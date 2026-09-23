@@ -1,0 +1,98 @@
+CHARTE GRAPHIQUE DE L'ADMINISTRATION BURKINABE
+Version 2.0 — septembre 2026
+
+
+CE QUE CONTIENT CE PAQUET
+
+  assets/css/tokens.css     Jetons, themes, declarations de polices
+  assets/css/faso.css       Bibliotheque de composants
+  assets/css/icones.css     35 icones, appliquees en masque CSS
+  assets/js/faso.js         Comportements, sans dependance
+  assets/js/faso.d.ts       Declarations TypeScript
+  assets/polices/           Archivo et Inter, variables, latin
+  assets/img/armoiries.svg  Emblème vectoriel
+  assets/img/icones.svg     Memes traces, pour les outils de conception
+  assets/jetons.json        189 jetons, valeurs resolues
+
+Les trois feuilles CSS sont obligatoires et solidaires : plusieurs
+composants puisent leurs reperes dans icones.css.
+
+
+INSTALLATION
+
+  Voir la page « Integration » de la documentation. En resume :
+
+    import '@gouv-bf/charte-graphique/css/tokens.css';
+    import '@gouv-bf/charte-graphique/css/faso.css';
+    import '@gouv-bf/charte-graphique/css/icones.css';
+    import Faso from '@gouv-bf/charte-graphique';
+
+    Faso.observer();   // une fois, au demarrage de l'application
+
+Sans chaine de construction, on sert les fichiers directement et
+l'initialisation est automatique : il n'y a rien a appeler.
+
+
+ARBORESCENCE A CONSERVER
+
+Les declarations de polices designent les fichiers par un chemin
+relatif, depuis assets/css/ vers assets/polices/. Deplacer l'un
+sans l'autre casse le chargement : le texte bascule silencieusement
+en police de repli, sans erreur.
+
+
+CE QUE LA CHARTE PREND EN CHARGE, ET CE QU'ELLE LAISSE
+
+  CSS seul                Boutons, cartes, encarts, badges, tableaux
+                          statiques, filet, figures, graphiques,
+                          composants metier.
+
+  Comportement autonome   Modale, panneau, menu, accordeon, onglets,
+                          depot de fichier, saisie de date,
+                          calendrier, centre de notifications.
+
+  Pilote par donnees      Tableau trie, filtre, pagine ;
+                          autocompletion ; export.
+                          -> Employer le CSS seul. Le cadriciel fait
+                             la logique. Voir la page Integration.
+
+Aucun composant React, Angular ou Vue n'est publie. Le motif de ce
+choix est expose dans la documentation.
+
+
+LICENCES
+
+Code et documentation
+  Reutilisables par les administrations publiques. Les conditions
+  precises relevent de l'autorite de tutelle du systeme, qui reste
+  a designer.
+
+Polices de caracteres
+  Archivo — Copyright The Archivo Project Authors
+  Inter   — Copyright The Inter Project Authors
+
+  Toutes deux sous SIL Open Font License 1.1, qui autorise l'usage,
+  la modification et la redistribution, y compris commerciale, a
+  deux conditions : ne pas les vendre seules, et conserver le texte
+  de la licence.
+
+  Ce texte accompagne les fichiers :
+    assets/polices/archivo-OFL.txt
+    assets/polices/inter-OFL.txt
+
+  Il doit etre conserve lors de toute reprise du paquet.
+
+Emblème
+  Les armoiries du Burkina Faso sont un symbole de souverainete.
+  Le fichier fourni est derive par vectorisation d'un rendu raster
+  et convient a la conception comme au developpement. Pour une mise
+  en production, la version de reference doit etre obtenue aupres
+  du Secretariat general du Gouvernement.
+
+
+ACCESSIBILITE
+
+Le systeme vise WCAG 2.1 AA. Les criteres relevant des composants
+sont satisfaits ; ceux relevant du projet — langue du document,
+textes de remplacement, hierarchie des titres, libelles de liens —
+restent a sa charge. La liste figure dans la documentation.

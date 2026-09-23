@@ -1,0 +1,53 @@
+CHARTE GRAPHIQUE DE L'ADMINISTRATION BURKINABE
+Version 1.0 — avril 2026 — ARCHIVE
+
+
+CES FICHIERS NE FONT PLUS FOI
+
+Ils sont conserves a titre d'historique. La version en vigueur est
+la 2.0, a la racine du projet : ouvrir index.html.
+
+Toute reprise de ces fichiers dans un projet produirait une
+interface non conforme a la charte actuelle.
+
+
+CONTENU DE L'ARCHIVE
+
+  charte_graphique_burkina.html   Documentation de la version 1.0
+  charte_graphique_burkina.json   Specification des jetons, version 1.0
+  variables_css_burkina.css       Variables CSS de la version 1.0
+  armoiries-1.png                 Emblème en raster, 1362 x 1600 px
+
+
+POURQUOI CES FICHIERS SONT ARCHIVES ET NON SUPPRIMES
+
+  1. armoiries-1.png est la source dont l'emblème vectoriel de la
+     version 2.0 a ete derive par vectorisation. Le conserver
+     permet de refaire ou de controler ce trace.
+
+  2. Les trois autres documentent l'etat anterieur du systeme.
+     Le journal des versions de la page Gouvernance decrit les
+     ruptures entre 1.0 et 2.0 ; ces fichiers en sont la preuve.
+
+
+CE QUI A CHANGE ENTRE 1.0 ET 2.0
+
+  Police de titre          Poppins            -> Archivo
+  Neutres                  gris bleutes       -> base chaude
+  --bleu-gouvernement      couleur de structure -> supprime ;
+                           le bleu devient couleur de support,
+                           cantonnee au registre informatif
+  Filet national           trois bandes egales -> composition du
+                           drapeau : rouge au-dessus, vert au-
+                           dessous, etoile d'or au centre
+  Feuilles de style        deux fichiers      -> trois, icones.css
+                           devenant obligatoire
+  Theme sombre             suivait le systeme -> choix explicite
+  Emblème                  PNG de 916 Ko      -> SVG, 45 Ko
+                                                 compresse
+
+Le detail figure dans gouvernance.html, section « Journal des
+versions ».
+
+
+Archive constituee le 21 septembre 2026.

@@ -1,0 +1,891 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Composants métier&nbsp;— Charte graphique de l'administration burkinabè</title>
+<meta name="description" content="Blocs propres au service public burkinabè : identification officielle, fiche de démarche, pièces à fournir, suivi de dossier et signalement de fraude.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/faso.css">
+<link rel="stylesheet" href="assets/css/icones.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="icon" href="assets/img/armoiries.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
+
+<div class="doc-barre">
+  <a class="doc-menu-marque" href="index.html">
+    <img src="assets/img/armoiries.svg" alt="">
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+  </a>
+  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
+</div>
+
+<div class="doc-page">
+
+  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
+    <a class="doc-menu-marque" href="index.html">
+      <img src="assets/img/armoiries.svg" alt="">
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    </a>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Le système</p>
+      <ul>
+        <li><a href="index.html">Présentation</a></li>
+        <li><a href="fondations.html">Fondations</a></li>
+        <li><a href="composants.html">Composants de base</a></li>
+        <li><a href="composants-metier.html" aria-current="page">Composants métier</a></li>
+        <li><a href="gabarits.html">Gabarits</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="integration.html">Intégration</a></li>
+        <li><a href="gouvernance.html">Gouvernance</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Sur cette page</p>
+      <div class="fs-sommaire" data-sommaire-auto></div>
+    </div>
+  </nav>
+
+  <main class="doc-corps" id="contenu" data-teinte="rouge">
+
+    <div class="doc-entete">
+      <nav class="doc-fil" aria-label="Fil d'Ariane">
+        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Composants métier</span>
+      </nav>
+      <h1>Composants métier</h1>
+      <p class="fs-chapeau">
+        Ces blocs ne sont pas des variantes esthétiques des composants de base&nbsp;: ils
+        répondent à une obligation d'information ou à une étape identifiée du parcours
+        administratif. Leur structure est imposée, car c'est elle qui garantit que
+        l'usager dispose des mêmes informations d'un service à l'autre.
+      </p>
+    </div>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="confiance">
+      <h2>Confiance numérique</h2>
+      <p class="doc-section-intro">
+        La multiplication des faux sites administratifs et des faux formulaires de
+        paiement constitue le principal risque pour l'usager. Les blocs de cette
+        famille répondent à un objectif unique&nbsp;: permettre de reconnaître un service
+        authentique de l'État en quelques secondes, sans compétence technique.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Bandeau d'identification officielle <code>.fs-officiel</code></h3>
+        <p class="doc-bloc-note">
+          Obligatoire en tête de toute page d'un service en ligne de l'État, avant
+          même le bloc-marque. Il affiche la nature officielle du site, le domaine
+          vérifié et un accès à l'explication des repères de confiance.
+        </p>
+
+        <div class="doc-demo" data-libelle="Bandeau officiel">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="padding:0;">
+            <div>
+              <div class="fs-officiel">
+                <div class="fs-conteneur">
+                  <span class="fs-officiel-sceau">Site officiel de l'administration burkinabè</span>
+                  <span>Domaine vérifié <code>impots.gov.bf</code></span>
+                  <button type="button" data-ouvre-modale="modale-repere">Comment le vérifier&nbsp;?</button>
+                </div>
+              </div>
+              <div class="fs-filet"></div>
+            </div>
+
+            <dialog class="fs-modale" id="modale-repere" aria-labelledby="modale-repere-titre">
+              <div class="fs-modale-entete">
+                <h3 class="fs-modale-titre" id="modale-repere-titre">Reconnaître un service officiel</h3>
+                <button type="button" class="fs-btn fs-btn--fantome fs-btn--sm fs-btn--icone" data-ferme-modale aria-label="Fermer"><span class="fs-icone fs-icone--fermer" aria-hidden="true"></span></button>
+              </div>
+              <div class="fs-modale-corps">
+                <ul class="fs-liste-controle">
+                  <li>L'adresse du site se termine par <code>.gov.bf</code> avant la première barre oblique.</li>
+                  <li>Le nom de l'administration responsable est affiché en clair, avec une adresse physique et un numéro vérifiable.</li>
+                  <li>Aucun service de l'État ne demande vos codes secrets bancaires ni votre code de monnaie électronique.</li>
+                  <li>Les paiements passent exclusivement par les canaux autorisés listés sur la fiche de la démarche.</li>
+                </ul>
+              </div>
+              <div class="fs-modale-pied">
+                <button type="button" class="fs-btn fs-btn--principal" data-ferme-modale>J'ai compris</button>
+              </div>
+            </dialog>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Signalement de fraude <code>.fs-signalement</code></h3>
+        <p class="doc-bloc-note">
+          Présent en pied de tout parcours comportant un paiement. Il offre une
+          issue immédiate à un usager qui doute, plutôt que de le laisser abandonner
+          ou, pire, poursuivre sur un site frauduleux.
+        </p>
+
+        <div class="doc-demo" data-libelle="Signalement">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-signalement">
+              <div style="flex:1;">
+                <strong>Un doute sur l'authenticité de cette page&nbsp;?</strong>
+                <p class="fs-legende" style="margin:0;">Ne saisissez aucune donnée personnelle et signalez la page au service compétent.</p>
+              </div>
+              <a class="fs-btn fs-btn--danger fs-btn--sm" href="#">Signaler</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Canaux de paiement autorisés</h3>
+        <p class="doc-bloc-note">
+          Tout parcours comportant un paiement liste explicitement les canaux
+          autorisés. Un canal absent de cette liste est un canal frauduleux&nbsp;: la
+          formulation doit le dire sans ambiguïté.
+        </p>
+
+        <div class="doc-demo" data-libelle="Canaux autorisés">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-encart fs-encart--info">
+              <div class="fs-encart-corps">
+                <p class="fs-encart-titre">Canaux de paiement autorisés pour cette démarche</p>
+                <ul class="fs-liste-puces" style="margin-bottom: var(--espace-3);">
+                  <li>Monnaie électronique adossée à un opérateur agréé</li>
+                  <li>Régie de recettes de l'administration responsable</li>
+                  <li>Virement bancaire vers le compte du Trésor public indiqué sur la quittance</li>
+                </ul>
+                <p><strong>Aucun autre canal n'est autorisé.</strong> Un versement sur un compte personnel ne vaut pas paiement et ne pourra pas être remboursé.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Récapitulatif de paiement <code>.fs-paiement</code></h3>
+        <p class="doc-bloc-note">
+          Dernier écran avant le débit. Il détaille ce qui est dû, ligne par ligne,
+          avant de demander le choix du canal. L'usager doit pouvoir vérifier le
+          montant sans faire de calcul et reconnaître le bénéficiaire&nbsp;: c'est là que
+          se joue la différence avec un faux formulaire de paiement.
+        </p>
+
+        <div class="doc-demo" data-libelle="Récapitulatif de paiement">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 520px;">
+            <div class="fs-paiement">
+              <dl class="fs-paiement-lignes">
+                <div>
+                  <dt>Droit de timbre&nbsp;— acte de naissance</dt>
+                  <dd>500&nbsp;F&nbsp;CFA</dd>
+                </div>
+                <div>
+                  <dt>Copie supplémentaire (× 2)</dt>
+                  <dd>400&nbsp;F&nbsp;CFA</dd>
+                </div>
+                <div>
+                  <dt>Frais d'envoi postal</dt>
+                  <dd>1&nbsp;500&nbsp;F&nbsp;CFA</dd>
+                </div>
+              </dl>
+              <div class="fs-paiement-total">
+                <span class="fs-paiement-total-libelle">Total à régler</span>
+                <span class="fs-paiement-total-montant">2&nbsp;400&nbsp;F&nbsp;CFA</span>
+              </div>
+            </div>
+
+            <fieldset class="fs-fieldset" style="border:0; padding:0;">
+              <legend class="fs-label">Canal de paiement</legend>
+              <label class="fs-choix fs-choix--carte">
+                <input type="radio" name="canal" checked>
+                <span class="fs-choix-texte">
+                  <span class="fs-choix-titre">Monnaie électronique</span>
+                  <span class="fs-choix-aide">Opérateur agréé. Un code de confirmation vous sera envoyé par SMS.</span>
+                </span>
+              </label>
+              <label class="fs-choix fs-choix--carte">
+                <input type="radio" name="canal">
+                <span class="fs-choix-texte">
+                  <span class="fs-choix-titre">Régie de recettes</span>
+                  <span class="fs-choix-aide">Règlement au guichet de l'administration responsable. Le traitement démarre à réception.</span>
+                </span>
+              </label>
+            </fieldset>
+
+            <div class="fs-signalement">
+              <p class="fs-legende" style="margin:0;">
+                Le bénéficiaire est le <strong>Trésor public du Burkina Faso</strong>.
+                Tout versement demandé sur un compte personnel est frauduleux et ne
+                pourra pas être remboursé.
+              </p>
+            </div>
+
+            <button type="button" class="fs-btn fs-btn--principal fs-btn--bloc fs-btn--lg">
+              Payer 2&nbsp;400&nbsp;F&nbsp;CFA
+            </button>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Porter le montant dans le libellé du bouton&nbsp;: « Payer 2&nbsp;400&nbsp;F&nbsp;CFA », jamais « Valider ».</li>
+              <li>Détailler chaque ligne, y compris les frais annexes, avant le total.</li>
+              <li>Nommer le bénéficiaire et rappeler qu'aucun versement personnel n'est autorisé.</li>
+              <li>Indiquer ce qui se passe après le paiement et sous quel délai.</li>
+              <li>Délivrer une quittance téléchargeable dès l'encaissement.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Afficher un total sans son détail.</li>
+              <li>Ajouter un frais après le récapitulatif.</li>
+              <li>Présélectionner une option payante.</li>
+              <li>Demander un code de confirmation ailleurs que sur le service lui-même.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Autorité responsable <code>.fs-autorite</code></h3>
+        <p class="doc-bloc-note">
+          Identifie sans ambiguïté l'administration qui délivre le service et
+          engage sa responsabilité. Ce bloc est obligatoire sur toute fiche de
+          démarche et toute page comportant une décision administrative.
+        </p>
+
+        <div class="doc-demo" data-libelle="Autorité responsable">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 620px;">
+            <div class="fs-autorite">
+              <img src="assets/img/armoiries.svg" alt="">
+              <div>
+                <p class="fs-autorite-nom">Direction générale de la modernisation de l'état civil</p>
+                <p class="fs-autorite-tutelle">Ministère de l'Administration territoriale</p>
+                <div class="fs-autorite-contacts">
+                  <p style="margin-bottom: var(--espace-1);">Avenue de l'Indépendance, Ouagadougou</p>
+                  <p style="margin-bottom: var(--espace-1);">Permanence téléphonique du lundi au vendredi, 7&nbsp;h 30 – 15&nbsp;h 30</p>
+                  <p><a href="#">Écrire au service</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="demarches">
+      <h2>Démarches</h2>
+      <p class="doc-section-intro">
+        Une démarche se présente toujours dans le même ordre&nbsp;: ce qu'elle permet
+        d'obtenir, qui peut la demander, ce qu'elle coûte, combien de temps elle
+        prend, et ce qu'il faut fournir. Cet ordre n'est pas négociable&nbsp;: il permet
+        à l'usager de décider avant de s'engager.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Carte de démarche <code>.fs-demarche</code></h3>
+        <p class="doc-bloc-note">
+          Format de listing. Le coût et le délai sont affichés dès la liste&nbsp;: un
+          usager ne doit pas ouvrir cinq fiches pour comparer deux démarches.
+        </p>
+
+        <div class="doc-demo" data-libelle="Cartes de démarche">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-auto-grille" style="--min-colonne: 300px;">
+              <article class="fs-demarche">
+                <div class="fs-demarche-entete">
+                  <h4 class="fs-demarche-titre"><a href="#">Demander un acte de naissance</a></h4>
+                  <span class="fs-badge fs-badge--succes">En ligne</span>
+                </div>
+                <p class="fs-demarche-resume">
+                  Copie intégrale ou extrait d'acte de naissance délivré par la mairie
+                  du lieu de naissance.
+                </p>
+                <dl class="fs-demarche-meta">
+                  <div><dt>Coût</dt><dd>500&nbsp;F&nbsp;CFA</dd></div>
+                  <div><dt>Délai</dt><dd>3&nbsp;jours ouvrés</dd></div>
+                  <div><dt>Canal</dt><dd>En ligne ou guichet</dd></div>
+                </dl>
+              </article>
+
+              <article class="fs-demarche">
+                <div class="fs-demarche-entete">
+                  <h4 class="fs-demarche-titre"><a href="#">Demander un passeport ordinaire</a></h4>
+                  <span class="fs-badge fs-badge--alerte">Présence requise</span>
+                </div>
+                <p class="fs-demarche-resume">
+                  Première demande ou renouvellement. La prise d'empreintes impose un
+                  passage au centre d'enrôlement.
+                </p>
+                <dl class="fs-demarche-meta">
+                  <div><dt>Coût</dt><dd>50&nbsp;000&nbsp;F&nbsp;CFA</dd></div>
+                  <div><dt>Délai</dt><dd>15&nbsp;jours ouvrés</dd></div>
+                  <div><dt>Canal</dt><dd>Guichet uniquement</dd></div>
+                </dl>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Pièces à fournir <code>.fs-pieces</code></h3>
+        <p class="doc-bloc-note">
+          Chaque pièce est numérotée et accompagnée de sa contrainte réelle&nbsp;: format
+          accepté, durée de validité, mention d'original ou de copie. Une liste sans
+          ces précisions génère des dossiers incomplets, donc des allers-retours.
+        </p>
+
+        <div class="doc-demo" data-libelle="Pièces à fournir">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 620px;">
+            <ol class="fs-pieces">
+              <li>
+                <span class="fs-pieces-num">1</span>
+                <div>
+                  <p class="fs-pieces-nom">Pièce d'identité du demandeur</p>
+                  <p class="fs-pieces-detail">CNIB ou passeport en cours de validité. Copie recto-verso lisible, format JPG ou PDF, 5&nbsp;Mo maximum.</p>
+                </div>
+              </li>
+              <li>
+                <span class="fs-pieces-num">2</span>
+                <div>
+                  <p class="fs-pieces-nom">Justificatif de filiation</p>
+                  <p class="fs-pieces-detail">Livret de famille ou acte de naissance des parents. Non exigé si le demandeur est le titulaire de l'acte.</p>
+                </div>
+              </li>
+              <li>
+                <span class="fs-pieces-num">3</span>
+                <div>
+                  <p class="fs-pieces-nom">Procuration</p>
+                  <p class="fs-pieces-detail">Uniquement en cas de demande pour un tiers majeur. Original signé, accompagné de la pièce d'identité du mandant.</p>
+                </div>
+              </li>
+              <li>
+                <span class="fs-pieces-num">4</span>
+                <div>
+                  <p class="fs-pieces-nom">Quittance du droit de timbre</p>
+                  <p class="fs-pieces-detail">Délivrée automatiquement après paiement en ligne. À joindre si le paiement a été effectué en régie.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Photographie d'identité <code>.fs-photo-guide</code></h3>
+        <p class="doc-bloc-note">
+          Le cadrage est le premier motif de rejet d'un dossier d'enrôlement. Montrer
+          le cadre attendu avant la prise de vue coûte moins cher qu'un aller-retour,
+          et évite à l'usager un second déplacement.
+        </p>
+
+        <div class="doc-demo" data-libelle="Guide de cadrage">
+          <div class="doc-demo-scene">
+            <div class="fs-photo-guide">
+              <div class="fs-photo-cadre">
+                <svg viewBox="0 0 35 45" aria-hidden="true">
+                  <path class="fs-photo-silhouette" d="M17.5 9a6.5 6.5 0 0 1 6.5 6.5c0 3.6-2.9 7.5-6.5 7.5s-6.5-3.9-6.5-7.5A6.5 6.5 0 0 1 17.5 9z"/>
+                  <path class="fs-photo-silhouette" d="M4.5 45c1.6-8.6 6.8-12.5 13-12.5S29 36.4 30.5 45z"/>
+                  <path class="fs-photo-reperes" d="M0 8h35M0 34h35"/>
+                  <path class="fs-photo-reperes" d="M17.5 0v45"/>
+                </svg>
+                <span class="fs-photo-legende">Tête entre les deux repères</span>
+              </div>
+
+              <ul class="fs-liste-controle" style="flex:1; min-width: 240px;">
+                <li>Visage de face, centré, tête droite, expression neutre.</li>
+                <li>Hauteur du visage comprise entre 32 et 36&nbsp;mm sur un tirage de 45&nbsp;mm.</li>
+                <li>Fond uni et clair, sans ombre portée ni motif.</li>
+                <li>Yeux ouverts et visibles&nbsp;: pas de reflet sur les verres, pas de monture épaisse.</li>
+                <li>Photographie de moins de six mois, sans couvre-chef, sauf motif religieux laissant le visage dégagé.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Afficher le guide <strong>avant</strong> le dépôt, pas en message d'erreur après.</li>
+              <li>Vérifier la résolution et prévenir immédiatement si elle est insuffisante.</li>
+              <li>Indiquer que la photographie peut être prise par un photographe agréé, tous les usagers n'ayant pas d'appareil.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Rejeter sans dire ce qui ne va pas ni comment corriger.</li>
+              <li>Exiger un format que le téléphone de l'usager ne produit pas.</li>
+              <li>Recadrer automatiquement sans montrer le résultat.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Événements de vie <code>.fs-evenement</code></h3>
+        <p class="doc-bloc-note">
+          Point d'entrée alternatif à la recherche. Un usager cherche rarement «&nbsp;acte
+          de naissance&nbsp;»&nbsp;: il cherche «&nbsp;je viens d'avoir un enfant&nbsp;». L'entrée par
+          événement réduit la charge de vocabulaire administratif.
+        </p>
+
+        <div class="doc-demo" data-libelle="Événements de vie">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-auto-grille" style="--min-colonne: 190px;">
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Naissance</span><span class="fs-evenement-nb">7 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Études</span><span class="fs-evenement-nb">11 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Emploi public</span><span class="fs-evenement-nb">9 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Créer une entreprise</span><span class="fs-evenement-nb">14 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Impôts</span><span class="fs-evenement-nb">12 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Voyage</span><span class="fs-evenement-nb">5 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Retraite</span><span class="fs-evenement-nb">6 démarches</span></a>
+              <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Décès</span><span class="fs-evenement-nb">8 démarches</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="dossier">
+      <h2>Suivi de dossier</h2>
+      <p class="doc-section-intro">
+        Le suivi est le premier motif de contact avec les guichets. Un suivi lisible
+        en ligne réduit mécaniquement la charge d'accueil physique et téléphonique.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Bloc de suivi <code>.fs-dossier</code></h3>
+        <p class="doc-bloc-note">
+          Six états normalisés couvrent l'ensemble des parcours&nbsp;: reçu, en cours
+          d'instruction, complément demandé, validé, rejeté, disponible au retrait.
+          Aucun service n'invente un état supplémentaire sans validation.
+        </p>
+
+        <div class="doc-demo" data-libelle="Suivi de dossier">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-dossier">
+              <div class="fs-dossier-entete">
+                <div>
+                  <p class="fs-dossier-reference">BF-2026-004871-OUA</p>
+                  <p class="fs-dossier-depot">Acte de naissance&nbsp;— déposé le 18 septembre 2026</p>
+                </div>
+                <span class="fs-badge fs-badge--info">En cours d'instruction</span>
+              </div>
+
+              <div class="fs-pile fs-pile--large">
+                <div>
+                  <div class="fs-rangee fs-rangee--entre" style="margin-bottom: var(--espace-2);">
+                    <span class="fs-legende">Avancement</span>
+                    <span class="fs-legende fs-tabulaire">3 étapes sur 4</span>
+                  </div>
+                  <div class="fs-jauge" data-valeur="75" aria-label="Dossier avancé à 75 %">
+                    <div class="fs-jauge-valeur"></div>
+                  </div>
+                </div>
+
+                <ol class="fs-chrono">
+                  <li data-etat="faite">
+                    <span class="fs-chrono-date">18 septembre 2026&nbsp;— 09&nbsp;h 12</span>
+                    <span class="fs-chrono-titre">Demande reçue</span>
+                    <p class="fs-legende">Récépissé de dépôt adressé par courrier électronique.</p>
+                  </li>
+                  <li data-etat="faite">
+                    <span class="fs-chrono-date">18 septembre 2026&nbsp;— 14&nbsp;h 40</span>
+                    <span class="fs-chrono-titre">Paiement encaissé</span>
+                    <p class="fs-legende">Droit de timbre de 500&nbsp;F&nbsp;CFA. Quittance disponible au téléchargement.</p>
+                  </li>
+                  <li data-etat="courante">
+                    <span class="fs-chrono-date">19 septembre 2026</span>
+                    <span class="fs-chrono-titre">En cours d'instruction</span>
+                    <p class="fs-legende">Dossier transmis à la mairie du lieu de naissance.</p>
+                  </li>
+                  <li>
+                    <span class="fs-chrono-date">Prévu le 23 septembre 2026</span>
+                    <span class="fs-chrono-titre">Document disponible au retrait</span>
+                  </li>
+                </ol>
+
+                <div class="fs-actions">
+                  <a class="fs-btn fs-btn--tertiaire" href="#">Télécharger le récépissé</a>
+                  <a class="fs-btn fs-btn--tertiaire" href="#">Télécharger la quittance</a>
+                  <a class="fs-btn fs-btn--secondaire" href="#">Contacter le service instructeur</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Liste de dossiers <code>.fs-liste-dossiers</code></h3>
+        <p class="doc-bloc-note">
+          Format complémentaire du tableau. Il tient sur un écran étroit sans
+          reconfiguration et supporte des intitulés longs, là où un tableau impose des
+          colonnes de largeur fixe. À privilégier quand l'usager consulte ses propres
+          dossiers&nbsp;— peu nombreux, chacun important&nbsp;; le tableau reste préférable dès
+          qu'il s'agit de comparer ou de trier.
+        </p>
+
+        <div class="doc-demo" data-libelle="Liste de dossiers">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <ul class="fs-liste-dossiers">
+              <li class="fs-dossier-item">
+                <div>
+                  <span class="fs-dossier-ref">BF-2026-004915</span>
+                  <p class="fs-dossier-objet"><a href="#">Extrait de casier judiciaire</a></p>
+                  <p class="fs-dossier-meta">
+                    <span>Déposé le 12 septembre 2026</span>
+                    <span>2&nbsp;000&nbsp;F&nbsp;CFA</span>
+                    <span>Tribunal de grande instance de Ouagadougou</span>
+                  </p>
+                </div>
+                <div class="fs-dossier-cote">
+                  <span class="fs-badge fs-badge--alerte">Complément demandé</span>
+                  <a class="fs-btn fs-btn--secondaire fs-btn--sm" href="#">Transmettre la pièce</a>
+                </div>
+              </li>
+
+              <li class="fs-dossier-item">
+                <div>
+                  <span class="fs-dossier-ref">BF-2026-004871</span>
+                  <p class="fs-dossier-objet"><a href="#">Acte de naissance</a></p>
+                  <p class="fs-dossier-meta">
+                    <span>Déposé le 18 septembre 2026</span>
+                    <span>500&nbsp;F&nbsp;CFA</span>
+                    <span>Mairie de Ouagadougou</span>
+                  </p>
+                </div>
+                <div class="fs-dossier-cote">
+                  <span class="fs-statut fs-statut--cours">En instruction</span>
+                  <a class="fs-btn fs-btn--tertiaire fs-btn--sm" href="#">Suivre</a>
+                </div>
+              </li>
+
+              <li class="fs-dossier-item">
+                <div>
+                  <span class="fs-dossier-ref">BF-2026-004790</span>
+                  <p class="fs-dossier-objet"><a href="#">Certificat de résidence</a></p>
+                  <p class="fs-dossier-meta">
+                    <span>Déposé le 2 septembre 2026</span>
+                    <span>1&nbsp;000&nbsp;F&nbsp;CFA</span>
+                  </p>
+                </div>
+                <div class="fs-dossier-cote">
+                  <span class="fs-badge fs-badge--succes">Disponible au retrait</span>
+                  <a class="fs-btn fs-btn--principal fs-btn--sm" href="#">
+                    <span class="fs-icone fs-icone--telecharger" aria-hidden="true"></span>
+                    Télécharger
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>États normalisés</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Correspondance entre état de dossier et traitement visuel</caption>
+            <thead>
+              <tr><th>État</th><th>Traitement</th><th>Signification pour l'usager</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="fs-badge fs-badge--neutre">Reçu</span></td>
+                <td><code>--texte-faible</code></td>
+                <td>La demande est enregistrée mais n'a pas encore été prise en charge.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--info">En instruction</span></td>
+                <td><code>--info</code></td>
+                <td>Un agent examine le dossier. Aucune action n'est attendue.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--alerte">Complément demandé</span></td>
+                <td><code>--alerte</code></td>
+                <td>Une action de l'usager est requise, avec une échéance explicite.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--succes">Validé</span></td>
+                <td><code>--succes</code></td>
+                <td>La demande est acceptée. Le document est en cours d'édition.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--danger">Rejeté</span></td>
+                <td><code>--danger</code></td>
+                <td>La demande est refusée. Le motif et la voie de recours sont indiqués.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--succes">Disponible</span></td>
+                <td><code>--succes</code></td>
+                <td>Le document peut être téléchargé ou retiré au guichet indiqué.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="usager">
+      <h2>Relation à l'usager</h2>
+      <p class="doc-section-intro">
+        Recherche, consentement et contact. Ces blocs conditionnent l'accessibilité
+        réelle du service à l'ensemble de la population.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Recherche de démarche</h3>
+        <p class="doc-bloc-note">
+          Point d'entrée principal d'un portail. Le champ est large, l'exemple de
+          requête est concret, et les suggestions emploient le vocabulaire de
+          l'usager plutôt que la nomenclature administrative.
+        </p>
+
+        <div class="doc-demo" data-libelle="Recherche">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 640px;">
+            <div class="fs-champ">
+              <label class="fs-label" for="recherche-demarche">Quelle démarche souhaitez-vous effectuer&nbsp;?</label>
+              <div class="fs-recherche">
+                <input class="fs-saisie" type="search" id="recherche-demarche"
+                       placeholder="Acte de naissance, passeport, casier judiciaire…">
+                <button type="submit" class="fs-btn fs-btn--principal">Rechercher</button>
+              </div>
+            </div>
+
+            <div class="fs-rangee">
+              <span class="fs-legende">Recherches fréquentes&nbsp;:</span>
+              <span class="fs-etiquette">Acte de naissance</span>
+              <span class="fs-etiquette">Certificat de résidence</span>
+              <span class="fs-etiquette">Casier judiciaire</span>
+              <span class="fs-etiquette">Carte grise</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Bandeau de consentement <code>.fs-consentement</code></h3>
+        <p class="doc-bloc-note">
+          Refuser doit être aussi simple qu'accepter&nbsp;: les deux actions ont le même
+          poids visuel et le même nombre de clics. Un service public ne recourt à
+          aucune mesure d'audience non essentielle sans consentement préalable.
+        </p>
+
+        <div class="doc-demo" data-libelle="Consentement">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-consentement" style="position: static; width: auto; max-width: 460px;">
+              <h4 style="font-size: var(--taille-lg); margin-bottom: var(--espace-3);">Mesure d'audience</h4>
+              <p class="fs-legende" style="margin-bottom: var(--espace-5);">
+                Ce service dépose des cookies de mesure d'audience afin d'améliorer la
+                qualité des démarches en ligne. Aucune donnée n'est transmise à un
+                tiers commercial. Votre choix est conservé six mois.
+              </p>
+              <div class="fs-actions">
+                <button type="button" class="fs-btn fs-btn--tertiaire">Personnaliser</button>
+                <button type="button" class="fs-btn fs-btn--tertiaire">Refuser</button>
+                <button type="button" class="fs-btn fs-btn--principal">Accepter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Modèles de SMS</h3>
+        <p class="doc-bloc-note">
+          Le SMS est le canal le plus sûr pour joindre un usager&nbsp;: il ne dépend
+          d'aucune connexion de données et atteint tous les appareils. C'est aussi
+          celui qu'exploitent les fraudeurs. Chaque message suit donc la même
+          structure&nbsp;: <strong>émetteur, objet, référence, action attendue</strong>&nbsp;—
+          et jamais de lien.
+        </p>
+
+        <div class="doc-demo" data-libelle="Modèles">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+
+            <div class="doc-sms">
+              <span class="doc-sms-expediteur">Code de vérification</span>
+              eBurkina : votre code est 418 207. Il expire dans 10 minutes.
+              Aucun agent ne vous le demandera, ni par appel ni par message.
+              <span class="doc-sms-compte">124 caractères — 1 SMS</span>
+            </div>
+
+            <div class="doc-sms">
+              <span class="doc-sms-expediteur">Dépôt enregistré</span>
+              eBurkina : votre demande d'acte de naissance est enregistrée sous la
+              reference BF-2026-004871. Suivi sur eservices.gov.bf, rubrique Mon espace.
+              <span class="doc-sms-compte">143 caractères — 1 SMS</span>
+            </div>
+
+            <div class="doc-sms">
+              <span class="doc-sms-expediteur">Action attendue</span>
+              eBurkina : dossier BF-2026-004915, un justificatif de domicile est attendu
+              avant le 30/09/2026. Connectez-vous a votre espace pour le transmettre.
+              <span class="doc-sms-compte">146 caractères — 1 SMS</span>
+            </div>
+
+            <div class="doc-sms">
+              <span class="doc-sms-expediteur">Document disponible</span>
+              eBurkina : votre acte est disponible. Retrait a la mairie de votre lieu de
+              naissance, muni de votre CNIB. Reference BF-2026-004871.
+              <span class="doc-sms-compte">131 caractères — 1 SMS</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Nommer le service en tête de message, toujours de la même façon.</li>
+              <li>Tenir dans 160 caractères&nbsp;: au-delà, l'opérateur facture et découpe le message, et l'ordre d'arrivée n'est pas garanti.</li>
+              <li>Rappeler la référence du dossier dans tout message de suivi.</li>
+              <li>Écrire sans accents&nbsp;: certains combinés anciens les remplacent par des caractères illisibles et font basculer le message en encodage long.</li>
+              <li>Rappeler, dans tout message contenant un code, qu'aucun agent ne le demandera.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li><strong>Tout lien cliquable.</strong> C'est la signature des messages frauduleux&nbsp;; l'usager doit apprendre qu'un SMS officiel n'en contient jamais.</li>
+              <li>Demander une donnée personnelle, un code ou un paiement par retour de message.</li>
+              <li>Envoyer depuis un numéro différent d'un envoi à l'autre.</li>
+              <li>Employer un ton commercial ou une formule d'urgence artificielle.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Modèles de courriel</h3>
+        <p class="doc-bloc-note">
+          Le courriel porte les pièces&nbsp;: récépissés, quittances, décisions. Il doit
+          rester compréhensible sans images et sans mise en forme, car une part des
+          messageries les bloque par défaut.
+        </p>
+
+        <div class="doc-demo" data-libelle="Accusé de dépôt">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="doc-courriel">
+              <div class="doc-courriel-entete">
+                <dl>
+                  <dt>De</dt>
+                  <dd>Téléservices de l'État <span class="fs-faible">&lt;ne-pas-repondre@eservices.gov.bf&gt;</span></dd>
+                  <dt>Objet</dt>
+                  <dd><strong>Acte de naissance&nbsp;— demande enregistrée&nbsp;— BF-2026-004871</strong></dd>
+                  <dt>Pièce</dt>
+                  <dd>recepisse-BF-2026-004871.pdf <span class="fs-faible">(84&nbsp;Ko)</span></dd>
+                </dl>
+              </div>
+              <div class="doc-courriel-corps">
+                <p>Votre demande d'acte de naissance a été enregistrée le 18 septembre 2026 sous la référence <strong>BF-2026-004871</strong>.</p>
+                <p>Le récépissé de dépôt est joint à ce message. Il ne vaut pas acte et ne peut être produit comme pièce justificative.</p>
+                <p>Le délai indicatif de traitement est de trois jours ouvrés à compter de la validation du dossier. Vous serez informé par SMS dès que le document sera disponible.</p>
+                <p><strong>Suivre ce dossier&nbsp;:</strong> connectez-vous à votre espace personnel sur eservices.gov.bf, rubrique « Mes demandes ».</p>
+                <hr>
+                <p class="fs-legende">
+                  Ce message est envoyé par la Direction générale de la modernisation de
+                  l'état civil. Il ne demande jamais de paiement ni de code. En cas de
+                  doute sur son authenticité, ne répondez pas et signalez-le depuis votre
+                  espace personnel.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h4 class="fs-mt-8">Règle de l'objet</h4>
+        <p class="doc-bloc-note">
+          L'objet est souvent la seule partie lue. Il suit un ordre fixe, du général au
+          particulier, pour que la référence reste visible même tronquée sur mobile.
+        </p>
+        <pre><code>&lt;Démarche&gt; — &lt;état&gt; — &lt;référence&gt;
+
+Acte de naissance — demande enregistrée — BF-2026-004871
+Casier judiciaire — pièce complémentaire attendue — BF-2026-004915
+Passeport ordinaire — document disponible — BF-2026-004930</code></pre>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Expédier depuis un domaine en <code>.gov.bf</code>, identique d'un message à l'autre.</li>
+              <li>Rester compréhensible en texte seul&nbsp;: aucune information portée par une image.</li>
+              <li>Joindre les pièces plutôt que de renvoyer vers un téléchargement.</li>
+              <li>Clore par la mention de l'administration émettrice et la voie de signalement.</li>
+              <li>Indiquer explicitement ce que le document joint ne permet pas de faire.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Bandeau d'en-tête en image&nbsp;: bloqué par défaut, il fait perdre l'identification de l'émetteur.</li>
+              <li>Bouton d'action vers une page de connexion&nbsp;: c'est le schéma exact de l'hameçonnage.</li>
+              <li>Pièce jointe de plus de 2&nbsp;Mo.</li>
+              <li>Adresse d'expédition changeante ou en domaine commercial.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Bloc de contact</h3>
+        <div class="doc-demo" data-libelle="Contact">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-auto-grille" style="--min-colonne: 240px;">
+              <div class="fs-carte">
+                <div class="fs-carte-corps">
+                  <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">Au guichet</h4>
+                  <p class="fs-carte-texte">
+                    Mairie de votre lieu de résidence<br>
+                    Du lundi au vendredi, 7&nbsp;h 30 – 15&nbsp;h 30
+                  </p>
+                </div>
+              </div>
+              <div class="fs-carte">
+                <div class="fs-carte-corps">
+                  <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">Par téléphone</h4>
+                  <p class="fs-carte-texte">
+                    Numéro vert national<br>
+                    Appel gratuit depuis un poste fixe
+                  </p>
+                </div>
+              </div>
+              <div class="fs-carte">
+                <div class="fs-carte-corps">
+                  <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">En ligne</h4>
+                  <p class="fs-carte-texte">
+                    Formulaire de contact sécurisé<br>
+                    Réponse sous 48 heures ouvrées
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
+     avant que les comportements n'y ajoutent leurs attributs. -->
+<script src="assets/js/docs.js" defer></script>
+<script src="assets/js/faso.js" defer></script>
+</body>
+</html>

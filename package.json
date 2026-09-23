@@ -1,0 +1,50 @@
+{
+  "name": "@gouv-bf/charte-graphique",
+  "version": "2.0.0",
+  "description": "Charte graphique des services numériques de l'administration burkinabè : jetons, composants CSS, comportements sans dépendance.",
+  "license": "SEE LICENSE IN LISEZMOI-PAQUET.txt",
+  "type": "commonjs",
+  "main": "./assets/js/faso.js",
+  "types": "./assets/js/faso.d.ts",
+  "exports": {
+    ".": {
+      "types": "./assets/js/faso.d.ts",
+      "default": "./assets/js/faso.js"
+    },
+    "./css/tokens.css": "./assets/css/tokens.css",
+    "./css/faso.css": "./assets/css/faso.css",
+    "./css/icones.css": "./assets/css/icones.css",
+    "./jetons.json": "./assets/jetons.json",
+    "./img/armoiries.svg": "./assets/img/armoiries.svg",
+    "./img/icones.svg": "./assets/img/icones.svg",
+    "./polices/*": "./assets/polices/*",
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "*.css",
+    "./assets/js/faso.js"
+  ],
+  "files": [
+    "assets/css",
+    "assets/js",
+    "assets/img",
+    "assets/polices",
+    "assets/jetons.json",
+    "LISEZMOI-PAQUET.txt"
+  ],
+  "keywords": [
+    "charte-graphique",
+    "design-system",
+    "burkina-faso",
+    "service-public",
+    "accessibilite",
+    "rgaa",
+    "wcag"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

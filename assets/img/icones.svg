@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- Jeu d'icônes de la charte graphique de l'administration burkinabè.
+     Grille 24 x 24, trait 1,5, extrémités arrondies.
+     Fichier de référence pour les outils de conception et les
+     intégrations qui préfèrent <use> au masque CSS. -->
+<svg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor'
+     stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'>
+  <symbol id='fs-recherche' viewBox='0 0 24 24'>
+    <title>Recherche, loupe</title>
+    <circle cx='11' cy='11' r='6.5'/><path d='M15.9 15.9 20.5 20.5'/>
+  </symbol>
+  <symbol id='fs-fermer' viewBox='0 0 24 24'>
+    <title>Fermer une modale, retirer une étiquette</title>
+    <path d='M6 6 18 18M18 6 6 18'/>
+  </symbol>
+  <symbol id='fs-menu' viewBox='0 0 24 24'>
+    <title>Ouvrir la navigation sur écran étroit</title>
+    <path d='M4 7h16M4 12h16M4 17h16'/>
+  </symbol>
+  <symbol id='fs-chevron-bas' viewBox='0 0 24 24'>
+    <title>Accordéon, liste déroulante</title>
+    <path d='m6 9.5 6 6 6-6'/>
+  </symbol>
+  <symbol id='fs-chevron-haut' viewBox='0 0 24 24'>
+    <title>Replier une section</title>
+    <path d='m6 14.5 6-6 6 6'/>
+  </symbol>
+  <symbol id='fs-chevron-droite' viewBox='0 0 24 24'>
+    <title>Fil d'Ariane, page suivante</title>
+    <path d='m9.5 6 6 6-6 6'/>
+  </symbol>
+  <symbol id='fs-chevron-gauche' viewBox='0 0 24 24'>
+    <title>Retour, page précédente</title>
+    <path d='m14.5 6-6 6 6 6'/>
+  </symbol>
+  <symbol id='fs-fleche-droite' viewBox='0 0 24 24'>
+    <title>Lien d'action, étape suivante</title>
+    <path d='M4 12h16'/><path d='m13.5 5.5 6.5 6.5-6.5 6.5'/>
+  </symbol>
+  <symbol id='fs-lien-externe' viewBox='0 0 24 24'>
+    <title>Lien quittant le service</title>
+    <path d='M14 4h6v6'/><path d='M20 4 11 13'/><path d='M18 14.5V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V7.5A1.5 1.5 0 0 1 5 6h4.5'/>
+  </symbol>
+  <symbol id='fs-filtre' viewBox='0 0 24 24'>
+    <title>Filtrer une liste de résultats</title>
+    <path d='M3.5 5.5h17l-6.5 7.6v5.7l-4 2.2v-7.9z'/>
+  </symbol>
+  <symbol id='fs-trier' viewBox='0 0 24 24'>
+    <title>Trier une colonne de tableau</title>
+    <path d='M7 4.5v15'/><path d='m4 16.5 3 3 3-3'/><path d='M17 19.5v-15'/><path d='m14 7.5 3-3 3 3'/>
+  </symbol>
+  <symbol id='fs-document' viewBox='0 0 24 24'>
+    <title>Pièce à fournir, fiche de démarche</title>
+    <path d='M14 3.5H6.5A1.5 1.5 0 0 0 5 5v14a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V8.5z'/><path d='M14 3.5V8.5H19'/><path d='M8.5 13.5h7M8.5 16.5h4.5'/>
+  </symbol>
+  <symbol id='fs-dossier' viewBox='0 0 24 24'>
+    <title>Dossier en cours d'instruction</title>
+    <path d='M3.5 7A1.5 1.5 0 0 1 5 5.5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9.5v9A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5z'/>
+  </symbol>
+  <symbol id='fs-telecharger' viewBox='0 0 24 24'>
+    <title>Récépissé, quittance, document délivré</title>
+    <path d='M12 3.5v11'/><path d='m7.5 10 4.5 4.5 4.5-4.5'/><path d='M4 16.5V19a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-2.5'/>
+  </symbol>
+  <symbol id='fs-televerser' viewBox='0 0 24 24'>
+    <title>Déposer une pièce justificative</title>
+    <path d='M12 15.5v-11'/><path d='m7.5 9 4.5-4.5 4.5 4.5'/><path d='M4 16.5V19a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-2.5'/>
+  </symbol>
+  <symbol id='fs-imprimer' viewBox='0 0 24 24'>
+    <title>Imprimer une fiche ou un récépissé</title>
+    <path d='M7 9V3.5h10V9'/><path d='M7 17.5H5.5A1.5 1.5 0 0 1 4 16v-5a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 20 11v5a1.5 1.5 0 0 1-1.5 1.5H17'/><path d='M7 14h10v6.5H7z'/>
+  </symbol>
+  <symbol id='fs-calendrier' viewBox='0 0 24 24'>
+    <title>Date de dépôt, échéance</title>
+    <rect x='3.5' y='5.5' width='17' height='15' rx='1.5'/><path d='M3.5 10.5h17M8 3.5v4M16 3.5v4'/>
+  </symbol>
+  <symbol id='fs-horloge' viewBox='0 0 24 24'>
+    <title>Délai de traitement, horaires</title>
+    <circle cx='12' cy='12' r='8.5'/><path d='M12 7v5.3l3.5 2.2'/>
+  </symbol>
+  <symbol id='fs-paiement' viewBox='0 0 24 24'>
+    <title>Coût, droit de timbre, règlement</title>
+    <rect x='2.5' y='6.5' width='19' height='11' rx='1.5'/><circle cx='12' cy='12' r='2.5'/><path d='M6 12h.01M18 12h.01'/>
+  </symbol>
+  <symbol id='fs-carte-identite' viewBox='0 0 24 24'>
+    <title>CNIB, pièce d'identité</title>
+    <rect x='2.5' y='5' width='19' height='14' rx='1.5'/><circle cx='8.5' cy='10.8' r='2'/><path d='M5.2 15.8c.6-1.5 1.9-2.4 3.3-2.4s2.7.9 3.3 2.4'/><path d='M15 10h4M15 13.5h4'/>
+  </symbol>
+  <symbol id='fs-utilisateur' viewBox='0 0 24 24'>
+    <title>Compte usager, espace personnel</title>
+    <circle cx='12' cy='8.5' r='3.75'/><path d='M4.5 20c.8-3.8 3.9-6 7.5-6s6.7 2.2 7.5 6'/>
+  </symbol>
+  <symbol id='fs-institution' viewBox='0 0 24 24'>
+    <title>Administration responsable, ministère</title>
+    <path d='M3.5 9.5 12 4l8.5 5.5'/><path d='M6 9.5V18M10 9.5V18M14 9.5V18M18 9.5V18'/><path d='M3.5 20.5h17'/>
+  </symbol>
+  <symbol id='fs-lieu' viewBox='0 0 24 24'>
+    <title>Guichet, mairie, point de retrait</title>
+    <path d='M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z'/><circle cx='12' cy='10' r='2.5'/>
+  </symbol>
+  <symbol id='fs-telephone' viewBox='0 0 24 24'>
+    <title>Contact téléphonique, numéro vert</title>
+    <path d='M8.4 4.5H5.6A1.6 1.6 0 0 0 4 6.2c0 7.9 6.4 14.3 14.3 14.3a1.6 1.6 0 0 0 1.6-1.6v-2.8l-4-1.4-2 2a13.2 13.2 0 0 1-5.4-5.4l2-2z'/>
+  </symbol>
+  <symbol id='fs-courriel' viewBox='0 0 24 24'>
+    <title>Contact électronique, récépissé envoyé</title>
+    <rect x='3' y='5.5' width='18' height='13' rx='1.5'/><path d='m3.5 7 8.5 6 8.5-6'/>
+  </symbol>
+  <symbol id='fs-information' viewBox='0 0 24 24'>
+    <title>Encart d'information neutre</title>
+    <circle cx='12' cy='12' r='8.5'/><path d='M12 11.2v5.3M12 7.8h.01'/>
+  </symbol>
+  <symbol id='fs-succes' viewBox='0 0 24 24'>
+    <title>Dossier validé, opération aboutie</title>
+    <circle cx='12' cy='12' r='8.5'/><path d='m8.3 12.2 2.6 2.6 5-5.3'/>
+  </symbol>
+  <symbol id='fs-alerte' viewBox='0 0 24 24'>
+    <title>Mise en garde, complément demandé</title>
+    <path d='M10.7 4.2 2.9 17.4A1.5 1.5 0 0 0 4.2 19.7h15.6a1.5 1.5 0 0 0 1.3-2.3L13.3 4.2a1.5 1.5 0 0 0-2.6 0z'/><path d='M12 9.5v4M12 16.6h.01'/>
+  </symbol>
+  <symbol id='fs-erreur' viewBox='0 0 24 24'>
+    <title>Erreur de saisie, demande rejetée</title>
+    <circle cx='12' cy='12' r='8.5'/><path d='m9 9 6 6m0-6-6 6'/>
+  </symbol>
+  <symbol id='fs-coche' viewBox='0 0 24 24'>
+    <title>Élément validé dans une liste de contrôle</title>
+    <path d='m4.5 12.8 5 5 10-11'/>
+  </symbol>
+  <symbol id='fs-aide' viewBox='0 0 24 24'>
+    <title>Aide contextuelle, question fréquente</title>
+    <circle cx='12' cy='12' r='8.5'/><path d='M9.6 9.6a2.5 2.5 0 0 1 4.9.4c0 1.7-2.5 2.2-2.5 3.6'/><path d='M12 16.4h.01'/>
+  </symbol>
+  <symbol id='fs-cadenas' viewBox='0 0 24 24'>
+    <title>Connexion sécurisée, donnée protégée</title>
+    <rect x='4.5' y='10' width='15' height='10.5' rx='1.5'/><path d='M8 10V7.5a4 4 0 0 1 8 0V10'/>
+  </symbol>
+  <symbol id='fs-bouclier' viewBox='0 0 24 24'>
+    <title>Service officiel vérifié</title>
+    <path d='M12 3.2 5 5.9v5.6c0 4.3 2.9 8.3 7 9.3 4.1-1 7-5 7-9.3V5.9z'/><path d='m9.2 12.2 2 2 3.6-3.8'/>
+  </symbol>
+  <symbol id='fs-signalement' viewBox='0 0 24 24'>
+    <title>Signaler une fraude, une page suspecte</title>
+    <path d='M5.5 21V4'/><path d='M5.5 4.8h12.2l-2 3.6 2 3.6H5.5z'/>
+  </symbol>
+  <symbol id='fs-oeil' viewBox='0 0 24 24'>
+    <title>Afficher un contenu masqué</title>
+    <path d='M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z'/><circle cx='12' cy='12' r='3'/>
+  </symbol>
+</svg>

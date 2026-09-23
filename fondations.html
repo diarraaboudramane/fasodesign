@@ -1,0 +1,1637 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fondations&nbsp;— Charte graphique de l'administration burkinabè</title>
+<meta name="description" content="Emblème, couleurs nationales, typographie, grille, espacement, formes et mouvement du système de conception de l'État burkinabè.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/faso.css">
+<link rel="stylesheet" href="assets/css/icones.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="icon" href="assets/img/armoiries.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
+
+<div class="doc-barre">
+  <a class="doc-menu-marque" href="index.html">
+    <img src="assets/img/armoiries.svg" alt="">
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+  </a>
+  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
+</div>
+
+<div class="doc-page">
+
+  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
+    <a class="doc-menu-marque" href="index.html">
+      <img src="assets/img/armoiries.svg" alt="">
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    </a>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Le système</p>
+      <ul>
+        <li><a href="index.html">Présentation</a></li>
+        <li><a href="fondations.html" aria-current="page">Fondations</a></li>
+        <li><a href="composants.html">Composants de base</a></li>
+        <li><a href="composants-metier.html">Composants métier</a></li>
+        <li><a href="gabarits.html">Gabarits</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="integration.html">Intégration</a></li>
+        <li><a href="gouvernance.html">Gouvernance</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Sur cette page</p>
+      <div class="fs-sommaire" data-sommaire-auto></div>
+    </div>
+  </nav>
+
+  <main class="doc-corps" id="contenu">
+
+    <div class="doc-entete">
+      <nav class="doc-fil" aria-label="Fil d'Ariane">
+        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Fondations</span>
+      </nav>
+      <h1>Fondations</h1>
+      <p class="fs-chapeau">
+        Les fondations sont les décisions dont tout le reste découle. Un composant
+        ne définit jamais une couleur, une taille ou un rayon&nbsp;: il consomme un jeton
+        déclaré ici. C'est ce qui permet de faire évoluer le système sans le réécrire.
+      </p>
+    </div>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="marque">
+      <h2>Emblème et bloc-marque</h2>
+      <p class="doc-section-intro">
+        Les armoiries du Burkina Faso sont un symbole de souveraineté, pas un logo.
+        Leur emploi identifie l'État et engage la responsabilité de l'administration
+        qui les affiche. Les règles qui suivent sont impératives.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Bloc-marque officiel <code>.fs-marque</code></h3>
+        <p class="doc-bloc-note">
+          Le bloc-marque associe l'emblème, la dénomination de l'État, la devise
+          nationale et, le cas échéant, l'entité responsable du service. Il est le
+          premier élément de contenu de toute page et renvoie toujours à l'accueil.
+        </p>
+
+        <div class="doc-demo" data-libelle="Bloc-marque complet">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <a class="fs-marque" href="#">
+              <img src="assets/img/armoiries.svg" alt="Armoiries du Burkina Faso">
+              <span class="fs-marque-texte">
+                <span class="fs-marque-pays">Burkina Faso</span>
+                <span class="fs-marque-devise">La Patrie ou la Mort, nous Vaincrons</span>
+                <span class="fs-marque-entite">Ministère de l'Économie et des Finances</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Formats de l'emblème</h3>
+        <p class="doc-bloc-note">
+          L'emblème est livré en vectoriel. C'est la seule forme qui reste nette du
+          favicon de 16&nbsp;px à l'affiche imprimée, et la seule compatible avec le
+          principe de contrainte réseau&nbsp;: le fichier pèse 45&nbsp;Ko une fois compressé,
+          contre 916&nbsp;Ko pour le raster dont il est issu, soit vingt fois moins sur
+          une connexion facturée au volume.
+        </p>
+
+        <div class="doc-demo" data-libelle="Tailles d'emploi">
+          <div class="doc-demo-scene" style="align-items: flex-end; gap: var(--espace-8);">
+            <div class="doc-variante">
+              <img src="assets/img/armoiries.svg" alt="" style="height: 120px;">
+              <span class="doc-variante-nom">120 px — page d'accueil</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/armoiries.svg" alt="" style="height: 56px;">
+              <span class="doc-variante-nom">56 px — en-tête</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/armoiries.svg" alt="" style="height: 44px;">
+              <span class="doc-variante-nom">44 px — écran étroit</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/armoiries.svg" alt="" style="height: 32px;">
+              <span class="doc-variante-nom">32 px — pied de page</span>
+            </div>
+          </div>
+        </div>
+
+        <dl class="fs-definitions fs-mt-6">
+          <div>
+            <dt><code>armoiries.svg</code></dt>
+            <dd>Emblème vectoriel. Format de référence pour tout usage numérique et imprimé. 191&nbsp;Ko, 45&nbsp;Ko compressé.</dd>
+          </div>
+          <div>
+            <dt>Dimensions</dt>
+            <dd>Rapport 468 × 550. Le fichier ne porte pas de <code>width</code> ni de <code>height</code>&nbsp;: la taille est pilotée par le CSS.</dd>
+          </div>
+          <div>
+            <dt>Taille minimale</dt>
+            <dd>32&nbsp;px de hauteur. En deçà, l'écu cesse d'être identifiable et la devise devient illisible.</dd>
+          </div>
+        </dl>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Recalage chromatique.</strong> L'écu porte le drapeau national. La
+          vectorisation ayant fait dériver ses teintes, celles-ci ont été ramenées aux
+          valeurs officielles fixées par cette charte&nbsp;— <code>#e30613</code>,
+          <code>#00843b</code> et <code>#ffed00</code>. Sans cette correction,
+          l'emblème aurait juré avec les mêmes couleurs employées ailleurs sur la
+          page. Les gris et les bruns de l'illustration sont conservés tels quels.
+        </div>
+
+        <div class="fs-encart fs-encart--alerte fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Statut du fichier</p>
+            <p>
+              Ce fichier est dérivé par vectorisation d'un rendu raster de l'emblème.
+              Il convient à la conception et au développement des interfaces. Pour une
+              mise en production, la version vectorielle de référence doit être obtenue
+              auprès du Secrétariat général du Gouvernement et se substituer à
+              celle-ci.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Filet national <code>.fs-filet</code></h3>
+        <p class="doc-bloc-note">
+          Bande longue&nbsp;: le rouge occupe la moitié gauche, le vert la moitié droite,
+          l'étoile d'or se pose à la jonction. Placé sous le bandeau d'identification
+          officielle, le filet marque l'appartenance à l'État et n'est jamais employé
+          comme séparateur décoratif à l'intérieur d'une page.
+        </p>
+
+        <div class="doc-note">
+          <strong>Pourquoi pas la composition du drapeau ici&nbsp;?</strong> Étirée sur
+          toute la largeur d'un écran, une bande de 14&nbsp;px se présente dans un rapport
+          voisin de cent pour un. Superposer deux bandes de 7&nbsp;px dans ce format ne
+          donne pas un drapeau mais deux traits parallèles, qu'aucun œil ne rapproche.
+          La division gauche-droite, elle, tient à n'importe quelle longueur&nbsp;: le
+          regard parcourt le rouge, rencontre l'étoile, poursuit sur le vert. La vraie
+          composition du drapeau est réservée au <a href="#marque">repère national</a>,
+          dont les proportions la rendent lisible.
+        </div>
+
+        <div class="doc-demo" data-libelle="Filet national">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-filet"></div>
+            <div class="fs-filet fs-filet--fin"></div>
+            <div class="fs-filet fs-filet--epais"></div>
+          </div>
+        </div>
+        <p class="fs-legende fs-mt-4">
+          Trois hauteurs&nbsp;: <code>--fin</code> à 10&nbsp;px pour un bandeau interne,
+          la hauteur courante à 14&nbsp;px, <code>--epais</code> à 20&nbsp;px lorsque le
+          filet ouvre une page d'accueil. L'étoile suit la hauteur, elle n'a pas de
+          réglage propre.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Repère national <code>.fs-repere</code></h3>
+        <p class="doc-bloc-note">
+          Vignette courte, dont les proportions permettent la <strong>vraie
+          composition du drapeau</strong>&nbsp;: rouge au-dessus, vert au-dessous, étoile
+          centrée à cheval sur les deux. Il ponctue un titre de section ou une
+          ouverture de page, là où le filet pleine largeur serait trop appuyé. Le
+          drapeau entier tient dans deux couches de fond, sans rien à superposer&nbsp;:
+          c'est ce qui permet de le composer dans un pseudo-élément, là où aucune
+          classe ne peut être posée.
+        </p>
+
+        <div class="doc-note">
+          <strong>Deux objets, deux compositions.</strong> La règle tient en une
+          phrase&nbsp;: au-delà d'un rapport d'environ dix pour un, on emploie la division
+          gauche-droite du filet&nbsp;; en deçà, la composition du drapeau du repère.
+        </div>
+
+        <div class="doc-demo" data-libelle="Repère national">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <span class="fs-repere"></span>
+            <span class="fs-repere" style="width: 96px; --repere-hauteur: 20px;"></span>
+            <span class="fs-repere fs-repere--centre"></span>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Un seul repère par niveau de titre, toujours à la même place.</li>
+              <li>Conserver les proportions du drapeau&nbsp;: deux bandes égales, étoile centrée à cheval sur les deux.</li>
+              <li>Ajuster la largeur et la hauteur par les variables du composant, jamais en redéfinissant le dégradé.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Remplacer l'étoile par un point, un losange ou une autre forme.</li>
+              <li>Grossir l'étoile jusqu'à couvrir la hauteur&nbsp;: sur le drapeau, elle laisse respirer les deux bandes.</li>
+              <li>Inverser les bandes&nbsp;: le rouge est toujours au-dessus du vert.</li>
+              <li>Employer le repère comme puce de liste ou séparateur répété.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Motif tissé <code>.fs-tissage</code></h3>
+        <p class="doc-bloc-note">
+          Inspiré des rayures du Faso Dan Fani, le tissu traditionnel. Les bandes
+          sont de largeur inégale et séparées d'un fil clair, comme sur le métier à
+          tisser&nbsp;: le motif se distingue ainsi du filet officiel, qu'il ne remplace
+          jamais. Il habille les lisières&nbsp;— bas d'un bandeau, tête d'un pied de page,
+          ouverture d'une section&nbsp;— et reste de faible hauteur.
+        </p>
+
+        <div class="doc-demo" data-libelle="Motif tissé">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-tissage"></div>
+            <div class="fs-tissage fs-tissage--fin"></div>
+            <div style="display:flex; gap: var(--espace-4); height: 96px;">
+              <div class="fs-tissage fs-tissage--vertical"></div>
+              <p class="fs-legende" style="align-self:center; margin:0;">Variante verticale, pour border une colonne ou une citation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Hauteur de 4 à 8&nbsp;px, en pleine largeur ou sur une courte longueur en repère.</li>
+              <li>Sur un fond coloré, adapter le fil clair via <code>--tissage-fond</code>.</li>
+              <li>Un seul motif tissé par écran&nbsp;: c'est un accent, pas une texture.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Le poser en fond derrière du texte ou des composants.</li>
+              <li>L'employer à la place du filet officiel sous le bandeau d'identification.</li>
+              <li>L'agrandir au-delà de 12&nbsp;px&nbsp;: il devient un drapeau déformé.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Règles d'emploi de l'emblème</h3>
+
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Conserver une zone de protection au moins égale à la moitié de la hauteur de l'emblème, libre de tout texte ou image.</li>
+              <li>Afficher l'emblème à 56&nbsp;px de hauteur minimum en en-tête, 44&nbsp;px sur écran étroit, 32&nbsp;px en pied de page.</li>
+              <li>Placer l'emblème sur un fond uni, clair ou très sombre, offrant un contraste suffisant.</li>
+              <li>Associer systématiquement l'emblème au nom de l'administration responsable du service.</li>
+              <li>Renseigner un texte de remplacement explicite lorsque l'emblème porte une information, et un texte vide lorsqu'il est redondant.</li>
+            </ul>
+          </div>
+
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Déformer, recadrer, faire pivoter ou recolorer l'emblème, y compris en version monochrome non validée.</li>
+              <li>Appliquer une ombre portée, un contour, un dégradé ou un effet de relief.</li>
+              <li>Poser l'emblème sur une photographie, une texture ou un fond chargé.</li>
+              <li>Utiliser l'emblème comme motif de fond, filigrane, favicon décoratif ou élément d'illustration.</li>
+              <li>Associer l'emblème à un service qui n'émane pas d'une administration publique.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Co-marquage</h3>
+        <p class="doc-bloc-note">
+          Un service porté conjointement par l'État et un partenaire&nbsp;— agence,
+          établissement public, organisation internationale&nbsp;— fait coexister deux
+          marques. L'ordre n'est pas négociable&nbsp;: l'emblème de l'État vient en
+          premier, car c'est lui qui engage la responsabilité du service.
+        </p>
+
+        <div class="doc-demo" data-libelle="Co-marquage">
+          <div class="doc-demo-scene">
+            <div class="fs-rangee" style="gap: var(--espace-5);">
+              <a class="fs-marque" href="#" style="padding-right: var(--espace-5); border-right: var(--trait-fin) solid var(--bordure);">
+                <img src="assets/img/armoiries.svg" alt="Armoiries du Burkina Faso">
+                <span class="fs-marque-texte">
+                  <span class="fs-marque-pays">Burkina Faso</span>
+                  <span class="fs-marque-entite">Ministère de la Santé</span>
+                </span>
+              </a>
+              <span style="display:grid; place-items:center; width:92px; height:44px; background: var(--surface-enfoncee); border: var(--trait-fin) dashed var(--bordure-forte); border-radius: var(--rayon-sm); font-size: var(--taille-2xs); color: var(--texte-faible); text-align:center;">
+                Marque<br>partenaire
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Placer l'emblème de l'État en premier dans le sens de lecture, séparé de la marque partenaire par un filet vertical.</li>
+              <li>Limiter la marque partenaire à la hauteur de l'emblème, jamais au-delà.</li>
+              <li>Conserver la zone de protection de l'emblème, que le partenaire n'empiète pas.</li>
+              <li>N'admettre qu'un seul partenaire dans le bloc-marque&nbsp;; les autres figurent en pied de page.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Placer une marque partenaire avant l'emblème ou au-dessus de lui.</li>
+              <li>Composer un logotype mixte associant l'emblème à un autre signe.</li>
+              <li>Faire figurer une marque commerciale dans le bloc-marque, quel que soit le financement du service.</li>
+              <li>Aligner les deux marques sans séparateur&nbsp;: elles paraîtraient émaner d'une même entité.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Devise nationale</h3>
+        <p class="doc-bloc-note">
+          La devise figure dans le bloc-marque en capitale initiale et en italique,
+          au palier typographique le plus discret. Elle n'est ni un slogan
+          promotionnel, ni un titre&nbsp;: elle ne doit jamais être mise en avant au
+          détriment de l'intitulé du service. Sur écran étroit, elle est masquée pour
+          préserver la lisibilité de la dénomination.
+        </p>
+        <div class="doc-note">
+          La devise portée par l'emblème en vigueur est
+          <strong>«&nbsp;La Patrie ou la Mort, nous Vaincrons&nbsp;»</strong>. Toute reprise
+          doit être conforme au fichier officiel de référence, y compris dans la
+          ponctuation et les capitales.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="couleurs">
+      <h2>Couleurs</h2>
+      <p class="doc-section-intro">
+        Les trois couleurs du drapeau adopté le 4 août 1984 constituent la souche
+        chromatique du système. Elles sont trop saturées pour habiller une interface
+        entière&nbsp;: chacune est donc déclinée en dix paliers, la teinte officielle
+        restant fixée au palier indiqué. Les neutres sont dérivés d'une base chaude,
+        et non d'un gris bleuté, pour rester cohérents avec cette souche.
+      </p>
+
+      <div class="doc-trio">
+        <div class="doc-trio-tuile doc-trio-tuile--rouge" data-copier="#e30613" title="Copier la valeur">
+          <span class="doc-trio-nom">Rouge</span>
+          <span class="doc-trio-sens">Révolution, courage, sang versé pour la patrie</span>
+          <span class="doc-trio-hex">#e30613 · Pantone 032 C</span>
+        </div>
+        <div class="doc-trio-tuile doc-trio-tuile--or" data-copier="#ffed00" title="Copier la valeur">
+          <span class="doc-trio-nom">Or</span>
+          <span class="doc-trio-sens">Lumière de l'étoile, richesse du sous-sol</span>
+          <span class="doc-trio-hex">#ffed00 · Pantone 116 C</span>
+        </div>
+        <div class="doc-trio-tuile doc-trio-tuile--vert" data-copier="#00843b" title="Copier la valeur">
+          <span class="doc-trio-nom">Vert</span>
+          <span class="doc-trio-sens">Espérance, abondance des richesses agricoles</span>
+          <span class="doc-trio-hex">#00843b · Pantone 355 C</span>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Rouge&nbsp;— révolution et courage</h3>
+        <p class="doc-bloc-note">
+          Employé pour le registre grave&nbsp;: erreurs, suppressions, alertes critiques,
+          signalement de fraude. Sa charge symbolique interdit de l'utiliser comme
+          couleur d'accentuation ordinaire ou de mise en avant commerciale.
+        </p>
+        <div class="doc-echelle">
+          <div class="doc-ton doc-ton--clair"  style="background:#fff1f2" data-copier="#fff1f2"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fff1f2</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffe0e2" data-copier="#ffe0e2"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#ffe0e2</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffc5c9" data-copier="#ffc5c9"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#ffc5c9</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#f99aa1" data-copier="#f99aa1"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#f99aa1</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#f0636e" data-copier="#f0636e"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#f0636e</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#e30613" data-copier="#e30613"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#e30613</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#c40511" data-copier="#c40511"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#c40511</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#a2040e" data-copier="#a2040e"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#a2040e</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#7d0610" data-copier="#7d0610"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#7d0610</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#5a0810" data-copier="#5a0810"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#5a0810</span></div>
+        </div>
+        <p class="fs-legende">
+          Référence d'impression&nbsp;: Pantone 032 C · CMJN 0 / 90 / 76 / 0 · RAL 3024.
+          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#e30613/#ffffff"></span>
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Vert&nbsp;— espérance et richesses agricoles</h3>
+        <p class="doc-bloc-note">
+          Couleur de l'action. Elle porte les boutons principaux, les liens, les
+          états de validation et les repères de navigation active. C'est la couleur
+          la plus présente dans une interface conforme.
+        </p>
+        <div class="doc-echelle">
+          <div class="doc-ton doc-ton--clair"  style="background:#ecf7f0" data-copier="#ecf7f0"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#ecf7f0</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#d3eddd" data-copier="#d3eddd"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#d3eddd</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#a8dbbc" data-copier="#a8dbbc"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#a8dbbc</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#74c296" data-copier="#74c296"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#74c296</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#3ea46d" data-copier="#3ea46d"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#3ea46d</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#00843b" data-copier="#00843b"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#00843b</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#026c31" data-copier="#026c31"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#026c31</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#045527" data-copier="#045527"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#045527</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#04411f" data-copier="#04411f"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#04411f</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#032e16" data-copier="#032e16"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#032e16</span></div>
+        </div>
+        <p class="fs-legende">
+          Référence d'impression&nbsp;: Pantone 355 C · CMJN 93 / 0 / 100 / 0 · RAL 6037.
+          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#00843b/#ffffff"></span>
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Or&nbsp;— lumière de l'étoile</h3>
+        <p class="doc-bloc-note">
+          Couleur de mise en avant, employée avec parcimonie. Le jaune pur étant très
+          clair, il ne porte jamais de texte blanc&nbsp;: le palier 300 s'accompagne
+          toujours d'un texte sombre. Les paliers 600 et au-delà tirent vers l'ocre
+          et servent à écrire sur fond clair.
+        </p>
+        <div class="doc-echelle">
+          <div class="doc-ton doc-ton--clair"  style="background:#fffce5" data-copier="#fffce5"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fffce5</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fff8bf" data-copier="#fff8bf"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#fff8bf</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fff287" data-copier="#fff287"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#fff287</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffed00" data-copier="#ffed00"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#ffed00</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#e8d400" data-copier="#e8d400"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#e8d400</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#c9b600" data-copier="#c9b600"><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#c9b600</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#a39300" data-copier="#a39300"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#a39300</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#7d7100" data-copier="#7d7100"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#7d7100</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#5c5300" data-copier="#5c5300"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#5c5300</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#3d3800" data-copier="#3d3800"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#3d3800</span></div>
+        </div>
+        <p class="fs-legende">
+          Référence d'impression&nbsp;: Pantone 116 C · CMJN 0 / 10 / 98 / 0 · RAL 2007.
+          Texte noir sur le palier 300&nbsp;: <span data-contraste="#ffed00/#211d1a"></span> ·
+          Texte blanc sur le palier 300&nbsp;: <span data-contraste="#ffed00/#ffffff"></span>
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Neutres</h3>
+        <p class="doc-bloc-note">
+          Fonds, bordures et textes. La base est volontairement chaude&nbsp;: un gris
+          bleuté introduirait une teinte étrangère à la souche nationale et ferait
+          jurer les aplats verts et or.
+        </p>
+        <div class="doc-echelle doc-echelle--large">
+          <div class="doc-ton doc-ton--clair"  style="background:#ffffff; box-shadow: inset 0 0 0 1px #e2ddd6" data-copier="#ffffff"><span class="doc-ton-palier">0</span><span class="doc-ton-hex">#ffffff</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fcfbf9" data-copier="#fcfbf9"><span class="doc-ton-palier">25</span><span class="doc-ton-hex">#fcfbf9</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#f7f5f2" data-copier="#f7f5f2"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#f7f5f2</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#efece7" data-copier="#efece7"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#efece7</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#e2ddd6" data-copier="#e2ddd6"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#e2ddd6</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#cfc8bf" data-copier="#cfc8bf"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#cfc8bf</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#a9a199" data-copier="#a9a199"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#a9a199</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#837b73" data-copier="#837b73"><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#837b73</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#635c55" data-copier="#635c55"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#635c55</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#4a443e" data-copier="#4a443e"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#4a443e</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#332e2a" data-copier="#332e2a"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#332e2a</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#211d1a" data-copier="#211d1a"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#211d1a</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#14110f" data-copier="#14110f"><span class="doc-ton-palier">950</span><span class="doc-ton-hex">#14110f</span></div>
+        </div>
+        <p class="fs-legende">
+          Texte courant sur fond blanc&nbsp;: <span data-contraste="#211d1a/#ffffff"></span> ·
+          Texte atténué sur fond blanc&nbsp;: <span data-contraste="#635c55/#ffffff"></span>
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Couleurs de support</h3>
+        <p class="doc-bloc-note">
+          Deux familles complètent la souche nationale, strictement cantonnées à un
+          registre fonctionnel. Le bleu administratif ne structure jamais un en-tête,
+          une navigation ou une action&nbsp;: il n'appartient pas au drapeau et son emploi
+          au-delà du registre informatif affaiblirait l'identité de l'État.
+        </p>
+        <div class="doc-echelle doc-echelle--libre">
+          <div class="doc-ton doc-ton--clair"  style="background:#eef4f9" data-copier="#eef4f9"><span class="doc-ton-palier">Bleu 50</span><span class="doc-ton-hex">#eef4f9</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#d6e5f0" data-copier="#d6e5f0"><span class="doc-ton-palier">Bleu 100</span><span class="doc-ton-hex">#d6e5f0</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#2a6d9b" data-copier="#2a6d9b"><span class="doc-ton-palier">Bleu 500</span><span class="doc-ton-hex">#2a6d9b</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#173f5f" data-copier="#173f5f"><span class="doc-ton-palier">Bleu 700</span><span class="doc-ton-hex">#173f5f</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fdf4e3" data-copier="#fdf4e3"><span class="doc-ton-palier">Ocre 50</span><span class="doc-ton-hex">#fdf4e3</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#b07800" data-copier="#b07800"><span class="doc-ton-palier">Ocre 500</span><span class="doc-ton-hex">#b07800</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#7d5500" data-copier="#7d5500"><span class="doc-ton-palier">Ocre 700</span><span class="doc-ton-hex">#7d5500</span></div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Rôles sémantiques</h3>
+        <p class="doc-bloc-note">
+          Les composants ne référencent jamais un palier directement. Ils consomment
+          un rôle, qui pointe vers un palier. C'est cette indirection qui rend le
+          thème sombre possible sans toucher à une seule règle de composant.
+        </p>
+
+        <div class="doc-roles">
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--action)"></span>
+            <div><span class="doc-role-nom">--action</span><span class="doc-role-usage">Boutons principaux, liens, navigation active, validation</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--accent)"></span>
+            <div><span class="doc-role-nom">--accent</span><span class="doc-role-usage">Suppression, alerte critique, urgence nationale</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--relief)"></span>
+            <div><span class="doc-role-nom">--relief</span><span class="doc-role-usage">Mise en avant ponctuelle, repère, surlignage</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--succes)"></span>
+            <div><span class="doc-role-nom">--succes</span><span class="doc-role-usage">Dossier validé, opération aboutie</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--alerte)"></span>
+            <div><span class="doc-role-nom">--alerte</span><span class="doc-role-usage">Complément demandé, délai proche, mise en garde</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--danger)"></span>
+            <div><span class="doc-role-nom">--danger</span><span class="doc-role-usage">Erreur de saisie, rejet, action irréversible</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--info)"></span>
+            <div><span class="doc-role-nom">--info</span><span class="doc-role-usage">Information neutre, repère documentaire</span></div>
+          </div>
+          <div class="doc-role">
+            <span class="doc-role-pastille" style="background: var(--surface-enfoncee); border-color: var(--bordure)"></span>
+            <div><span class="doc-role-nom">--surface-enfoncee</span><span class="doc-role-usage">Fonds de tableau, zones inactives, en-têtes</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Répartition chromatique</h3>
+        <p class="doc-bloc-note">
+          Une interface conforme n'est pas une interface tricolore. Les trois couleurs
+          nationales sont des signaux&nbsp;: leur force tient à leur rareté. La proportion
+          de référence est la suivante.
+        </p>
+
+        <div class="doc-demo" data-libelle="Proportions indicatives">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div style="display:flex; height:56px; border-radius: var(--rayon-md); overflow:hidden; font-size: var(--taille-2xs); font-weight:700; color:#fff;">
+              <div style="flex: 78; background: var(--neutre-100); color: var(--neutre-700); display:grid; place-items:center;">Neutres&nbsp;— 78&nbsp;%</div>
+              <div style="flex: 14; background: var(--vert-500); display:grid; place-items:center;">Vert&nbsp;— 14&nbsp;%</div>
+              <div style="flex: 5; background: var(--or-300); color: var(--neutre-900); display:grid; place-items:center;">Or</div>
+              <div style="flex: 3; background: var(--rouge-500); display:grid; place-items:center;">Rouge</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="typographie">
+      <h2>Typographie</h2>
+      <p class="doc-section-intro">
+        Deux familles suffisent. Archivo, grotesque de facture institutionnelle,
+        porte les titres et les éléments d'interface&nbsp;; son dessin ferme tient bien
+        en petit corps et en capitales. Inter porte le texte courant&nbsp;: sa hauteur
+        d'x généreuse reste lisible sur les écrans de faible densité, qui
+        constituent le parc dominant.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Les deux familles</h3>
+        <p class="doc-bloc-note">
+          Deux familles suffisent, et deux seulement&nbsp;: chaque famille
+          supplémentaire est un fichier de plus sur le chemin critique, pour un
+          service dont le premier principe est la contrainte réseau.
+        </p>
+
+        <div class="doc-demo" data-libelle="Spécimen">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div>
+              <p class="fs-legende">Archivo&nbsp;— titres, boutons, navigation</p>
+              <p style="font-family: var(--police-titre); font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: var(--espace-2) 0;">
+                Burkina Faso
+              </p>
+              <p style="font-family: var(--police-titre); font-size: 1.125rem; line-height: 1.6; margin: 0;">
+                ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                abcdefghijklmnopqrstuvwxyz<br>
+                0123456789 &amp; ’ «&nbsp;» — … €
+              </p>
+            </div>
+
+            <hr>
+
+            <div>
+              <p class="fs-legende">Inter&nbsp;— texte courant, formulaires, tableaux</p>
+              <p style="font-family: var(--police-texte); font-size: 1.0625rem; line-height: 1.7; margin: var(--espace-2) 0 0; max-width: 54ch;">
+                Le récépissé de dépôt est délivré immédiatement après validation du
+                formulaire. Il ne vaut pas acte et ne peut être produit comme pièce
+                justificative.
+              </p>
+              <p style="font-family: var(--police-texte); font-size: 1.125rem; line-height: 1.6; margin-top: var(--espace-4);">
+                ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>
+                abcdefghijklmnopqrstuvwxyz<br>
+                0123456789 &amp; ’ «&nbsp;» — … €
+              </p>
+            </div>
+
+            <hr>
+
+            <div>
+              <p class="fs-legende">Accents et ligatures du français</p>
+              <p style="font-family: var(--police-texte); font-size: 1.375rem; line-height: 1.7; margin: var(--espace-2) 0 0;">
+                À Â Ä Ç É È Ê Ë Î Ï Ô Ö Ù Û Ü Ÿ Œ Æ<br>
+                à â ä ç é è ê ë î ï ô ö ù û ü ÿ œ æ
+              </p>
+              <p class="fs-legende fs-mt-4">
+                Le sous-ensemble servi couvre l'intégralité du français, <strong>Œ et œ
+                compris</strong>&nbsp;— sans eux, « cœur » et « œuvre » basculeraient dans
+                la police de repli au milieu d'un mot.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Graisses</h3>
+        <p class="doc-bloc-note">
+          Cinq graisses sont disponibles, mais chacune a un emploi assigné. Une
+          graisse employée hors de son rôle affaiblit la hiérarchie au lieu de la
+          renforcer.
+        </p>
+
+        <div class="doc-demo" data-libelle="Graisses">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="display:block;">
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>400 — normale</b>Texte courant</div>
+              <div class="doc-specimen-rendu" style="font-weight: 400; font-size: 1.125rem;">Demander un acte de naissance</div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>500 — moyenne</b>Étiquette, libellé de champ</div>
+              <div class="doc-specimen-rendu" style="font-weight: 500; font-size: 1.125rem;">Demander un acte de naissance</div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>600 — demi-grasse</b>Boutons, titres de rang 4 à 6</div>
+              <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 600; font-size: 1.125rem;">Demander un acte de naissance</div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>700 — grasse</b>Titres de rang 2 et 3</div>
+              <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 700; font-size: 1.125rem;">Demander un acte de naissance</div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>800 — noire</b>Titre de rang 1, chiffres clés</div>
+              <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 800; font-size: 1.125rem;">Demander un acte de naissance</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Les fichiers sont des <strong>polices variables</strong>&nbsp;: un seul fichier
+          par famille couvre toutes les graisses. Cinq fichiers statiques auraient
+          pesé le triple. Aucune graisse intermédiaire n'est pour autant autorisée&nbsp;—
+          l'échelle reste celle des cinq paliers ci-dessus.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Chasse fixe</h3>
+        <p class="doc-bloc-note">
+          Références de dossier, montants dans un tableau, valeurs techniques&nbsp;: tout
+          ce qui doit s'aligner en colonne ou se lire caractère par caractère.
+          <strong>Aucune police n'est téléchargée pour cela</strong>&nbsp;— une chasse fixe
+          ne porte aucune identité, celle du système d'exploitation convient, et son
+          absence économise un fichier entier sur le chemin critique.
+        </p>
+
+        <div class="doc-demo" data-libelle="Chasse fixe">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <p style="margin:0;"><code>BF-2026-004871-OUA</code></p>
+            <p class="fs-legende" style="margin:0;">
+              Les chiffres du texte courant sont eux aussi tabulaires dans les
+              tableaux et les montants, via <code>font-variant-numeric</code>&nbsp;: sans
+              cela, une colonne de sommes ne s'aligne pas.
+            </p>
+            <div class="fs-tableau-cadre" style="max-width: 280px;">
+              <table class="fs-tableau fs-tableau--compact">
+                <tbody>
+                  <tr><td>Droit de timbre</td><td class="fs-num">500&nbsp;F</td></tr>
+                  <tr><td>Copies</td><td class="fs-num">1&nbsp;400&nbsp;F</td></tr>
+                  <tr><td>Envoi</td><td class="fs-num">11&nbsp;500&nbsp;F</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Chargement et repli</h3>
+        <p class="doc-bloc-note">
+          Les polices sont servies <strong>depuis le domaine du service</strong>,
+          jamais depuis un tiers. Une dépendance externe ajoute une résolution de nom,
+          une connexion, et place la disponibilité d'un service public hors du contrôle
+          de l'administration.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Poids réel servi, sous-ensemble latin</caption>
+            <thead>
+              <tr><th>Fichier</th><th>Format</th><th>Graisses</th><th class="fs-num">Poids</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>archivo.woff2</code></td><td>Variable</td><td>400 à 800</td><td class="fs-num">34&nbsp;Ko</td></tr>
+              <tr><td><code>inter.woff2</code></td><td>Variable</td><td>400 à 700</td><td class="fs-num">47&nbsp;Ko</td></tr>
+              <tr><td>Chasse fixe</td><td>Système</td><td>—</td><td class="fs-num">0&nbsp;Ko</td></tr>
+              <tr><td><strong>Total</strong></td><td></td><td></td><td class="fs-num"><strong>81&nbsp;Ko</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="fs-legende fs-mt-4">
+          Plafond fixé par le <a href="accessibilite.html#budget">budget de
+          performance</a>&nbsp;: 100&nbsp;Ko. Objectif&nbsp;: 60&nbsp;Ko. Le système est sous le
+          plafond, au-dessus de l'objectif&nbsp;; la marge restante viendrait d'un
+          sous-ensemble plus étroit que le latin complet.
+        </p>
+
+        <h4 class="fs-mt-8">Repli système</h4>
+        <p class="doc-bloc-note">
+          Si une police ne charge pas, le texte reste lisible dans la pile de
+          substitution. <code>font-display: swap</code> affiche immédiatement le
+          contenu en police de repli, puis bascule&nbsp;: sur réseau lent, une page lisible
+          vaut mieux qu'une page blanche.
+        </p>
+
+        <div class="doc-demo" data-libelle="Repli">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div>
+              <p class="fs-legende">Titre — police attendue</p>
+              <p style="font-family: var(--police-titre); font-size: 1.5rem; font-weight: 700; margin: var(--espace-1) 0 0;">Suivi de votre dossier</p>
+            </div>
+            <div>
+              <p class="fs-legende">Titre — repli système</p>
+              <p style="font-family: 'Segoe UI', system-ui, sans-serif; font-size: 1.5rem; font-weight: 700; margin: var(--espace-1) 0 0;">Suivi de votre dossier</p>
+            </div>
+          </div>
+        </div>
+
+        <dl class="fs-definitions fs-mt-6">
+          <div><dt>Titres</dt><dd><code>"Segoe UI", system-ui, -apple-system, sans-serif</code></dd></div>
+          <div><dt>Texte</dt><dd><code>"Segoe UI", system-ui, -apple-system, sans-serif</code></dd></div>
+          <div><dt>Chasse fixe</dt><dd><code>ui-monospace, "Cascadia Mono", Consolas, Menlo, monospace</code></dd></div>
+        </dl>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Licence et provenance</h3>
+        <p class="doc-bloc-note">
+          Une administration doit pouvoir répondre à une question simple&nbsp;: a-t-elle le
+          droit d'embarquer ces polices dans un site, un document ou une application&nbsp;?
+          Les deux familles sont diffusées sous <strong>SIL Open Font License</strong>,
+          qui autorise l'usage, la modification et la redistribution, y compris
+          commerciale, à condition de ne pas les vendre seules et de conserver le texte
+          de la licence.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Famille</th><th>Auteurs</th><th>Licence</th><th>Texte</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Archivo</td>
+                <td>The Archivo Project Authors</td>
+                <td>SIL OFL 1.1</td>
+                <td><a href="assets/polices/archivo-OFL.txt">archivo-OFL.txt</a></td>
+              </tr>
+              <tr>
+                <td>Inter</td>
+                <td>The Inter Project Authors</td>
+                <td>SIL OFL 1.1</td>
+                <td><a href="assets/polices/inter-OFL.txt">inter-OFL.txt</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Le texte de chaque licence accompagne les fichiers dans
+          <code>assets/polices/</code>. Il doit être conservé lors de toute reprise du
+          système par un projet&nbsp;: c'est la seule obligation que la licence impose.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Échelle typographique</h3>
+        <p class="doc-bloc-note">
+          Les tailles de titre sont fluides&nbsp;: elles s'interpolent entre 360&nbsp;px et
+          1280&nbsp;px de largeur de fenêtre, ce qui évite les paliers brutaux sur les
+          formats intermédiaires. Le corps de texte reste fixe à 15&nbsp;px, plancher
+          au-dessous duquel la lecture prolongée devient pénible.
+        </p>
+
+        <div class="doc-demo" data-libelle="Spécimen">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="display:block;">
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Titre 1</b>Archivo 800<br>32 → 53&nbsp;px<br>interligne 1.15</div>
+              <div class="doc-specimen-rendu"><h1 style="margin:0;">Demander un acte de naissance</h1></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Titre 2</b>Archivo 700<br>26 → 38&nbsp;px<br>interligne 1.25</div>
+              <div class="doc-specimen-rendu"><h2 style="margin:0; border:0; padding:0;">Pièces à fournir</h2></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Titre 3</b>Archivo 700<br>22 → 29&nbsp;px</div>
+              <div class="doc-specimen-rendu"><h3 style="margin:0;">Délai de traitement</h3></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Titre 4</b>Archivo 600<br>19 → 23&nbsp;px</div>
+              <div class="doc-specimen-rendu"><h4 style="margin:0;">Administration responsable</h4></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Chapeau</b>Inter 400<br>17&nbsp;px<br>interligne 1.75</div>
+              <div class="doc-specimen-rendu"><p class="fs-chapeau" style="margin:0;">La demande peut être déposée en ligne ou au guichet de la mairie de résidence.</p></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Corps</b>Inter 400<br>15&nbsp;px<br>interligne 1.6</div>
+              <div class="doc-specimen-rendu"><p style="margin:0;">Le récépissé de dépôt est délivré immédiatement après validation du formulaire. Il ne vaut pas acte et ne peut être produit comme pièce justificative.</p></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Petit texte</b>Inter 400<br>13&nbsp;px</div>
+              <div class="doc-specimen-rendu"><p class="fs-legende" style="margin:0;">Mention légale, légende de tableau, précision secondaire.</p></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Surtitre</b>Archivo 700<br>12&nbsp;px<br>capitales, approche 0.08em</div>
+              <div class="doc-specimen-rendu"><span class="fs-surtitre" style="margin:0;">Service en ligne</span></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Monospace</b>JetBrains Mono<br>Références, montants, codes</div>
+              <div class="doc-specimen-rendu"><code>BF-2026-004871-OUA</code></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Règles de composition</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Limiter le texte courant à environ 68 caractères par ligne (<code>--mesure</code>).</li>
+              <li>Respecter la hiérarchie des niveaux de titre sans en sauter&nbsp;: un <code>h3</code> suit un <code>h2</code>.</li>
+              <li>Aligner les chiffres en colonne avec <code>font-variant-numeric: tabular-nums</code> dans les tableaux et les montants.</li>
+              <li>Écrire les montants en francs CFA avec séparateur de milliers et unité explicite.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Composer un paragraphe entier en capitales&nbsp;: la lecture chute d'environ un tiers.</li>
+              <li>Justifier le texte&nbsp;: sans césure, la justification crée des lézardes ingérables.</li>
+              <li>Descendre sous 15&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
+              <li>Introduire une troisième famille typographique pour un besoin ponctuel.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="images">
+      <h2>Photographie et illustration</h2>
+      <p class="doc-section-intro">
+        Une image de service public informe&nbsp;; elle n'habille pas. La question à se
+        poser avant d'en placer une n'est pas « qu'est-ce qui irait bien ici&nbsp;? » mais
+        « qu'est-ce que l'usager comprendra mieux grâce à elle&nbsp;? ». Si la réponse
+        n'est pas évidente, la place reste vide.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Rôle de l'image</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Légitime</p>
+            <ul>
+              <li>Montrer à quoi ressemble un document ou un guichet, pour que l'usager le reconnaisse.</li>
+              <li>Situer un lieu&nbsp;: façade d'une mairie, plan d'accès à un centre d'enrôlement.</li>
+              <li>Illustrer un geste&nbsp;: comment cadrer la photographie d'une pièce d'identité.</li>
+              <li>Documenter une actualité par une photographie de l'événement.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Photographie d'ambiance pour « aérer » une page de démarche.</li>
+              <li>Banque d'images internationale sans lien avec le Burkina Faso.</li>
+              <li>Image de fond derrière du texte&nbsp;: le contraste devient incontrôlable.</li>
+              <li>Illustration décorative dans un parcours de démarche&nbsp;: elle allonge la page et distrait de l'action.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Représentation des personnes</h3>
+        <p class="doc-bloc-note">
+          Les images d'un service de l'État montrent les usagers tels qu'ils sont,
+          sans mise en scène. Cette exigence n'est pas cosmétique&nbsp;: un usager qui ne
+          se reconnaît pas dans les images d'un service doute de s'y adresser.
+        </p>
+
+        <ul class="fs-liste-controle fs-mesure">
+          <li><strong>Dignité.</strong> Aucune mise en scène de détresse, de pauvreté ou de dépendance. L'usager d'un service public est un citoyen qui exerce un droit, pas un bénéficiaire.</li>
+          <li><strong>Diversité réelle.</strong> Âges, genres, régions, milieux urbains et ruraux, situations de handicap. Une administration nationale s'adresse à tout le pays.</li>
+          <li><strong>Justesse.</strong> Les tenues, les lieux et les documents montrés sont ceux du Burkina Faso, pas ceux d'un catalogue générique.</li>
+          <li><strong>Consentement.</strong> Autorisation écrite pour toute personne identifiable, conservée par l'administration émettrice.</li>
+          <li><strong>Sobriété.</strong> Aucun sourire commercial, aucune pose professionnelle appuyée.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Traitement et format <code>.fs-figure</code></h3>
+        <p class="doc-bloc-note">
+          Le rapport d'affichage est déclaré pour qu'aucun décalage de mise en page ne
+          survienne pendant le chargement. La légende porte l'information&nbsp;; le crédit
+          la suit, plus discret.
+        </p>
+
+        <div class="doc-demo" data-libelle="Figure">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 460px;">
+            <figure class="fs-figure fs-figure--16-9">
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23e2ddd6'/%3E%3C/svg%3E"
+                   width="16" height="9" alt="Emplacement de la photographie">
+              <figcaption>
+                Guichet de l'état civil de la mairie de Ouagadougou, ouvert du lundi au
+                vendredi de 7&nbsp;h&nbsp;30 à 15&nbsp;h&nbsp;30.
+                <span class="fs-figure-credit">Photographie&nbsp;: Service d'information du Gouvernement, 2026</span>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <dl class="fs-definitions fs-mt-6">
+          <div><dt>Rapports admis</dt><dd><code>16/9</code> pour une bannière, <code>4/3</code> pour une photographie de contenu, <code>1/1</code> pour un portrait ou une vignette.</dd></div>
+          <div><dt>Traitement</dt><dd>Aucun filtre, aucune teinte de marque, aucun cadre arrondi au-delà du rayon du système. Recadrage seulement.</dd></div>
+          <div><dt>Poids</dt><dd>200&nbsp;Ko au maximum par image, dimensionnée à sa taille d'affichage. Voir le <a href="accessibilite.html#budget">budget de performance</a>.</dd></div>
+          <div><dt>Texte de remplacement</dt><dd>Descriptif si l'image porte une information, vide (<code>alt=""</code>) si elle est redondante avec le texte voisin.</dd></div>
+        </dl>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Illustration</h3>
+        <p class="doc-bloc-note">
+          L'illustration n'intervient que là où la photographie ne peut rien montrer&nbsp;:
+          un schéma de procédure, une page d'erreur, un état vide. Son dessin dérive
+          du jeu d'icônes&nbsp;— trait ouvert, épaisseur constante, aucune forme pleine&nbsp;—
+          de sorte qu'elle appartient visiblement au même système.
+        </p>
+
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Reprendre la grille, l'épaisseur de trait et les extrémités arrondies du jeu d'icônes.</li>
+              <li>Se limiter aux couleurs du système, l'or servant d'unique accent.</li>
+              <li>Garder l'illustration lisible en monochrome.</li>
+              <li>La traiter comme décorative&nbsp;: <code>aria-hidden</code>, l'information restant dans le texte.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Personnages stylisés aux proportions fantaisistes.</li>
+              <li>Illustration portant seule une information ou une instruction.</li>
+              <li>Dégradés, ombres portées, perspective.</li>
+              <li>Mélange avec des illustrations d'une autre provenance.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="grille">
+      <h2>Grille et mise en page</h2>
+      <p class="doc-section-intro">
+        Une grille de douze colonnes, une gouttière fluide et quatre largeurs de
+        conteneur couvrent l'ensemble des gabarits. La conception part du format le
+        plus étroit&nbsp;: c'est l'usage dominant, pas un cas de repli.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Colonnes <code>.fs-grille</code></h3>
+        <div class="doc-demo" data-libelle="Grille de 12 colonnes">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="doc-grille-demo">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+              <div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Répartitions courantes</h3>
+        <p class="doc-bloc-note">
+          Les classes <code>.fs-col-*</code> portent le nombre de colonnes occupées.
+          Sous 768&nbsp;px, toutes les colonnes passent en pleine largeur sans qu'il soit
+          nécessaire de le déclarer.
+        </p>
+
+        <div class="doc-demo" data-libelle="Répartitions">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-grille">
+              <div class="fs-col-8 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">Contenu principal&nbsp;— 8 colonnes</div>
+              <div class="fs-col-4 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">Colonne latérale&nbsp;— 4</div>
+            </div>
+
+            <div class="fs-grille">
+              <div class="fs-col-4 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">4</div>
+              <div class="fs-col-4 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">4</div>
+              <div class="fs-col-4 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">4</div>
+            </div>
+
+            <div class="fs-grille">
+              <div class="fs-col-6 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">6</div>
+              <div class="fs-col-3 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">3</div>
+              <div class="fs-col-3 fs-fond-enfoncee" style="padding: var(--espace-4); border-radius: var(--rayon-md);">3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Contenu et colonne latérale <code>.fs-avec-aside</code></h3>
+        <p class="doc-bloc-note">
+          Assemblage le plus fréquent des gabarits institutionnels. La colonne
+          latérale mesure 300&nbsp;px et passe sous le contenu principal en dessous de
+          1024&nbsp;px. La variante <code>.fs-avec-aside--gauche</code> place une colonne
+          de navigation de 260&nbsp;px avant le contenu.
+        </p>
+
+        <div class="doc-demo" data-libelle="Contenu et colonne latérale">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-avec-aside">
+              <div class="fs-fond-enfoncee" style="padding: var(--espace-6); border-radius: var(--rayon-md);">Contenu principal</div>
+              <aside class="fs-fond-enfoncee" style="padding: var(--espace-6); border-radius: var(--rayon-md);">Colonne latérale</aside>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Largeurs de conteneur</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Classe</th><th>Largeur</th><th>Emploi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>.fs-conteneur--etroit</code></td><td class="fs-tabulaire">560&nbsp;px</td><td>Formulaire d'authentification, confirmation, message isolé</td></tr>
+              <tr><td><code>.fs-conteneur--texte</code></td><td class="fs-tabulaire">760&nbsp;px</td><td>Article, contenu réglementaire, fiche de démarche</td></tr>
+              <tr><td><code>.fs-conteneur</code></td><td class="fs-tabulaire">1200&nbsp;px</td><td>Largeur de référence de la majorité des pages</td></tr>
+              <tr><td><code>.fs-conteneur--large</code></td><td class="fs-tabulaire">1440&nbsp;px</td><td>Tableau de bord, liste dense, tableau à nombreuses colonnes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Points de rupture</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Palier</th><th>Largeur</th><th>Adaptation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Étroit</td><td class="fs-tabulaire">&lt; 560&nbsp;px</td><td>Colonne unique, actions en pleine largeur, modale plein écran</td></tr>
+              <tr><td>Intermédiaire</td><td class="fs-tabulaire">560 – 768&nbsp;px</td><td>Colonne unique, tableaux empilés</td></tr>
+              <tr><td>Tablette</td><td class="fs-tabulaire">768 – 1024&nbsp;px</td><td>Deux colonnes, colonne latérale repliée sous le contenu</td></tr>
+              <tr><td>Bureau</td><td class="fs-tabulaire">&gt; 1024&nbsp;px</td><td>Grille complète, colonne latérale visible</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="espacement">
+      <h2>Espacement</h2>
+      <p class="doc-section-intro">
+        Une échelle unique de base 4&nbsp;px. Toute valeur intermédiaire introduite hors
+        de cette échelle produit des désalignements qui se propagent à l'ensemble
+        d'une interface.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Échelle</h3>
+        <div class="doc-demo" data-libelle="Échelle d'espacement">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="doc-espaces">
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-1</span><span class="doc-espace-barre" style="width:4px"></span><span class="doc-espace-val">4&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-2</span><span class="doc-espace-barre" style="width:8px"></span><span class="doc-espace-val">8&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-3</span><span class="doc-espace-barre" style="width:12px"></span><span class="doc-espace-val">12&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-4</span><span class="doc-espace-barre" style="width:16px"></span><span class="doc-espace-val">16&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-5</span><span class="doc-espace-barre" style="width:20px"></span><span class="doc-espace-val">20&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-6</span><span class="doc-espace-barre" style="width:24px"></span><span class="doc-espace-val">24&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-8</span><span class="doc-espace-barre" style="width:32px"></span><span class="doc-espace-val">32&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-10</span><span class="doc-espace-barre" style="width:40px"></span><span class="doc-espace-val">40&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-12</span><span class="doc-espace-barre" style="width:48px"></span><span class="doc-espace-val">48&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-16</span><span class="doc-espace-barre" style="width:64px"></span><span class="doc-espace-val">64&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-20</span><span class="doc-espace-barre" style="width:80px"></span><span class="doc-espace-val">80&nbsp;px</span></div>
+              <div class="doc-espace"><span class="doc-espace-nom">--espace-24</span><span class="doc-espace-barre" style="width:96px"></span><span class="doc-espace-val">96&nbsp;px</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Emplois de référence</h3>
+        <dl class="fs-definitions">
+          <div><dt>4 – 8&nbsp;px</dt><dd>Écart entre une étiquette et son champ, entre une icône et son libellé.</dd></div>
+          <div><dt>12 – 16&nbsp;px</dt><dd>Rembourrage interne des composants, écart entre champs d'un même groupe.</dd></div>
+          <div><dt>24 – 32&nbsp;px</dt><dd>Rembourrage des cartes, écart entre groupes de champs, gouttière de grille.</dd></div>
+          <div><dt>48 – 96&nbsp;px</dt><dd>Respiration entre sections de page, variable selon la largeur de fenêtre.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="formes">
+      <h2>Formes et profondeur</h2>
+      <p class="doc-section-intro">
+        Les rayons restent sobres&nbsp;: un arrondi prononcé évoque le registre
+        promotionnel, étranger au service public. Les ombres sont teintées chaud pour
+        rester cohérentes avec les neutres, et servent à hiérarchiser les plans, pas
+        à décorer.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Rayons de bordure</h3>
+        <div class="doc-demo" data-libelle="Rayons">
+          <div class="doc-demo-scene">
+            <div class="doc-variante"><div style="width:80px;height:64px;background:var(--vert-100);border:1px solid var(--vert-300);border-radius:var(--rayon-sm)"></div><span class="doc-variante-nom">sm · 4&nbsp;px</span></div>
+            <div class="doc-variante"><div style="width:80px;height:64px;background:var(--vert-100);border:1px solid var(--vert-300);border-radius:var(--rayon-md)"></div><span class="doc-variante-nom">md · 6&nbsp;px</span></div>
+            <div class="doc-variante"><div style="width:80px;height:64px;background:var(--vert-100);border:1px solid var(--vert-300);border-radius:var(--rayon-lg)"></div><span class="doc-variante-nom">lg · 10&nbsp;px</span></div>
+            <div class="doc-variante"><div style="width:80px;height:64px;background:var(--vert-100);border:1px solid var(--vert-300);border-radius:var(--rayon-xl)"></div><span class="doc-variante-nom">xl · 16&nbsp;px</span></div>
+            <div class="doc-variante"><div style="width:80px;height:64px;background:var(--vert-100);border:1px solid var(--vert-300);border-radius:var(--rayon-plein)"></div><span class="doc-variante-nom">plein</span></div>
+          </div>
+        </div>
+        <p class="fs-legende fs-mt-4">
+          Correspondances&nbsp;: <code>md</code> pour les boutons et les champs,
+          <code>lg</code> pour les cartes et les tableaux, <code>xl</code> pour les
+          modales et les blocs de démarche, <code>plein</code> pour les étiquettes
+          et les pastilles.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Élévation</h3>
+        <div class="doc-demo" data-libelle="Ombres">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="doc-ombres">
+              <div class="doc-ombre" style="box-shadow: var(--ombre-xs)">xs</div>
+              <div class="doc-ombre" style="box-shadow: var(--ombre-sm)">sm</div>
+              <div class="doc-ombre" style="box-shadow: var(--ombre-md)">md</div>
+              <div class="doc-ombre" style="box-shadow: var(--ombre-lg)">lg</div>
+              <div class="doc-ombre" style="box-shadow: var(--ombre-xl)">xl</div>
+            </div>
+          </div>
+        </div>
+        <dl class="fs-definitions fs-mt-6">
+          <div><dt>xs&nbsp;— repos</dt><dd>Bouton principal au repos. Suggère la possibilité d'une action sans détacher l'élément.</dd></div>
+          <div><dt>sm&nbsp;— survol</dt><dd>Carte ou bouton survolé.</dd></div>
+          <div><dt>md&nbsp;— flottant</dt><dd>Carte détachée, infobulle.</dd></div>
+          <div><dt>lg&nbsp;— superposé</dt><dd>Menu déroulant, notification passagère.</dd></div>
+          <div><dt>xl&nbsp;— modal</dt><dd>Modale, panneau latéral, bandeau de consentement.</dd></div>
+        </dl>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Focus</h3>
+        <p class="doc-bloc-note">
+          Un seul traitement de focus pour tout le système, appliqué via
+          <code>:focus-visible</code>. Il n'est jamais désactivé&nbsp;: une interface sans
+          anneau de focus est inutilisable au clavier, ce qui exclut une part des
+          usagers et contrevient aux obligations d'accessibilité.
+        </p>
+        <div class="doc-demo" data-libelle="Anneau de focus">
+          <div class="doc-demo-scene">
+            <button type="button" class="fs-btn fs-btn--principal">Naviguez au clavier jusqu'ici</button>
+            <a class="fs-btn fs-btn--tertiaire" href="#focus">Puis jusqu'ici</a>
+            <input class="fs-saisie" style="max-width: 220px;" type="text" aria-label="Exemple de champ" placeholder="Et enfin ici">
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="iconographie">
+      <h2>Iconographie</h2>
+      <p class="doc-section-intro">
+        Une icône ne remplace jamais un mot&nbsp;: elle accélère la reconnaissance d'un
+        libellé déjà présent. Le jeu est volontairement restreint&nbsp;— 35 tracés
+        couvrant les besoins réels des parcours documentés dans cette charte. Un
+        service qui a besoin d'une icône absente la soumet plutôt que d'en importer
+        une d'un jeu tiers, dont le dessin jurerait avec l'ensemble.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Construction</h3>
+        <p class="doc-bloc-note">
+          Toutes les icônes partagent la même grille et la même épaisseur de trait.
+          C'est cette régularité, bien plus que le dessin de chaque symbole, qui fait
+          tenir un jeu d'icônes.
+        </p>
+
+        <div class="doc-demo" data-libelle="Grille de construction">
+          <div class="doc-demo-scene">
+            <div class="doc-grille-icone">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect class="doc-grille-zone" x="2" y="2" width="20" height="20" rx="1"/>
+                <path class="doc-grille-trait" d="M12 0v24M0 12h24"/>
+                <circle class="doc-grille-trait" cx="12" cy="12" r="9"/>
+                <g class="doc-grille-dessin">
+                  <circle cx="11" cy="11" r="6.5"/>
+                  <path d="M15.9 15.9 20.5 20.5"/>
+                </g>
+              </svg>
+            </div>
+            <dl class="fs-definitions" style="flex:1; min-width: 260px;">
+              <div><dt>Grille</dt><dd>24 × 24, zone utile 20 × 20</dd></div>
+              <div><dt>Trait</dt><dd>1,5 — constant, jamais mis à l'échelle</dd></div>
+              <div><dt>Extrémités</dt><dd>Arrondies, jonctions arrondies</dd></div>
+              <div><dt>Style</dt><dd>Trait ouvert, aucune forme pleine, aucune couleur</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Mise en œuvre <code>.fs-icone</code></h3>
+        <p class="doc-bloc-note">
+          Chaque tracé est appliqué en masque CSS sur un aplat de
+          <code>currentColor</code>&nbsp;: une icône hérite donc toujours de la couleur
+          du texte qui l'accompagne et suit le thème sans le moindre réglage. Sa
+          taille est exprimée en <code>em</code>, donc proportionnelle au corps du
+          texte voisin.
+        </p>
+
+        <div class="doc-demo" data-libelle="Tailles et héritage de couleur">
+          <div class="doc-demo-scene">
+            <span class="fs-icone fs-icone--dossier fs-icone--sm" aria-hidden="true"></span>
+            <span class="fs-icone fs-icone--dossier" aria-hidden="true"></span>
+            <span class="fs-icone fs-icone--dossier fs-icone--lg" aria-hidden="true"></span>
+            <span class="fs-icone fs-icone--dossier fs-icone--xl" aria-hidden="true"></span>
+            <span class="fs-icone fs-icone--dossier fs-icone--xxl" aria-hidden="true"></span>
+            <span style="color: var(--accent-sur-clair);">
+              <span class="fs-icone fs-icone--dossier fs-icone--xl" aria-hidden="true"></span>
+            </span>
+            <span style="color: var(--action-sur-clair);">
+              <span class="fs-icone fs-icone--dossier fs-icone--xl" aria-hidden="true"></span>
+            </span>
+          </div>
+        </div>
+
+        <div class="doc-demo fs-mt-6" data-libelle="Dans les composants">
+          <div class="doc-demo-scene">
+            <button type="button" class="fs-btn fs-btn--principal">
+              <span class="fs-icone fs-icone--televerser" aria-hidden="true"></span>
+              Déposer une pièce
+            </button>
+            <a class="fs-btn fs-btn--tertiaire" href="#">
+              <span class="fs-icone fs-icone--telecharger" aria-hidden="true"></span>
+              Télécharger le récépissé
+            </a>
+            <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--icone" aria-label="Imprimer la fiche">
+              <span class="fs-icone fs-icone--imprimer" aria-hidden="true"></span>
+            </button>
+            <span class="fs-badge fs-badge--succes">
+              <span class="fs-icone fs-icone--succes fs-icone--sm" aria-hidden="true"></span>
+              Validé
+            </span>
+            <span class="fs-statut fs-statut--cours">
+              <span class="fs-icone fs-icone--horloge fs-icone--sm" aria-hidden="true"></span>
+              En instruction
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Accessibilité</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Porter <code>aria-hidden="true"</code> sur toute icône accompagnant un libellé&nbsp;: elle est décorative et ne doit pas être annoncée deux fois.</li>
+              <li>Sur un bouton réduit à une icône, donner le nom accessible par <code>aria-label</code> posé sur le bouton.</li>
+              <li>Conserver la cible tactile de 44&nbsp;px même lorsque l'icône n'en fait que 20.</li>
+              <li>Doubler toute icône porteuse de sens par un texte, y compris dans les tableaux denses.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Employer une icône seule pour signaler un état&nbsp;: elle tombe sous le principe « la couleur ne porte jamais seule ».</li>
+              <li>Redessiner ou étirer un tracé&nbsp;: l'épaisseur du trait ne se met jamais à l'échelle.</li>
+              <li>Mélanger ce jeu avec des icônes d'une autre provenance.</li>
+              <li>Employer une icône comme puce décorative répétée dans un texte courant.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Le jeu complet</h3>
+        <p class="doc-bloc-note">
+          Les icônes sont classées par usage et non par forme&nbsp;: on cherche « ce que
+          je veux dire », pas « ce que ça représente ». Le fichier
+          <code>assets/img/icones.svg</code> rassemble les mêmes tracés pour les
+          outils de conception.
+        </p>
+
+        <h4 class="fs-mt-8">Navigation</h4>
+        <p class="fs-legende" style="margin-bottom: var(--espace-4);">11 icônes. Cliquez sur une icône pour copier sa classe.</p>
+        <div class="doc-icones">
+            <div class="doc-icone" data-copier="fs-icone--recherche" title="Recherche, loupe">
+              <span class="fs-icone fs-icone--recherche" aria-hidden="true"></span>
+              <span class="doc-icone-nom">recherche</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--fermer" title="Fermer une modale, retirer une étiquette">
+              <span class="fs-icone fs-icone--fermer" aria-hidden="true"></span>
+              <span class="doc-icone-nom">fermer</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--menu" title="Ouvrir la navigation sur écran étroit">
+              <span class="fs-icone fs-icone--menu" aria-hidden="true"></span>
+              <span class="doc-icone-nom">menu</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--chevron-bas" title="Accordéon, liste déroulante">
+              <span class="fs-icone fs-icone--chevron-bas" aria-hidden="true"></span>
+              <span class="doc-icone-nom">chevron-bas</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--chevron-haut" title="Replier une section">
+              <span class="fs-icone fs-icone--chevron-haut" aria-hidden="true"></span>
+              <span class="doc-icone-nom">chevron-haut</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--chevron-droite" title="Fil d'Ariane, page suivante">
+              <span class="fs-icone fs-icone--chevron-droite" aria-hidden="true"></span>
+              <span class="doc-icone-nom">chevron-droite</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--chevron-gauche" title="Retour, page précédente">
+              <span class="fs-icone fs-icone--chevron-gauche" aria-hidden="true"></span>
+              <span class="doc-icone-nom">chevron-gauche</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--fleche-droite" title="Lien d'action, étape suivante">
+              <span class="fs-icone fs-icone--fleche-droite" aria-hidden="true"></span>
+              <span class="doc-icone-nom">fleche-droite</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--lien-externe" title="Lien quittant le service">
+              <span class="fs-icone fs-icone--lien-externe" aria-hidden="true"></span>
+              <span class="doc-icone-nom">lien-externe</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--filtre" title="Filtrer une liste de résultats">
+              <span class="fs-icone fs-icone--filtre" aria-hidden="true"></span>
+              <span class="doc-icone-nom">filtre</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--trier" title="Trier une colonne de tableau">
+              <span class="fs-icone fs-icone--trier" aria-hidden="true"></span>
+              <span class="doc-icone-nom">trier</span>
+            </div>
+        </div>
+
+        <h4 class="fs-mt-8">Démarches</h4>
+        <p class="fs-legende" style="margin-bottom: var(--espace-4);">8 icônes. Cliquez sur une icône pour copier sa classe.</p>
+        <div class="doc-icones">
+            <div class="doc-icone" data-copier="fs-icone--document" title="Pièce à fournir, fiche de démarche">
+              <span class="fs-icone fs-icone--document" aria-hidden="true"></span>
+              <span class="doc-icone-nom">document</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--dossier" title="Dossier en cours d'instruction">
+              <span class="fs-icone fs-icone--dossier" aria-hidden="true"></span>
+              <span class="doc-icone-nom">dossier</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--telecharger" title="Récépissé, quittance, document délivré">
+              <span class="fs-icone fs-icone--telecharger" aria-hidden="true"></span>
+              <span class="doc-icone-nom">telecharger</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--televerser" title="Déposer une pièce justificative">
+              <span class="fs-icone fs-icone--televerser" aria-hidden="true"></span>
+              <span class="doc-icone-nom">televerser</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--imprimer" title="Imprimer une fiche ou un récépissé">
+              <span class="fs-icone fs-icone--imprimer" aria-hidden="true"></span>
+              <span class="doc-icone-nom">imprimer</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--calendrier" title="Date de dépôt, échéance">
+              <span class="fs-icone fs-icone--calendrier" aria-hidden="true"></span>
+              <span class="doc-icone-nom">calendrier</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--horloge" title="Délai de traitement, horaires">
+              <span class="fs-icone fs-icone--horloge" aria-hidden="true"></span>
+              <span class="doc-icone-nom">horloge</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--paiement" title="Coût, droit de timbre, règlement">
+              <span class="fs-icone fs-icone--paiement" aria-hidden="true"></span>
+              <span class="doc-icone-nom">paiement</span>
+            </div>
+        </div>
+
+        <h4 class="fs-mt-8">Identité</h4>
+        <p class="fs-legende" style="margin-bottom: var(--espace-4);">6 icônes. Cliquez sur une icône pour copier sa classe.</p>
+        <div class="doc-icones">
+            <div class="doc-icone" data-copier="fs-icone--carte-identite" title="CNIB, pièce d'identité">
+              <span class="fs-icone fs-icone--carte-identite" aria-hidden="true"></span>
+              <span class="doc-icone-nom">carte-identite</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--utilisateur" title="Compte usager, espace personnel">
+              <span class="fs-icone fs-icone--utilisateur" aria-hidden="true"></span>
+              <span class="doc-icone-nom">utilisateur</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--institution" title="Administration responsable, ministère">
+              <span class="fs-icone fs-icone--institution" aria-hidden="true"></span>
+              <span class="doc-icone-nom">institution</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--lieu" title="Guichet, mairie, point de retrait">
+              <span class="fs-icone fs-icone--lieu" aria-hidden="true"></span>
+              <span class="doc-icone-nom">lieu</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--telephone" title="Contact téléphonique, numéro vert">
+              <span class="fs-icone fs-icone--telephone" aria-hidden="true"></span>
+              <span class="doc-icone-nom">telephone</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--courriel" title="Contact électronique, récépissé envoyé">
+              <span class="fs-icone fs-icone--courriel" aria-hidden="true"></span>
+              <span class="doc-icone-nom">courriel</span>
+            </div>
+          </div>
+
+        <h4 class="fs-mt-8">États</h4>
+        <p class="fs-legende" style="margin-bottom: var(--espace-4);">6 icônes. Cliquez sur une icône pour copier sa classe.</p>
+        <div class="doc-icones">
+            <div class="doc-icone" data-copier="fs-icone--information" title="Encart d'information neutre">
+              <span class="fs-icone fs-icone--information" aria-hidden="true"></span>
+              <span class="doc-icone-nom">information</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--succes" title="Dossier validé, opération aboutie">
+              <span class="fs-icone fs-icone--succes" aria-hidden="true"></span>
+              <span class="doc-icone-nom">succes</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--alerte" title="Mise en garde, complément demandé">
+              <span class="fs-icone fs-icone--alerte" aria-hidden="true"></span>
+              <span class="doc-icone-nom">alerte</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--erreur" title="Erreur de saisie, demande rejetée">
+              <span class="fs-icone fs-icone--erreur" aria-hidden="true"></span>
+              <span class="doc-icone-nom">erreur</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--coche" title="Élément validé dans une liste de contrôle">
+              <span class="fs-icone fs-icone--coche" aria-hidden="true"></span>
+              <span class="doc-icone-nom">coche</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--aide" title="Aide contextuelle, question fréquente">
+              <span class="fs-icone fs-icone--aide" aria-hidden="true"></span>
+              <span class="doc-icone-nom">aide</span>
+            </div>
+        </div>
+
+        <h4 class="fs-mt-8">Confiance</h4>
+        <p class="fs-legende" style="margin-bottom: var(--espace-4);">4 icônes. Cliquez sur une icône pour copier sa classe.</p>
+        <div class="doc-icones">
+            <div class="doc-icone" data-copier="fs-icone--cadenas" title="Connexion sécurisée, donnée protégée">
+              <span class="fs-icone fs-icone--cadenas" aria-hidden="true"></span>
+              <span class="doc-icone-nom">cadenas</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--bouclier" title="Service officiel vérifié">
+              <span class="fs-icone fs-icone--bouclier" aria-hidden="true"></span>
+              <span class="doc-icone-nom">bouclier</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--signalement" title="Signaler une fraude, une page suspecte">
+              <span class="fs-icone fs-icone--signalement" aria-hidden="true"></span>
+              <span class="doc-icone-nom">signalement</span>
+            </div>
+            <div class="doc-icone" data-copier="fs-icone--oeil" title="Afficher un contenu masqué">
+              <span class="fs-icone fs-icone--oeil" aria-hidden="true"></span>
+              <span class="doc-icone-nom">oeil</span>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="mouvement">
+      <h2>Mouvement</h2>
+      <p class="doc-section-intro">
+        L'animation sert à expliquer un changement d'état, jamais à séduire. Les
+        durées sont courtes&nbsp;: sur un appareil modeste, une transition longue est
+        perçue comme une lenteur du service, pas comme un raffinement.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Durées et courbes</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Jeton</th><th>Durée</th><th>Emploi</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>--duree-instant</code></td><td class="fs-tabulaire">80&nbsp;ms</td><td>Enfoncement d'un bouton, retour tactile</td></tr>
+              <tr><td><code>--duree-courte</code></td><td class="fs-tabulaire">140&nbsp;ms</td><td>Survol, changement de couleur, focus</td></tr>
+              <tr><td><code>--duree-moyenne</code></td><td class="fs-tabulaire">220&nbsp;ms</td><td>Ouverture d'un menu, d'une modale, d'un accordéon</td></tr>
+              <tr><td><code>--duree-longue</code></td><td class="fs-tabulaire">360&nbsp;ms</td><td>Panneau latéral, progression d'une jauge</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Préférence de mouvement réduit</h3>
+        <p class="doc-bloc-note">
+          Lorsque l'usager a demandé une réduction des animations au niveau du
+          système, toutes les durées sont ramenées à 1&nbsp;ms et les animations en
+          boucle sont supprimées. Cette règle est appliquée dans
+          <code>tokens.css</code> et n'a donc pas à être répétée composant par
+          composant.
+        </p>
+        <pre><code>@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duree-instant: 1ms;
+    --duree-courte:  1ms;
+    --duree-moyenne: 1ms;
+    --duree-longue:  1ms;
+  }
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="themes">
+      <h2>Thèmes</h2>
+      <p class="doc-section-intro">
+        Le thème sombre n'est pas un ornement&nbsp;: il réduit la consommation sur écran
+        OLED et soulage la lecture nocturne, deux situations courantes pour un usager
+        qui consulte un service depuis son téléphone. Il est obtenu en réaffectant
+        les rôles sémantiques, sans toucher à un seul composant.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Arbitrages du thème sombre</h3>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>
+            Les teintes officielles du drapeau sont éclaircies d'un palier sur fond
+            sombre&nbsp;: au palier 500, le vert et le rouge ne dégagent plus un contraste
+            suffisant pour porter du texte.
+          </li>
+          <li>
+            Les fonds ne sont jamais noir pur. La base est un brun très sombre,
+            cohérent avec la souche chaude des neutres, qui réduit l'éblouissement.
+          </li>
+          <li>
+            Les ombres deviennent plus denses et plus contrastées, l'effet de
+            profondeur étant naturellement moins lisible sur fond sombre.
+          </li>
+          <li>
+            Le thème clair est le thème par défaut de l'administration, quelle que
+            soit la préférence du système d'exploitation&nbsp;: un service public doit
+            présenter le même visage à tous ses usagers. Le thème sombre s'active
+            sur choix explicite, et ce choix est conservé d'une visite à l'autre.
+          </li>
+        </ul>
+
+        <div class="fs-actions fs-mt-6">
+          <button type="button" class="fs-btn fs-btn--secondaire" data-bascule-theme aria-pressed="false">
+            <span data-theme-libelle>Thème sombre</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
+     avant que les comportements n'y ajoutent leurs attributs. -->
+<script src="assets/js/docs.js" defer></script>
+<script src="assets/js/faso.js" defer></script>
+</body>
+</html>

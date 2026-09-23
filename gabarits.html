@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gabarits institutionnels&nbsp;— Charte graphique de l'administration burkinabè</title>
+<meta name="description" content="Assemblages de référence : portail de services, fiche de démarche, formulaire long, tableau de bord usager, authentification et pages d'erreur.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/faso.css">
+<link rel="stylesheet" href="assets/css/icones.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="icon" href="assets/img/armoiries.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
+
+<div class="doc-barre">
+  <a class="doc-menu-marque" href="index.html">
+    <img src="assets/img/armoiries.svg" alt="">
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+  </a>
+  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
+</div>
+
+<div class="doc-page">
+
+  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
+    <a class="doc-menu-marque" href="index.html">
+      <img src="assets/img/armoiries.svg" alt="">
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    </a>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Le système</p>
+      <ul>
+        <li><a href="index.html">Présentation</a></li>
+        <li><a href="fondations.html">Fondations</a></li>
+        <li><a href="composants.html">Composants de base</a></li>
+        <li><a href="composants-metier.html">Composants métier</a></li>
+        <li><a href="gabarits.html" aria-current="page">Gabarits</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="integration.html">Intégration</a></li>
+        <li><a href="gouvernance.html">Gouvernance</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Sur cette page</p>
+      <div class="fs-sommaire" data-sommaire-auto></div>
+    </div>
+  </nav>
+
+  <main class="doc-corps" id="contenu" data-teinte="vert">
+
+    <div class="doc-entete">
+      <nav class="doc-fil" aria-label="Fil d'Ariane">
+        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Gabarits</span>
+      </nav>
+      <h1>Gabarits institutionnels</h1>
+      <p class="fs-chapeau">
+        Les gabarits sont des assemblages validés, pas des propositions. Ils fixent
+        l'ordre des blocs et la hiérarchie de l'information pour les situations qui
+        couvrent la quasi-totalité des services publics numériques. Un projet qui
+        s'en écarte doit justifier son écart.
+      </p>
+    </div>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="structure">
+      <h2>Structure commune</h2>
+      <p class="doc-section-intro">
+        Toutes les pages de l'État partagent la même ossature. Seule la zone de
+        contenu principal varie d'un gabarit à l'autre.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ordre imposé des blocs</h3>
+        <div class="doc-demo" data-libelle="Ossature">
+          <div class="doc-demo-scene doc-demo-scene--pile" style="padding:0;">
+            <div style="font-family: var(--police-mono); font-size: var(--taille-xs);">
+              <div style="padding: var(--espace-3) var(--espace-4); background: var(--vert-900); color:#fff;">1 · Lien d'évitement (invisible, premier élément focusable)</div>
+              <div style="padding: var(--espace-3) var(--espace-4); background: var(--vert-800); color:#fff;">2 · Bandeau d'identification officielle</div>
+              <div class="fs-filet fs-filet--fin"></div>
+              <div style="padding: var(--espace-4); background: var(--surface-enfoncee);">3 · Bloc-marque et outils</div>
+              <div style="padding: var(--espace-3) var(--espace-4); background: var(--surface-basse); border-block: 1px solid var(--bordure);">4 · Navigation principale</div>
+              <div style="padding: var(--espace-3) var(--espace-4);">5 · Fil d'Ariane</div>
+              <div style="padding: var(--espace-12) var(--espace-4); background: var(--action-tenue); border: 1px dashed var(--action); color: var(--action-sur-clair); text-align:center;">6 · Contenu principal&nbsp;— varie selon le gabarit</div>
+              <div style="padding: var(--espace-4); background: var(--surface-enfoncee); border-top: 1px solid var(--bordure);">7 · Pied de page&nbsp;: plan, obligations légales, contact</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="portail">
+      <h2>Portail de services</h2>
+      <p class="doc-section-intro">
+        Page d'accueil d'une plateforme de téléservices. Sa fonction unique est
+        d'orienter&nbsp;: la recherche et les entrées par événement de vie précèdent tout
+        contenu institutionnel.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-pile fs-pile--large">
+
+              <div style="padding: var(--espace-8) var(--espace-6); background: var(--vert-900); color:#fff; border-radius: var(--rayon-lg);">
+                <h3 style="color:#fff; max-width: 20ch;">Effectuez vos démarches administratives en ligne</h3>
+                <div class="fs-recherche" style="max-width: 520px; margin-top: var(--espace-5);">
+                  <input class="fs-saisie" type="search" aria-label="Rechercher une démarche" placeholder="Acte de naissance, passeport, casier judiciaire…">
+                  <button type="button" class="fs-btn fs-btn--relief">Rechercher</button>
+                </div>
+              </div>
+
+              <div>
+                <h4>Par événement de vie</h4>
+                <div class="fs-auto-grille" style="--min-colonne: 150px;">
+                  <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Naissance</span><span class="fs-evenement-nb">7 démarches</span></a>
+                  <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Études</span><span class="fs-evenement-nb">11 démarches</span></a>
+                  <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Entreprise</span><span class="fs-evenement-nb">14 démarches</span></a>
+                  <a class="fs-evenement" href="#"><span class="fs-evenement-titre">Impôts</span><span class="fs-evenement-nb">12 démarches</span></a>
+                </div>
+              </div>
+
+              <div>
+                <h4>Démarches les plus demandées</h4>
+                <div class="fs-auto-grille" style="--min-colonne: 260px;">
+                  <article class="fs-demarche">
+                    <h5 class="fs-demarche-titre"><a href="#">Acte de naissance</a></h5>
+                    <dl class="fs-demarche-meta">
+                      <div><dt>Coût</dt><dd>500&nbsp;F</dd></div>
+                      <div><dt>Délai</dt><dd>3&nbsp;jours</dd></div>
+                    </dl>
+                  </article>
+                  <article class="fs-demarche">
+                    <h5 class="fs-demarche-titre"><a href="#">Certificat de résidence</a></h5>
+                    <dl class="fs-demarche-meta">
+                      <div><dt>Coût</dt><dd>1&nbsp;000&nbsp;F</dd></div>
+                      <div><dt>Délai</dt><dd>2&nbsp;jours</dd></div>
+                    </dl>
+                  </article>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-8">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Règles</p>
+            <ul>
+              <li>La recherche occupe la zone haute et reste atteignable sans défilement sur mobile.</li>
+              <li>Les démarches affichées en page d'accueil indiquent coût et délai.</li>
+              <li>L'accès au compte usager et au suivi de dossier est visible dès l'accueil.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Carrousel d'images en tête de page&nbsp;: il repousse la recherche sous la ligne de flottaison.</li>
+              <li>Actualités institutionnelles placées avant les démarches.</li>
+              <li>Message de bienvenue signé d'une autorité occupant la zone haute.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="resultats">
+      <h2>Résultats de recherche</h2>
+      <p class="doc-section-intro">
+        La recherche est le premier geste de l'usager sur un portail. Documenter le
+        champ sans documenter ce qu'il produit laisse le gabarit le plus fréquent à
+        l'appréciation de chaque projet. Sa règle centrale&nbsp;: <strong>ne jamais
+        renvoyer une page vide</strong>.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/recherche?q=acte+naissance</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-pile fs-pile--large">
+
+              <div class="fs-recherche" style="max-width: 560px;">
+                <input class="fs-saisie" type="search" value="acte naissance" aria-label="Rechercher une démarche">
+                <button type="button" class="fs-btn fs-btn--principal">Rechercher</button>
+              </div>
+
+              <div class="fs-rangee fs-rangee--entre">
+                <p style="margin:0;"><strong>7 démarches</strong> pour « acte naissance »</p>
+                <label class="fs-tableau-taille">
+                  Trier par
+                  <select class="fs-select">
+                    <option>Pertinence</option>
+                    <option>Délai le plus court</option>
+                    <option>Coût le plus faible</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="fs-rangee">
+                <span class="fs-legende">Filtres&nbsp;:</span>
+                <span class="fs-etiquette">En ligne <button type="button" aria-label="Retirer le filtre En ligne">&times;</button></span>
+                <span class="fs-etiquette">État civil <button type="button" aria-label="Retirer le filtre État civil">&times;</button></span>
+              </div>
+
+              <ul class="fs-liste-separee">
+                <li>
+                  <span class="fs-surtitre">État civil</span>
+                  <h4 style="margin: 0 0 var(--espace-2);"><a href="#">Demander un <mark>acte</mark> de <mark>naissance</mark></a></h4>
+                  <p class="fs-attenue" style="font-size: var(--taille-sm);">
+                    Copie intégrale ou extrait délivré par la mairie du lieu de naissance.
+                  </p>
+                  <div class="fs-rangee" style="margin-top: var(--espace-3);">
+                    <span class="fs-badge fs-badge--succes">En ligne</span>
+                    <span class="fs-legende">500&nbsp;F&nbsp;CFA</span>
+                    <span class="fs-legende">3 jours ouvrés</span>
+                  </div>
+                </li>
+                <li>
+                  <span class="fs-surtitre">État civil</span>
+                  <h4 style="margin: 0 0 var(--espace-2);"><a href="#">Rectifier un <mark>acte</mark> de <mark>naissance</mark></a></h4>
+                  <p class="fs-attenue" style="font-size: var(--taille-sm);">
+                    Correction d'une erreur matérielle sur un acte déjà délivré.
+                  </p>
+                  <div class="fs-rangee" style="margin-top: var(--espace-3);">
+                    <span class="fs-badge fs-badge--alerte">Présence requise</span>
+                    <span class="fs-legende">Gratuit</span>
+                    <span class="fs-legende">15 jours ouvrés</span>
+                  </div>
+                </li>
+              </ul>
+
+              <div class="fs-encart fs-encart--info">
+                <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+                <div class="fs-encart-corps">
+                  <p class="fs-encart-titre">Vous ne trouvez pas votre démarche&nbsp;?</p>
+                  <p>Parcourez les démarches par événement de vie, ou contactez le numéro vert national.</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Recherche sans résultat</h3>
+        <p class="doc-bloc-note">
+          C'est l'écran le plus important du gabarit, et le plus souvent bâclé. Il ne
+          se contente pas de constater&nbsp;: il explique, propose une reformulation, et
+          ouvre une autre voie.
+        </p>
+
+        <div class="doc-demo" data-libelle="Aucun résultat">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <div class="fs-vide" style="border-style: solid;">
+              <h4 class="fs-vide-titre">Aucune démarche ne correspond à « certificat de naissanse »</h4>
+              <p>
+                Vérifiez l'orthographe, ou employez un terme plus général.
+                Les démarches les plus proches sont proposées ci-dessous.
+              </p>
+              <div class="fs-actions">
+                <a class="fs-btn fs-btn--principal" href="#">Rechercher « acte de naissance »</a>
+                <a class="fs-btn fs-btn--tertiaire" href="#">Parcourir par événement de vie</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Règles</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Porter la requête dans l'adresse&nbsp;: une recherche doit être partageable et retrouvable par l'historique.</li>
+              <li>Rappeler la requête au-dessus des résultats et la laisser dans le champ, modifiable.</li>
+              <li>Annoncer le nombre de résultats avant la liste, dans une région live.</li>
+              <li>Mettre en évidence les termes trouvés, sans surligner la page entière.</li>
+              <li>Afficher coût, délai et canal dès la liste&nbsp;: c'est ce qui permet de choisir sans ouvrir cinq fiches.</li>
+              <li>Ignorer les accents et tolérer les fautes courantes.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Renvoyer une page vide&nbsp;: il y a toujours une suggestion, une reformulation ou un canal humain à proposer.</li>
+              <li>Exiger l'orthographe exacte d'un terme administratif.</li>
+              <li>Mêler démarches, actualités et pages institutionnelles sans les distinguer.</li>
+              <li>Paginer avant d'avoir proposé un filtre&nbsp;: l'usager préfère affiner que feuilleter.</li>
+              <li>Perdre les filtres actifs au changement de requête sans le signaler.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="contenu-institutionnel">
+      <h2>Page de contenu institutionnel</h2>
+      <p class="doc-section-intro">
+        Actualité, communiqué, texte réglementaire, page de présentation d'un service.
+        Ce n'est ni une fiche de démarche ni un formulaire&nbsp;: on y vient pour lire, et
+        la mise en page doit servir la lecture plutôt que l'action.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://gouvernement.gov.bf/actualites/teleservices-etat-civil</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-avec-aside">
+              <article class="fs-pile fs-pile--large">
+                <div>
+                  <span class="fs-surtitre">Communiqué</span>
+                  <h3 style="max-width: 24ch;">Ouverture du téléservice de délivrance des actes d'état civil</h3>
+                  <p class="fs-legende">
+                    Publié le 18 septembre 2026&nbsp;—
+                    Ministère de l'Administration territoriale
+                  </p>
+                </div>
+
+                <p class="fs-chapeau">
+                  Les communes de la région du Centre basculent sur la plateforme
+                  nationale à compter du 1er octobre 2026. La délivrance au guichet
+                  reste assurée sans changement.
+                </p>
+
+                <figure class="fs-figure fs-figure--16-9">
+                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3Crect width='16' height='9' fill='%23e2ddd6'/%3E%3C/svg%3E" width="16" height="9" alt="Emplacement de la photographie">
+                  <figcaption>
+                    Guichet de l'état civil de la mairie de Ouagadougou.
+                    <span class="fs-figure-credit">Photographie&nbsp;: Service d'information du Gouvernement</span>
+                  </figcaption>
+                </figure>
+
+                <div class="fs-mesure">
+                  <p>
+                    Le service permet de demander une copie intégrale ou un extrait
+                    d'acte de naissance sans se déplacer. Le dossier est instruit par
+                    la mairie du lieu de naissance, qui demeure l'autorité délivrante.
+                  </p>
+                  <h4>Ce qui change pour les usagers</h4>
+                  <p>
+                    La demande se dépose depuis un espace personnel. Le suivi est
+                    consultable en ligne et notifié par message.
+                  </p>
+                  <blockquote>
+                    La dématérialisation ne retire aucune compétence aux communes&nbsp;:
+                    elle en modifie le canal de saisine.
+                    <cite>Direction générale de la modernisation de l'état civil</cite>
+                  </blockquote>
+                </div>
+
+                <div class="fs-encart fs-encart--info">
+                  <span class="fs-encart-marque fs-icone fs-icone--document" aria-hidden="true"></span>
+                  <div class="fs-encart-corps">
+                    <p class="fs-encart-titre">Démarche associée</p>
+                    <p><a href="#">Demander un acte de naissance</a>&nbsp;— 500&nbsp;F&nbsp;CFA, 3 jours ouvrés.</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="fs-legende">Documents à télécharger</p>
+                  <ul class="fs-liste-nue">
+                    <li>
+                      <a class="fs-lien-fichier" href="#">
+                        Arrêté portant ouverture du téléservice
+                        <span class="fs-poids">PDF&nbsp;— 180&nbsp;Ko</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <aside class="fs-pile">
+                <div class="fs-sommaire" style="position: static;">
+                  <p class="fs-sommaire-titre">Sur cette page</p>
+                  <ul>
+                    <li><a href="#">Ce qui change pour les usagers</a></li>
+                    <li><a href="#">Calendrier de déploiement</a></li>
+                    <li><a href="#">Documents à télécharger</a></li>
+                  </ul>
+                </div>
+
+                <div class="fs-autorite" style="flex-direction: column;">
+                  <img src="assets/img/armoiries.svg" alt="" style="width: 36px;">
+                  <div>
+                    <p class="fs-autorite-nom" style="font-size: var(--taille-sm);">Ministère de l'Administration territoriale</p>
+                    <p class="fs-autorite-tutelle">Émetteur du communiqué</p>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Règles</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À faire</p>
+            <ul>
+              <li>Limiter le corps de texte à la mesure de confort&nbsp;: environ 68 caractères par ligne.</li>
+              <li>Dater la publication et nommer l'administration émettrice, en tête.</li>
+              <li>Signaler toute mise à jour ultérieure avec sa date.</li>
+              <li>Relier le contenu aux démarches concernées&nbsp;: un communiqué sans point d'entrée vers l'action est une impasse.</li>
+              <li>Donner format et poids de chaque document joint.</li>
+              <li>Ajouter un sommaire au-delà de trois sections.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Publier un texte réglementaire en image&nbsp;: il devient illisible, non traduisible et introuvable par la recherche.</li>
+              <li>Étendre le texte sur toute la largeur de l'écran.</li>
+              <li>Ouvrir sur une photographie d'ambiance qui repousse le contenu sous la ligne de flottaison.</li>
+              <li>Employer un ton promotionnel dans un communiqué.</li>
+              <li>Renvoyer vers un PDF ce qui tient en une page web.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="fiche">
+      <h2>Fiche de démarche</h2>
+      <p class="doc-section-intro">
+        Le gabarit le plus important du système. Il présente une démarche dans un
+        ordre invariable et place l'action principale en fin de parcours de lecture,
+        une fois l'usager informé.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/demarches/acte-de-naissance</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-avec-aside">
+              <div class="fs-pile fs-pile--large">
+                <div>
+                  <span class="fs-surtitre">État civil</span>
+                  <h3>Demander un acte de naissance</h3>
+                  <p class="fs-chapeau">
+                    Obtenez une copie intégrale ou un extrait d'acte de naissance
+                    délivré par la mairie de votre lieu de naissance.
+                  </p>
+                </div>
+
+                <dl class="fs-definitions">
+                  <div><dt>Public concerné</dt><dd>Toute personne née au Burkina Faso ou de parents burkinabè</dd></div>
+                  <div><dt>Coût</dt><dd>500&nbsp;F&nbsp;CFA&nbsp;— droit de timbre</dd></div>
+                  <div><dt>Délai indicatif</dt><dd>3&nbsp;jours ouvrés</dd></div>
+                  <div><dt>Canaux</dt><dd>En ligne ou guichet de la mairie du lieu de naissance</dd></div>
+                </dl>
+
+                <div>
+                  <h4>Pièces à fournir</h4>
+                  <ol class="fs-pieces">
+                    <li>
+                      <span class="fs-pieces-num">1</span>
+                      <div>
+                        <p class="fs-pieces-nom">Pièce d'identité du demandeur</p>
+                        <p class="fs-pieces-detail">CNIB ou passeport en cours de validité</p>
+                      </div>
+                    </li>
+                    <li>
+                      <span class="fs-pieces-num">2</span>
+                      <div>
+                        <p class="fs-pieces-nom">Justificatif de filiation</p>
+                        <p class="fs-pieces-detail">Non exigé si vous êtes le titulaire de l'acte</p>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
+
+                <div class="fs-actions">
+                  <a class="fs-btn fs-btn--principal fs-btn--lg" href="#">Commencer la démarche en ligne</a>
+                </div>
+              </div>
+
+              <aside class="fs-pile">
+                <div class="fs-autorite" style="flex-direction: column;">
+                  <img src="assets/img/armoiries.svg" alt="" style="width: 40px;">
+                  <div>
+                    <p class="fs-autorite-nom" style="font-size: var(--taille-sm);">Direction générale de la modernisation de l'état civil</p>
+                    <p class="fs-autorite-tutelle">Ministère de l'Administration territoriale</p>
+                  </div>
+                </div>
+
+                <div class="fs-encart fs-encart--info">
+                  <div class="fs-encart-corps">
+                    <p class="fs-encart-titre">Besoin d'aide&nbsp;?</p>
+                    <p>Le numéro vert national est joignable gratuitement du lundi au vendredi.</p>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          L'ordre des sections est imposé&nbsp;: intitulé, résumé, informations pratiques,
+          pièces, procédure, action. Placer le bouton d'action avant les informations
+          pratiques produit des dossiers incomplets.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="formulaire">
+      <h2>Formulaire long</h2>
+      <p class="doc-section-intro">
+        Au-delà de huit champs, un formulaire est découpé en étapes numérotées. La
+        progression est sauvegardée à chaque étape&nbsp;: sur réseau instable, perdre une
+        saisie de quinze minutes fait abandonner la démarche.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/demarches/acte-de-naissance/etape-3</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div style="max-width: 640px; margin-inline: auto;">
+              <div class="fs-pile fs-pile--large">
+
+                <nav aria-label="Progression">
+                  <p class="fs-invisible">Étape 3 sur 5</p>
+                  <ol class="fs-etapes">
+                    <li class="fs-etape" data-etat="faite"><span class="fs-etape-num">Étape 1</span><span class="fs-etape-titre">Identification</span></li>
+                    <li class="fs-etape" data-etat="faite"><span class="fs-etape-num">Étape 2</span><span class="fs-etape-titre">Objet</span></li>
+                    <li class="fs-etape" data-etat="courante" aria-current="step"><span class="fs-etape-num">Étape 3</span><span class="fs-etape-titre">Pièces</span></li>
+                    <li class="fs-etape"><span class="fs-etape-num">Étape 4</span><span class="fs-etape-titre">Paiement</span></li>
+                    <li class="fs-etape"><span class="fs-etape-num">Étape 5</span><span class="fs-etape-titre">Récapitulatif</span></li>
+                  </ol>
+                </nav>
+
+                <div>
+                  <h3>Pièces justificatives</h3>
+                  <p class="fs-attenue">Les documents doivent être lisibles et non rognés. Formats acceptés&nbsp;: JPG, PNG ou PDF, 5&nbsp;Mo maximum par fichier.</p>
+                </div>
+
+                <div class="fs-champ">
+                  <label class="fs-label" for="g-piece">Copie de la pièce d'identité <span class="fs-requis">*</span></label>
+                  <label class="fs-depot" tabindex="0">
+                    <span class="fs-depot-titre">Déposez un fichier ou parcourez</span>
+                    <span class="fs-depot-contraintes">JPG, PNG ou PDF&nbsp;— 5&nbsp;Mo maximum</span>
+                    <input type="file" id="g-piece">
+                  </label>
+                </div>
+
+                <div class="fs-fichier">
+                  <span class="fs-fichier-nom">cnib-recto.jpg</span>
+                  <span class="fs-fichier-poids">1,2&nbsp;Mo</span>
+                  <span class="fs-badge fs-badge--succes">Transmis</span>
+                </div>
+
+                <div class="fs-encart fs-encart--info">
+                  <div class="fs-encart-corps">
+                    <p>Votre progression est enregistrée automatiquement. Vous pouvez reprendre cette demande pendant trente jours depuis votre espace personnel.</p>
+                  </div>
+                </div>
+
+                <div class="fs-actions fs-actions--fin">
+                  <button type="button" class="fs-btn fs-btn--fantome">Enregistrer et quitter</button>
+                  <button type="button" class="fs-btn fs-btn--tertiaire">Étape précédente</button>
+                  <button type="button" class="fs-btn fs-btn--principal">Continuer</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-8">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Règles</p>
+            <ul>
+              <li>Une seule intention par étape, cinq étapes au maximum.</li>
+              <li>Sauvegarde automatique à chaque changement d'étape.</li>
+              <li>Récapitulatif modifiable avant validation définitive.</li>
+              <li>Accusé de dépôt téléchargeable immédiatement après transmission.</li>
+              <li>En cas d'erreur, le récapitulatif d'erreurs reçoit le focus et renvoie vers chaque champ concerné.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Validation bloquante en cours de frappe&nbsp;: elle signale une erreur avant la fin de la saisie.</li>
+              <li>Expiration de session sans avertissement ni sauvegarde.</li>
+              <li>Champ obligatoire sans justification de sa nécessité.</li>
+              <li>Message d'erreur qui constate la faute sans indiquer la correction.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="tableau-bord">
+      <h2>Tableau de bord usager</h2>
+      <p class="doc-section-intro">
+        Espace personnel. Il répond à trois questions dans cet ordre&nbsp;: qu'attend-on
+        de moi, où en sont mes demandes, que puis-je télécharger.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/mon-espace</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-pile fs-pile--large">
+
+              <div class="fs-rangee fs-rangee--entre">
+                <div>
+                  <h3 style="margin-bottom: var(--espace-1);">Bonjour</h3>
+                  <p class="fs-attenue" style="margin:0;">Dernière connexion le 19 septembre 2026</p>
+                </div>
+                <a class="fs-btn fs-btn--principal" href="#">Nouvelle démarche</a>
+              </div>
+
+              <div class="fs-encart fs-encart--alerte">
+                <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+                <div class="fs-encart-corps">
+                  <p class="fs-encart-titre">Une action est attendue de votre part</p>
+                  <p>Le dossier BF-2026-004915 requiert un justificatif de domicile avant le 30 septembre 2026.</p>
+                  <a class="fs-btn fs-btn--tertiaire fs-btn--sm fs-mt-4" href="#">Transmettre la pièce</a>
+                </div>
+              </div>
+
+              <div class="fs-auto-grille" style="--min-colonne: 160px;">
+                <div class="fs-stat"><span class="fs-stat-valeur">3</span><span class="fs-stat-libelle">demandes en cours</span></div>
+                <div class="fs-stat"><span class="fs-stat-valeur">1</span><span class="fs-stat-libelle">action attendue</span></div>
+                <div class="fs-stat"><span class="fs-stat-valeur">12</span><span class="fs-stat-libelle">documents disponibles</span></div>
+              </div>
+
+              <div>
+                <h4>Mes demandes</h4>
+                <div class="fs-tableau-cadre">
+                  <table class="fs-tableau fs-tableau--empile">
+                    <thead>
+                      <tr><th>Référence</th><th>Démarche</th><th>Dépôt</th><th>État</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td data-colonne="Référence"><code>BF-2026-004871</code></td>
+                        <td data-colonne="Démarche">Acte de naissance</td>
+                        <td data-colonne="Dépôt">18/09/2026</td>
+                        <td data-colonne="État"><span class="fs-statut fs-statut--cours">En instruction</span></td>
+                      </tr>
+                      <tr>
+                        <td data-colonne="Référence"><code>BF-2026-004915</code></td>
+                        <td data-colonne="Démarche">Casier judiciaire</td>
+                        <td data-colonne="Dépôt">12/09/2026</td>
+                        <td data-colonne="État"><span class="fs-statut fs-statut--alerte">Complément demandé</span></td>
+                      </tr>
+                      <tr>
+                        <td data-colonne="Référence"><code>BF-2026-004790</code></td>
+                        <td data-colonne="Démarche">Certificat de résidence</td>
+                        <td data-colonne="Dépôt">02/09/2026</td>
+                        <td data-colonne="État"><span class="fs-statut fs-statut--succes">Disponible au retrait</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="tableau-bord-agent">
+      <h2>Tableau de bord agent</h2>
+      <p class="doc-section-intro">
+        L'agent qui instruit les dossiers est lui aussi un usager du système. Son
+        écran répond à une question différente de celle du citoyen&nbsp;: non pas « où en
+        est mon dossier&nbsp;? » mais « lequel dois-je traiter maintenant&nbsp;? ». La densité
+        y est assumée, l'écran étant consulté toute la journée sur un poste fixe.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/agent/instruction</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div class="fs-pile fs-pile--large">
+
+              <div class="fs-rangee fs-rangee--entre">
+                <div>
+                  <h3 style="margin-bottom: var(--espace-1);">File d'instruction</h3>
+                  <p class="fs-attenue" style="margin:0;">Direction générale de la modernisation de l'état civil&nbsp;— poste 12</p>
+                </div>
+                <div class="fs-rangee">
+                  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm">
+                    <span class="fs-icone fs-icone--filtre" aria-hidden="true"></span>
+                    Filtrer
+                  </button>
+                  <button type="button" class="fs-btn fs-btn--principal fs-btn--sm">Prendre le suivant</button>
+                </div>
+              </div>
+
+              <div class="fs-encart fs-encart--danger" role="alert">
+                <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+                <div class="fs-encart-corps">
+                  <p class="fs-encart-titre">4 dossiers hors délai</p>
+                  <p>Le délai indicatif de trois jours ouvrés est dépassé. Ces dossiers passent en tête de file.</p>
+                </div>
+              </div>
+
+              <div class="fs-auto-grille" style="--min-colonne: 150px;">
+                <div class="fs-stat">
+                  <span class="fs-stat-valeur">37</span>
+                  <span class="fs-stat-libelle">à traiter</span>
+                </div>
+                <div class="fs-stat">
+                  <span class="fs-stat-valeur" style="color: var(--danger-texte);">4</span>
+                  <span class="fs-stat-libelle">hors délai</span>
+                </div>
+                <div class="fs-stat">
+                  <span class="fs-stat-valeur">12</span>
+                  <span class="fs-stat-libelle">traités aujourd'hui</span>
+                </div>
+                <div class="fs-stat">
+                  <span class="fs-stat-valeur">2,4&nbsp;j</span>
+                  <span class="fs-stat-libelle">délai moyen du poste</span>
+                </div>
+              </div>
+
+              <div>
+                <h4>Dossiers à instruire</h4>
+                <div class="fs-tableau-cadre">
+                  <table class="fs-tableau fs-tableau--compact fs-tableau--zebre">
+                    <caption class="fs-invisible">Dossiers en attente d'instruction, du plus ancien au plus récent</caption>
+                    <thead>
+                      <tr>
+                        <th>Référence</th>
+                        <th>Démarche</th>
+                        <th>Déposé</th>
+                        <th>Attente</th>
+                        <th>État</th>
+                        <th data-export="non">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>BF-2026-004612</code></td>
+                        <td>Acte de naissance</td>
+                        <td>02/09/2026</td>
+                        <td class="fs-num"><span class="fs-badge fs-badge--danger">19&nbsp;j</span></td>
+                        <td><span class="fs-statut fs-statut--alerte">Pièce reçue</span></td>
+                        <td><button type="button" class="fs-btn fs-btn--secondaire fs-btn--sm">Instruire</button></td>
+                      </tr>
+                      <tr>
+                        <td><code>BF-2026-004655</code></td>
+                        <td>Certificat de résidence</td>
+                        <td>08/09/2026</td>
+                        <td class="fs-num"><span class="fs-badge fs-badge--alerte">13&nbsp;j</span></td>
+                        <td><span class="fs-statut fs-statut--cours">Complet</span></td>
+                        <td><button type="button" class="fs-btn fs-btn--secondaire fs-btn--sm">Instruire</button></td>
+                      </tr>
+                      <tr>
+                        <td><code>BF-2026-004871</code></td>
+                        <td>Acte de naissance</td>
+                        <td>18/09/2026</td>
+                        <td class="fs-num"><span class="fs-badge fs-badge--neutre">3&nbsp;j</span></td>
+                        <td><span class="fs-statut fs-statut--cours">Complet</span></td>
+                        <td><button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm">Instruire</button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-8">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Règles</p>
+            <ul>
+              <li>Ordonner par ancienneté, pas par date de dépôt décroissante&nbsp;: le plus vieux dossier passe en premier.</li>
+              <li>Afficher l'attente en jours, avec un repère qui se durcit à l'approche du délai.</li>
+              <li>Une action principale par ligne, toujours au même endroit.</li>
+              <li>Exclure la colonne d'actions des extractions par <code>data-export="non"</code>.</li>
+              <li>Densité plus forte que côté citoyen&nbsp;: tableau compact, zébrures, pas d'illustration.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Reprendre le gabarit citoyen tel quel&nbsp;: les deux écrans répondent à des questions différentes.</li>
+              <li>Laisser l'agent choisir librement son dossier sans signaler les retards.</li>
+              <li>Afficher des données personnelles au-delà de ce que l'instruction exige.</li>
+              <li>Masquer le nom de l'agent instructeur&nbsp;: une décision administrative est imputable.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="authentification">
+      <h2>Authentification</h2>
+      <p class="doc-section-intro">
+        Page d'entrée dans l'espace personnel. Conteneur étroit, aucune navigation
+        secondaire, aucune distraction&nbsp;: la seule issue est de s'identifier ou de
+        revenir à l'accueil.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Composition</h3>
+        <div class="doc-maquette">
+          <div class="doc-maquette-cadre">
+            <span></span><span></span><span></span>
+            <span class="doc-maquette-url">https://eservices.gov.bf/connexion</span>
+          </div>
+          <div class="doc-maquette-contenu">
+            <div style="max-width: 420px; margin-inline: auto;">
+              <div class="fs-pile fs-pile--large">
+
+                <div class="fs-centre">
+                  <img src="assets/img/armoiries.svg" alt="" style="width:56px; margin-inline:auto;">
+                  <h3 class="fs-mt-4" style="margin-bottom: var(--espace-2);">Accéder à mon espace</h3>
+                  <p class="fs-attenue" style="font-size: var(--taille-sm);">Identifiez-vous pour suivre vos demandes et télécharger vos documents.</p>
+                </div>
+
+                <div class="fs-champ">
+                  <label class="fs-label" for="g-cnib">Numéro CNIB</label>
+                  <input class="fs-saisie" type="text" id="g-cnib" placeholder="B1234567">
+                </div>
+
+                <div class="fs-champ">
+                  <label class="fs-label" for="g-tel">Téléphone</label>
+                  <div class="fs-groupe-saisie">
+                    <span class="fs-affixe">+226</span>
+                    <input class="fs-saisie" type="tel" id="g-tel" placeholder="70 00 00 00">
+                  </div>
+                  <p class="fs-aide">Un code de vérification à six chiffres vous sera envoyé par SMS.</p>
+                </div>
+
+                <button type="button" class="fs-btn fs-btn--principal fs-btn--bloc fs-btn--lg">Recevoir le code</button>
+
+                <div class="fs-centre">
+                  <p class="fs-legende"><a href="#">Je n'ai pas de numéro CNIB</a></p>
+                </div>
+
+                <div class="fs-signalement">
+                  <p class="fs-legende" style="margin:0;">
+                    Aucun agent de l'administration ne vous demandera ce code par
+                    téléphone ou par message.
+                  </p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="erreurs">
+      <h2>Pages d'erreur</h2>
+      <p class="doc-section-intro">
+        Une page d'erreur explique ce qui s'est passé, ce que l'usager peut faire, et
+        qui contacter. Elle ne plaisante pas et n'affiche aucun code technique sans
+        explication.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Page introuvable et indisponibilité</h3>
+        <div class="doc-demo" data-libelle="Pages d'erreur">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+
+            <div class="fs-vide" style="border-style: solid;">
+              <span class="fs-badge fs-badge--neutre">Erreur 404</span>
+              <h4 class="fs-vide-titre">Cette page n'existe pas ou a été déplacée</h4>
+              <p>
+                L'adresse saisie est peut-être incomplète, ou le contenu a été
+                réorganisé. La recherche vous permettra de retrouver la démarche
+                concernée.
+              </p>
+              <div class="fs-actions">
+                <a class="fs-btn fs-btn--tertiaire" href="#">Retour à l'accueil</a>
+                <a class="fs-btn fs-btn--principal" href="#">Rechercher une démarche</a>
+              </div>
+            </div>
+
+            <div class="fs-vide" style="border-style: solid;">
+              <span class="fs-badge fs-badge--danger">Erreur 503</span>
+              <h4 class="fs-vide-titre">Le service est momentanément indisponible</h4>
+              <p>
+                Une opération de maintenance est en cours. Vos demandes déjà déposées
+                ne sont pas affectées. Le service sera rétabli dans la journée.
+              </p>
+              <div class="fs-actions">
+                <a class="fs-btn fs-btn--tertiaire" href="#">Réessayer</a>
+                <a class="fs-btn fs-btn--secondaire" href="#">Voir l'état des services</a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="doc-usages fs-mt-8">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Règles</p>
+            <ul>
+              <li>Indiquer si les données déjà saisies ou déposées sont affectées.</li>
+              <li>Proposer au moins deux issues, dont la recherche.</li>
+              <li>Conserver l'en-tête et le pied de page complets&nbsp;: l'usager doit pouvoir repartir.</li>
+              <li>Donner un contact lorsque l'erreur bloque une démarche en cours.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À proscrire</p>
+            <ul>
+              <li>Illustration humoristique ou ton léger.</li>
+              <li>Code d'erreur technique affiché sans explication en langage courant.</li>
+              <li>Page d'erreur dépouillée de toute navigation, laissant l'usager sans issue.</li>
+              <li>Renvoi automatique vers l'accueil sans laisser le temps de lire.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
+     avant que les comportements n'y ajoutent leurs attributs. -->
+<script src="assets/js/docs.js" defer></script>
+<script src="assets/js/faso.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intégration&nbsp;— Charte graphique de l'administration burkinabè</title>
+<meta name="description" content="Intégrer la charte comme dépendance : npm, Composer, téléchargement. Cas détaillé d'Angular, rendu côté serveur, politique de sécurité, encapsulation des styles.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/faso.css">
+<link rel="stylesheet" href="assets/css/icones.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="icon" href="assets/img/armoiries.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
+
+<div class="doc-barre">
+  <a class="doc-menu-marque" href="index.html">
+    <img src="assets/img/armoiries.svg" alt="">
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+  </a>
+  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
+</div>
+
+<div class="doc-page">
+
+  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
+    <a class="doc-menu-marque" href="index.html">
+      <img src="assets/img/armoiries.svg" alt="">
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    </a>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Le système</p>
+      <ul>
+        <li><a href="index.html">Présentation</a></li>
+        <li><a href="fondations.html">Fondations</a></li>
+        <li><a href="composants.html">Composants de base</a></li>
+        <li><a href="composants-metier.html">Composants métier</a></li>
+        <li><a href="gabarits.html">Gabarits</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="integration.html" aria-current="page">Intégration</a></li>
+        <li><a href="gouvernance.html">Gouvernance</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Sur cette page</p>
+      <div class="fs-sommaire" data-sommaire-auto></div>
+    </div>
+  </nav>
+
+  <main class="doc-corps" id="contenu" data-teinte="or">
+
+    <div class="doc-entete">
+      <nav class="doc-fil" aria-label="Fil d'Ariane">
+        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Intégration</span>
+      </nav>
+      <h1>Intégration</h1>
+      <p class="fs-chapeau">
+        La charte s'installe comme une dépendance ordinaire. Elle fournit
+        <strong>l'apparence et les comportements des composants isolés</strong>&nbsp;; les
+        composants pilotés par des données restent la responsabilité du cadriciel.
+        Cette page dit ce que cela recouvre exactement, et ce qu'il faut savoir avant
+        d'installer.
+      </p>
+    </div>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="partage">
+      <h2>Partage des responsabilités</h2>
+      <p class="doc-section-intro">
+        Tout tient dans cette répartition. La lire avant d'écrire une ligne de code
+        évite le seul type de bogue véritablement pénible&nbsp;: celui où le cadriciel et
+        la charte se disputent la propriété d'un même nœud du document.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Trois catégories</h3>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Catégorie</th><th>Composants</th><th>Ce que fait le projet</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="fs-badge fs-badge--succes">CSS seul</span></td>
+                <td>Boutons, liens, cartes, encarts, badges, étiquettes, avatars, listes, tableaux statiques, filet, repère, figures, graphiques, fiches de démarche, pièces, suivi de dossier</td>
+                <td>Reprendre les classes. Rien d'autre.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--info">Comportement autonome</span></td>
+                <td>Modale, panneau latéral, menu, accordéon, onglets, infobulle, encart refermable, dépôt de fichier, code de vérification, saisie de date, calendrier, centre de notifications, bascule de thème</td>
+                <td>Appeler l'initialisation après le rendu, ou activer l'observation une fois pour toutes.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--alerte">Piloté par données</span></td>
+                <td>Tableau trié, filtré, paginé&nbsp;; autocomplétion&nbsp;; export</td>
+                <td><strong>Employer le CSS seul.</strong> Le cadriciel fait la logique.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Pourquoi la troisième catégorie.</strong> La pagination de la charte
+          pose <code>hidden</code> sur des lignes de tableau&nbsp;; le filtre y pose
+          <code>data-exclu</code>. Si ces lignes proviennent d'une boucle du cadriciel,
+          celui-ci les reconstruit à chaque cycle de rendu et efface ces attributs&nbsp;—
+          ou les impose à nouveau au cycle suivant. Le résultat n'est pas un bogue
+          qu'on corrige, c'est un conflit de propriété qu'on évite en tranchant&nbsp;: soit
+          le tableau est entièrement à la charte, soit il est entièrement au cadriciel.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>La règle en une phrase</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Sain</p>
+            <ul>
+              <li>Le balisage d'un composant est écrit une fois et ne change plus&nbsp;: la charte peut l'animer.</li>
+              <li>Le cadriciel rend une liste et lui applique les classes de la charte&nbsp;: l'apparence est reprise, la logique reste au cadriciel.</li>
+              <li>La charte n'écrit que dans des nœuds qu'aucune liaison du cadriciel ne surveille.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À éviter</p>
+            <ul>
+              <li>Poser <code>data-pagination</code> sur un tableau dont les lignes viennent d'une boucle du cadriciel.</li>
+              <li>Laisser la charte modifier un attribut que le cadriciel lie par ailleurs.</li>
+              <li>Recopier le balisage d'un composant dans un gabarit puis le régénérer à chaque frappe.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="installation">
+      <h2>Installation</h2>
+      <p class="doc-section-intro">
+        Un seul paquet, quel que soit le cadriciel. Aucune variante React, Angular ou
+        Vue n'est publiée&nbsp;— le motif de ce choix est expliqué plus bas.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Par npm</h3>
+        <p class="doc-bloc-note">
+          Couvre React, Angular, Vue, Svelte, et aussi Laravel et Symfony, qui
+          embarquent une chaîne Node depuis plusieurs versions.
+        </p>
+        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+
+        <div class="fs-encart fs-encart--alerte fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Nom de paquet à confirmer</p>
+            <p>
+              L'espace de noms <code>@gouv-bf</code> doit être enregistré par
+              l'organisme désigné responsable du système. Tant que cette désignation
+              n'est pas arrêtée, l'installation se fait par téléchargement.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Sans chaîne Node</h3>
+        <p class="doc-bloc-note">
+          Projet PHP sans outillage, site statique, page isolée&nbsp;: on télécharge les
+          fichiers et on les sert. C'est le mode de fonctionnement d'origine du
+          système, et il reste pleinement pris en charge.
+        </p>
+        <pre><code>&lt;link rel="stylesheet" href="/assets/css/tokens.css"&gt;
+&lt;link rel="stylesheet" href="/assets/css/faso.css"&gt;
+&lt;link rel="stylesheet" href="/assets/css/icones.css"&gt;
+&lt;script src="/assets/js/faso.js" defer&gt;&lt;/script&gt;</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Dans ce mode, l'initialisation est automatique au chargement. Il n'y a rien
+          à appeler.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Ce que contient le paquet</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Chemin</th><th>Contenu</th><th>Obligatoire</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td><td>Oui</td></tr>
+              <tr><td><code>css/faso.css</code></td><td>Bibliothèque de composants</td><td>Oui</td></tr>
+              <tr><td><code>css/icones.css</code></td><td>35 icônes&nbsp;; plusieurs composants y puisent leurs repères</td><td>Oui</td></tr>
+              <tr><td><code>polices/</code></td><td>Archivo et Inter, variables, sous-ensemble latin, avec leurs licences</td><td>Oui</td></tr>
+              <tr><td>racine du paquet</td><td>Comportements, avec ses déclarations de types</td><td>Non</td></tr>
+              <tr><td><code>jetons.json</code></td><td>189 jetons, valeurs résolues</td><td>Non</td></tr>
+              <tr><td><code>img/armoiries.svg</code></td><td>Emblème vectoriel</td><td>Selon l'usage</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          L'arborescence <code>css/</code> et <code>polices/</code> doit être conservée
+          telle quelle. Les déclarations de polices désignent les fichiers par un
+          chemin relatif&nbsp;; déplacer l'un sans l'autre casse le chargement, et le texte
+          bascule silencieusement en police de repli.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="angular">
+      <h2>Angular</h2>
+      <p class="doc-section-intro">
+        Cas traité en détail, parce qu'il concentre toutes les difficultés&nbsp;: rendu
+        côté serveur, encapsulation des styles, cycle de vie des composants, mode sans
+        zone. Ce qui suit vaut, à la syntaxe près, pour les autres cadriciels.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>1. Déclarer les styles</h3>
+        <p class="doc-bloc-note">
+          Dans <code>angular.json</code>, section <code>build</code>. Les styles
+          globaux échappent à l'encapsulation des composants, ce qui est exactement ce
+          qu'on veut&nbsp;: les classes doivent s'appliquer partout.
+        </p>
+        <pre><code>"styles": [
+  "node_modules/@gouv-bf/charte-graphique/assets/css/tokens.css",
+  "node_modules/@gouv-bf/charte-graphique/assets/css/faso.css",
+  "node_modules/@gouv-bf/charte-graphique/assets/css/icones.css",
+  "src/styles.css"
+]</code></pre>
+        <p class="fs-legende fs-mt-4">
+          L'ordre compte&nbsp;: les jetons d'abord, la feuille du projet en dernier, pour
+          qu'une surcharge locale l'emporte.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>2. Amorcer les comportements</h3>
+        <p class="doc-bloc-note">
+          Une seule ligne, dans le composant racine. L'observation prend en charge
+          tout ce que l'application rendra par la suite&nbsp;: il n'y a plus rien à appeler
+          après chaque rendu, et rien à défaire au démontage.
+        </p>
+        <pre><code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import Faso from '@gouv-bf/charte-graphique';
+
+@Component({ selector: 'app-root', templateUrl: './app.html' })
+export class AppComponent implements OnInit {
+  private plateforme = inject(PLATFORM_ID);
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.plateforme)) {
+      Faso.observer();
+    }
+  }
+}</code></pre>
+
+        <div class="doc-note fs-mt-6">
+          Le test de plateforme n'est pas indispensable&nbsp;— <code>observer()</code> se
+          contente de renvoyer <code>false</code> hors navigateur&nbsp;— mais il rend
+          l'intention explicite et évite un appel inutile au rendu serveur.
+        </div>
+
+        <h4 class="fs-mt-8">Variante sans observation</h4>
+        <p class="doc-bloc-note">
+          Si l'on préfère maîtriser le moment de l'initialisation, on la déclenche
+          composant par composant. L'opération est idempotente&nbsp;: la rappeler
+          n'empile pas les gestionnaires.
+        </p>
+        <pre><code>export class FicheDemarche implements AfterViewInit {
+  private hote = inject(ElementRef&lt;HTMLElement&gt;);
+
+  ngAfterViewInit(): void {
+    Faso.initialiser(this.hote.nativeElement);
+  }
+}</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>3. Rendu côté serveur</h3>
+        <p class="doc-bloc-note">
+          Le module s'importe sans DOM. Rien ne s'exécute au chargement lorsque
+          <code>document</code> est absent, et l'API reste appelable sans effet. Un
+          <code>import</code> en tête de fichier ne fait donc pas échouer le rendu
+          serveur.
+        </p>
+
+        <div class="fs-encart fs-encart--info">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Thème et hydratation</p>
+            <p>
+              Le thème est lu dans le stockage local, donc côté navigateur uniquement.
+              Le serveur rend toujours le thème clair. Pour éviter que la page
+              n'apparaisse claire puis bascule, posez l'attribut
+              <code>data-theme</code> sur <code>&lt;html&gt;</code> depuis un script en
+              tête de document, avant le rendu de l'application.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>4. Encapsulation des styles</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Compatible</p>
+            <ul>
+              <li><code>ViewEncapsulation.Emulated</code>, le mode par défaut&nbsp;: les styles globaux s'appliquent normalement.</li>
+              <li><code>ViewEncapsulation.None</code>&nbsp;: compatible, mais la feuille du composant fuit dans toute l'application.</li>
+              <li>Une surcharge locale passe par une redéfinition de jeton sur <code>:host</code>, jamais par une réécriture de règle.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">Incompatible</p>
+            <ul>
+              <li><code>ViewEncapsulation.ShadowDom</code>&nbsp;: les styles globaux ne franchissent pas la frontière, et les composants apparaissent sans mise en forme.</li>
+              <li><code>::ng-deep</code> pour forcer un style de la charte&nbsp;: la règle est dépréciée et la surcharge survit mal aux montées de version.</li>
+            </ul>
+          </div>
+        </div>
+
+        <pre class="fs-mt-6"><code>/* Surcharge correcte : on redéfinit un jeton */
+:host {
+  --action: var(--vert-700);
+}</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Politique de sécurité de contenu</h3>
+        <p class="doc-bloc-note">
+          Les 35 icônes et l'étoile du filet sont des URI <code>data:</code> employées
+          en masque CSS. Une politique stricte qui ne les autorise pas les fait
+          disparaître <strong>sans aucune erreur visible</strong>&nbsp;: les boutons
+          restent, les icônes s'évaporent. C'est le défaut le plus difficile à
+          diagnostiquer de cette intégration, et il ne se manifeste souvent qu'en
+          production.
+        </p>
+        <pre><code>Content-Security-Policy:
+  default-src 'self';
+  img-src 'self' data:;
+  font-src 'self';
+  style-src 'self';</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Aucune directive <code>'unsafe-inline'</code> n'est nécessaire&nbsp;: la charte
+          ne pose aucun style en ligne ni aucun script en ligne.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>6. Détection de changement</h3>
+        <p class="doc-bloc-note">
+          Avec <code>zone.js</code>, les gestionnaires délégués de la charte
+          déclenchent un cycle de détection à chaque clic dans la page. C'est correct,
+          mais mesurable sur une grande application. Pour l'éviter, amorcez en dehors
+          de la zone&nbsp;— les comportements de la charte ne modifient aucun état Angular.
+        </p>
+        <pre><code>private zone = inject(NgZone);
+
+ngOnInit(): void {
+  this.zone.runOutsideAngular(() =&gt; Faso.observer());
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          En mode sans zone, la question ne se pose pas. La charte écrit directement
+          dans le document et n'attend aucune détection.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>7. Ce qu'Angular doit reprendre à son compte</h3>
+        <p class="doc-bloc-note">
+          Les composants de la troisième catégorie. On garde le balisage et les
+          classes, on retire les attributs de pilotage de la charte, et le cadriciel
+          fait le travail.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Attribut à retirer</th><th>Ce qu'Angular reprend</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>data-pagination</code></td><td>Découpage des lignes, commandes de page</td></tr>
+              <tr><td><code>data-filtres</code>, <code>data-filtre</code></td><td>Filtrage de la source de données</td></tr>
+              <tr><td><code>data-triable</code></td><td>Tri de la source, et <code>aria-sort</code> sur les en-têtes</td></tr>
+              <tr><td><code>data-combo</code></td><td>Filtrage des suggestions, <code>aria-activedescendant</code></td></tr>
+              <tr><td><code>data-export</code></td><td>Génération du fichier, côté client ou serveur</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Les classes, elles, restent&nbsp;: <code>.fs-tableau</code>,
+          <code>.fs-tableau-bloc</code>, <code>.fs-pagination</code>,
+          <code>.fs-filtres</code>, <code>.fs-combo-liste</code>. L'apparence et les
+          règles d'accessibilité sont acquises&nbsp;; seule la logique change de camp.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>8. TypeScript</h3>
+        <p class="doc-bloc-note">
+          Le paquet embarque ses déclarations. En mode strict, l'import par défaut est
+          typé, et <code>window.Faso</code> est déclaré globalement pour les projets
+          qui préfèrent y accéder directement.
+        </p>
+        <pre><code>import Faso from '@gouv-bf/charte-graphique';
+
+Faso.initialiser(element);
+Faso.notifier({ titre: 'Dossier transmis', ton: 'succes' });
+Faso.appliquerTheme('dark');</code></pre>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="autres">
+      <h2>Autres cadriciels</h2>
+      <p class="doc-section-intro">
+        Le principe ne change pas&nbsp;: déclarer les feuilles, activer l'observation une
+        fois, laisser au cadriciel les composants pilotés par des données.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>React, Vue, Svelte</h3>
+        <pre><code>import '@gouv-bf/charte-graphique/css/tokens.css';
+import '@gouv-bf/charte-graphique/css/faso.css';
+import '@gouv-bf/charte-graphique/css/icones.css';
+import Faso from '@gouv-bf/charte-graphique';
+
+Faso.observer();</code></pre>
+        <p class="fs-legende fs-mt-4">
+          En rendu côté serveur, placez l'appel dans un effet, exécuté après le montage
+          dans le navigateur.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Laravel, Symfony</h3>
+        <p class="doc-bloc-note">
+          Les deux embarquent Vite. L'installation passe donc par npm, exactement comme
+          ci-dessus, et les feuilles sont déclarées dans le point d'entrée des actifs.
+          Un paquet Composer n'a d'intérêt que pour un projet PHP dépourvu de chaîne
+          Node&nbsp;; il se contenterait de publier les fichiers dans le dossier public.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="pas-de-composants">
+      <h2>Pourquoi aucun composant par cadriciel</h2>
+      <p class="doc-section-intro">
+        C'est la demande la plus fréquente des équipes, et le refus mérite d'être
+        motivé plutôt que subi.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Le raisonnement</h3>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>
+            Publier des composants React, Angular et Vue revient à maintenir
+            <strong>trois implémentations</strong> de chaque comportement, plus la
+            version sans cadriciel. Soixante-cinq composants deviennent deux cent
+            soixante.
+          </li>
+          <li>
+            Chaque montée de version majeure d'un cadriciel impose une reprise, sur un
+            calendrier que l'administration ne maîtrise pas.
+          </li>
+          <li>
+            Un projet qui n'emploie aucun de ces trois cadriciels&nbsp;— et
+            l'administration en compte&nbsp;— se retrouverait citoyen de seconde zone.
+          </li>
+          <li>
+            C'est de cette façon que meurent les systèmes de conception publics&nbsp;: non
+            par manque d'idées, mais parce que la charge de maintenance dépasse
+            l'équipe qui en a la garde.
+          </li>
+        </ul>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Le prix à payer est réel et assumé.</strong> Un développeur Angular
+          aurait préféré <code>&lt;faso-bouton&gt;</code> à
+          <code>&lt;button class="fs-btn fs-btn--principal"&gt;</code>. En contrepartie,
+          le balisage qu'il écrit reste valable quel que soit l'avenir du cadriciel, et
+          la charte survit à ses propres équipes.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Ce qu'un projet peut faire de son côté</h3>
+        <p class="doc-bloc-note">
+          Rien n'interdit à une équipe d'envelopper les classes dans ses propres
+          composants&nbsp;: c'est même recommandé au-delà de quelques écrans. Ces
+          enveloppes appartiennent au projet, pas à la charte, et n'engagent qu'elle.
+        </p>
+        <pre><code>@Component({
+  selector: 'app-bouton',
+  template: `&lt;button [class]="classes" [disabled]="desactive"&gt;
+               &lt;ng-content /&gt;
+             &lt;/button&gt;`
+})
+export class Bouton {
+  variante = input&lt;'principal' | 'secondaire' | 'tertiaire'&gt;('principal');
+  desactive = input(false);
+  get classes() { return `fs-btn fs-btn--${this.variante()}`; }
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="recette">
+      <h2>Recette d'intégration</h2>
+      <p class="doc-section-intro">
+        À passer avant la première mise en production d'un projet reprenant la charte.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Contrôles</h3>
+        <ul class="fs-liste-controle fs-mesure">
+          <li>Les trois feuilles sont déclarées, dans l'ordre, et la feuille du projet vient après.</li>
+          <li>Les polices sont servies depuis le domaine du service&nbsp;: aucune requête vers un tiers dans l'onglet réseau.</li>
+          <li>Les icônes s'affichent&nbsp;— si elles sont absentes, vérifier <code>img-src data:</code> dans la politique de sécurité.</li>
+          <li>Aucun composant en <code>ShadowDom</code>.</li>
+          <li>Un composant rendu après le chargement réagit&nbsp;: ouvrir une modale rendue dynamiquement.</li>
+          <li>Un composant rendu deux fois ne déclenche pas deux fois&nbsp;: cliquer une commande après un aller-retour de navigation.</li>
+          <li>Le rendu côté serveur aboutit, le cas échéant.</li>
+          <li>Aucun tableau ne porte à la fois <code>data-pagination</code> et une boucle du cadriciel.</li>
+          <li>Les cinq vérifications d'<a href="accessibilite.html">accessibilité</a> sont passées.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
+     avant que les comportements n'y ajoutent leurs attributs. -->
+<script src="assets/js/docs.js" defer></script>
+<script src="assets/js/faso.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charte Graphique — Plateformes Numériques de l'Administration Burkinabè</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rouge-panaf: #E30613;
+    --rouge-fonce: #BA0510;
+    --rouge-clair: #F04E5A;
+    --rouge-pale: #FDE0E2;
+    --jaune-panaf: #FFED00;
+    --jaune-fonce: #E0C900;
+    --jaune-clair: #FFF24D;
+    --jaune-pale: #FFFDE0;
+    --vert-panaf: #00843B;
+    --vert-fonce: #006A2F;
+    --vert-clair: #33A35E;
+    --vert-pale: #E0F2E6;
+    --bleu-gouvernement: #1A3A5C;
+    --bleu-clair-gouv: #2C5282;
+    --texte-sombre: #1A2A3A;
+    --texte-moyen: #4A5B6C;
+    --texte-clair: #7A8B9C;
+    --fond-blanc: #FFFFFF;
+    --fond-creme: #FAFBFC;
+    --fond-gris: #EEF1F5;
+    --fond-alt: #F4F6F8;
+    --bordure: #D8DEE6;
+    --bordure-fonce: #C4CDD6;
+    --danger: #E04545;
+    --danger-bg: #FDE0E2;
+    --warning: #F0A030;
+    --warning-bg: #FEF3E0;
+    --succes: #00843B;
+    --succes-bg: #E0F2E6;
+    --info: #1A3A5C;
+    --info-bg: #E8F0F8;
+    --radius-xs: 4px;
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+    --shadow-xs: 0 1px 2px rgba(26,42,58,0.04);
+    --shadow-sm: 0 2px 8px rgba(26,42,58,0.06);
+    --shadow-md: 0 4px 16px rgba(26,42,58,0.08);
+    --shadow-lg: 0 8px 32px rgba(26,42,58,0.12);
+    --shadow-xl: 0 16px 48px rgba(26,42,58,0.16);
+    --shadow-glow-rouge: 0 4px 20px rgba(227,6,19,0.25);
+    --shadow-glow-jaune: 0 4px 20px rgba(255,237,0,0.3);
+    --shadow-glow-vert: 0 4px 20px rgba(0,132,59,0.25);
+    --focus-ring: 0 0 0 4px rgba(0,132,59,0.18);
+    --hauteur-cible-min: 44px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--texte-sombre);
+    background: var(--fond-creme);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, var(--vert-panaf) 0%, var(--vert-fonce) 40%, var(--bleu-gouvernement) 100%);
+    padding: 80px 40px 80px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 85%, rgba(227,6,19,0.3) 0%, transparent 45%),
+      radial-gradient(circle at 85% 15%, rgba(255,237,0,0.25) 0%, transparent 45%),
+      radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1) 0%, transparent 60%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0; right: 0;
+    height: 50px;
+    background: var(--fond-creme);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .hero-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  .hero-logo {
+    width: 164px;
+    height: 164px;
+    border-radius: 20px;
+    background: white;
+    padding: 14px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 3px var(--jaune-panaf), 0 0 0 6px rgba(255,255,255,0.2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1));
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .hero-text h1 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 44px;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .hero-text h1 span { opacity: 0.8; font-weight: 400; display: block; font-size: 16px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero-text p { font-size: 18px; opacity: 0.9; max-width: 580px; line-height: 1.6; }
+  .hero-motto {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.1);
+    border-left: 4px solid var(--jaune-panaf);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    font-size: 14px;
+    font-style: italic;
+    display: inline-block;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--bordure);
+    padding: 0 40px;
+    box-shadow: var(--shadow-xs);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .nav a {
+    display: block;
+    padding: 14px 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--texte-moyen);
+    text-decoration: none;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav a:hover, .nav a.active {
+    color: var(--vert-panaf);
+    border-bottom-color: var(--vert-panaf);
+  }
+
+  /* ─── SECTIONS ─── */
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  section { padding: 60px 0; }
+  .section-header { margin-bottom: 40px; }
+  .section-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 30px;
+    color: var(--texte-sombre);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-title .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--vert-panaf), var(--bleu-gouvernement));
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-desc {
+    color: var(--texte-moyen);
+    font-size: 15px;
+    padding-left: 58px;
+    max-width: 800px;
+    line-height: 1.7;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bordure), transparent);
+  }
+
+  /* ─── COULEURS ─── */
+  .color-groups { display: flex; flex-direction: column; gap: 40px; }
+  .color-group { margin-bottom: 8px; }
+  .color-group-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--texte-clair);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .color-group-label::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+  .color-group.primary .color-group-label::before { background: var(--rouge-panaf); }
+  .color-group.secondary .color-group-label::before { background: var(--jaune-panaf); }
+  .color-group.tertiary .color-group-label::before { background: var(--vert-panaf); }
+  .color-group.neutral .color-group-label::before { background: var(--bleu-gouvernement); }
+  .color-group.semantic .color-group-label::before { background: var(--info); }
+
+  .color-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+  .color-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: white;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+    border: 1px solid var(--fond-gris);
+  }
+  .color-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .color-swatch { height: 110px; position: relative; }
+  .color-swatch.bordered { box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08); }
+  .color-swatch.has-pattern {
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 20px);
+  }
+  .color-info { padding: 16px; }
+  .color-name { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+  .color-hex { font-size: 13px; color: var(--vert-panaf); font-family: 'JetBrains Mono', monospace; font-weight: 500; }
+  .color-rgb { font-size: 11px; color: var(--texte-clair); margin-top: 2px; }
+  .color-usage { font-size: 12px; color: var(--texte-moyen); margin-top: 6px; line-height: 1.5; }
+
+  /* Color meanings */
+  .color-meanings {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .color-meaning {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+    text-align: center;
+  }
+  .color-meaning-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+  .color-meaning h4 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 8px; }
+  .color-meaning p { font-size: 13px; color: var(--texte-moyen); line-height: 1.6; }
+  .meaning-rouge { background: linear-gradient(135deg, var(--rouge-pale), #fff); border-left: 4px solid var(--rouge-panaf); }
+  .meaning-jaune { background: linear-gradient(135deg, var(--jaune-pale), #fff); border-left: 4px solid var(--jaune-panaf); }
+  .meaning-vert { background: linear-gradient(135deg, var(--vert-pale), #fff); border-left: 4px solid var(--vert-panaf); }
+
+  /* ─── TYPO ─── */
+  .typo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .typo-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+  }
+  .typo-card.full { grid-column: 1 / -1; }
+  .typo-card.header { border-top: 4px solid var(--vert-panaf); }
+  .typo-card.body-card { border-top: 4px solid var(--bleu-gouvernement); }
+  .typo-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--vert-panaf);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .typo-label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--vert-panaf);
+    border-radius: 2px;
+  }
+  .typo-sample-poppins {
+    font-family: 'Poppins', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    color: var(--texte-sombre);
+    margin-bottom: 20px;
+  }
+  .typo-sample-inter {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--texte-moyen);
+    line-height: 1.5;
+  }
+  .typo-weights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--fond-gris);
+  }
+  .typo-weight { text-align: center; }
+  .typo-weight .letter {
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: var(--texte-sombre);
+  }
+  .typo-weight .meta { font-size: 11px; color: var(--texte-clair); font-weight: 500; }
+  .type-scale { display: flex; flex-direction: column; gap: 16px; }
+  .type-scale-item {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--fond-gris);
+  }
+  .type-scale-item:last-child { border-bottom: none; }
+  .type-scale-item .size-label {
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--vert-panaf);
+    background: var(--vert-pale);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    width: 100px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .type-scale-item .size-sample { font-family: 'Poppins', sans-serif; font-weight: 600; color: var(--texte-sombre); }
+  .type-scale-item .size-meta { font-size: 12px; color: var(--texte-clair); margin-left: auto; }
+
+  /* ─── BOUTONS ─── */
+  .buttons-section { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+  .btn-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  .btn-card-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--texte-clair);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .btn-primary { background: var(--vert-panaf); color: white; }
+  .btn-primary:hover { background: var(--vert-fonce); box-shadow: var(--shadow-glow-vert); transform: translateY(-2px); }
+  .btn-secondary { background: var(--jaune-panaf); color: var(--texte-sombre); }
+  .btn-secondary:hover { background: var(--jaune-fonce); box-shadow: var(--shadow-glow-jaune); transform: translateY(-2px); }
+  .btn-tertiary { background: var(--rouge-panaf); color: white; }
+  .btn-tertiary:hover { background: var(--rouge-fonce); box-shadow: var(--shadow-glow-rouge); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--vert-panaf); box-shadow: inset 0 0 0 2px var(--vert-panaf); }
+  .btn-outline:hover { background: var(--vert-panaf); color: white; }
+  .btn-outline-jaune { background: transparent; color: var(--jaune-fonce); box-shadow: inset 0 0 0 2px var(--jaune-panaf); }
+  .btn-outline-jaune:hover { background: var(--jaune-panaf); color: var(--texte-sombre); }
+  .btn-ghost { background: var(--vert-pale); color: var(--vert-panaf); }
+  .btn-ghost:hover { background: var(--vert-panaf); color: white; }
+  .btn-ghost-jaune { background: var(--jaune-pale); color: var(--jaune-fonce); }
+  .btn-ghost-jaune:hover { background: var(--jaune-panaf); color: var(--texte-sombre); }
+  .btn-danger { background: var(--danger); color: white; }
+  .btn-danger:hover { opacity: 0.9; box-shadow: 0 4px 16px rgba(224,69,69,0.35); }
+  .btn-lg { padding: 16px 40px; font-size: 16px; border-radius: var(--radius-lg); }
+  .btn-sm { padding: 8px 18px; font-size: 12px; border-radius: var(--radius-sm); }
+  .btn-icon { width: 48px; height: 48px; padding: 0; border-radius: 50%; }
+  .btn-icon.jaune { background: var(--jaune-panaf); color: var(--texte-sombre); }
+  .btn-icon.vert { background: var(--vert-panaf); color: white; }
+
+  /* ─── COMPOSANTS ─── */
+  .components-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .comp-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+  }
+  .comp-card.full { grid-column: 1 / -1; }
+  .comp-card.half { grid-column: span 1; }
+  .comp-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--vert-panaf);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+  }
+
+  /* Input */
+  .input-group { margin-bottom: 16px; }
+  .input-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texte-moyen);
+    margin-bottom: 8px;
+  }
+  .input-field {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--bordure);
+    border-radius: var(--radius-md);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--texte-sombre);
+    background: var(--fond-blanc);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .input-field:focus { border-color: var(--vert-panaf); box-shadow: 0 0 0 4px rgba(0,132,59,0.1); }
+  .input-field::placeholder { color: var(--texte-clair); }
+  .input-field.error { border-color: var(--danger); }
+  .input-field.success { border-color: var(--succes); }
+
+  /* Select */
+  .select-field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234A5B6C' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+  }
+
+  /* Checkbox & Radio */
+  .checkbox-group, .radio-group { display: flex; flex-direction: column; gap: 12px; }
+  .checkbox-item, .radio-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .checkbox-input, .radio-input {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--vert-panaf);
+    cursor: pointer;
+  }
+  .checkbox-label, .radio-label { font-size: 14px; color: var(--texte-moyen); }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    gap: 6px;
+  }
+  .badge-vert { background: var(--vert-pale); color: var(--vert-fonce); }
+  .badge-jaune { background: var(--jaune-pale); color: var(--jaune-fonce); }
+  .badge-rouge { background: var(--rouge-pale); color: var(--rouge-fonce); }
+  .badge-bleu { background: var(--info-bg); color: var(--bleu-gouvernement); }
+  .badge-danger { background: var(--danger-bg); color: var(--danger); }
+  .badge-warning { background: var(--warning-bg); color: #B36B00; }
+
+  /* Alert */
+  .alert {
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    border-left: 4px solid;
+  }
+  .alert-success { background: var(--succes-bg); color: var(--vert-fonce); border-left-color: var(--vert-panaf); }
+  .alert-info { background: var(--info-bg); color: var(--bleu-gouvernement); border-left-color: var(--bleu-gouvernement); }
+  .alert-warning { background: var(--warning-bg); color: #8B5E0A; border-left-color: var(--warning); }
+  .alert-danger { background: var(--danger-bg); color: #B33030; border-left-color: var(--danger); }
+  .alert-icon { width: 20px; height: 20px; flex-shrink: 0; }
+  .alert-content strong { font-weight: 600; }
+
+  /* Card */
+  .demo-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    background: white;
+    border: 1px solid var(--fond-gris);
+  }
+  .demo-card-header {
+    height: 100px;
+    background: linear-gradient(135deg, var(--vert-panaf), var(--bleu-gouvernement));
+    position: relative;
+  }
+  .demo-card-header.rouge { background: linear-gradient(135deg, var(--rouge-panaf), var(--rouge-fonce)); }
+  .demo-card-header.jaune { background: linear-gradient(135deg, var(--jaune-panaf), var(--jaune-fonce)); }
+  .demo-card-avatar {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 4px solid white;
+    position: absolute;
+    bottom: -30px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: var(--vert-panaf);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    box-shadow: var(--shadow-md);
+  }
+  .demo-card-body { padding: 40px 20px 20px; }
+  .demo-card-body h4 { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .demo-card-body p { font-size: 13px; color: var(--texte-moyen); }
+  .demo-card-footer {
+    padding: 12px 20px;
+    background: var(--fond-alt);
+    border-top: 1px solid var(--fond-gris);
+    display: flex;
+    gap: 8px;
+  }
+
+  /* ─── PLATEFORMES ─── */
+  .plateformes-intro {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+  }
+  .plateformes-intro h3 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--texte-sombre);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .plateformes-intro p { color: var(--texte-moyen); font-size: 14px; line-height: 1.7; }
+  .plateformes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .plateforme-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+    transition: all 0.3s;
+  }
+  .plateforme-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .plateforme-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--fond-gris);
+  }
+  .plateforme-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .plateforme-icon.vert { background: var(--vert-pale); color: var(--vert-panaf); }
+  .plateforme-icon.jaune { background: var(--jaune-pale); color: var(--jaune-fonce); }
+  .plateforme-icon.rouge { background: var(--rouge-pale); color: var(--rouge-fonce); }
+  .plateforme-icon.bleu { background: var(--info-bg); color: var(--bleu-gouvernement); }
+  .plateforme-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--texte-sombre); }
+  .plateforme-category { font-size: 11px; color: var(--texte-clair); text-transform: uppercase; letter-spacing: 1px; }
+  .plateforme-body { padding: 20px; }
+  .plateforme-desc { font-size: 13px; color: var(--texte-moyen); line-height: 1.6; margin-bottom: 16px; }
+  .plateforme-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* ─── SPACING ─── */
+  .spacing-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 20px; }
+  .spacing-item { text-align: center; }
+  .spacing-box {
+    background: linear-gradient(135deg, var(--vert-pale), var(--jaune-pale));
+    border: 2px dashed var(--vert-clair);
+    border-radius: var(--radius-sm);
+    margin: 0 auto 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spacing-val { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; color: var(--vert-fonce); }
+  .spacing-name { font-size: 11px; color: var(--texte-clair); margin-top: 4px; }
+
+  /* ─── RADIUS ─── */
+  .radius-grid { display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-end; }
+  .radius-item { text-align: center; }
+  .radius-box {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, var(--vert-panaf), var(--jaune-panaf));
+    margin: 0 auto 10px;
+    transition: transform 0.2s;
+  }
+  .radius-box:hover { transform: scale(1.1); }
+  .radius-label { font-size: 11px; color: var(--texte-clair); }
+  .radius-value { font-size: 12px; font-weight: 600; color: var(--texte-sombre); margin-top: 2px; }
+
+  /* ─── SHADOWS ─── */
+  .shadow-grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .shadow-item { text-align: center; }
+  .shadow-box {
+    width: 100px; height: 72px;
+    background: white;
+    border-radius: var(--radius-md);
+    margin: 0 auto 10px;
+    transition: transform 0.2s;
+  }
+  .shadow-box:hover { transform: translateY(-4px); }
+  .shadow-label { font-size: 11px; color: var(--texte-clair); }
+  .shadow-value { font-size: 11px; font-weight: 600; color: var(--texte-sombre); margin-top: 2px; }
+
+  /* ─── ICONS ─── */
+  .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; }
+  .icon-item {
+    text-align: center;
+    padding: 18px 10px;
+    border-radius: var(--radius-md);
+    background: white;
+    border: 1px solid var(--fond-gris);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .icon-item:hover { border-color: var(--vert-panaf); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+  .icon-item svg { width: 26px; height: 26px; margin-bottom: 8px; color: var(--texte-moyen); }
+  .icon-item:hover svg { color: var(--vert-panaf); }
+  .icon-item span { font-size: 10px; color: var(--texte-clair); display: block; }
+
+  /* ─── DESIGN SYSTEM ADMINISTRATIF ─── */
+  .guideline-grid,
+  .admin-components-grid,
+  .template-grid,
+  .accessibility-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .guideline-card,
+  .admin-component,
+  .template-card,
+  .accessibility-card {
+    background: white;
+    border: 1px solid var(--fond-gris);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    min-width: 0;
+  }
+  .admin-component.wide { grid-column: 1 / -1; }
+  .guideline-card h3,
+  .admin-component h3,
+  .template-card h3,
+  .accessibility-card h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--texte-sombre);
+    margin-bottom: 10px;
+  }
+  .guideline-card p,
+  .admin-component p,
+  .template-card p,
+  .accessibility-card p {
+    font-size: 13px;
+    color: var(--texte-moyen);
+    line-height: 1.7;
+  }
+  .usage-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .usage-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+    color: var(--texte-moyen);
+  }
+  .usage-list li::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vert-panaf);
+    flex: 0 0 auto;
+    margin-top: 7px;
+  }
+  .official-banner {
+    background: var(--bleu-gouvernement);
+    color: white;
+    border-radius: var(--radius-lg);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
+  }
+  .official-banner img {
+    width: 46px;
+    height: 46px;
+    object-fit: contain;
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    flex-shrink: 0;
+  }
+  .official-banner strong {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    display: block;
+  }
+  .official-banner span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.78);
+  }
+  .service-search-demo {
+    background: white;
+    border: 1px solid var(--fond-gris);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+  }
+  .service-search-demo label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    display: block;
+    margin-bottom: 14px;
+  }
+  .service-search-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+  .procedure-card {
+    background: white;
+    border: 1px solid var(--fond-gris);
+    border-left: 5px solid var(--vert-panaf);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .procedure-card h4 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .procedure-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .stepper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .step {
+    background: var(--fond-alt);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    border-top: 4px solid var(--bordure);
+    min-width: 0;
+  }
+  .step.active { border-top-color: var(--vert-panaf); background: var(--vert-pale); }
+  .step strong {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--texte-sombre);
+    margin-bottom: 4px;
+    overflow-wrap: anywhere;
+  }
+  .step span { font-size: 12px; color: var(--texte-moyen); overflow-wrap: anywhere; }
+  .template-preview {
+    border: 1px solid var(--fond-gris);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-top: 16px;
+    background: var(--fond-alt);
+  }
+  .template-preview-header {
+    height: 42px;
+    background: var(--bleu-gouvernement);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 12px;
+  }
+  .template-preview-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--jaune-panaf);
+  }
+  .template-preview-body {
+    padding: 14px;
+    display: grid;
+    gap: 8px;
+  }
+  .template-line {
+    height: 9px;
+    border-radius: var(--radius-full);
+    background: var(--bordure);
+  }
+  .template-line.short { width: 55%; }
+  .template-line.medium { width: 76%; }
+  .trust-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .trust-item {
+    background: white;
+    border: 1px solid var(--fond-gris);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    font-size: 13px;
+    color: var(--texte-moyen);
+  }
+  .trust-item strong {
+    display: block;
+    color: var(--texte-sombre);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 4px;
+  }
+
+  /* ─── NAVIGATION ─── */
+  .navbar-demo {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--fond-gris);
+  }
+  .navbar-demo-bar {
+    display: flex;
+    align-items: center;
+    padding: 14px 24px;
+    gap: 24px;
+    border-bottom: 1px solid var(--fond-gris);
+  }
+  .navbar-demo-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--vert-panaf);
+  }
+  .navbar-demo-logo-mini {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: white;
+    padding: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--jaune-panaf);
+  }
+  .navbar-demo-links {
+    display: flex;
+    gap: 20px;
+    margin-left: auto;
+  }
+  .navbar-demo-links a {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--texte-moyen);
+    text-decoration: none;
+    padding: 8px 4px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .navbar-demo-links a:hover { color: var(--vert-panaf); }
+  .navbar-demo-links a.active { color: var(--vert-panaf); border-bottom-color: var(--vert-panaf); font-weight: 600; }
+  .navbar-demo-actions { display: flex; gap: 10px; align-items: center; }
+  .navbar-demo-content {
+    padding: 60px 40px;
+    text-align: center;
+    color: var(--texte-clair);
+    font-size: 14px;
+    background: var(--fond-alt);
+  }
+
+  /* Footer Demo */
+  .footer-demo {
+    background: var(--bleu-gouvernement);
+    color: rgba(255,255,255,0.8);
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    margin-top: 24px;
+  }
+  .footer-demo-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .footer-demo-brand { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 18px; color: white; }
+  .footer-demo-links { display: flex; gap: 24px; }
+  .footer-demo-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  .footer-demo-links a:hover { color: var(--jaune-panaf); }
+  .footer-demo-bottom { text-align: center; font-size: 12px; }
+  .footer-demo-bottom strong { color: var(--jaune-panaf); }
+
+  /* ─── CODE ─── */
+  .code-block {
+    background: #1A2A3A;
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    overflow-x: auto;
+    margin-top: 24px;
+  }
+  .code-block pre {
+    color: #E0F2E6;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .code-block .comment { color: #7A8B9C; }
+  .code-block .property { color: #5CB8E6; }
+  .code-block .value-rouge { color: var(--rouge-clair); }
+  .code-block .value-jaune { color: var(--jaune-panaf); }
+  .code-block .value-vert { color: var(--vert-clair); }
+  .code-block .value-bleu { color: #6EB3E8; }
+  .code-block .value-text { color: #D4D8DC; }
+
+  /* ─── LOGO USAGE ─── */
+  .logo-usage-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .logo-usage-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--fond-gris);
+    text-align: center;
+  }
+  .logo-usage-preview {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: var(--radius-md);
+  }
+  .logo-usage-preview.light { background: var(--fond-alt); }
+  .logo-usage-preview.dark { background: var(--bleu-gouvernement); }
+  .logo-usage-preview.jaune { background: var(--jaune-pale); }
+  .logo-usage-preview.vert { background: var(--vert-pale); }
+  .logo-usage-preview.rouge { background: var(--rouge-pale); }
+  .logo-usage-label { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px; color: var(--texte-sombre); margin-bottom: 4px; }
+  .logo-usage-desc { font-size: 12px; color: var(--texte-clair); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--texte-sombre);
+    color: rgba(255,255,255,0.6);
+    padding: 50px 40px;
+    text-align: center;
+    margin-top: 60px;
+  }
+  footer strong { color: white; font-family: 'Poppins', sans-serif; }
+  footer .panaf-colors { display: inline-flex; gap: 4px; margin: 16px 0; }
+  footer .panaf-colors span { width: 40px; height: 8px; border-radius: 4px; }
+  footer .panaf-colors span:nth-child(1) { background: var(--rouge-panaf); }
+  footer .panaf-colors span:nth-child(2) { background: var(--jaune-panaf); }
+  footer .panaf-colors span:nth-child(3) { background: var(--vert-panaf); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .hero { padding: 50px 20px 60px; }
+    .hero-inner { flex-direction: column; text-align: center; gap: 28px; }
+    .hero-logo { width: 110px; height: 110px; }
+    .hero-text h1 { font-size: 32px; }
+    .container { padding: 0 20px; }
+    .typo-grid, .components-grid { grid-template-columns: 1fr; }
+    .plateformes-grid { grid-template-columns: 1fr; }
+    .color-meanings { grid-template-columns: 1fr; }
+    .logo-usage-grid { grid-template-columns: 1fr; }
+    .guideline-grid, .admin-components-grid, .template-grid, .accessibility-grid { grid-template-columns: 1fr; }
+    .service-search-row { grid-template-columns: 1fr; }
+    .stepper { grid-template-columns: 1fr; }
+    .official-banner { align-items: flex-start; }
+    .nav { padding: 0 20px; }
+    .color-row { grid-template-columns: 1fr 1fr; }
+    .navbar-demo-links { display: none; }
+    .footer-demo-top { flex-direction: column; gap: 20px; }
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  section { animation: fadeUp 0.5s ease-out; }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .loading { animation: pulse 1.5s infinite; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-logo-container">
+      <div class="hero-logo">
+        <img src="armoiries-1.png" alt="Armoiries du Burkina Faso">
+      </div>
+      <div class="hero-badge">Burkina Faso</div>
+    </div>
+    <div class="hero-text">
+      <h1>
+        <span>Charte Graphique Officielle</span>
+        Plateformes Numériques de l'Administration Burkinabè
+      </h1>
+      <p>Guide de référence visuelle pour les services numériques de l'État burkinabè — identité graphique, couleurs panafricaines, typographie, composants UI et règles d'interface.</p>
+      <div class="hero-motto">« La Patrie ou la mort, nous vaincrons ! »</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#couleurs" class="active">Couleurs</a>
+    <a href="#symbolique">Symbolique</a>
+    <a href="#typographie">Typographie</a>
+    <a href="#boutons">Boutons</a>
+    <a href="#composants">Composants</a>
+    <a href="#plateformes">Plateformes</a>
+    <a href="#espacement">Espacement</a>
+    <a href="#usages">Usages</a>
+    <a href="#metier">Métier public</a>
+    <a href="#confiance">Confiance</a>
+    <a href="#accessibilite">Accessibilité</a>
+    <a href="#navigation">Navigation</a>
+  </div>
+</nav>
+
+<!-- COULEURS -->
+<section id="couleurs">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">01</span> Palette de couleurs officielle</h2>
+      <p class="section-desc">Basée sur les couleurs du drapeau national (4 août 1984) : bande rouge (haut), étoile jaune (centre), bande verte (bas). Une palette qui incarne l'identité, la souveraineté et le progrès du Burkina Faso.</p>
+    </div>
+
+    <div class="color-groups">
+      <!-- Rouge -->
+      <div class="color-group primary">
+        <div class="color-group-label">Rouge — Révolution & Courage</div>
+        <div class="color-row">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #BA0510;"></div>
+            <div class="color-info">
+              <div class="color-name">Rouge Foncé</div>
+              <div class="color-hex">#BA0510</div>
+              <div class="color-rgb">RGB: 196, 43, 52</div>
+              <div class="color-usage">Accents graves, alertes critiques, symbolique révolutionnaire</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E30613;"></div>
+            <div class="color-info">
+              <div class="color-name">Rouge Panafricain</div>
+              <div class="color-hex">#E30613</div>
+              <div class="color-rgb">RGB: 239, 51, 64</div>
+              <div class="color-usage">Boutons d'action danger, erreurs, alertes</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #F04E5A;"></div>
+            <div class="color-info">
+              <div class="color-name">Rouge Clair</div>
+              <div class="color-hex">#F04E5A</div>
+              <div class="color-rgb">RGB: 240, 101, 111</div>
+              <div class="color-usage">Icônes, badges secondaires, hover states</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch bordered" style="background: #FDE0E2;"></div>
+            <div class="color-info">
+              <div class="color-name">Rouge Pâle</div>
+              <div class="color-hex">#FDE0E2</div>
+              <div class="color-rgb">RGB: 253, 232, 232</div>
+              <div class="color-usage">Fonds d'alerte danger, backgrounds</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jaune (Étoile du drapeau) -->
+      <div class="color-group secondary">
+        <div class="color-group-label">Jaune — Étoile nationale</div>
+        <div class="color-row">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E0C900;"></div>
+            <div class="color-info">
+              <div class="color-name">Jaune Étoile</div>
+              <div class="color-hex">#E0C900</div>
+              <div class="color-rgb">RGB: 230, 184, 0</div>
+              <div class="color-usage">Étoile centrale du drapeau, texte sur fond sombre</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #FFED00;"></div>
+            <div class="color-info">
+              <div class="color-name">Jaune Or (Étoile)</div>
+              <div class="color-hex">#FFED00</div>
+              <div class="color-rgb">RGB: 255, 205, 0</div>
+              <div class="color-usage">Logo officiel, étoiles, badges, highlights</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #FFF24D;"></div>
+            <div class="color-info">
+              <div class="color-name">Jaune Clair</div>
+              <div class="color-hex">#FFF24D</div>
+              <div class="color-rgb">RGB: 255, 224, 102</div>
+              <div class="color-usage">Effets lumineux, gradients, illustrations</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch bordered" style="background: #FFFDE0;"></div>
+            <div class="color-info">
+              <div class="color-name">Jaune Pâle</div>
+              <div class="color-hex">#FFFDE0</div>
+              <div class="color-rgb">RGB: 255, 249, 219</div>
+              <div class="color-usage">Fonds d'avertissement, backgrounds légers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vert -->
+      <div class="color-group tertiary">
+        <div class="color-group-label">Vert — Espoir & Richesses</div>
+        <div class="color-row">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #006A2F;"></div>
+            <div class="color-info">
+              <div class="color-name">Vert Foncé</div>
+              <div class="color-hex">#006A2F</div>
+              <div class="color-rgb">RGB: 0, 122, 46</div>
+              <div class="color-usage">Textes validés, actions principales sombres</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #00843B;"></div>
+            <div class="color-info">
+              <div class="color-name">Vert Panafricain</div>
+              <div class="color-hex">#00843B</div>
+              <div class="color-rgb">RGB: 0, 151, 57</div>
+              <div class="color-usage">CTA principaux, succès, validation, liens</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #33A35E;"></div>
+            <div class="color-info">
+              <div class="color-name">Vert Clair</div>
+              <div class="color-hex">#33A35E</div>
+              <div class="color-rgb">RGB: 76, 175, 80</div>
+              <div class="color-usage">Icônes de succès, indicateurs positifs</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch bordered" style="background: #E0F2E6;"></div>
+            <div class="color-info">
+              <div class="color-name">Vert Pâle</div>
+              <div class="color-hex">#E0F2E6</div>
+              <div class="color-rgb">RGB: 232, 245, 233</div>
+              <div class="color-usage">Fonds de succès, badges validés</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bleu Gouvernement -->
+      <div class="color-group neutral">
+        <div class="color-group-label">Bleu Gouvernement — Confiance & Souveraineté</div>
+        <div class="color-row">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #1A3A5C;"></div>
+            <div class="color-info">
+              <div class="color-name">Bleu Gouvernement</div>
+              <div class="color-hex">#1A3A5C</div>
+              <div class="color-rgb">RGB: 26, 58, 92</div>
+              <div class="color-usage">Headers, navigation, textes importants</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #2C5282;"></div>
+            <div class="color-info">
+              <div class="color-name">Bleu Clair Gouv.</div>
+              <div class="color-hex">#2C5282</div>
+              <div class="color-rgb">RGB: 44, 82, 130</div>
+              <div class="color-usage">Liens, actions secondaires, icônes</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E8F0F8;"></div>
+            <div class="color-info">
+              <div class="color-name">Bleu Information</div>
+              <div class="color-hex">#E8F0F8</div>
+              <div class="color-rgb">RGB: 232, 240, 248</div>
+              <div class="color-usage">Fonds d'information, badges info</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #4A5B6C;"></div>
+            <div class="color-info">
+              <div class="color-name">Neutre Texte</div>
+              <div class="color-hex">#4A5B6C</div>
+              <div class="color-rgb">RGB: 74, 91, 108</div>
+              <div class="color-usage">Corps de texte, sous-titres</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sémantiques -->
+      <div class="color-group semantic">
+        <div class="color-group-label">Couleurs sémantiques</div>
+        <div class="color-row">
+          <div class="color-card">
+            <div class="color-swatch" style="background: #00843B;"></div>
+            <div class="color-info">
+              <div class="color-name">Succès</div>
+              <div class="color-hex">#00843B</div>
+              <div class="color-usage">Actions réussies, validations, confirmations</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #F0A030;"></div>
+            <div class="color-info">
+              <div class="color-name">Avertissement</div>
+              <div class="color-hex">#F0A030</div>
+              <div class="color-usage">Alertes, mises en garde</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #E04545;"></div>
+            <div class="color-info">
+              <div class="color-name">Erreur</div>
+              <div class="color-hex">#E04545</div>
+              <div class="color-usage">Erreurs, suppressions, actions irréversibles</div>
+            </div>
+          </div>
+          <div class="color-card">
+            <div class="color-swatch" style="background: #1A3A5C;"></div>
+            <div class="color-info">
+              <div class="color-name">Information</div>
+              <div class="color-hex">#1A3A5C</div>
+              <div class="color-usage">Messages informatifs, guides, conseils</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Symbolique des couleurs -->
+    <div class="color-meanings">
+      <div class="color-meaning meaning-rouge">
+        <div class="color-meaning-icon" style="background: var(--rouge-pale); color: var(--rouge-panaf);">&#9644;</div>
+        <h4 style="color: var(--rouge-fonce);">Bande Rouge (haut)</h4>
+        <p>Symbole de la Révolution de 1984 et du sang versé pour la patrie. Représente le courage et la détermination du peuple burkinabè.</p>
+      </div>
+      <div class="color-meaning meaning-jaune">
+        <div class="color-meaning-icon" style="background: var(--jaune-pale); color: var(--jaune-fonce);">&#9733;</div>
+        <h4 style="color: var(--jaune-fonce);">Étoile Jaune</h4>
+        <p>L'étoile qui guide le peuple. Symbolise la lumière de la révolution, la sagesse et les richesses minières du pays.</p>
+      </div>
+      <div class="color-meaning meaning-vert">
+        <div class="color-meaning-icon" style="background: var(--vert-pale); color: var(--vert-panaf);">&#9645;</div>
+        <h4 style="color: var(--vert-fonce);">Bande Verte (bas)</h4>
+        <p>L'espoir et l'abondance agricole. Représente les terres fertiles, la nature et l'aspiration à l'autosuffisance alimentaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- SYMBOLIQUE & LOGO -->
+<section id="symbolique">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">02</span> Drapeau &amp; Armoiries nationales</h2>
+      <p class="section-desc">Les symboles officiels de la Burkina Faso : le drapeau adopté le 4 août 1984 (bande rouge haut, verte bas, étoile jaune) et les armoiries nationales qui figurent sur tous les documents officiels de l'État.</p>
+    </div>
+
+    <!-- ARMOIRIES SHOWCASE -->
+    <div style="display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center;background:white;border-radius:var(--radius-xl);padding:40px;box-shadow:var(--shadow-md);border:1px solid var(--fond-gris);margin-bottom:40px;">
+      <div style="text-align:center;">
+        <div style="background:linear-gradient(135deg,var(--fond-creme),var(--fond-gris));border-radius:var(--radius-lg);padding:32px;border:2px solid var(--bordure);display:inline-flex;flex-direction:column;align-items:center;gap:16px;">
+          <img src="armoiries-1.png" alt="Armoiries du Burkina Faso" style="width:180px;height:auto;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.15));">
+          <span style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;color:var(--texte-clair);">Armoiries officielles</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Poppins',sans-serif;font-weight:700;font-size:22px;color:var(--texte-sombre);margin-bottom:12px;">Les Armoiries du Burkina Faso</h3>
+        <p style="color:var(--texte-moyen);font-size:15px;line-height:1.7;margin-bottom:20px;">Les armoiries nationales constituent l'emblème officiel de l'État burkinabè. Elles sont utilisées sur tous les documents administratifs, sceaux officiels, en-têtes de correspondance gouvernementale et symboles d'autorité publique.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span style="width:28px;height:28px;background:var(--vert-pale);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--vert-panaf);font-size:14px;flex-shrink:0;">&#10003;</span>
+            <span style="font-size:13px;color:var(--texte-moyen);">Obligatoires sur les en-têtes de documents officiels de l'État</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span style="width:28px;height:28px;background:var(--vert-pale);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--vert-panaf);font-size:14px;flex-shrink:0;">&#10003;</span>
+            <span style="font-size:13px;color:var(--texte-moyen);">À afficher sur les plateformes numériques gouvernementales</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span style="width:28px;height:28px;background:var(--vert-pale);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--vert-panaf);font-size:14px;flex-shrink:0;">&#10003;</span>
+            <span style="font-size:13px;color:var(--texte-moyen);">Format minimum recommandé : 60×60px (numérique), 2cm (imprimé)</span>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span style="width:28px;height:28px;background:var(--danger-bg);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--danger);font-size:14px;flex-shrink:0;">&#10007;</span>
+            <span style="font-size:13px;color:var(--texte-moyen);">Ne pas modifier, recolorer, déformer ou superposer du texte sur les armoiries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOGO USAGE CARDS -->
+    <div class="logo-usage-grid">
+      <div class="logo-usage-card">
+        <div class="logo-usage-preview light">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <img src="armoiries-1.png" alt="Armoiries" style="width:50px;height:50px;object-fit:contain;">
+            <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:var(--bleu-gouvernement);">Burkina<br>Faso</span>
+          </div>
+        </div>
+        <div class="logo-usage-label">Sur fond clair</div>
+        <div class="logo-usage-desc">Recommandé pour en-têtes de pages, documents officiels</div>
+      </div>
+      <div class="logo-usage-card">
+        <div class="logo-usage-preview dark">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="background:white;border-radius:8px;padding:4px;display:inline-flex;align-items:center;justify-content:center;">
+              <img src="armoiries-1.png" alt="Armoiries" style="width:42px;height:42px;object-fit:contain;">
+            </div>
+            <span style="font-family:'Poppins',sans-serif;font-weight:700;font-size:14px;color:white;">Burkina<br>Faso</span>
+          </div>
+        </div>
+        <div class="logo-usage-label">Sur fond sombre</div>
+        <div class="logo-usage-desc">Armoiries sur fond blanc pour barres de navigation, pieds de page</div>
+      </div>
+      <div class="logo-usage-card">
+        <div class="logo-usage-preview jaune" style="justify-content:center;">
+          <img src="armoiries-1.png" alt="Armoiries" style="width:70px;height:70px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.15));">
+        </div>
+        <div class="logo-usage-label">Version emblème seul</div>
+        <div class="logo-usage-desc">Armoiries isolées pour sceaux, en-têtes de formulaires officiels</div>
+      </div>
+    </div>
+
+    <div style="background:var(--fond-alt);border-radius:var(--radius-lg);padding:24px;margin-top:32px;border:1px solid var(--fond-gris);">
+      <div class="comp-label">Règles d'utilisation du logo</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:16px;">
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--vert-panaf);font-size:20px;">&#10003;</span>
+          <div>
+            <strong style="font-family:'Poppins',sans-serif;font-size:14px;color:var(--texte-sombre);">Espaces minimaux</strong>
+            <p style="font-size:12px;color:var(--texte-moyen);margin-top:4px;">Respecter un espace équivalent à la hauteur de l'étoile autour du logo</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--vert-panaf);font-size:20px;">&#10003;</span>
+          <div>
+            <strong style="font-family:'Poppins',sans-serif;font-size:14px;color:var(--texte-sombre);">Contraste requis</strong>
+            <p style="font-size:12px;color:var(--texte-moyen);margin-top:4px;">Assurer un contraste suffisant entre le logo et l'arrière-plan</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;">
+          <span style="color:var(--danger);font-size:20px;">&#10007;</span>
+          <div>
+            <strong style="font-family:'Poppins',sans-serif;font-size:14px;color:var(--texte-sombre);">Interdictions</strong>
+            <p style="font-size:12px;color:var(--texte-moyen);margin-top:4px;">Ne pas déformer, modifier les couleurs ou ajouter d'effets non autorisés</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- TYPOGRAPHIE -->
+<section id="typographie">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">03</span> Typographie</h2>
+      <p class="section-desc">Deux familles complémentaires pour une hiérarchie visuelle claire : Poppins pour les titres et Inter pour le corps de texte.</p>
+    </div>
+
+    <div class="typo-grid">
+      <div class="typo-card header">
+        <div class="typo-label">Police des Titres — Poppins</div>
+        <div class="typo-sample-poppins">La Patrie ou la Mort</div>
+        <div class="typo-weights">
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:300;">Aa</div>
+            <div class="meta">Light 300</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:400;">Aa</div>
+            <div class="meta">Regular 400</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:500;">Aa</div>
+            <div class="meta">Medium 500</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:600;">Aa</div>
+            <div class="meta">SemiBold 600</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:700;">Aa</div>
+            <div class="meta">Bold 700</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Poppins;font-weight:800;">Aa</div>
+            <div class="meta">ExtraBold 800</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="typo-card body-card">
+        <div class="typo-label">Police du Corps — Inter</div>
+        <div class="typo-sample-inter">La Patrie ou la Mort, nous vaincrons</div>
+        <p style="font-size:14px;color:var(--texte-moyen);margin-top:16px;line-height:1.8;">
+          Le Service d'Information du Gouvernement (SIG) assure la diffusion de l'information officielle. Cette police offre une excellente lisibilité sur tous les écrans.
+        </p>
+        <div class="typo-weights">
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Inter;font-weight:400;">Aa</div>
+            <div class="meta">Regular 400</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Inter;font-weight:500;">Aa</div>
+            <div class="meta">Medium 500</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Inter;font-weight:600;">Aa</div>
+            <div class="meta">SemiBold 600</div>
+          </div>
+          <div class="typo-weight">
+            <div class="letter" style="font-family:Inter;font-weight:700;">Aa</div>
+            <div class="meta">Bold 700</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="typo-card full">
+        <div class="typo-label">Échelle typographique</div>
+        <div class="type-scale">
+          <div class="type-scale-item">
+            <span class="size-label">H1 — 42px</span>
+            <span class="size-sample" style="font-size:42px;">Service Public Numérique</span>
+            <span class="size-meta">Poppins Bold</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">H2 — 32px</span>
+            <span class="size-sample" style="font-size:32px;">Plateformes de l'État</span>
+            <span class="size-meta">Poppins Bold</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">H3 — 24px</span>
+            <span class="size-sample" style="font-size:24px;">Citoyenneté numérique</span>
+            <span class="size-meta">Poppins SemiBold</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">H4 — 20px</span>
+            <span class="size-sample" style="font-size:20px;">Démarches administratives</span>
+            <span class="size-meta">Poppins SemiBold</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">H5 — 18px</span>
+            <span class="size-sample" style="font-size:18px;">Portail eBurkina</span>
+            <span class="size-meta">Poppins Medium</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">Body — 15px</span>
+            <span class="size-sample" style="font-size:15px;font-family:'Inter';font-weight:400;color:var(--texte-moyen);">Accédez à tous les services administratifs du Burkina Faso en ligne, 24h/24.</span>
+            <span class="size-meta">Inter Regular</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">Small — 13px</span>
+            <span class="size-sample" style="font-size:13px;font-family:'Inter';font-weight:400;color:var(--texte-clair);">© 2026 Burkina Faso — Tous droits réservés</span>
+            <span class="size-meta">Inter Regular</span>
+          </div>
+          <div class="type-scale-item">
+            <span class="size-label">Caption — 11px</span>
+            <span class="size-sample" style="font-size:11px;font-family:'Inter';font-weight:500;color:var(--texte-clair);">MIS EN LIGNE LE 15 AVRIL 2026</span>
+            <span class="size-meta">Inter Medium Uppercase</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- BOUTONS -->
+<section id="boutons">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">04</span> Boutons & Actions</h2>
+      <p class="section-desc">Styles de boutons cohérents reflétant l'identité panafricaine. Le vert est prioritaire pour les actions principales.</p>
+    </div>
+
+    <div class="buttons-section">
+      <div class="btn-card">
+        <div class="btn-card-label">Primaire — Vert</div>
+        <button class="btn btn-primary">Accéder au service</button>
+        <button class="btn btn-primary btn-sm">Petit format</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Secondaire — Jaune</div>
+        <button class="btn btn-secondary">En savoir plus</button>
+        <button class="btn btn-secondary btn-sm">Petit format</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Tertiaire — Rouge</div>
+        <button class="btn btn-tertiary">Signaler un problème</button>
+        <button class="btn btn-tertiary btn-sm">Petit format</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Outline — Vert</div>
+        <button class="btn btn-outline">Annuler</button>
+        <button class="btn btn-outline btn-sm">Fermer</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Outline — Jaune</div>
+        <button class="btn btn-outline-jaune">Consulter</button>
+        <button class="btn btn-outline-jaune btn-sm">Voir</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Ghost — Vert</div>
+        <button class="btn btn-ghost">Réinitialiser</button>
+        <button class="btn btn-ghost btn-sm">Effacer</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Danger</div>
+        <button class="btn btn-danger">Supprimer le dossier</button>
+        <button class="btn btn-danger btn-sm">Annuler</button>
+      </div>
+      <div class="btn-card">
+        <div class="btn-card-label">Tailles spéciales</div>
+        <button class="btn btn-primary btn-lg">Créer mon compte</button>
+        <button class="btn btn-icon vert">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- COMPOSANTS -->
+<section id="composants">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">05</span> Composants UI</h2>
+      <p class="section-desc">Bibliothèque de composants réutilisables pour construire des interfaces cohérentes et accessibles.</p>
+    </div>
+
+    <div class="components-grid">
+      <!-- Formulaires -->
+      <div class="comp-card">
+        <div class="comp-label">Champs de formulaire</div>
+        <div class="input-group">
+          <label>Numéro d'identification national</label>
+          <input type="text" class="input-field" placeholder="Ex: 12345678901234">
+        </div>
+        <div class="input-group">
+          <label>Adresse email</label>
+          <input type="email" class="input-field" placeholder="prenom.nom@gouv.bf">
+        </div>
+        <div class="input-group">
+          <label>Mot de passe</label>
+          <input type="password" class="input-field" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;">
+        </div>
+        <div class="input-group">
+          <label>Sélectionnez votre région</label>
+          <select class="input-field select-field">
+            <option>Choisir une région...</option>
+            <option>Centre (Ouagadougou)</option>
+            <option>Houet (Bobo-Dioulasso)</option>
+            <option>Kadiogo</option>
+            <option>Bam</option>
+            <option>Autres régions...</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label>Message (optionnel)</label>
+          <textarea class="input-field" rows="3" placeholder="Votre message ou commentaire..."></textarea>
+        </div>
+      </div>
+
+      <!-- Badges & États -->
+      <div class="comp-card">
+        <div class="comp-label">Badges & Étiquettes</div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;">
+          <span class="badge badge-vert">&#10003; Validé</span>
+          <span class="badge badge-jaune">&#9203; En cours</span>
+          <span class="badge badge-rouge">&#10007; Rejeté</span>
+          <span class="badge badge-bleu">&#9432; Information</span>
+          <span class="badge badge-warning">&#9888; Attention</span>
+          <span class="badge badge-danger">&#9888; Urgent</span>
+        </div>
+
+        <div class="comp-label" style="margin-top:20px;">États des champs</div>
+        <div class="input-group">
+          <label>Champ normal</label>
+          <input type="text" class="input-field" placeholder="Entrez une valeur">
+        </div>
+        <div class="input-group">
+          <label>Champ validé</label>
+          <input type="text" class="input-field success" value="Données conformes">
+        </div>
+        <div class="input-group">
+          <label>Champ en erreur</label>
+          <input type="text" class="input-field error" placeholder="Format incorrect">
+        </div>
+
+        <div class="comp-label" style="margin-top:20px;">Cases à cocher</div>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" class="checkbox-input" checked>
+            <span class="checkbox-label">J'accepte les conditions d'utilisation</span>
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" class="checkbox-input">
+            <span class="checkbox-label">S'inscrire à la newsletter gouvernementale</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Alertes -->
+      <div class="comp-card full">
+        <div class="comp-label">Alertes & Notifications</div>
+        <div class="alert alert-success">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span class="alert-content"><strong>Succès :</strong> Votre demande a été enregistrée avec succès. Vous recevrez un SMS de confirmation.</span>
+        </div>
+        <div class="alert alert-info">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span class="alert-content"><strong>Information :</strong> La plateforme eBurkina est disponible 24h/24 pour toutes vos démarches.</span>
+        </div>
+        <div class="alert alert-warning">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span class="alert-content"><strong>Attention :</strong> Le délai de traitement est de 5 à 10 jours ouvrés.</span>
+        </div>
+        <div class="alert alert-danger">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span class="alert-content"><strong>Erreur :</strong> Impossible de traiter votre demande. Veuillez réessayer ou contacter le support.</span>
+        </div>
+      </div>
+
+      <!-- Cartes -->
+      <div class="comp-card full">
+        <div class="comp-label">Exemples de cartes</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+          <div class="demo-card">
+            <div class="demo-card-header">
+              <div class="demo-card-avatar">MO</div>
+            </div>
+            <div class="demo-card-body">
+              <h4>Mamadou Ouedraogo</h4>
+              <p>Agent de l'État — Ministère des Finances</p>
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-vert">Actif</span>
+                <span class="badge badge-bleu">Grade A</span>
+              </div>
+            </div>
+            <div class="demo-card-footer">
+              <button class="btn btn-primary btn-sm" style="flex:1;">Consulter</button>
+              <button class="btn btn-outline btn-sm">Modifier</button>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header jaune">
+              <div class="demo-card-avatar" style="color:var(--jaune-fonce);">AF</div>
+            </div>
+            <div class="demo-card-body">
+              <h4>Aïcha FON</h4>
+              <p>Contribuable — IFU : 123456789012</p>
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-jaune">En cours</span>
+                <span class="badge badge-vert">Conforme</span>
+              </div>
+            </div>
+            <div class="demo-card-footer">
+              <button class="btn btn-secondary btn-sm" style="flex:1;">Détails</button>
+              <button class="btn btn-ghost-jaune btn-sm">PDF</button>
+            </div>
+          </div>
+          <div class="demo-card">
+            <div class="demo-card-header rouge">
+              <div class="demo-card-avatar" style="color:var(--rouge-panaf);">SK</div>
+            </div>
+            <div class="demo-card-body">
+              <h4>Seydou Kaboré</h4>
+              <p>Demande de passeport — N° 2026/0452</p>
+              <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+                <span class="badge badge-rouge">En attente</span>
+                <span class="badge badge-warning">Documents</span>
+              </div>
+            </div>
+            <div class="demo-card-footer">
+              <button class="btn btn-tertiary btn-sm" style="flex:1;">Suivre</button>
+              <button class="btn btn-outline btn-sm">Info</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- PLATEFORMES -->
+<section id="plateformes">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">06</span> Plateformes numériques</h2>
+      <p class="section-desc">L'écosystème digital de l'administration burkinabè. Chaque plateforme respecte cette charte graphique pour une expérience unifiée.</p>
+    </div>
+
+    <div class="plateformes-intro">
+      <h3>&#9881; Écosystème eBurkina</h3>
+      <p>Le portail central eBurkina (eburkina.com) agrège l'ensemble des services numériques de l'État. Les citoyens peuvent accéder à plus de 50 démarches administratives en ligne, de la demande de documents d'identité à la consultation des avis d'imposition.</p>
+    </div>
+
+    <div class="plateformes-grid">
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon vert">&#128273;</div>
+          <div>
+            <div class="plateforme-category">Fiscalité</div>
+            <div class="plateforme-title">eSINTAX</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Portail officiel de la DGI pour la télédéclaration et le télépaiement des impôts. Accessible aux entreprises et particuliers.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-vert">DGI</span>
+            <span class="badge badge-bleu">Fiscalité</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon jaune">&#128176;</div>
+          <div>
+            <div class="plateforme-category">Paiement</div>
+            <div class="plateforme-title">FASO ARZEKA</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Plateforme nationale de paiement numérique pour régler les dettes envers les administrations publiques via mobile money.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-jaune">MEF</span>
+            <span class="badge badge-vert">Paiement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon vert">&#127979;</div>
+          <div>
+            <div class="plateforme-category">Fonction publique</div>
+            <div class="plateforme-title">e-Concours</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Inscription en ligne aux concours directs de la fonction publique. Consultation des calendriers et résultats.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-vert">FP</span>
+            <span class="badge badge-bleu">Recrutement</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon rouge">&#127757;</div>
+          <div>
+            <div class="plateforme-category">Immigration</div>
+            <div class="plateforme-title">e-Visa Burkina</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Demande de visa en ligne pour le Burkina Faso. Formulaire simplifié, paiement sécurisé et suivi du dossier.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-rouge">MAE</span>
+            <span class="badge badge-bleu">Voyage</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon bleu">&#127968;</div>
+          <div>
+            <div class="plateforme-category">Foncier</div>
+            <div class="plateforme-title">SyC@D / SIF</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Système intégré du cadastre et des domaines. Demande de titres fonciers, attestations et extraits cadastraux.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-bleu">DGI</span>
+            <span class="badge badge-vert">Foncier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon vert">&#128196;</div>
+          <div>
+            <div class="plateforme-category">Administration</div>
+            <div class="plateforme-title">JOBF</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Journal Officiel du Burkina Faso digitalisé. Publication et consultation des textes réglementaires.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-vert">SGG</span>
+            <span class="badge badge-bleu">Officiel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon jaune">&#128220;</div>
+          <div>
+            <div class="plateforme-category">Juridique</div>
+            <div class="plateforme-title">Legiburkina</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Base de données officielle du droit burkinabè. Accès aux codes, lois, décrets et jurisprudence.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-jaune">SGG</span>
+            <span class="badge badge-bleu">Droit</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon vert">&#128104;</div>
+          <div>
+            <div class="plateforme-category">Ressources humaines</div>
+            <div class="plateforme-title">ALIAS</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Système d'Accès en Ligne aux Informations Administratives et Salariales des agents de l'État.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-vert">MFP</span>
+            <span class="badge badge-bleu">RH</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plateforme-card">
+        <div class="plateforme-header">
+          <div class="plateforme-icon bleu">&#128450;</div>
+          <div>
+            <div class="plateforme-category">Information</div>
+            <div class="plateforme-title">SIG Burkina</div>
+          </div>
+        </div>
+        <div class="plateforme-body">
+          <p class="plateforme-desc">Service d'Information du Gouvernement. Actualités officielles, comptes rendus du Conseil des ministros.</p>
+          <div class="plateforme-tags">
+            <span class="badge badge-bleu">SIG</span>
+            <span class="badge badge-vert">Actualités</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ESPACEMENT -->
+<section id="espacement">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">07</span> Espacement & Effets</h2>
+      <p class="section-desc">Système de spacing basé sur des multiples de 4px pour une cohérence visuelle et un rythme harmonieux.</p>
+    </div>
+
+    <div class="components-grid">
+      <div class="comp-card">
+        <div class="comp-label">Espacement (multiples de 4px)</div>
+        <div class="spacing-grid">
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:4px;height:4px;"></div>
+            <div class="spacing-val">4px</div>
+            <div class="spacing-name">2xs</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:8px;height:8px;"></div>
+            <div class="spacing-val">8px</div>
+            <div class="spacing-name">xs</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:12px;height:12px;"></div>
+            <div class="spacing-val">12px</div>
+            <div class="spacing-name">sm</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:16px;height:16px;"></div>
+            <div class="spacing-val">16px</div>
+            <div class="spacing-name">md</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:24px;height:24px;"></div>
+            <div class="spacing-val">24px</div>
+            <div class="spacing-name">lg</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:32px;height:32px;"></div>
+            <div class="spacing-val">32px</div>
+            <div class="spacing-name">xl</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:48px;height:48px;"></div>
+            <div class="spacing-val">48px</div>
+            <div class="spacing-name">2xl</div>
+          </div>
+          <div class="spacing-item">
+            <div class="spacing-box" style="width:64px;height:64px;"></div>
+            <div class="spacing-val">64px</div>
+            <div class="spacing-name">3xl</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-label">Rayons de bordure</div>
+        <div class="radius-grid" style="margin-bottom:32px;">
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:4px;"></div>
+            <div class="radius-value">4px</div>
+            <div class="radius-label">Extra Small</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:6px;"></div>
+            <div class="radius-value">6px</div>
+            <div class="radius-label">Small</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:10px;"></div>
+            <div class="radius-value">10px</div>
+            <div class="radius-label">Medium</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:16px;"></div>
+            <div class="radius-value">16px</div>
+            <div class="radius-label">Large</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:24px;"></div>
+            <div class="radius-value">24px</div>
+            <div class="radius-label">XL</div>
+          </div>
+          <div class="radius-item">
+            <div class="radius-box" style="border-radius:9999px;"></div>
+            <div class="radius-value">9999px</div>
+            <div class="radius-label">Pill</div>
+          </div>
+        </div>
+
+        <div class="comp-label">Ombres</div>
+        <div class="shadow-grid">
+          <div class="shadow-item">
+            <div class="shadow-box" style="box-shadow:var(--shadow-xs);"></div>
+            <div class="shadow-value">XS</div>
+            <div class="shadow-label">Légère</div>
+          </div>
+          <div class="shadow-item">
+            <div class="shadow-box" style="box-shadow:var(--shadow-sm);"></div>
+            <div class="shadow-value">SM</div>
+            <div class="shadow-label">Cartes</div>
+          </div>
+          <div class="shadow-item">
+            <div class="shadow-box" style="box-shadow:var(--shadow-md);"></div>
+            <div class="shadow-value">MD</div>
+            <div class="shadow-label">Modales</div>
+          </div>
+          <div class="shadow-item">
+            <div class="shadow-box" style="box-shadow:var(--shadow-lg);"></div>
+            <div class="shadow-value">LG</div>
+            <div class="shadow-label">Navigation</div>
+          </div>
+          <div class="shadow-item">
+            <div class="shadow-box" style="box-shadow:var(--shadow-xl);"></div>
+            <div class="shadow-value">XL</div>
+            <div class="shadow-label">Hero</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card full">
+        <div class="comp-label">Icônes de la plateforme</div>
+        <div class="icon-grid">
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Accueil</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <span>Document</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Temps</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <span>Message</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span>Recherche</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>Sécurité</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span>Validé</span>
+          </div>
+          <div class="icon-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Paramètres</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- USAGES INSTITUTIONNELS -->
+<section id="usages">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">08</span> Usages institutionnels</h2>
+      <p class="section-desc">Règles de composition pour garder une identité publique sobre, reconnaissable et compatible avec les portails gouvernementaux, les plateformes de démarches et les sites ministériels.</p>
+    </div>
+
+    <div class="guideline-grid">
+      <div class="guideline-card">
+        <h3>Hiérarchie des couleurs</h3>
+        <p>Le bleu gouvernement structure les interfaces. Le vert sert aux actions principales. Le rouge est réservé aux erreurs, urgences et actions destructives. Le jaune met en valeur sans porter de longs textes.</p>
+        <ul class="usage-list">
+          <li>Éviter les aplats rouge, jaune et vert simultanés sur une même zone.</li>
+          <li>Utiliser le blanc et les gris clairs pour les fonds de lecture.</li>
+          <li>Réserver les couleurs nationales aux repères importants.</li>
+        </ul>
+      </div>
+      <div class="guideline-card">
+        <h3>Ton administratif</h3>
+        <p>Les interfaces doivent être directes, utiles et rassurantes. Les intitulés décrivent l’action réelle de l’usager et les messages indiquent clairement la suite attendue.</p>
+        <ul class="usage-list">
+          <li>Préférer “Déposer une demande” à “Commencer”.</li>
+          <li>Afficher le coût, le délai et les pièces avant le formulaire.</li>
+          <li>Éviter les slogans dans les parcours de démarches.</li>
+        </ul>
+      </div>
+      <div class="guideline-card">
+        <h3>Reconnaissance officielle</h3>
+        <p>Chaque site ou service doit permettre d’identifier immédiatement l’administration émettrice, le domaine officiel, les armoiries, les contacts et les mentions légales.</p>
+        <ul class="usage-list">
+          <li>En-tête institutionnel constant sur toutes les pages sensibles.</li>
+          <li>Footer obligatoire avec contacts, accessibilité et plan du site.</li>
+          <li>Libellé du ministère ou de la direction visible au premier écran.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- COMPOSANTS METIER PUBLIC -->
+<section id="metier">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">09</span> Composants métier public</h2>
+      <p class="section-desc">Composants communs aux démarches administratives : recherche, fiches de procédure, pièces à fournir, suivi de dossier et événements de vie.</p>
+    </div>
+
+    <div class="service-search-demo">
+      <label for="demo-search">Rechercher une démarche administrative</label>
+      <div class="service-search-row">
+        <input id="demo-search" class="input-field" type="search" value="Demande de certificat de nationalité" aria-label="Rechercher une démarche administrative">
+        <button class="btn btn-primary">Rechercher</button>
+      </div>
+      <div class="procedure-meta">
+        <span class="badge badge-bleu">Citoyen</span>
+        <span class="badge badge-vert">Service en ligne</span>
+        <span class="badge badge-jaune">Délai affiché</span>
+      </div>
+    </div>
+
+    <div class="admin-components-grid">
+      <div class="admin-component">
+        <h3>Carte de démarche</h3>
+        <div class="procedure-card">
+          <h4>Demander un casier judiciaire</h4>
+          <p>Résumé court de la démarche, public concerné, administration responsable et bouton d’accès au service.</p>
+          <div class="procedure-meta">
+            <span class="badge badge-bleu">Justice</span>
+            <span class="badge badge-vert">En ligne</span>
+            <span class="badge badge-warning">Paiement possible</span>
+          </div>
+        </div>
+      </div>
+      <div class="admin-component">
+        <h3>Pièces à fournir</h3>
+        <p>Bloc standard listant les documents requis, leur format, les exigences de validité et les cas particuliers avant que l’usager démarre le formulaire.</p>
+        <ul class="usage-list">
+          <li>CNIB ou passeport en cours de validité.</li>
+          <li>Justificatif de résidence si demandé.</li>
+          <li>Reçu ou référence de paiement si applicable.</li>
+        </ul>
+      </div>
+      <div class="admin-component wide">
+        <h3>Suivi de dossier</h3>
+        <p>Le statut doit être lisible sans code interne : reçu, en cours d’instruction, complément demandé, validé, rejeté ou disponible au retrait.</p>
+        <div class="stepper">
+          <div class="step active"><strong>1. Dépôt</strong><span>Dossier reçu</span></div>
+          <div class="step active"><strong>2. Contrôle</strong><span>Vérification</span></div>
+          <div class="step"><strong>3. Décision</strong><span>Instruction</span></div>
+          <div class="step"><strong>4. Retrait</strong><span>Document prêt</span></div>
+        </div>
+      </div>
+      <div class="admin-component">
+        <h3>Événements de vie</h3>
+        <p>Regrouper les démarches par situations concrètes : naissance, études, emploi public, création d’entreprise, impôts, voyage, retraite ou décès.</p>
+        <div class="procedure-meta">
+          <span class="badge badge-bleu">Naissance</span>
+          <span class="badge badge-bleu">Emploi</span>
+          <span class="badge badge-bleu">Entreprise</span>
+          <span class="badge badge-bleu">Voyage</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- CONFIANCE NUMERIQUE -->
+<section id="confiance">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">10</span> Confiance numérique</h2>
+      <p class="section-desc">Éléments obligatoires pour aider l’usager à reconnaître un vrai service public et réduire le risque de faux sites, faux formulaires ou paiements frauduleux.</p>
+    </div>
+
+    <div class="official-banner">
+      <img src="armoiries-1.png" alt="Armoiries du Burkina Faso">
+      <div>
+        <strong>Site officiel de l’administration publique du Burkina Faso</strong>
+        <span>Vérifiez toujours le domaine officiel, l’institution responsable et les contacts publiés avant de déposer une demande ou d’effectuer un paiement.</span>
+      </div>
+    </div>
+
+    <div class="trust-checklist">
+      <div class="trust-item"><strong>Domaine officiel</strong>Utiliser prioritairement les domaines gouvernementaux reconnus et afficher le domaine dans les communications.</div>
+      <div class="trust-item"><strong>Identité de l’émetteur</strong>Afficher le ministère, la direction, le service responsable et les armoiries dans l’en-tête.</div>
+      <div class="trust-item"><strong>Paiement sécurisé</strong>Afficher le montant, les frais, le canal autorisé et le reçu officiel avant confirmation.</div>
+      <div class="trust-item"><strong>Contact vérifiable</strong>Présenter téléphone, courriel, adresse physique et horaires de service dans le footer ou la fiche démarche.</div>
+      <div class="trust-item"><strong>Mentions légales</strong>Inclure confidentialité, accessibilité, conditions d’utilisation et gestion des données personnelles.</div>
+      <div class="trust-item"><strong>Signalement</strong>Prévoir un lien “Signaler un faux site ou une fraude” sur les portails de services.</div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- ACCESSIBILITE ET MODELES -->
+<section id="accessibilite">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">11</span> Accessibilité & modèles</h2>
+      <p class="section-desc">Standards de lisibilité et gabarits d’écrans pour les plateformes publiques : portail, fiche démarche, formulaire, tableau de bord et page institutionnelle.</p>
+    </div>
+
+    <div class="accessibility-grid" style="margin-bottom:24px;">
+      <div class="accessibility-card">
+        <h3>Lisibilité</h3>
+        <p>Texte courant de 15px minimum, interligne confortable, lignes courtes, contrastes forts et langage clair. Les textes sur jaune doivent rester courts et utiliser une couleur sombre.</p>
+      </div>
+      <div class="accessibility-card">
+        <h3>Navigation clavier</h3>
+        <p>Tous les champs, liens, boutons, menus et modales doivent être accessibles au clavier avec un focus visible vert ou bleu.</p>
+      </div>
+      <div class="accessibility-card">
+        <h3>Mobile et faible débit</h3>
+        <p>Les démarches doivent fonctionner sur écran étroit, avec images optimisées, pages légères, labels persistants et sauvegarde de progression pour formulaires longs.</p>
+      </div>
+    </div>
+
+    <div class="template-grid">
+      <div class="template-card">
+        <h3>Portail de services</h3>
+        <p>Recherche centrale, démarches populaires, thématiques, événements de vie, actualités et accès au compte usager.</p>
+        <div class="template-preview"><div class="template-preview-header"><span class="template-preview-dot"></span><span class="template-preview-dot"></span></div><div class="template-preview-body"><div class="template-line medium"></div><div class="template-line"></div><div class="template-line short"></div></div></div>
+      </div>
+      <div class="template-card">
+        <h3>Fiche démarche</h3>
+        <p>Résumé, administration responsable, coût, délai, pièces à fournir, procédure, canaux disponibles et bouton d’action.</p>
+        <div class="template-preview"><div class="template-preview-header"><span class="template-preview-dot"></span></div><div class="template-preview-body"><div class="template-line"></div><div class="template-line medium"></div><div class="template-line medium"></div></div></div>
+      </div>
+      <div class="template-card">
+        <h3>Formulaire long</h3>
+        <p>Étapes numérotées, sauvegarde, validation progressive, résumé final, consentement et accusé de dépôt téléchargeable.</p>
+        <div class="template-preview"><div class="template-preview-header"><span class="template-preview-dot"></span></div><div class="template-preview-body"><div class="template-line short"></div><div class="template-line"></div><div class="template-line"></div></div></div>
+      </div>
+      <div class="template-card">
+        <h3>Tableau de bord usager</h3>
+        <p>Liste des demandes, statuts compréhensibles, notifications, paiements, documents disponibles et historique des échanges.</p>
+        <div class="template-preview"><div class="template-preview-header"><span class="template-preview-dot"></span></div><div class="template-preview-body"><div class="template-line"></div><div class="template-line"></div><div class="template-line short"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="divider"></div></div>
+
+<!-- NAVIGATION -->
+<section id="navigation">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title"><span class="num">12</span> Navigation & Templates</h2>
+      <p class="section-desc">Modèles de navigation et de pied de page cohérents pour toutes les plateformes gouvernementales.</p>
+    </div>
+
+    <!-- Navbar Demo -->
+    <div class="navbar-demo">
+      <div class="navbar-demo-bar">
+        <div class="navbar-demo-brand">
+          <div class="navbar-demo-logo-mini">
+            <img src="armoiries-1.png" alt="Armoiries" style="width:100%;height:100%;object-fit:contain;">
+          </div>
+          <span>Gouvernement BF</span>
+        </div>
+        <div class="navbar-demo-links">
+          <a href="#" class="active">Accueil</a>
+          <a href="#">Services</a>
+          <a href="#">Citoyens</a>
+          <a href="#">Entreprises</a>
+          <a href="#">Actualités</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="navbar-demo-actions">
+          <button class="btn btn-outline btn-sm">Mon compte</button>
+          <button class="btn btn-primary btn-sm">Connexion</button>
+        </div>
+      </div>
+      <div class="navbar-demo-content">
+        <p style="margin-bottom:16px;font-size:16px;color:var(--texte-moyen);">Contenu principal de la page</p>
+        <p style="font-size:13px;">Breadcrumb : Accueil &gt; Services &gt; eBurkina</p>
+      </div>
+    </div>
+
+    <!-- Footer Demo -->
+    <div class="footer-demo">
+      <div class="footer-demo-top">
+        <div class="footer-demo-brand" style="display:flex;align-items:center;gap:12px;">
+          <img src="armoiries-1.png" alt="Armoiries" style="width:40px;height:40px;object-fit:contain;background:white;border-radius:6px;padding:3px;">
+          Burkina Faso
+        </div>
+        <div class="footer-demo-links">
+          <a href="#">Mentions légales</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="#">Accessibilité</a>
+          <a href="#">Contact</a>
+          <a href="#">Plan du site</a>
+        </div>
+      </div>
+      <div class="footer-demo-bottom">
+        <strong>© 2026</strong> Burkina Faso<br>
+        <span style="opacity:0.6;">Système d'Information du Gouvernement (SIG) | Ouagadougou, Burkina Faso</span>
+      </div>
+    </div>
+
+    <!-- Variables CSS -->
+    <div class="code-block">
+      <pre><span class="comment">/* Variables CSS — Administration Burkinabè */</span>
+:root {
+  <span class="comment">/* Couleurs Panafricaines */</span>
+  <span class="property">--rouge-panaf:</span> <span class="value-rouge">#E30613</span>;
+  <span class="property">--rouge-fonce:</span> <span class="value-rouge">#BA0510</span>;
+  <span class="property">--jaune-panaf:</span> <span class="value-jaune">#FFED00</span>;
+  <span class="property">--jaune-fonce:</span> <span class="value-jaune">#E0C900</span>;
+  <span class="property">--vert-panaf:</span> <span class="value-vert">#00843B</span>;
+  <span class="property">--vert-fonce:</span> <span class="value-vert">#006A2F</span>;
+  
+  <span class="comment">/* Bleu Gouvernement */</span>
+  <span class="property">--bleu-gouvernement:</span> <span class="value-bleu">#1A3A5C</span>;
+  
+  <span class="comment">/* Textes & Fond */</span>
+  <span class="property">--texte-sombre:</span> <span class="value-text">#1A2A3A</span>;
+  <span class="property">--texte-moyen:</span> <span class="value-text">#4A5B6C</span>;
+  <span class="property">--fond-blanc:</span> <span class="value-text">#FFFFFF</span>;
+  <span class="property">--fond-creme:</span> <span class="value-text">#FAFBFC</span>;
+  
+  <span class="comment">/* Sémantiques */</span>
+  <span class="property">--succes:</span> <span class="value-vert">#00843B</span>;
+  <span class="property">--warning:</span> <span class="value-jaune">#F0A030</span>;
+  <span class="property">--danger:</span> <span class="value-rouge">#E04545</span>;
+  <span class="property">--info:</span> <span class="value-bleu">#1A3A5C</span>;
+
+  <span class="comment">/* Accessibilité */</span>
+  <span class="property">--focus-ring:</span> <span class="value-vert">0 0 0 4px rgba(0,132,59,0.18)</span>;
+  <span class="property">--hauteur-cible-min:</span> <span class="value-text">44px</span>;
+}</pre>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <img src="armoiries-1.png" alt="Armoiries du Burkina Faso" style="width:72px;height:auto;object-fit:contain;margin-bottom:16px;filter:brightness(1.1)drop-shadow(0 2px 8px rgba(0,0,0,0.4));display:block;margin-left:auto;margin-right:auto;">
+  <strong>Burkina Faso</strong><br>
+  Charte Graphique — Plateformes Numériques de l'Administration Burkinabè<br>
+  <div class="panaf-colors">
+    <span></span><span></span><span></span>
+  </div>
+  <span style="font-size:12px;">La Patrie ou la Mort, nous vaincrons !</span><br>
+  <span style="font-size:11px;opacity:0.5;margin-top:8px;display:block;">Document de référence — Avril 2026</span>
+</footer>
+
+<script>
+  document.querySelectorAll('.nav a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href');
+      document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.nav a').forEach(a => a.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
+</body>
+</html>

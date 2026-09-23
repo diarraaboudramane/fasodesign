@@ -1,0 +1,3305 @@
+/* =============================================================
+   Charte graphique de l'administration burkinabè
+   faso.css — bibliothèque de composants
+   Version 2.0
+
+   Dépend de tokens.css. Aucun composant ne doit contenir de
+   valeur chromatique en dur : tout passe par un rôle sémantique.
+
+   Préfixe de classe : .fs-
+   ============================================================= */
+
+/* =============================================================
+   1. SOCLE
+   ============================================================= */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--espace-20);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background: var(--surface);
+  color: var(--texte);
+  font-family: var(--police-texte);
+  font-size: var(--taille-md);
+  line-height: var(--interligne-normal);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+fieldset { margin: 0; padding: 0; border: 0; }
+legend { padding: 0; }
+
+/* L'attribut hidden doit l'emporter sur toute règle d'affichage
+   d'un composant. Sans cela, une règle plus spécifique — celle du
+   tableau empilé sur écran étroit, par exemple — réaffiche des
+   lignes que la pagination vient de masquer. */
+[hidden] { display: none !important; }
+
+/* Focus unique pour tout le système. On ne retire jamais
+   l'anneau ; on le rend seulement conditionnel au clavier. */
+:focus-visible {
+  outline: var(--focus-trait) solid var(--focus-couleur);
+  outline-offset: 2px;
+  border-radius: var(--rayon-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+::selection {
+  background: var(--or-200);
+  color: var(--neutre-900);
+}
+
+/* Lien d'évitement — premier élément focusable de chaque page */
+.fs-evitement {
+  position: absolute;
+  left: var(--espace-4);
+  top: var(--espace-4);
+  z-index: var(--plan-alerte);
+  transform: translateY(-200%);
+  padding: var(--espace-3) var(--espace-5);
+  background: var(--action);
+  color: var(--action-texte);
+  font-weight: var(--graisse-demi);
+  text-decoration: none;
+  border-radius: var(--rayon-md);
+  box-shadow: var(--ombre-lg);
+  transition: transform var(--duree-courte) var(--courbe-sortie);
+}
+.fs-evitement:focus { transform: translateY(0); }
+
+/* =============================================================
+   2. TYPOGRAPHIE
+   ============================================================= */
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--espace-4);
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-grasse);
+  line-height: var(--interligne-titre);
+  letter-spacing: var(--approche-titre);
+  color: var(--texte);
+  text-wrap: balance;
+}
+
+h1 { font-size: var(--taille-h1); font-weight: var(--graisse-noire); line-height: var(--interligne-serre); }
+h2 { font-size: var(--taille-h2); }
+h3 { font-size: var(--taille-h3); }
+h4 { font-size: var(--taille-h4); font-weight: var(--graisse-demi); }
+h5 { font-size: var(--taille-h5); font-weight: var(--graisse-demi); }
+h6 { font-size: var(--taille-h6); font-weight: var(--graisse-demi); }
+
+p { margin: 0 0 var(--espace-4); }
+p:last-child { margin-bottom: 0; }
+
+.fs-chapeau {
+  font-size: var(--taille-lg);
+  line-height: var(--interligne-large);
+  color: var(--texte-attenue);
+  max-width: var(--mesure);
+}
+
+.fs-surtitre {
+  display: block;
+  margin-bottom: var(--espace-2);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--action-sur-clair);
+}
+
+.fs-legende {
+  font-size: var(--taille-sm);
+  color: var(--texte-faible);
+}
+
+.fs-mesure { max-width: var(--mesure); }
+
+small { font-size: var(--taille-sm); }
+
+strong, b { font-weight: var(--graisse-demi); }
+
+abbr[title] {
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  cursor: help;
+}
+
+mark {
+  background: var(--or-200);
+  color: var(--neutre-900);
+  padding: 0.1em 0.25em;
+  border-radius: var(--rayon-xs);
+}
+
+code, kbd, samp, pre {
+  font-family: var(--police-mono);
+  font-size: 0.9em;
+}
+
+code {
+  padding: 0.15em 0.4em;
+  background: var(--surface-enfoncee);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-sm);
+}
+
+pre {
+  margin: 0 0 var(--espace-4);
+  padding: var(--espace-4) var(--espace-5);
+  overflow-x: auto;
+  background: var(--surface-enfoncee);
+  color: var(--texte);
+  border: var(--trait-fin) solid var(--bordure);
+  border-left: var(--trait-epais) solid var(--vert-500);
+  border-radius: var(--rayon-md);
+  line-height: 1.7;
+}
+pre code {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+}
+
+kbd {
+  padding: 0.15em 0.45em;
+  background: var(--surface);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-bottom-width: var(--trait-moyen);
+  border-radius: var(--rayon-sm);
+  font-size: 0.85em;
+}
+
+blockquote {
+  margin: 0 0 var(--espace-4);
+  padding: var(--espace-1) 0 var(--espace-1) var(--espace-5);
+  border-left: var(--trait-epais) solid var(--relief);
+  color: var(--texte-attenue);
+  font-size: var(--taille-lg);
+  line-height: var(--interligne-large);
+}
+blockquote cite {
+  display: block;
+  margin-top: var(--espace-3);
+  font-size: var(--taille-sm);
+  font-style: normal;
+  color: var(--texte-faible);
+}
+
+hr {
+  margin: var(--espace-8) 0;
+  border: 0;
+  border-top: var(--trait-fin) solid var(--bordure);
+}
+
+/* =============================================================
+   3. LIENS
+   ============================================================= */
+
+a {
+  color: var(--lien);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color var(--duree-courte) var(--courbe-douce),
+              text-decoration-color var(--duree-courte) var(--courbe-douce);
+}
+a:hover {
+  color: var(--lien-survol);
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--or-400);
+}
+
+.fs-lien-discret {
+  color: inherit;
+  text-decoration: none;
+}
+.fs-lien-discret:hover { text-decoration: underline; }
+
+/* Lien sortant : le repère est posé en CSS plutôt que dans le
+   balisage, pour qu'aucun service ne puisse l'oublier. */
+.fs-lien-externe::after {
+  content: "";
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  margin-left: 0.3em;
+  vertical-align: -0.05em;
+  background-color: currentColor;
+  -webkit-mask: var(--i-lien-externe) center / contain no-repeat;
+          mask: var(--i-lien-externe) center / contain no-repeat;
+}
+
+.fs-lien-fichier {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--espace-2);
+}
+.fs-lien-fichier .fs-poids {
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* =============================================================
+   4. MISE EN PAGE
+   ============================================================= */
+
+.fs-conteneur {
+  width: 100%;
+  max-width: var(--largeur-contenu);
+  margin-inline: auto;
+  padding-inline: var(--gouttiere);
+}
+.fs-conteneur--texte   { max-width: var(--largeur-texte); }
+.fs-conteneur--etroit  { max-width: var(--largeur-etroite); }
+.fs-conteneur--large   { max-width: 1440px; }
+
+.fs-section { padding-block: var(--section-y); }
+
+/* Grille 12 colonnes */
+.fs-grille {
+  display: grid;
+  grid-template-columns: repeat(var(--colonnes), minmax(0, 1fr));
+  gap: var(--espace-6);
+}
+.fs-col-1  { grid-column: span 1; }
+.fs-col-2  { grid-column: span 2; }
+.fs-col-3  { grid-column: span 3; }
+.fs-col-4  { grid-column: span 4; }
+.fs-col-5  { grid-column: span 5; }
+.fs-col-6  { grid-column: span 6; }
+.fs-col-7  { grid-column: span 7; }
+.fs-col-8  { grid-column: span 8; }
+.fs-col-9  { grid-column: span 9; }
+.fs-col-10 { grid-column: span 10; }
+.fs-col-11 { grid-column: span 11; }
+.fs-col-12 { grid-column: span 12; }
+
+@media (max-width: 1024px) {
+  .fs-col-md-6  { grid-column: span 6; }
+  .fs-col-md-12 { grid-column: span 12; }
+}
+@media (max-width: 768px) {
+  .fs-grille > [class*="fs-col-"] { grid-column: span 12; }
+}
+
+/* Grille auto : cartes de largeur minimale garantie */
+.fs-auto-grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--min-colonne, 260px), 1fr));
+  gap: var(--espace-6);
+}
+
+/* Empilement vertical régulier */
+.fs-pile { display: flex; flex-direction: column; gap: var(--espace-4); }
+.fs-pile--serree { gap: var(--espace-2); }
+.fs-pile--large  { gap: var(--espace-8); }
+
+/* Alignement horizontal avec retour à la ligne */
+.fs-rangee {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espace-3);
+}
+.fs-rangee--entre { justify-content: space-between; }
+.fs-rangee--fin   { justify-content: flex-end; }
+.fs-rangee--haut  { align-items: flex-start; }
+
+/* Contenu principal + colonne latérale */
+.fs-avec-aside {
+  display: grid;
+  gap: var(--espace-10);
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+}
+.fs-avec-aside--gauche { grid-template-columns: 260px minmax(0, 1fr); }
+@media (max-width: 1024px) {
+  .fs-avec-aside,
+  .fs-avec-aside--gauche { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* =============================================================
+   5. BOUTONS
+   ============================================================= */
+
+.fs-btn {
+  --btn-fond: transparent;
+  --btn-texte: var(--texte);
+  --btn-bord: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-2);
+  min-height: var(--cible-min);
+  padding: var(--espace-3) var(--espace-5);
+  border: var(--trait-moyen) solid var(--btn-bord);
+  border-radius: var(--rayon-md);
+  background: var(--btn-fond);
+  color: var(--btn-texte);
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--duree-courte) var(--courbe-douce),
+              border-color var(--duree-courte) var(--courbe-douce),
+              color var(--duree-courte) var(--courbe-douce),
+              transform var(--duree-instant) var(--courbe-douce),
+              box-shadow var(--duree-courte) var(--courbe-douce);
+}
+.fs-btn:hover { text-decoration: none; }
+.fs-btn:active { transform: translateY(1px); }
+
+.fs-btn:disabled,
+.fs-btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Variantes */
+.fs-btn--principal {
+  --btn-fond: var(--action);
+  --btn-texte: var(--action-texte);
+  --btn-bord: var(--action);
+  box-shadow: var(--ombre-xs);
+}
+.fs-btn--principal:hover:not(:disabled) {
+  --btn-fond: var(--action-survol);
+  --btn-bord: var(--action-survol);
+  box-shadow: var(--ombre-sm);
+}
+.fs-btn--principal:active:not(:disabled) {
+  --btn-fond: var(--action-active);
+  --btn-bord: var(--action-active);
+}
+
+.fs-btn--secondaire {
+  --btn-fond: transparent;
+  --btn-texte: var(--action-sur-clair);
+  --btn-bord: var(--action);
+}
+.fs-btn--secondaire:hover:not(:disabled) {
+  --btn-fond: var(--action-tenue);
+}
+
+.fs-btn--tertiaire {
+  --btn-fond: transparent;
+  --btn-texte: var(--texte);
+  --btn-bord: var(--bordure-forte);
+}
+.fs-btn--tertiaire:hover:not(:disabled) {
+  --btn-fond: var(--surface-enfoncee);
+  --btn-bord: var(--texte-faible);
+}
+
+.fs-btn--relief {
+  --btn-fond: var(--relief);
+  --btn-texte: var(--relief-texte);
+  --btn-bord: var(--relief);
+  box-shadow: var(--ombre-xs);
+}
+.fs-btn--relief:hover:not(:disabled) {
+  --btn-fond: var(--relief-survol);
+  --btn-bord: var(--relief-survol);
+}
+
+.fs-btn--danger {
+  --btn-fond: var(--accent);
+  --btn-texte: var(--texte-sur-couleur);
+  --btn-bord: var(--accent);
+}
+.fs-btn--danger:hover:not(:disabled) {
+  --btn-fond: var(--accent-survol);
+  --btn-bord: var(--accent-survol);
+}
+
+.fs-btn--fantome {
+  --btn-fond: transparent;
+  --btn-texte: var(--texte-attenue);
+  --btn-bord: transparent;
+}
+.fs-btn--fantome:hover:not(:disabled) {
+  --btn-fond: var(--surface-enfoncee);
+  --btn-texte: var(--texte);
+}
+
+/* Sur fond sombre ou coloré */
+.fs-btn--inverse {
+  --btn-fond: var(--surface);
+  --btn-texte: var(--texte);
+  --btn-bord: var(--surface);
+}
+.fs-btn--contour-clair {
+  --btn-fond: transparent;
+  --btn-texte: #fff;
+  --btn-bord: rgba(255, 255, 255, 0.45);
+}
+.fs-btn--contour-clair:hover:not(:disabled) {
+  --btn-fond: rgba(255, 255, 255, 0.12);
+  --btn-bord: #fff;
+}
+
+/* Tailles */
+.fs-btn--sm {
+  min-height: 36px;
+  padding: var(--espace-2) var(--espace-4);
+  font-size: var(--taille-sm);
+}
+.fs-btn--lg {
+  min-height: 52px;
+  padding: var(--espace-4) var(--espace-8);
+  font-size: var(--taille-lg);
+}
+.fs-btn--bloc { display: flex; width: 100%; }
+
+/* Bouton réduit à une icône : le libellé passe en aria-label */
+.fs-btn--icone {
+  width: var(--cible-min);
+  min-width: var(--cible-min);
+  padding: 0;
+}
+.fs-btn--icone.fs-btn--sm { width: 36px; min-width: 36px; }
+
+/* État de chargement */
+.fs-btn[data-chargement="true"] {
+  pointer-events: none;
+  position: relative;
+  color: transparent;
+}
+.fs-btn[data-chargement="true"]::after {
+  content: "";
+  position: absolute;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  color: var(--btn-texte);
+  animation: fs-rotation 720ms linear infinite;
+}
+
+@keyframes fs-rotation { to { transform: rotate(360deg); } }
+
+/* Groupe de boutons accolés */
+.fs-btn-groupe { display: inline-flex; }
+.fs-btn-groupe .fs-btn { border-radius: 0; margin-left: calc(var(--trait-moyen) * -1); }
+.fs-btn-groupe .fs-btn:first-child {
+  border-start-start-radius: var(--rayon-md);
+  border-end-start-radius: var(--rayon-md);
+  margin-left: 0;
+}
+.fs-btn-groupe .fs-btn:last-child {
+  border-start-end-radius: var(--rayon-md);
+  border-end-end-radius: var(--rayon-md);
+}
+.fs-btn-groupe .fs-btn:hover,
+.fs-btn-groupe .fs-btn:focus-visible { z-index: 1; }
+
+/* Barre d'actions : l'action principale reste à droite sur
+   écran large, et passe en premier et pleine largeur sur mobile. */
+.fs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-3);
+  align-items: center;
+}
+.fs-actions--fin { justify-content: flex-end; }
+@media (max-width: 560px) {
+  .fs-actions { flex-direction: column-reverse; align-items: stretch; }
+  .fs-actions .fs-btn { width: 100%; }
+}
+
+/* Segmenté */
+.fs-segment {
+  display: inline-flex;
+  padding: var(--espace-1);
+  background: var(--surface-enfoncee);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  gap: var(--espace-1);
+}
+.fs-segment button {
+  min-height: 36px;
+  padding: var(--espace-2) var(--espace-4);
+  border: 0;
+  border-radius: var(--rayon-md);
+  background: transparent;
+  color: var(--texte-attenue);
+  font-family: var(--police-titre);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  cursor: pointer;
+  transition: background-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-segment button[aria-pressed="true"],
+.fs-segment button[aria-selected="true"] {
+  background: var(--surface);
+  color: var(--texte);
+  font-weight: var(--graisse-demi);
+  box-shadow: var(--ombre-xs);
+}
+
+/* =============================================================
+   6. FORMULAIRES
+   ============================================================= */
+
+.fs-champ { display: flex; flex-direction: column; gap: var(--espace-2); }
+
+.fs-label {
+  font-family: var(--police-titre);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+  color: var(--texte);
+}
+.fs-label .fs-requis {
+  color: var(--accent-sur-clair);
+  margin-left: 0.15em;
+}
+.fs-label .fs-optionnel {
+  margin-left: 0.4em;
+  font-weight: var(--graisse-normale);
+  color: var(--texte-faible);
+}
+
+/* Aide affichée avant le champ : l'usager la lit au bon moment */
+.fs-aide {
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+  line-height: var(--interligne-normal);
+}
+
+.fs-saisie,
+.fs-zone,
+.fs-select {
+  width: 100%;
+  min-height: var(--cible-min);
+  padding: var(--espace-3) var(--espace-4);
+  background: var(--surface);
+  color: var(--texte);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-radius: var(--rayon-md);
+  font-size: var(--taille-md);
+  line-height: 1.4;
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              box-shadow var(--duree-courte) var(--courbe-douce);
+}
+
+.fs-saisie::placeholder,
+.fs-zone::placeholder {
+  color: var(--texte-faible);
+  opacity: 1;
+}
+
+.fs-saisie:hover,
+.fs-zone:hover,
+.fs-select:hover { border-color: var(--texte-faible); }
+
+.fs-saisie:focus,
+.fs-zone:focus,
+.fs-select:focus {
+  outline: none;
+  border-color: var(--action);
+  box-shadow: 0 0 0 3px var(--action-tenue);
+}
+
+.fs-saisie:disabled,
+.fs-zone:disabled,
+.fs-select:disabled {
+  background: var(--surface-enfoncee);
+  color: var(--texte-faible);
+  cursor: not-allowed;
+}
+
+.fs-saisie[readonly] { background: var(--surface-enfoncee); }
+
+.fs-zone {
+  min-height: 7rem;
+  resize: vertical;
+  line-height: var(--interligne-normal);
+}
+
+.fs-select {
+  appearance: none;
+  padding-right: var(--espace-10);
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 20px) calc(50% + 2px),
+                       calc(100% - 15px) calc(50% + 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* États de validation. La couleur ne porte jamais seule
+   l'information : elle accompagne un message textuel. */
+.fs-champ[data-etat="erreur"] .fs-saisie,
+.fs-champ[data-etat="erreur"] .fs-zone,
+.fs-champ[data-etat="erreur"] .fs-select,
+.fs-saisie[aria-invalid="true"] {
+  border-color: var(--danger);
+  border-width: var(--trait-moyen);
+}
+.fs-champ[data-etat="erreur"] .fs-saisie:focus,
+.fs-saisie[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px var(--danger-fond);
+}
+.fs-champ[data-etat="succes"] .fs-saisie { border-color: var(--succes); }
+
+.fs-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-2);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  line-height: var(--interligne-normal);
+}
+.fs-message--erreur { color: var(--danger-texte); }
+.fs-message--succes { color: var(--succes-texte); }
+.fs-message--erreur::before,
+.fs-message--succes::before {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  border-radius: 50%;
+  color: var(--surface);
+  font-family: var(--police-titre);
+  font-size: 11px;
+  font-weight: var(--graisse-noire);
+  line-height: 1;
+}
+.fs-message--erreur::before { content: "!"; background: var(--danger); }
+.fs-message--succes::before { content: "\2713"; background: var(--succes); }
+
+/* Champ avec préfixe ou suffixe (devise, unité, domaine) */
+.fs-groupe-saisie {
+  display: flex;
+  align-items: stretch;
+}
+.fs-groupe-saisie .fs-saisie { border-radius: 0; }
+.fs-groupe-saisie > :first-child {
+  border-start-start-radius: var(--rayon-md);
+  border-end-start-radius: var(--rayon-md);
+}
+.fs-groupe-saisie > :last-child {
+  border-start-end-radius: var(--rayon-md);
+  border-end-end-radius: var(--rayon-md);
+}
+.fs-affixe {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--espace-4);
+  background: var(--surface-enfoncee);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  color: var(--texte-attenue);
+  font-size: var(--taille-sm);
+  white-space: nowrap;
+}
+.fs-groupe-saisie .fs-affixe + .fs-saisie { border-left: 0; }
+.fs-groupe-saisie .fs-saisie + .fs-affixe { border-left: 0; }
+
+/* Cases à cocher et boutons radio */
+.fs-choix {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  min-height: var(--cible-min);
+  padding: var(--espace-2) 0;
+  cursor: pointer;
+}
+.fs-choix input[type="checkbox"],
+.fs-choix input[type="radio"] {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 1px 0 0;
+  accent-color: var(--action);
+  cursor: pointer;
+}
+.fs-choix-texte { display: flex; flex-direction: column; gap: 2px; }
+.fs-choix-titre { font-weight: var(--graisse-moyenne); }
+.fs-choix-aide { font-size: var(--taille-sm); color: var(--texte-attenue); }
+
+/* Choix présenté en carte cliquable */
+.fs-choix--carte {
+  padding: var(--espace-4);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-radius: var(--rayon-lg);
+  background: var(--surface);
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              background-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-choix--carte:hover { border-color: var(--action); }
+.fs-choix--carte:has(input:checked) {
+  border-color: var(--action);
+  border-width: var(--trait-moyen);
+  background: var(--action-tenue);
+}
+.fs-choix--carte:has(input:focus-visible) {
+  outline: var(--focus-trait) solid var(--focus-couleur);
+  outline-offset: 2px;
+}
+
+/* Interrupteur */
+.fs-interrupteur {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-3);
+  min-height: var(--cible-min);
+  cursor: pointer;
+}
+.fs-interrupteur input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.fs-interrupteur-piste {
+  position: relative;
+  flex: none;
+  width: 48px;
+  height: 28px;
+  background: var(--neutre-400);
+  border-radius: var(--rayon-plein);
+  transition: background-color var(--duree-moyenne) var(--courbe-douce);
+}
+.fs-interrupteur-piste::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: var(--ombre-sm);
+  transition: transform var(--duree-moyenne) var(--courbe-sortie);
+}
+.fs-interrupteur input:checked + .fs-interrupteur-piste { background: var(--action); }
+.fs-interrupteur input:checked + .fs-interrupteur-piste::after { transform: translateX(20px); }
+.fs-interrupteur input:focus-visible + .fs-interrupteur-piste {
+  outline: var(--focus-trait) solid var(--focus-couleur);
+  outline-offset: 2px;
+}
+.fs-interrupteur input:disabled + .fs-interrupteur-piste { opacity: 0.45; }
+
+/* Curseur de valeur */
+.fs-curseur {
+  width: 100%;
+  height: var(--cible-min);
+  accent-color: var(--action);
+  cursor: pointer;
+}
+
+/* Dépôt de fichier */
+.fs-depot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-8) var(--espace-6);
+  text-align: center;
+  background: var(--surface-basse);
+  border: var(--trait-moyen) dashed var(--bordure-forte);
+  border-radius: var(--rayon-lg);
+  cursor: pointer;
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              background-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-depot:hover,
+.fs-depot[data-survol="true"] {
+  border-color: var(--action);
+  background: var(--action-tenue);
+}
+.fs-depot input[type="file"] { display: none; }
+.fs-depot-titre { font-weight: var(--graisse-demi); font-family: var(--police-titre); }
+.fs-depot-contraintes { font-size: var(--taille-sm); color: var(--texte-faible); }
+
+.fs-fichier {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-3) var(--espace-4);
+  background: var(--surface);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-md);
+}
+.fs-fichier-nom {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+}
+.fs-fichier-poids { font-size: var(--taille-xs); color: var(--texte-faible); }
+
+/* Aperçu de fichier. La vignette rassure sur ce qui a été déposé —
+   le bon document, dans le bon sens, lisible. Elle ne remplace
+   jamais le nom du fichier, qui reste l'information portée au
+   lecteur d'écran ; la vignette est donc décorative. */
+.fs-fichier--apercu { align-items: flex-start; gap: var(--espace-4); }
+.fs-fichier-vignette {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  background: var(--surface-enfoncee);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-md);
+  color: var(--texte-faible);
+}
+.fs-fichier-vignette img { width: 100%; height: 100%; object-fit: cover; }
+.fs-fichier-vignette .fs-icone { --icone-taille: 22px; }
+.fs-fichier-detail {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-1);
+}
+.fs-fichier-actions { display: flex; gap: var(--espace-2); margin-top: var(--espace-2); }
+
+/* Guide de cadrage d'une photographie d'identité. Montrer le
+   cadre attendu évite l'aller-retour le plus fréquent des
+   services d'enrôlement : une photo rejetée pour cadrage. */
+.fs-photo-guide {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-6);
+  align-items: flex-start;
+}
+.fs-photo-cadre {
+  flex: none;
+  width: 160px;
+  aspect-ratio: 35 / 45;
+  position: relative;
+  background: var(--surface-enfoncee);
+  border: var(--trait-moyen) solid var(--bordure-forte);
+  border-radius: var(--rayon-md);
+  overflow: hidden;
+}
+.fs-photo-cadre svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fs-photo-reperes { fill: none; stroke: var(--action); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.fs-photo-silhouette { fill: var(--neutre-300); }
+.fs-photo-legende {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--espace-1) var(--espace-2);
+  background: var(--surface);
+  border-top: var(--trait-fin) solid var(--bordure);
+  font-size: var(--taille-2xs);
+  text-align: center;
+  color: var(--texte-attenue);
+}
+
+/* =============================================================
+   RÉCAPITULATIF DE PAIEMENT
+   ============================================================= */
+
+.fs-paiement {
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+}
+.fs-paiement-lignes { margin: 0; padding: var(--espace-5); }
+.fs-paiement-lignes > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding: var(--espace-2) 0;
+}
+.fs-paiement-lignes dt { font-size: var(--taille-sm); color: var(--texte-attenue); }
+.fs-paiement-lignes dd {
+  margin: 0;
+  font-size: var(--taille-sm);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.fs-paiement-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding: var(--espace-4) var(--espace-5);
+  border-top: var(--trait-moyen) solid var(--bordure-forte);
+  background: var(--surface-basse);
+}
+.fs-paiement-total-libelle {
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-demi);
+}
+.fs-paiement-total-montant {
+  font-family: var(--police-titre);
+  font-size: var(--taille-h4);
+  font-weight: var(--graisse-noire);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* =============================================================
+   LISTE DE DOSSIERS
+
+   Format liste, complémentaire du tableau : il tient sur un écran
+   étroit sans reconfiguration et supporte des intitulés longs,
+   là où un tableau impose des colonnes de largeur fixe.
+   ============================================================= */
+
+.fs-liste-dossiers { list-style: none; margin: 0; padding: 0; }
+.fs-dossier-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--espace-2) var(--espace-5);
+  align-items: center;
+  padding: var(--espace-4) var(--espace-5);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  background: var(--surface-haute);
+  margin-bottom: var(--espace-3);
+  transition: border-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-dossier-item:hover { border-color: var(--action); }
+.fs-dossier-item:last-child { margin-bottom: 0; }
+.fs-dossier-ref {
+  font-family: var(--police-mono);
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+}
+.fs-dossier-objet {
+  margin: 2px 0 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+}
+.fs-dossier-objet a { color: inherit; text-decoration: none; }
+.fs-dossier-objet a:hover { color: var(--lien); }
+.fs-dossier-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-2) var(--espace-4);
+  margin-top: var(--espace-2);
+  font-size: var(--taille-xs);
+  color: var(--texte-attenue);
+}
+.fs-dossier-cote {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  justify-self: end;
+}
+@media (max-width: 560px) {
+  .fs-dossier-item { grid-template-columns: minmax(0, 1fr); }
+  .fs-dossier-cote { justify-self: start; }
+}
+
+/* Saisie de code à usage unique */
+.fs-code { display: flex; gap: var(--espace-2); }
+.fs-code input {
+  width: 48px;
+  height: 56px;
+  padding: 0;
+  text-align: center;
+  font-family: var(--police-mono);
+  font-size: var(--taille-h4);
+  font-weight: var(--graisse-demi);
+  background: var(--surface);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-radius: var(--rayon-md);
+}
+.fs-code input:focus {
+  outline: none;
+  border-color: var(--action);
+  border-width: var(--trait-moyen);
+  box-shadow: 0 0 0 3px var(--action-tenue);
+}
+
+/* Recherche */
+.fs-recherche { display: flex; }
+.fs-recherche .fs-saisie {
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+  border-right: 0;
+}
+.fs-recherche .fs-btn {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+/* Bloc de formulaire */
+.fs-fieldset {
+  padding: var(--espace-6);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+}
+.fs-fieldset legend {
+  padding-inline: var(--espace-3);
+  margin-left: calc(var(--espace-3) * -1);
+  font-family: var(--police-titre);
+  font-size: var(--taille-lg);
+  font-weight: var(--graisse-demi);
+}
+
+/* Récapitulatif d'erreurs en tête de formulaire */
+.fs-recap-erreurs {
+  padding: var(--espace-5);
+  background: var(--danger-fond);
+  border: var(--trait-moyen) solid var(--danger);
+  border-radius: var(--rayon-lg);
+}
+.fs-recap-erreurs h3 {
+  margin-bottom: var(--espace-3);
+  font-size: var(--taille-lg);
+  color: var(--danger-texte);
+}
+.fs-recap-erreurs ul { margin: 0; padding-left: var(--espace-5); }
+.fs-recap-erreurs li { margin-bottom: var(--espace-2); }
+.fs-recap-erreurs a { color: var(--danger-texte); font-weight: var(--graisse-moyenne); }
+
+/* =============================================================
+   7. ÉTIQUETTES, PASTILLES, AVATARS
+   ============================================================= */
+
+.fs-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-1);
+  padding: 0.2em 0.65em;
+  border-radius: var(--rayon-plein);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-demi);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.fs-badge--neutre  { background: var(--surface-enfoncee); color: var(--texte-attenue); }
+.fs-badge--succes  { background: var(--succes-fond); color: var(--succes-texte); }
+.fs-badge--alerte  { background: var(--alerte-fond); color: var(--alerte-texte); }
+.fs-badge--danger  { background: var(--danger-fond); color: var(--danger-texte); }
+.fs-badge--info    { background: var(--info-fond); color: var(--info-texte); }
+.fs-badge--relief  { background: var(--or-200); color: var(--or-900); }
+
+/* Pastille d'état précédée d'un point : lisible sans couleur */
+.fs-statut {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+}
+.fs-statut::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.fs-statut--attente { color: var(--texte-faible); }
+.fs-statut--cours   { color: var(--info-texte); }
+.fs-statut--succes  { color: var(--succes-texte); }
+.fs-statut--alerte  { color: var(--alerte-texte); }
+.fs-statut--rejet   { color: var(--danger-texte); }
+
+/* Étiquette retirable */
+.fs-etiquette {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  padding: var(--espace-1) var(--espace-2) var(--espace-1) var(--espace-3);
+  background: var(--surface-enfoncee);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-plein);
+  font-size: var(--taille-sm);
+}
+.fs-etiquette button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--texte-attenue);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+.fs-etiquette button:hover { background: var(--bordure); color: var(--texte); }
+
+/* Compteur de notification */
+.fs-compteur {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 6px;
+  background: var(--accent);
+  color: var(--texte-sur-couleur);
+  border-radius: var(--rayon-plein);
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--vert-100);
+  color: var(--vert-800);
+  font-family: var(--police-titre);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-grasse);
+  overflow: hidden;
+  text-transform: uppercase;
+}
+.fs-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.fs-avatar--sm { width: 28px; height: 28px; font-size: var(--taille-2xs); }
+.fs-avatar--lg { width: 56px; height: 56px; font-size: var(--taille-lg); }
+
+.fs-avatars { display: flex; }
+.fs-avatars .fs-avatar {
+  border: var(--trait-moyen) solid var(--surface);
+  margin-left: -10px;
+}
+.fs-avatars .fs-avatar:first-child { margin-left: 0; }
+
+/* =============================================================
+   8. ENCARTS ET MESSAGES
+   ============================================================= */
+
+.fs-encart {
+  display: flex;
+  gap: var(--espace-4);
+  padding: var(--espace-4) var(--espace-5);
+  border: var(--trait-fin) solid var(--bordure);
+  border-left-width: var(--trait-epais);
+  border-radius: var(--rayon-md);
+  background: var(--surface-basse);
+}
+.fs-encart-corps { flex: 1; min-width: 0; }
+.fs-encart-titre {
+  margin: 0 0 var(--espace-1);
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+}
+.fs-encart p { font-size: var(--taille-sm); margin-bottom: var(--espace-2); }
+.fs-encart p:last-child { margin-bottom: 0; }
+
+/* Le repère est une icône du jeu système, jamais un symbole
+   Unicode : sur Windows, « ⚠ » est rendu par la police d'emoji en
+   couleurs, ce qui casse la sobriété du registre. */
+.fs-encart-marque {
+  --icone-taille: 20px;
+  margin-top: 2px;
+  color: var(--texte-attenue);
+}
+/* Encart refermable. Seul un message dont la disparition ne fait
+   perdre aucune information nécessaire à la tâche peut l'être :
+   une erreur de saisie ou une alerte de fraude ne se ferme pas. */
+.fs-encart-fermer {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  margin: -2px -4px 0 0;
+  border: 0;
+  border-radius: var(--rayon-sm);
+  background: none;
+  color: var(--texte-attenue);
+  cursor: pointer;
+}
+.fs-encart-fermer:hover { background: rgba(0, 0, 0, 0.06); color: var(--texte); }
+.fs-encart-fermer .fs-icone { --icone-taille: 16px; }
+
+.fs-encart--info .fs-encart-marque   { color: var(--info); }
+.fs-encart--succes .fs-encart-marque { color: var(--succes); }
+.fs-encart--alerte .fs-encart-marque { color: var(--alerte); }
+.fs-encart--danger .fs-encart-marque { color: var(--danger); }
+
+.fs-encart--info    { background: var(--info-fond);   border-color: var(--info-bord);   border-left-color: var(--info); }
+.fs-encart--succes  { background: var(--succes-fond); border-color: var(--succes-bord); border-left-color: var(--succes); }
+.fs-encart--alerte  { background: var(--alerte-fond); border-color: var(--alerte-bord); border-left-color: var(--alerte); }
+.fs-encart--danger  { background: var(--danger-fond); border-color: var(--danger-bord); border-left-color: var(--danger); }
+
+.fs-encart--info .fs-encart-titre   { color: var(--info-texte); }
+.fs-encart--succes .fs-encart-titre { color: var(--succes-texte); }
+.fs-encart--alerte .fs-encart-titre { color: var(--alerte-texte); }
+.fs-encart--danger .fs-encart-titre { color: var(--danger-texte); }
+
+/* Bandeau pleine largeur, pour une information de portée
+   nationale affichée en haut de page. */
+.fs-bandeau {
+  padding: var(--espace-3) 0;
+  background: var(--accent);
+  color: var(--texte-sur-couleur);
+  font-size: var(--taille-sm);
+}
+.fs-bandeau a { color: inherit; font-weight: var(--graisse-demi); }
+.fs-bandeau .fs-conteneur {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  flex-wrap: wrap;
+}
+.fs-bandeau-etiquette {
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--rayon-sm);
+  font-family: var(--police-titre);
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+}
+
+/* Notification passagère */
+.fs-toasts {
+  position: fixed;
+  bottom: var(--espace-6);
+  right: var(--espace-6);
+  z-index: var(--plan-alerte);
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-3);
+  width: min(380px, calc(100vw - var(--espace-8)));
+}
+.fs-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  padding: var(--espace-4);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-left: var(--trait-epais) solid var(--action);
+  border-radius: var(--rayon-lg);
+  box-shadow: var(--ombre-lg);
+  animation: fs-toast-entree var(--duree-moyenne) var(--courbe-sortie);
+}
+.fs-toast--succes { border-left-color: var(--succes); }
+.fs-toast--danger { border-left-color: var(--danger); }
+.fs-toast--alerte { border-left-color: var(--alerte); }
+.fs-toast-corps { flex: 1; min-width: 0; font-size: var(--taille-sm); }
+.fs-toast-titre { font-weight: var(--graisse-demi); font-family: var(--police-titre); }
+.fs-toast[data-sortie="true"] { animation: fs-toast-sortie var(--duree-courte) var(--courbe-entree) forwards; }
+
+@keyframes fs-toast-entree {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes fs-toast-sortie {
+  to { opacity: 0; transform: translateX(16px); }
+}
+
+@media (max-width: 560px) {
+  .fs-toasts { left: var(--espace-4); right: var(--espace-4); width: auto; bottom: var(--espace-4); }
+}
+
+/* =============================================================
+   9. CARTES
+   ============================================================= */
+
+.fs-carte {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              box-shadow var(--duree-courte) var(--courbe-douce),
+              transform var(--duree-courte) var(--courbe-douce);
+}
+.fs-carte-media { aspect-ratio: 16 / 9; background: var(--surface-enfoncee); }
+.fs-carte-media img { width: 100%; height: 100%; object-fit: cover; }
+.fs-carte-corps { flex: 1; padding: var(--espace-5); display: flex; flex-direction: column; gap: var(--espace-3); }
+.fs-carte-titre { margin: 0; font-size: var(--taille-h5); }
+.fs-carte-titre a { color: inherit; text-decoration: none; }
+.fs-carte-titre a:hover { color: var(--lien); }
+.fs-carte-texte { margin: 0; font-size: var(--taille-sm); color: var(--texte-attenue); }
+.fs-carte-pied {
+  padding: var(--espace-4) var(--espace-5);
+  border-top: var(--trait-fin) solid var(--bordure);
+  background: var(--surface-basse);
+}
+
+/* Carte entièrement cliquable : le lien du titre est étendu à
+   toute la surface, ce qui conserve une cible unique pour les
+   technologies d'assistance. */
+.fs-carte--cliquable { position: relative; }
+.fs-carte--cliquable:hover {
+  border-color: var(--action);
+  box-shadow: var(--ombre-md);
+  transform: translateY(-2px);
+}
+.fs-carte--cliquable:has(a:focus-visible) {
+  outline: var(--focus-trait) solid var(--focus-couleur);
+  outline-offset: 2px;
+}
+.fs-carte--cliquable .fs-carte-titre a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* Carte mise en avant par le filet national en bandeau */
+.fs-carte--marquee::before {
+  content: "";
+  display: block;
+  height: 12px;
+  background-image:
+    var(--etoile-or),
+    linear-gradient(to right,
+      var(--rouge-500) 0 50%,
+      var(--vert-500) 50% 100%);
+  background-size: 8px 8px, 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* Bloc statistique */
+.fs-stat {
+  padding: var(--espace-5);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+}
+.fs-stat-valeur {
+  display: block;
+  font-family: var(--police-titre);
+  font-size: var(--taille-h2);
+  font-weight: var(--graisse-noire);
+  line-height: 1.1;
+  letter-spacing: var(--approche-titre);
+  font-variant-numeric: tabular-nums;
+  color: var(--action-sur-clair);
+}
+.fs-stat-libelle {
+  display: block;
+  margin-top: var(--espace-2);
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+}
+.fs-stat-variation { font-size: var(--taille-xs); font-weight: var(--graisse-demi); }
+.fs-stat-variation--hausse { color: var(--succes-texte); }
+.fs-stat-variation--baisse { color: var(--danger-texte); }
+
+/* =============================================================
+   10. TABLEAUX
+   ============================================================= */
+
+.fs-tableau-cadre {
+  width: 100%;
+  overflow-x: auto;
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  background: var(--surface-haute);
+}
+
+/* Tableau complet : barre d'outils, tableau défilant, pied de
+   pagination. Le cadre défile horizontalement, mais les deux
+   barres restent en place — sans quoi la pagination s'échapperait
+   hors de l'écran sur un tableau large. */
+.fs-tableau-bloc {
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+  background: var(--surface-haute);
+}
+.fs-tableau-bloc > .fs-tableau-cadre {
+  border: 0;
+  border-radius: 0;
+}
+
+/* Filtres.
+
+   Deux couches de visibilité qui ne doivent pas se confondre : le
+   filtre écarte une ligne du jeu de données, la pagination masque
+   celles qui ne sont pas sur la page courante. Une ligne exclue
+   par un filtre l'est en toute circonstance, d'où le !important
+   qui la soustrait aussi au mode empilé. */
+.fs-tableau tbody tr[data-exclu] { display: none !important; }
+
+.fs-filtres {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--espace-4);
+  padding: var(--espace-5);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-filtres .fs-champ {
+  flex: 1 1 190px;
+  min-width: 0;
+  gap: var(--espace-1);
+}
+.fs-filtres .fs-label { font-size: var(--taille-xs); }
+.fs-filtres .fs-saisie,
+.fs-filtres .fs-select { min-height: 40px; }
+
+/* Rappel des filtres appliqués. Il est obligatoire : un filtre
+   qui écarte des données sans le dire est un piège, a fortiori
+   dans un contexte administratif où l'absence d'une ligne peut
+   être lue comme l'absence d'un dossier. */
+.fs-filtres-actifs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espace-2);
+  padding: var(--espace-3) var(--espace-5);
+  background: var(--action-tenue);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-filtres-actifs-titre {
+  margin-right: var(--espace-1);
+  font-family: var(--police-titre);
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--action-sur-clair);
+}
+.fs-filtres-actifs .fs-etiquette {
+  background: var(--surface);
+  border-color: var(--action);
+}
+.fs-filtres-vider {
+  margin-left: auto;
+  padding: var(--espace-1) var(--espace-2);
+  border: 0;
+  border-radius: var(--rayon-sm);
+  background: none;
+  color: var(--action-sur-clair);
+  font-family: inherit;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.fs-filtres-vider:hover { background: var(--surface); }
+
+/* État vide propre au tableau : il distingue « aucune donnée » de
+   « aucun résultat pour ces filtres », ce que l'usager doit
+   pouvoir différencier pour savoir quoi faire. */
+.fs-tableau-vide {
+  padding: var(--espace-12) var(--espace-6);
+  text-align: center;
+}
+.fs-tableau-vide-titre {
+  margin-bottom: var(--espace-2);
+  font-family: var(--police-titre);
+  font-size: var(--taille-h5);
+}
+.fs-tableau-vide p {
+  max-width: 44ch;
+  margin-inline: auto;
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+}
+
+.fs-tableau-outils,
+.fs-tableau-pied {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-3) var(--espace-5);
+  padding: var(--espace-3) var(--espace-5);
+  background: var(--surface-basse);
+}
+.fs-tableau-outils { border-bottom: var(--trait-fin) solid var(--bordure); }
+.fs-tableau-pied   { border-top: var(--trait-fin) solid var(--bordure); }
+
+.fs-tableau-compte {
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+}
+.fs-tableau-compte b { font-variant-numeric: tabular-nums; }
+
+.fs-tableau-intervalle {
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.fs-tableau-taille {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+}
+.fs-tableau-taille .fs-select {
+  width: auto;
+  min-height: 36px;
+  padding: var(--espace-1) var(--espace-8) var(--espace-1) var(--espace-3);
+  font-size: var(--taille-sm);
+}
+
+.fs-tableau-export {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-2);
+}
+
+/* En-tête d'extraction, visible à la seule impression. Une
+   extraction qui circule hors du service doit porter son
+   contexte : quelle administration, quelles données, à quelle
+   date, et sous quels filtres. Un tableau imprimé sans ces
+   mentions n'est pas opposable. */
+.fs-impression-entete { display: none; }
+.fs-impression-titre {
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: 13pt;
+  font-weight: var(--graisse-grasse);
+}
+.fs-impression-meta {
+  margin: 0;
+  font-size: 9pt;
+  line-height: 1.5;
+  color: var(--texte-attenue);
+}
+
+@media (max-width: 640px) {
+  .fs-tableau-pied { justify-content: center; }
+  .fs-tableau-pied .fs-tableau-intervalle { width: 100%; text-align: center; }
+}
+
+.fs-tableau {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--taille-sm);
+}
+.fs-tableau caption {
+  padding: var(--espace-4) var(--espace-5);
+  text-align: left;
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-demi);
+  color: var(--texte-attenue);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-tableau th,
+.fs-tableau td {
+  padding: var(--espace-3) var(--espace-4);
+  text-align: left;
+  border-bottom: var(--trait-fin) solid var(--bordure);
+  vertical-align: top;
+}
+.fs-tableau thead th {
+  position: sticky;
+  top: 0;
+  background: var(--surface-enfoncee);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-attenue);
+  white-space: nowrap;
+}
+.fs-tableau tbody tr:last-child td { border-bottom: 0; }
+.fs-tableau tbody tr:hover { background: var(--surface-basse); }
+.fs-tableau--zebre tbody tr:nth-child(even) { background: var(--surface-basse); }
+.fs-tableau--compact th,
+.fs-tableau--compact td { padding: var(--espace-2) var(--espace-3); }
+.fs-tableau .fs-num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* En-tête triable */
+.fs-tableau th[aria-sort] { padding: 0; }
+.fs-tableau th[aria-sort] button {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+  width: 100%;
+  padding: var(--espace-3) var(--espace-4);
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+}
+.fs-tableau th[aria-sort] button:hover { color: var(--texte); }
+.fs-tableau th[aria-sort] button::after {
+  content: "";
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  background-color: currentColor;
+  opacity: 0.4;
+  -webkit-mask: var(--i-trier) center / contain no-repeat;
+          mask: var(--i-trier) center / contain no-repeat;
+}
+.fs-tableau th[aria-sort="ascending"] button::after,
+.fs-tableau th[aria-sort="descending"] button::after {
+  opacity: 1;
+  background-color: var(--action-sur-clair);
+}
+.fs-tableau th[aria-sort="ascending"] button::after  { -webkit-mask-image: var(--i-chevron-haut); mask-image: var(--i-chevron-haut); }
+.fs-tableau th[aria-sort="descending"] button::after { -webkit-mask-image: var(--i-chevron-bas);  mask-image: var(--i-chevron-bas); }
+
+/* Sur écran étroit, chaque cellule reprend l'intitulé de sa
+   colonne via data-colonne. */
+@media (max-width: 640px) {
+  .fs-tableau--empile thead { display: none; }
+  .fs-tableau--empile tbody tr {
+    display: block;
+    padding: var(--espace-3) var(--espace-4);
+    border-bottom: var(--trait-fin) solid var(--bordure);
+  }
+  .fs-tableau--empile tbody td {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--espace-4);
+    padding: var(--espace-2) 0;
+    border: 0;
+  }
+  .fs-tableau--empile tbody td::before {
+    content: attr(data-colonne);
+    font-weight: var(--graisse-demi);
+    color: var(--texte-attenue);
+  }
+}
+
+/* Liste de définition pour les fiches */
+.fs-definitions { margin: 0; }
+.fs-definitions > div {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: var(--espace-4);
+  padding: var(--espace-3) 0;
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-definitions > div:last-child { border-bottom: 0; }
+.fs-definitions dt {
+  font-weight: var(--graisse-demi);
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+}
+.fs-definitions dd { margin: 0; }
+@media (max-width: 640px) {
+  .fs-definitions > div { grid-template-columns: minmax(0, 1fr); gap: var(--espace-1); }
+}
+
+/* Listes de contenu */
+.fs-liste-puces { margin: 0 0 var(--espace-4); padding-left: var(--espace-5); }
+.fs-liste-puces li { margin-bottom: var(--espace-2); }
+.fs-liste-puces li::marker { color: var(--action); }
+
+.fs-liste-nue { list-style: none; margin: 0; padding: 0; }
+
+.fs-liste-separee { list-style: none; margin: 0; padding: 0; }
+.fs-liste-separee > li {
+  padding: var(--espace-4) 0;
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-liste-separee > li:last-child { border-bottom: 0; }
+
+/* Liste de contrôle : coche décorative, l'état reste textuel */
+.fs-liste-controle { list-style: none; margin: 0; padding: 0; }
+.fs-liste-controle li {
+  display: flex;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-3);
+}
+.fs-liste-controle li::before {
+  content: "";
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: 0.15em;
+  background-color: var(--succes);
+  -webkit-mask: var(--i-coche) center / contain no-repeat;
+          mask: var(--i-coche) center / contain no-repeat;
+}
+
+/* =============================================================
+   11. NAVIGATION
+   ============================================================= */
+
+/* Bloc-marque officiel : armoiries, dénomination, devise.
+   Les proportions et la zone de protection sont fixées ici et
+   ne doivent pas être redéfinies dans les projets. */
+.fs-marque {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  padding-right: var(--espace-5);
+  text-decoration: none;
+  color: inherit;
+}
+.fs-marque img {
+  width: auto;
+  height: 56px;
+  flex: none;
+}
+.fs-marque-texte { display: flex; flex-direction: column; gap: 1px; }
+.fs-marque-pays {
+  font-family: var(--police-titre);
+  font-size: var(--taille-lg);
+  font-weight: var(--graisse-noire);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.fs-marque-devise {
+  font-size: var(--taille-2xs);
+  font-style: italic;
+  color: var(--texte-attenue);
+  letter-spacing: 0.01em;
+}
+.fs-marque-entite {
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-moyenne);
+  color: var(--texte-attenue);
+}
+@media (max-width: 640px) {
+  .fs-marque img { height: 44px; }
+  .fs-marque-devise { display: none; }
+}
+
+/* Filet national : bande longue, pleine largeur.
+
+   Le rouge occupe la moitié gauche, le vert la moitié droite,
+   l'étoile d'or se pose à la jonction.
+
+   Ce n'est pas la composition du drapeau, et c'est délibéré :
+   étirée sur toute la largeur d'un écran, une bande de 14 px se
+   présente dans un rapport voisin de cent pour un. Superposer
+   deux bandes de 7 px dans ce format ne donne pas un drapeau mais
+   deux traits parallèles, qu'aucun œil ne rapproche. La division
+   gauche-droite, elle, tient à n'importe quelle longueur : le
+   regard parcourt le rouge, rencontre l'étoile, poursuit sur le
+   vert.
+
+   La composition du drapeau est réservée à .fs-repere, dont les
+   proportions la rendent lisible. */
+.fs-filet {
+  --filet-hauteur: 14px;
+  --filet-etoile: calc(var(--filet-hauteur) * 0.7);
+
+  height: var(--filet-hauteur);
+  background-image:
+    var(--etoile-or),
+    linear-gradient(to right,
+      var(--rouge-500) 0 50%,
+      var(--vert-500) 50% 100%);
+  background-size: var(--filet-etoile) var(--filet-etoile), 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+.fs-filet--fin { --filet-hauteur: 10px; }
+.fs-filet--epais { --filet-hauteur: 20px; }
+
+/* Repère national : vignette courte, pour ponctuer un titre ou
+   une ouverture de section. Ses proportions permettent la vraie
+   composition du drapeau — rouge au-dessus, vert au-dessous,
+   étoile centrée à cheval sur les deux. */
+.fs-repere {
+  --repere-hauteur: 12px;
+  --repere-etoile: calc(var(--repere-hauteur) * 0.42);
+
+  display: block;
+  width: 52px;
+  height: var(--repere-hauteur);
+  border-radius: var(--rayon-xs);
+  background-image:
+    var(--etoile-or),
+    linear-gradient(to bottom,
+      var(--rouge-500) 0 50%,
+      var(--vert-500) 50% 100%);
+  background-size: var(--repere-etoile) var(--repere-etoile), 100% 100%;
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+}
+.fs-repere--centre { margin-inline: auto; }
+
+/* Motif tissé — inspiré des rayures du Faso Dan Fani, le tissu
+   traditionnel. Bandes de largeur inégale séparées d'un fil clair,
+   comme sur le métier à tisser. Réservé aux bordures décoratives
+   de faible hauteur ; jamais en fond de texte. */
+.fs-tissage {
+  --tissage-fond: var(--surface);
+  height: 8px;
+  background:
+    repeating-linear-gradient(to right,
+      var(--rouge-500) 0 18px,
+      var(--tissage-fond) 18px 21px,
+      var(--or-300) 21px 31px,
+      var(--tissage-fond) 31px 34px,
+      var(--vert-500) 34px 52px,
+      var(--tissage-fond) 52px 55px,
+      var(--or-300) 55px 61px,
+      var(--tissage-fond) 61px 64px);
+}
+.fs-tissage--fin { height: 4px; }
+.fs-tissage--vertical {
+  width: 8px;
+  height: auto;
+  background:
+    repeating-linear-gradient(to bottom,
+      var(--rouge-500) 0 18px,
+      var(--tissage-fond) 18px 21px,
+      var(--or-300) 21px 31px,
+      var(--tissage-fond) 31px 34px,
+      var(--vert-500) 34px 52px,
+      var(--tissage-fond) 52px 55px,
+      var(--or-300) 55px 61px,
+      var(--tissage-fond) 61px 64px);
+}
+
+.fs-entete {
+  position: relative;
+  z-index: var(--plan-entete);
+  background: var(--surface);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-entete--collant { position: sticky; top: 0; }
+.fs-entete-haut {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-6);
+  padding-block: var(--espace-4);
+}
+.fs-entete-outils { display: flex; align-items: center; gap: var(--espace-2); }
+
+/* Barre de service au-dessus de l'en-tête */
+.fs-barre-service {
+  background: var(--surface-enfoncee);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+  font-size: var(--taille-xs);
+}
+.fs-barre-service .fs-conteneur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  min-height: 36px;
+  flex-wrap: wrap;
+}
+.fs-barre-service a { color: var(--texte-attenue); text-decoration: none; }
+.fs-barre-service a:hover { color: var(--texte); text-decoration: underline; }
+
+/* Navigation principale */
+.fs-nav { border-top: var(--trait-fin) solid var(--bordure); }
+.fs-nav-liste {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--espace-1);
+  flex-wrap: wrap;
+}
+.fs-nav-lien {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: var(--espace-2) var(--espace-4);
+  border-bottom: var(--trait-epais) solid transparent;
+  color: var(--texte-attenue);
+  font-family: var(--police-titre);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  text-decoration: none;
+  transition: color var(--duree-courte) var(--courbe-douce),
+              border-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-nav-lien:hover {
+  color: var(--texte);
+  border-bottom-color: var(--bordure-forte);
+}
+.fs-nav-lien[aria-current="page"] {
+  color: var(--action-sur-clair);
+  font-weight: var(--graisse-demi);
+  border-bottom-color: var(--action);
+}
+
+.fs-nav-bascule { display: none; }
+@media (max-width: 900px) {
+  .fs-nav-bascule { display: inline-flex; }
+  .fs-nav-liste {
+    display: none;
+    flex-direction: column;
+    padding-block: var(--espace-2);
+  }
+  .fs-nav[data-ouvert="true"] .fs-nav-liste { display: flex; }
+  .fs-nav-lien {
+    border-bottom: 0;
+    border-left: var(--trait-epais) solid transparent;
+    min-height: var(--cible-min);
+  }
+  .fs-nav-lien[aria-current="page"] { border-left-color: var(--action); }
+}
+
+/* Fil d'Ariane */
+.fs-ariane { font-size: var(--taille-sm); }
+.fs-ariane ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espace-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fs-ariane li { display: flex; align-items: center; gap: var(--espace-2); }
+.fs-ariane li + li::before {
+  content: "/";
+  color: var(--texte-faible);
+}
+.fs-ariane a { color: var(--texte-attenue); text-decoration: none; }
+.fs-ariane a:hover { color: var(--lien); text-decoration: underline; }
+.fs-ariane [aria-current="page"] { color: var(--texte); font-weight: var(--graisse-moyenne); }
+
+/* Onglets */
+.fs-onglets {
+  display: flex;
+  gap: var(--espace-1);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.fs-onglets::-webkit-scrollbar { display: none; }
+.fs-onglet {
+  min-height: 48px;
+  padding: var(--espace-3) var(--espace-5);
+  margin-bottom: calc(var(--trait-fin) * -1);
+  border: 0;
+  border-bottom: var(--trait-epais) solid transparent;
+  background: none;
+  color: var(--texte-attenue);
+  font-family: var(--police-titre);
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--duree-courte) var(--courbe-douce),
+              border-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-onglet:hover { color: var(--texte); }
+.fs-onglet[aria-selected="true"] {
+  color: var(--action-sur-clair);
+  font-weight: var(--graisse-demi);
+  border-bottom-color: var(--action);
+}
+.fs-panneau { padding-top: var(--espace-6); }
+.fs-panneau[hidden] { display: none; }
+
+/* Pagination */
+.fs-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-1);
+  flex-wrap: wrap;
+}
+/* Un lien lorsque la pagination est servie par le serveur — chaque
+   page ayant alors sa propre adresse —, un bouton lorsqu'elle est
+   faite dans le navigateur. Les deux se présentent à l'identique. */
+.fs-pagination a,
+.fs-pagination button,
+.fs-pagination span {
+  display: grid;
+  place-items: center;
+  min-width: var(--cible-min);
+  min-height: var(--cible-min);
+  padding-inline: var(--espace-3);
+  border: var(--trait-fin) solid transparent;
+  border-radius: var(--rayon-md);
+  background: none;
+  color: var(--texte-attenue);
+  font-family: inherit;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  text-decoration: none;
+  font-variant-numeric: tabular-nums;
+}
+.fs-pagination button { cursor: pointer; }
+.fs-pagination a:hover,
+.fs-pagination button:hover:not(:disabled) {
+  background: var(--surface-enfoncee);
+  color: var(--texte);
+}
+.fs-pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.fs-pagination [aria-current="page"] {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--action-texte);
+  font-weight: var(--graisse-grasse);
+}
+.fs-pagination button[aria-current="page"]:hover {
+  background: var(--action);
+  color: var(--action-texte);
+}
+.fs-pagination .fs-ellipse { min-width: auto; padding-inline: var(--espace-2); }
+
+/* Sommaire ancré */
+.fs-sommaire {
+  position: sticky;
+  top: var(--espace-6);
+  padding-left: var(--espace-4);
+  border-left: var(--trait-moyen) solid var(--bordure);
+}
+.fs-sommaire-titre {
+  margin-bottom: var(--espace-3);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-faible);
+}
+.fs-sommaire ul { list-style: none; margin: 0; padding: 0; }
+.fs-sommaire a {
+  display: block;
+  padding: var(--espace-2) 0;
+  color: var(--texte-attenue);
+  font-size: var(--taille-sm);
+  text-decoration: none;
+  border-left: var(--trait-moyen) solid transparent;
+  margin-left: calc(var(--espace-4) * -1 - var(--trait-moyen));
+  padding-left: var(--espace-4);
+}
+.fs-sommaire a:hover { color: var(--texte); }
+.fs-sommaire a[aria-current="true"] {
+  color: var(--action-sur-clair);
+  font-weight: var(--graisse-demi);
+  border-left-color: var(--action);
+}
+
+/* Étapes numérotées */
+.fs-etapes {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: var(--espace-2);
+  counter-reset: etape;
+}
+.fs-etape {
+  flex: 1;
+  min-width: 0;
+  padding-top: var(--espace-3);
+  border-top: var(--espace-1) solid var(--bordure);
+  counter-increment: etape;
+}
+.fs-etape-num {
+  display: block;
+  font-family: var(--police-titre);
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-faible);
+}
+.fs-etape-titre {
+  display: block;
+  margin-top: 2px;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+  color: var(--texte-attenue);
+}
+.fs-etape[data-etat="faite"] { border-top-color: var(--succes); }
+.fs-etape[data-etat="faite"] .fs-etape-titre { color: var(--texte); }
+.fs-etape[data-etat="courante"] { border-top-color: var(--action); }
+.fs-etape[data-etat="courante"] .fs-etape-num { color: var(--action-sur-clair); }
+.fs-etape[data-etat="courante"] .fs-etape-titre { color: var(--texte); font-weight: var(--graisse-grasse); }
+
+@media (max-width: 640px) {
+  .fs-etapes { flex-direction: column; gap: var(--espace-3); }
+  .fs-etape { border-top: 0; border-left: var(--espace-1) solid var(--bordure); padding: 0 0 0 var(--espace-3); }
+  .fs-etape[data-etat="faite"]    { border-left-color: var(--succes); }
+  .fs-etape[data-etat="courante"] { border-left-color: var(--action); }
+}
+
+/* Chronologie de suivi */
+.fs-chrono { list-style: none; margin: 0; padding: 0; }
+.fs-chrono li {
+  position: relative;
+  padding: 0 0 var(--espace-6) var(--espace-8);
+  border-left: var(--trait-moyen) solid var(--bordure);
+}
+.fs-chrono li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.fs-chrono li::before {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: 2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: var(--trait-moyen) solid var(--bordure-forte);
+}
+.fs-chrono li[data-etat="faite"] { border-left-color: var(--succes); }
+.fs-chrono li[data-etat="faite"]::before { background: var(--succes); border-color: var(--succes); }
+.fs-chrono li[data-etat="courante"]::before { border-color: var(--action); border-width: var(--trait-epais); }
+.fs-chrono-date {
+  display: block;
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+  font-variant-numeric: tabular-nums;
+}
+.fs-chrono-titre {
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-demi);
+  margin-bottom: var(--espace-1);
+}
+
+/* Pied de page */
+.fs-pied {
+  margin-top: var(--section-y);
+  background: var(--surface-enfoncee);
+  border-top: var(--trait-fin) solid var(--bordure);
+}
+.fs-pied-corps {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--espace-8);
+  padding-block: var(--espace-12);
+}
+.fs-pied-titre {
+  margin-bottom: var(--espace-4);
+  font-family: var(--police-titre);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-faible);
+}
+.fs-pied ul { list-style: none; margin: 0; padding: 0; }
+.fs-pied li { margin-bottom: var(--espace-2); }
+.fs-pied a {
+  color: var(--texte-attenue);
+  font-size: var(--taille-sm);
+  text-decoration: none;
+}
+.fs-pied a:hover { color: var(--texte); text-decoration: underline; }
+.fs-pied-bas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding-block: var(--espace-5);
+  border-top: var(--trait-fin) solid var(--bordure);
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+}
+@media (max-width: 768px) {
+  .fs-pied-corps { grid-template-columns: minmax(0, 1fr); gap: var(--espace-6); }
+}
+
+/* =============================================================
+   12. DIVULGATION ET SUPERPOSITION
+   ============================================================= */
+
+/* Accordéon bâti sur details/summary : fonctionne sans
+   JavaScript, ce qui compte sur connexion dégradée. */
+.fs-accordeon {
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+  background: var(--surface-haute);
+}
+.fs-accordeon details { border-bottom: var(--trait-fin) solid var(--bordure); }
+.fs-accordeon details:last-child { border-bottom: 0; }
+.fs-accordeon summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  min-height: var(--cible-min);
+  padding: var(--espace-4) var(--espace-5);
+  font-family: var(--police-titre);
+  font-weight: var(--graisse-demi);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-accordeon summary::-webkit-details-marker { display: none; }
+.fs-accordeon summary:hover { background: var(--surface-basse); }
+.fs-accordeon summary::after {
+  content: "";
+  flex: none;
+  width: 1.25em;
+  height: 1.25em;
+  background-color: var(--texte-faible);
+  -webkit-mask: var(--i-chevron-bas) center / contain no-repeat;
+          mask: var(--i-chevron-bas) center / contain no-repeat;
+  transition: transform var(--duree-moyenne) var(--courbe-sortie);
+}
+.fs-accordeon details[open] > summary { background: var(--surface-basse); }
+.fs-accordeon details[open] > summary::after { transform: rotate(180deg); }
+.fs-accordeon-corps { padding: 0 var(--espace-5) var(--espace-5); }
+
+/* Modale */
+.fs-modale {
+  padding: 0;
+  border: 0;
+  border-radius: var(--rayon-xl);
+  background: var(--surface-haute);
+  color: var(--texte);
+  box-shadow: var(--ombre-xl);
+  width: min(560px, calc(100vw - var(--espace-8)));
+  max-height: min(85vh, 800px);
+}
+.fs-modale::backdrop {
+  background: var(--surface-voile);
+  backdrop-filter: blur(2px);
+}
+.fs-modale[open] { animation: fs-modale-entree var(--duree-moyenne) var(--courbe-sortie); }
+@keyframes fs-modale-entree {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+.fs-modale-entete {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding: var(--espace-5) var(--espace-6);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-modale-titre { margin: 0; font-size: var(--taille-h4); }
+.fs-modale-corps {
+  padding: var(--espace-6);
+  overflow-y: auto;
+  max-height: 60vh;
+}
+.fs-modale-pied {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espace-3);
+  padding: var(--espace-5) var(--espace-6);
+  border-top: var(--trait-fin) solid var(--bordure);
+  background: var(--surface-basse);
+}
+.fs-modale--large { width: min(860px, calc(100vw - var(--espace-8))); }
+
+@media (max-width: 560px) {
+  .fs-modale {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+  .fs-modale-pied { flex-direction: column-reverse; }
+  .fs-modale-pied .fs-btn { width: 100%; }
+}
+
+/* Panneau latéral */
+.fs-panneau-lateral {
+  position: fixed;
+  inset-block: 0;
+  right: 0;
+  z-index: var(--plan-modale);
+  width: min(420px, 100vw);
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-haute);
+  border-left: var(--trait-fin) solid var(--bordure);
+  box-shadow: var(--ombre-xl);
+  transform: translateX(100%);
+  transition: transform var(--duree-longue) var(--courbe-sortie);
+}
+.fs-panneau-lateral[data-ouvert="true"] { transform: none; }
+.fs-voile {
+  position: fixed;
+  inset: 0;
+  z-index: var(--plan-voile);
+  background: var(--surface-voile);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duree-moyenne) var(--courbe-douce), visibility var(--duree-moyenne);
+}
+.fs-voile[data-ouvert="true"] { opacity: 1; visibility: visible; }
+
+/* Menu déroulant */
+.fs-menu { position: relative; display: inline-block; }
+.fs-menu-liste {
+  position: absolute;
+  top: calc(100% + var(--espace-2));
+  right: 0;
+  z-index: var(--plan-menu);
+  min-width: 220px;
+  padding: var(--espace-2);
+  margin: 0;
+  list-style: none;
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  box-shadow: var(--ombre-lg);
+}
+.fs-menu-liste[hidden] { display: none; }
+.fs-menu-liste a,
+.fs-menu-liste button {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  width: 100%;
+  min-height: 40px;
+  padding: var(--espace-2) var(--espace-3);
+  border: 0;
+  border-radius: var(--rayon-md);
+  background: none;
+  color: var(--texte);
+  font-size: var(--taille-sm);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.fs-menu-liste a:hover,
+.fs-menu-liste button:hover { background: var(--surface-enfoncee); }
+.fs-menu-separateur {
+  height: 1px;
+  margin: var(--espace-2) 0;
+  background: var(--bordure);
+}
+
+/* Infobulle */
+.fs-infobulle { position: relative; display: inline-flex; }
+.fs-infobulle-contenu {
+  position: absolute;
+  bottom: calc(100% + var(--espace-2));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--plan-infobulle);
+  width: max-content;
+  max-width: 260px;
+  padding: var(--espace-2) var(--espace-3);
+  background: var(--neutre-900);
+  color: var(--neutre-50);
+  border-radius: var(--rayon-md);
+  font-size: var(--taille-xs);
+  line-height: 1.45;
+  box-shadow: var(--ombre-md);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duree-courte) var(--courbe-douce), visibility var(--duree-courte);
+}
+.fs-infobulle:hover .fs-infobulle-contenu,
+.fs-infobulle:focus-within .fs-infobulle-contenu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =============================================================
+   13. PROGRESSION ET ATTENTE
+   ============================================================= */
+
+.fs-jauge {
+  width: 100%;
+  height: 8px;
+  background: var(--surface-enfoncee);
+  border-radius: var(--rayon-plein);
+  overflow: hidden;
+}
+.fs-jauge-valeur {
+  height: 100%;
+  background: var(--action);
+  border-radius: inherit;
+  transition: width var(--duree-longue) var(--courbe-sortie);
+}
+.fs-jauge--relief .fs-jauge-valeur { background: var(--relief); }
+.fs-jauge--danger .fs-jauge-valeur { background: var(--danger); }
+
+.fs-sablier {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: var(--trait-moyen) solid var(--bordure-forte);
+  border-top-color: var(--action);
+  border-radius: 50%;
+  animation: fs-rotation 720ms linear infinite;
+}
+.fs-sablier--lg { width: 36px; height: 36px; border-width: var(--trait-epais); }
+
+/* Squelette de chargement */
+.fs-squelette {
+  background: linear-gradient(90deg,
+    var(--surface-enfoncee) 25%,
+    var(--surface-basse) 37%,
+    var(--surface-enfoncee) 63%);
+  background-size: 400% 100%;
+  border-radius: var(--rayon-sm);
+  animation: fs-squelette 1.4s ease infinite;
+}
+.fs-squelette--texte { height: 0.85em; margin-bottom: var(--espace-2); }
+.fs-squelette--titre { height: 1.6em; width: 60%; margin-bottom: var(--espace-4); }
+.fs-squelette--bloc  { height: 160px; border-radius: var(--rayon-lg); }
+@keyframes fs-squelette {
+  from { background-position: 100% 50%; }
+  to   { background-position: 0 50%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fs-squelette { animation: none; }
+}
+
+/* État vide */
+.fs-vide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--espace-4);
+  padding: var(--espace-16) var(--espace-6);
+  text-align: center;
+  border: var(--trait-fin) dashed var(--bordure-forte);
+  border-radius: var(--rayon-lg);
+  background: var(--surface-basse);
+}
+.fs-vide-titre { margin: 0; font-size: var(--taille-h5); }
+.fs-vide p { max-width: 44ch; color: var(--texte-attenue); font-size: var(--taille-sm); }
+
+/* =============================================================
+   14. COMPOSANTS MÉTIER
+
+   Blocs propres aux services publics. Ils répondent à une
+   obligation d'information ou à un parcours administratif
+   identifié, et ne sont pas interchangeables avec des blocs
+   génériques.
+   ============================================================= */
+
+/* Bandeau d'identification officielle. Obligatoire en tête de
+   tout service en ligne de l'État : il permet à l'usager de
+   distinguer un site authentique d'une contrefaçon. */
+.fs-officiel {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  padding: var(--espace-2) 0;
+  background: var(--vert-900);
+  color: #fff;
+  font-size: var(--taille-xs);
+}
+.fs-officiel .fs-conteneur {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  flex-wrap: wrap;
+}
+.fs-officiel-sceau {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espace-2);
+  font-weight: var(--graisse-demi);
+}
+.fs-officiel-sceau::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom,
+    var(--rouge-500) 0 50%, var(--vert-500) 50% 100%);
+}
+.fs-officiel code {
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 0;
+  border-radius: var(--rayon-sm);
+  color: #fff;
+  font-size: inherit;
+}
+.fs-officiel button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+/* Carte de démarche : résume ce que l'usager veut savoir avant
+   de s'engager — coût, délai, canal. */
+.fs-demarche {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-4);
+  padding: var(--espace-5);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              box-shadow var(--duree-courte) var(--courbe-douce);
+}
+.fs-demarche:hover { border-color: var(--action); box-shadow: var(--ombre-md); }
+.fs-demarche-entete { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--espace-3); }
+.fs-demarche-titre { margin: 0; font-size: var(--taille-h5); }
+.fs-demarche-titre a { color: inherit; text-decoration: none; }
+.fs-demarche-resume { margin: 0; font-size: var(--taille-sm); color: var(--texte-attenue); }
+.fs-demarche-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-4);
+  padding-top: var(--espace-4);
+  border-top: var(--trait-fin) solid var(--bordure);
+}
+.fs-demarche-meta > div { display: flex; flex-direction: column; gap: 1px; }
+.fs-demarche-meta dt,
+.fs-demarche-meta .fs-cle {
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-faible);
+}
+.fs-demarche-meta dd,
+.fs-demarche-meta .fs-valeur {
+  margin: 0;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Bloc d'autorité responsable */
+.fs-autorite {
+  display: flex;
+  gap: var(--espace-4);
+  padding: var(--espace-5);
+  background: var(--surface-basse);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+}
+.fs-autorite img { width: 48px; height: auto; flex: none; }
+.fs-autorite-nom { font-family: var(--police-titre); font-weight: var(--graisse-demi); }
+.fs-autorite-tutelle { font-size: var(--taille-sm); color: var(--texte-attenue); }
+.fs-autorite-contacts { margin-top: var(--espace-3); font-size: var(--taille-sm); }
+
+/* Pièces à fournir */
+.fs-pieces { list-style: none; margin: 0; padding: 0; }
+.fs-pieces li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espace-3);
+  padding: var(--espace-3) 0;
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-pieces li:last-child { border-bottom: 0; }
+.fs-pieces-num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--action-tenue);
+  color: var(--action-sur-clair);
+  font-size: var(--taille-xs);
+  font-weight: var(--graisse-grasse);
+  font-variant-numeric: tabular-nums;
+}
+.fs-pieces-nom { font-weight: var(--graisse-moyenne); }
+.fs-pieces-detail { font-size: var(--taille-sm); color: var(--texte-attenue); }
+
+/* Suivi de dossier */
+.fs-dossier {
+  padding: var(--espace-6);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-xl);
+}
+.fs-dossier-entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-4);
+  padding-bottom: var(--espace-5);
+  margin-bottom: var(--espace-5);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-dossier-reference {
+  font-family: var(--police-mono);
+  font-size: var(--taille-lg);
+  font-weight: var(--graisse-demi);
+  letter-spacing: 0.02em;
+}
+.fs-dossier-depot { font-size: var(--taille-sm); color: var(--texte-faible); }
+
+/* Tuile d'événement de vie */
+.fs-evenement {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-2);
+  padding: var(--espace-5);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--duree-courte) var(--courbe-douce),
+              background-color var(--duree-courte) var(--courbe-douce);
+}
+.fs-evenement:hover {
+  border-color: var(--action);
+  background: var(--action-tenue);
+}
+.fs-evenement-titre { font-family: var(--police-titre); font-weight: var(--graisse-demi); }
+.fs-evenement-nb { font-size: var(--taille-xs); color: var(--texte-faible); }
+
+/* Bandeau de consentement */
+.fs-consentement {
+  position: fixed;
+  bottom: var(--espace-4);
+  left: var(--espace-4);
+  z-index: var(--plan-alerte);
+  width: min(460px, calc(100vw - var(--espace-8)));
+  padding: var(--espace-5);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-radius: var(--rayon-xl);
+  box-shadow: var(--ombre-xl);
+}
+
+/* Signalement de fraude */
+.fs-signalement {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-4);
+  padding: var(--espace-4) var(--espace-5);
+  background: var(--danger-fond);
+  border: var(--trait-fin) solid var(--danger-bord);
+  border-radius: var(--rayon-lg);
+  font-size: var(--taille-sm);
+}
+
+/* =============================================================
+   15. SAISIE DE DATE
+
+   Deux composants distincts, pour deux usages que l'on confond
+   souvent. Une date que l'usager connaît par cœur — naissance,
+   délivrance d'un titre — se saisit au clavier en trois champs :
+   ouvrir un calendrier pour remonter quarante ans est une
+   épreuve. Une date à choisir dans les semaines qui viennent —
+   rendez-vous — se prend dans le sélecteur natif du système,
+   déjà connu de l'usager et accessible sans effort.
+   ============================================================= */
+
+.fs-date {
+  display: flex;
+  gap: var(--espace-3);
+  align-items: flex-start;
+}
+.fs-date .fs-champ { gap: var(--espace-1); }
+.fs-date .fs-label { font-weight: var(--graisse-normale); font-size: var(--taille-xs); }
+.fs-date .fs-saisie {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  padding-inline: var(--espace-2);
+}
+.fs-date-jour  .fs-saisie,
+.fs-date-mois  .fs-saisie { width: 4rem; }
+.fs-date-annee .fs-saisie { width: 5.5rem; }
+
+/* =============================================================
+   16. AUTOCOMPLÉTION
+
+   Motif ARIA combobox. Le champ reste un champ de saisie
+   ordinaire tant que le script n'a pas pris la main : sans
+   JavaScript, l'usager saisit librement et le serveur valide.
+   ============================================================= */
+
+.fs-combo { position: relative; }
+
+.fs-combo-liste {
+  position: absolute;
+  top: calc(100% + var(--espace-1));
+  left: 0;
+  right: 0;
+  z-index: var(--plan-menu);
+  max-height: 260px;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--espace-1);
+  list-style: none;
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure-forte);
+  border-radius: var(--rayon-md);
+  box-shadow: var(--ombre-lg);
+}
+.fs-combo-liste[hidden] { display: none; }
+
+.fs-combo-option {
+  padding: var(--espace-3) var(--espace-3);
+  border-radius: var(--rayon-sm);
+  font-size: var(--taille-sm);
+  cursor: pointer;
+  scroll-margin: var(--espace-1);
+}
+.fs-combo-option:hover { background: var(--surface-enfoncee); }
+.fs-combo-option[aria-selected="true"] {
+  background: var(--action-tenue);
+  color: var(--action-sur-clair);
+  font-weight: var(--graisse-moyenne);
+}
+/* La portion saisie est mise en évidence dans chaque suggestion,
+   pour que l'usager comprenne pourquoi elle lui est proposée. */
+.fs-combo-option mark {
+  background: none;
+  color: inherit;
+  font-weight: var(--graisse-grasse);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.fs-combo-vide {
+  padding: var(--espace-4) var(--espace-3);
+  font-size: var(--taille-sm);
+  color: var(--texte-faible);
+}
+
+/* =============================================================
+   17. VISUALISATION DE DONNÉES
+
+   Aucun graphique n'est produit par une bibliothèque tierce :
+   une page de service public doit rester lisible sur un appareil
+   modeste. Les formes ci-dessous sont obtenues en CSS ou en SVG
+   écrit à la main, et s'accompagnent toujours du tableau des
+   données, qui reste la source consultable par tous.
+   ============================================================= */
+
+.fs-graphe {
+  padding: var(--espace-5);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+}
+.fs-graphe-titre {
+  margin: 0 0 var(--espace-1);
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+}
+.fs-graphe-note {
+  margin: 0 0 var(--espace-5);
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+}
+
+/* Barres horizontales : le libellé reste lisible quelle que soit
+   la longueur, ce qui n'est pas le cas des barres verticales. */
+.fs-barres { display: flex; flex-direction: column; gap: var(--espace-4); }
+.fs-barre {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--espace-1) var(--espace-4);
+  align-items: baseline;
+}
+.fs-barre-libelle { font-size: var(--taille-sm); }
+.fs-barre-valeur {
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-demi);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.fs-barre-piste {
+  grid-column: 1 / -1;
+  height: 12px;
+  background: var(--surface-enfoncee);
+  border-radius: var(--rayon-sm);
+  overflow: hidden;
+}
+.fs-barre-remplissage {
+  height: 100%;
+  background: var(--serie-1);
+  border-radius: inherit;
+}
+.fs-barre--s2 .fs-barre-remplissage { background: var(--serie-2); }
+.fs-barre--s3 .fs-barre-remplissage { background: var(--serie-3); }
+.fs-barre--s4 .fs-barre-remplissage { background: var(--serie-4); }
+.fs-barre--s5 .fs-barre-remplissage { background: var(--serie-5); }
+.fs-barre--s6 .fs-barre-remplissage { background: var(--serie-6); }
+
+/* Répartition : une seule grandeur décomposée en parts */
+.fs-repartition {
+  display: flex;
+  height: 28px;
+  border-radius: var(--rayon-sm);
+  overflow: hidden;
+}
+.fs-repartition > * {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  color: var(--texte-sur-couleur);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.fs-repartition-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-2) var(--espace-5);
+  margin-top: var(--espace-4);
+  font-size: var(--taille-sm);
+}
+.fs-repartition-legende > * {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-2);
+}
+.fs-repartition-legende > *::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+  flex: none;
+  border-radius: var(--rayon-xs);
+  background: var(--puce, var(--serie-1));
+}
+
+/* Courbe : SVG écrit à la main, le tracé étant fourni par le
+   service. preserveAspectRatio="none" est proscrit, il déforme
+   l'épaisseur du trait. */
+.fs-courbe { width: 100%; height: auto; overflow: visible; }
+.fs-courbe-grille { stroke: var(--bordure); stroke-width: 1; }
+.fs-courbe-axe { stroke: var(--bordure-forte); stroke-width: 1; }
+.fs-courbe-trace {
+  fill: none;
+  stroke: var(--serie-1);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.fs-courbe-aire { fill: var(--serie-1); opacity: 0.1; }
+.fs-courbe-point { fill: var(--surface); stroke: var(--serie-1); stroke-width: 2.5; }
+.fs-courbe-etiquette {
+  font-family: var(--police-texte);
+  font-size: 11px;
+  fill: var(--texte-faible);
+}
+
+/* Le tableau équivalent est la donnée de référence. Il est
+   replié pour ne pas alourdir la page, jamais supprimé. */
+.fs-graphe-donnees { margin-top: var(--espace-5); }
+.fs-graphe-donnees > summary {
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+  color: var(--lien);
+  cursor: pointer;
+}
+.fs-graphe-donnees > summary:hover { color: var(--lien-survol); }
+.fs-graphe-donnees[open] > summary { margin-bottom: var(--espace-4); }
+
+/* =============================================================
+   18. IMAGES
+
+   Une image de service public informe ; elle n'habille pas. Le
+   rapport d'affichage est déclaré pour qu'aucun décalage de mise
+   en page ne survienne pendant le chargement.
+   ============================================================= */
+
+.fs-figure { margin: 0 0 var(--espace-6); }
+.fs-figure img {
+  width: 100%;
+  border-radius: var(--rayon-lg);
+  background: var(--surface-enfoncee);
+}
+.fs-figure--16-9 img { aspect-ratio: 16 / 9; object-fit: cover; }
+.fs-figure--4-3 img  { aspect-ratio: 4 / 3;  object-fit: cover; }
+.fs-figure--1-1 img  { aspect-ratio: 1 / 1;  object-fit: cover; }
+.fs-figure figcaption {
+  margin-top: var(--espace-3);
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+  line-height: var(--interligne-normal);
+}
+.fs-figure-credit {
+  display: block;
+  margin-top: var(--espace-1);
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+}
+
+/* =============================================================
+   19. CALENDRIER
+
+   Un calendrier est un tableau : les jours d'une même colonne
+   partagent un en-tête, ceux d'une même ligne une semaine. Le
+   balisage suit cette structure, ce qui le rend parcourable par
+   un lecteur d'écran sans traitement particulier.
+
+   Le mois est produit par le serveur. Le script ne gère que la
+   sélection : sans lui, le calendrier reste consultable et les
+   jours disponibles restent des liens.
+   ============================================================= */
+
+.fs-calendrier {
+  display: inline-block;
+  padding: var(--espace-4);
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+}
+.fs-calendrier-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-3);
+  margin-bottom: var(--espace-3);
+}
+.fs-calendrier-mois {
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+  text-transform: capitalize;
+}
+.fs-calendrier table { border-collapse: collapse; }
+.fs-calendrier th {
+  padding: var(--espace-2) 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-2xs);
+  font-weight: var(--graisse-grasse);
+  letter-spacing: var(--approche-capitale);
+  text-transform: uppercase;
+  color: var(--texte-faible);
+}
+.fs-calendrier td { padding: 1px; text-align: center; }
+
+.fs-jour {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: var(--trait-fin) solid transparent;
+  border-radius: var(--rayon-md);
+  background: none;
+  color: var(--texte);
+  font-family: inherit;
+  font-size: var(--taille-sm);
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  cursor: pointer;
+}
+.fs-jour:hover { background: var(--surface-enfoncee); }
+
+/* Le jour courant est cerné, le jour choisi est plein : deux
+   repères distincts, qui peuvent tomber sur la même case. */
+.fs-jour[data-aujourdhui] {
+  border-color: var(--bordure-forte);
+  font-weight: var(--graisse-demi);
+}
+.fs-jour[aria-pressed="true"],
+.fs-jour[aria-current="date"] {
+  background: var(--action);
+  border-color: var(--action);
+  color: var(--action-texte);
+  font-weight: var(--graisse-grasse);
+}
+.fs-jour:disabled,
+.fs-jour[aria-disabled="true"] {
+  color: var(--texte-faible);
+  background: none;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Pastille de disponibilité : un jour peut être ouvert sans être
+   choisi, l'information ne doit pas reposer sur la seule couleur. */
+.fs-jour-dispo {
+  position: relative;
+}
+.fs-jour-dispo::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--succes);
+}
+.fs-jour[aria-pressed="true"]::after { background: var(--action-texte); }
+
+.fs-calendrier-legende {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espace-4);
+  margin-top: var(--espace-3);
+  padding-top: var(--espace-3);
+  border-top: var(--trait-fin) solid var(--bordure);
+  font-size: var(--taille-xs);
+  color: var(--texte-attenue);
+}
+
+/* =============================================================
+   20. CENTRE DE NOTIFICATIONS
+
+   Historique consultable, distinct de la notification passagère.
+   Il ne porte jamais seul une information exigeant une action :
+   le SMS reste le canal qui atteint l'usager hors du service.
+   ============================================================= */
+
+.fs-notifications {
+  background: var(--surface-haute);
+  border: var(--trait-fin) solid var(--bordure);
+  border-radius: var(--rayon-lg);
+  overflow: hidden;
+}
+.fs-notifications-entete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espace-3);
+  padding: var(--espace-4) var(--espace-5);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+  background: var(--surface-basse);
+}
+.fs-notifications-titre {
+  display: flex;
+  align-items: center;
+  gap: var(--espace-3);
+  margin: 0;
+  font-family: var(--police-titre);
+  font-size: var(--taille-md);
+  font-weight: var(--graisse-demi);
+}
+.fs-notifications-liste { list-style: none; margin: 0; padding: 0; }
+
+.fs-notification {
+  display: flex;
+  gap: var(--espace-4);
+  padding: var(--espace-4) var(--espace-5);
+  border-bottom: var(--trait-fin) solid var(--bordure);
+}
+.fs-notification:last-child { border-bottom: 0; }
+.fs-notification-icone {
+  --icone-taille: 20px;
+  margin-top: 2px;
+  color: var(--texte-faible);
+}
+.fs-notification-corps { flex: 1; min-width: 0; }
+.fs-notification-titre {
+  margin: 0 0 2px;
+  font-size: var(--taille-sm);
+  font-weight: var(--graisse-moyenne);
+}
+.fs-notification-texte {
+  margin: 0;
+  font-size: var(--taille-sm);
+  color: var(--texte-attenue);
+}
+.fs-notification-date {
+  display: block;
+  margin-top: var(--espace-2);
+  font-size: var(--taille-xs);
+  color: var(--texte-faible);
+}
+
+/* Non lu : fond teinté, titre appuyé et pastille. Trois repères
+   pour une seule information, dont aucun n'est la couleur seule. */
+.fs-notification[data-lu="false"] { background: var(--action-tenue); }
+.fs-notification[data-lu="false"] .fs-notification-titre {
+  font-weight: var(--graisse-grasse);
+}
+.fs-notification[data-lu="false"] .fs-notification-icone { color: var(--action-sur-clair); }
+.fs-notification-puce {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--action);
+}
+.fs-notification[data-lu="true"] .fs-notification-puce { visibility: hidden; }
+
+/* =============================================================
+   21. UTILITAIRES
+   ============================================================= */
+
+.fs-invisible {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.fs-centre { text-align: center; }
+.fs-droite { text-align: right; }
+
+.fs-nowrap { white-space: nowrap; }
+.fs-tabulaire { font-variant-numeric: tabular-nums; }
+
+.fs-attenue { color: var(--texte-attenue); }
+.fs-faible  { color: var(--texte-faible); }
+
+.fs-fond-basse    { background: var(--surface-basse); }
+.fs-fond-enfoncee { background: var(--surface-enfoncee); }
+
+.fs-mt-0 { margin-top: 0; }
+.fs-mb-0 { margin-bottom: 0; }
+.fs-mt-4 { margin-top: var(--espace-4); }
+.fs-mt-6 { margin-top: var(--espace-6); }
+.fs-mt-8 { margin-top: var(--espace-8); }
+
+@media (max-width: 768px) {
+  .fs-masque-mobile { display: none !important; }
+}
+@media (min-width: 769px) {
+  .fs-masque-bureau { display: none !important; }
+}
+
+/* =============================================================
+   22. IMPRESSION
+
+   Les services publics sont imprimés : récépissés, convocations,
+   fiches de démarche. La feuille d'impression fait partie du
+   système, pas d'un correctif ultérieur.
+   ============================================================= */
+
+@media print {
+  :root {
+    --surface: #fff;
+    --surface-basse: #fff;
+    --surface-enfoncee: #fff;
+    --texte: #000;
+    --texte-attenue: #333;
+    --bordure: #999;
+  }
+
+  body { font-size: 11pt; background: #fff; color: #000; }
+
+  .fs-entete--collant,
+  .fs-nav,
+  .fs-barre-service,
+  .fs-sommaire,
+  .fs-toasts,
+  .fs-consentement,
+  .fs-pagination,
+  .fs-evitement,
+  .fs-btn { display: none !important; }
+
+  .fs-carte,
+  .fs-demarche,
+  .fs-dossier,
+  .fs-tableau-cadre {
+    border: 1px solid #999;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  h1, h2, h3 { break-after: avoid; }
+  figure { break-inside: avoid; }
+
+  /* Tableau de données à l'impression.
+
+     L'extraction porte sur l'ensemble des lignes retenues par les
+     filtres, et non sur la page affichée : une extraction limitée
+     à la page 1 sur 12 serait un piège. Les lignes que la
+     pagination masque sont donc réaffichées, mais pas celles
+     qu'un filtre a écartées. */
+  [data-pagination] tbody tr[hidden]:not([data-exclu]) {
+    display: table-row !important;
+  }
+
+  .fs-filtres,
+  .fs-filtres-actifs,
+  .fs-tableau-outils,
+  .fs-tableau-pied,
+  .fs-tableau-export,
+  .fs-pagination { display: none !important; }
+
+  .fs-tableau-bloc { border: 0; }
+  .fs-tableau-cadre { overflow: visible; }
+
+  .fs-impression-entete {
+    display: flex !important;
+    align-items: center;
+    gap: 12pt;
+    padding-bottom: 8pt;
+    margin-bottom: 10pt;
+    border-bottom: 1pt solid #999;
+    break-after: avoid;
+  }
+  .fs-impression-entete img { width: 34pt; height: auto; }
+
+  /* L'en-tête de colonnes se répète sur chaque feuille, et
+     aucune ligne n'est coupée entre deux pages. */
+  .fs-tableau thead { display: table-header-group; }
+  .fs-tableau tfoot { display: table-footer-group; }
+  .fs-tableau tr { break-inside: avoid; }
+  .fs-tableau th,
+  .fs-tableau td { font-size: 9pt; padding: 4pt 6pt; }
+  .fs-tableau thead th {
+    position: static;
+    background: #eee;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* L'URL des liens de contenu est restituée : sur papier, un
+     lien sans adresse est une information perdue. */
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555;
+    word-break: break-all;
+  }
+
+  .fs-filet,
+  .fs-repere {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

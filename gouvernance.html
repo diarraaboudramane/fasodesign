@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gouvernance&nbsp;— Charte graphique de l'administration burkinabè</title>
+<meta name="description" content="Rôles, versionnement, cycle de vie des composants, procédure de contribution, dérogations et journal des versions du système de conception de l'État burkinabè.">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/faso.css">
+<link rel="stylesheet" href="assets/css/icones.css">
+<link rel="stylesheet" href="assets/css/docs.css">
+<link rel="icon" href="assets/img/armoiries.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
+
+<div class="doc-barre">
+  <a class="doc-menu-marque" href="index.html">
+    <img src="assets/img/armoiries.svg" alt="">
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+  </a>
+  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
+</div>
+
+<div class="doc-page">
+
+  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
+    <a class="doc-menu-marque" href="index.html">
+      <img src="assets/img/armoiries.svg" alt="">
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    </a>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Le système</p>
+      <ul>
+        <li><a href="index.html">Présentation</a></li>
+        <li><a href="fondations.html">Fondations</a></li>
+        <li><a href="composants.html">Composants de base</a></li>
+        <li><a href="composants-metier.html">Composants métier</a></li>
+        <li><a href="gabarits.html">Gabarits</a></li>
+        <li><a href="accessibilite.html">Accessibilité</a></li>
+        <li><a href="integration.html">Intégration</a></li>
+        <li><a href="gouvernance.html" aria-current="page">Gouvernance</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Sur cette page</p>
+      <div class="fs-sommaire" data-sommaire-auto></div>
+    </div>
+  </nav>
+
+  <main class="doc-corps" id="contenu">
+
+    <div class="doc-entete">
+      <nav class="doc-fil" aria-label="Fil d'Ariane">
+        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Gouvernance</span>
+      </nav>
+      <h1>Gouvernance</h1>
+      <p class="fs-chapeau">
+        Un système de conception qui n'a pas de propriétaire se fragmente&nbsp;; un système
+        qui n'a pas de procédure se fige. Cette page fixe qui décide, comment le
+        système évolue, et ce qu'un projet doit faire lorsque la charte ne prévoit pas
+        son cas.
+      </p>
+    </div>
+
+    <div class="fs-encart fs-encart--alerte" style="margin-bottom: var(--espace-12);">
+      <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+      <div class="fs-encart-corps">
+        <p class="fs-encart-titre">Désignations à arrêter</p>
+        <p>
+          Les rôles et les procédures décrits ici sont des propositions de conception.
+          Les organismes qui les exercent&nbsp;— autorité de tutelle, équipe du système,
+          comité d'arbitrage&nbsp;— doivent être désignés par acte administratif avant
+          l'entrée en vigueur de la charte. Les mentions <code>[à désigner]</code>
+          marquent les points qui relèvent de cette décision et non de la conception.
+        </p>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="roles">
+      <h2>Rôles et responsabilités</h2>
+      <p class="doc-section-intro">
+        Trois niveaux, et un principe&nbsp;: la décision revient au plus proche du
+        terrain qui peut la prendre sans compromettre l'unité du système.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Les trois niveaux</h3>
+
+        <div class="fs-auto-grille" style="--min-colonne: 280px;">
+          <article class="fs-carte">
+            <div class="fs-carte-corps">
+              <span class="fs-badge fs-badge--info" style="align-self:flex-start;">Niveau 1</span>
+              <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">Autorité de tutelle</h4>
+              <p class="fs-carte-texte">
+                Approuve les versions majeures, arbitre les désaccords persistants,
+                engage la charte vis-à-vis des administrations. N'intervient pas dans
+                les décisions courantes.
+              </p>
+              <p class="fs-legende"><code>[à désigner]</code></p>
+            </div>
+          </article>
+
+          <article class="fs-carte">
+            <div class="fs-carte-corps">
+              <span class="fs-badge fs-badge--succes" style="align-self:flex-start;">Niveau 2</span>
+              <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">Équipe du système</h4>
+              <p class="fs-carte-texte">
+                Maintient les fichiers et la documentation, instruit les propositions,
+                publie les versions mineures et correctives, tient le registre des
+                dérogations, accompagne les projets.
+              </p>
+              <p class="fs-legende"><code>[à désigner]</code></p>
+            </div>
+          </article>
+
+          <article class="fs-carte">
+            <div class="fs-carte-corps">
+              <span class="fs-badge fs-badge--neutre" style="align-self:flex-start;">Niveau 3</span>
+              <h4 class="fs-carte-titre" style="font-size: var(--taille-md);">Référents de projet</h4>
+              <p class="fs-carte-texte">
+                Un référent par service numérique. Applique la charte, signale les
+                manques, soumet les dérogations, atteste la conformité avant mise en
+                production.
+              </p>
+              <p class="fs-legende">Désigné par l'administration porteuse du service</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Qui décide quoi</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Répartition des décisions</caption>
+            <thead>
+              <tr>
+                <th>Décision</th>
+                <th>Instruite par</th>
+                <th>Arrêtée par</th>
+                <th>Délai visé</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Correction d'un défaut</td>
+                <td>Équipe du système</td>
+                <td>Équipe du système</td>
+                <td class="fs-tabulaire">10 jours ouvrés</td>
+              </tr>
+              <tr>
+                <td>Nouveau composant ou variante</td>
+                <td>Équipe du système</td>
+                <td>Équipe du système</td>
+                <td class="fs-tabulaire">30 jours ouvrés</td>
+              </tr>
+              <tr>
+                <td>Modification d'un jeton existant</td>
+                <td>Équipe du système</td>
+                <td>Comité d'arbitrage</td>
+                <td class="fs-tabulaire">45 jours ouvrés</td>
+              </tr>
+              <tr>
+                <td>Dérogation ponctuelle d'un projet</td>
+                <td>Référent de projet</td>
+                <td>Équipe du système</td>
+                <td class="fs-tabulaire">10 jours ouvrés</td>
+              </tr>
+              <tr>
+                <td>Emploi de l'emblème hors règles</td>
+                <td>Équipe du système</td>
+                <td>Autorité de tutelle</td>
+                <td class="fs-tabulaire">Sans délai garanti</td>
+              </tr>
+              <tr>
+                <td>Version majeure</td>
+                <td>Équipe du système</td>
+                <td>Autorité de tutelle</td>
+                <td class="fs-tabulaire">Annuel au plus</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="versionnement">
+      <h2>Versionnement</h2>
+      <p class="doc-section-intro">
+        Le numéro de version se lit <code>majeure.mineure.corrective</code>. Ce qui
+        détermine le rang n'est pas l'ampleur du travail mais l'effort imposé aux
+        projets qui ont déjà intégré la charte.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ce qui fait changer chaque rang</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Rang</th><th>Déclencheurs</th><th>Effet pour un projet</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Majeure</strong><br><span class="fs-legende">2.0 → 3.0</span></td>
+                <td>
+                  Suppression ou renommage d'un jeton, d'une classe ou d'un composant&nbsp;;
+                  modification du balisage exigé par un composant&nbsp;; changement de
+                  <em>sens</em> d'un jeton&nbsp;; nouvelle dépendance entre fichiers.
+                </td>
+                <td>Reprise du code nécessaire. Guide de migration fourni.</td>
+              </tr>
+              <tr>
+                <td><strong>Mineure</strong><br><span class="fs-legende">2.0 → 2.1</span></td>
+                <td>
+                  Nouveau composant, nouvelle variante, nouveau jeton, nouvelle icône,
+                  passage d'un composant en <em>déconseillé</em>.
+                </td>
+                <td>Aucune reprise. Mise à jour des fichiers suffisante.</td>
+              </tr>
+              <tr>
+                <td><strong>Corrective</strong><br><span class="fs-legende">2.0 → 2.0.1</span></td>
+                <td>
+                  Correction d'un défaut, ajustement visuel sans changement de
+                  balisage, correction de documentation.
+                </td>
+                <td>Aucune reprise.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>La valeur d'un jeton n'est pas son contrat.</strong> Ajuster
+          <code>--vert-600</code> de deux points de luminosité est une version
+          corrective. En revanche, faire pointer <code>--action</code> vers une autre
+          famille chromatique change le sens du jeton et constitue une rupture, même
+          si aucune ligne de code de projet n'a besoin d'être touchée.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Rythme de publication</h3>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Les versions correctives sont publiées au fil de l'eau.</li>
+          <li>Les versions mineures sont regroupées et publiées au plus une fois par trimestre, pour que les projets n'aient pas à suivre un flux continu.</li>
+          <li>Une version majeure au plus par an, annoncée six mois à l'avance.</li>
+          <li>Chaque publication est accompagnée d'une entrée au <a href="#journal">journal des versions</a>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="cycle">
+      <h2>Cycle de vie d'un composant</h2>
+      <p class="doc-section-intro">
+        Un composant n'entre pas dans la charte parce qu'il est utile à un projet,
+        mais parce qu'il répond à un besoin constaté dans plusieurs. Il en sort selon
+        une procédure, jamais du jour au lendemain.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Les quatre états</h3>
+
+        <div class="doc-demo" data-libelle="États d'un composant">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <ol class="fs-etapes">
+              <li class="fs-etape" data-etat="faite">
+                <span class="fs-etape-num">État 1</span>
+                <span class="fs-etape-titre">Proposé</span>
+              </li>
+              <li class="fs-etape" data-etat="faite">
+                <span class="fs-etape-num">État 2</span>
+                <span class="fs-etape-titre">Expérimental</span>
+              </li>
+              <li class="fs-etape" data-etat="courante">
+                <span class="fs-etape-num">État 3</span>
+                <span class="fs-etape-titre">Stable</span>
+              </li>
+              <li class="fs-etape">
+                <span class="fs-etape-num">État 4</span>
+                <span class="fs-etape-titre">Déconseillé, puis retiré</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <dl class="fs-definitions fs-mt-6">
+          <div>
+            <dt><span class="fs-badge fs-badge--neutre">Proposé</span></dt>
+            <dd>
+              Besoin exprimé et instruit. Le composant n'existe pas encore dans les
+              fichiers. Aucun projet ne doit l'anticiper.
+            </dd>
+          </div>
+          <div>
+            <dt><span class="fs-badge fs-badge--alerte">Expérimental</span></dt>
+            <dd>
+              Publié mais susceptible d'évoluer sans version majeure. Utilisable par
+              les projets volontaires, qui acceptent d'en suivre les modifications.
+              Un composant ne reste pas expérimental plus de deux versions mineures.
+            </dd>
+          </div>
+          <div>
+            <dt><span class="fs-badge fs-badge--succes">Stable</span></dt>
+            <dd>
+              État par défaut de tout composant publié dans cette charte. Ne peut
+              changer de contrat qu'à l'occasion d'une version majeure.
+            </dd>
+          </div>
+          <div>
+            <dt><span class="fs-badge fs-badge--danger">Déconseillé</span></dt>
+            <dd>
+              Signalé dans la documentation, avec le composant de remplacement et la
+              version de retrait. Continue de fonctionner pendant au moins
+              <strong>deux versions mineures et une version majeure</strong>, soit un
+              an au minimum.
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Critères d'acceptation</h3>
+        <p class="doc-bloc-note">
+          Un composant proposé n'est publié que si les sept conditions sont réunies.
+          Une seule non satisfaite suffit à ajourner la proposition.
+        </p>
+
+        <ul class="fs-liste-controle fs-mesure">
+          <li><strong>Besoin partagé.</strong> Le besoin est constaté dans au moins deux services de l'État, ou découle d'une obligation réglementaire.</li>
+          <li><strong>Absence de doublon.</strong> Aucun composant existant ne couvre le cas, même au prix d'une variante.</li>
+          <li><strong>Aucune valeur en dur.</strong> Le composant ne consomme que des jetons.</li>
+          <li><strong>Accessible.</strong> Contrastes conformes, navigation au clavier, cible tactile de 44&nbsp;px, état visible sans recours à la seule couleur.</li>
+          <li><strong>Dégradation maîtrisée.</strong> Le contenu essentiel reste lisible sans JavaScript et sur écran de 320&nbsp;px.</li>
+          <li><strong>Documenté.</strong> Intitulé, usage, règles d'emploi, exemple, et au moins un cas à proscrire.</li>
+          <li><strong>Imprimable.</strong> Le composant s'imprime correctement ou est explicitement exclu de l'impression.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Signalement dans la documentation</h3>
+        <p class="doc-bloc-note">
+          L'état d'un composant est porté par une étiquette placée à côté de son
+          intitulé. L'absence d'étiquette signifie <em>stable</em>&nbsp;: c'est le cas de
+          la quasi-totalité de la charte.
+        </p>
+
+        <div class="doc-demo" data-libelle="Étiquettes d'état">
+          <div class="doc-demo-scene doc-demo-scene--pile">
+            <h4 style="margin:0;">
+              Bouton <code>.fs-btn</code>
+            </h4>
+            <h4 style="margin:0;">
+              Motif tissé <code>.fs-tissage</code>
+              <span class="fs-badge fs-badge--alerte">Expérimental</span>
+            </h4>
+            <h4 style="margin:0;">
+              Ancien filet <code>.fs-filet--bandes</code>
+              <span class="fs-badge fs-badge--danger">Déconseillé — retrait en 3.0</span>
+            </h4>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="contribuer">
+      <h2>Proposer un changement</h2>
+      <p class="doc-section-intro">
+        Toute administration peut proposer. La procédure est volontairement courte&nbsp;:
+        une proposition mal instruite coûte plus cher à traiter qu'un besoin mal
+        formulé mais honnête.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>La procédure</h3>
+
+        <ol class="fs-pieces">
+          <li>
+            <span class="fs-pieces-num">1</span>
+            <div>
+              <p class="fs-pieces-nom">Vérifier que le besoin n'est pas déjà couvert</p>
+              <p class="fs-pieces-detail">
+                Parcourir les composants de base, les composants métier et les gabarits.
+                La majorité des propositions reçues portent sur un cas déjà traité sous
+                un autre nom.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="fs-pieces-num">2</span>
+            <div>
+              <p class="fs-pieces-nom">Décrire le besoin, pas la solution</p>
+              <p class="fs-pieces-detail">
+                Indiquer la tâche que l'usager doit accomplir, le service concerné, et
+                pourquoi les composants existants ne suffisent pas. Une maquette est
+                utile mais ne remplace pas l'énoncé du besoin.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="fs-pieces-num">3</span>
+            <div>
+              <p class="fs-pieces-nom">Transmettre au référent de son administration</p>
+              <p class="fs-pieces-detail">
+                Le référent filtre, complète et transmet à l'équipe du système. Une
+                proposition transmise directement est réorientée vers le référent.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="fs-pieces-num">4</span>
+            <div>
+              <p class="fs-pieces-nom">Instruction</p>
+              <p class="fs-pieces-detail">
+                L'équipe rapproche la proposition des autres besoins reçus, vérifie les
+                sept critères d'acceptation et répond&nbsp;: retenue, ajournée avec les
+                éléments manquants, ou écartée avec le motif.
+              </p>
+            </div>
+          </li>
+          <li>
+            <span class="fs-pieces-num">5</span>
+            <div>
+              <p class="fs-pieces-nom">Publication</p>
+              <p class="fs-pieces-detail">
+                Le composant retenu est publié en état expérimental à la prochaine
+                version mineure, puis stabilisé après retour des projets.
+              </p>
+            </div>
+          </li>
+        </ol>
+
+        <div class="fs-encart fs-encart--info fs-mt-8">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Signaler un défaut</p>
+            <p>
+              Un défaut d'accessibilité, de contraste ou de comportement ne suit pas
+              cette procédure. Il est signalé directement à l'équipe du système et
+              traité en version corrective sous dix jours ouvrés.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="derogations">
+      <h2>Dérogations</h2>
+      <p class="doc-section-intro">
+        Une charte qui n'admet aucune exception est contournée en silence. Mieux vaut
+        une dérogation instruite et inscrite au registre qu'un écart invisible.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ce qui peut faire l'objet d'une dérogation</h3>
+
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Recevable</p>
+            <ul>
+              <li>Composant absent du système et nécessaire à une obligation réglementaire.</li>
+              <li>Adaptation d'un gabarit imposée par un texte ou par un système tiers imposé.</li>
+              <li>Contrainte technique documentée d'une plateforme existante.</li>
+              <li>Densité d'information supérieure dans un outil réservé aux agents.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">Irrecevable</p>
+            <ul>
+              <li>Toute atteinte aux règles d'emploi de l'emblème, du filet ou de la devise.</li>
+              <li>Tout abaissement du niveau d'accessibilité.</li>
+              <li>Suppression du bandeau d'identification officielle ou des mentions de confiance.</li>
+              <li>Préférence esthétique d'une administration ou d'un prestataire.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Régime de la dérogation</h3>
+        <dl class="fs-definitions">
+          <div><dt>Forme</dt><dd>Écrite, motivée, portée par le référent de projet.</dd></div>
+          <div><dt>Portée</dt><dd>Limitée à un service et à un écran identifié. Une dérogation ne vaut jamais pour une administration entière.</dd></div>
+          <div><dt>Durée</dt><dd>Douze mois, renouvelable une fois. Au-delà, le besoin est requalifié en proposition de composant.</dd></div>
+          <div><dt>Publicité</dt><dd>Inscrite au registre des dérogations, consultable par toutes les administrations.</dd></div>
+          <div><dt>Effet</dt><dd>Le service reste déclaré conforme à la charte, la dérogation étant mentionnée dans sa déclaration.</dd></div>
+        </dl>
+
+        <div class="doc-note fs-mt-6">
+          Une dérogation accordée deux fois pour le même motif par deux services
+          différents vaut constat d'un manque du système. L'équipe est alors tenue
+          d'ouvrir une proposition de composant, sans attendre qu'on la lui soumette.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="conformite">
+      <h2>Déclaration de conformité</h2>
+      <p class="doc-section-intro">
+        Avant toute mise en production, le référent de projet atteste la conformité de
+        son service. La déclaration est publiée au même titre que la déclaration
+        d'accessibilité.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Points attestés</h3>
+        <ul class="fs-liste-controle fs-mesure">
+          <li>Le bandeau d'identification officielle, le filet national et le bloc-marque sont repris sans adaptation.</li>
+          <li>Les trois feuilles de style du système sont intégrées sans modification locale.</li>
+          <li>Aucune couleur, taille ou forme n'est écrite en dur&nbsp;: toute adaptation passe par une surcharge de jetons.</li>
+          <li>Les cinq vérifications d'accessibilité de la recette ont été passées.</li>
+          <li>Les dérogations en vigueur sont listées, avec leur date d'échéance.</li>
+          <li>La version de la charte utilisée est indiquée, ainsi que la date de l'audit.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Niveaux de conformité</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Niveau</th><th>Condition</th><th>Conséquence</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="fs-badge fs-badge--succes">Conforme</span></td>
+                <td>Tous les points attestés, aucune dérogation ou dérogations en cours de validité.</td>
+                <td>Mise en production autorisée.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--alerte">Conforme sous réserve</span></td>
+                <td>Écarts identifiés, sans incidence sur l'accessibilité ni sur l'identification officielle.</td>
+                <td>Mise en production autorisée, plan de correction daté exigé.</td>
+              </tr>
+              <tr>
+                <td><span class="fs-badge fs-badge--danger">Non conforme</span></td>
+                <td>Atteinte à l'identification officielle, ou défaut d'accessibilité bloquant.</td>
+                <td>Mise en production ajournée.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="journal">
+      <h2>Journal des versions</h2>
+      <p class="doc-section-intro">
+        Chaque version publiée est consignée ici. Les ruptures sont listées en premier,
+        parce que ce sont les seules qui demandent du travail aux projets.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>2.0&nbsp;— septembre 2026</h3>
+        <p class="doc-bloc-note">
+          Refonte des fondations et première bibliothèque de composants réelle.
+          Version majeure&nbsp;: la reprise d'un projet issu de la 1.0 est nécessaire.
+        </p>
+
+        <h4 class="fs-mt-6">Ruptures</h4>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Objet</th><th>Avant</th><th>Après</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Police de titre</td>
+                <td>Poppins</td>
+                <td>Archivo</td>
+              </tr>
+              <tr>
+                <td>Hébergement des polices</td>
+                <td>Google Fonts</td>
+                <td>Servies depuis le domaine du service, en polices variables, sous-ensemble latin&nbsp;: 81&nbsp;Ko au lieu de 198</td>
+              </tr>
+              <tr>
+                <td>Police à chasse fixe</td>
+                <td>JetBrains Mono, téléchargée</td>
+                <td>Supprimée. La chasse fixe du système suffit&nbsp;: elle ne porte aucune identité</td>
+              </tr>
+              <tr>
+                <td>Neutres</td>
+                <td>Gris bleutés</td>
+                <td>Base chaude dérivée de la latérite</td>
+              </tr>
+              <tr>
+                <td><code>--bleu-gouvernement</code></td>
+                <td>Couleur de structure&nbsp;: en-têtes, navigation, pieds de page</td>
+                <td>Supprimé. Le bleu devient couleur de support, cantonnée au registre informatif</td>
+              </tr>
+              <tr>
+                <td><code>.fs-filet</code></td>
+                <td>Trois bandes égales, 4&nbsp;px</td>
+                <td>Composition du drapeau&nbsp;: moitié rouge, moitié verte, étoile d'or. 12&nbsp;px</td>
+              </tr>
+              <tr>
+                <td>Feuilles de style</td>
+                <td><code>tokens.css</code> et <code>faso.css</code></td>
+                <td><code>icones.css</code> devient obligatoire&nbsp;: plusieurs composants y puisent leurs repères</td>
+              </tr>
+              <tr>
+                <td>Thème sombre</td>
+                <td>Suivait la préférence du système d'exploitation</td>
+                <td>Le thème clair est le défaut&nbsp;; le sombre s'active sur choix explicite</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="fs-mt-8">Ajouts</h4>
+        <ul class="fs-liste-puces fs-mesure">
+          <li><strong>52 composants</strong> documentés en sept familles, là où la 1.0 ne décrivait que des jetons.</li>
+          <li><strong>Iconographie</strong>&nbsp;: 35 icônes en cinq familles, grille de 24&nbsp;px, trait de 1,5, appliquées en masque CSS.</li>
+          <li><strong>Emblème vectoriel</strong>&nbsp;: 45&nbsp;Ko compressé au lieu de 916&nbsp;Ko, net à toute taille.</li>
+          <li><strong>Échelles tonales</strong> de dix paliers sur les trois couleurs nationales, la teinte officielle restant verrouillée à son palier.</li>
+          <li><strong><code>.fs-repere</code></strong> et <strong><code>.fs-tissage</code></strong>, ce dernier inspiré des rayures du Faso Dan Fani.</li>
+          <li><strong>Gabarits institutionnels</strong>&nbsp;: portail, fiche de démarche, formulaire long, tableau de bord, authentification, pages d'erreur.</li>
+          <li><strong>Composants métier</strong> de confiance numérique&nbsp;: bandeau officiel, signalement de fraude, canaux de paiement autorisés.</li>
+          <li><strong>Contrôle de contraste</strong> calculé dans la page, selon la formule WCAG&nbsp;2.1.</li>
+          <li><strong>Panneau de code</strong> sous chaque exemple, restituant le HTML, le CSS et le JavaScript réellement en vigueur.</li>
+          <li>Feuille d'impression, thème sombre, contraste renforcé et mouvement réduit traités dans le socle.</li>
+        </ul>
+
+        <h4 class="fs-mt-8">Corrections</h4>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Navigation principale inatteignable sous 900&nbsp;px, faute de bouton de repli.</li>
+          <li>Zone de dépôt de fichier&nbsp;: le script doublait le clic natif du libellé et ouvrait deux fois le sélecteur.</li>
+          <li>Glyphes Unicode d'avertissement rendus en emoji couleur sous Windows, remplacés par des icônes du système.</li>
+          <li>Emblème de 916&nbsp;Ko chargé sur chaque page, en contradiction avec le principe de contrainte réseau.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>1.0&nbsp;— avril 2026 <span class="fs-badge fs-badge--neutre">Archivée</span></h3>
+        <p class="doc-bloc-note">
+          Version initiale. Palette issue du drapeau, couleurs institutionnelles,
+          typographie, espacement, rayons et ombres, accompagnés d'une description des
+          usages institutionnels et des modèles de pages. Le système ne comportait pas
+          encore de bibliothèque de composants intégrable.
+        </p>
+
+        <div class="fs-encart fs-encart--info">
+          <span class="fs-encart-marque fs-icone fs-icone--dossier" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Emplacement de l'archive</p>
+            <p>
+              Les fichiers de la 1.0 ont été déplacés dans
+              <code>archives/v1-avril-2026/</code>, accompagnés d'une note rappelant
+              qu'ils ne font plus foi. Ils cohabitaient jusque-là avec la 2.0 à la
+              racine du projet, sans rien indiquer de leur obsolescence&nbsp;: deux jeux
+              de jetons contradictoires s'y présentaient comme également valides.
+            </p>
+            <p>
+              Le raster d'origine de l'emblème y est conservé&nbsp;: c'est la source dont
+              la version vectorielle a été dérivée, et elle est nécessaire pour
+              refaire ou contrôler ce tracé.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Sort des versions retirées</h3>
+        <p class="doc-bloc-note">
+          Une version qui cesse de faire foi n'est pas effacée&nbsp;: elle est archivée.
+          C'est ce qui permet de vérifier après coup ce qu'un service conforme à une
+          version antérieure était censé appliquer.
+        </p>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Les fichiers sont déplacés dans <code>archives/&lt;version&gt;-&lt;mois&gt;/</code>, hors du chemin de production.</li>
+          <li>Une note placée dans le dossier énonce, dès sa première ligne, que ces fichiers ne font plus foi et où se trouve la version en vigueur.</li>
+          <li>Les sources nécessaires à la reconstitution d'un livrable&nbsp;— fichier d'origine d'un emblème, par exemple&nbsp;— sont conservées avec elle.</li>
+          <li>Aucun fichier obsolète ne demeure à la racine&nbsp;: deux sources contradictoires au même endroit valent absence de source.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
+     avant que les comportements n'y ajoutent leurs attributs. -->
+<script src="assets/js/docs.js" defer></script>
+<script src="assets/js/faso.js" defer></script>
+</body>
+</html>

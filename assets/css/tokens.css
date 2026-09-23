@@ -1,0 +1,488 @@
+/* =============================================================
+   Charte graphique de l'administration burkinabè
+   tokens.css — socle de variables
+   Version 2.0
+
+   Ordre du fichier :
+   1. Palettes brutes (valeurs absolues, jamais utilisées telles
+      quelles dans les composants)
+   2. Typographie, espacement, formes, profondeur, mouvement
+   3. Rôles sémantiques (ce que les composants consomment)
+   4. Thème sombre
+   ============================================================= */
+
+/* =============================================================
+   0. POLICES
+
+   Les fichiers sont servis depuis le domaine du service, jamais
+   depuis un tiers : une dépendance externe ajoute une résolution
+   DNS, une connexion, et place la disponibilité du service hors
+   du contrôle de l'administration.
+
+   Ce sont des polices variables : un seul fichier couvre toutes
+   les graisses, là où cinq fichiers statiques pèseraient le
+   triple. Seul le sous-ensemble latin est servi — il couvre le
+   français en entier, Œ et œ compris.
+
+   Archivo et Inter sont diffusées sous SIL Open Font License,
+   qui autorise l'usage, la modification et la redistribution,
+   y compris par une administration. Le texte des licences
+   accompagne les fichiers dans assets/polices/.
+
+   font-display: swap — le texte s'affiche immédiatement dans la
+   police de repli, puis bascule. Sur réseau lent, une page
+   lisible en police système vaut mieux qu'une page blanche.
+   ============================================================= */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("../polices/archivo.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("../polices/inter.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                 U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---------------------------------------------------------
+     1. PALETTES
+
+     Les trois couleurs du drapeau du 4 août 1984 servent de
+     souche. Chaque souche est déclinée en dix valeurs pour
+     couvrir les besoins réels d'une interface (fonds, bordures,
+     textes, états) sans jamais altérer la teinte officielle,
+     qui reste fixée au palier indiqué « drapeau ».
+     --------------------------------------------------------- */
+
+  /* Rouge — révolution, courage. Teinte officielle : 500 */
+  --rouge-50:  #fff1f2;
+  --rouge-100: #ffe0e2;
+  --rouge-200: #ffc5c9;
+  --rouge-300: #f99aa1;
+  --rouge-400: #f0636e;
+  --rouge-500: #e30613;  /* drapeau */
+  --rouge-600: #c40511;
+  --rouge-700: #a2040e;
+  --rouge-800: #7d0610;
+  --rouge-900: #5a0810;
+
+  /* Vert — espérance, richesses agricoles. Teinte officielle : 500 */
+  --vert-50:  #ecf7f0;
+  --vert-100: #d3eddd;
+  --vert-200: #a8dbbc;
+  --vert-300: #74c296;
+  --vert-400: #3ea46d;
+  --vert-500: #00843b;  /* drapeau */
+  --vert-600: #026c31;
+  --vert-700: #045527;
+  --vert-800: #04411f;
+  --vert-900: #032e16;
+
+  /* Or — étoile, lumière. Teinte officielle : 300.
+     Le jaune pur est clair par nature ; le palier officiel est
+     donc placé haut dans l'échelle et les paliers sombres
+     tirent vers l'ocre pour rester lisibles sur blanc. */
+  --or-50:  #fffce5;
+  --or-100: #fff8bf;
+  --or-200: #fff287;
+  --or-300: #ffed00;  /* drapeau */
+  --or-400: #e8d400;
+  --or-500: #c9b600;
+  --or-600: #a39300;
+  --or-700: #7d7100;
+  --or-800: #5c5300;
+  --or-900: #3d3800;
+
+  /* Neutres — dérivés d'une base chaude (latérite) et non d'un
+     gris bleuté. Le bleu n'appartient pas au drapeau : il n'a
+     pas à teinter les fonds, les bordures ni les textes. */
+  --neutre-0:   #ffffff;
+  --neutre-25:  #fcfbf9;
+  --neutre-50:  #f7f5f2;
+  --neutre-100: #efece7;
+  --neutre-200: #e2ddd6;
+  --neutre-300: #cfc8bf;
+  --neutre-400: #a9a199;
+  --neutre-500: #837b73;
+  --neutre-600: #635c55;
+  --neutre-700: #4a443e;
+  --neutre-800: #332e2a;
+  --neutre-900: #211d1a;
+  --neutre-950: #14110f;
+
+  /* Bleu administratif — couleur de support, réservée au registre
+     informatif (messages neutres, repères documentaires). Elle ne
+     structure ni l'en-tête, ni la navigation, ni les actions. */
+  --bleu-50:  #eef4f9;
+  --bleu-100: #d6e5f0;
+  --bleu-300: #7ba5c4;
+  --bleu-500: #2a6d9b;
+  --bleu-700: #173f5f;
+  --bleu-900: #0d2639;
+
+  /* Ocre — registre d'avertissement. Dérivé de l'or, assombri
+     jusqu'à obtenir un contraste AA sur fond clair. */
+  --ocre-50:  #fdf4e3;
+  --ocre-100: #f9e6c2;
+  --ocre-500: #b07800;
+  --ocre-700: #7d5500;
+  --ocre-900: #4a3200;
+
+  /* ---------------------------------------------------------
+     2. TYPOGRAPHIE
+
+     Archivo pour les titres : grotesque institutionnelle, dessin
+     ferme, large palette de graisses. Inter pour le texte courant :
+     hauteur d'x généreuse, lisible en petit corps et sur écran
+     de faible densité.
+
+     Aucune police à chasse fixe n'est téléchargée. Une chasse
+     fixe ne porte aucune identité : celle du système suffit, et
+     son absence économise un fichier entier sur le chemin
+     critique.
+     --------------------------------------------------------- */
+  --police-titre: "Archivo", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --police-texte: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --police-mono:  ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas,
+                  "Liberation Mono", Menlo, monospace;
+
+  /* Échelle fluide. Les bornes correspondent à 360 px et 1280 px
+     de largeur de fenêtre. */
+  --taille-2xs: 0.6875rem;                              /* 11px */
+  --taille-xs:  0.75rem;                                /* 12px */
+  --taille-sm:  0.8125rem;                              /* 13px */
+  --taille-md:  0.9375rem;                              /* 15px — corps */
+  --taille-lg:  1.0625rem;                              /* 17px */
+  --taille-h6:  clamp(0.9375rem, 0.90rem + 0.16vw, 1rem);
+  --taille-h5:  clamp(1.0625rem, 1.01rem + 0.25vw, 1.1875rem);
+  --taille-h4:  clamp(1.1875rem, 1.10rem + 0.39vw, 1.4375rem);
+  --taille-h3:  clamp(1.375rem, 1.23rem + 0.65vw, 1.8125rem);
+  --taille-h2:  clamp(1.625rem, 1.36rem + 1.17vw, 2.375rem);
+  --taille-h1:  clamp(2rem, 1.54rem + 2.04vw, 3.3125rem);
+
+  --graisse-normale:  400;
+  --graisse-moyenne:  500;
+  --graisse-demi:     600;
+  --graisse-grasse:   700;
+  --graisse-noire:    800;
+
+  --interligne-serre:  1.15;
+  --interligne-titre:  1.25;
+  --interligne-normal: 1.6;
+  --interligne-large:  1.75;
+
+  --approche-titre: -0.02em;
+  --approche-texte: 0;
+  --approche-capitale: 0.08em;
+
+  /* Longueur de ligne de confort pour le texte courant */
+  --mesure: 68ch;
+
+  /* ---------------------------------------------------------
+     3. ESPACEMENT — base 4 px
+     --------------------------------------------------------- */
+  --espace-0:  0;
+  --espace-1:  0.25rem;   /*  4px */
+  --espace-2:  0.5rem;    /*  8px */
+  --espace-3:  0.75rem;   /* 12px */
+  --espace-4:  1rem;      /* 16px */
+  --espace-5:  1.25rem;   /* 20px */
+  --espace-6:  1.5rem;    /* 24px */
+  --espace-8:  2rem;      /* 32px */
+  --espace-10: 2.5rem;    /* 40px */
+  --espace-12: 3rem;      /* 48px */
+  --espace-16: 4rem;      /* 64px */
+  --espace-20: 5rem;      /* 80px */
+  --espace-24: 6rem;      /* 96px */
+
+  /* Respiration verticale des sections, fluide */
+  --section-y: clamp(2.5rem, 1.6rem + 4vw, 5rem);
+
+  /* ---------------------------------------------------------
+     4. FORMES ET PROFONDEUR
+     --------------------------------------------------------- */
+  --rayon-xs:   2px;
+  --rayon-sm:   4px;
+  --rayon-md:   6px;
+  --rayon-lg:   10px;
+  --rayon-xl:   16px;
+  --rayon-2xl:  24px;
+  --rayon-plein: 999px;
+
+  /* Ombres teintées chaud, cohérentes avec les neutres */
+  --ombre-xs: 0 1px 2px rgba(33, 29, 26, 0.06);
+  --ombre-sm: 0 1px 3px rgba(33, 29, 26, 0.08), 0 1px 2px rgba(33, 29, 26, 0.04);
+  --ombre-md: 0 4px 12px rgba(33, 29, 26, 0.08), 0 1px 3px rgba(33, 29, 26, 0.05);
+  --ombre-lg: 0 12px 28px rgba(33, 29, 26, 0.10), 0 4px 8px rgba(33, 29, 26, 0.05);
+  --ombre-xl: 0 24px 56px rgba(33, 29, 26, 0.14), 0 8px 16px rgba(33, 29, 26, 0.06);
+  --ombre-interne: inset 0 1px 2px rgba(33, 29, 26, 0.07);
+
+  /* Épaisseurs de trait */
+  --trait-fin:    1px;
+  --trait-moyen:  2px;
+  --trait-epais:  3px;
+
+  /* Étoile à cinq branches du drapeau.
+
+     C'est le seul endroit du système où une couleur est inscrite
+     dans une forme plutôt que consommée par un rôle. L'étoile du
+     drapeau est d'or, toujours : elle ne suit ni le thème ni le
+     contexte, et une variante sombre n'aurait aucun sens pour un
+     symbole national. La figer permet de la poser en couche de
+     fond, donc de composer un drapeau complet dans un seul
+     élément — y compris dans un pseudo-élément, où l'on ne peut
+     rien superposer. */
+  --etoile-or: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 95'%3E%3Cpath fill='%23ffed00' d='M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z'/%3E%3C/svg%3E");
+
+  /* ---------------------------------------------------------
+     5. MOUVEMENT
+     --------------------------------------------------------- */
+  --duree-instant: 80ms;
+  --duree-courte:  140ms;
+  --duree-moyenne: 220ms;
+  --duree-longue:  360ms;
+
+  --courbe-sortie:  cubic-bezier(0.16, 0.84, 0.44, 1);
+  --courbe-entree:  cubic-bezier(0.55, 0, 1, 0.45);
+  --courbe-douce:   cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ---------------------------------------------------------
+     6. PLANS DE SUPERPOSITION
+     --------------------------------------------------------- */
+  --plan-base:     0;
+  --plan-sticky:   100;
+  --plan-entete:   200;
+  --plan-menu:     300;
+  --plan-voile:    400;
+  --plan-modale:   410;
+  --plan-infobulle: 500;
+  --plan-alerte:   600;
+
+  /* ---------------------------------------------------------
+     7. GABARIT
+     --------------------------------------------------------- */
+  --largeur-contenu:  1200px;
+  --largeur-texte:    760px;
+  --largeur-etroite:  560px;
+  --gouttiere:  clamp(1rem, 0.6rem + 1.8vw, 2rem);
+  --colonnes: 12;
+
+  /* Cible tactile minimale imposée par la charte */
+  --cible-min: 44px;
+
+  /* ---------------------------------------------------------
+     8. RÔLES SÉMANTIQUES — thème clair
+
+     Les composants ne référencent que ces variables. Changer de
+     thème consiste à les réaffecter, jamais à retoucher un
+     composant.
+     --------------------------------------------------------- */
+
+  /* Surfaces */
+  --surface:            var(--neutre-0);
+  --surface-basse:      var(--neutre-25);
+  --surface-enfoncee:   var(--neutre-50);
+  --surface-haute:      var(--neutre-0);
+  --surface-inverse:    var(--neutre-900);
+  --surface-voile:      rgba(33, 29, 26, 0.55);
+
+  /* Textes */
+  --texte:              var(--neutre-900);
+  --texte-attenue:      var(--neutre-600);
+  --texte-faible:       var(--neutre-500);
+  --texte-inverse:      var(--neutre-0);
+  --texte-sur-couleur:  var(--neutre-0);
+
+  /* Bordures */
+  --bordure:            var(--neutre-200);
+  --bordure-forte:      var(--neutre-300);
+  --bordure-inverse:    var(--neutre-700);
+
+  /* Action principale — vert du drapeau */
+  --action:             var(--vert-500);
+  --action-survol:      var(--vert-600);
+  --action-active:      var(--vert-700);
+  --action-tenue:       var(--vert-50);
+  --action-texte:       var(--neutre-0);
+  --action-sur-clair:   var(--vert-700);
+
+  /* Accent — rouge du drapeau, réservé au registre grave */
+  --accent:             var(--rouge-500);
+  --accent-survol:      var(--rouge-600);
+  --accent-actif:       var(--rouge-700);
+  --accent-tenue:       var(--rouge-50);
+  --accent-sur-clair:   var(--rouge-700);
+
+  /* Mise en avant — or du drapeau. Jamais de texte blanc dessus. */
+  --relief:             var(--or-300);
+  --relief-survol:      var(--or-400);
+  --relief-texte:       var(--neutre-900);
+  --relief-sur-clair:   var(--or-700);
+
+  /* Registres d'état */
+  --succes:        var(--vert-500);
+  --succes-fond:   var(--vert-50);
+  --succes-bord:   var(--vert-200);
+  --succes-texte:  var(--vert-700);
+
+  --alerte:        var(--ocre-500);
+  --alerte-fond:   var(--ocre-50);
+  --alerte-bord:   var(--ocre-100);
+  --alerte-texte:  var(--ocre-700);
+
+  --danger:        var(--rouge-500);
+  --danger-fond:   var(--rouge-50);
+  --danger-bord:   var(--rouge-200);
+  --danger-texte:  var(--rouge-700);
+
+  --info:          var(--bleu-500);
+  --info-fond:     var(--bleu-50);
+  --info-bord:     var(--bleu-100);
+  --info-texte:    var(--bleu-700);
+
+  /* Séries de données.
+
+     Ordonnées par écart de luminosité et non par teinte : un
+     graphique doit rester lisible en niveaux de gris et pour un
+     daltonien. La couleur ne distingue jamais seule une série,
+     elle accompagne toujours une étiquette posée sur la donnée. */
+  --serie-1: var(--vert-600);
+  --serie-2: var(--or-400);
+  --serie-3: var(--rouge-700);
+  --serie-4: var(--neutre-400);
+  --serie-5: var(--vert-300);
+  --serie-6: var(--bleu-700);
+
+  /* Focus — le halo doit rester perceptible sur toutes les
+     surfaces, y compris colorées. */
+  --focus-couleur: var(--vert-600);
+  --focus-halo:    0 0 0 3px var(--neutre-0), 0 0 0 5px var(--vert-600);
+  --focus-trait:   var(--trait-moyen);
+
+  /* Liens */
+  --lien:          var(--vert-700);
+  --lien-survol:   var(--vert-800);
+  --lien-visite:   var(--vert-900);
+
+  color-scheme: light;
+}
+
+/* =============================================================
+   THÈME SOMBRE
+
+   Appliqué par attribut (choix explicite de l'usager) et par
+   préférence système lorsque aucun choix n'a été exprimé.
+   Les teintes du drapeau sont éclaircies d'un palier : les
+   valeurs officielles perdent trop de contraste sur fond noir
+   pour porter du texte.
+   ============================================================= */
+
+:root[data-theme="dark"] {
+  --surface:            var(--neutre-950);
+  --surface-basse:      #191512;
+  --surface-enfoncee:   #1f1a17;
+  --surface-haute:      var(--neutre-900);
+  --surface-inverse:    var(--neutre-50);
+  --surface-voile:      rgba(0, 0, 0, 0.7);
+
+  --texte:              #f2efec;
+  --texte-attenue:      #b3aca4;
+  --texte-faible:       #8d857d;
+  --texte-inverse:      var(--neutre-950);
+  --texte-sur-couleur:  var(--neutre-0);
+
+  --bordure:            #332e2a;
+  --bordure-forte:      #4a443e;
+  --bordure-inverse:    var(--neutre-300);
+
+  --action:             var(--vert-400);
+  --action-survol:      var(--vert-300);
+  --action-active:      var(--vert-200);
+  --action-tenue:       rgba(62, 164, 109, 0.14);
+  --action-texte:       #04211a;
+  --action-sur-clair:   var(--vert-300);
+
+  --accent:             var(--rouge-400);
+  --accent-survol:      var(--rouge-300);
+  --accent-actif:       var(--rouge-200);
+  --accent-tenue:       rgba(240, 99, 110, 0.14);
+  --accent-sur-clair:   var(--rouge-300);
+
+  --relief:             var(--or-300);
+  --relief-survol:      var(--or-200);
+  --relief-texte:       var(--neutre-950);
+  --relief-sur-clair:   var(--or-200);
+
+  --succes:        var(--vert-400);
+  --succes-fond:   rgba(62, 164, 109, 0.12);
+  --succes-bord:   rgba(62, 164, 109, 0.32);
+  --succes-texte:  var(--vert-200);
+
+  --alerte:        #d9a441;
+  --alerte-fond:   rgba(217, 164, 65, 0.12);
+  --alerte-bord:   rgba(217, 164, 65, 0.32);
+  --alerte-texte:  #edc57d;
+
+  --danger:        var(--rouge-400);
+  --danger-fond:   rgba(240, 99, 110, 0.12);
+  --danger-bord:   rgba(240, 99, 110, 0.32);
+  --danger-texte:  var(--rouge-200);
+
+  --info:          var(--bleu-300);
+  --info-fond:     rgba(123, 165, 196, 0.12);
+  --info-bord:     rgba(123, 165, 196, 0.30);
+  --info-texte:    #b7d2e4;
+
+  --focus-couleur: var(--vert-300);
+  --focus-halo:    0 0 0 3px var(--neutre-950), 0 0 0 5px var(--vert-300);
+
+  --lien:          var(--vert-300);
+  --lien-survol:   var(--vert-200);
+  --lien-visite:   #9fd4b6;
+
+  --ombre-xs: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --ombre-sm: 0 1px 3px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --ombre-md: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.35);
+  --ombre-lg: 0 12px 28px rgba(0, 0, 0, 0.55), 0 4px 8px rgba(0, 0, 0, 0.35);
+  --ombre-xl: 0 24px 56px rgba(0, 0, 0, 0.6), 0 8px 16px rgba(0, 0, 0, 0.4);
+
+  color-scheme: dark;
+}
+
+/* Le thème clair est le thème par défaut, quelle que soit la
+   préférence du système d'exploitation. Le thème sombre reste
+   disponible, mais uniquement sur choix explicite de l'usager
+   (attribut data-theme="dark" posé par faso.js). */
+
+/* Contraste renforcé : on durcit bordures et focus plutôt que de
+   modifier la palette, pour ne pas dénaturer les teintes. */
+@media (prefers-contrast: more) {
+  :root {
+    --bordure:       var(--neutre-400);
+    --bordure-forte: var(--neutre-600);
+    --texte-attenue: var(--neutre-700);
+    --trait-fin:     2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duree-instant: 1ms;
+    --duree-courte:  1ms;
+    --duree-moyenne: 1ms;
+    --duree-longue:  1ms;
+  }
+}

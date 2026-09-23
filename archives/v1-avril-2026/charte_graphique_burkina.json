@@ -1,0 +1,383 @@
+{
+  "nom": "Charte Graphique — Administration Burkinabè",
+  "version": "1.0.0",
+  "date": "2026-04-16",
+  "description": "Guide de référence visuelle pour les plateformes numériques de l'administration publique du Burkina Faso",
+  "devise_nationale": "La Patrie ou la Mort, nous vaincrons !",
+  "drapeau_adopte": "1984-08-04",
+  "auteur": "Service d'Information du Gouvernement (SIG)",
+  
+  "couleurs": {
+    "drapeau_officiel": {
+      "description": "Drapeau adopté le 4 août 1984 : bande rouge (haut), étoile jaune (centre), bande verte (bas)",
+      "rouge": {
+        "nom": "Rouge (Bande supérieure)",
+        "hex": "#E30613",
+        "rgb": [227, 6, 19],
+        "cmyk": [0, 90, 76, 0],
+        "pantone": "032 C",
+        "ral": "3024",
+        "signification": "Révolution, courage, sang versé pour la patrie",
+        "utilisations": ["Boutons danger", "Erreurs", "Alertes critiques", "Actions destructives"]
+      },
+      "jaune": {
+        "nom": "Jaune (Étoile centrale)",
+        "hex": "#FFED00",
+        "rgb": [255, 237, 0],
+        "cmyk": [0, 10, 98, 0],
+        "pantone": "116 C",
+        "ral": "2007",
+        "signification": "Lumière de la révolution, sagesse, étoile nationale",
+        "utilisations": ["Logo officiel", "Highlights", "Badges", "Étoiles", "Accents"]
+      },
+      "vert": {
+        "nom": "Vert (Bande inférieure)",
+        "hex": "#00843B",
+        "rgb": [0, 132, 59],
+        "cmyk": [93, 0, 100, 0],
+        "pantone": "355 C",
+        "ral": "6037",
+        "signification": "Espoir, richesse agricole, nature",
+        "utilisations": ["CTA principaux", "Succès", "Validation", "Liens", "Navigation"]
+      }
+    },
+    "etendues": {
+      "rouge_fonce": {
+        "hex": "#BA0510",
+        "utilisation": "Accents graves, symbolique révolutionnaire"
+      },
+      "rouge_clair": {
+        "hex": "#F04E5A",
+        "utilisation": "Icônes, badges secondaires, hover states"
+      },
+      "rouge_pale": {
+        "hex": "#FDE0E2",
+        "utilisation": "Fonds d'alerte danger"
+      },
+      "jaune_fonce": {
+        "hex": "#E0C900",
+        "utilisation": "Texte sur fond sombre"
+      },
+      "jaune_clair": {
+        "hex": "#FFF24D",
+        "utilisation": "Décorations, effets de survol"
+      },
+      "jaune_pale": {
+        "hex": "#FFFDE0",
+        "utilisation": "Fonds d'avertissement"
+      },
+      "vert_fonce": {
+        "hex": "#006A2F",
+        "utilisation": "Textes validés"
+      },
+      "vert_clair": {
+        "hex": "#33A35E",
+        "utilisation": "Icônes de succès"
+      },
+      "vert_pale": {
+        "hex": "#E0F2E6",
+        "utilisation": "Fonds de succès, badges validés"
+      }
+    },
+    "institutionnelles": {
+      "bleu_gouvernement": {
+        "nom": "Bleu Gouvernement",
+        "hex": "#1A3A5C",
+        "signification": "Confiance, souveraineté, institution",
+        "utilisations": ["Headers", "Navigation", "Footers", "Textes importants"]
+      },
+      "bleu_clair_gouv": {
+        "hex": "#2C5282",
+        "utilisation": "Liens, actions secondaires"
+      },
+      "bleu_information": {
+        "hex": "#E8F0F8",
+        "utilisation": "Fonds d'information"
+      }
+    },
+    "neutres": {
+      "texte_sombre": {
+        "hex": "#1A2A3A",
+        "utilisation": "Titres, paragraphes"
+      },
+      "texte_moyen": {
+        "hex": "#4A5B6C",
+        "utilisation": "Sous-titres, labels"
+      },
+      "texte_clair": {
+        "hex": "#7A8B9C",
+        "utilisation": "Texte secondaire, captions"
+      },
+      "fond_blanc": {
+        "hex": "#FFFFFF"
+      },
+      "fond_creme": {
+        "hex": "#FAFBFC"
+      },
+      "fond_gris": {
+        "hex": "#EEF1F5"
+      },
+      "bordure": {
+        "hex": "#D8DEE6"
+      }
+    },
+    "semantiques": {
+      "succes": {
+        "hex": "#00843B",
+        "fond": "#E0F2E6",
+        "usage": "Actions réussies, validations"
+      },
+      "warning": {
+        "hex": "#F0A030",
+        "fond": "#FEF3E0",
+        "usage": "Avertissements, mises en garde"
+      },
+      "danger": {
+        "hex": "#E04545",
+        "fond": "#FDE0E2",
+        "usage": "Erreurs, suppressions"
+      },
+      "info": {
+        "hex": "#1A3A5C",
+        "fond": "#E8F0F8",
+        "usage": "Informations, guides"
+      }
+    }
+  },
+
+  "typographie": {
+    "polices": {
+      "titres": {
+        "nom": "Poppins",
+        "fabricant": "Indian Type Foundry",
+        "google_fonts": "https://fonts.google.com/specimen/Poppins",
+        "poids": [300, 400, 500, 600, 700, 800],
+        "utilisation": "Titres H1-H6, navigation, boutons, badges",
+        "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      },
+      "corps": {
+        "nom": "Inter",
+        "fabricant": "Rasmus Andersson (Meta)",
+        "google_fonts": "https://fonts.google.com/specimen/Inter",
+        "poids": [300, 400, 500, 600, 700],
+        "utilisation": "Corps de texte, paragraphs, formulaires",
+        "fallback": "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+      },
+      "mono": {
+        "nom": "JetBrains Mono",
+        "fabricant": "JetBrains",
+        "google_fonts": "https://fonts.google.com/specimen/JetBrains+Mono",
+        "poids": [400, 500],
+        "utilisation": "Code, hex codes, valeurs techniques",
+        "fallback": "'Consolas', 'Monaco', monospace"
+      }
+    },
+    "echelle": {
+      "h1": {"taille": "42px", "poids": 800, "famille": "Poppins", "line_height": 1.15},
+      "h2": {"taille": "32px", "poids": 700, "famille": "Poppins", "line_height": 1.2},
+      "h3": {"taille": "24px", "poids": 600, "famille": "Poppins", "line_height": 1.3},
+      "h4": {"taille": "20px", "poids": 600, "famille": "Poppins", "line_height": 1.35},
+      "h5": {"taille": "18px", "poids": 500, "famille": "Poppins", "line_height": 1.4},
+      "body": {"taille": "15px", "poids": 400, "famille": "Inter", "line_height": 1.6},
+      "small": {"taille": "13px", "poids": 400, "famille": "Inter", "line_height": 1.5},
+      "caption": {"taille": "11px", "poids": 500, "famille": "Inter", "line_height": 1.4, "transform": "uppercase", "letter_spacing": "1px"}
+    }
+  },
+
+  "composants": {
+    "boutons": {
+      "primaire": {
+        "fond": "#00843B",
+        "texte": "#FFFFFF",
+        "hover_fond": "#006A2F",
+        "hover_shadow": "0 4px 20px rgba(0,132,59,0.25)"
+      },
+      "secondaire": {
+        "fond": "#FFED00",
+        "texte": "#1A2A3A",
+        "hover_fond": "#E0C900",
+        "hover_shadow": "0 4px 20px rgba(255,237,0,0.3)"
+      },
+      "tertiaire": {
+        "fond": "#E30613",
+        "texte": "#FFFFFF",
+        "hover_fond": "#BA0510",
+        "hover_shadow": "0 4px 20px rgba(227,6,19,0.25)"
+      },
+      "outline_vert": {
+        "fond": "transparent",
+        "bordure": "2px solid #00843B",
+        "texte": "#00843B",
+        "hover_fond": "#00843B",
+        "hover_texte": "#FFFFFF"
+      },
+      "outline_jaune": {
+        "fond": "transparent",
+        "bordure": "2px solid #FFED00",
+        "texte": "#E0C900",
+        "hover_fond": "#FFED00",
+        "hover_texte": "#1A2A3A"
+      },
+      "danger": {
+        "fond": "#E04545",
+        "texte": "#FFFFFF",
+        "hover_fond": "#C43B3B"
+      }
+    },
+    "badges": {
+      "vert": {"fond": "#E0F2E6", "texte": "#006A2F"},
+      "jaune": {"fond": "#FFFDE0", "texte": "#E0C900"},
+      "rouge": {"fond": "#FDE0E2", "texte": "#BA0510"},
+      "bleu": {"fond": "#E8F0F8", "texte": "#1A3A5C"}
+    },
+    "alertes": {
+      "success": {"fond": "#E0F2E6", "texte": "#006A2F", "bordure": "#00843B"},
+      "warning": {"fond": "#FEF3E0", "texte": "#8B5E0A", "bordure": "#F0A030"},
+      "danger": {"fond": "#FDE0E2", "texte": "#B33030", "bordure": "#E04545"},
+      "info": {"fond": "#E8F0F8", "texte": "#1A3A5C", "bordure": "#1A3A5C"}
+    }
+  },
+
+  "espacement": {
+    "unite_base": "4px",
+    "valeurs": {
+      "2xs": "4px",
+      "xs": "8px",
+      "sm": "12px",
+      "md": "16px",
+      "lg": "24px",
+      "xl": "32px",
+      "2xl": "48px",
+      "3xl": "64px"
+    }
+  },
+
+  "rayons_bordure": {
+    "xs": "4px",
+    "sm": "6px",
+    "md": "10px",
+    "lg": "16px",
+    "xl": "24px",
+    "full": "9999px"
+  },
+
+  "ombres": {
+    "xs": "0 1px 2px rgba(26,42,58,0.04)",
+    "sm": "0 2px 8px rgba(26,42,58,0.06)",
+    "md": "0 4px 16px rgba(26,42,58,0.08)",
+    "lg": "0 8px 32px rgba(26,42,58,0.12)",
+    "xl": "0 16px 48px rgba(26,42,58,0.16)"
+  },
+
+  "plateformes_referencees": [
+    {"nom": "eBurkina", "url": "https://www.eburkina.com", "description": "Portail central des services numériques"},
+    {"nom": "eSINTAX", "description": "Télédéclaration et télépaiement des impôts"},
+    {"nom": "FASO ARZEKA", "description": "Paiement numérique des dettes administratives"},
+    {"nom": "e-Concours", "description": "Concours de la fonction publique"},
+    {"nom": "e-Visa", "description": "Demande de visa en ligne"},
+    {"nom": "SyC@D / SIF", "url": "https://sif.bf", "description": "Système intégré du cadastre et des domaines"},
+    {"nom": "JOBF", "description": "Journal Officiel du Burkina Faso"},
+    {"nom": "Legiburkina", "description": "Base de données juridique"},
+    {"nom": "ALIAS", "description": "Accès aux informations administratives et salariales"},
+    {"nom": "SIG Burkina", "url": "https://gouvernement.gov.bf", "description": "Service d'Information du Gouvernement"},
+    {"nom": "eDAC", "description": "Demande d'actes en ligne"},
+    {"nom": "eTimbre", "description": "Achat de timbres dématérialisés"}
+  ],
+
+  "usages_institutionnels": {
+    "hierarchie_couleurs": {
+      "bleu_gouvernement": "Structure des interfaces, navigation, en-tetes, pieds de page et contexte institutionnel",
+      "vert": "Actions principales, validation, progression et succes",
+      "rouge": "Erreurs, alertes critiques, urgence et actions destructives",
+      "jaune": "Mise en avant, badges, reperes et informations importantes courtes",
+      "neutres": "Fonds de lecture, tableaux, formulaires et contenus denses"
+    },
+    "ton_editorial": [
+      "Utiliser des intitules directs et administratifs",
+      "Afficher le cout, le delai, les pieces et l'administration responsable avant les formulaires",
+      "Eviter les formulations marketing dans les parcours de demarches",
+      "Utiliser des messages d'erreur qui indiquent la correction attendue"
+    ],
+    "identification_officielle": [
+      "Armoiries visibles sur les pages sensibles",
+      "Nom du ministere, de la direction ou du service responsable",
+      "Domaine officiel et contacts verifiables",
+      "Mentions legales, confidentialite, accessibilite et plan du site"
+    ]
+  },
+
+  "composants_metier_public": {
+    "recherche_demarche": {
+      "usage": "Point d'entree principal des portails de services publics",
+      "elements": ["champ de recherche", "bouton rechercher", "filtres thematiques", "suggestions", "resultats classes"]
+    },
+    "fiche_demarche": {
+      "elements_obligatoires": ["resume", "public concerne", "administration responsable", "cout", "delai", "pieces a fournir", "procedure", "canaux disponibles", "contact"]
+    },
+    "suivi_dossier": {
+      "statuts_recommandes": ["recu", "en cours d'instruction", "complement demande", "valide", "rejete", "disponible au retrait"]
+    },
+    "formulaire_long": {
+      "regles": ["etapes numerotees", "sauvegarde de progression", "validation progressive", "recapitulatif final", "accuse de depot telechargeable"]
+    },
+    "evenements_de_vie": ["naissance", "etudes", "emploi public", "creation d'entreprise", "impots", "voyage", "retraite", "deces"]
+  },
+
+  "confiance_numerique": {
+    "objectif": "Aider les usagers a reconnaitre les vrais services publics et reduire les risques de faux sites, faux formulaires et paiements frauduleux",
+    "obligatoire": [
+      "bandeau site officiel",
+      "domaine officiel visible",
+      "institution responsable",
+      "contacts verifiables",
+      "mentions legales",
+      "canaux de paiement autorises",
+      "lien de signalement fraude"
+    ]
+  },
+
+  "accessibilite": {
+    "taille_texte_min": "15px pour le corps de texte",
+    "cible_tactile_min": "44px",
+    "focus": "focus visible sur tous les elements interactifs",
+    "contraste": "contrastes conformes WCAG AA pour textes et composants essentiels",
+    "mobile": "interfaces utilisables sur ecran etroit et connexion faible",
+    "formulaires": ["labels persistants", "messages d'erreur explicites", "aide contextuelle", "resume avant validation"]
+  },
+
+  "modeles_pages": [
+    {"nom": "Portail de services", "contenus": ["recherche centrale", "demarches populaires", "thematiques", "evenements de vie", "actualites", "compte usager"]},
+    {"nom": "Fiche demarche", "contenus": ["resume", "cout", "delai", "pieces", "procedure", "contact", "action principale"]},
+    {"nom": "Formulaire long", "contenus": ["etapes", "sauvegarde", "validation", "recapitulatif", "accuse de depot"]},
+    {"nom": "Tableau de bord usager", "contenus": ["demandes", "statuts", "notifications", "paiements", "documents", "historique"]},
+    {"nom": "Page institutionnelle", "contenus": ["mission", "services", "organigramme", "actualites", "contacts", "documents officiels"]}
+  ],
+
+  "institutions": [
+    {"nom": "Présidence du Faso", "role": "Chef de l'État"},
+    {"nom": "Primature", "role": "Coordination du Gouvernement"},
+    {"nom": "SIG", "role": "Service d'Information du Gouvernement"},
+    {"nom": "DGI", "role": "Direction Générale des Impôts"},
+    {"nom": "MEF", "role": "Ministère de l'Économie et des Finances"},
+    {"nom": "SGG", "role": "Secrétariat Général du Gouvernement"}
+  ],
+
+  "contacts": {
+    "sig_email": "contact@sig.gov.bf",
+    "sig_tel": "+226 25 30 70 87",
+    "adresse": "Ouagadougou, Burkina Faso"
+  },
+
+  "fichiers": {
+    "charte_html": "charte_graphique_burkina.html",
+    "variables_css": "variables_css_burkina.css",
+    "documentation_json": "charte_graphique_burkina.json",
+    "charte_ods_original": "charte graphique de l'administration burkinabe.ods"
+  },
+
+  "references": {
+    "drapeau_codes": "https://www.flagcolorcodes.com/burkina-faso",
+    "sig_officiel": "https://gouvernement.gov.bf",
+    "eburkina": "https://www.eburkina.com"
+  }
+}
