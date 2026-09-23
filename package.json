@@ -11,6 +11,7 @@
       "types": "./assets/js/faso.d.ts",
       "default": "./assets/js/faso.js"
     },
+    "./amorce": "./assets/js/faso-amorce.js",
     "./css/tokens.css": "./assets/css/tokens.css",
     "./css/faso.css": "./assets/css/faso.css",
     "./css/icones.css": "./assets/css/icones.css",
@@ -22,7 +23,8 @@
   },
   "sideEffects": [
     "*.css",
-    "./assets/js/faso.js"
+    "./assets/js/faso.js",
+    "./assets/js/faso-amorce.js"
   ],
   "files": [
     "assets/css",

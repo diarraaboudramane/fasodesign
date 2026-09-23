@@ -24,6 +24,43 @@ export interface OptionsNotification {
   duree?: number;
 }
 
+/**
+ * Annonces émises par la charte.
+ *
+ * Chacune porte deux noms : `fs:<nom>` et `fs-<nom>`. Les deux
+ * transportent le même détail et sont émises l'une après l'autre.
+ * La forme à trait d'union existe parce qu'un gabarit d'Angular ne
+ * peut pas lier un événement dont le nom contient deux-points :
+ * `(fs:onglet)` y désignerait la cible « fs ».
+ *
+ * Les annonces annulables précèdent une écriture d'état.
+ * `preventDefault()` empêche la charte d'écrire l'attribut, sans
+ * rien lui retirer de ce qu'elle assure par ailleurs : clavier,
+ * focus, ordre de tabulation, annonce vocale.
+ */
+export interface AnnoncesFaso {
+  /** Avant `aria-selected`, `hidden` et `tabindex` d'un jeu d'onglets. Annulable. */
+  "fs:onglet": CustomEvent<{ onglet: HTMLElement; index: number }>;
+  /** Avant `data-ouvert` et `aria-expanded` d'un élément repliable. Annulable. */
+  "fs:bascule": CustomEvent<{ ouvert: boolean }>;
+  /** Avant la largeur et `aria-valuenow` d'une jauge. Annulable. */
+  "fs:jauge": CustomEvent<{ valeur: number }>;
+  /** Avant la largeur d'une barre d'un groupe. Annulable. */
+  "fs:barre": CustomEvent<{ valeur: number; max: number }>;
+  /** Avant `data-lu` sur une notification. Annulable. */
+  "fs:lecture": CustomEvent<{ tout: boolean }>;
+  /** Avant le retrait d'un encart du document. Annulable. */
+  "fs:fermeture": CustomEvent<null>;
+  /**
+   * Après un tri ou un changement de filtre. Informe seulement.
+   * `rejeu` distingue un re-rendu du cadriciel d'un changement
+   * demandé par l'usager.
+   */
+  "fs:donnees": CustomEvent<{
+    annoncer: boolean; rejeu: boolean; retenues: number;
+  } | null>;
+}
+
 export interface Faso {
   /** Version du système, alignée sur celle du paquet. */
   readonly version: string;
@@ -57,6 +94,21 @@ export interface Faso {
    * retire avant l'échéance.
    */
   notifier(options: OptionsNotification): () => void;
+
+  /**
+   * Compose un CSV à partir de données, et non du document.
+   *
+   * C'est la voie à suivre lorsque le cadriciel possède les
+   * lignes : il fournit l'intégralité du jeu, la charte se charge
+   * de l'échappement, du séparateur et des fins de ligne.
+   */
+  versCsv(entetes: string[], lignes: Array<Array<string | number>>): string;
+
+  /**
+   * Déclenche le téléchargement d'un CSV, avec l'indicateur
+   * d'ordre des octets qu'attendent les tableurs.
+   */
+  telechargerCsv(nom: string, contenu: string): void;
 
   /**
    * Force un thème. `"dark"` ou `"light"` ; toute valeur vide

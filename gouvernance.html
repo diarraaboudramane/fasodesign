@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gouvernance&nbsp;— Charte graphique de l'administration burkinabè</title>
 <meta name="description" content="Rôles, versionnement, cycle de vie des composants, procédure de contribution, dérogations et journal des versions du système de conception de l'État burkinabè.">
+<!-- Pose le theme retenu avant le premier rendu, pour eviter
+     le clignotement clair d'une page reglee en sombre. -->
+<script src="assets/js/faso-amorce.js"></script>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
@@ -620,7 +623,7 @@
 
         <h4 class="fs-mt-8">Ajouts</h4>
         <ul class="fs-liste-puces fs-mesure">
-          <li><strong>52 composants</strong> documentés en sept familles, là où la 1.0 ne décrivait que des jetons.</li>
+          <li><strong>65 composants</strong> documentés en sept familles, là où la 1.0 ne décrivait que des jetons.</li>
           <li><strong>Iconographie</strong>&nbsp;: 35 icônes en cinq familles, grille de 24&nbsp;px, trait de 1,5, appliquées en masque CSS.</li>
           <li><strong>Emblème vectoriel</strong>&nbsp;: 45&nbsp;Ko compressé au lieu de 916&nbsp;Ko, net à toute taille.</li>
           <li><strong>Échelles tonales</strong> de dix paliers sur les trois couleurs nationales, la teinte officielle restant verrouillée à son palier.</li>
@@ -634,6 +637,63 @@
 
         <h4 class="fs-mt-8">Corrections</h4>
         <ul class="fs-liste-puces fs-mesure">
+          <li>
+            <strong>Résolution des cibles sans ambiguïté.</strong> Six comportements
+            résolvaient leur cible par identifiant global. Deux instances d'un même
+            composant se disputaient alors le même <code>id</code>, et le déclencheur
+            de la seconde agissait sur la première. Quand l'identifiant ne désigne
+            qu'un élément, le résultat reste celui de <code>getElementById</code>&nbsp;;
+            ce n'est qu'en cas de doublon que la recherche remonte depuis le
+            déclencheur. La frontière d'une racine fantôme est franchie.
+          </li>
+          <li>
+            <strong>Écritures de valeur signalées.</strong> Cinq endroits où le script
+            écrit dans un champ&nbsp;— code collé, date collée, suggestion retenue, filtre
+            vidé&nbsp;— émettent <code>input</code> et <code>change</code>. Sans eux, une
+            liaison bidirectionnelle conservait l'ancienne valeur et le formulaire
+            partait incomplet.
+          </li>
+          <li>
+            <strong>Extraction incomplète rendue impossible.</strong>
+            <code>data-export-total</code> fait refuser l'export dès que le compte des
+            lignes affichées ne correspond pas au total déclaré.
+          </li>
+          <li>
+            <strong>Pagination et filtres résistent au re-rendu.</strong> Le
+            remplacement des lignes est détecté et les deux se rejouent. La page
+            courante est conservée lorsque le nombre de lignes n'a pas changé&nbsp;:
+            un re-rendu sans rapport ne fait plus perdre sa place à l'usager.
+          </li>
+          <li>
+            <strong>Tout état écrit est annulable.</strong> Onglets, navigation
+            repliable, jauges, barres, notifications lues et fermeture d'encart
+            annoncent leur changement avant de l'écrire. Un projet qui lie l'attribut
+            lui-même annule l'annonce&nbsp;: la charte continue d'assurer le clavier, le
+            focus et l'ordre de tabulation, sans toucher à la liaison. Chaque annonce
+            porte deux noms, <code>fs:onglet</code> et <code>fs-onglet</code>, la
+            seconde forme étant la seule qu'un gabarit d'Angular puisse lier.
+          </li>
+          <li>
+            <strong>Verrou de défilement compté.</strong> Un panneau latéral en
+            remplaçait la valeur d'origine par une chaîne vide à la fermeture, et deux
+            panneaux superposés libéraient le défilement trop tôt. Un panneau détruit
+            sans avoir été fermé laissait la page bloquée.
+          </li>
+          <li>
+            <strong>Valeurs suivies.</strong> Jauges et barres se mettaient à jour à
+            l'initialisation seulement&nbsp;: une valeur changée ensuite par le cadriciel
+            restait sans effet sur la largeur affichée.
+          </li>
+          <li>
+            <strong>Amorce du thème.</strong> Une page réglée en sombre s'affichait
+            brièvement en clair. <code>faso-amorce.js</code> pose l'attribut avant le
+            premier rendu, sans script en ligne.
+          </li>
+          <li>
+            <strong>Notification au rendu côté serveur.</strong> <code>Faso.notifier()</code>
+            échouait hors navigateur&nbsp;; l'appel ne fait plus rien et rend une fermeture
+            inerte.
+          </li>
           <li>Navigation principale inatteignable sous 900&nbsp;px, faute de bouton de repli.</li>
           <li>Zone de dépôt de fichier&nbsp;: le script doublait le clic natif du libellé et ouvrait deux fois le sélecteur.</li>
           <li>Glyphes Unicode d'avertissement rendus en emoji couleur sous Windows, remplacés par des icônes du système.</li>

@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Intégration&nbsp;— Charte graphique de l'administration burkinabè</title>
 <meta name="description" content="Intégrer la charte comme dépendance : npm, Composer, téléchargement. Cas détaillé d'Angular, rendu côté serveur, politique de sécurité, encapsulation des styles.">
+<!-- Pose le theme retenu avant le premier rendu, pour eviter
+     le clignotement clair d'une page reglee en sombre. -->
+<script src="assets/js/faso-amorce.js"></script>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
@@ -98,7 +101,7 @@
               <tr>
                 <td><span class="fs-badge fs-badge--alerte">Piloté par données</span></td>
                 <td>Tableau trié, filtré, paginé&nbsp;; autocomplétion&nbsp;; export</td>
-                <td><strong>Employer le CSS seul.</strong> Le cadriciel fait la logique.</td>
+                <td>Utilisable <strong>si le cadriciel rend l'intégralité des lignes</strong>. S'il pagine de son côté, il reprend tout.</td>
               </tr>
             </tbody>
           </table>
@@ -107,11 +110,20 @@
         <div class="doc-note fs-mt-6">
           <strong>Pourquoi la troisième catégorie.</strong> La pagination de la charte
           pose <code>hidden</code> sur des lignes de tableau&nbsp;; le filtre y pose
-          <code>data-exclu</code>. Si ces lignes proviennent d'une boucle du cadriciel,
-          celui-ci les reconstruit à chaque cycle de rendu et efface ces attributs&nbsp;—
-          ou les impose à nouveau au cycle suivant. Le résultat n'est pas un bogue
-          qu'on corrige, c'est un conflit de propriété qu'on évite en tranchant&nbsp;: soit
-          le tableau est entièrement à la charte, soit il est entièrement au cadriciel.
+          <code>data-exclu</code>. Si le cadriciel reconstruit ces lignes, ces
+          attributs disparaissent.
+        </div>
+
+        <div class="doc-note fs-mt-4">
+          <strong>Ce que la charte encaisse désormais.</strong> Le remplacement des
+          lignes est détecté&nbsp;: pagination et filtres se rejouent, et l'usager reste
+          sur sa page tant que le nombre de lignes ne change pas. La ligne de partage
+          n'est donc plus « le tableau vient-il d'une boucle&nbsp;? » mais
+          <strong>« qui décide des lignes présentes&nbsp;? »</strong>. Tant que le cadriciel
+          les rend toutes, la charte peut les paginer. Dès qu'il n'en rend qu'une
+          partie, il doit aussi reprendre le tri, le filtre et l'export&nbsp;— et
+          <code>data-export-total</code> empêche entre-temps toute extraction
+          incomplète.
         </div>
       </div>
 
@@ -129,9 +141,9 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À éviter</p>
             <ul>
-              <li>Poser <code>data-pagination</code> sur un tableau dont les lignes viennent d'une boucle du cadriciel.</li>
-              <li>Laisser la charte modifier un attribut que le cadriciel lie par ailleurs.</li>
-              <li>Recopier le balisage d'un composant dans un gabarit puis le régénérer à chaque frappe.</li>
+              <li>Poser <code>data-pagination</code> sur un tableau que le cadriciel pagine déjà de son côté.</li>
+              <li>Lier un attribut que la charte pilote sans annuler l'annonce qui précède son écriture.</li>
+              <li>Exporter depuis le document quand le cadriciel n'en rend qu'une partie, sans déclarer <code>data-export-total</code>.</li>
             </ul>
           </div>
         </div>
@@ -174,13 +186,16 @@
           fichiers et on les sert. C'est le mode de fonctionnement d'origine du
           système, et il reste pleinement pris en charge.
         </p>
-        <pre><code>&lt;link rel="stylesheet" href="/assets/css/tokens.css"&gt;
+        <pre><code>&lt;script src="/assets/js/faso-amorce.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="/assets/css/tokens.css"&gt;
 &lt;link rel="stylesheet" href="/assets/css/faso.css"&gt;
 &lt;link rel="stylesheet" href="/assets/css/icones.css"&gt;
 &lt;script src="/assets/js/faso.js" defer&gt;&lt;/script&gt;</code></pre>
         <p class="fs-legende fs-mt-4">
-          Dans ce mode, l'initialisation est automatique au chargement. Il n'y a rien
-          à appeler.
+          Dans ce mode, l'initialisation est automatique au chargement&nbsp;: il n'y a rien
+          à appeler. La première ligne, bloquante et minuscule, pose le thème retenu
+          avant le premier rendu&nbsp;; elle n'est utile qu'aux services qui proposent le
+          thème sombre.
         </p>
       </div>
 
@@ -197,6 +212,7 @@
               <tr><td><code>css/icones.css</code></td><td>35 icônes&nbsp;; plusieurs composants y puisent leurs repères</td><td>Oui</td></tr>
               <tr><td><code>polices/</code></td><td>Archivo et Inter, variables, sous-ensemble latin, avec leurs licences</td><td>Oui</td></tr>
               <tr><td>racine du paquet</td><td>Comportements, avec ses déclarations de types</td><td>Non</td></tr>
+              <tr><td><code>amorce</code></td><td>Pose le thème retenu avant le premier rendu</td><td>Si thème sombre</td></tr>
               <tr><td><code>jetons.json</code></td><td>189 jetons, valeurs résolues</td><td>Non</td></tr>
               <tr><td><code>img/armoiries.svg</code></td><td>Emblème vectoriel</td><td>Selon l'usage</td></tr>
             </tbody>
@@ -420,6 +436,386 @@ Faso.appliquerTheme('dark');</code></pre>
     </section>
 
     <!-- ===================================================== -->
+    <section class="doc-section" id="surete">
+      <h2>Bilan de sûreté, composant par composant</h2>
+      <p class="doc-section-intro">
+        Relevé de ce que chaque comportement écrit dans le document, et de ce qui
+        peut entrer en conflit avec un cadriciel. Ce bilan est établi par lecture du
+        code, et révisé à chaque version.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ce que la charte défend elle-même</h3>
+        <p class="doc-bloc-note">
+          Sept mécanismes, pour que les pièges connus ne reposent plus sur la
+          vigilance du développeur.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Mécanisme</th><th>Ce qu'il évite</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Résolution sans ambiguïté</strong></td>
+                <td>
+                  Quand l'identifiant ne désigne qu'un élément&nbsp;— le cas
+                  ordinaire&nbsp;— le résultat est exactement celui de
+                  <code>getElementById</code>. Ce n'est qu'en cas de doublon que la
+                  recherche remonte depuis le déclencheur&nbsp;: deux lignes d'une liste
+                  portant la même modale ne se confondent pas.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Reprise d'état par le projet</strong></td>
+                <td>
+                  Chaque écriture d'état est précédée d'une annonce annulable.
+                  <code>preventDefault()</code> et la charte s'abstient d'écrire,
+                  tout en continuant d'assurer le clavier, le focus et l'ordre de
+                  tabulation. Un attribut lié par le cadriciel n'est plus disputé.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Signalement des écritures</strong></td>
+                <td>
+                  Quand le script écrit dans un champ, il émet <code>input</code> et
+                  <code>change</code>. Une liaison bidirectionnelle reste à jour. Un
+                  drapeau empêche nos propres écouteurs de se réveiller.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Détection du re-rendu</strong></td>
+                <td>
+                  Le remplacement des lignes d'un tableau est détecté&nbsp;; pagination et
+                  filtres se rejouent, et <strong>la page courante est conservée</strong>
+                  quand le nombre de lignes est inchangé. Un tri, qui réordonne les
+                  mêmes nœuds, ne déclenche rien.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Suivi des valeurs</strong></td>
+                <td>
+                  Jauges et barres suivent <code>data-valeur</code> et
+                  <code>data-max</code>, y compris lorsque le cadriciel remplace les
+                  nœuds qui les portent. Aucune réinitialisation à prévoir.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Verrou de défilement compté</strong></td>
+                <td>
+                  Plusieurs panneaux peuvent être ouverts l'un sur l'autre&nbsp;: le
+                  défilement n'est rendu qu'à la fermeture du dernier, dans l'état
+                  où le projet l'avait laissé. Un panneau détruit sans être fermé ne
+                  bloque plus la page.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Refus d'extraction partielle</strong></td>
+                <td>
+                  <code>data-export-total</code> fait refuser l'export dès que le
+                  compte affiché ne correspond pas au total déclaré.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Reprendre un état à son compte</h3>
+        <p class="doc-bloc-note">
+          Le conflit d'attribut était le seul risque qu'aucun garde-fou ne pouvait
+          détecter&nbsp;: la charte ne peut pas savoir qu'une liaison surveille le nœud
+          qu'elle écrit. Elle demande donc l'autorisation avant d'écrire.
+        </p>
+
+        <div class="doc-note fs-mt-4">
+          <strong>Deux noms pour une même annonce.</strong> Un gabarit d'Angular ne
+          peut pas lier un événement dont le nom contient deux-points&nbsp;:
+          <code>(fs:onglet)</code> y désignerait la cible &laquo;&nbsp;fs&nbsp;&raquo; et le
+          modèle serait refusé à la compilation. Chaque annonce est donc émise sous
+          les deux formes&nbsp;: <code>fs:onglet</code> pour le JavaScript nu et les
+          autres cadriciels, <code>fs-onglet</code> pour une liaison de gabarit.
+          Annuler l'une suffit.
+        </div>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Annonce</th><th>Émise avant</th><th>Si vous l'annulez</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>fs:onglet</code><br><code>fs-onglet</code></td>
+                <td>D'écrire <code>aria-selected</code> et <code>hidden</code></td>
+                <td>Clavier, focus et <code>tabindex</code> restent assurés</td>
+              </tr>
+              <tr>
+                <td><code>fs:bascule</code><br><code>fs-bascule</code></td>
+                <td>D'écrire <code>data-ouvert</code> et <code>aria-expanded</code></td>
+                <td>Rien n'est écrit&nbsp;; à vous de refléter l'état</td>
+              </tr>
+              <tr>
+                <td><code>fs:jauge</code><br><code>fs-jauge</code></td>
+                <td>D'écrire <code>style.width</code> et <code>aria-valuenow</code></td>
+                <td>Le rôle et les bornes restent posés</td>
+              </tr>
+              <tr>
+                <td><code>fs:barre</code><br><code>fs-barre</code></td>
+                <td>D'écrire la largeur d'une barre</td>
+                <td>Les autres barres du groupe suivent leur propre annonce</td>
+              </tr>
+              <tr>
+                <td><code>fs:lecture</code><br><code>fs-lecture</code></td>
+                <td>D'écrire <code>data-lu</code> sur une notification</td>
+                <td>Le compteur reste juste, l'état lu est à vous</td>
+              </tr>
+              <tr>
+                <td><code>fs:fermeture</code><br><code>fs-fermeture</code></td>
+                <td>De retirer un encart du document</td>
+                <td>L'encart reste en place, à masquer par votre liaison</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre><code>&lt;!-- L'onglet actif vient du composant, pas de la charte --&gt;
+&lt;div role="tablist" (fs-onglet)="reprendre($event)"&gt;
+  &lt;button role="tab" [attr.aria-selected]="actif === 'suivi'"&gt;Suivi&lt;/button&gt;
+&lt;/div&gt;
+
+reprendre(ev: CustomEvent) {
+  ev.preventDefault();               // la charte n'écrira pas
+  this.actif = ev.detail.onglet.dataset.cle;
+}</code></pre>
+
+        <p class="doc-bloc-note fs-mt-4">
+          Ces annonces remontent&nbsp;: un écouteur posé sur un conteneur suffit pour
+          tous les composants qu'il contient. Ne rien écouter revient à laisser la
+          charte tenir l'état, ce qui reste le cas ordinaire. La même règle vaut pour
+          <code>fs:donnees</code> et <code>fs-donnees</code>, émis après chaque tri
+          ou filtre&nbsp;; celles-là informent seulement et ne s'annulent pas.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3><span class="fs-badge fs-badge--succes">Niveau 1</span> Aucun risque</h3>
+        <p class="doc-bloc-note">
+          Aucun JavaScript. Ces composants n'écrivent rien et ne peuvent entrer en
+          conflit avec quoi que ce soit. Ils se reprennent par leurs classes, dans
+          n'importe quel gabarit, rendu et re-rendu sans limite.
+        </p>
+        <p class="fs-mesure">
+          Boutons, liens, cartes, badges, étiquettes, pastilles d'état, avatars,
+          listes, fil d'Ariane, indicateur d'étapes, chronologie, listes de
+          définitions, figures, filet, repère, motif tissé, tableaux statiques,
+          squelette de chargement, état vide, sablier, infobulle, citation,
+          accordéon, bloc-marque, bandeau d'identification officielle, signalement de
+          fraude, autorité responsable, carte de démarche, pièces à fournir,
+          événements de vie, récapitulatif de paiement, liste de dossiers, guide de
+          photographie, encart non refermable.
+        </p>
+        <div class="doc-note fs-mt-4">
+          L'infobulle et l'accordéon méritent d'être signalés&nbsp;: ils paraissent
+          interactifs mais ne dépendent d'aucun script. L'un repose sur
+          <code>:hover</code> et <code>:focus-within</code>, l'autre sur
+          <code>&lt;details&gt;</code>.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3><span class="fs-badge fs-badge--info">Niveau 2</span> Sûrs après initialisation</h3>
+        <p class="doc-bloc-note">
+          Ces comportements fonctionnent dès que l'initialisation a eu lieu, ou que
+          l'observation est active. <strong>Douze des quinze ne demandent plus rien</strong>&nbsp;;
+          les trois réserves restantes se lèvent par une ligne, indiquée.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Composant</th><th>Ce qu'il écrit</th><th>Réserve</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Modale</td>
+                <td>Ouvre et ferme <code>&lt;dialog&gt;</code>, rend le focus</td>
+                <td>Aucune</td>
+              </tr>
+              <tr>
+                <td>Onglets</td>
+                <td><code>hidden</code>, <code>aria-selected</code>, <code>tabindex</code></td>
+                <td>Aucune&nbsp;— annuler <code>fs-onglet</code> pour tenir l'état soi-même</td>
+              </tr>
+              <tr>
+                <td>Menu déroulant</td>
+                <td><code>hidden</code>, <code>aria-expanded</code></td>
+                <td>Aucune</td>
+              </tr>
+              <tr>
+                <td>Navigation repliable</td>
+                <td><code>data-ouvert</code>, <code>aria-expanded</code></td>
+                <td>Aucune&nbsp;— annuler <code>fs-bascule</code> pour tenir l'état soi-même</td>
+              </tr>
+              <tr>
+                <td>Compteur de caractères</td>
+                <td>Texte du compteur</td>
+                <td>Aucune</td>
+              </tr>
+              <tr>
+                <td>Code de vérification</td>
+                <td>Valeur des cases, focus</td>
+                <td>Aucune</td>
+              </tr>
+              <tr>
+                <td>Saisie de date</td>
+                <td>Valeur des trois champs, focus</td>
+                <td>Aucune</td>
+              </tr>
+              <tr>
+                <td>Dépôt de fichier</td>
+                <td><code>data-survol</code>, affecte <code>files</code></td>
+                <td>Aucune&nbsp;— <code>input</code> et <code>change</code> sont émis après un glisser-déposer</td>
+              </tr>
+              <tr>
+                <td>Encart refermable</td>
+                <td>Retire le nœud</td>
+                <td>Aucune&nbsp;— annuler <code>fs-fermeture</code> si le cadriciel possède l'encart</td>
+              </tr>
+              <tr>
+                <td>Panneau latéral</td>
+                <td><code>data-ouvert</code>, défilement du corps de page</td>
+                <td>Aucune&nbsp;— plusieurs panneaux peuvent se superposer</td>
+              </tr>
+              <tr>
+                <td>Jauge et barres</td>
+                <td><code>style.width</code>, <code>aria-valuenow</code></td>
+                <td>Aucune&nbsp;— la valeur est suivie, annuler <code>fs-jauge</code> pour lier la largeur soi-même</td>
+              </tr>
+              <tr>
+                <td>Centre de notifications</td>
+                <td><code>data-lu</code></td>
+                <td>Aucune&nbsp;— annuler <code>fs-lecture</code> si la liste vient d'une boucle</td>
+              </tr>
+              <tr>
+                <td>Notification passagère</td>
+                <td>Ajoute un nœud à <code>document.body</code></td>
+                <td>Aucune&nbsp;— l'appel au rendu serveur ne fait rien et rend une fermeture inerte</td>
+              </tr>
+              <tr>
+                <td>Calendrier</td>
+                <td><code>aria-pressed</code></td>
+                <td>Le mois est rendu par le service&nbsp;: la charte ne le construit pas</td>
+              </tr>
+              <tr>
+                <td>Bascule de thème</td>
+                <td><code>data-theme</code>, stockage local</td>
+                <td>Déclarer <code>faso-amorce.js</code> dans <code>&lt;head&gt;</code> pour éviter le clignotement</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3><span class="fs-badge fs-badge--alerte">Niveau 3</span> Conditionnels</h3>
+        <p class="doc-bloc-note">
+          Ces comportements prennent le document pour source de données. Ils ne sont
+          pas interdits avec un cadriciel, mais soumis à une condition unique&nbsp;:
+          <strong>le cadriciel doit rendre l'intégralité des lignes</strong>. Tant
+          qu'elle tient, la charte encaisse les re-rendus sans perdre la place de
+          l'usager. Dès qu'elle tombe&nbsp;— pagination côté cadriciel, défilement
+          virtuel, chargement progressif&nbsp;— le cadriciel reprend l'ensemble.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Composant</th><th>Si toutes les lignes sont rendues</th><th>Sinon</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tri de tableau</td>
+                <td>Fonctionne. Réordonne les mêmes nœuds, sans déclencher de rejeu.</td>
+                <td>Le tri ne porterait que sur la page visible&nbsp;: à reprendre.</td>
+              </tr>
+              <tr>
+                <td>Pagination</td>
+                <td>Fonctionne. Un re-rendu à jeu constant laisse l'usager sur sa page.</td>
+                <td>Deux paginations superposées&nbsp;: retirer <code>data-pagination</code>.</td>
+              </tr>
+              <tr>
+                <td>Filtres</td>
+                <td>Fonctionnent, et se rejouent après remplacement des lignes.</td>
+                <td>Compteurs faux&nbsp;: filtrer la source de données.</td>
+              </tr>
+              <tr>
+                <td>Autocomplétion</td>
+                <td>Fonctionne. Les options doivent toutes être présentes.</td>
+                <td>Suggestions distantes&nbsp;: au cadriciel, en gardant les classes.</td>
+              </tr>
+              <tr>
+                <td>Export</td>
+                <td>Fonctionne.</td>
+                <td>Refusé par <code>data-export-total</code>. Employer <code>Faso.versCsv()</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Risques résiduels</h3>
+        <p class="doc-bloc-note">
+          Ce qui reste tient à des propriétés du document lui-même, et non à des
+          arbitrages laissés en suspens. Aucun n'est bloquant.
+        </p>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>
+            <strong>Changement du nombre de lignes.</strong> Un re-rendu qui ajoute
+            ou retire des lignes est un jeu de données différent&nbsp;: la pagination
+            revient en tête, comme après un filtre. À jeu constant, la place est
+            conservée.
+          </li>
+          <li>
+            <strong>Identifiants dupliqués.</strong> Ils ne gênent plus le
+            fonctionnement, mais les technologies d'assistance s'appuient dessus&nbsp;:
+            cela reste un défaut d'accessibilité, à corriger pour ce motif.
+          </li>
+          <li>
+            <strong>Racine fantôme.</strong> La résolution et la délégation la
+            franchissent désormais, mais les feuilles de style ne la traversent pas&nbsp;:
+            il faut les adopter dans chaque racine. Le mode
+            <code>ViewEncapsulation.Emulated</code> reste le choix recommandé.
+          </li>
+          <li>
+            <strong>Attribut lié sans interception.</strong> Lier
+            <code>[hidden]</code> ou <code>[style.width]</code> sur un élément que la
+            charte pilote, sans annuler l'annonce correspondante, produit toujours un
+            conflit&nbsp;— mais la charte fournit désormais le moyen de l'éviter.
+          </li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Ce que la charte garantit</h3>
+        <ul class="fs-liste-controle fs-mesure">
+          <li><strong>Import sans DOM.</strong> Le module s'importe au rendu serveur sans exception ni effet, <code>Faso.notifier()</code> compris.</li>
+          <li><strong>Initialisation idempotente.</strong> Quatre appels posent exactement autant de gestionnaires qu'un seul.</li>
+          <li><strong>Délégation enregistrée une fois</strong>, quel que soit le nombre d'appels.</li>
+          <li><strong>Résolution conforme</strong>&nbsp;: identique à <code>getElementById</code> quand l'identifiant est unique, et par proximité seulement en cas de doublon.</li>
+          <li><strong>Tout état écrit est annulable</strong> par <code>preventDefault()</code> sur l'annonce qui le précède.</li>
+          <li><strong>Écritures de champ signalées</strong> par <code>input</code> et <code>change</code>, sans réveiller nos propres écouteurs.</li>
+          <li><strong>Aucune place perdue</strong>&nbsp;: un re-rendu à jeu constant laisse la pagination où elle était.</li>
+          <li><strong>Aucun verrou orphelin</strong>&nbsp;: le défilement est toujours rendu, même si un panneau ouvert est détruit.</li>
+          <li><strong>Extraction jamais silencieusement partielle</strong>, dès lors que le total est déclaré.</li>
+          <li><strong>Aucun style ni script en ligne</strong>&nbsp;: pas de <code>'unsafe-inline'</code>.</li>
+          <li><strong>Aucune dépendance, aucun appel réseau.</strong></li>
+        </ul>
+      </div>
+    </section>
+
     <section class="doc-section" id="autres">
       <h2>Autres cadriciels</h2>
       <p class="doc-section-intro">
@@ -527,11 +923,13 @@ export class Bouton {
           <li>Les trois feuilles sont déclarées, dans l'ordre, et la feuille du projet vient après.</li>
           <li>Les polices sont servies depuis le domaine du service&nbsp;: aucune requête vers un tiers dans l'onglet réseau.</li>
           <li>Les icônes s'affichent&nbsp;— si elles sont absentes, vérifier <code>img-src data:</code> dans la politique de sécurité.</li>
-          <li>Aucun composant en <code>ShadowDom</code>.</li>
+          <li><code>faso-amorce.js</code> est déclaré dans <code>&lt;head&gt;</code> si le thème sombre est proposé.</li>
+          <li>Les composants en <code>ShadowDom</code>, s'il y en a, adoptent les feuilles de la charte dans leur racine.</li>
           <li>Un composant rendu après le chargement réagit&nbsp;: ouvrir une modale rendue dynamiquement.</li>
           <li>Un composant rendu deux fois ne déclenche pas deux fois&nbsp;: cliquer une commande après un aller-retour de navigation.</li>
           <li>Le rendu côté serveur aboutit, le cas échéant.</li>
-          <li>Aucun tableau ne porte à la fois <code>data-pagination</code> et une boucle du cadriciel.</li>
+          <li>Aucun tableau paginé par la charte n'est paginé aussi par le cadriciel.</li>
+          <li>Chaque attribut lié par le projet sur un composant de la charte a son annonce annulée.</li>
           <li>Les cinq vérifications d'<a href="accessibilite.html">accessibilité</a> sont passées.</li>
         </ul>
       </div>

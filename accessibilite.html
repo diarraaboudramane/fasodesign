@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Accessibilité et rédaction&nbsp;— Charte graphique de l'administration burkinabè</title>
 <meta name="description" content="Exigences d'accessibilité, contraintes de réseau et règles de rédaction administrative des services numériques de l'État burkinabè.">
+<!-- Pose le theme retenu avant le premier rendu, pour eviter
+     le clignotement clair d'une page reglee en sombre. -->
+<script src="assets/js/faso-amorce.js"></script>
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
@@ -367,24 +370,24 @@
           <p class="fs-graphe-note">Ces fichiers sont mis en cache&nbsp;: ils ne sont téléchargés qu'à la première visite.</p>
 
           <div class="fs-barres" data-max="100">
-            <div class="fs-barre" data-valeur="44.8">
+            <div class="fs-barre" data-valeur="45.4">
               <span class="fs-barre-libelle">Emblème <code>armoiries.svg</code></span>
-              <span class="fs-barre-valeur">44,8 Ko</span>
+              <span class="fs-barre-valeur">45,4 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s2" data-valeur="18.7">
+            <div class="fs-barre fs-barre--s2" data-valeur="19">
               <span class="fs-barre-libelle">Composants <code>faso.css</code></span>
-              <span class="fs-barre-valeur">18,7 Ko</span>
+              <span class="fs-barre-valeur">19,0 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s3" data-valeur="13.9">
+            <div class="fs-barre fs-barre--s3" data-valeur="18.2">
               <span class="fs-barre-libelle">Comportements <code>faso.js</code></span>
-              <span class="fs-barre-valeur">13,9 Ko</span>
+              <span class="fs-barre-valeur">18,2 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s4" data-valeur="5.5">
+            <div class="fs-barre fs-barre--s4" data-valeur="5.6">
               <span class="fs-barre-libelle">Jetons <code>tokens.css</code></span>
-              <span class="fs-barre-valeur">5,5 Ko</span>
+              <span class="fs-barre-valeur">5,6 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
             <div class="fs-barre fs-barre--s5" data-valeur="2.9">
@@ -392,20 +395,25 @@
               <span class="fs-barre-valeur">2,9 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
+            <div class="fs-barre fs-barre--s6" data-valeur="0.6">
+              <span class="fs-barre-libelle">Amorce <code>faso-amorce.js</code></span>
+              <span class="fs-barre-valeur">0,6 Ko</span>
+              <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
+            </div>
           </div>
 
           <p class="fs-legende fs-mt-6">
-            Socle complet&nbsp;: <strong>85,8&nbsp;Ko</strong> transférés, auxquels s'ajoutent
-            <strong>81&nbsp;Ko</strong> de polices, désormais servies depuis le domaine
-            du service. Avec le HTML d'une page, le total s'établit autour de
-            <strong>175&nbsp;Ko</strong>&nbsp;: sous le plafond de 500&nbsp;Ko, au-dessus de
+            Socle complet&nbsp;: <strong>91,7&nbsp;Ko</strong> transférés, auxquels s'ajoutent
+            <strong>81&nbsp;Ko</strong> de polices, servies depuis le domaine du service.
+            Avec le HTML d'une page, le total s'établit autour de
+            <strong>180&nbsp;Ko</strong>&nbsp;: sous le plafond de 500&nbsp;Ko, au-dessus de
             l'objectif de 250&nbsp;Ko seulement à la première visite, les polices et le
             socle étant ensuite mis en cache.
           </p>
         </div>
 
         <div class="doc-note fs-mt-6">
-          L'emblème représente à lui seul 60&nbsp;% du socle. C'est le prix d'un tracé
+          L'emblème représente à lui seul la moitié du socle. C'est le prix d'un tracé
           vectoriel fidèle. Il reste vingt fois plus léger que le raster dont il est
           issu, et il n'est téléchargé qu'une fois pour l'ensemble du service.
         </div>

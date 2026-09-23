@@ -57,6 +57,146 @@
   }
 
   /* -----------------------------------------------------------
+     Résolution d'une cible par identifiant
+
+     Un cadriciel qui rend le même composant plusieurs fois produit
+     autant d'éléments portant le même identifiant. Le document n'en
+     connaît alors qu'un, le premier : le bouton de la dixième ligne
+     ouvrirait la modale de la première, sans qu'aucune erreur ne le
+     signale.
+
+     La recherche part donc du déclencheur et remonte : le premier
+     ancêtre qui contient un élément portant cet identifiant gagne.
+     L'instance la plus proche l'emporte, ce qui est toujours celle
+     que l'usager désigne. Lorsque l'identifiant est unique — le cas
+     ordinaire — le résultat est exactement celui de getElementById.
+     ----------------------------------------------------------- */
+  function echapper(valeur) {
+    if (window.CSS && CSS.escape) return CSS.escape(valeur);
+    return valeur.replace(/["\\]/g, "\\$&");
+  }
+
+  function resoudre(depuis, identifiant) {
+    if (!identifiant) return null;
+
+    var selecteur = '[id="' + echapper(identifiant) + '"]';
+    var arbre = depuis && depuis.getRootNode ? depuis.getRootNode() : document;
+    if (!arbre.querySelectorAll) arbre = document;
+
+    /* Cas ordinaire : l'identifiant ne désigne qu'un élément. Le
+       résultat est alors exactement celui de getElementById, et la
+       remontée ci-dessous ne s'exécute jamais. */
+    var candidats = arbre.querySelectorAll(selecteur);
+    if (candidats.length === 1) return candidats[0];
+    if (!candidats.length) {
+      return arbre === document ? null : document.getElementById(identifiant);
+    }
+
+    /* Plusieurs porteurs du même identifiant : on remonte depuis le
+       déclencheur, en franchissant au besoin la frontière d'une
+       racine fantôme. L'instance la plus proche l'emporte. */
+    var noeud = depuis;
+    while (noeud) {
+      var parent = noeud.parentNode;
+      if (!parent) break;
+      var trouve = parent.querySelector ? parent.querySelector(selecteur) : null;
+      if (trouve) return trouve;
+      noeud = parent.host || parent;
+    }
+    return candidats[0];
+  }
+
+  /* Un événement parti d'une racine fantôme ouverte traverse bien le
+     document, mais sa cible est recalée sur l'hôte : la délégation
+     ne verrait plus le bouton réellement actionné. Le chemin composé
+     rend l'élément d'origine. */
+  function cibleDe(ev) {
+    if (ev.composedPath) {
+      var chemin = ev.composedPath();
+      if (chemin.length && chemin[0] && chemin[0].closest) return chemin[0];
+    }
+    return ev.target;
+  }
+
+  /* Un cadriciel peut reprendre à son compte l'écriture d'un état.
+     Chaque changement est annoncé par un événement annulable :
+     preventDefault() laisse la charte assurer le clavier, le focus
+     et l'annonce, sans toucher aux attributs que le projet lie. */
+  function avis(nom, detail, annulable) {
+    return new CustomEvent(nom, {
+      bubbles: true, cancelable: !!annulable, detail: detail || null
+    });
+  }
+
+  /* Chaque annonce porte deux noms. Les gabarits d'Angular
+     n'acceptent pas les deux-points dans une liaison d'événement :
+     (fs:onglet) y désignerait la cible « fs » et le modèle serait
+     refusé à la compilation. La forme à trait d'union se lie
+     directement, (fs-onglet)="...", et la forme à deux-points reste
+     celle que lisent les autres cadriciels et le JavaScript nu. */
+  function diffuser(element, nom, detail) {
+    if (!element) return;
+    element.dispatchEvent(avis("fs:" + nom, detail, false));
+    element.dispatchEvent(avis("fs-" + nom, detail, false));
+  }
+
+  function repris(element, nom, detail) {
+    if (!element) return false;
+    /* Les deux formes sont émises quoi qu'il arrive : annuler l'une
+       suffit, et le projet n'a pas à savoir laquelle la charte
+       consulte en premier. */
+    var deuxPoints = element.dispatchEvent(avis("fs:" + nom, detail, true));
+    var trait = element.dispatchEvent(avis("fs-" + nom, detail, true));
+    return !deuxPoints || !trait;
+  }
+
+  /* Suit une valeur portée par un attribut, y compris quand le
+     cadriciel remplace les nœuds qui la portent. */
+  function suivreValeurs(element, noms, rappel) {
+    if (!NAVIGATEUR || !window.MutationObserver) return;
+    new MutationObserver(rappel).observe(element, {
+      attributes: true, attributeFilter: noms, childList: true, subtree: true
+    });
+  }
+
+  /* Le verrou de défilement est compté : deux couches superposées le
+     posent deux fois et ne le lèvent qu'à la fermeture de la
+     dernière. La valeur d'origine est rendue telle quelle. */
+  var VERROUS = 0;
+  var DEFILEMENT_INITIAL = "";
+
+  function verrouillerDefilement() {
+    if (VERROUS === 0) DEFILEMENT_INITIAL = document.body.style.overflow;
+    VERROUS++;
+    document.body.style.overflow = "hidden";
+  }
+
+  function libererDefilement() {
+    if (VERROUS === 0) return;
+    VERROUS--;
+    if (VERROUS === 0) document.body.style.overflow = DEFILEMENT_INITIAL;
+  }
+
+  /* Le champ vient d'être modifié par le script et non par la
+     frappe : les cadriciels n'en savent rien. Sans ces deux
+     événements, une liaison bidirectionnelle conserve l'ancienne
+     valeur et le formulaire part incomplet.
+
+     Le drapeau distingue cette écriture d'une frappe réelle. Nos
+     propres écouteurs de saisie s'en servent pour ne pas se
+     réveiller : sans lui, retenir une suggestion rouvrirait la
+     liste que l'on vient de fermer. La distribution étant
+     synchrone, le drapeau retombe avant tout autre traitement. */
+  var ECRITURE_SCRIPT = false;
+
+  function signalerSaisie(champ) {
+    ECRITURE_SCRIPT = true;
+    champ.dispatchEvent(new Event("input", { bubbles: true }));
+    champ.dispatchEvent(new Event("change", { bubbles: true }));
+    ECRITURE_SCRIPT = false;
+  }
+
+  /* -----------------------------------------------------------
      Thème
 
      Le choix explicite prime sur la préférence système et est
@@ -90,7 +230,7 @@
     appliquerTheme(lireTheme());
 
     document.addEventListener("click", function (ev) {
-      var btn = ev.target.closest("[data-bascule-theme]");
+      var btn = cibleDe(ev).closest("[data-bascule-theme]");
       if (!btn) return;
       /* Le thème clair est le défaut du système : en l'absence
          d'attribut, l'état courant est clair, quelle que soit la
@@ -107,13 +247,14 @@
      ----------------------------------------------------------- */
   function initNavigation() {
     document.addEventListener("click", function (ev) {
-      var btn = ev.target.closest("[data-bascule]");
+      var btn = cibleDe(ev).closest("[data-bascule]");
       if (!btn) return;
 
-      var cible = document.getElementById(btn.getAttribute("data-bascule"));
+      var cible = resoudre(btn, btn.getAttribute("data-bascule"));
       if (!cible) return;
 
       var ouvert = cible.getAttribute("data-ouvert") === "true";
+      if (repris(cible, "bascule", { ouvert: !ouvert })) return;
       cible.setAttribute("data-ouvert", String(!ouvert));
       btn.setAttribute("aria-expanded", String(!ouvert));
     });
@@ -132,11 +273,19 @@
       if (!onglets.length) return;
 
       function activer(onglet, donnerFocus) {
+        /* Le projet qui lie lui-même [hidden] ou [attr.aria-selected]
+           annule l'annonce : la charte s'en tient alors au clavier,
+           au focus et à l'ordre de tabulation, qui ne se lient pas. */
+        var externe = repris(liste, "onglet", {
+          onglet: onglet, index: onglets.indexOf(onglet)
+        });
+
         onglets.forEach(function (o) {
           var actif = o === onglet;
-          o.setAttribute("aria-selected", String(actif));
           o.tabIndex = actif ? 0 : -1;
-          var panneau = document.getElementById(o.getAttribute("aria-controls"));
+          if (externe) return;
+          o.setAttribute("aria-selected", String(actif));
+          var panneau = resoudre(o, o.getAttribute("aria-controls"));
           if (panneau) panneau.hidden = !actif;
         });
         if (donnerFocus) onglet.focus();
@@ -173,9 +322,9 @@
 
   function initModales() {
     document.addEventListener("click", function (ev) {
-      var ouvrir = ev.target.closest("[data-ouvre-modale]");
+      var ouvrir = cibleDe(ev).closest("[data-ouvre-modale]");
       if (ouvrir) {
-        var modale = document.getElementById(ouvrir.getAttribute("data-ouvre-modale"));
+        var modale = resoudre(ouvrir, ouvrir.getAttribute("data-ouvre-modale"));
         if (modale && typeof modale.showModal === "function") {
           declencheurModale = ouvrir;
           modale.showModal();
@@ -183,7 +332,7 @@
         return;
       }
 
-      var fermer = ev.target.closest("[data-ferme-modale]");
+      var fermer = cibleDe(ev).closest("[data-ferme-modale]");
       if (fermer) {
         var parente = fermer.closest("dialog");
         if (parente) parente.close();
@@ -224,50 +373,91 @@
      main et rétablir le défilement du document.
      ----------------------------------------------------------- */
   function initPanneaux() {
-    var ouvertCourant = null;
-    var declencheur = null;
+    /* Une pile, et non un panneau unique : un panneau peut en ouvrir
+       un second — choisir une commune, un service — et la fermeture
+       doit rendre le premier exactement tel qu'il était. */
+    var pile = [];
+
+    function sommet() { return pile.length ? pile[pile.length - 1] : null; }
+
+    function voile(ouvert) {
+      var v = $(".fs-voile");
+      if (v) v.setAttribute("data-ouvert", ouvert ? "true" : "false");
+    }
+
+    /* Un cadriciel peut détruire un panneau ouvert sans passer par la
+       fermeture. Sans ce balayage, le verrou de défilement resterait
+       posé et la page ne défilerait plus. */
+    function purger() {
+      for (var i = pile.length - 1; i >= 0; i--) {
+        if (!document.contains(pile[i].panneau)) {
+          pile.splice(i, 1);
+          libererDefilement();
+        }
+      }
+      voile(pile.length > 0);
+    }
+
+    function ouvrir(panneau, declencheur) {
+      purger();
+      if (!panneau) return;
+      var deja = pile.some(function (e) { return e.panneau === panneau; });
+      if (deja) return;
+
+      pile.push({ panneau: panneau, declencheur: declencheur });
+      panneau.setAttribute("data-ouvert", "true");
+      panneau.setAttribute("aria-hidden", "false");
+      voile(true);
+      verrouillerDefilement();
+
+      var premier = $(FOCUSABLES, panneau);
+      if (premier) premier.focus();
+    }
 
     function fermer() {
-      if (!ouvertCourant) return;
-      ouvertCourant.setAttribute("data-ouvert", "false");
-      ouvertCourant.setAttribute("aria-hidden", "true");
-      var voile = $(".fs-voile");
-      if (voile) voile.setAttribute("data-ouvert", "false");
-      document.body.style.overflow = "";
-      if (declencheur && document.contains(declencheur)) declencheur.focus();
-      ouvertCourant = null;
-      declencheur = null;
+      purger();
+      var entree = pile.pop();
+      if (!entree) return;
+
+      entree.panneau.setAttribute("data-ouvert", "false");
+      entree.panneau.setAttribute("aria-hidden", "true");
+      libererDefilement();
+      voile(pile.length > 0);
+
+      if (entree.declencheur && document.contains(entree.declencheur)) {
+        entree.declencheur.focus();
+      } else if (pile.length) {
+        var dessous = $(FOCUSABLES, sommet().panneau);
+        if (dessous) dessous.focus();
+      }
     }
 
     document.addEventListener("click", function (ev) {
-      var btn = ev.target.closest("[data-ouvre-panneau]");
+      var cible = cibleDe(ev);
+
+      var btn = cible.closest("[data-ouvre-panneau]");
       if (btn) {
-        var panneau = document.getElementById(btn.getAttribute("data-ouvre-panneau"));
-        if (!panneau) return;
-        declencheur = btn;
-        ouvertCourant = panneau;
-        panneau.setAttribute("data-ouvert", "true");
-        panneau.setAttribute("aria-hidden", "false");
-        var voile = $(".fs-voile");
-        if (voile) voile.setAttribute("data-ouvert", "true");
-        document.body.style.overflow = "hidden";
-        var premier = $(FOCUSABLES, panneau);
-        if (premier) premier.focus();
+        ouvrir(resoudre(btn, btn.getAttribute("data-ouvre-panneau")), btn);
         return;
       }
 
-      if (ev.target.closest("[data-ferme-panneau]") || ev.target.classList.contains("fs-voile")) {
+      if (cible.closest("[data-ferme-panneau]") ||
+          (cible.classList && cible.classList.contains("fs-voile"))) {
         fermer();
       }
     });
 
     document.addEventListener("keydown", function (ev) {
-      if (!ouvertCourant) return;
+      if (!pile.length) return;
+      if (ev.key !== "Escape" && ev.key !== "Tab") return;
+
+      purger();
+      var courant = sommet();
+      if (!courant) return;
 
       if (ev.key === "Escape") { fermer(); return; }
-      if (ev.key !== "Tab") return;
 
-      var cibles = $$(FOCUSABLES, ouvertCourant);
+      var cibles = $$(FOCUSABLES, courant.panneau);
       if (!cibles.length) return;
       var premier = cibles[0];
       var dernier = cibles[cibles.length - 1];
@@ -297,7 +487,7 @@
     }
 
     document.addEventListener("click", function (ev) {
-      var btn = ev.target.closest("[data-menu] [aria-haspopup]");
+      var btn = cibleDe(ev).closest("[data-menu] [aria-haspopup]");
       if (btn) {
         var menu = btn.closest("[data-menu]");
         var liste = $(".fs-menu-liste", menu);
@@ -345,6 +535,11 @@
   }
 
   function notifier(options) {
+    /* Appelée depuis un rendu côté serveur, la fonction ne fait rien
+       et rend une fermeture inerte : le code appelant n'a pas à
+       savoir où il s'exécute. */
+    if (!NAVIGATEUR) return function () {};
+
     options = options || {};
     var zone = conteneurToasts();
 
@@ -431,7 +626,7 @@
       depot.addEventListener("drop", function (ev) {
         if (ev.dataTransfer && ev.dataTransfer.files.length) {
           champ.files = ev.dataTransfer.files;
-          champ.dispatchEvent(new Event("change", { bubbles: true }));
+          signalerSaisie(champ);
         }
       });
     });
@@ -447,6 +642,7 @@
 
       cases.forEach(function (champ, index) {
         champ.addEventListener("input", function () {
+          if (ECRITURE_SCRIPT) return;
           champ.value = champ.value.replace(/\D/g, "").slice(-1);
           if (champ.value && cases[index + 1]) cases[index + 1].focus();
         });
@@ -462,7 +658,10 @@
         champ.addEventListener("paste", function (ev) {
           ev.preventDefault();
           var colle = (ev.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
-          cases.forEach(function (c, i) { c.value = colle[i] || ""; });
+          cases.forEach(function (c, i) {
+            c.value = colle[i] || "";
+            signalerSaisie(c);
+          });
           var cible = cases[Math.min(colle.length, cases.length - 1)];
           if (cible) cible.focus();
         });
@@ -486,6 +685,7 @@
         var taille = parseInt(champ.getAttribute("maxlength"), 10) || 2;
 
         champ.addEventListener("input", function () {
+          if (ECRITURE_SCRIPT) return;
           champ.value = champ.value.replace(/\D/g, "").slice(0, taille);
           if (champ.value.length === taille && champs[index + 1]) {
             champs[index + 1].focus();
@@ -507,7 +707,9 @@
           if (parts.length < 3) return;
           ev.preventDefault();
           champs.forEach(function (c, i) {
-            if (parts[i]) c.value = parts[i];
+            if (!parts[i]) return;
+            c.value = parts[i];
+            signalerSaisie(c);
           });
         });
       });
@@ -529,7 +731,7 @@
       var liste = $('.fs-combo-liste', bloc);
       if (!champ || !liste) return;
 
-      var compteur = document.getElementById(champ.getAttribute("aria-describedby"));
+      var compteur = resoudre(champ, champ.getAttribute("aria-describedby"));
       var options = $$('.fs-combo-option', liste).map(function (li) {
         return { element: li, texte: li.textContent.trim() };
       });
@@ -611,10 +813,13 @@
       function choisir(option) {
         champ.value = option.texte;
         fermer();
-        champ.dispatchEvent(new Event("change", { bubbles: true }));
+        signalerSaisie(champ);
       }
 
-      champ.addEventListener("input", filtrer);
+      champ.addEventListener("input", function () {
+        if (ECRITURE_SCRIPT) return;
+        filtrer();
+      });
       champ.addEventListener("focus", filtrer);
 
       champ.addEventListener("keydown", function (ev) {
@@ -661,17 +866,30 @@
      maximum déclaré sur le graphique, pour que le balisage porte
      la donnée réelle et non une largeur déjà calculée.
      ----------------------------------------------------------- */
+  function appliquerBarres(groupe) {
+    var max = parseFloat(groupe.getAttribute("data-max"));
+    if (!max) return;
+
+    $$(".fs-barre[data-valeur]", groupe).forEach(function (barre) {
+      var valeur = parseFloat(barre.getAttribute("data-valeur")) || 0;
+      if (repris(barre, "barre", { valeur: valeur, max: max })) return;
+
+      var remplissage = $(".fs-barre-remplissage", barre);
+      if (remplissage) {
+        remplissage.style.width = Math.max(0, Math.min(100, (valeur / max) * 100)) + "%";
+      }
+    });
+  }
+
   function initBarres(racine) {
     $$(".fs-barres[data-max]", racine).forEach(function (groupe) {
-      var max = parseFloat(groupe.getAttribute("data-max"));
-      if (!max) return;
+      appliquerBarres(groupe);
 
-      $$(".fs-barre[data-valeur]", groupe).forEach(function (barre) {
-        var valeur = parseFloat(barre.getAttribute("data-valeur")) || 0;
-        var remplissage = $(".fs-barre-remplissage", barre);
-        if (remplissage) {
-          remplissage.style.width = Math.max(0, Math.min(100, (valeur / max) * 100)) + "%";
-        }
+      /* Le suivi porte sur le sous-arbre : il résiste au remplacement
+         des barres elles-mêmes par une boucle du cadriciel. */
+      if (!nouveau(groupe, "barres")) return;
+      suivreValeurs(groupe, ["data-valeur", "data-max"], function () {
+        appliquerBarres(groupe);
       });
     });
   }
@@ -725,7 +943,7 @@
           /* Le tri réordonne l'ensemble des lignes, y compris
              celles que la pagination masque. Elle doit donc
              reprendre la main pour réafficher la bonne tranche. */
-          table.dispatchEvent(new CustomEvent("fs:donnees", { bubbles: true }));
+          diffuser(table, "donnees", null);
         });
       });
 
@@ -750,6 +968,34 @@
      tableau s'affiche en entier : c'est une dégradation correcte,
      l'usager voit toutes les données.
      ----------------------------------------------------------- */
+
+  /* -----------------------------------------------------------
+     Surveillance du jeu de lignes
+
+     Un cadriciel qui re-rend son tableau remplace les lignes :
+     celles que la pagination masquait réapparaissent, celles
+     qu'un filtre écartait reviennent. Plutôt que d'interdire le
+     cas, on le détecte et l'on rejoue.
+
+     Seules les additions et suppressions comptent. Un tri
+     réordonne les mêmes nœuds : le jeu est inchangé, rien n'est
+     rejoué, et aucune boucle ne peut s'amorcer.
+     ----------------------------------------------------------- */
+  function surLignesChangees(corps, rappel) {
+    if (!NAVIGATEUR || !window.MutationObserver) return;
+
+    var connues = new Set($$("tr", corps));
+
+    new MutationObserver(function () {
+      var actuelles = $$("tr", corps);
+      var identique = actuelles.length === connues.size &&
+                      actuelles.every(function (tr) { return connues.has(tr); });
+      if (identique) return;
+
+      connues = new Set(actuelles);
+      rappel();
+    }).observe(corps, { childList: true });
+  }
 
   /* Fenêtre de pages autour de la page courante, avec les
      extrémités toujours visibles : 1 … 4 5 6 … 18 */
@@ -787,6 +1033,7 @@
 
       var taille = parseInt(bloc.getAttribute("data-pagination"), 10) || 10;
       var page = 1;
+      var dernierCompte = -1;
 
       var annonce = document.createElement("p");
       annonce.className = "fs-invisible";
@@ -820,6 +1067,7 @@
         }
 
         construire(pages);
+        dernierCompte = toutes.length;
 
         if (annoncer) {
           annonce.textContent = "Page " + page + " sur " + pages + ". " +
@@ -885,11 +1133,28 @@
       /* Un tri ou un changement de filtre renvoie à la première
          page : rester en page 7 d'un jeu qui n'en compte plus que
          deux n'aurait aucun sens. */
+      /* Un re-rendu qui remplace les lignes sans changer leur nombre
+         n'est pas un autre jeu de données : c'est la même page,
+         reconstruite, et l'usager doit y rester. Un tri, un filtre ou
+         un nombre de lignes différent renvoient en tête. */
+      function apres(rejeu, annoncer) {
+        afficher(rejeu && lignes().length === dernierCompte ? page : 1, annoncer);
+      }
+
       bloc.addEventListener("fs:donnees", function (ev) {
-        afficher(1, ev.detail && ev.detail.annoncer);
+        var detail = ev.detail || {};
+        apres(!!detail.rejeu, detail.annoncer);
       });
 
       afficher(1, false);
+
+      /* Lorsque le bloc porte aussi des filtres, ceux-ci recalculent
+         les lignes retenues avant d'émettre fs:donnees : les observer
+         tous les deux ferait passer la pagination deux fois, la
+         première sur un état intermédiaire. Un seul pilote. */
+      if (!bloc.hasAttribute("data-filtres")) {
+        surLignesChangees(corps, function () { apres(true, false); });
+      }
     });
   }
 
@@ -991,6 +1256,7 @@
           retirer.textContent = "×";
           retirer.addEventListener("click", function () {
             controle.value = "";
+            signalerSaisie(controle);
             appliquer(true);
             controle.focus();
           });
@@ -1004,14 +1270,17 @@
         vider.className = "fs-filtres-vider";
         vider.textContent = "Tout effacer";
         vider.addEventListener("click", function () {
-          controles.forEach(function (c) { c.value = ""; });
+          controles.forEach(function (c) {
+            c.value = "";
+            signalerSaisie(c);
+          });
           appliquer(true);
           controles[0].focus();
         });
         zone.appendChild(vider);
       }
 
-      function appliquer(annoncer) {
+      function appliquer(annoncer, rejeu) {
         var actifs = controles.filter(function (c) { return c.value.trim(); });
 
         var retenues = 0;
@@ -1044,17 +1313,25 @@
         if (cadre) cadre.hidden = retenues === 0;
         if (pied) pied.hidden = retenues === 0;
 
-        bloc.dispatchEvent(new CustomEvent("fs:donnees", {
-          bubbles: true, detail: { annoncer: !!annoncer }
-        }));
+        diffuser(bloc, "donnees", {
+          annoncer: !!annoncer, rejeu: !!rejeu, retenues: retenues
+        });
       }
 
       controles.forEach(function (controle) {
         var evenement = controle.tagName === "SELECT" ? "change" : "input";
-        controle.addEventListener(evenement, function () { appliquer(true); });
+        controle.addEventListener(evenement, function () {
+          if (ECRITURE_SCRIPT) return;
+          appliquer(true);
+        });
       });
 
       appliquer(false);
+
+      /* Le rejeu est signalé comme tel : la pagination sait alors
+         qu'il s'agit du même jeu reconstruit, et non d'un filtre que
+         l'usager vient de changer. */
+      surLignesChangees(corps, function () { appliquer(false, true); });
     });
   }
 
@@ -1158,7 +1435,37 @@
         return lignes.join("\r\n");
       }
 
+      /* Garde-fou contre l'extraction partielle.
+
+         L'export lit les lignes présentes dans le document. Si un
+         cadriciel n'en rend qu'une partie — sa propre pagination,
+         un défilement virtuel — le fichier serait incomplet sans
+         que rien ne le signale, et l'usager croirait détenir
+         l'intégralité de ses dossiers.
+
+         Le service déclare alors data-export-total. Dès que le
+         compte ne correspond pas, l'extraction est refusée : mieux
+         vaut un refus explicite qu'un fichier faux. */
+      function verifierCompletude() {
+        var declare = parseInt(bloc.getAttribute("data-export-total"), 10);
+        if (isNaN(declare)) return true;
+
+        var presentes = $$("tr", corps).length;
+        if (presentes >= declare) return true;
+
+        notifier({
+          titre: "Extraction refusée",
+          texte: presentes + " lignes sur " + declare + " sont chargées. "
+               + "L'export doit être produit par le service.",
+          ton: "danger",
+          duree: 0
+        });
+        return false;
+      }
+
       function telecharger() {
+        if (!verifierCompletude()) return;
+
         var filtres = filtresActifs().length;
         var fichier = nom + "-" + horodatage() + (filtres ? "-filtre" : "") + ".csv";
 
@@ -1189,6 +1496,7 @@
 
       $$("[data-export-impression]", bloc).forEach(function (b) {
         b.addEventListener("click", function () {
+          if (!verifierCompletude()) return;
           majContexte();
           window.print();
         });
@@ -1208,11 +1516,17 @@
      ----------------------------------------------------------- */
   function initEncarts() {
     document.addEventListener("click", function (ev) {
-      var bouton = ev.target.closest("[data-ferme-encart]");
+      var bouton = cibleDe(ev).closest("[data-ferme-encart]");
       if (!bouton) return;
 
       var encart = bouton.closest(".fs-encart");
       if (!encart) return;
+
+      /* Lorsqu'un cadriciel possède cet encart, le retirer d'ici
+         laisserait sa vue croire qu'il existe encore. L'annonce est
+         donc annulable : le projet l'intercepte, empêche le retrait,
+         et masque l'encart par sa propre liaison. */
+      if (repris(encart, "fermeture", null)) return;
 
       var suivant = encart.nextElementSibling;
       var repli = encart.parentElement;
@@ -1238,7 +1552,10 @@
       function majCompteur() {
         var n = $$('.fs-notification[data-lu="false"]', centre).length;
         if (compteur) {
-          compteur.textContent = n;
+          /* L'écriture n'a lieu que si le compte a changé : le compteur
+             est lui-même sous observation, et réécrire la même valeur
+             relancerait le balayage sans fin. */
+          if (compteur.textContent !== String(n)) compteur.textContent = String(n);
           compteur.hidden = n === 0;
         }
         var tout = $("[data-tout-lu]", centre);
@@ -1246,23 +1563,33 @@
       }
 
       centre.addEventListener("click", function (ev) {
-        var lire = ev.target.closest("[data-marquer-lu]");
+        var cible = cibleDe(ev);
+
+        var lire = cible.closest("[data-marquer-lu]");
         if (lire) {
           var item = lire.closest(".fs-notification");
-          if (item) item.setAttribute("data-lu", "true");
+          if (item && !repris(item, "lecture", { tout: false })) {
+            item.setAttribute("data-lu", "true");
+          }
           majCompteur();
           return;
         }
 
-        if (ev.target.closest("[data-tout-lu]")) {
+        if (cible.closest("[data-tout-lu]")) {
           $$(".fs-notification", centre).forEach(function (n) {
-            n.setAttribute("data-lu", "true");
+            if (!repris(n, "lecture", { tout: true })) {
+              n.setAttribute("data-lu", "true");
+            }
           });
           majCompteur();
         }
       });
 
       majCompteur();
+
+      /* Quand la liste vient d'une boucle du cadriciel, l'état lu est
+         à lui ; le compteur, lui, reste juste. */
+      suivreValeurs(centre, ["data-lu"], majCompteur);
     });
   }
 
@@ -1278,7 +1605,7 @@
       var sortie = $("[data-calendrier-valeur]", calendrier);
 
       calendrier.addEventListener("click", function (ev) {
-        var jour = ev.target.closest(".fs-jour");
+        var jour = cibleDe(ev).closest(".fs-jour");
         if (!jour || jour.disabled || jour.getAttribute("aria-disabled") === "true") return;
 
         $$(".fs-jour", calendrier).forEach(function (j) {
@@ -1299,7 +1626,7 @@
   function initCompteurs(racine) {
     $$("[data-compteur]", racine).forEach(function (champ) {
       if (!nouveau(champ, "compteurs")) return;
-      var sortie = document.getElementById(champ.getAttribute("data-compteur"));
+      var sortie = resoudre(champ, champ.getAttribute("data-compteur"));
       if (!sortie) return;
 
       var max = parseInt(champ.getAttribute("maxlength"), 10);
@@ -1320,16 +1647,30 @@
   /* -----------------------------------------------------------
      Barre de progression pilotée par data-valeur
      ----------------------------------------------------------- */
+  function appliquerJauge(jauge) {
+    var valeur = Math.max(0, Math.min(100, parseFloat(jauge.getAttribute("data-valeur")) || 0));
+
+    jauge.setAttribute("role", "progressbar");
+    jauge.setAttribute("aria-valuemin", "0");
+    jauge.setAttribute("aria-valuemax", "100");
+
+    /* Le projet qui lie lui-même [style.width] annule l'annonce : la
+       largeur reste à sa liaison, et l'état accessible avec elle. */
+    if (repris(jauge, "jauge", { valeur: valeur })) return;
+
+    jauge.setAttribute("aria-valuenow", String(valeur));
+    var barre = $(".fs-jauge-valeur", jauge);
+    if (barre) barre.style.width = valeur + "%";
+  }
+
   function initJauges(racine) {
     $$(".fs-jauge[data-valeur]", racine).forEach(function (jauge) {
-      var valeur = Math.max(0, Math.min(100, parseFloat(jauge.getAttribute("data-valeur")) || 0));
-      var barre = $(".fs-jauge-valeur", jauge);
-      if (barre) barre.style.width = valeur + "%";
+      appliquerJauge(jauge);
 
-      jauge.setAttribute("role", "progressbar");
-      jauge.setAttribute("aria-valuenow", String(valeur));
-      jauge.setAttribute("aria-valuemin", "0");
-      jauge.setAttribute("aria-valuemax", "100");
+      /* La valeur est suivie : une jauge dont le cadriciel change
+         data-valeur se met à jour sans nouvelle initialisation. */
+      if (!nouveau(jauge, "jauges")) return;
+      suivreValeurs(jauge, ["data-valeur"], function () { appliquerJauge(jauge); });
     });
   }
 
@@ -1423,11 +1764,39 @@
     return true;
   }
 
+  /* Construction d'un CSV à partir de données, et non du document.
+     C'est la porte de sortie lorsque le cadriciel possède les
+     lignes : il fournit l'intégralité du jeu, la charte se charge
+     de l'échappement, du séparateur et de l'encodage. */
+  function versCsv(entetes, lignes) {
+    var sortie = [entetes.map(echapperCsv).join(";")];
+    lignes.forEach(function (ligne) {
+      sortie.push(ligne.map(echapperCsv).join(";"));
+    });
+    return sortie.join("\r\n");
+  }
+
+  function telechargerCsv(nom, contenu) {
+    if (!NAVIGATEUR) return;
+
+    var blob = new Blob(["﻿" + contenu], { type: "text/csv;charset=utf-8;" });
+    var url = URL.createObjectURL(blob);
+    var lien = document.createElement("a");
+    lien.href = url;
+    lien.download = /\.csv$/.test(nom) ? nom : nom + ".csv";
+    document.body.appendChild(lien);
+    lien.click();
+    lien.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
   var Faso = {
     notifier: notifier,
     appliquerTheme: appliquerTheme,
     initialiser: initialiser,
     observer: observer,
+    versCsv: versCsv,
+    telechargerCsv: telechargerCsv,
     version: "2.0.0",
 
     /* Les comportements sont exposés pour que la documentation
