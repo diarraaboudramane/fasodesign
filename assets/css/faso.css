@@ -55,7 +55,7 @@ fieldset { margin: 0; padding: 0; border: 0; }
 legend { padding: 0; }
 
 /* L'attribut hidden doit l'emporter sur toute règle d'affichage
-   d'un composant. Sans cela, une règle plus spécifique — celle du
+   d'un composant. Sans cela, une règle plus spécifique, celle du
    tableau empilé sur écran étroit, par exemple — réaffiche des
    lignes que la pagination vient de masquer. */
 [hidden] { display: none !important; }
@@ -440,7 +440,7 @@ a:hover {
 
 .fs-btn--danger {
   --btn-fond: var(--accent);
-  --btn-texte: var(--texte-sur-couleur);
+  --btn-texte: var(--accent-texte);
   --btn-bord: var(--accent);
 }
 .fs-btn--danger:hover:not(:disabled) {
@@ -493,7 +493,19 @@ a:hover {
   min-width: var(--cible-min);
   padding: 0;
 }
-.fs-btn--icone.fs-btn--sm { width: 36px; min-width: 36px; }
+.fs-btn--icone.fs-btn--sm { width: 36px; min-width: 36px; position: relative; }
+
+/* Le dessin garde ses 36 px, la zone qui repond en fait 44 : un calque
+   transparent deborde de 4 px sur chaque bord. C'est la seule facon de
+   tenir la cible annoncee sans epaissir les barres d'outils denses.
+   Deux boutons voisins separes du gouttiere habituelle ne voient pas
+   leurs zones se recouvrir. */
+.fs-btn--icone.fs-btn--sm::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+}
 
 /* État de chargement */
 .fs-btn[data-chargement="true"] {
@@ -1176,7 +1188,7 @@ a:hover {
   height: 20px;
   padding-inline: 6px;
   background: var(--accent);
-  color: var(--texte-sur-couleur);
+  color: var(--accent-texte);
   border-radius: var(--rayon-plein);
   font-size: var(--taille-2xs);
   font-weight: var(--graisse-grasse);
@@ -1279,7 +1291,7 @@ a:hover {
 .fs-bandeau {
   padding: var(--espace-3) 0;
   background: var(--accent);
-  color: var(--texte-sur-couleur);
+  color: var(--accent-texte);
   font-size: var(--taille-sm);
 }
 .fs-bandeau a { color: inherit; font-weight: var(--graisse-demi); }
@@ -1389,14 +1401,16 @@ a:hover {
   inset: 0;
 }
 
-/* Carte mise en avant par le filet national en bandeau */
+/* Carte mise en avant par le filet national en bandeau.
+   Même composition que partout ailleurs : rouge au-dessus, vert
+   au-dessous, étoile centrée. */
 .fs-carte--marquee::before {
   content: "";
   display: block;
   height: 12px;
   background-image:
     var(--etoile-or),
-    linear-gradient(to right,
+    linear-gradient(to bottom,
       var(--rouge-500) 0 50%,
       var(--vert-500) 50% 100%);
   background-size: 8px 8px, 100% 100%;
@@ -1445,7 +1459,7 @@ a:hover {
 
 /* Tableau complet : barre d'outils, tableau défilant, pied de
    pagination. Le cadre défile horizontalement, mais les deux
-   barres restent en place — sans quoi la pagination s'échapperait
+   barres restent en place, sans quoi la pagination s'échapperait
    hors de l'écran sur un tableau large. */
 .fs-tableau-bloc {
   border: var(--trait-fin) solid var(--bordure);
@@ -1810,20 +1824,20 @@ a:hover {
 
 /* Filet national : bande longue, pleine largeur.
 
-   Le rouge occupe la moitié gauche, le vert la moitié droite,
-   l'étoile d'or se pose à la jonction.
+   Le rouge occupe la moitié haute, le vert la moitié basse,
+   l'étoile d'or centrée à cheval sur les deux.
 
-   Ce n'est pas la composition du drapeau, et c'est délibéré :
-   étirée sur toute la largeur d'un écran, une bande de 14 px se
-   présente dans un rapport voisin de cent pour un. Superposer
-   deux bandes de 7 px dans ce format ne donne pas un drapeau mais
-   deux traits parallèles, qu'aucun œil ne rapproche. La division
-   gauche-droite, elle, tient à n'importe quelle longueur : le
-   regard parcourt le rouge, rencontre l'étoile, poursuit sur le
-   vert.
+   C'est la composition du drapeau, et elle vaut pour toutes les
+   marques du système sans exception : le repère court, le filet
+   pleine largeur, le bandeau d'une carte mise en avant. Une marque
+   de l'État ne se réarrange pas selon le format où elle se pose.
 
-   La composition du drapeau est réservée à .fs-repere, dont les
-   proportions la rendent lisible. */
+   La conséquence est à connaître : sur une bande de 14 px étirée
+   sur toute la largeur, les deux moitiés ne font que 7 px chacune.
+   La variante --epais, à 20 px, donne deux bandes de 10 px et se
+   lit de plus loin ; c'est celle à préférer en ouverture de page.
+   L'étoile, elle, suit la hauteur et reste toujours à cheval sur
+   la ligne de partage. */
 .fs-filet {
   --filet-hauteur: 14px;
   --filet-etoile: calc(var(--filet-hauteur) * 0.7);
@@ -1831,7 +1845,7 @@ a:hover {
   height: var(--filet-hauteur);
   background-image:
     var(--etoile-or),
-    linear-gradient(to right,
+    linear-gradient(to bottom,
       var(--rouge-500) 0 50%,
       var(--vert-500) 50% 100%);
   background-size: var(--filet-etoile) var(--filet-etoile), 100% 100%;
@@ -3016,8 +3030,12 @@ a:hover {
 .fs-jour {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  /* 44 px : la charte annonce cette cible tactile, elle la tient ici.
+     Un jour de calendrier est entouré de six voisins ; l'agrandir par
+     un calque débordant ferait empiéter les cibles les unes sur les
+     autres, on agrandit donc la case elle-même. */
+  width: 44px;
+  height: 44px;
   border: var(--trait-fin) solid transparent;
   border-radius: var(--rayon-md);
   background: none;
@@ -3029,6 +3047,16 @@ a:hover {
   cursor: pointer;
 }
 .fs-jour:hover { background: var(--surface-enfoncee); }
+
+/* Sept cases de 44 px font 322 px : au-dela d'un ecran de 400 px cela
+   passe, en deca il faut ceder. Le calendrier prend alors toute la
+   largeur et les cases se repartissent, sans jamais descendre sous
+   38 px — bien au-dessus du plancher de 24 px du referentiel. */
+@media (max-width: 400px) {
+  .fs-calendrier { display: block; }
+  .fs-calendrier table { width: 100%; }
+  .fs-jour { width: 100%; min-width: 38px; height: 40px; }
+}
 
 /* Le jour courant est cerné, le jour choisi est plein : deux
    repères distincts, qui peuvent tomber sur la même case. */

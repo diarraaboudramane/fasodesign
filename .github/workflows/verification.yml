@@ -1,0 +1,43 @@
+# Charte graphique de l'administration burkinabè
+# Vérification à chaque poussée et à chaque demande de fusion.
+#
+# Le même script qu'en local : « npm test ». Il n'y a pas deux vérités,
+# et rien ici qui ne puisse être rejoué sur un poste.
+
+name: Vérification
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # Aucune dépendance à installer : le système n'en a pas.
+      # « npm ci » échouerait faute de verrou, et n'aurait rien à faire.
+
+      - name: Vérification complète
+        run: npm test
+
+      - name: Les projections sont-elles à jour ?
+        run: |
+          node outils/jetons.js
+          node outils/android.js
+          if ! git diff --quiet; then
+            echo "::error::assets/jetons.json ou android/ ne correspondent plus à tokens.css."
+            echo "Relancer « npm run jetons » et « npm run android », puis committer."
+            git diff --stat
+            exit 1
+          fi

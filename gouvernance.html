@@ -75,8 +75,8 @@
         <p class="fs-encart-titre">Désignations à arrêter</p>
         <p>
           Les rôles et les procédures décrits ici sont des propositions de conception.
-          Les organismes qui les exercent&nbsp;— autorité de tutelle, équipe du système,
-          comité d'arbitrage&nbsp;— doivent être désignés par acte administratif avant
+          Les organismes qui les exercent (autorité de tutelle, équipe du système,
+          comité d'arbitrage), doivent être désignés par acte administratif avant
           l'entrée en vigueur de la charte. Les mentions <code>[à désigner]</code>
           marquent les points qui relèvent de cette décision et non de la conception.
         </p>
@@ -87,7 +87,7 @@
     <section class="doc-section" id="roles">
       <h2>Rôles et responsabilités</h2>
       <p class="doc-section-intro">
-        Trois niveaux, et un principe&nbsp;: la décision revient au plus proche du
+        Trois niveaux, et un principe. La décision revient au plus proche du
         terrain qui peut la prendre sans compromettre l'unité du système.
       </p>
 
@@ -519,7 +519,7 @@
         <ul class="fs-liste-controle fs-mesure">
           <li>Le bandeau d'identification officielle, le filet national et le bloc-marque sont repris sans adaptation.</li>
           <li>Les trois feuilles de style du système sont intégrées sans modification locale.</li>
-          <li>Aucune couleur, taille ou forme n'est écrite en dur&nbsp;: toute adaptation passe par une surcharge de jetons.</li>
+          <li>Aucune couleur, taille ou forme n'est écrite en dur. Toute adaptation passe par une surcharge de jetons.</li>
           <li>Les cinq vérifications d'accessibilité de la recette ont été passées.</li>
           <li>Les dérogations en vigueur sont listées, avec leur date d'échéance.</li>
           <li>La version de la charte utilisée est indiquée, ainsi que la date de l'audit.</li>
@@ -567,7 +567,7 @@
         <h3>2.0&nbsp;— septembre 2026</h3>
         <p class="doc-bloc-note">
           Refonte des fondations et première bibliothèque de composants réelle.
-          Version majeure&nbsp;: la reprise d'un projet issu de la 1.0 est nécessaire.
+          Version majeure. La reprise d'un projet issu de la 1.0 est nécessaire.
         </p>
 
         <h4 class="fs-mt-6">Ruptures</h4>
@@ -590,7 +590,7 @@
               <tr>
                 <td>Police à chasse fixe</td>
                 <td>JetBrains Mono, téléchargée</td>
-                <td>Supprimée. La chasse fixe du système suffit&nbsp;: elle ne porte aucune identité</td>
+                <td>Supprimée. La chasse fixe du système suffit. Elle ne porte aucune identité</td>
               </tr>
               <tr>
                 <td>Neutres</td>
@@ -648,10 +648,152 @@
           </li>
           <li>
             <strong>Écritures de valeur signalées.</strong> Cinq endroits où le script
-            écrit dans un champ&nbsp;— code collé, date collée, suggestion retenue, filtre
-            vidé&nbsp;— émettent <code>input</code> et <code>change</code>. Sans eux, une
+            écrit dans un champ (code collé, date collée, suggestion retenue, filtre
+            vidé), émettent <code>input</code> et <code>change</code>. Sans eux, une
             liaison bidirectionnelle conservait l'ancienne valeur et le formulaire
             partait incomplet.
+          </li>
+          <li>
+            <strong>Valeurs invisibles pour React.</strong> React n'interroge pas le
+            champ. Il compare à ce que son propre accesseur a mémorisé. Une valeur
+            écrite par cet accesseur (date collée, code collé, suggestion retenue,
+            filtre vidé) ne déclenchait donc jamais <code>onChange</code>&nbsp;: l'usager
+            lisait la nouvelle valeur à l'écran et le formulaire partait avec
+            l'ancienne. La charte écrit désormais par l'accesseur du prototype, ce qui
+            est sans effet pour les cadriciels qui n'ont rien installé.
+          </li>
+          <li>
+            <strong>Une seule composition pour toutes les marques.</strong> Le filet
+            pleine largeur et le bandeau d'une carte mise en avant étaient divisés
+            gauche-droite, avec l'étoile à la jonction&nbsp;; seul le repère court portait
+            la composition du drapeau. Les cinq marques du système la portent
+            désormais&nbsp;: <strong>rouge au-dessus, vert au-dessous, étoile centrée à
+            cheval sur les deux</strong>. Une marque de l'État ne se réarrange pas
+            selon le format où elle se pose. La justification contraire, qui figurait
+            dans la page Fondations et dans les commentaires du code, a été retirée.
+            Le contrôle d'identité vérifie maintenant la composition marque par marque,
+            et non plus sa seule présence quelque part dans la feuille.
+          </li>
+          <li>
+            <strong>Recette exécutable et chaîne de publication.</strong> La
+            vérification n'était affirmée nulle part qu'en prose.
+            <code>npm test</code> exécute désormais vingt contrôles&nbsp;: syntaxe,
+            balisage des neuf pages, classes orphelines, bonne formation des SVG et
+            des 43 ressources Android, correspondance des projections, cohérence du
+            paquet, contraste, et six suites de comportements. Un second mode,
+            <code>--publication</code>, refuse de laisser partir un paquet dont les
+            champs restent à renseigner ou dont les conditions de réutilisation ne
+            sont pas arrêtées. Deux chaînes d'intégration, une page d'erreur 404 et
+            trois configurations de serveur complètent l'ensemble.
+          </li>
+          <li>
+            <strong>Chiffre de contrôle corrigé.</strong> La vérification de
+            contraste annonçait 150 couples&nbsp;; elle comptait les couples tentés, y
+            compris ceux qui ne se résolvaient pas. Le nombre de couples réellement
+            éprouvés est de 118, et il est désormais produit par le contrôle
+            lui-même.
+          </li>
+          <li>
+            <strong>Intégration d'Android, en Kotlin et en Java.</strong> Le CSS et
+            le JavaScript ne s'exécutent pas dans une application native&nbsp;: ce sont
+            les décisions qui se transportent. <code>outils/android.js</code> produit
+            depuis la même feuille de jetons les couleurs des deux thèmes, les
+            dimensions du téléphone et de la tablette, un thème Material&nbsp;3, un
+            thème Compose, les 35 icônes, l'emblème, le filet et le repère nationaux.
+            Deux traductions y sont assumées&nbsp;: <code>clamp()</code> devient deux
+            jeux de dimensions, et la cible tactile passe de 44 à 48&nbsp;dp, plancher
+            d'Android. En WebView, la charte s'exécute telle quelle&nbsp;; la section
+            correspondante insiste sur le refus de l'assombrissement automatique, qui
+            déplacerait les couleurs du drapeau.
+          </li>
+          <li>
+            <strong>Intégration de React et de Laravel.</strong> Les deux ont
+            désormais leur section, au même niveau de détail qu'Angular&nbsp;: champs
+            contrôlés et écoute des annonces pour le premier, formulaire Blade,
+            paginateur d'Eloquent, Livewire, Alpine, Inertia et politique de sécurité
+            pour le second. Les autres cadriciels sont renvoyés à celui des trois dont
+            ils se rapprochent.
+          </li>
+          <li>
+            <strong>Contraste des contours et des mentions.</strong> Le contour d'un
+            champ atteignait 1,66:1 sur blanc, là où le référentiel en exige 3 pour
+            un élément d'interface&nbsp;; le texte faible atteignait 4,16:1 pour un
+            seuil de 4,5. Deux demi-paliers, <code>neutre-450</code> et
+            <code>neutre-550</code>, ont été ajoutés à l'échelle et les rôles
+            réaffectés. En thème sombre, le contour ne donnait que 1,96:1 et le
+            texte du bouton de suppression 3,13:1&nbsp;: un jeton
+            <code>accent-texte</code> résout le second. Les 118 couples de couleurs
+            réellement employés par la feuille passent désormais leur seuil, dans
+            les deux thèmes.
+          </li>
+          <li>
+            <strong>Injection de formule dans les extractions.</strong> Une cellule
+            valant <code>=1+1</code> ou <code>=HYPERLINK(...)</code> était livrée
+            telle quelle et s'exécutait à l'ouverture du fichier sur le poste de
+            l'agent. Les cellules de texte commençant par un caractère de formule
+            sont désarmées par une apostrophe&nbsp;; les nombres, reconnus, restent
+            calculables. L'échappement n'aplatit plus les espaces ni les retours à
+            la ligne, qui appartiennent à la donnée.
+          </li>
+          <li>
+            <strong>Surface publique utilisable au rendu serveur.</strong>
+            <code>Faso.appliquerTheme()</code> et les vingt et un comportements
+            exposés levaient <code>ReferenceError: document is not defined</code>.
+            Seul l'import était protégé. Les vingt-huit points d'entrée sont
+            désormais sans effet plutôt que fatals.
+          </li>
+          <li>
+            <strong>Éléments ajoutés après l'initialisation.</strong> Un onglet
+            ajouté à une liste déjà initialisée n'obtenait ni clic ni clavier, et
+            rejouer l'initialisation n'y changeait rien&nbsp;: le marquage portait sur
+            le conteneur. Il porte maintenant sur chaque enfant, et une veille
+            équipe les arrivants. Même traitement pour les cases d'un code à usage
+            unique et les options d'une autocomplétion.
+          </li>
+          <li>
+            <strong>Fuite d'écouteur de l'autocomplétion.</strong> Chaque instance
+            posait un écouteur sur <code>document</code> qui retenait son bloc bien
+            après la destruction de celui-ci. Un écouteur unique le remplace, qui
+            relit le document à chaque clic.
+          </li>
+          <li>
+            <strong>Cible tactile tenue ou dite.</strong> La charte annonçait
+            44&nbsp;×&nbsp;44&nbsp;px pour des boutons à icône de 36 et des jours de
+            calendrier de 40. La case du calendrier passe à 44&nbsp;px, le bouton à
+            icône reçoit une zone active débordante, et les deux exceptions qui
+            subsistent sont écrites dans la page Accessibilité.
+          </li>
+          <li>
+            <strong>Conformité annoncée ramenée au mesuré.</strong> La page
+            Accessibilité affirmait que les composants satisfaisaient déjà les
+            critères. Elle dit maintenant ce qui a été mesuré, et ce qui ne l'a pas
+            été&nbsp;: ni lecteur d'écran, ni audit tiers, ni test avec des personnes
+            en situation de handicap.
+          </li>
+          <li>
+            <strong>Jetons produits, non recopiés.</strong> <code>jetons.json</code>
+            était entretenu à la main et avait divergé du CSS sur
+            <code>police-mono</code>, tandis que <code>etoile-or</code> y manquait.
+            <code>outils/jetons.js</code> le produit désormais depuis
+            <code>tokens.css</code>, et sa vérification entre dans la recette.
+          </li>
+          <li>
+            <strong>Libellés du script rassemblés.</strong> Une vingtaine de textes
+            étaient écrits en dur en français. Ils forment un dictionnaire unique,
+            <code>Faso.textes</code>, que le projet complète. Le pays compte une
+            soixantaine de langues&nbsp;: la charte ne pouvait pas en imposer une.
+          </li>
+          <li>
+            <strong>Exemple Angular qui compile.</strong> Le gestionnaire d'annonce
+            était écrit avec une signature en <code>CustomEvent</code>, refusée par
+            <code>strictTemplates</code> puisque Angular type <code>$event</code> en
+            <code>Event</code>, et le gabarit ne portait pas le <code>data-cle</code>
+            que le gestionnaire relisait.
+          </li>
+          <li>
+            <strong>Outillage de la documentation retiré du paquet.</strong>
+            <code>docs.css</code> et <code>docs.js</code> ne servent qu'au site de la
+            charte et pesaient sur chaque projet consommateur.
           </li>
           <li>
             <strong>Extraction incomplète rendue impossible.</strong>
@@ -681,7 +823,7 @@
           </li>
           <li>
             <strong>Valeurs suivies.</strong> Jauges et barres se mettaient à jour à
-            l'initialisation seulement&nbsp;: une valeur changée ensuite par le cadriciel
+            l'initialisation seulement. Une valeur changée ensuite par le cadriciel
             restait sans effet sur la largeur affichée.
           </li>
           <li>
@@ -718,11 +860,11 @@
               Les fichiers de la 1.0 ont été déplacés dans
               <code>archives/v1-avril-2026/</code>, accompagnés d'une note rappelant
               qu'ils ne font plus foi. Ils cohabitaient jusque-là avec la 2.0 à la
-              racine du projet, sans rien indiquer de leur obsolescence&nbsp;: deux jeux
+              racine du projet, sans rien indiquer de leur obsolescence. Deux jeux
               de jetons contradictoires s'y présentaient comme également valides.
             </p>
             <p>
-              Le raster d'origine de l'emblème y est conservé&nbsp;: c'est la source dont
+              Le raster d'origine de l'emblème y est conservé. C'est la source dont
               la version vectorielle a été dérivée, et elle est nécessaire pour
               refaire ou contrôler ce tracé.
             </p>
@@ -733,15 +875,15 @@
       <div class="doc-bloc">
         <h3>Sort des versions retirées</h3>
         <p class="doc-bloc-note">
-          Une version qui cesse de faire foi n'est pas effacée&nbsp;: elle est archivée.
-          C'est ce qui permet de vérifier après coup ce qu'un service conforme à une
+          Une version qui cesse de faire foi n'est pas effacée. Elle est archivée.
+          On peut ainsi vérifier après coup ce qu'un service conforme à une
           version antérieure était censé appliquer.
         </p>
         <ul class="fs-liste-puces fs-mesure">
           <li>Les fichiers sont déplacés dans <code>archives/&lt;version&gt;-&lt;mois&gt;/</code>, hors du chemin de production.</li>
           <li>Une note placée dans le dossier énonce, dès sa première ligne, que ces fichiers ne font plus foi et où se trouve la version en vigueur.</li>
-          <li>Les sources nécessaires à la reconstitution d'un livrable&nbsp;— fichier d'origine d'un emblème, par exemple&nbsp;— sont conservées avec elle.</li>
-          <li>Aucun fichier obsolète ne demeure à la racine&nbsp;: deux sources contradictoires au même endroit valent absence de source.</li>
+          <li>Les sources nécessaires à la reconstitution d'un livrable (fichier d'origine d'un emblème, par exemple), sont conservées avec elle.</li>
+          <li>Aucun fichier obsolète ne demeure à la racine. Deux sources contradictoires au même endroit valent absence de source.</li>
         </ul>
       </div>
     </section>

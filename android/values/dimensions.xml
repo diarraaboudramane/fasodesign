@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Charte graphique de l'administration burkinabè
+  Fichier produit par outils/android.js depuis assets/css/tokens.css.
+  Ne pas modifier directement : toute retouche serait perdue à la
+  prochaine génération. La source faisant foi est la feuille de jetons.
+-->
+<resources>
+  <dimen name="faso_taille_2xs">11sp</dimen>
+  <dimen name="faso_taille_xs">12sp</dimen>
+  <dimen name="faso_taille_sm">13sp</dimen>
+  <dimen name="faso_taille_md">15sp</dimen>
+  <dimen name="faso_taille_lg">17sp</dimen>
+  <dimen name="faso_taille_h6">15sp</dimen>
+  <dimen name="faso_taille_h5">17sp</dimen>
+  <dimen name="faso_taille_h4">19sp</dimen>
+  <dimen name="faso_taille_h3">22sp</dimen>
+  <dimen name="faso_taille_h2">26sp</dimen>
+  <dimen name="faso_taille_h1">32sp</dimen>
+  <dimen name="faso_espace_0">0dp</dimen>
+  <dimen name="faso_espace_1">4dp</dimen>
+  <dimen name="faso_espace_2">8dp</dimen>
+  <dimen name="faso_espace_3">12dp</dimen>
+  <dimen name="faso_espace_4">16dp</dimen>
+  <dimen name="faso_espace_5">20dp</dimen>
+  <dimen name="faso_espace_6">24dp</dimen>
+  <dimen name="faso_espace_8">32dp</dimen>
+  <dimen name="faso_espace_10">40dp</dimen>
+  <dimen name="faso_espace_12">48dp</dimen>
+  <dimen name="faso_espace_16">64dp</dimen>
+  <dimen name="faso_espace_20">80dp</dimen>
+  <dimen name="faso_espace_24">96dp</dimen>
+  <dimen name="faso_section_y">40dp</dimen>
+  <dimen name="faso_rayon_xs">2dp</dimen>
+  <dimen name="faso_rayon_sm">4dp</dimen>
+  <dimen name="faso_rayon_md">6dp</dimen>
+  <dimen name="faso_rayon_lg">10dp</dimen>
+  <dimen name="faso_rayon_xl">16dp</dimen>
+  <dimen name="faso_rayon_2xl">24dp</dimen>
+  <dimen name="faso_trait_fin">1dp</dimen>
+  <dimen name="faso_trait_moyen">2dp</dimen>
+  <dimen name="faso_trait_epais">3dp</dimen>
+  <dimen name="faso_largeur_contenu">1200dp</dimen>
+  <dimen name="faso_largeur_texte">760dp</dimen>
+  <dimen name="faso_largeur_etroite">560dp</dimen>
+  <dimen name="faso_gouttiere">16dp</dimen>
+  <!-- 48 dp et non 44 : Android impose un plancher plus haut que le web. -->
+  <dimen name="faso_cible_min">48dp</dimen>
+</resources>

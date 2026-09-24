@@ -1,0 +1,91 @@
+# Charte graphique de l'administration burkinabè
+# Configuration d'un registre npm souverain.
+#
+# Verdaccio tient dans un petit serveur : quelques centaines de
+# mégaoctets de mémoire, aucune base de données, le stockage sur le
+# disque. C'est la solution la plus légère pour héberger le paquet dans
+# le pays, et elle rend un second service au moins aussi utile que le
+# premier : elle fait aussi miroir du registre public.
+#
+#   npm install -g verdaccio
+#   verdaccio --config verdaccio.yaml
+#
+# Derrière un nginx qui termine le TLS, sur depot.fasodesign.gov.bf.
+#
+# Deux raisons de faire cela plutôt que de dépendre du seul registre
+# public :
+#
+#   la souveraineté — le paquet qui porte les emblèmes de l'État est
+#   servi depuis une infrastructure que l'administration exploite ;
+#
+#   la continuité — les dépendances déjà demandées une fois restent
+#   installables quand le lien international est lent ou interrompu,
+#   parce qu'elles sont en cache ici.
+
+storage: /var/lib/verdaccio/storage
+
+# ---------------------------------------------------------------- accès
+auth:
+  htpasswd:
+    file: /etc/verdaccio/htpasswd
+    # Aucune inscription libre : les comptes sont créés par
+    # l'administrateur du registre.
+    #   htpasswd -B /etc/verdaccio/htpasswd prenom.nom
+    max_users: -1
+
+# -------------------------------------------------------------- amont
+uplinks:
+  registre-public:
+    url: https://registry.npmjs.org/
+    # Un lien international peut être lent : mieux vaut attendre que
+    # servir une erreur.
+    timeout: 60s
+    maxage: 30m
+    # Si l'amont est injoignable, on continue de servir ce qui est en
+    # cache plutôt que de bloquer tous les projets du pays.
+    max_fails: 5
+    fail_timeout: 10m
+    cache: true
+
+# ------------------------------------------------------------ paquets
+packages:
+  # La charte et tout ce que l'administration publiera sous son nom.
+  # Aucun accès à l'amont : ces paquets n'existent qu'ici, et il ne faut
+  # surtout pas qu'une demande fuite vers le registre public, où un
+  # homonyme pourrait répondre à sa place.
+  "@gouv-bf/*":
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    # proxy volontairement absent
+
+  "@*/*":
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    proxy: registre-public
+
+  "**":
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    proxy: registre-public
+
+# ------------------------------------------------------------- serveur
+listen: 127.0.0.1:4873
+
+server:
+  keepAliveTimeout: 60
+
+web:
+  title: Dépôt npm de l'administration burkinabè
+  # L'interface de consultation est publique, la publication ne l'est
+  # pas : ce sont deux choses distinctes.
+
+log:
+  type: stdout
+  format: pretty
+  level: http
+
+# L'archive de la charte pèse environ 250 Ko ; la marge est large.
+max_body_size: 20mb

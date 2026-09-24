@@ -63,8 +63,8 @@
       <h1>Fondations</h1>
       <p class="fs-chapeau">
         Les fondations sont les décisions dont tout le reste découle. Un composant
-        ne définit jamais une couleur, une taille ou un rayon&nbsp;: il consomme un jeton
-        déclaré ici. C'est ce qui permet de faire évoluer le système sans le réécrire.
+        ne définit pas une couleur, une taille ou un rayon. Il consomme un jeton
+        déclaré ici. La charte évolue ainsi sans qu'on ait à le réécrire.
       </p>
     </div>
 
@@ -72,7 +72,7 @@
     <section class="doc-section" id="marque">
       <h2>Emblème et bloc-marque</h2>
       <p class="doc-section-intro">
-        Les armoiries du Burkina Faso sont un symbole de souveraineté, pas un logo.
+        Les armoiries du Burkina Faso sont un symbole de souveraineté de l'État.
         Leur emploi identifie l'État et engage la responsabilité de l'administration
         qui les affiche. Les règles qui suivent sont impératives.
       </p>
@@ -104,7 +104,7 @@
         <p class="doc-bloc-note">
           L'emblème est livré en vectoriel. C'est la seule forme qui reste nette du
           favicon de 16&nbsp;px à l'affiche imprimée, et la seule compatible avec le
-          principe de contrainte réseau&nbsp;: le fichier pèse 45&nbsp;Ko une fois compressé,
+          principe de contrainte réseau. Le fichier pèse 45&nbsp;Ko une fois compressé,
           contre 916&nbsp;Ko pour le raster dont il est issu, soit vingt fois moins sur
           une connexion facturée au volume.
         </p>
@@ -172,21 +172,27 @@
       <div class="doc-bloc">
         <h3>Filet national <code>.fs-filet</code></h3>
         <p class="doc-bloc-note">
-          Bande longue&nbsp;: le rouge occupe la moitié gauche, le vert la moitié droite,
-          l'étoile d'or se pose à la jonction. Placé sous le bandeau d'identification
-          officielle, le filet marque l'appartenance à l'État et n'est jamais employé
-          comme séparateur décoratif à l'intérieur d'une page.
+          Bande longue portant la <strong>composition du drapeau</strong>&nbsp;: rouge
+          au-dessus, vert au-dessous, étoile d'or centrée à cheval sur les deux. Placé
+          sous le bandeau d'identification officielle, le filet marque l'appartenance
+          à l'État et n'est pas employé comme séparateur décoratif à l'intérieur
+          d'une page.
         </p>
 
         <div class="doc-note">
-          <strong>Pourquoi pas la composition du drapeau ici&nbsp;?</strong> Étirée sur
-          toute la largeur d'un écran, une bande de 14&nbsp;px se présente dans un rapport
-          voisin de cent pour un. Superposer deux bandes de 7&nbsp;px dans ce format ne
-          donne pas un drapeau mais deux traits parallèles, qu'aucun œil ne rapproche.
-          La division gauche-droite, elle, tient à n'importe quelle longueur&nbsp;: le
-          regard parcourt le rouge, rencontre l'étoile, poursuit sur le vert. La vraie
-          composition du drapeau est réservée au <a href="#marque">repère national</a>,
-          dont les proportions la rendent lisible.
+          <strong>Une seule composition, quel que soit le format.</strong> Le repère
+          court, le filet pleine largeur et le bandeau d'une carte mise en avant
+          portent tous le drapeau dans le même ordre. Une marque de l'État ne se
+          réarrange pas selon la place dont elle dispose.
+        </div>
+
+        <div class="doc-note fs-mt-4">
+          <strong>Ce que cela demande à la hauteur.</strong> À 14&nbsp;px, les deux
+          moitiés ne font que 7&nbsp;px chacune. La composition se lit de près, moins
+          bien de loin. La variante <code>--epais</code>, à 20&nbsp;px, donne deux bandes
+          de 10&nbsp;px et porte mieux&nbsp;; c'est celle à préférer en ouverture de page.
+          La hauteur se règle par <code>--filet-hauteur</code> sans rien recalculer,
+          l'étoile suivant toujours.
         </div>
 
         <div class="doc-demo" data-libelle="Filet national">
@@ -207,19 +213,21 @@
       <div class="doc-bloc">
         <h3>Repère national <code>.fs-repere</code></h3>
         <p class="doc-bloc-note">
-          Vignette courte, dont les proportions permettent la <strong>vraie
-          composition du drapeau</strong>&nbsp;: rouge au-dessus, vert au-dessous, étoile
-          centrée à cheval sur les deux. Il ponctue un titre de section ou une
+          Vignette courte portant la <strong>composition du drapeau</strong>&nbsp;:
+          rouge au-dessus, vert au-dessous, étoile centrée à cheval sur les deux, dans
+          des proportions proches de celles du drapeau lui-même. Il ponctue un titre
+          de section ou une
           ouverture de page, là où le filet pleine largeur serait trop appuyé. Le
           drapeau entier tient dans deux couches de fond, sans rien à superposer&nbsp;:
-          c'est ce qui permet de le composer dans un pseudo-élément, là où aucune
+          il se compose donc dans un pseudo-élément, là où aucune
           classe ne peut être posée.
         </p>
 
         <div class="doc-note">
-          <strong>Deux objets, deux compositions.</strong> La règle tient en une
-          phrase&nbsp;: au-delà d'un rapport d'environ dix pour un, on emploie la division
-          gauche-droite du filet&nbsp;; en deçà, la composition du drapeau du repère.
+          <strong>Deux objets, une seule composition.</strong> Le repère et le filet ne
+          se distinguent plus que par leur emploi. Le repère ponctue un titre, le
+          filet ouvre une page. Le drapeau y figure dans le même ordre, avec la même
+          étoile centrée.
         </div>
 
         <div class="doc-demo" data-libelle="Repère national">
@@ -236,7 +244,7 @@
             <ul>
               <li>Un seul repère par niveau de titre, toujours à la même place.</li>
               <li>Conserver les proportions du drapeau&nbsp;: deux bandes égales, étoile centrée à cheval sur les deux.</li>
-              <li>Ajuster la largeur et la hauteur par les variables du composant, jamais en redéfinissant le dégradé.</li>
+              <li>Ajuster la largeur et la hauteur par les variables du composant, pas en redéfinissant le dégradé.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
@@ -244,7 +252,7 @@
             <ul>
               <li>Remplacer l'étoile par un point, un losange ou une autre forme.</li>
               <li>Grossir l'étoile jusqu'à couvrir la hauteur&nbsp;: sur le drapeau, elle laisse respirer les deux bandes.</li>
-              <li>Inverser les bandes&nbsp;: le rouge est toujours au-dessus du vert.</li>
+              <li>Inverser les bandes. Le rouge est toujours au-dessus du vert.</li>
               <li>Employer le repère comme puce de liste ou séparateur répété.</li>
             </ul>
           </div>
@@ -256,9 +264,9 @@
         <p class="doc-bloc-note">
           Inspiré des rayures du Faso Dan Fani, le tissu traditionnel. Les bandes
           sont de largeur inégale et séparées d'un fil clair, comme sur le métier à
-          tisser&nbsp;: le motif se distingue ainsi du filet officiel, qu'il ne remplace
-          jamais. Il habille les lisières&nbsp;— bas d'un bandeau, tête d'un pied de page,
-          ouverture d'une section&nbsp;— et reste de faible hauteur.
+          tisser. Le motif se distingue ainsi du filet officiel, qu'il ne remplace
+          pas. Il habille les lisières (bas d'un bandeau, tête d'un pied de page,
+          ouverture d'une section), et reste de faible hauteur.
         </p>
 
         <div class="doc-demo" data-libelle="Motif tissé">
@@ -278,7 +286,7 @@
             <ul>
               <li>Hauteur de 4 à 8&nbsp;px, en pleine largeur ou sur une courte longueur en repère.</li>
               <li>Sur un fond coloré, adapter le fil clair via <code>--tissage-fond</code>.</li>
-              <li>Un seul motif tissé par écran&nbsp;: c'est un accent, pas une texture.</li>
+              <li>Un seul motif tissé par écran. Il accentue, il ne meuble pas.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
@@ -323,8 +331,8 @@
       <div class="doc-bloc">
         <h3>Co-marquage</h3>
         <p class="doc-bloc-note">
-          Un service porté conjointement par l'État et un partenaire&nbsp;— agence,
-          établissement public, organisation internationale&nbsp;— fait coexister deux
+          Un service porté conjointement par l'État et un partenaire (agence,
+          établissement public, organisation internationale), fait coexister deux
           marques. L'ordre n'est pas négociable&nbsp;: l'emblème de l'État vient en
           premier, car c'est lui qui engage la responsabilité du service.
         </p>
@@ -351,7 +359,7 @@
             <p class="doc-usage-titre">À faire</p>
             <ul>
               <li>Placer l'emblème de l'État en premier dans le sens de lecture, séparé de la marque partenaire par un filet vertical.</li>
-              <li>Limiter la marque partenaire à la hauteur de l'emblème, jamais au-delà.</li>
+              <li>Limiter la marque partenaire à la hauteur de l'emblème, pas au-delà.</li>
               <li>Conserver la zone de protection de l'emblème, que le partenaire n'empiète pas.</li>
               <li>N'admettre qu'un seul partenaire dans le bloc-marque&nbsp;; les autres figurent en pied de page.</li>
             </ul>
@@ -373,7 +381,7 @@
         <p class="doc-bloc-note">
           La devise figure dans le bloc-marque en capitale initiale et en italique,
           au palier typographique le plus discret. Elle n'est ni un slogan
-          promotionnel, ni un titre&nbsp;: elle ne doit jamais être mise en avant au
+          promotionnel, ni un titre&nbsp;: elle ne doit pas être mise en avant au
           détriment de l'intitulé du service. Sur écran étroit, elle est masquée pour
           préserver la lisibilité de la dénomination.
         </p>
@@ -469,7 +477,7 @@
         <h3>Or&nbsp;— lumière de l'étoile</h3>
         <p class="doc-bloc-note">
           Couleur de mise en avant, employée avec parcimonie. Le jaune pur étant très
-          clair, il ne porte jamais de texte blanc&nbsp;: le palier 300 s'accompagne
+          clair, il ne porte pas de texte blanc. Le palier 300 s'accompagne
           toujours d'un texte sombre. Les paliers 600 et au-delà tirent vers l'ocre
           et servent à écrire sur fond clair.
         </p>
@@ -495,7 +503,7 @@
       <div class="doc-bloc">
         <h3>Neutres</h3>
         <p class="doc-bloc-note">
-          Fonds, bordures et textes. La base est volontairement chaude&nbsp;: un gris
+          Fonds, bordures et textes. La base est volontairement chaude. Un gris
           bleuté introduirait une teinte étrangère à la souche nationale et ferait
           jurer les aplats verts et or.
         </p>
@@ -507,7 +515,9 @@
           <div class="doc-ton doc-ton--clair"  style="background:#e2ddd6" data-copier="#e2ddd6"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#e2ddd6</span></div>
           <div class="doc-ton doc-ton--clair"  style="background:#cfc8bf" data-copier="#cfc8bf"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#cfc8bf</span></div>
           <div class="doc-ton doc-ton--clair"  style="background:#a9a199" data-copier="#a9a199"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#a9a199</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#8e867f" data-copier="#8e867f"><span class="doc-ton-palier">450</span><span class="doc-ton-hex">#8e867f</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#837b73" data-copier="#837b73"><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#837b73</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#756d66" data-copier="#756d66"><span class="doc-ton-palier">550</span><span class="doc-ton-hex">#756d66</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#635c55" data-copier="#635c55"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#635c55</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#4a443e" data-copier="#4a443e"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#4a443e</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#332e2a" data-copier="#332e2a"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#332e2a</span></div>
@@ -524,8 +534,8 @@
         <h3>Couleurs de support</h3>
         <p class="doc-bloc-note">
           Deux familles complètent la souche nationale, strictement cantonnées à un
-          registre fonctionnel. Le bleu administratif ne structure jamais un en-tête,
-          une navigation ou une action&nbsp;: il n'appartient pas au drapeau et son emploi
+          registre fonctionnel. Le bleu administratif ne structure pas un en-tête,
+          une navigation ou une action. Il n'appartient pas au drapeau et son emploi
           au-delà du registre informatif affaiblirait l'identité de l'État.
         </p>
         <div class="doc-echelle doc-echelle--libre">
@@ -542,7 +552,7 @@
       <div class="doc-bloc">
         <h3>Rôles sémantiques</h3>
         <p class="doc-bloc-note">
-          Les composants ne référencent jamais un palier directement. Ils consomment
+          Les composants ne référencent pas un palier directement. Ils consomment
           un rôle, qui pointe vers un palier. C'est cette indirection qui rend le
           thème sombre possible sans toucher à une seule règle de composant.
         </p>
@@ -587,7 +597,7 @@
         <h3>Répartition chromatique</h3>
         <p class="doc-bloc-note">
           Une interface conforme n'est pas une interface tricolore. Les trois couleurs
-          nationales sont des signaux&nbsp;: leur force tient à leur rareté. La proportion
+          nationales sont des signaux. Leur force tient à leur rareté. La proportion
           de référence est la suivante.
         </p>
 
@@ -610,7 +620,7 @@
       <p class="doc-section-intro">
         Deux familles suffisent. Archivo, grotesque de facture institutionnelle,
         porte les titres et les éléments d'interface&nbsp;; son dessin ferme tient bien
-        en petit corps et en capitales. Inter porte le texte courant&nbsp;: sa hauteur
+        en petit corps et en capitales. Inter porte le texte courant. Sa hauteur
         d'x généreuse reste lisible sur les écrans de faible densité, qui
         constituent le parc dominant.
       </p>
@@ -618,7 +628,7 @@
       <div class="doc-bloc">
         <h3>Les deux familles</h3>
         <p class="doc-bloc-note">
-          Deux familles suffisent, et deux seulement&nbsp;: chaque famille
+          Deux familles suffisent, et deux seulement. Chaque famille
           supplémentaire est un fichier de plus sur le chemin critique, pour un
           service dont le premier principe est la contrainte réseau.
         </p>
@@ -663,7 +673,7 @@
               </p>
               <p class="fs-legende fs-mt-4">
                 Le sous-ensemble servi couvre l'intégralité du français, <strong>Œ et œ
-                compris</strong>&nbsp;— sans eux, « cœur » et « œuvre » basculeraient dans
+                compris</strong>, sans eux, « cœur » et « œuvre » basculeraient dans
                 la police de repli au milieu d'un mot.
               </p>
             </div>
@@ -774,6 +784,69 @@
           sous-ensemble plus étroit que le latin complet.
         </p>
 
+        <h4 class="fs-mt-8">Langues nationales et couverture des glyphes</h4>
+        <p class="doc-bloc-note">
+          Les deux fichiers sont réduits au sous-ensemble latin&nbsp;: c'est ce qui les
+          fait tenir en 81&nbsp;Ko. Ce sous-ensemble couvre le français, langue
+          officielle, mais <strong>pas les caractères propres aux orthographes des
+          langues nationales</strong>. Le fait est écrit ici parce qu'il engage
+          directement tout service qui voudrait s'adresser aux usagers dans leur
+          langue.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Caractères hors du sous-ensemble servi</caption>
+            <thead>
+              <tr><th>Caractère</th><th>Point de code</th><th>Employé notamment en</th><th>État</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fs-tabulaire">ɛ Ɛ</td>
+                <td class="fs-tabulaire">U+025B, U+0190</td>
+                <td>Mooré, dioula</td>
+                <td><span class="fs-badge fs-badge--alerte">Police de repli</span></td>
+              </tr>
+              <tr>
+                <td class="fs-tabulaire">ɔ Ɔ</td>
+                <td class="fs-tabulaire">U+0254, U+0186</td>
+                <td>Dioula, bissa</td>
+                <td><span class="fs-badge fs-badge--alerte">Police de repli</span></td>
+              </tr>
+              <tr>
+                <td class="fs-tabulaire">ŋ Ŋ</td>
+                <td class="fs-tabulaire">U+014B, U+014A</td>
+                <td>Fulfuldé</td>
+                <td><span class="fs-badge fs-badge--alerte">Police de repli</span></td>
+              </tr>
+              <tr>
+                <td class="fs-tabulaire">ɩ ʋ</td>
+                <td class="fs-tabulaire">U+0269, U+028B</td>
+                <td>Mooré</td>
+                <td><span class="fs-badge fs-badge--alerte">Police de repli</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Ce que cela produit à l'écran.</strong> Le navigateur remplace
+          caractère par caractère&nbsp;: le mot reste lisible, mais le glyphe manquant
+          est emprunté à une autre police, avec une chasse et un dessin différents.
+          Sur un mot isolé cela passe, sur un paragraphe entier cela se voit.
+        </div>
+
+        <div class="doc-note fs-mt-4">
+          <strong>Ce qu'il faut faire pour y remédier.</strong> Reproduire le
+          sous-ensemble depuis les fichiers d'origine d'Archivo et d'Inter, tous deux
+          sous licence SIL OFL, en y ajoutant les plages
+          <code>U+014A-014B</code>, <code>U+0186</code>, <code>U+0190</code>,
+          <code>U+0254</code>, <code>U+025B</code>, <code>U+0269</code>,
+          <code>U+028B</code>, puis étendre <code>unicode-range</code> en conséquence.
+          Le surcoût attendu se compte en quelques kilo-octets. Tant que ce travail
+          n'est pas fait, la charte ne prétend couvrir que le français.
+        </div>
+
         <h4 class="fs-mt-8">Repli système</h4>
         <p class="doc-bloc-note">
           Si une police ne charge pas, le texte reste lisible dans la pile de
@@ -845,7 +918,7 @@
       <div class="doc-bloc">
         <h3>Échelle typographique</h3>
         <p class="doc-bloc-note">
-          Les tailles de titre sont fluides&nbsp;: elles s'interpolent entre 360&nbsp;px et
+          Les tailles de titre sont fluides. Elles s'interpolent entre 360&nbsp;px et
           1280&nbsp;px de largeur de fenêtre, ce qui évite les paliers brutaux sur les
           formats intermédiaires. Le corps de texte reste fixe à 15&nbsp;px, plancher
           au-dessous duquel la lecture prolongée devient pénible.
@@ -908,7 +981,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Composer un paragraphe entier en capitales&nbsp;: la lecture chute d'environ un tiers.</li>
+              <li>Composer un paragraphe entier en capitales. La lecture chute d'environ un tiers.</li>
               <li>Justifier le texte&nbsp;: sans césure, la justification crée des lézardes ingérables.</li>
               <li>Descendre sous 15&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
               <li>Introduire une troisième famille typographique pour un besoin ponctuel.</li>
@@ -945,8 +1018,8 @@
             <ul>
               <li>Photographie d'ambiance pour « aérer » une page de démarche.</li>
               <li>Banque d'images internationale sans lien avec le Burkina Faso.</li>
-              <li>Image de fond derrière du texte&nbsp;: le contraste devient incontrôlable.</li>
-              <li>Illustration décorative dans un parcours de démarche&nbsp;: elle allonge la page et distrait de l'action.</li>
+              <li>Image de fond derrière du texte. Le contraste devient incontrôlable.</li>
+              <li>Illustration décorative dans un parcours de démarche. Elle allonge la page et distrait de l'action.</li>
             </ul>
           </div>
         </div>
@@ -956,14 +1029,14 @@
         <h3>Représentation des personnes</h3>
         <p class="doc-bloc-note">
           Les images d'un service de l'État montrent les usagers tels qu'ils sont,
-          sans mise en scène. Cette exigence n'est pas cosmétique&nbsp;: un usager qui ne
+          sans mise en scène. Cette exigence n'est pas cosmétique. Un usager qui ne
           se reconnaît pas dans les images d'un service doute de s'y adresser.
         </p>
 
         <ul class="fs-liste-controle fs-mesure">
-          <li><strong>Dignité.</strong> Aucune mise en scène de détresse, de pauvreté ou de dépendance. L'usager d'un service public est un citoyen qui exerce un droit, pas un bénéficiaire.</li>
+          <li><strong>Dignité.</strong> Aucune mise en scène de détresse, de pauvreté ou de dépendance. L'usager d'un service public est un citoyen qui exerce un droit.</li>
           <li><strong>Diversité réelle.</strong> Âges, genres, régions, milieux urbains et ruraux, situations de handicap. Une administration nationale s'adresse à tout le pays.</li>
-          <li><strong>Justesse.</strong> Les tenues, les lieux et les documents montrés sont ceux du Burkina Faso, pas ceux d'un catalogue générique.</li>
+          <li><strong>Justesse.</strong> Les tenues, les lieux et les documents montrés sont ceux du Burkina Faso.</li>
           <li><strong>Consentement.</strong> Autorisation écrite pour toute personne identifiable, conservée par l'administration émettrice.</li>
           <li><strong>Sobriété.</strong> Aucun sourire commercial, aucune pose professionnelle appuyée.</li>
         </ul>
@@ -1037,7 +1110,7 @@
       <p class="doc-section-intro">
         Une grille de douze colonnes, une gouttière fluide et quatre largeurs de
         conteneur couvrent l'ensemble des gabarits. La conception part du format le
-        plus étroit&nbsp;: c'est l'usage dominant, pas un cas de repli.
+        plus étroit. C'est l'usage dominant.
       </p>
 
       <div class="doc-bloc">
@@ -1368,7 +1441,7 @@
       <div class="doc-bloc">
         <h3>Le jeu complet</h3>
         <p class="doc-bloc-note">
-          Les icônes sont classées par usage et non par forme&nbsp;: on cherche « ce que
+          Les icônes sont classées par usage et non par forme. On cherche « ce que
           je veux dire », pas « ce que ça représente ». Le fichier
           <code>assets/img/icones.svg</code> rassemble les mêmes tracés pour les
           outils de conception.
@@ -1591,7 +1664,7 @@
     <section class="doc-section" id="themes">
       <h2>Thèmes</h2>
       <p class="doc-section-intro">
-        Le thème sombre n'est pas un ornement&nbsp;: il réduit la consommation sur écran
+        Le thème sombre n'est pas un ornement. Il réduit la consommation sur écran
         OLED et soulage la lecture nocturne, deux situations courantes pour un usager
         qui consulte un service depuis son téléphone. Il est obtenu en réaffectant
         les rôles sémantiques, sans toucher à un seul composant.
@@ -1615,7 +1688,7 @@
           </li>
           <li>
             Le thème clair est le thème par défaut de l'administration, quelle que
-            soit la préférence du système d'exploitation&nbsp;: un service public doit
+            soit la préférence du système d'exploitation. Un service public doit
             présenter le même visage à tous ses usagers. Le thème sombre s'active
             sur choix explicite, et ce choix est conservé d'une visite à l'autre.
           </li>

@@ -16,17 +16,13 @@ body { background: var(--surface); }
 /* =============================================================
    REPÈRES NATIONAUX EN PSEUDO-ÉLÉMENT
 
-   Deux compositions, selon la longueur, exactement comme dans la
-   bibliothèque :
-
-   — vignette courte : composition du drapeau, rouge au-dessus,
-     vert au-dessous, étoile centrée ;
-   — bande longue : rouge à gauche, vert à droite, étoile à la
-     jonction. À un rapport de plusieurs dizaines pour un, deux
-     bandes superposées ne se lisent plus comme un drapeau.
+   Une seule composition, celle du drapeau, exactement comme dans la
+   bibliothèque : rouge au-dessus, vert au-dessous, étoile centrée à
+   cheval sur les deux. Vignette courte ou bande longue, la marque ne
+   se réarrange pas selon le format où elle se pose.
 
    Deux couches de fond dans les deux cas, donc rien à superposer :
-   c'est ce qui permet de les composer dans un pseudo-élément.
+   elles se composent donc dans un pseudo-élément.
    ============================================================= */
 
 /* Vignettes courtes */
@@ -58,7 +54,7 @@ body { background: var(--surface); }
   border-radius: var(--rayon-xs);
   background-image:
     var(--etoile-or),
-    linear-gradient(to right,
+    linear-gradient(to bottom,
       var(--rouge-500) 0 50%,
       var(--vert-500) 50% 100%);
   background-size: var(--repere-etoile) var(--repere-etoile), 100% 100%;

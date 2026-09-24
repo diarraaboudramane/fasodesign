@@ -8,17 +8,34 @@ CE QUE CONTIENT CE PAQUET
   assets/css/faso.css       Bibliotheque de composants
   assets/css/icones.css     35 icones, appliquees en masque CSS
   assets/js/faso.js         Comportements, sans dependance
+  assets/js/faso-amorce.js  Pose le theme avant le premier rendu
   assets/js/faso.d.ts       Declarations TypeScript
   assets/polices/           Archivo et Inter, variables, latin
   assets/img/armoiries.svg  Emblème vectoriel
   assets/img/icones.svg     Memes traces, pour les outils de conception
-  assets/jetons.json        189 jetons, valeurs resolues
+  assets/jetons.json        193 jetons, valeurs resolues, produits
+                            depuis tokens.css par outils/jetons.js
+  android/                  Ressources Android produites depuis les
+                            memes jetons : couleurs, dimensions,
+                            theme Material 3, theme Compose, les 35
+                            icones, l'embleme, le filet et le repere
 
 Les trois feuilles CSS sont obligatoires et solidaires : plusieurs
 composants puisent leurs reperes dans icones.css.
 
 
 INSTALLATION
+
+  Le paquet peut etre servi par cinq depots distants differents :
+  le registre public, le depot d'une forge, un Verdaccio heberge au
+  Burkina Faso, le depot d'une forge interne, ou aucun depot du tout
+  (archive ou depot Git). La page Integration les compare.
+
+  Quel que soit le depot, la declaration se fait par espace de noms :
+  seuls les paquets @gouv-bf y sont demandes.
+
+    # .npmrc du projet
+    @gouv-bf:registry=https://depot.fasodesign.gov.bf/
 
   Voir la page « Integration » de la documentation. En resume :
 
@@ -28,6 +45,15 @@ INSTALLATION
     import Faso from '@gouv-bf/charte-graphique';
 
     Faso.observer();   // une fois, au demarrage de l'application
+
+  Si le service propose le theme sombre, declarer aussi, dans
+  <head> et avant la feuille de styles :
+
+    <script src="/assets/js/faso-amorce.js"></script>
+
+  Les libelles produits par le script sont rassembles dans
+  Faso.textes, a completer avant l'initialisation si le service
+  rend son interface dans une autre langue.
 
 Sans chaine de construction, on sert les fichiers directement et
 l'initialisation est automatique : il n'y a rien a appeler.
@@ -58,6 +84,25 @@ CE QUE LA CHARTE PREND EN CHARGE, ET CE QU'ELLE LAISSE
 
 Aucun composant React, Angular ou Vue n'est publie. Le motif de ce
 choix est expose dans la documentation.
+
+La page Integration traite en detail Angular, React et Laravel, et
+renvoie les autres cadriciels a celui des trois dont ils se
+rapprochent. Trois points y sont propres a un cadriciel :
+
+  React     Les annonces se lisent par une reference et un ecouteur,
+            non par une propriete onQuelqueChose.
+  Angular   Les annonces portent un second nom a trait d'union,
+            fs-onglet, seul liable dans un gabarit.
+  Laravel   Avec Livewire, wire:ignore sur ce que la charte anime et
+            wire:key sur ce qui se repete.
+
+Pour Android, le CSS et le JavaScript ne s'executent pas : ce sont
+les decisions qui se transportent. Le dossier android/ contient les
+ressources produites depuis la meme feuille de jetons, en Kotlin et
+en XML. En WebView, la charte s'execute telle quelle, a quatre
+reglages pres decrits dans la documentation ; l'un d'eux compte
+particulierement : refuser l'assombrissement automatique d'Android,
+qui deplacerait le rouge, le vert et l'or officiels.
 
 
 LICENCES

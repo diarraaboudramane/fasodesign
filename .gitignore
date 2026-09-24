@@ -1,0 +1,11 @@
+# Produit par « npm run site », reconstruit a chaque fois.
+/site/
+
+# Traces du serveur Apache local.
+/hebergement/journal-*.log
+/hebergement/*.pid
+
+# Archives produites par « npm pack ».
+*.tgz
+
+node_modules/

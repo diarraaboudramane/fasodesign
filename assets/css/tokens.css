@@ -21,7 +21,7 @@
 
    Ce sont des polices variables : un seul fichier couvre toutes
    les graisses, là où cinq fichiers statiques pèseraient le
-   triple. Seul le sous-ensemble latin est servi — il couvre le
+   triple. Seul le sous-ensemble latin est servi : il couvre le
    français en entier, Œ et œ compris.
 
    Archivo et Inter sont diffusées sous SIL Open Font License,
@@ -29,7 +29,7 @@
    y compris par une administration. Le texte des licences
    accompagne les fichiers dans assets/polices/.
 
-   font-display: swap — le texte s'affiche immédiatement dans la
+   font-display: swap : le texte s'affiche immédiatement dans la
    police de repli, puis bascule. Sur réseau lent, une page
    lisible en police système vaut mieux qu'une page blanche.
    ============================================================= */
@@ -116,7 +116,15 @@
   --neutre-200: #e2ddd6;
   --neutre-300: #cfc8bf;
   --neutre-400: #a9a199;
+  /* Deux demi-paliers, ajoutés pour la conformité et non pour
+     l'esthétique : 450 est le premier palier qui atteigne 3:1 sur
+     blanc comme sur la surface enfoncée, seuil exigé par WCAG 1.4.11
+     pour le contour d'un contrôle ; 550 est le premier qui atteigne
+     4,5:1, seuil du texte courant. Les mesures figurent dans la page
+     Accessibilité. */
+  --neutre-450: #8e867f;
   --neutre-500: #837b73;
+  --neutre-550: #756d66;
   --neutre-600: #635c55;
   --neutre-700: #4a443e;
   --neutre-800: #332e2a;
@@ -302,13 +310,21 @@
   /* Textes */
   --texte:              var(--neutre-900);
   --texte-attenue:      var(--neutre-600);
-  --texte-faible:       var(--neutre-500);
+  /* 550 et non 500 : le texte faible sert aux mentions en petit
+     corps, où le seuil de 4,5:1 s'applique pleinement. Le palier 500
+     n'atteignait que 4,16:1 sur blanc. */
+  --texte-faible:       var(--neutre-550);
   --texte-inverse:      var(--neutre-0);
   --texte-sur-couleur:  var(--neutre-0);
 
   /* Bordures */
   --bordure:            var(--neutre-200);
-  --bordure-forte:      var(--neutre-300);
+  /* Le contour d'un champ, d'une case à cocher ou d'une zone de
+     dépôt est la seule chose qui en signale l'existence : il relève
+     du contraste non textuel, à 3:1. Le palier 300 n'atteignait que
+     1,66:1. --bordure reste réservée aux séparations décoratives,
+     qui n'entrent pas dans le critère. */
+  --bordure-forte:      var(--neutre-450);
   --bordure-inverse:    var(--neutre-700);
 
   /* Action principale — vert du drapeau */
@@ -321,6 +337,9 @@
 
   /* Accent — rouge du drapeau, réservé au registre grave */
   --accent:             var(--rouge-500);
+  /* Le texte posé sur l'accent a son propre jeton : en thème sombre
+     l'accent s'éclaircit, et le blanc n'y tient plus que 3,13:1. */
+  --accent-texte:       var(--neutre-0);
   --accent-survol:      var(--rouge-600);
   --accent-actif:       var(--rouge-700);
   --accent-tenue:       var(--rouge-50);
@@ -405,7 +424,9 @@
   --texte-sur-couleur:  var(--neutre-0);
 
   --bordure:            #332e2a;
-  --bordure-forte:      #4a443e;
+  /* Même exigence en thème sombre, où l'ancien #4a443e ne donnait
+     que 1,96:1 sur la surface. */
+  --bordure-forte:      var(--neutre-550);
   --bordure-inverse:    var(--neutre-300);
 
   --action:             var(--vert-400);
@@ -416,6 +437,7 @@
   --action-sur-clair:   var(--vert-300);
 
   --accent:             var(--rouge-400);
+  --accent-texte:       var(--neutre-950);
   --accent-survol:      var(--rouge-300);
   --accent-actif:       var(--rouge-200);
   --accent-tenue:       rgba(240, 99, 110, 0.14);

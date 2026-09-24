@@ -61,6 +61,27 @@ export interface AnnoncesFaso {
   } | null>;
 }
 
+/**
+ * Libellés produits par le script, et langue de mise en forme des
+ * nombres et des dates.
+ *
+ * L'objet exposé par `Faso.textes` est celui que la bibliothèque lit :
+ * on le complète, on ne le remplace pas.
+ *
+ *     Object.assign(Faso.textes, { pageSuivante: '…' });
+ *
+ * Les accolades délimitent les valeurs à insérer : `{n}`, `{page}`,
+ * `{pages}`, `{debut}`, `{fin}`, `{total}`, `{date}`, `{filtres}`,
+ * `{fichier}`, `{presentes}`. La marque `{s}` porte le pluriel.
+ */
+export interface TextesFaso {
+  /** Étiquette BCP 47 passée à `toLocaleString`. « fr-FR » par défaut. */
+  langue: string;
+  /** Les douze mois, en minuscules, pour la date d'extraction. */
+  mois: string[];
+  [cle: string]: string | string[];
+}
+
 export interface Faso {
   /** Version du système, alignée sur celle du paquet. */
   readonly version: string;
@@ -117,6 +138,12 @@ export interface Faso {
   appliquerTheme(valeur?: "dark" | "light" | null): void;
 
   /**
+   * Libellés produits par le script. À compléter avant
+   * l'initialisation, jamais à remplacer.
+   */
+  readonly textes: TextesFaso;
+
+  /**
    * Comportements pris isolément. Exposés pour la documentation
    * et les tests ; un projet n'a normalement pas à les appeler.
    */
@@ -130,5 +157,13 @@ declare global {
   interface Window {
     /** Présent dès le chargement de faso.js dans un navigateur. */
     Faso: Faso;
+
+    /**
+     * Posé à `true` avant le chargement, empêche l'initialisation
+     * automatique. L'application appelle alors `initialiser()` ou
+     * `observer()` au moment qu'elle choisit — ce que réclame un
+     * rendu côté serveur avec hydratation.
+     */
+    FASO_SANS_DEMARRAGE?: boolean;
   }
 }

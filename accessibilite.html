@@ -64,7 +64,7 @@
       <p class="fs-chapeau">
         Un service public s'adresse à toute la population, sans condition d'équipement,
         de débit, de vue ou de maîtrise du vocabulaire administratif. Les exigences de
-        cette page ne sont pas des recommandations&nbsp;: un service qui ne les respecte pas
+        cette page ne sont pas des recommandations. Un service qui ne les respecte pas
         exclut une partie de ses usagers.
       </p>
     </div>
@@ -73,9 +73,12 @@
     <section class="doc-section" id="criteres">
       <h2>Critères de conformité</h2>
       <p class="doc-section-intro">
-        Le niveau visé est WCAG 2.1 AA. Les critères ci-dessous sont déjà satisfaits
-        par les composants du système&nbsp;: un projet qui les utilise sans les modifier
-        hérite de leur conformité.
+        Le niveau visé est WCAG&nbsp;2.1&nbsp;AA. Les exigences marquées
+        <span class="fs-badge fs-badge--succes">Système</span> sont tenues par les
+        composants tels qu'ils sont livrés, et vérifiées par la mesure décrite plus
+        bas. Un projet qui les reprend sans les modifier part de là&nbsp;; il n'en
+        hérite pas pour autant une conformité globale, qui dépend de son contenu, de
+        sa structure et de ses parcours.
       </p>
 
       <div class="doc-bloc">
@@ -109,7 +112,7 @@
               </tr>
               <tr>
                 <td>Cible tactile</td>
-                <td class="fs-tabulaire">44 × 44&nbsp;px minimum</td>
+                <td class="fs-tabulaire">44 × 44&nbsp;px, deux exceptions</td>
                 <td><span class="fs-badge fs-badge--succes">Système</span></td>
               </tr>
               <tr>
@@ -153,6 +156,89 @@
       </div>
 
       <div class="doc-bloc">
+        <h3>Les deux exceptions à la cible de 44&nbsp;px</h3>
+        <p class="doc-bloc-note">
+          La règle des 44&nbsp;px est celle de la charte, plus exigeante que le
+          référentiel&nbsp;: WCAG&nbsp;2.2 fixe le plancher de conformité&nbsp;AA à
+          24&nbsp;×&nbsp;24&nbsp;px. Les deux cas ci-dessous restent très au-dessus de ce
+          plancher, et sont écrits ici plutôt que passés sous silence.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Cas</th><th>Dessin</th><th>Cible effective</th><th>Pourquoi</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Bouton à icône en taille réduite</td>
+                <td class="fs-tabulaire">36 × 36&nbsp;px</td>
+                <td class="fs-tabulaire">44 × 44&nbsp;px</td>
+                <td>Un calque transparent déborde de 4&nbsp;px. La zone qui répond
+                    atteint la cible sans épaissir les barres d'outils denses.</td>
+              </tr>
+              <tr>
+                <td>Jour de calendrier sous 400&nbsp;px de large</td>
+                <td class="fs-tabulaire">40&nbsp;px de haut</td>
+                <td class="fs-tabulaire">38&nbsp;px au minimum</td>
+                <td>Sept cases de 44&nbsp;px débordent d'un téléphone étroit. Au-delà de
+                    400&nbsp;px, la case fait bien 44 × 44&nbsp;px.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Portée de la vérification</h3>
+        <p class="doc-bloc-note">
+          Une charte qui annonce un niveau doit dire comment elle le vérifie, et
+          jusqu'où sa vérification porte. Le tableau ci-dessus ne vaut que dans ces
+          limites.
+        </p>
+
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Mesuré</p>
+            <ul>
+              <li><strong>118 couples de couleurs</strong> effectivement employés par
+                  <code>faso.css</code> (texte sur fond, variante de bouton, état
+                  sémantique, contour de contrôle), calculés dans les deux thèmes,
+                  transparences composées sur leur fond réel. Aucun sous le seuil.</li>
+              <li><strong>Les dimensions des cibles tactiles</strong>, relevées dans la
+                  feuille de styles et reportées ci-dessus sans arrondi favorable.</li>
+              <li><strong>Le balisage des huit pages</strong>&nbsp;: bonne formation,
+                  aucune classe orpheline.</li>
+              <li><strong>Le comportement au clavier</strong> des onglets, du menu, de la
+                  modale, du panneau et de l'autocomplétion, par lecture du code et
+                  essais automatisés sur un document simulé.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">Non mesuré à ce jour</p>
+            <ul>
+              <li><strong>Aucun essai avec un lecteur d'écran réel</strong>&nbsp;: NVDA,
+                  JAWS et VoiceOver restent à passer.</li>
+              <li><strong>Aucun audit RGAA complet</strong> par un tiers, ni grille de
+                  critères renseignée.</li>
+              <li><strong>Aucun parcours complet dans un navigateur</strong>&nbsp;: les
+                  essais s'appuient sur un document simulé, qui ne remplace pas le
+                  rendu réel.</li>
+              <li><strong>Aucun test avec des personnes en situation de handicap</strong>,
+                  qui reste la seule vérification qui compte vraiment.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Tant que ces quatre points ne sont pas levés, la formule juste est
+          <strong>&laquo;&nbsp;conçu pour WCAG&nbsp;2.1&nbsp;AA, vérifié par la mesure sur les
+          points listés &raquo;</strong>, et non &laquo;&nbsp;conforme&nbsp;&raquo;. La
+          déclaration d'accessibilité d'un service ne peut être établie qu'après
+          l'audit, service par service.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
         <h3>Vérification des contrastes</h3>
         <p class="doc-bloc-note">
           Les rapports ci-dessous sont calculés dans le navigateur à partir de la
@@ -168,7 +254,10 @@
             <tbody>
               <tr><td>Texte 900 sur blanc</td><td>Texte courant</td><td><span data-contraste="#211d1a/#ffffff"></span></td></tr>
               <tr><td>Texte 600 sur blanc</td><td>Texte atténué, aide</td><td><span data-contraste="#635c55/#ffffff"></span></td></tr>
-              <tr><td>Texte 500 sur blanc</td><td>Légende, mention secondaire</td><td><span data-contraste="#837b73/#ffffff"></span></td></tr>
+              <tr><td>Texte 550 sur blanc</td><td>Légende, mention secondaire</td><td><span data-contraste="#756d66/#ffffff"></span></td></tr>
+              <tr><td>Texte 550 sur surface enfoncée</td><td>Légende dans un encadré</td><td><span data-contraste="#756d66/#f7f5f2"></span></td></tr>
+              <tr><td>Bordure 450 sur blanc</td><td>Contour d'un champ, seuil de 3:1</td><td><span data-contraste="#8e867f/#ffffff"></span></td></tr>
+              <tr><td>Bordure 450 sur surface enfoncée</td><td>Contour d'un champ désactivé</td><td><span data-contraste="#8e867f/#f7f5f2"></span></td></tr>
               <tr><td>Blanc sur vert 500</td><td>Bouton principal</td><td><span data-contraste="#ffffff/#00843b"></span></td></tr>
               <tr><td>Blanc sur rouge 500</td><td>Bouton de suppression</td><td><span data-contraste="#ffffff/#e30613"></span></td></tr>
               <tr><td>Noir sur or 300</td><td>Bouton de mise en avant</td><td><span data-contraste="#211d1a/#ffed00"></span></td></tr>
@@ -237,8 +326,8 @@
                 <button type="button" class="fs-btn fs-btn--fantome fs-btn--sm fs-btn--icone" data-ferme-modale aria-label="Fermer"><span class="fs-icone fs-icone--fermer" aria-hidden="true"></span></button>
               </div>
               <div class="fs-modale-corps">
-                <p>Appuyez sur la touche de tabulation à plusieurs reprises&nbsp;: le focus tourne à l'intérieur de cette fenêtre sans en sortir.</p>
-                <p>Appuyez ensuite sur Échap&nbsp;: la fenêtre se ferme et le focus revient sur le bouton d'origine.</p>
+                <p>Appuyez sur la touche de tabulation à plusieurs reprises. Le focus tourne à l'intérieur de cette fenêtre sans en sortir.</p>
+                <p>Appuyez ensuite sur Échap. La fenêtre se ferme et le focus revient sur le bouton d'origine.</p>
               </div>
               <div class="fs-modale-pied">
                 <button type="button" class="fs-btn fs-btn--tertiaire" data-ferme-modale>Fermer</button>
@@ -256,7 +345,7 @@
       <p class="doc-section-intro">
         L'usager type consulte un service public depuis un téléphone d'entrée de
         gamme, sur un réseau instable, avec un forfait facturé au volume. Cette
-        situation n'est pas un cas limite&nbsp;: c'est le cas nominal.
+        situation n'est pas un cas limite. C'est le cas nominal.
       </p>
 
       <div class="doc-bloc">
@@ -370,24 +459,24 @@
           <p class="fs-graphe-note">Ces fichiers sont mis en cache&nbsp;: ils ne sont téléchargés qu'à la première visite.</p>
 
           <div class="fs-barres" data-max="100">
-            <div class="fs-barre" data-valeur="45.4">
+            <div class="fs-barre" data-valeur="44.8">
               <span class="fs-barre-libelle">Emblème <code>armoiries.svg</code></span>
-              <span class="fs-barre-valeur">45,4 Ko</span>
+              <span class="fs-barre-valeur">44,8 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s2" data-valeur="19">
+            <div class="fs-barre fs-barre--s2" data-valeur="19.1">
               <span class="fs-barre-libelle">Composants <code>faso.css</code></span>
-              <span class="fs-barre-valeur">19,0 Ko</span>
+              <span class="fs-barre-valeur">19,1 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s3" data-valeur="18.2">
+            <div class="fs-barre fs-barre--s3" data-valeur="22.1">
               <span class="fs-barre-libelle">Comportements <code>faso.js</code></span>
-              <span class="fs-barre-valeur">18,2 Ko</span>
+              <span class="fs-barre-valeur">22,1 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s4" data-valeur="5.6">
+            <div class="fs-barre fs-barre--s4" data-valeur="6">
               <span class="fs-barre-libelle">Jetons <code>tokens.css</code></span>
-              <span class="fs-barre-valeur">5,6 Ko</span>
+              <span class="fs-barre-valeur">6,0 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
             <div class="fs-barre fs-barre--s5" data-valeur="2.9">
@@ -403,10 +492,10 @@
           </div>
 
           <p class="fs-legende fs-mt-6">
-            Socle complet&nbsp;: <strong>91,7&nbsp;Ko</strong> transférés, auxquels s'ajoutent
+            Socle complet&nbsp;: <strong>95,5&nbsp;Ko</strong> transférés, auxquels s'ajoutent
             <strong>81&nbsp;Ko</strong> de polices, servies depuis le domaine du service.
             Avec le HTML d'une page, le total s'établit autour de
-            <strong>180&nbsp;Ko</strong>&nbsp;: sous le plafond de 500&nbsp;Ko, au-dessus de
+            <strong>183&nbsp;Ko</strong>&nbsp;: sous le plafond de 500&nbsp;Ko, au-dessus de
             l'objectif de 250&nbsp;Ko seulement à la première visite, les polices et le
             socle étant ensuite mis en cache.
           </p>

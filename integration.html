@@ -66,7 +66,11 @@
         <strong>l'apparence et les comportements des composants isolés</strong>&nbsp;; les
         composants pilotés par des données restent la responsabilité du cadriciel.
         Cette page dit ce que cela recouvre exactement, et ce qu'il faut savoir avant
-        d'installer.
+        d'installer. Quatre environnements y sont traités en détail&nbsp;:
+        <a href="#angular">Angular</a>, <a href="#react">React</a>,
+        <a href="#laravel">Laravel</a> et <a href="#android">Android</a>&nbsp;; les
+        autres se ramènent à l'un des quatre. La <a href="#diffusion">diffusion</a>, publier le paquet et servir les
+        fichiers en ligne, fait l'objet d'une section à part.
       </p>
     </div>
 
@@ -108,14 +112,14 @@
         </div>
 
         <div class="doc-note fs-mt-6">
-          <strong>Pourquoi la troisième catégorie.</strong> La pagination de la charte
+          La troisième catégorie tient à peu de chose. La pagination de la charte
           pose <code>hidden</code> sur des lignes de tableau&nbsp;; le filtre y pose
           <code>data-exclu</code>. Si le cadriciel reconstruit ces lignes, ces
           attributs disparaissent.
         </div>
 
         <div class="doc-note fs-mt-4">
-          <strong>Ce que la charte encaisse désormais.</strong> Le remplacement des
+          Depuis, le remplacement des
           lignes est détecté&nbsp;: pagination et filtres se rejouent, et l'usager reste
           sur sa page tant que le nombre de lignes ne change pas. La ligne de partage
           n'est donc plus « le tableau vient-il d'une boucle&nbsp;? » mais
@@ -128,12 +132,12 @@
       </div>
 
       <div class="doc-bloc">
-        <h3>La règle en une phrase</h3>
+        <h3>Où passe la limite</h3>
         <div class="doc-usages">
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Sain</p>
             <ul>
-              <li>Le balisage d'un composant est écrit une fois et ne change plus&nbsp;: la charte peut l'animer.</li>
+              <li>Le balisage d'un composant est écrit une fois et ne change plus. La charte peut l'animer.</li>
               <li>Le cadriciel rend une liste et lui applique les classes de la charte&nbsp;: l'apparence est reprise, la logique reste au cadriciel.</li>
               <li>La charte n'écrit que dans des nœuds qu'aucune liaison du cadriciel ne surveille.</li>
             </ul>
@@ -160,22 +164,102 @@
 
       <div class="doc-bloc">
         <h3>Par npm</h3>
-        <p class="doc-bloc-note">
-          Couvre React, Angular, Vue, Svelte, et aussi Laravel et Symfony, qui
-          embarquent une chaîne Node depuis plusieurs versions.
-        </p>
-        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
 
-        <div class="fs-encart fs-encart--alerte fs-mt-6">
+        <div class="fs-encart fs-encart--alerte">
           <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
           <div class="fs-encart-corps">
-            <p class="fs-encart-titre">Nom de paquet à confirmer</p>
+            <p class="fs-encart-titre">Le paquet n'est pas encore sur le registre public</p>
             <p>
-              L'espace de noms <code>@gouv-bf</code> doit être enregistré par
-              l'organisme désigné responsable du système. Tant que cette désignation
-              n'est pas arrêtée, l'installation se fait par téléchargement.
+              <code>npm install @gouv-bf/charte-graphique</code> répond aujourd'hui
+              <code>404 Not Found</code>. L'espace de noms <code>@gouv-bf</code> doit
+              être enregistré par l'organisme désigné responsable du système, et cette
+              désignation n'est pas arrêtée. Les trois voies ci-dessous fonctionnent
+              dès maintenant et n'exigent rien de plus qu'un accès aux fichiers.
             </p>
           </div>
+        </div>
+
+        <h4 class="fs-mt-8">Aujourd'hui&nbsp;: par une archive</h4>
+        <p class="doc-bloc-note">
+          La plus simple, et celle qui se contrôle le mieux. On produit l'archive
+          depuis le dépôt, on la range dans le projet, on l'installe comme n'importe
+          quelle dépendance. Le nom du paquet, ses sous-chemins et ses types sont
+          exactement ceux qu'ils seront après publication.
+        </p>
+        <pre><code># depuis le depot de la charte
+npm pack
+# produit gouv-bf-charte-graphique-2.0.0.tgz
+
+# depuis le projet qui la consomme
+mkdir -p vendor
+cp .../gouv-bf-charte-graphique-2.0.0.tgz vendor/
+npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
+        <pre><code>// le package.json du projet porte alors :
+"dependencies": {
+  "@gouv-bf/charte-graphique": "file:vendor/gouv-bf-charte-graphique-2.0.0.tgz"
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          L'archive versionnée dans le dépôt du projet rend l'installation
+          reproductible, y compris sur une machine d'intégration sans accès au
+          registre.
+        </p>
+
+        <h4 class="fs-mt-8">Aujourd'hui&nbsp;: depuis le dépôt</h4>
+        <pre><code>npm install git+https://&lt;hôte&gt;/&lt;organisation&gt;/charte-graphique.git#v2.0.0</code></pre>
+        <p class="fs-legende fs-mt-4">
+          npm clone, lit le <code>package.json</code> et n'installe que les fichiers
+          déclarés. Épingler une étiquette de version, jamais une branche. Une
+          branche changerait sous les pieds du projet.
+        </p>
+
+        <h4 class="fs-mt-8">À l'échelle de l'administration&nbsp;: un registre interne</h4>
+        <p class="doc-bloc-note">
+          Dès que plusieurs services reprennent la charte, un registre privé vaut
+          mieux que des archives recopiées. Il donne les versions, les mises à jour
+          et la traçabilité, sans dépendre d'un service hébergé hors du pays.
+        </p>
+        <pre><code># .npmrc du projet
+@gouv-bf:registry=https://depot.gov.bf/npm/</code></pre>
+
+        <h4 class="fs-mt-8">Une fois l'espace de noms enregistré</h4>
+        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Rien d'autre ne change. Les chemins d'importation donnés dans cette page
+          sont déjà les bons.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Chemins d'importation</h3>
+        <p class="doc-bloc-note">
+          Le paquet déclare ses sous-chemins&nbsp;; ce sont les seuls utilisables, et ils
+          ne changeront pas si l'arborescence interne bouge. Tous ont été vérifiés
+          après installation réelle de l'archive.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Import</th><th>Ce qu'il désigne</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>@gouv-bf/charte-graphique</code></td><td>Les comportements, avec leurs types</td></tr>
+              <tr><td><code>…/css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td></tr>
+              <tr><td><code>…/css/faso.css</code></td><td>Bibliothèque de composants</td></tr>
+              <tr><td><code>…/css/icones.css</code></td><td>Les 35 icônes</td></tr>
+              <tr><td><code>…/amorce</code></td><td>Pose le thème avant le premier rendu</td></tr>
+              <tr><td><code>…/jetons.json</code></td><td>Les 193 jetons, valeurs résolues</td></tr>
+              <tr><td><code>…/img/armoiries.svg</code></td><td>Emblème vectoriel</td></tr>
+              <tr><td><code>…/polices/archivo.woff2</code></td><td>Les fichiers de police, si le projet les sert lui-même</td></tr>
+              <tr><td><code>…/android/…</code></td><td>Les ressources Android</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="doc-note fs-mt-6">
+          <code>@gouv-bf/charte-graphique/assets/css/faso.css</code> ne fonctionne
+          pas, et c'est voulu&nbsp;: seuls les chemins ci-dessus sont publics. Les
+          déclarations de polices, elles, désignent leurs fichiers par un chemin
+          relatif interne au paquet&nbsp;; un empaqueteur les résout tout seul, sans que
+          le projet ait à s'en occuper.
         </div>
       </div>
 
@@ -200,7 +284,32 @@
       </div>
 
       <div class="doc-bloc">
-        <h3>Ce que contient le paquet</h3>
+        <h3>Langue des libellés produits par le script</h3>
+        <p class="doc-bloc-note">
+          Une vingtaine de libellés sont écrits par les comportements eux-mêmes&nbsp;:
+          &laquo;&nbsp;Page suivante&nbsp;&raquo;, &laquo;&nbsp;Aucun résultat&nbsp;&raquo;, le
+          compteur de caractères, le contexte d'extraction. Ils sont rassemblés dans
+          un objet unique, avec la langue de mise en forme des nombres et des dates.
+          Un service qui rend son interface en mooré, en dioula ou en fulfuldé
+          remplace ce dont il a besoin&nbsp;; ce qu'il ne remplace pas reste en
+          français.
+        </p>
+        <pre><code>import Faso from '@gouv-bf/charte-graphique';
+
+Object.assign(Faso.textes, {
+  langue: 'fr-BF',
+  pageSuivante: '…',
+  aucunResultat: '…',
+});
+// puis seulement : Faso.observer();</code></pre>
+        <p class="fs-legende fs-mt-4">
+          À faire avant l'initialisation, ou avant le premier rendu du composant
+          concerné&nbsp;: un libellé déjà écrit dans le document n'est pas réécrit.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Le contenu du paquet</h3>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
             <thead>
@@ -213,7 +322,7 @@
               <tr><td><code>polices/</code></td><td>Archivo et Inter, variables, sous-ensemble latin, avec leurs licences</td><td>Oui</td></tr>
               <tr><td>racine du paquet</td><td>Comportements, avec ses déclarations de types</td><td>Non</td></tr>
               <tr><td><code>amorce</code></td><td>Pose le thème retenu avant le premier rendu</td><td>Si thème sombre</td></tr>
-              <tr><td><code>jetons.json</code></td><td>189 jetons, valeurs résolues</td><td>Non</td></tr>
+              <tr><td><code>jetons.json</code></td><td>193 jetons, valeurs résolues, produits par <code>outils/jetons.js</code></td><td>Non</td></tr>
               <tr><td><code>img/armoiries.svg</code></td><td>Emblème vectoriel</td><td>Selon l'usage</td></tr>
             </tbody>
           </table>
@@ -229,12 +338,393 @@
     </section>
 
     <!-- ===================================================== -->
+    <section class="doc-section" id="diffusion">
+      <h2>Publier et servir en ligne</h2>
+      <p class="doc-section-intro">
+        Deux chemins, qui ne s'excluent pas&nbsp;: le paquet sur un registre, pour les
+        projets qui ont une chaîne Node&nbsp;; les fichiers sur un domaine, pour tous les
+        autres. Les deux partent de la même vérification et de la même étiquette de
+        version.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ce qu'il reste à décider</h3>
+        <p class="doc-bloc-note">
+          Techniquement, le paquet est prêt&nbsp;: <code>npm publish --dry-run</code>
+          aboutit. Ce qui manque relève de la décision, non du code, et la machine le
+          dit maintenant elle-même.
+        </p>
+        <pre><code>node outils/verifier.js --publication</code></pre>
+        <div class="fs-tableau-cadre fs-mt-4">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>À arrêter</th><th>Pourquoi cela bloque</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>L'organisme responsable du système</td>
+                <td>Il détient l'espace de noms <code>@gouv-bf</code>, le dépôt et le
+                    jeton de publication. Tant qu'il n'est pas désigné, personne ne
+                    peut publier au nom de l'État.</td>
+              </tr>
+              <tr>
+                <td>Les conditions de réutilisation</td>
+                <td>Un paquet public sans conditions arrêtées est réutilisé sans
+                    cadre. Le fichier de licence annonce encore des dispositions
+                    provisoires. Le contrôle de publication refuse tant qu'elles
+                    le restent.</td>
+              </tr>
+              <tr>
+                <td>Le dépôt et le domaine</td>
+                <td>Quatre champs de <code>package.json</code> portent la mention
+                    <code>A-RENSEIGNER</code>. Le contrôle les nomme un par un.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="doc-note fs-mt-6">
+          Ces trois points sont des décisions institutionnelles. Le reste de cette
+          section décrit ce qui se met en place le jour où elles sont prises, et qui
+          ne demande alors plus aucun arbitrage.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>1. Une fois, à la mise en place</h3>
+        <ol class="fs-liste-puces fs-mesure">
+          <li>
+            <strong>Enregistrer l'espace de noms.</strong> Sur le registre public, une
+            organisation <code>gouv-bf</code> réserve définitivement le préfixe&nbsp;:
+            personne d'autre ne pourra publier un paquet sous ce nom. C'est une
+            précaution qui vaut d'être prise même avant la première publication.
+          </li>
+          <li>
+            <strong>Créer un jeton d'automatisation</strong>, et lui seul. Un jeton
+            de ce type publie sans second facteur, ce qu'exige une chaîne
+            d'intégration, mais ne peut pas administrer l'organisation. Il se range
+            dans le secret <code>NPM_TOKEN</code> du dépôt, jamais dans un fichier.
+          </li>
+          <li>
+            <strong>Renseigner les quatre champs</strong> du <code>package.json</code>
+            et arrêter les conditions de réutilisation.
+          </li>
+          <li>
+            <strong>Activer la publication des pages</strong> du dépôt, source
+            «&nbsp;actions&nbsp;».
+          </li>
+        </ol>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>2. À chaque version</h3>
+        <pre><code>npm test                       # la recette entière, en local
+npm version 2.1.0              # met à jour package.json et pose l'étiquette
+git push --follow-tags</code></pre>
+        <p class="doc-bloc-note fs-mt-4">
+          L'étiquette déclenche le reste. Trois travaux s'enchaînent, et le premier
+          arrête tout s'il échoue&nbsp;: <strong>vérification</strong> — la même qu'en
+          local, plus les contrôles de publication et la concordance entre l'étiquette
+          et la version&nbsp;; <strong>paquet</strong> — publication avec attestation
+          d'origine&nbsp;; <strong>documentation</strong> — mise en ligne des pages.
+        </p>
+
+        <div class="doc-note fs-mt-6">
+          Un mot sur l'attestation d'origine.
+          <code>npm publish --provenance</code> relie publiquement l'archive au dépôt
+          et au travail qui l'a produite. Quiconque installe la charte peut vérifier
+          qu'elle vient bien de là, et non d'un paquet homonyme. Pour un système de
+          l'État, dont l'apparence sert précisément à établir la confiance, ce n'est
+          pas un détail.
+        </div>
+
+        <p class="doc-bloc-note fs-mt-6">
+          La chaîne vérifie aussi que <code>jetons.json</code> et
+          <code>android/</code> correspondent toujours à <code>tokens.css</code>&nbsp;:
+          elle régénère et compare. Une projection oubliée arrête la publication au
+          lieu de partir en ligne.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>3. Servir les fichiers en ligne</h3>
+        <p class="doc-bloc-note">
+          Un projet PHP sans outillage, un site statique, une page isolée. Tous ont
+          besoin d'une adresse. Trois configurations prêtes sont fournies dans
+          <code>hebergement/</code>, une par famille de serveur.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Fichier</th><th>Pour</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>_headers</code></td><td>Cloudflare Pages, Netlify et apparentés</td></tr>
+              <tr><td><code>nginx.conf</code></td><td>Un serveur que l'administration exploite</td></tr>
+              <tr><td><code>apache.htaccess</code></td><td>Un hébergement mutualisé, sans droit d'administration</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="fs-mt-8">La règle de version, qui commande tout le reste</h4>
+        <pre><code>https://fasodesign.gov.bf/2.0.0/css/faso.css     ← figé, cache d'un an
+https://fasodesign.gov.bf/2.1.0/css/faso.css     ← la version suivante
+https://fasodesign.gov.bf/latest/css/faso.css    ← à proscrire en production</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Une adresse versionnée ne se réécrit jamais. Une correction sort sous un
+          nouveau numéro. C'est ce qui autorise le cache d'un an, et surtout ce qui
+          garantit qu'un service ne changera pas d'apparence du jour au lendemain sans
+          l'avoir décidé. Une adresse <code>latest</code> convient à un essai&nbsp;; en
+          production, elle expose chaque service à une correction qu'il n'a pas
+          demandée.
+        </p>
+
+        <div class="fs-encart fs-encart--alerte fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Les polices exigent un en-tête, sinon elles disparaissent en silence</p>
+            <p>
+              Servies depuis un domaine différent de celui du service, elles réclament
+              <code>Access-Control-Allow-Origin</code>. Sans lui, le navigateur
+              télécharge le fichier, le refuse, et bascule en police de repli sans
+              rien signaler. La page reste lisible, et personne ne remarque que
+              l'identité typographique a disparu. Les trois configurations posent cet
+              en-tête.
+            </p>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Une seule autorisation particulière.</strong> La politique de
+          sécurité doit accepter <code>img-src data:</code>&nbsp;: les icônes sont des
+          masques CSS encodés ainsi. Aucun <code>'unsafe-inline'</code> n'est requis,
+          ni pour les styles ni pour les scripts.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>4. Où héberger le paquet</h3>
+        <p class="doc-bloc-note">
+          Un paquet npm ne vit pas nulle part&nbsp;: il faut un dépôt distant qui le
+          serve. Le choix n'est pas seulement technique. Il engage la souveraineté sur
+          un fichier qui porte les emblèmes de l'État, et la capacité des services à
+          continuer de travailler quand la liaison internationale faiblit.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Les cinq dépôts possibles, et ce qu'ils impliquent</caption>
+            <thead>
+              <tr>
+                <th>Dépôt</th>
+                <th>Hébergé</th>
+                <th>Coût</th>
+                <th>Ce qu'il apporte</th>
+                <th>Ce qu'il coûte</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Registre public</strong><br><code>registry.npmjs.org</code></td>
+                <td>Hors du pays</td>
+                <td>Gratuit</td>
+                <td>Aucune installation à prévoir&nbsp;; attestation d'origine
+                    vérifiable&nbsp;; diffusion la plus large, y compris aux prestataires.</td>
+                <td>Dépendance à un service privé étranger. Une version publiée ne se
+                    retire plus vraiment.</td>
+              </tr>
+              <tr>
+                <td><strong>Dépôt de la forge</strong><br><code>npm.pkg.github.com</code></td>
+                <td>Hors du pays</td>
+                <td>Gratuit</td>
+                <td>Déjà là si le code y est&nbsp;; authentification commune&nbsp;; rien à
+                    exploiter.</td>
+                <td>L'espace de noms doit porter le nom de l'organisation.
+                    <strong>Même en public, l'installation exige un jeton</strong>&nbsp;—
+                    c'est la principale surprise.</td>
+              </tr>
+              <tr>
+                <td><strong>Verdaccio</strong><br>sur un serveur de l'État</td>
+                <td>Au Burkina Faso</td>
+                <td>Un petit serveur</td>
+                <td>Souveraineté complète&nbsp;; <strong>fait aussi miroir</strong> du
+                    registre public, donc les projets continuent d'installer quand le
+                    lien international tombe&nbsp;; trace de qui installe quoi.</td>
+                <td>À exploiter&nbsp;: sauvegardes, TLS, comptes. Configuration fournie
+                    dans <code>hebergement/verdaccio.yaml</code>.</td>
+              </tr>
+              <tr>
+                <td><strong>Dépôt d'une forge interne</strong><br>GitLab, Gitea, Forgejo</td>
+                <td>Au Burkina Faso</td>
+                <td>Déjà en place</td>
+                <td>Rien de plus à exploiter si la forge existe déjà&nbsp;; comptes et
+                    droits communs avec le code.</td>
+                <td>Ne fait pas miroir du registre public&nbsp;: il faut alors un second
+                    dépôt pour les dépendances tierces.</td>
+              </tr>
+              <tr>
+                <td><strong>Aucun dépôt</strong><br>archive ou dépôt Git</td>
+                <td>Sans objet</td>
+                <td>Nul</td>
+                <td>Fonctionne immédiatement, sans rien décider ni installer.</td>
+                <td>Pas de liste de versions, pas de mise à jour signalée, pas de
+                    trace. Convient à un projet pilote, pas à une généralisation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Le plus sûr reste de retenir les deux, et dans cet
+          ordre&nbsp;: <strong>un dépôt souverain</strong> comme source de référence pour
+          les services de l'administration, <strong>le registre public</strong> en
+          second pour les prestataires et les collectivités qui n'auront pas accès au
+          premier. La chaîne de publication envoie le paquet aux deux depuis la même
+          étiquette, ce qui écarte le risque de les voir diverger.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Ce qu'écrit le projet qui installe</h3>
+        <p class="doc-bloc-note">
+          Une chose est à comprendre avant tout le reste. La déclaration se
+          fait <strong>par espace de noms</strong>. Seuls les paquets
+          <code>@gouv-bf/…</code> sont demandés au dépôt désigné&nbsp;; tout le reste
+          continue d'aller là où il allait. On ne bascule pas un projet entier pour
+          installer la charte.
+        </p>
+
+        <h4 class="fs-mt-6">Registre public</h4>
+        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <p class="fs-legende fs-mt-4">Rien à déclarer&nbsp;: c'est la destination par défaut.</p>
+
+        <h4 class="fs-mt-8">Dépôt souverain, ou toute autre installation de Verdaccio</h4>
+        <pre><code># .npmrc, à la racine du projet, versionné avec lui
+@gouv-bf:registry=https://depot.fasodesign.gov.bf/</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Si le dépôt exige un compte pour lire, on ajoute la ligne d'authentification
+          — jamais dans le fichier versionné, mais par une variable d'environnement
+          que <code>npm</code> substitue&nbsp;:
+        </p>
+        <pre><code>//depot.fasodesign.gov.bf/:_authToken=${JETON_DEPOT}</code></pre>
+
+        <h4 class="fs-mt-8">Dépôt de la forge</h4>
+        <pre><code># .npmrc
+@gouv-bf:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${JETON_FORGE}</code></pre>
+        <div class="fs-encart fs-encart--alerte fs-mt-4">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Un jeton reste nécessaire, même pour un paquet public</p>
+            <p>
+              C'est la différence la plus souvent découverte trop tard. Un paquet
+              hébergé sur le dépôt d'une forge ne s'installe pas anonymement&nbsp;: tout
+              poste, toute chaîne d'intégration, tout prestataire doit disposer d'un
+              jeton de lecture. Pour un système destiné à être repris largement, c'est
+              un obstacle sérieux, et la raison pour laquelle ce dépôt convient
+              mieux en second qu'en premier.
+            </p>
+          </div>
+        </div>
+
+        <h4 class="fs-mt-8">Sans dépôt du tout</h4>
+        <pre><code># depuis une archive rangée dans le projet
+npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz
+
+# ou directement depuis le dépôt de code, sur une étiquette
+npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Toujours une étiquette, jamais une branche&nbsp;: une branche changerait sous
+          les pieds du projet, sans que rien ne le signale.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>6. Monter le dépôt souverain</h3>
+        <p class="doc-bloc-note">
+          <code>hebergement/verdaccio.yaml</code> est prêt à l'emploi. Il déclare deux
+          choses qui comptent&nbsp;: les paquets <code>@gouv-bf/*</code> n'ont
+          <strong>aucun accès amont</strong>, et le reste est relayé vers le registre
+          public avec mise en cache.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Réglage</th><th>Pourquoi il est écrit ainsi</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pas de <code>proxy</code> sur <code>@gouv-bf/*</code></td>
+                <td>Une demande pour un paquet de l'État ne doit jamais partir vers le
+                    registre public, où un homonyme pourrait répondre à sa place. Sans
+                    cette précaution, un paquet déposé par un tiers sous le même nom
+                    serait installé à la place du vrai.</td>
+              </tr>
+              <tr>
+                <td><code>cache: true</code> sur l'amont</td>
+                <td>Une dépendance déjà demandée une fois reste installable quand le
+                    lien international est lent ou coupé. C'est ce qui transforme le
+                    dépôt en filet de sécurité pour tous les projets du pays.</td>
+              </tr>
+              <tr>
+                <td><code>max_fails</code> et <code>fail_timeout</code></td>
+                <td>Quand l'amont ne répond plus, le dépôt cesse de l'interroger et
+                    sert ce qu'il a, au lieu de bloquer chaque installation sur un
+                    délai d'attente.</td>
+              </tr>
+              <tr>
+                <td><code>max_users: -1</code></td>
+                <td>Aucune inscription libre&nbsp;: les comptes sont créés par
+                    l'administrateur du dépôt.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre><code># sur le serveur
+npm install -g verdaccio
+htpasswd -B -c /etc/verdaccio/htpasswd publication
+verdaccio --config /etc/verdaccio/verdaccio.yaml
+
+# derrière un nginx qui termine le TLS, il n'écoute que
+# sur la boucle locale : 127.0.0.1:4873</code></pre>
+
+        <p class="doc-bloc-note fs-mt-6">
+          Côté chaîne de publication, deux valeurs à déclarer une fois sur le dépôt de
+          code&nbsp;: la variable <code>REGISTRE_INTERNE</code> avec l'adresse, et le
+          secret <code>REGISTRE_INTERNE_TOKEN</code> avec le jeton du compte de
+          publication. Les étapes qui n'ont pas leurs valeurs sont sautées. On peut
+          n'en retenir qu'une, ou les trois, sans toucher au fichier.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Recette de publication</h3>
+        <ul class="fs-liste-controle fs-mesure">
+          <li><code>npm test</code> passe en local.</li>
+          <li><code>node outils/verifier.js --publication</code> passe&nbsp;: plus aucun
+              champ à renseigner, conditions de réutilisation arrêtées.</li>
+          <li>Le journal des versions de la page <a href="gouvernance.html">Gouvernance</a>
+              décrit ce qui change.</li>
+          <li>L'étiquette correspond à la version du <code>package.json</code>.</li>
+          <li>Le paquet ne contient ni les essais, ni l'outillage, ni la documentation.</li>
+          <li>Le paquet est parti sur chacun des dépôts retenus, et y porte la même
+              empreinte.</li>
+          <li>Après publication. Une installation depuis un projet vierge résout les
+              chemins publics, et les polices se chargent depuis le domaine du service.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
     <section class="doc-section" id="angular">
       <h2>Angular</h2>
       <p class="doc-section-intro">
-        Cas traité en détail, parce qu'il concentre toutes les difficultés&nbsp;: rendu
-        côté serveur, encapsulation des styles, cycle de vie des composants, mode sans
-        zone. Ce qui suit vaut, à la syntaxe près, pour les autres cadriciels.
+        Premier cas traité en détail, parce qu'il concentre le plus de
+        difficultés&nbsp;: rendu côté serveur, encapsulation des styles, cycle de vie
+        des composants, mode sans zone, typage strict des gabarits. React et Laravel
+        suivent, avec leurs propres points durs.
       </p>
 
       <div class="doc-bloc">
@@ -242,7 +732,7 @@
         <p class="doc-bloc-note">
           Dans <code>angular.json</code>, section <code>build</code>. Les styles
           globaux échappent à l'encapsulation des composants, ce qui est exactement ce
-          qu'on veut&nbsp;: les classes doivent s'appliquer partout.
+          qu'on veut. Les classes doivent s'appliquer partout.
         </p>
         <pre><code>"styles": [
   "node_modules/@gouv-bf/charte-graphique/assets/css/tokens.css",
@@ -251,7 +741,7 @@
   "src/styles.css"
 ]</code></pre>
         <p class="fs-legende fs-mt-4">
-          L'ordre compte&nbsp;: les jetons d'abord, la feuille du projet en dernier, pour
+          L'ordre compte. Les jetons d'abord, la feuille du projet en dernier, pour
           qu'une surcharge locale l'emporte.
         </p>
       </div>
@@ -260,7 +750,7 @@
         <h3>2. Amorcer les comportements</h3>
         <p class="doc-bloc-note">
           Une seule ligne, dans le composant racine. L'observation prend en charge
-          tout ce que l'application rendra par la suite&nbsp;: il n'y a plus rien à appeler
+          tout ce que l'application rendra par la suite. Il n'y a plus rien à appeler
           après chaque rendu, et rien à défaire au démontage.
         </p>
         <pre><code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
@@ -280,9 +770,53 @@ export class AppComponent implements OnInit {
 
         <div class="doc-note fs-mt-6">
           Le test de plateforme n'est pas indispensable&nbsp;— <code>observer()</code> se
-          contente de renvoyer <code>false</code> hors navigateur&nbsp;— mais il rend
+          contente de renvoyer <code>false</code> hors navigateur, mais il rend
           l'intention explicite et évite un appel inutile au rendu serveur.
         </div>
+
+        <h4 class="fs-mt-8">Refuser le démarrage automatique</h4>
+        <p class="doc-bloc-note">
+          Chargée telle quelle, la bibliothèque s'initialise seule au chargement du
+          document. Une page servie sans outillage peut ainsi
+          fonctionner sans une ligne de script. Une application qui maîtrise son
+          cycle de vie préfère décider du moment, en particulier avec
+          l'hydratation, où Angular reprend un balisage rendu par le serveur et où
+          l'on ne veut personne d'autre dans le document avant lui.
+        </p>
+        <pre><code>// index.html, avant le chargement du paquet
+&lt;script&gt;window.FASO_SANS_DEMARRAGE = true;&lt;/script&gt;
+
+// ou, si la bibliothèque est déclarée par une balise :
+&lt;script src="/assets/js/faso.js" data-sans-demarrage defer&gt;&lt;/script&gt;</code></pre>
+        <p class="fs-legende fs-mt-4">
+          La charte ne touche alors à rien tant que <code>Faso.initialiser()</code> ou
+          <code>Faso.observer()</code> n'a pas été appelé. Avec l'hydratation
+          incrémentale, appeler <code>observer()</code> une fois suffit&nbsp;: les
+          sous-arbres hydratés plus tard sont pris à leur arrivée.
+        </p>
+
+        <h4 class="fs-mt-8">Au démontage</h4>
+        <p class="doc-bloc-note">
+          Rien, et ce n'est pas une facilité de langage&nbsp;: c'est une propriété de
+          la construction, que voici en détail.
+        </p>
+        <ul class="fs-liste-controle fs-mesure">
+          <li>Les gestionnaires posés sur un élément disparaîssent avec lui.</li>
+          <li>Les gestionnaires posés sur <code>document</code> le sont une fois pour
+              la page, jamais par instance&nbsp;: rien ne retient un nœud détruit.</li>
+          <li>Les veilles posées sur un élément ne sont référencées nulle part
+              ailleurs&nbsp;: elles forment avec lui un cycle isolé, que le ramasse-miettes
+              collecte.</li>
+          <li>Le verrou de défilement d'un panneau se lève de lui-même si le panneau
+              est détruit sans avoir été fermé.</li>
+          <li>Le registre d'initialisation est faible&nbsp;: un élément retiré en sort
+              seul.</li>
+        </ul>
+        <p class="fs-legende fs-mt-4">
+          La seule chose qui se défait explicitement est l'observation globale,
+          par <code>Faso.observer(false)</code>&nbsp;; elle n'est utile que pour rendre
+          la main au projet, non pour libérer de la mémoire.
+        </p>
 
         <h4 class="fs-mt-8">Variante sans observation</h4>
         <p class="doc-bloc-note">
@@ -329,7 +863,7 @@ export class AppComponent implements OnInit {
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Compatible</p>
             <ul>
-              <li><code>ViewEncapsulation.Emulated</code>, le mode par défaut&nbsp;: les styles globaux s'appliquent normalement.</li>
+              <li><code>ViewEncapsulation.Emulated</code>, le mode par défaut. Les styles globaux s'appliquent normalement.</li>
               <li><code>ViewEncapsulation.None</code>&nbsp;: compatible, mais la feuille du composant fuit dans toute l'application.</li>
               <li>Une surcharge locale passe par une redéfinition de jeton sur <code>:host</code>, jamais par une réécriture de règle.</li>
             </ul>
@@ -338,7 +872,7 @@ export class AppComponent implements OnInit {
             <p class="doc-usage-titre">Incompatible</p>
             <ul>
               <li><code>ViewEncapsulation.ShadowDom</code>&nbsp;: les styles globaux ne franchissent pas la frontière, et les composants apparaissent sans mise en forme.</li>
-              <li><code>::ng-deep</code> pour forcer un style de la charte&nbsp;: la règle est dépréciée et la surcharge survit mal aux montées de version.</li>
+              <li><code>::ng-deep</code> pour forcer un style de la charte. La règle est dépréciée et la surcharge survit mal aux montées de version.</li>
             </ul>
           </div>
         </div>
@@ -365,7 +899,7 @@ export class AppComponent implements OnInit {
   font-src 'self';
   style-src 'self';</code></pre>
         <p class="fs-legende fs-mt-4">
-          Aucune directive <code>'unsafe-inline'</code> n'est nécessaire&nbsp;: la charte
+          Aucune directive <code>'unsafe-inline'</code> n'est nécessaire. La charte
           ne pose aucun style en ligne ni aucun script en ligne.
         </p>
       </div>
@@ -436,6 +970,1035 @@ Faso.appliquerTheme('dark');</code></pre>
     </section>
 
     <!-- ===================================================== -->
+    <!-- ===================================================== -->
+    <section class="doc-section" id="react">
+      <h2>React</h2>
+      <p class="doc-section-intro">
+        Second cas traité en détail. Les difficultés ne sont pas les mêmes qu'avec
+        Angular. Le rendu est déclaratif et le DOM entièrement possédé par la
+        bibliothèque, ce qui simplifie certaines choses et en complique deux autres,
+        les champs contrôlés et l'écoute des annonces.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>1. Déclarer les feuilles</h3>
+        <pre><code>// main.tsx, avant le rendu
+import '@gouv-bf/charte-graphique/css/tokens.css';
+import '@gouv-bf/charte-graphique/css/faso.css';
+import '@gouv-bf/charte-graphique/css/icones.css';</code></pre>
+        <p class="fs-legende fs-mt-4">
+          L'ordre compte. Les jetons d'abord, la feuille du projet en dernier. Aucun
+          module CSS, aucune portée&nbsp;— les classes de la charte sont globales par
+          construction, et c'est ce qui permet de les reprendre telles quelles dans un
+          gabarit Blade ou un courriel.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>2. Amorcer les comportements</h3>
+        <p class="doc-bloc-note">
+          Un effet unique, au composant racine. L'observation prend ensuite en charge
+          tout ce que React rendra.
+        </p>
+        <pre><code>import { useEffect } from 'react';
+import Faso from '@gouv-bf/charte-graphique';
+
+export default function App() {
+  useEffect(() =&gt; {
+    Faso.observer();
+    return () =&gt; Faso.observer(false);
+  }, []);
+
+  return &lt;Routes /&gt;;
+}</code></pre>
+
+        <div class="doc-note fs-mt-6">
+          Le mode strict ne demande rien de particulier. En développement,
+          React monte, démonte et remonte&nbsp;: l'effet s'exécute deux fois.
+          <code>observer()</code> est idempotent et <code>observer(false)</code> rend
+          proprement la main&nbsp;; aucun gestionnaire ne s'empile.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>3. Champs contrôlés</h3>
+        <p class="doc-bloc-note">
+          C'est le point où React diffère de tous les autres, et il a demandé une
+          correction dans la charte elle-même.
+        </p>
+
+        <div class="fs-encart fs-encart--info">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Pourquoi écrire dans un champ ne suffit pas</p>
+            <p>
+              React ne relit pas la valeur du champ. Il installe sur le nœud son
+              propre accesseur, qui mémorise chaque affectation. Un script qui écrit
+              par cet accesseur fait bouger la valeur mémorisée en même temps que
+              celle du champ&nbsp;; à la réception de l'événement, React ne constate
+              aucun écart et <code>onChange</code> n'est jamais appelé. L'usager lit
+              la nouvelle valeur à l'écran, le formulaire part avec l'ancienne.
+            </p>
+          </div>
+        </div>
+
+        <p class="doc-bloc-note fs-mt-6">
+          La charte écrit donc par l'accesseur du prototype, que React n'a pas
+          remplacé&nbsp;: le champ change, la valeur mémorisée non, et l'événement qui
+          suit est reconnu comme une saisie véritable. Cela concerne les quatre
+          endroits où le script écrit&nbsp;: date collée, code collé, suggestion retenue,
+          filtre vidé.
+        </p>
+
+        <pre><code>// Un champ contrôlé ordinaire : rien de particulier à écrire.
+const [ville, setVille] = useState('');
+
+&lt;div className="fs-champ fs-combo" data-combo&gt;
+  &lt;label className="fs-label" htmlFor="ville"&gt;Commune de naissance&lt;/label&gt;
+  &lt;input className="fs-saisie" id="ville" value={ville}
+         aria-describedby="ville-nb" aria-controls="ville-liste"
+         onChange={(e) =&gt; setVille(e.target.value)} /&gt;
+  &lt;p className="fs-invisible" id="ville-nb" role="status" aria-live="polite" /&gt;
+  &lt;ul className="fs-combo-liste" id="ville-liste" hidden&gt;
+    {communes.map((c) =&gt; (
+      &lt;li className="fs-combo-option" key={c}&gt;{c}&lt;/li&gt;
+    ))}
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Retenir une suggestion appelle bien <code>setVille</code>. La liste des
+          options peut changer entre deux rendus&nbsp;: la charte la relit.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>4. Écouter les annonces</h3>
+        <p class="doc-bloc-note">
+          React ne relaie pas les événements personnalisés vers une propriété
+          <code>onQuelqueChose</code> sur un élément natif. La forme à trait d'union,
+          qui sert à Angular, n'y change rien&nbsp;: il faut une référence et un
+          écouteur. Un crochet d'une dizaine de lignes suffit, et se réutilise.
+        </p>
+
+        <pre><code>import { useEffect, useRef } from 'react';
+
+export function useAnnonce&lt;T&gt;(
+  nom: string,
+  gerer: (detail: T, ev: CustomEvent&lt;T&gt;) =&gt; void,
+) {
+  const hote = useRef&lt;HTMLElement&gt;(null);
+  const dernier = useRef(gerer);
+  dernier.current = gerer;
+
+  useEffect(() =&gt; {
+    const n = hote.current;
+    if (!n) return;
+    const relais = (ev: Event) =&gt; {
+      const a = ev as CustomEvent&lt;T&gt;;
+      dernier.current(a.detail, a);
+    };
+    n.addEventListener(nom, relais);
+    return () =&gt; n.removeEventListener(nom, relais);
+  }, [nom]);
+
+  return hote;
+}</code></pre>
+
+        <pre><code>// L'onglet actif appartient au composant, pas à la charte.
+type Onglet = { onglet: HTMLElement; index: number };
+
+function Onglets() {
+  const [actif, setActif] = useState('suivi');
+
+  const liste = useAnnonce&lt;Onglet&gt;('fs:onglet', (detail, ev) =&gt; {
+    ev.preventDefault();                 // la charte n'écrira pas
+    setActif(detail.onglet.dataset.cle ?? actif);
+  });
+
+  return (
+    &lt;div&gt;
+      &lt;div className="fs-onglets" role="tablist" ref={liste}
+           aria-label="Informations sur la démarche"&gt;
+        {cles.map((c) =&gt; (
+          &lt;button className="fs-onglet" key={c} role="tab" data-cle={c}
+                  id={`onglet-${c}`} aria-controls={`panneau-${c}`}
+                  aria-selected={actif === c}&gt;{libelles[c]}&lt;/button&gt;
+        ))}
+      &lt;/div&gt;
+      {cles.map((c) =&gt; (
+        &lt;div className="fs-panneau" key={c} id={`panneau-${c}`} role="tabpanel"
+             aria-labelledby={`onglet-${c}`} tabIndex={0} hidden={actif !== c}&gt;
+          {contenus[c]}
+        &lt;/div&gt;
+      ))}
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <p class="fs-legende fs-mt-4">
+          Sans <code>preventDefault()</code>, la charte écrirait <code>hidden</code> et
+          <code>aria-selected</code> de son côté, React les réécrirait au rendu
+          suivant, et les deux se disputeraient. L'annuler règle le conflit en une
+          ligne&nbsp;: la charte continue d'assurer le clavier, le focus et l'ordre de
+          tabulation, que JSX ne sait pas exprimer.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Initialiser un sous-arbre précis</h3>
+        <p class="doc-bloc-note">
+          Si l'on préfère maîtriser le moment plutôt qu'observer en continu.
+        </p>
+        <pre><code>function FicheDemarche({ demarche }) {
+  const hote = useRef&lt;HTMLDivElement&gt;(null);
+
+  useEffect(() =&gt; {
+    if (hote.current) Faso.initialiser(hote.current);
+  }, [demarche.id]);          // rejoué quand la fiche change
+
+  return (
+    &lt;div ref={hote}&gt;
+      &lt;div className="fs-accordeon"&gt;…&lt;/div&gt;
+      &lt;div className="fs-jauge" data-valeur={demarche.avancement}&gt;
+        &lt;span className="fs-jauge-valeur" /&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          L'opération est idempotente. Un élément déjà initialisé est ignoré, et
+          seuls les nouveaux sont équipés. Ici la jauge suivrait de toute façon
+          <code>data-valeur</code> sans rien demander&nbsp;; l'appel sert aux composants
+          qui n'ont pas cette veille.
+        </p>
+
+        <div class="doc-note fs-mt-6">
+          Un balisage posé par
+          <code>dangerouslySetInnerHTML</code> échappe au rendu de React&nbsp;: il faut
+          appeler <code>Faso.initialiser()</code> sur le conteneur après chaque
+          injection, ou laisser l'observation s'en charger.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>6. Next.js et le rendu côté serveur</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Point</th><th>Ce qu'il faut faire</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Import du module</td>
+                <td>Sans effet hors navigateur. Aucune directive
+                    <code>'use client'</code> n'est nécessaire pour importer.</td>
+              </tr>
+              <tr>
+                <td>Appel de <code>observer()</code></td>
+                <td>Dans un composant client, à l'intérieur d'un effet.</td>
+              </tr>
+              <tr>
+                <td>Thème sombre</td>
+                <td>Déclarer <code>faso-amorce.js</code> dans le <code>&lt;head&gt;</code>
+                    du gabarit racine, avant les feuilles.</td>
+              </tr>
+              <tr>
+                <td>Hydratation</td>
+                <td>Poser <code>window.FASO_SANS_DEMARRAGE = true</code> si le paquet
+                    est chargé par une balise. La charte attendra votre appel.</td>
+              </tr>
+              <tr>
+                <td>Politique de sécurité</td>
+                <td><code>img-src 'self' data:</code>&nbsp;: les icônes sont des masques
+                    CSS en <code>data:</code>. Aucun <code>'unsafe-inline'</code>
+                    n'est requis.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <pre><code>// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    &lt;html lang="fr"&gt;
+      &lt;head&gt;
+        &lt;script src="/faso-amorce.js" /&gt;
+      &lt;/head&gt;
+      &lt;body&gt;{children}&lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Avec React, en résumé</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Sain</p>
+            <ul>
+              <li>Reprendre les classes dans le JSX et laisser React rendre. C'est
+                  l'usage le plus courant, et il ne demande rien.</li>
+              <li>Laisser la charte tenir un état qu'aucune liaison ne surveille&nbsp;:
+                  ouverture d'un menu, d'une modale, d'un panneau.</li>
+              <li>Annuler l'annonce dès que l'état figure aussi dans un
+                  <code>useState</code>.</li>
+              <li>Donner une <code>key</code> stable à chaque élément d'une liste&nbsp;:
+                  React réutilise alors les nœuds, et la charte n'a rien à rejouer.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À éviter</p>
+            <ul>
+              <li>Refléter dans un <code>useState</code> un attribut que la charte
+                  écrit, sans annuler l'annonce correspondante.</li>
+              <li>Poser <code>data-pagination</code> sur un tableau dont React ne rend
+                  qu'une page.</li>
+              <li>Injecter le balisage de la charte par
+                  <code>dangerouslySetInnerHTML</code> sans appeler
+                  <code>Faso.initialiser()</code> sur le conteneur.</li>
+              <li>Une <code>key</code> fondée sur l'index&nbsp;: React recrée alors les
+                  nœuds à chaque tri, et la pagination repart en tête.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="laravel">
+      <h2>Laravel</h2>
+      <p class="doc-section-intro">
+        Le cas le plus simple, et celui qui concerne le plus grand nombre de services
+        de l'administration. Le balisage vient du serveur, personne ne le redessine
+        ensuite&nbsp;: <strong>la totalité de la charte est utilisable, sans réserve</strong>.
+        Les deux points qui demandent attention arrivent avec Livewire et avec Inertia.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>1. Installer, avec ou sans Node</h3>
+
+        <h4 class="fs-mt-6">Avec Vite, qui est le défaut</h4>
+        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <pre><code>// resources/js/app.js
+import '@gouv-bf/charte-graphique/css/tokens.css';
+import '@gouv-bf/charte-graphique/css/faso.css';
+import '@gouv-bf/charte-graphique/css/icones.css';
+import '@gouv-bf/charte-graphique';   // les comportements s'amorcent seuls</code></pre>
+        <pre><code>{{-- resources/views/layouts/app.blade.php --}}
+&lt;!doctype html&gt;
+&lt;html lang="fr"&gt;
+&lt;head&gt;
+  &lt;meta charset="utf-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+  @vite(['resources/js/app.js'])
+&lt;/head&gt;
+&lt;body&gt;
+  @yield('contenu')
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <h4 class="fs-mt-8">Sans chaîne Node</h4>
+        <p class="doc-bloc-note">
+          Un service hébergé sur un serveur mutualisé, sans <code>npm</code>&nbsp;: on
+          copie les fichiers et on les sert. C'est le mode d'origine du système, et il
+          reste pleinement pris en charge.
+        </p>
+        <pre><code># une fois, depuis un poste qui a Node
+npm pack @gouv-bf/charte-graphique
+tar -xzf gouv-bf-charte-graphique-2.0.0.tgz
+cp -r package/assets public/charte</code></pre>
+        <pre><code>&lt;script src="{{ asset('charte/js/faso-amorce.js') }}"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="{{ asset('charte/css/tokens.css') }}"&gt;
+&lt;link rel="stylesheet" href="{{ asset('charte/css/faso.css') }}"&gt;
+&lt;link rel="stylesheet" href="{{ asset('charte/css/icones.css') }}"&gt;
+&lt;script src="{{ asset('charte/js/faso.js') }}" defer&gt;&lt;/script&gt;</code></pre>
+        <div class="doc-note fs-mt-6">
+          L'arborescence <code>css/</code> et <code>polices/</code> doit être conservée
+          telle quelle&nbsp;: les déclarations de polices désignent les fichiers par un
+          chemin relatif. Déplacer l'un sans l'autre fait basculer silencieusement le
+          texte en police de repli.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>2. Un formulaire Blade</h3>
+        <p class="doc-bloc-note">
+          Le seul travail réel est de brancher la validation de Laravel sur les états
+          que la charte dessine. Trois choses&nbsp;: l'attribut <code>data-etat</code> sur
+          le champ, <code>aria-invalid</code> et <code>aria-describedby</code> sur la
+          saisie, le message dans un <code>.fs-message--erreur</code> qui porte
+          l'identifiant désigné.
+        </p>
+
+        <pre><code>{{-- resources/views/composants/champ.blade.php --}}
+@props(['nom', 'libelle', 'type' =&gt; 'text', 'aide' =&gt; null])
+
+@php
+  $erreur = $errors-&gt;first($nom);
+  $idAide = $nom . '-aide';
+  $idErreur = $nom . '-erreur';
+  $decrit = collect([$aide ? $idAide : null, $erreur ? $idErreur : null])
+              -&gt;filter()-&gt;implode(' ');
+@endphp
+
+&lt;div class="fs-champ" @if($erreur) data-etat="erreur" @endif&gt;
+  &lt;label class="fs-label" for="{{ $nom }}"&gt;{{ $libelle }}&lt;/label&gt;
+
+  @if($aide)
+    &lt;p class="fs-aide" id="{{ $idAide }}"&gt;{{ $aide }}&lt;/p&gt;
+  @endif
+
+  &lt;input class="fs-saisie" type="{{ $type }}" id="{{ $nom }}" name="{{ $nom }}"
+         value="{{ old($nom) }}"
+         @if($erreur) aria-invalid="true" @endif
+         @if($decrit) aria-describedby="{{ $decrit }}" @endif&gt;
+
+  @if($erreur)
+    &lt;p class="fs-message fs-message--erreur" id="{{ $idErreur }}"&gt;{{ $erreur }}&lt;/p&gt;
+  @endif
+&lt;/div&gt;</code></pre>
+
+        <pre><code>&lt;form method="post" action="{{ route('demande.store') }}" class="fs-pile fs-pile--large"&gt;
+  @csrf
+  &lt;x-champ nom="nom" libelle="Nom de famille" /&gt;
+  &lt;x-champ nom="courriel" libelle="Adresse électronique" type="email"
+           aide="Nous y enverrons le récépissé." /&gt;
+  &lt;button class="fs-btn fs-btn--principal" type="submit"&gt;Déposer la demande&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Ce composant appartient au projet, pas à la charte.</strong> La
+          charte ne publie pas de composants Blade, pour la raison expliquée plus
+          bas. Elle livre des classes et un contrat de balisage, que chaque projet
+          enveloppe dans les conventions de son cadriciel. Celui-ci est donné comme
+          point de départ, à copier et à adapter.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>3. Tableaux paginés par le serveur</h3>
+        <p class="doc-bloc-note">
+          Laravel pagine côté serveur. C'est le cas où
+          <strong>il ne faut pas poser <code>data-pagination</code></strong>, puisque
+          la page ne contient qu'une tranche des lignes. On reprend en revanche le
+          dessin de la pagination, en publiant la vue du paginateur.
+        </p>
+
+        <pre><code>php artisan vendor:publish --tag=laravel-pagination</code></pre>
+
+        <pre><code>{{-- resources/views/vendor/pagination/charte.blade.php --}}
+@if ($paginator-&gt;hasPages())
+  &lt;nav class="fs-pagination" aria-label="Pagination des résultats"&gt;
+    @if ($paginator-&gt;onFirstPage())
+      &lt;span aria-hidden="true"&gt;&lsaquo;&lt;/span&gt;
+    @else
+      &lt;a href="{{ $paginator-&gt;previousPageUrl() }}" aria-label="Page précédente"&gt;&lsaquo;&lt;/a&gt;
+    @endif
+
+    @foreach ($elements as $element)
+      @if (is_string($element))
+        &lt;span class="fs-ellipse" aria-hidden="true"&gt;{{ $element }}&lt;/span&gt;
+      @endif
+      @if (is_array($element))
+        @foreach ($element as $page =&gt; $url)
+          @if ($page == $paginator-&gt;currentPage())
+            &lt;a href="{{ $url }}" aria-current="page" aria-label="Page {{ $page }}"&gt;{{ $page }}&lt;/a&gt;
+          @else
+            &lt;a href="{{ $url }}" aria-label="Page {{ $page }}"&gt;{{ $page }}&lt;/a&gt;
+          @endif
+        @endforeach
+      @endif
+    @endforeach
+
+    @if ($paginator-&gt;hasMorePages())
+      &lt;a href="{{ $paginator-&gt;nextPageUrl() }}" aria-label="Page suivante"&gt;&rsaquo;&lt;/a&gt;
+    @else
+      &lt;span aria-hidden="true"&gt;&rsaquo;&lt;/span&gt;
+    @endif
+  &lt;/nav&gt;
+@endif</code></pre>
+
+        <pre><code>{{ $demandes-&gt;links('vendor.pagination.charte') }}</code></pre>
+
+        <div class="doc-note fs-mt-6">
+          L'extraction suit la même règle. Le bouton d'export de la
+          charte lit le document&nbsp;: sur une page qui n'affiche que vingt lignes sur
+          quatre mille, il produirait un fichier faux. Déclarer
+          <code>data-export-total="{{ $demandes-&gt;total() }}"</code> fait refuser
+          l'extraction et affiche un message explicite&nbsp;; l'export complet se fait
+          alors par une route qui diffuse le jeu entier.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>4. Livewire</h3>
+        <p class="doc-bloc-note">
+          C'est le seul endroit où Laravel rejoint les difficultés d'Angular et de
+          React. Livewire ne recharge pas la page&nbsp;: il compare l'ancien balisage au
+          nouveau et transforme le premier en second. Les attributs que la charte a
+          posés après le rendu ne figurent pas dans le balisage attendu, et peuvent
+          donc être effacés.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Situation</th><th>Ce qu'il faut faire</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Un composant que la charte anime, et que Livewire ne doit pas
+                    retoucher&nbsp;: modale, menu, onglets</td>
+                <td>Poser <code>wire:ignore</code> sur le conteneur. Livewire le laisse
+                    tel quel à chaque rafraîchissement.</td>
+              </tr>
+              <tr>
+                <td>Un conteneur dont Livewire rend le contenu mais pas l'enveloppe</td>
+                <td><code>wire:ignore.self</code>&nbsp;: l'enveloppe et ses attributs sont
+                    préservés, l'intérieur est mis à jour.</td>
+              </tr>
+              <tr>
+                <td>Une liste rendue par <code>@foreach</code></td>
+                <td>Une <code>wire:key</code> stable sur chaque élément&nbsp;: Livewire
+                    réutilise alors les nœuds au lieu de les recréer.</td>
+              </tr>
+              <tr>
+                <td>Un tableau dont Livewire pagine les lignes</td>
+                <td>Pas de <code>data-pagination</code> ni de <code>data-filtres</code>&nbsp;:
+                    le tri, le filtre et l'export reviennent au composant.</td>
+              </tr>
+              <tr>
+                <td>Un champ lié par <code>wire:model.live</code></td>
+                <td>Rien à faire&nbsp;: la charte émet <code>input</code> et
+                    <code>change</code> quand elle écrit une valeur.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="fs-mt-8">Réinitialiser après une transformation</h4>
+        <p class="doc-bloc-note">
+          Si un composant rend un balisage neuf, les comportements doivent être posés
+          sur les nouveaux nœuds. Deux voies, au choix.
+        </p>
+
+        <pre><code>// resources/js/app.js — la voie simple, une fois pour toutes
+import Faso from '@gouv-bf/charte-graphique';
+Faso.observer();</code></pre>
+
+        <pre><code>// ou la voie explicite, si l'on préfère ne rien observer
+document.addEventListener('livewire:init', () =&gt; {
+  Livewire.hook('morphed', ({ el }) =&gt; Faso.initialiser(el));
+});</code></pre>
+        <p class="fs-legende fs-mt-4">
+          L'initialisation étant idempotente, la seconde voie ne risque pas d'empiler
+          les gestionnaires, même si le composant se rafraîchit à chaque frappe.
+        </p>
+
+        <h4 class="fs-mt-8">Alpine, qui accompagne souvent Livewire</h4>
+        <p class="doc-bloc-note">
+          Les deux cohabitent sans heurt tant qu'ils n'écrivent pas le même attribut.
+          Si un <code>x-data</code> pilote l'ouverture d'un panneau ou l'onglet actif,
+          on annule l'annonce de la charte&nbsp;— la forme à trait d'union se lie
+          directement dans une directive Alpine.
+        </p>
+        <pre><code>&lt;div role="tablist" x-data="{ actif: 'suivi' }"
+     @fs-onglet="$event.preventDefault(); actif = $event.detail.onglet.dataset.cle"&gt;
+  &lt;button role="tab" data-cle="suivi"
+          :aria-selected="actif === 'suivi'"&gt;Suivi&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Inertia</h3>
+        <p class="doc-bloc-note">
+          Inertia rend des composants React ou Vue dans un squelette Laravel&nbsp;: les
+          sections correspondantes de cette page s'appliquent telles quelles. Une
+          seule précision&nbsp;: une visite Inertia remplace la page sans rechargement,
+          si bien que l'amorçage doit avoir lieu une fois dans le point d'entrée, et
+          non dans un gabarit Blade rendu à chaque requête.
+        </p>
+        <pre><code>// resources/js/app.jsx
+import Faso from '@gouv-bf/charte-graphique';
+
+createInertiaApp({
+  setup({ el, App, props }) {
+    Faso.observer();                  // une fois, pour toute la session
+    createRoot(el).render(&lt;App {...props} /&gt;);
+  },
+});</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>6. Politique de sécurité du contenu</h3>
+        <p class="doc-bloc-note">
+          La charte ne pose aucun style ni script en ligne&nbsp;: elle n'exige pas
+          <code>'unsafe-inline'</code>. Une seule autorisation lui est nécessaire, pour
+          les icônes, qui sont des masques CSS en <code>data:</code>.
+        </p>
+        <pre><code>// app/Http/Middleware/SecuriteContenu.php
+public function handle(Request $requete, Closure $suivant): Response
+{
+    $reponse = $suivant($requete);
+
+    $reponse-&gt;headers-&gt;set('Content-Security-Policy', implode('; ', [
+        "default-src 'self'",
+        "img-src 'self' data:",        // masques d'icônes et emblème
+        "font-src 'self'",             // polices servies par le domaine
+        "style-src 'self'",
+        "script-src 'self'",
+        "frame-ancestors 'none'",
+    ]));
+
+    return $reponse;
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Si les icônes n'apparaissent pas, c'est presque toujours
+          <code>img-src data:</code> qui manque.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Avec Laravel, en résumé</h3>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Sain</p>
+            <ul>
+              <li>Blade seul. Tout est utilisable, y compris le tri, les filtres et
+                  l'export, tant que la vue rend l'intégralité des lignes.</li>
+              <li>Brancher la validation de Laravel sur <code>data-etat</code>,
+                  <code>aria-invalid</code> et <code>aria-describedby</code>.</li>
+              <li>Reprendre le dessin du paginateur plutôt que sa mécanique quand le
+                  serveur pagine.</li>
+              <li>Avec Livewire, <code>wire:ignore</code> sur ce que la charte anime et
+                  <code>wire:key</code> sur ce qui se répète.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À éviter</p>
+            <ul>
+              <li>Poser <code>data-pagination</code> sur un tableau que le paginateur
+                  d'Eloquent découpe déjà.</li>
+              <li>Exporter depuis le document une page qui ne montre qu'une tranche,
+                  sans déclarer <code>data-export-total</code>.</li>
+              <li>Laisser Livewire transformer une modale ouverte. Elle se refermera
+                  au rafraîchissement suivant.</li>
+              <li>Recopier les fichiers dans <code>public/</code> en séparant
+                  <code>css/</code> de <code>polices/</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
+    <section class="doc-section" id="android">
+      <h2>Android, en Kotlin et en Java</h2>
+      <p class="doc-section-intro">
+        Ici le partage des responsabilités change de nature. Le CSS et le JavaScript
+        de la charte ne s'exécutent pas dans une application native. Ce qui se
+        transporte, ce ne sont pas les composants, ce sont <strong>les décisions</strong>
+        — couleurs officielles, échelle d'espacement, rayons, typographie, cible
+        tactile, emblème et marques nationales. Elles sont produites depuis la même
+        feuille de jetons, dans les formats qu'Android sait lire.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Ce qui se transporte, et ce qui ne se transporte pas</h3>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Élément</th><th>Sur Android</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Couleurs, thème sombre compris</td>
+                <td><span class="fs-badge fs-badge--succes">Fourni</span>
+                    <code>values/couleurs.xml</code>, <code>values-night/</code>,
+                    <code>FasoCouleurs.kt</code></td>
+              </tr>
+              <tr>
+                <td>Espacements, rayons, épaisseurs, tailles de texte</td>
+                <td><span class="fs-badge fs-badge--succes">Fourni</span>
+                    <code>values/dimensions.xml</code> et
+                    <code>values-sw600dp/</code></td>
+              </tr>
+              <tr>
+                <td>Thème Material 3 et styles de texte</td>
+                <td><span class="fs-badge fs-badge--succes">Fourni</span>
+                    <code>Theme.Faso</code>, <code>FasoTheme</code> en Compose</td>
+              </tr>
+              <tr>
+                <td>Les 35 icônes</td>
+                <td><span class="fs-badge fs-badge--succes">Fourni</span>
+                    <code>ic_faso_*.xml</code>, teintées par l'attribut de thème</td>
+              </tr>
+              <tr>
+                <td>Emblème, filet et repère nationaux</td>
+                <td><span class="fs-badge fs-badge--succes">Fourni</span>
+                    <code>faso_armoiries.xml</code>, <code>faso_filet.xml</code>,
+                    <code>faso_repere.xml</code></td>
+              </tr>
+              <tr>
+                <td>Polices Archivo et Inter</td>
+                <td><span class="fs-badge fs-badge--alerte">À télécharger</span>
+                    Le paquet ne contient que des <code>woff2</code>, illisibles hors
+                    navigateur. Les <code>ttf</code> viennent de la même source, sous
+                    la même licence SIL OFL.</td>
+              </tr>
+              <tr>
+                <td>Composants et comportements</td>
+                <td><span class="fs-badge fs-badge--neutre">Sans objet</span>
+                    Material fournit les siens&nbsp;; la charte leur donne l'apparence
+                    officielle par le thème.</td>
+              </tr>
+              <tr>
+                <td>La charte entière, telle quelle</td>
+                <td><span class="fs-badge fs-badge--info">En WebView</span>
+                    Voir plus bas. C'est le cas d'un service web consulté depuis
+                    l'application.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>1. Installer les ressources</h3>
+        <p class="doc-bloc-note">
+          Il n'y a pas d'artefact Maven. Les fichiers se copient, une fois, et se
+          régénèrent quand la charte change de version. Le contenu du dossier
+          <code>android/</code> se range comme suit.
+        </p>
+        <pre><code>android/values/couleurs.xml         →  app/src/main/res/values/
+android/values-night/couleurs.xml  →  app/src/main/res/values-night/
+android/values/dimensions.xml      →  app/src/main/res/values/
+android/values-sw600dp/…           →  app/src/main/res/values-sw600dp/
+android/values/themes.xml          →  app/src/main/res/values/
+android/drawable/*.xml             →  app/src/main/res/drawable/
+android/kotlin/*.kt                →  app/src/main/java/bf/gouv/charte/</code></pre>
+
+        <div class="doc-note fs-mt-6">
+          Ces fichiers sont produits, jamais écrits à la main.
+          <code>node outils/jetons.js</code> a son équivalent ici&nbsp;:
+          <code>node outils/android.js</code> relit <code>tokens.css</code> et réécrit
+          le dossier, <code>--verifier</code> signale toute dérive. Retoucher une
+          couleur dans <code>couleurs.xml</code> serait perdu à la génération
+          suivante, et surtout, la teinte du drapeau ne se retouche pas.
+        </div>
+
+        <h4 class="fs-mt-8">Les polices</h4>
+        <pre><code>// app/src/main/res/font/archivo.xml  — après avoir place les .ttf
+&lt;font-family xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+  &lt;font android:fontStyle="normal" android:fontWeight="400"
+        android:font="@font/archivo_regular" /&gt;
+  &lt;font android:fontStyle="normal" android:fontWeight="700"
+        android:font="@font/archivo_bold" /&gt;
+&lt;/font-family&gt;</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Les lignes <code>fontFamily</code> sont déjà présentes dans
+          <code>themes.xml</code>, en commentaire. Il suffit de les rétablir. Sans
+          polices, Android emploie sa pile par défaut et la charte reste lisible&nbsp;;
+          l'identité typographique en souffre, la lisibilité non.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>2. Application native — Jetpack Compose</h3>
+        <pre><code>// MainActivity.kt
+import bf.gouv.charte.FasoTheme
+import bf.gouv.charte.cibleMinimale
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(etat: Bundle?) {
+        super.onCreate(etat)
+        setContent {
+            FasoTheme {                       // clair ou sombre selon le système
+                FicheDemarche()
+            }
+        }
+    }
+}</code></pre>
+
+        <pre><code>@Composable
+fun FicheDemarche() {
+    Column(modifier = Modifier.padding(16.dp)) {
+
+        // Le filet national, en tête de page comme sur le web.
+        Image(
+            painter = painterResource(R.drawable.faso_filet),
+            contentDescription = null,        // décoratif : pas de description
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.fillMaxWidth().height(14.dp),
+        )
+
+        Spacer(Modifier.height(24.dp))
+
+        Text("Acte de naissance", style = MaterialTheme.typography.headlineMedium)
+
+        Button(
+            onClick = { deposer() },
+            modifier = Modifier.defaultMinSize(minHeight = cibleMinimale),
+        ) {
+            Icon(painterResource(R.drawable.ic_faso_coche), contentDescription = null)
+            Spacer(Modifier.width(8.dp))
+            Text("Déposer la demande")
+        }
+    }
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          <code>cibleMinimale</code> vaut 48&nbsp;dp, et non les 44&nbsp;px du web&nbsp;:
+          Android impose un plancher plus haut, c'est le plus strict des deux qui
+          s'applique.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>3. Application native — vues XML</h3>
+        <p class="doc-bloc-note">
+          Le thème se pose dans le manifeste, et les styles suivent. Rien ne distingue
+          Kotlin de Java à ce niveau&nbsp;: tout est déclaratif.
+        </p>
+        <pre><code>&lt;!-- AndroidManifest.xml --&gt;
+&lt;application android:theme="@style/Theme.Faso" …&gt;</code></pre>
+
+        <pre><code>&lt;!-- res/layout/fiche_demarche.xml --&gt;
+&lt;LinearLayout
+    android:orientation="vertical"
+    android:padding="@dimen/faso_espace_4"&gt;
+
+  &lt;ImageView
+      android:layout_width="match_parent"
+      android:layout_height="14dp"
+      android:scaleType="fitXY"
+      android:src="@drawable/faso_filet"
+      android:importantForAccessibility="no" /&gt;
+
+  &lt;TextView
+      android:layout_marginTop="@dimen/faso_espace_6"
+      android:textAppearance="@style/TextAppearance.Faso.H2"
+      android:text="@string/acte_de_naissance" /&gt;
+
+  &lt;com.google.android.material.button.MaterialButton
+      android:id="@+id/deposer"
+      style="@style/Widget.Faso.Bouton"
+      android:layout_marginTop="@dimen/faso_espace_6"
+      app:icon="@drawable/ic_faso_coche"
+      android:text="@string/deposer_la_demande" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Kotlin</p>
+            <pre><code>class FicheActivity : AppCompatActivity() {
+    override fun onCreate(etat: Bundle?) {
+        super.onCreate(etat)
+        setContentView(R.layout.fiche_demarche)
+
+        findViewById&lt;MaterialButton&gt;(R.id.deposer).setOnClickListener {
+            deposer()
+        }
+    }
+}</code></pre>
+          </div>
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">Java</p>
+            <pre><code>public class FicheActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle etat) {
+        super.onCreate(etat);
+        setContentView(R.layout.fiche_demarche);
+
+        MaterialButton deposer = findViewById(R.id.deposer);
+        deposer.setOnClickListener(v -&gt; deposer());
+    }
+}</code></pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>4. WebView — la charte s'exécute telle quelle</h3>
+        <p class="doc-bloc-note">
+          C'est le cas d'une application qui donne accès à un téléservice déjà
+          construit avec la charte. Tout fonctionne, à quatre réglages près, dont
+          <strong>trois touchent à l'accessibilité et un à l'identité nationale</strong>.
+        </p>
+
+        <div class="fs-encart fs-encart--alerte">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">L'assombrissement automatique altère les couleurs du drapeau</p>
+            <p>
+              Android sait assombrir une page qui n'a pas de thème sombre, en
+              recalculant ses couleurs. Appliqué à la charte, ce procédé déplace le
+              rouge, le vert et l'or officiels. Il faut le refuser explicitement et
+              poser le thème sombre de la charte, qui existe et qui conserve les
+              teintes à leur palier.
+            </p>
+          </div>
+        </div>
+
+        <h4 class="fs-mt-8">Kotlin</h4>
+        <pre><code>import androidx.webkit.WebSettingsCompat
+import androidx.webkit.WebViewFeature
+
+private fun preparer(vue: WebView) {
+    val reglages = vue.settings
+
+    reglages.javaScriptEnabled = true
+    reglages.domStorageEnabled = true        // le thème est mémorisé là
+
+    // Accessibilité : le zoom ne se refuse pas.
+    reglages.setSupportZoom(true)
+    reglages.builtInZoomControls = true
+    reglages.displayZoomControls = false
+
+    // Une WebView ignore la taille de texte choisie par l'usager :
+    // on la lui transmet. Sans cette ligne, un réglage à 200 % dans
+    // les paramètres du téléphone n'a aucun effet sur la page.
+    reglages.textZoom = (resources.configuration.fontScale * 100).toInt()
+
+    // On refuse l'assombrissement automatique : la charte a son thème.
+    if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+        WebSettingsCompat.setAlgorithmicDarkeningAllowed(reglages, false)
+    }
+}</code></pre>
+
+        <pre><code>// Le thème suit celui du système, en passant par l'API de la charte.
+private fun accorderLeTheme(vue: WebView) {
+    val nuit = resources.configuration.uiMode and
+        Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES
+
+    vue.evaluateJavascript(
+        "window.Faso && Faso.appliquerTheme(" +
+            (if (nuit) "'dark'" else "'light'") + ")",
+        null,
+    )
+}
+
+vue.webViewClient = object : WebViewClient() {
+    override fun onPageFinished(vue: WebView, url: String) = accorderLeTheme(vue)
+}</code></pre>
+
+        <h4 class="fs-mt-8">Java</h4>
+        <pre><code>private void preparer(WebView vue) {
+    WebSettings reglages = vue.getSettings();
+
+    reglages.setJavaScriptEnabled(true);
+    reglages.setDomStorageEnabled(true);
+
+    reglages.setSupportZoom(true);
+    reglages.setBuiltInZoomControls(true);
+    reglages.setDisplayZoomControls(false);
+
+    float echelle = getResources().getConfiguration().fontScale;
+    reglages.setTextZoom((int) (echelle * 100));
+
+    if (WebViewFeature.isFeatureSupported(WebViewFeature.ALGORITHMIC_DARKENING)) {
+        WebSettingsCompat.setAlgorithmicDarkeningAllowed(reglages, false);
+    }
+}
+
+private void accorderLeTheme(WebView vue) {
+    int mode = getResources().getConfiguration().uiMode
+        &amp; Configuration.UI_MODE_NIGHT_MASK;
+    boolean nuit = mode == Configuration.UI_MODE_NIGHT_YES;
+
+    vue.evaluateJavascript(
+        "window.Faso &amp;&amp; Faso.appliquerTheme('" + (nuit ? "dark" : "light") + "')",
+        null);
+}</code></pre>
+
+        <h4 class="fs-mt-8">Servir la charte depuis les ressources de l'application</h4>
+        <p class="doc-bloc-note">
+          Pour un service consultable hors connexion, on embarque les fichiers. Il ne
+          faut pas les charger en <code>file://</code>&nbsp;: le stockage local y est
+          refusé, donc le thème ne se mémorise pas, et les polices peuvent être
+          bloquées. <code>WebViewAssetLoader</code> les sert sous une origine
+          <code>https</code> locale, ce qui règle les deux.
+        </p>
+        <pre><code>val chargeur = WebViewAssetLoader.Builder()
+    .addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(this))
+    .build()
+
+vue.webViewClient = object : WebViewClient() {
+    override fun shouldInterceptRequest(
+        vue: WebView, requete: WebResourceRequest,
+    ) = chargeur.shouldInterceptRequest(requete.url)
+
+    override fun onPageFinished(vue: WebView, url: String) = accorderLeTheme(vue)
+}
+
+vue.loadUrl("https://appassets.androidplatform.net/assets/demarche.html")</code></pre>
+
+        <h4 class="fs-mt-8">Appeler la charte depuis l'application</h4>
+        <pre><code>// Une notification passagère, déclenchée par le code natif.
+vue.evaluateJavascript(
+    "Faso.notifier({ titre: 'Dossier enregistré', ton: 'succes' })", null)</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Dans l'autre sens, un pont <code>@JavascriptInterface</code> est possible,
+          mais il expose des méthodes natives à la page&nbsp;: à réserver à un contenu
+          servi par l'administration elle-même, jamais à une page distante.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Onglet personnalisé</h3>
+        <p class="doc-bloc-note">
+          Quand le service n'a pas besoin d'être encadré par l'application, un onglet
+          personnalisé vaut mieux qu'une WebView&nbsp;: il apporte la barre d'adresse, le
+          gestionnaire de mots de passe et les réglages d'accessibilité du navigateur,
+          sans que l'application ait rien à régler.
+        </p>
+        <pre><code>val couleurs = CustomTabColorSchemeParams.Builder()
+    .setToolbarColor(ContextCompat.getColor(this, R.color.faso_action))
+    .build()
+
+CustomTabsIntent.Builder()
+    .setDefaultColorSchemeParams(couleurs)
+    .build()
+    .launchUrl(this, Uri.parse("https://demarches.gov.bf/acte-de-naissance"))</code></pre>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Deux réserves, dites franchement</h3>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>
+            <strong>L'emblème pèse 191&nbsp;Ko en tracé vectoriel.</strong> C'est le prix
+            de ses onze chemins, fidèles à l'original. Il convient à un écran de
+            démarrage ou à un en-tête, où il est dessiné une fois. Dans une liste qui
+            défile, ou en petite taille, il faut lui préférer une image matricielle
+            exportée aux densités voulues&nbsp;: le rendu est identique et le coût
+            d'affichage sans commune mesure.
+          </li>
+          <li>
+            <strong>Aucune application de référence n'est fournie.</strong> Les
+            ressources sont produites et vérifiées (XML bien formé, tracés
+            n'employant que des commandes reconnues par Android), mais elles n'ont
+            pas été compilées dans un projet Gradle ni affichées sur un appareil.
+            C'est la première chose à faire avant un déploiement.
+          </li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Recette Android</h3>
+        <ul class="fs-liste-controle fs-mesure">
+          <li>Le thème <code>Theme.Faso</code> est déclaré dans le manifeste.</li>
+          <li>Le mode sombre du système bascule bien les couleurs, sans altérer le
+              rouge, le vert ni l'or.</li>
+          <li>Toute commande atteint 48&nbsp;dp dans les deux dimensions.</li>
+          <li>Un réglage de taille de texte à 200&nbsp;% dans les paramètres du
+              téléphone agrandit le contenu, y compris dans une WebView.</li>
+          <li>Les images décoratives portent <code>importantForAccessibility="no"</code>,
+              les autres une description.</li>
+          <li>TalkBack annonce chaque commande et chaque champ.</li>
+          <li><code>node outils/android.js --verifier</code> passe.</li>
+        </ul>
+      </div>
+    </section>
+
     <section class="doc-section" id="surete">
       <h2>Bilan de sûreté, composant par composant</h2>
       <p class="doc-section-intro">
@@ -445,9 +2008,9 @@ Faso.appliquerTheme('dark');</code></pre>
       </p>
 
       <div class="doc-bloc">
-        <h3>Ce que la charte défend elle-même</h3>
+        <h3>Les garde-fous de la bibliothèque</h3>
         <p class="doc-bloc-note">
-          Sept mécanismes, pour que les pièges connus ne reposent plus sur la
+          Dix mécanismes, pour que les pièges connus ne reposent plus sur la
           vigilance du développeur.
         </p>
 
@@ -460,8 +2023,8 @@ Faso.appliquerTheme('dark');</code></pre>
               <tr>
                 <td><strong>Résolution sans ambiguïté</strong></td>
                 <td>
-                  Quand l'identifiant ne désigne qu'un élément&nbsp;— le cas
-                  ordinaire&nbsp;— le résultat est exactement celui de
+                  Quand l'identifiant ne désigne qu'un élément, le cas
+                  ordinaire, le résultat est exactement celui de
                   <code>getElementById</code>. Ce n'est qu'en cas de doublon que la
                   recherche remonte depuis le déclencheur&nbsp;: deux lignes d'une liste
                   portant la même modale ne se confondent pas.
@@ -485,6 +2048,15 @@ Faso.appliquerTheme('dark');</code></pre>
                 </td>
               </tr>
               <tr>
+                <td><strong>Écriture par l'accesseur du prototype</strong></td>
+                <td>
+                  React ne relit pas le champ. Il compare à ce que son propre
+                  accesseur a mémorisé. Écrire par cet accesseur passerait inaperçu et
+                  <code>onChange</code> ne serait jamais appelé. La charte contourne,
+                  sans effet là où il n'y a rien à contourner.
+                </td>
+              </tr>
+              <tr>
                 <td><strong>Détection du re-rendu</strong></td>
                 <td>
                   Le remplacement des lignes d'un tableau est détecté&nbsp;; pagination et
@@ -504,10 +2076,28 @@ Faso.appliquerTheme('dark');</code></pre>
               <tr>
                 <td><strong>Verrou de défilement compté</strong></td>
                 <td>
-                  Plusieurs panneaux peuvent être ouverts l'un sur l'autre&nbsp;: le
+                  Plusieurs panneaux peuvent être ouverts l'un sur l'autre. Le
                   défilement n'est rendu qu'à la fermeture du dernier, dans l'état
                   où le projet l'avait laissé. Un panneau détruit sans être fermé ne
                   bloque plus la page.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Enfants ajoutés après coup</strong></td>
+                <td>
+                  Onglets, cases d'un code à usage unique et options d'une
+                  autocomplétion sont relus à chaque usage, jamais figés. Un
+                  élément qu'une boucle du cadriciel ajoute après l'initialisation
+                  est équipé sans qu'aucun appel ne soit nécessaire.
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Extraction sans formule</strong></td>
+                <td>
+                  Une cellule de texte commençant par <code>=</code>,
+                  <code>+</code>, <code>-</code> ou <code>@</code> est précédée
+                  d'une apostrophe. Le tableur l'affiche au lieu de l'exécuter.
+                  Les nombres, eux, restent calculables.
                 </td>
               </tr>
               <tr>
@@ -526,7 +2116,7 @@ Faso.appliquerTheme('dark');</code></pre>
         <h3>Reprendre un état à son compte</h3>
         <p class="doc-bloc-note">
           Le conflit d'attribut était le seul risque qu'aucun garde-fou ne pouvait
-          détecter&nbsp;: la charte ne peut pas savoir qu'une liaison surveille le nœud
+          détecter. La charte ne peut pas savoir qu'une liaison surveille le nœud
           qu'elle écrit. Elle demande donc l'autorisation avant d'écrire.
         </p>
 
@@ -580,18 +2170,27 @@ Faso.appliquerTheme('dark');</code></pre>
           </table>
         </div>
 
-        <pre><code>&lt;!-- L'onglet actif vient du composant, pas de la charte --&gt;
+        <pre><code>&lt;!-- L'onglet actif vient du composant, pas de la charte.
+     data-cle porte l'identifiant que le gestionnaire relit. --&gt;
 &lt;div role="tablist" (fs-onglet)="reprendre($event)"&gt;
-  &lt;button role="tab" [attr.aria-selected]="actif === 'suivi'"&gt;Suivi&lt;/button&gt;
-&lt;/div&gt;
+  &lt;button role="tab" data-cle="suivi"
+          [attr.aria-selected]="actif === 'suivi'"&gt;Suivi&lt;/button&gt;
+&lt;/div&gt;</code></pre>
 
-reprendre(ev: CustomEvent) {
-  ev.preventDefault();               // la charte n'écrira pas
-  this.actif = ev.detail.onglet.dataset.cle;
+        <pre><code>type Onglet = { onglet: HTMLElement; index: number };
+
+// Angular type $event comme Event dès que l'événement ne fait pas
+// partie de ceux qu'il connaît. Sous strictTemplates, une signature
+// en CustomEvent est refusée à la compilation : on accepte Event,
+// puis on précise.
+reprendre(ev: Event) {
+  const annonce = ev as CustomEvent&lt;Onglet&gt;;
+  annonce.preventDefault();               // la charte n'écrira pas
+  this.actif = annonce.detail.onglet.dataset['cle'] ?? this.actif;
 }</code></pre>
 
         <p class="doc-bloc-note fs-mt-4">
-          Ces annonces remontent&nbsp;: un écouteur posé sur un conteneur suffit pour
+          Ces annonces remontent. Un écouteur posé sur un conteneur suffit pour
           tous les composants qu'il contient. Ne rien écouter revient à laisser la
           charte tenir l'état, ce qui reste le cas ordinaire. La même règle vaut pour
           <code>fs:donnees</code> et <code>fs-donnees</code>, émis après chaque tri
@@ -617,7 +2216,7 @@ reprendre(ev: CustomEvent) {
           photographie, encart non refermable.
         </p>
         <div class="doc-note fs-mt-4">
-          L'infobulle et l'accordéon méritent d'être signalés&nbsp;: ils paraissent
+          L'infobulle et l'accordéon méritent d'être signalés. Ils paraissent
           interactifs mais ne dépendent d'aucun script. L'un repose sur
           <code>:hover</code> et <code>:focus-within</code>, l'autre sur
           <code>&lt;details&gt;</code>.
@@ -646,7 +2245,8 @@ reprendre(ev: CustomEvent) {
               <tr>
                 <td>Onglets</td>
                 <td><code>hidden</code>, <code>aria-selected</code>, <code>tabindex</code></td>
-                <td>Aucune&nbsp;— annuler <code>fs-onglet</code> pour tenir l'état soi-même</td>
+                <td>Aucune&nbsp;— un onglet ajouté par <code>&#64;for</code> est équipé seul&nbsp;;
+                    annuler <code>fs-onglet</code> pour tenir l'état soi-même</td>
               </tr>
               <tr>
                 <td>Menu déroulant</td>
@@ -666,7 +2266,7 @@ reprendre(ev: CustomEvent) {
               <tr>
                 <td>Code de vérification</td>
                 <td>Valeur des cases, focus</td>
-                <td>Aucune</td>
+                <td>Aucune&nbsp;— les cases sont relues à chaque frappe</td>
               </tr>
               <tr>
                 <td>Saisie de date</td>
@@ -725,8 +2325,8 @@ reprendre(ev: CustomEvent) {
           pas interdits avec un cadriciel, mais soumis à une condition unique&nbsp;:
           <strong>le cadriciel doit rendre l'intégralité des lignes</strong>. Tant
           qu'elle tient, la charte encaisse les re-rendus sans perdre la place de
-          l'usager. Dès qu'elle tombe&nbsp;— pagination côté cadriciel, défilement
-          virtuel, chargement progressif&nbsp;— le cadriciel reprend l'ensemble.
+          l'usager. Dès qu'elle tombe (pagination côté cadriciel, défilement
+          virtuel, chargement progressif), le cadriciel reprend l'ensemble.
         </p>
 
         <div class="fs-tableau-cadre">
@@ -752,7 +2352,7 @@ reprendre(ev: CustomEvent) {
               </tr>
               <tr>
                 <td>Autocomplétion</td>
-                <td>Fonctionne. Les options doivent toutes être présentes.</td>
+                <td>Fonctionne, options ajoutées en cours de route comprises.</td>
                 <td>Suggestions distantes&nbsp;: au cadriciel, en gardant les classes.</td>
               </tr>
               <tr>
@@ -793,7 +2393,7 @@ reprendre(ev: CustomEvent) {
             <strong>Attribut lié sans interception.</strong> Lier
             <code>[hidden]</code> ou <code>[style.width]</code> sur un élément que la
             charte pilote, sans annuler l'annonce correspondante, produit toujours un
-            conflit&nbsp;— mais la charte fournit désormais le moyen de l'éviter.
+            conflit, mais la charte fournit désormais le moyen de l'éviter.
           </li>
         </ul>
       </div>
@@ -801,7 +2401,11 @@ reprendre(ev: CustomEvent) {
       <div class="doc-bloc">
         <h3>Ce que la charte garantit</h3>
         <ul class="fs-liste-controle fs-mesure">
-          <li><strong>Import sans DOM.</strong> Le module s'importe au rendu serveur sans exception ni effet, <code>Faso.notifier()</code> compris.</li>
+          <li><strong>Surface publique sans DOM.</strong> Les vingt-huit points d'entrée — méthodes et comportements — sont appelables au rendu serveur sans exception ni effet.</li>
+          <li><strong>Enfants dynamiques pris en charge</strong> pour les onglets, le code à usage unique et l'autocomplétion.</li>
+          <li><strong>Aucun écouteur par instance sur <code>document</code></strong>&nbsp;: rien ne retient un nœud détruit par le cadriciel.</li>
+          <li><strong>Extraction inoffensive</strong>&nbsp;: aucune cellule de texte ne peut être interprétée comme une formule par un tableur.</li>
+          <li><strong>Valeurs vues par le cadriciel</strong>&nbsp;: une valeur écrite par la charte déclenche bien <code>onChange</code> en React, comme elle met à jour un <code>ngModel</code> ou un <code>wire:model</code>.</li>
           <li><strong>Initialisation idempotente.</strong> Quatre appels posent exactement autant de gestionnaires qu'un seul.</li>
           <li><strong>Délégation enregistrée une fois</strong>, quel que soit le nombre d'appels.</li>
           <li><strong>Résolution conforme</strong>&nbsp;: identique à <code>getElementById</code> quand l'identifiant est unique, et par proximité seulement en cas de doublon.</li>
@@ -817,33 +2421,77 @@ reprendre(ev: CustomEvent) {
     </section>
 
     <section class="doc-section" id="autres">
-      <h2>Autres cadriciels</h2>
+      <h2>Les autres cadriciels</h2>
       <p class="doc-section-intro">
-        Le principe ne change pas&nbsp;: déclarer les feuilles, activer l'observation une
-        fois, laisser au cadriciel les composants pilotés par des données.
+        Angular, React et Laravel couvrent les trois manières de construire une
+        page&nbsp;: application compilée, rendu déclaratif, gabarit produit par le
+        serveur. Android couvre le quatrième cas, celui où il n'y a pas de page du
+        tout. Les autres environnements se ramènent à l'un de ces quatre.
       </p>
 
-      <div class="doc-bloc">
-        <h3>React, Vue, Svelte</h3>
-        <pre><code>import '@gouv-bf/charte-graphique/css/tokens.css';
-import '@gouv-bf/charte-graphique/css/faso.css';
-import '@gouv-bf/charte-graphique/css/icones.css';
-import Faso from '@gouv-bf/charte-graphique';
-
-Faso.observer();</code></pre>
-        <p class="fs-legende fs-mt-4">
-          En rendu côté serveur, placez l'appel dans un effet, exécuté après le montage
-          dans le navigateur.
-        </p>
+      <div class="fs-tableau-cadre">
+        <table class="fs-tableau">
+          <thead>
+            <tr><th>Cadriciel</th><th>Se lit comme</th><th>Le seul point à vérifier</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Vue, Nuxt</td>
+              <td><a href="#react">React</a></td>
+              <td>La forme à trait d'union se lie directement&nbsp;:
+                  <code>@fs-onglet.prevent="…"</code>. La forme à deux-points, elle,
+                  demande une référence de gabarit et un écouteur.</td>
+            </tr>
+            <tr>
+              <td>Svelte, SvelteKit</td>
+              <td><a href="#react">React</a></td>
+              <td><code>on:fs-onglet</code> en Svelte&nbsp;4&nbsp;; en Svelte&nbsp;5, une
+                  action qui pose l'écouteur. Les champs liés par
+                  <code>bind:value</code> reçoivent bien les événements émis.</td>
+            </tr>
+            <tr>
+              <td>Symfony, Twig</td>
+              <td><a href="#laravel">Laravel</a></td>
+              <td>Même chose à la syntaxe près. Avec Turbo ou Stimulus, appliquer ce
+                  qui est dit de Livewire&nbsp;: le balisage est remplacé après coup.</td>
+            </tr>
+            <tr>
+              <td>Django, Rails, Express</td>
+              <td><a href="#laravel">Laravel</a></td>
+              <td>Servir les fichiers depuis le domaine, en conservant l'arborescence
+                  <code>css/</code> et <code>polices/</code>.</td>
+            </tr>
+            <tr>
+              <td>HTMX, Turbo, Unpoly</td>
+              <td><a href="#laravel">Laravel</a>, section Livewire</td>
+              <td>Ils remplacent des fragments&nbsp;: <code>Faso.observer()</code> une fois
+                  suffit, ou une réinitialisation à chaque échange.</td>
+            </tr>
+            <tr>
+              <td>Flutter, React Native, iOS</td>
+              <td><a href="#android">Android</a></td>
+              <td>Même partage. Les jetons se transportent, les composants restent sur
+                  place. <code>assets/jetons.json</code> sert de source&nbsp;; le
+                  générateur Android montre la méthode à reproduire.</td>
+            </tr>
+            <tr>
+              <td>Page servie telle quelle</td>
+              <td>—</td>
+              <td>Rien à faire&nbsp;: l'initialisation est automatique au chargement.</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <div class="doc-bloc">
-        <h3>Laravel, Symfony</h3>
+        <h3>Et un paquet Composer&nbsp;?</h3>
         <p class="doc-bloc-note">
-          Les deux embarquent Vite. L'installation passe donc par npm, exactement comme
-          ci-dessus, et les feuilles sont déclarées dans le point d'entrée des actifs.
-          Un paquet Composer n'a d'intérêt que pour un projet PHP dépourvu de chaîne
-          Node&nbsp;; il se contenterait de publier les fichiers dans le dossier public.
+          Il n'y en a pas, et il n'y en aura pas tant qu'il n'aurait rien d'autre à
+          faire que recopier des fichiers dans <code>public/</code>. Un projet PHP sans
+          chaîne Node fait cette copie une fois, en trois lignes de shell, et maîtrise
+          alors le moment de la mise à jour. Publier un paquet pour cela ajouterait
+          une dépendance, un cycle de version et une chose de plus à maintenir, sans
+          rien résoudre.
         </p>
       </div>
     </section>
@@ -852,8 +2500,8 @@ Faso.observer();</code></pre>
     <section class="doc-section" id="pas-de-composants">
       <h2>Pourquoi aucun composant par cadriciel</h2>
       <p class="doc-section-intro">
-        C'est la demande la plus fréquente des équipes, et le refus mérite d'être
-        motivé plutôt que subi.
+        C'est la demande la plus fréquente des équipes. Un refus se motive plutôt
+        qu'il ne se subit.
       </p>
 
       <div class="doc-bloc">
@@ -870,8 +2518,8 @@ Faso.observer();</code></pre>
             calendrier que l'administration ne maîtrise pas.
           </li>
           <li>
-            Un projet qui n'emploie aucun de ces trois cadriciels&nbsp;— et
-            l'administration en compte&nbsp;— se retrouverait citoyen de seconde zone.
+            Un projet qui n'emploie aucun de ces trois cadriciels, et
+            l'administration en compte, se retrouverait citoyen de seconde zone.
           </li>
           <li>
             C'est de cette façon que meurent les systèmes de conception publics&nbsp;: non
@@ -881,7 +2529,7 @@ Faso.observer();</code></pre>
         </ul>
 
         <div class="doc-note fs-mt-6">
-          <strong>Le prix à payer est réel et assumé.</strong> Un développeur Angular
+          Le prix à payer est réel. Un développeur Angular
           aurait préféré <code>&lt;faso-bouton&gt;</code> à
           <code>&lt;button class="fs-btn fs-btn--principal"&gt;</code>. En contrepartie,
           le balisage qu'il écrit reste valable quel que soit l'avenir du cadriciel, et
@@ -893,7 +2541,7 @@ Faso.observer();</code></pre>
         <h3>Ce qu'un projet peut faire de son côté</h3>
         <p class="doc-bloc-note">
           Rien n'interdit à une équipe d'envelopper les classes dans ses propres
-          composants&nbsp;: c'est même recommandé au-delà de quelques écrans. Ces
+          composants. C'est même recommandé au-delà de quelques écrans. Ces
           enveloppes appartiennent au projet, pas à la charte, et n'engagent qu'elle.
         </p>
         <pre><code>@Component({
@@ -921,7 +2569,7 @@ export class Bouton {
         <h3>Contrôles</h3>
         <ul class="fs-liste-controle fs-mesure">
           <li>Les trois feuilles sont déclarées, dans l'ordre, et la feuille du projet vient après.</li>
-          <li>Les polices sont servies depuis le domaine du service&nbsp;: aucune requête vers un tiers dans l'onglet réseau.</li>
+          <li>Les polices sont servies depuis le domaine du service. Aucune requête vers un tiers dans l'onglet réseau.</li>
           <li>Les icônes s'affichent&nbsp;— si elles sont absentes, vérifier <code>img-src data:</code> dans la politique de sécurité.</li>
           <li><code>faso-amorce.js</code> est déclaré dans <code>&lt;head&gt;</code> si le thème sombre est proposé.</li>
           <li>Les composants en <code>ShadowDom</code>, s'il y en a, adoptent les feuilles de la charte dans leur racine.</li>
@@ -930,6 +2578,20 @@ export class Bouton {
           <li>Le rendu côté serveur aboutit, le cas échéant.</li>
           <li>Aucun tableau paginé par la charte n'est paginé aussi par le cadriciel.</li>
           <li>Chaque attribut lié par le projet sur un composant de la charte a son annonce annulée.</li>
+          <li>Les libellés du script sont dans la langue du service, le cas échéant.</li>
+          <li>En React&nbsp;: retenir une suggestion d'autocomplétion met bien à jour
+              l'état du composant, pas seulement l'affichage.</li>
+          <li>En React. Chaque élément de liste porte une <code>key</code> stable,
+              qui ne soit pas son index.</li>
+          <li>Avec Livewire ou Turbo. Une modale ouverte survit à un
+              rafraîchissement du composant, ou porte <code>wire:ignore</code>.</li>
+          <li>Avec un paginateur côté serveur&nbsp;: <code>data-export-total</code> est
+              déclaré, et <code>data-pagination</code> ne l'est pas.</li>
+          <li>Un export CSV ouvert dans un tableur n'exécute rien&nbsp;: les cellules
+              commençant par <code>=</code>, <code>+</code>, <code>-</code> ou
+              <code>@</code> arrivent précédées d'une apostrophe.</li>
+          <li><code>node outils/jetons.js --verifier</code> passe, si le projet reprend
+              les jetons en JSON.</li>
           <li>Les cinq vérifications d'<a href="accessibilite.html">accessibilité</a> sont passées.</li>
         </ul>
       </div>

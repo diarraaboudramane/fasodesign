@@ -21,8 +21,24 @@
     'select:not([disabled])', 'textarea:not([disabled])', '[tabindex]:not([tabindex="-1"])'
   ].join(',');
 
-  function $(sel, racine) { return (racine || document).querySelector(sel); }
-  function $$(sel, racine) { return Array.prototype.slice.call((racine || document).querySelectorAll(sel)); }
+  /* Sans racine explicite et sans document, rendu côté serveur —
+     ces deux fonctions ne trouvent rien, au lieu de lever. C'est ce
+     qui rend inoffensif l'essentiel de la bibliothèque : un
+     comportement qui ne parcourt aucun élément n'écrit nulle part. */
+  function zone(racine) {
+    if (racine) return racine;
+    return NAVIGATEUR ? document : null;
+  }
+
+  function $(sel, racine) {
+    var z = zone(racine);
+    return z ? z.querySelector(sel) : null;
+  }
+
+  function $$(sel, racine) {
+    var z = zone(racine);
+    return z ? Array.prototype.slice.call(z.querySelectorAll(sel)) : [];
+  }
 
   /* -----------------------------------------------------------
      Environnement
@@ -72,7 +88,7 @@
      ordinaire — le résultat est exactement celui de getElementById.
      ----------------------------------------------------------- */
   function echapper(valeur) {
-    if (window.CSS && CSS.escape) return CSS.escape(valeur);
+    if (NAVIGATEUR && window.CSS && CSS.escape) return CSS.escape(valeur);
     return valeur.replace(/["\\]/g, "\\$&");
   }
 
@@ -196,6 +212,44 @@
     ECRITURE_SCRIPT = false;
   }
 
+  /* Écrire dans un champ ne suffit pas à en avertir React.
+
+     React n'interroge pas le champ : il installe sur le nœud son
+     propre accesseur, qui note chaque affectation. Si nous écrivons
+     par cet accesseur, la valeur qu'il mémorise bouge en même temps
+     que celle du champ&nbsp;; à la réception de l'événement il ne
+     constate aucun écart, conclut que rien n'a changé, et n'appelle
+     jamais onChange. Le formulaire part alors avec l'ancienne valeur,
+     alors même que l'usager lit la nouvelle à l'écran.
+
+     On écrit donc par l'accesseur du prototype, que le cadriciel n'a
+     pas remplacé : le champ change, la valeur mémorisée non, et
+     l'événement qui suit est reconnu comme une saisie véritable. Le
+     procédé est sans effet là où il n'y a rien à contourner, ce qui
+     le rend sûr pour Angular, Vue, Svelte et le JavaScript nu. */
+  function accesseurNatif(champ) {
+    if (!NAVIGATEUR) return null;
+
+    var proto = HTMLInputElement.prototype;
+    if (typeof HTMLTextAreaElement !== "undefined" &&
+        champ instanceof HTMLTextAreaElement) {
+      proto = HTMLTextAreaElement.prototype;
+    } else if (typeof HTMLSelectElement !== "undefined" &&
+               champ instanceof HTMLSelectElement) {
+      proto = HTMLSelectElement.prototype;
+    }
+
+    var descripteur = Object.getOwnPropertyDescriptor(proto, "value");
+    return descripteur && descripteur.set ? descripteur.set : null;
+  }
+
+  function poserValeur(champ, valeur) {
+    var ecrire = accesseurNatif(champ);
+    if (ecrire) ecrire.call(champ, valeur);
+    else champ.value = valeur;
+    signalerSaisie(champ);
+  }
+
   /* -----------------------------------------------------------
      Thème
 
@@ -203,6 +257,73 @@
      conservé. L'accès au stockage est protégé : en navigation
      privée ou site bloqué, la lecture peut lever une exception.
      ----------------------------------------------------------- */
+  /* Tous les libellés que le script produit, et la langue dans
+     laquelle il met en forme les nombres et les dates. Le Burkina
+     Faso compte une soixantaine de langues ; un service qui rend son
+     interface en mooré, en dioula ou en fulfuldé remplace ici ce
+     dont il a besoin, avant l'initialisation :
+
+       Object.assign(Faso.textes, { pageSuivante: "..." });
+
+     Les clés absentes gardent leur formulation française. Les
+     accolades délimitent les valeurs à insérer. */
+  var TEXTES = {
+    langue: "fr-FR",
+    mois: ["janvier", "février", "mars", "avril", "mai", "juin",
+           "juillet", "août", "septembre", "octobre", "novembre",
+           "décembre"],
+
+    themeClair: "Thème clair",
+    themeSombre: "Thème sombre",
+    fermerNotification: "Fermer la notification",
+    messageFerme: "Message fermé.",
+
+    caracteresRestants: "{n} caractère{s} restant{s}",
+    limiteDepassee: "Limite dépassée",
+
+    pagePrecedente: "Page précédente",
+    pageSuivante: "Page suivante",
+    pageNumero: "Page {n}",
+    pageSurTotal: "Page {page} sur {pages}.",
+    intervalle: "Résultats {debut} à {fin} sur {total}",
+    aucunResultat: "Aucun résultat",
+
+    filtre: "Filtre",
+    filtresActifs: "Filtres actifs",
+    toutEffacer: "Tout effacer",
+    aucunResultatFiltres: "Aucun résultat pour ces filtres",
+    aucuneDonnee: "Aucune donnée à afficher",
+    elargirFiltres: "Élargissez ou retirez un filtre pour retrouver des résultats.",
+    donneesAVenir: "Les données apparaîtront ici dès qu'elles seront disponibles.",
+
+    contexteLignes: "{n} ligne{s}",
+    contexteDate: " — extrait le {date}",
+    contexteFiltres: " — filtres appliqués : {filtres}",
+    contexteSansFiltre: " — aucun filtre appliqué",
+
+    extractionRefusee: "Extraction refusée",
+    extractionPartielle: "{presentes} lignes sur {total} sont chargées. "
+                       + "L'export doit être produit par le service.",
+    extractionFaite: "Extraction téléchargée",
+    extractionDetail: "{fichier} — {n} ligne(s)."
+  };
+
+  function dire(cle, valeurs) {
+    var modele = TEXTES[cle];
+    if (typeof modele !== "string") return cle;
+    if (!valeurs) return modele;
+    return modele.replace(/\{(\w+)\}/g, function (tout, nom) {
+      return nom in valeurs ? String(valeurs[nom]) : tout;
+    });
+  }
+
+  /* Le pluriel français tient à une lettre : {s} la porte. Une
+     langue qui ne pluralise pas laisse simplement la marque hors de
+     son modèle. */
+  function pluriel(n) { return n > 1 ? "s" : ""; }
+
+  function nombre(n) { return n.toLocaleString(TEXTES.langue); }
+
   var CLE_THEME = "faso-theme";
 
   function lireTheme() {
@@ -213,6 +334,13 @@
   }
 
   function appliquerTheme(valeur) {
+    /* Le thème se pose sur <html> : hors navigateur il n'y a rien
+       à poser. L'appel est sans effet plutôt que fatal, pour qu'un
+       composant universel puisse l'appeler sans se demander où il
+       s'exécute. Le fichier faso-amorce.js couvre le cas du rendu
+       côté serveur, où le thème doit être posé avant l'affichage. */
+    if (!NAVIGATEUR) return;
+
     if (valeur) {
       document.documentElement.setAttribute("data-theme", valeur);
     } else {
@@ -222,11 +350,14 @@
       var sombre = document.documentElement.getAttribute("data-theme") === "dark";
       btn.setAttribute("aria-pressed", String(sombre));
       var libelle = btn.querySelector("[data-theme-libelle]");
-      if (libelle) libelle.textContent = sombre ? "Thème clair" : "Thème sombre";
+      if (libelle) {
+        libelle.textContent = dire(sombre ? "themeClair" : "themeSombre");
+      }
     });
   }
 
   function initTheme() {
+    if (!NAVIGATEUR) return;
     appliquerTheme(lireTheme());
 
     document.addEventListener("click", function (ev) {
@@ -246,6 +377,7 @@
      Navigation repliable
      ----------------------------------------------------------- */
   function initNavigation() {
+    if (!NAVIGATEUR) return;
     document.addEventListener("click", function (ev) {
       var btn = cibleDe(ev).closest("[data-bascule]");
       if (!btn) return;
@@ -268,19 +400,24 @@
      ----------------------------------------------------------- */
   function initOnglets(racine) {
     $$('[role="tablist"]', racine).forEach(function (liste) {
-      if (!nouveau(liste, "onglets")) return;
-      var onglets = $$('[role="tab"]', liste);
-      if (!onglets.length) return;
+
+      /* La liste est relue à chaque usage, jamais figée : une boucle
+         du cadriciel peut ajouter, retirer ou réordonner les onglets
+         après l'initialisation. Un instantané aurait laissé le nouvel
+         onglet sans clavier et sans clic. */
+      function onglets() { return $$('[role="tab"]', liste); }
 
       function activer(onglet, donnerFocus) {
+        var tous = onglets();
+
         /* Le projet qui lie lui-même [hidden] ou [attr.aria-selected]
            annule l'annonce : la charte s'en tient alors au clavier,
            au focus et à l'ordre de tabulation, qui ne se lient pas. */
         var externe = repris(liste, "onglet", {
-          onglet: onglet, index: onglets.indexOf(onglet)
+          onglet: onglet, index: tous.indexOf(onglet)
         });
 
-        onglets.forEach(function (o) {
+        tous.forEach(function (o) {
           var actif = o === onglet;
           o.tabIndex = actif ? 0 : -1;
           if (externe) return;
@@ -291,23 +428,53 @@
         if (donnerFocus) onglet.focus();
       }
 
-      onglets.forEach(function (onglet, index) {
-        onglet.addEventListener("click", function () { activer(onglet, false); });
+      /* Le marquage porte sur chaque onglet, et non sur la liste :
+         c'est ce qui permet de rejouer l'initialisation pour n'équiper
+         que les onglets nouveaux. */
+      function equiper() {
+        onglets().forEach(function (onglet) {
+          if (!nouveau(onglet, "onglet")) return;
 
-        onglet.addEventListener("keydown", function (ev) {
-          var suivant = null;
-          if (ev.key === "ArrowRight") suivant = onglets[(index + 1) % onglets.length];
-          else if (ev.key === "ArrowLeft") suivant = onglets[(index - 1 + onglets.length) % onglets.length];
-          else if (ev.key === "Home") suivant = onglets[0];
-          else if (ev.key === "End") suivant = onglets[onglets.length - 1];
-          if (!suivant) return;
-          ev.preventDefault();
-          activer(suivant, true);
+          /* Un onglet arrivé après coup ne doit pas s'insérer dans
+             l'ordre de tabulation : dans un jeu d'onglets, un seul est
+             atteignable par Tab. */
+          if (onglet.getAttribute("aria-selected") !== "true") onglet.tabIndex = -1;
+
+          onglet.addEventListener("click", function () { activer(onglet, false); });
+
+          onglet.addEventListener("keydown", function (ev) {
+            var tous = onglets();
+            var index = tous.indexOf(onglet);
+            if (index < 0) return;
+
+            var suivant = null;
+            if (ev.key === "ArrowRight") suivant = tous[(index + 1) % tous.length];
+            else if (ev.key === "ArrowLeft") suivant = tous[(index - 1 + tous.length) % tous.length];
+            else if (ev.key === "Home") suivant = tous[0];
+            else if (ev.key === "End") suivant = tous[tous.length - 1];
+            if (!suivant) return;
+            ev.preventDefault();
+            activer(suivant, true);
+          });
         });
-      });
+      }
 
-      var courant = onglets.filter(function (o) { return o.getAttribute("aria-selected") === "true"; })[0];
-      activer(courant || onglets[0], false);
+      equiper();
+
+      /* La synchronisation de départ n'a lieu qu'une fois. Rejouée à
+         chaque ajout, elle ramènerait l'usager sur le premier onglet. */
+      if (!nouveau(liste, "onglets")) return;
+
+      /* Les onglets ajoutés ensuite sont équipés sans qu'aucun appel
+         ne soit nécessaire. */
+      surEnfantsChanges(liste, '[role="tab"]', equiper);
+
+      var depart = onglets();
+      if (!depart.length) return;
+      var courant = depart.filter(function (o) {
+        return o.getAttribute("aria-selected") === "true";
+      })[0];
+      activer(courant || depart[0], false);
     });
   }
 
@@ -321,6 +488,7 @@
   var declencheurModale = null;
 
   function initModales() {
+    if (!NAVIGATEUR) return;
     document.addEventListener("click", function (ev) {
       var ouvrir = cibleDe(ev).closest("[data-ouvre-modale]");
       if (ouvrir) {
@@ -373,8 +541,10 @@
      main et rétablir le défilement du document.
      ----------------------------------------------------------- */
   function initPanneaux() {
+    if (!NAVIGATEUR) return;
+
     /* Une pile, et non un panneau unique : un panneau peut en ouvrir
-       un second — choisir une commune, un service — et la fermeture
+       un second (choisir une commune, un service), et la fermeture
        doit rendre le premier exactement tel qu'il était. */
     var pile = [];
 
@@ -386,8 +556,23 @@
     }
 
     /* Un cadriciel peut détruire un panneau ouvert sans passer par la
-       fermeture. Sans ce balayage, le verrou de défilement resterait
-       posé et la page ne défilerait plus. */
+       fermeture — une navigation suffit. Le balayage ci-dessous libère
+       alors le verrou ; la veille qui le déclenche n'existe que tant
+       qu'un panneau est ouvert, et ne coûte rien le reste du temps. */
+    var veille = null;
+
+    function surveiller() {
+      if (!NAVIGATEUR || !window.MutationObserver) return;
+
+      if (pile.length && !veille) {
+        veille = new MutationObserver(function () { purger(); surveiller(); });
+        veille.observe(document.body, { childList: true, subtree: true });
+      } else if (!pile.length && veille) {
+        veille.disconnect();
+        veille = null;
+      }
+    }
+
     function purger() {
       for (var i = pile.length - 1; i >= 0; i--) {
         if (!document.contains(pile[i].panneau)) {
@@ -412,6 +597,8 @@
 
       var premier = $(FOCUSABLES, panneau);
       if (premier) premier.focus();
+
+      surveiller();
     }
 
     function fermer() {
@@ -430,6 +617,8 @@
         var dessous = $(FOCUSABLES, sommet().panneau);
         if (dessous) dessous.focus();
       }
+
+      surveiller();
     }
 
     document.addEventListener("click", function (ev) {
@@ -476,6 +665,8 @@
      Menus déroulants
      ----------------------------------------------------------- */
   function initMenus() {
+    if (!NAVIGATEUR) return;
+
     function toutFermer(sauf) {
       $$("[data-menu]").forEach(function (menu) {
         if (menu === sauf) return;
@@ -564,7 +755,7 @@
     var fermer = document.createElement("button");
     fermer.className = "fs-btn fs-btn--fantome fs-btn--sm fs-btn--icone";
     fermer.type = "button";
-    fermer.setAttribute("aria-label", "Fermer la notification");
+    fermer.setAttribute("aria-label", dire("fermerNotification"));
     fermer.textContent = "×";
 
     toast.appendChild(corps);
@@ -643,7 +834,8 @@
       cases.forEach(function (champ, index) {
         champ.addEventListener("input", function () {
           if (ECRITURE_SCRIPT) return;
-          champ.value = champ.value.replace(/\D/g, "").slice(-1);
+          var propre = champ.value.replace(/\D/g, "").slice(-1);
+          if (propre !== champ.value) poserValeur(champ, propre);
           if (champ.value && cases[index + 1]) cases[index + 1].focus();
         });
 
@@ -659,8 +851,7 @@
           ev.preventDefault();
           var colle = (ev.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "");
           cases.forEach(function (c, i) {
-            c.value = colle[i] || "";
-            signalerSaisie(c);
+            poserValeur(c, colle[i] || "");
           });
           var cible = cases[Math.min(colle.length, cases.length - 1)];
           if (cible) cible.focus();
@@ -679,40 +870,53 @@
   function initDates(racine) {
     $$(".fs-date", racine).forEach(function (bloc) {
       if (!nouveau(bloc, "dates")) return;
-      var champs = $$('input', bloc);
+      /* Les cases sont relues à l'événement, et non capturées : un
+         code dont le nombre de cases dépend du canal d'envoi peut être
+         rendu par une boucle. */
+      function cases() { return $$('input', bloc); }
 
-      champs.forEach(function (champ, index) {
-        var taille = parseInt(champ.getAttribute("maxlength"), 10) || 2;
+      function equiper() {
+        cases().forEach(function (champ) {
+          if (!nouveau(champ, "case-code")) return;
+          var taille = parseInt(champ.getAttribute("maxlength"), 10) || 2;
 
-        champ.addEventListener("input", function () {
-          if (ECRITURE_SCRIPT) return;
-          champ.value = champ.value.replace(/\D/g, "").slice(0, taille);
-          if (champ.value.length === taille && champs[index + 1]) {
-            champs[index + 1].focus();
-            champs[index + 1].select();
-          }
-        });
+          champ.addEventListener("input", function () {
+            if (ECRITURE_SCRIPT) return;
+            var toutes = cases();
+            var index = toutes.indexOf(champ);
+            var propre = champ.value.replace(/\D/g, "").slice(0, taille);
+            if (propre !== champ.value) poserValeur(champ, propre);
+            if (champ.value.length === taille && toutes[index + 1]) {
+              toutes[index + 1].focus();
+              toutes[index + 1].select();
+            }
+          });
 
-        champ.addEventListener("keydown", function (ev) {
-          if (ev.key === "Backspace" && !champ.value && champs[index - 1]) {
-            champs[index - 1].focus();
-          }
-        });
+          champ.addEventListener("keydown", function (ev) {
+            var toutes = cases();
+            var index = toutes.indexOf(champ);
+            if (ev.key === "Backspace" && !champ.value && toutes[index - 1]) {
+              toutes[index - 1].focus();
+            }
+          });
 
-        /* Une date collée depuis le presse-papiers est répartie
-           sur les trois champs plutôt que refusée. */
-        champ.addEventListener("paste", function (ev) {
-          var colle = (ev.clipboardData || window.clipboardData).getData("text");
-          var parts = colle.split(/[^\d]+/).filter(Boolean);
-          if (parts.length < 3) return;
-          ev.preventDefault();
-          champs.forEach(function (c, i) {
-            if (!parts[i]) return;
-            c.value = parts[i];
-            signalerSaisie(c);
+          /* Une date collée depuis le presse-papiers est répartie
+             sur les trois champs plutôt que refusée. */
+          champ.addEventListener("paste", function (ev) {
+            var colle = (ev.clipboardData || window.clipboardData).getData("text");
+            var parts = colle.split(/[^\d]+/).filter(Boolean);
+            if (parts.length < 3) return;
+            ev.preventDefault();
+            cases().forEach(function (c, i) {
+              if (!parts[i]) return;
+              poserValeur(c, parts[i]);
+            });
           });
         });
-      });
+      }
+
+      equiper();
+      surEnfantsChanges(bloc, "input", equiper);
     });
   }
 
@@ -732,21 +936,35 @@
       if (!champ || !liste) return;
 
       var compteur = resoudre(champ, champ.getAttribute("aria-describedby"));
-      var options = $$('.fs-combo-option', liste).map(function (li) {
-        return { element: li, texte: li.textContent.trim() };
-      });
+      var options = [];
       var visibles = [];
       var actif = -1;
+
+      /* Le texte d'origine est conservé sur l'élément : le surlignage
+         remplace le contenu de l'option par des nœuds, et il serait
+         perdu à la relecture suivante. */
+      function relireOptions() {
+        options = $$('.fs-combo-option', liste).map(function (li, i) {
+          if (!li.hasAttribute("data-texte")) {
+            li.setAttribute("data-texte", li.textContent.trim());
+          }
+          li.setAttribute("role", "option");
+          if (!li.id) li.id = liste.id + "-opt-" + i;
+          return { element: li, texte: li.getAttribute("data-texte") };
+        });
+      }
+
+      relireOptions();
 
       champ.setAttribute("role", "combobox");
       champ.setAttribute("aria-expanded", "false");
       champ.setAttribute("aria-autocomplete", "list");
       champ.setAttribute("autocomplete", "off");
       liste.setAttribute("role", "listbox");
-      options.forEach(function (o, i) {
-        o.element.setAttribute("role", "option");
-        o.element.id = o.element.id || liste.id + "-opt-" + i;
-      });
+
+      /* Une liste d'options rendue par une boucle du cadriciel est
+         suivie : les options ajoutées entrent dans le filtrage. */
+      surEnfantsChanges(liste, '.fs-combo-option', relireOptions);
 
       function sansAccent(s) {
         return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -811,9 +1029,8 @@
       }
 
       function choisir(option) {
-        champ.value = option.texte;
         fermer();
-        signalerSaisie(champ);
+        poserValeur(champ, option.texte);
       }
 
       champ.addEventListener("input", function () {
@@ -853,8 +1070,29 @@
         if (o) choisir(o);
       });
 
-      document.addEventListener("click", function (ev) {
-        if (!bloc.contains(ev.target)) fermer();
+      /* La fermeture au clic extérieur est déléguée une fois pour
+         toutes, plus bas : un écouteur posé sur document par instance
+         ne se retire jamais et retiendrait le bloc en mémoire bien
+         après sa destruction par le cadriciel. */
+      FERMETURES.set(bloc, fermer);
+    });
+  }
+
+  /* Un seul écouteur pour toutes les autocomplétions de la page. Les
+     blocs sont relus dans le document à chaque clic, si bien qu'un bloc
+     détruit disparaît de lui-même ; le registre est faible et ne
+     retient rien. */
+  var FERMETURES = NAVIGATEUR ? new WeakMap() : null;
+
+  function initFermetureCombos() {
+    if (!NAVIGATEUR) return;
+
+    document.addEventListener("click", function (ev) {
+      var cible = cibleDe(ev);
+      $$("[data-combo]").forEach(function (bloc) {
+        if (bloc.contains(cible)) return;
+        var fermer = FERMETURES.get(bloc);
+        if (fermer) fermer();
       });
     });
   }
@@ -981,20 +1219,24 @@
      réordonne les mêmes nœuds : le jeu est inchangé, rien n'est
      rejoué, et aucune boucle ne peut s'amorcer.
      ----------------------------------------------------------- */
-  function surLignesChangees(corps, rappel) {
+  function surEnfantsChanges(conteneur, selecteur, rappel) {
     if (!NAVIGATEUR || !window.MutationObserver) return;
 
-    var connues = new Set($$("tr", corps));
+    var connus = new Set($$(selecteur, conteneur));
 
     new MutationObserver(function () {
-      var actuelles = $$("tr", corps);
-      var identique = actuelles.length === connues.size &&
-                      actuelles.every(function (tr) { return connues.has(tr); });
+      var actuels = $$(selecteur, conteneur);
+      var identique = actuels.length === connus.size &&
+                      actuels.every(function (n) { return connus.has(n); });
       if (identique) return;
 
-      connues = new Set(actuelles);
-      rappel();
-    }).observe(corps, { childList: true });
+      connus = new Set(actuels);
+      rappel(actuels);
+    }).observe(conteneur, { childList: true });
+  }
+
+  function surLignesChangees(corps, rappel) {
+    surEnfantsChanges(corps, "tr", rappel);
   }
 
   /* Fenêtre de pages autour de la page courante, avec les
@@ -1058,20 +1300,24 @@
           tr.hidden = i < debut || i >= fin;
         });
 
-        if (total) total.textContent = toutes.length.toLocaleString("fr-FR");
+        if (total) total.textContent = nombre(toutes.length);
         if (intervalle) {
           intervalle.textContent = toutes.length
-            ? "Résultats " + (debut + 1).toLocaleString("fr-FR") + " à " +
-              fin.toLocaleString("fr-FR") + " sur " + toutes.length.toLocaleString("fr-FR")
-            : "Aucun résultat";
+            ? dire("intervalle", {
+                debut: nombre(debut + 1),
+                fin: nombre(fin),
+                total: nombre(toutes.length)
+              })
+            : dire("aucunResultat");
         }
 
         construire(pages);
         dernierCompte = toutes.length;
 
         if (annoncer) {
-          annonce.textContent = "Page " + page + " sur " + pages + ". " +
-            (intervalle ? intervalle.textContent + "." : "");
+          annonce.textContent =
+            dire("pageSurTotal", { page: page, pages: pages }) +
+            (intervalle ? " " + intervalle.textContent + "." : "");
         }
       }
 
@@ -1101,7 +1347,7 @@
         if (nav.hidden) return;
 
         nav.appendChild(bouton("‹", page - 1, {
-          libelle: "Page précédente", inactif: page === 1
+          libelle: dire("pagePrecedente"), inactif: page === 1
         }));
 
         fenetrePages(page, pages).forEach(function (p) {
@@ -1114,12 +1360,12 @@
             return;
           }
           nav.appendChild(bouton(String(p), p, {
-            libelle: "Page " + p, courante: p === page
+            libelle: dire("pageNumero", { n: p }), courante: p === page
           }));
         });
 
         nav.appendChild(bouton("›", page + 1, {
-          libelle: "Page suivante", inactif: page === pages
+          libelle: dire("pageSuivante"), inactif: page === pages
         }));
       }
 
@@ -1213,7 +1459,7 @@
           return controle.getAttribute("data-filtre-libelle");
         }
         var etiquette = controle.id && $('label[for="' + controle.id + '"]', bloc);
-        return etiquette ? etiquette.textContent.trim() : "Filtre";
+        return etiquette ? etiquette.textContent.trim() : dire("filtre");
       }
 
       function retient(ligne, controle) {
@@ -1242,7 +1488,7 @@
 
         var titre = document.createElement("span");
         titre.className = "fs-filtres-actifs-titre";
-        titre.textContent = "Filtres actifs";
+        titre.textContent = dire("filtresActifs");
         zone.appendChild(titre);
 
         actifs.forEach(function (controle) {
@@ -1255,8 +1501,7 @@
           retirer.setAttribute("aria-label", "Retirer le filtre " + libelle(controle));
           retirer.textContent = "×";
           retirer.addEventListener("click", function () {
-            controle.value = "";
-            signalerSaisie(controle);
+            poserValeur(controle, "");
             appliquer(true);
             controle.focus();
           });
@@ -1268,11 +1513,10 @@
         var vider = document.createElement("button");
         vider.type = "button";
         vider.className = "fs-filtres-vider";
-        vider.textContent = "Tout effacer";
+        vider.textContent = dire("toutEffacer");
         vider.addEventListener("click", function () {
           controles.forEach(function (c) {
-            c.value = "";
-            signalerSaisie(c);
+            poserValeur(c, "");
           });
           appliquer(true);
           controles[0].focus();
@@ -1298,16 +1542,14 @@
         if (vide) {
           vide.hidden = retenues > 0;
           var titre = $(".fs-tableau-vide-titre", vide);
-          var texte = $("[data-vide-texte]", vide);
+          var libre = $("[data-vide-texte]", vide);
           if (titre) {
-            titre.textContent = actifs.length
-              ? "Aucun résultat pour ces filtres"
-              : "Aucune donnée à afficher";
+            titre.textContent = dire(actifs.length
+              ? "aucunResultatFiltres" : "aucuneDonnee");
           }
-          if (texte) {
-            texte.textContent = actifs.length
-              ? "Élargissez ou retirez un filtre pour retrouver des résultats."
-              : "Les données apparaîtront ici dès qu'elles seront disponibles.";
+          if (libre) {
+            libre.textContent = dire(actifs.length
+              ? "elargirFiltres" : "donneesAVenir");
           }
         }
         if (cadre) cadre.hidden = retenues === 0;
@@ -1351,12 +1593,9 @@
      par le serveur, qui seul peut le signer.
      ----------------------------------------------------------- */
 
-  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
-              "août", "septembre", "octobre", "novembre", "décembre"];
-
   function dateDuJour() {
     var d = new Date();
-    return d.getDate() + " " + MOIS[d.getMonth()] + " " + d.getFullYear();
+    return d.getDate() + " " + TEXTES.mois[d.getMonth()] + " " + d.getFullYear();
   }
 
   function horodatage() {
@@ -1368,10 +1607,52 @@
   /* Le point-virgule est le séparateur attendu par les tableurs
      configurés en français ; la virgule y est le séparateur
      décimal. Un CSV à la virgule s'ouvre en une seule colonne. */
+  /* Un tableur interprète comme formule toute cellule commençant
+     par =, +, - ou @, ainsi que par une tabulation ou un retour
+     chariot. Une extraction contenant =1+1, ou pire
+     =HYPERLINK(...), s'exécute à l'ouverture sur le poste de
+     l'agent : c'est l'injection de formule décrite par l'OWASP.
+
+     Un nombre reste un nombre. -5 et +12,50 sont reconnus et
+     livrés tels quels, faute de quoi aucun total ne serait
+     calculable dans le tableur. Seul un texte commençant par l'un
+     de ces caractères est désarmé, par une apostrophe que les
+     tableurs consomment à la lecture. */
+  var AMORCE_FORMULE = /^[=+\-@\t\r]/;
+
+  /* Un vrai nombre : signe facultatif, puis un à trois chiffres,
+     puis des groupes de trois exactement s'il y a des séparateurs
+     de milliers, puis une partie décimale et un pourcentage
+     facultatifs. Cette exigence de groupes de trois distingue
+     -1 234 567,89, qui est un montant, de +226 70 00 00 00, qui
+     est un numéro de téléphone et sera désarmé. */
+  var NOMBRE = /^[-+]?\d{1,3}(?:[ \u00a0\u202f]\d{3})*(?:[.,]\d+)?\s*%?$/;
+
   function echapperCsv(valeur) {
-    valeur = String(valeur).replace(/\s+/g, " ").trim();
-    if (/[";\n\r]/.test(valeur)) return '"' + valeur.replace(/"/g, '""') + '"';
+    valeur = String(valeur);
+    var desarme = false;
+
+    if (AMORCE_FORMULE.test(valeur) && !NOMBRE.test(valeur)) {
+      valeur = "'" + valeur;
+      desarme = true;
+    }
+
+    /* Le contenu n'est plus aplati : deux espaces, un retour à la
+       ligne ou une tabulation appartiennent à la donnée. Le
+       guillemetage les protège, comme le prévoit le RFC 4180. Une
+       apostrophe présente dans le texte, elle, ne déclenche rien :
+       seule celle que nous ajoutons doit être protégée. */
+    if (desarme || /[";\n\r\t]/.test(valeur)) {
+      return '"' + valeur.replace(/"/g, '""') + '"';
+    }
     return valeur;
+  }
+
+  /* Le texte lu dans le document, lui, porte l'indentation du
+     HTML : elle est écrasée ici, et non dans l'échappement, pour
+     que Faso.versCsv() rende fidèlement ce qu'on lui confie. */
+  function texteCellule(valeur) {
+    return String(valeur == null ? "" : valeur).replace(/\s+/g, " ").trim();
   }
 
   function initExports(racine) {
@@ -1409,15 +1690,16 @@
         var filtres = filtresActifs();
         var n = lignesRetenues().length;
         contexte.textContent =
-          n.toLocaleString("fr-FR") + (n > 1 ? " lignes" : " ligne") +
-          " — extrait le " + dateDuJour() +
-          (filtres.length ? " — filtres appliqués : " + filtres.join(" ; ")
-                          : " — aucun filtre appliqué");
+          dire("contexteLignes", { n: nombre(n), s: pluriel(n) }) +
+          dire("contexteDate", { date: dateDuJour() }) +
+          (filtres.length
+            ? dire("contexteFiltres", { filtres: filtres.join(" ; ") })
+            : dire("contexteSansFiltre"));
       }
 
       function versCsv() {
         var lignes = [entetes.map(function (th) {
-          return echapperCsv(th.textContent);
+          return echapperCsv(texteCellule(th.textContent));
         }).join(";")];
 
         lignesRetenues().forEach(function (tr) {
@@ -1428,7 +1710,8 @@
             /* La donnée brute prime sur l'affichage : une date
                part en ISO et un montant en nombre, directement
                exploitables dans un tableur. */
-            return echapperCsv(td.getAttribute("data-valeur") || td.textContent);
+            return echapperCsv(
+              texteCellule(td.getAttribute("data-valeur") || td.textContent));
           }).join(";"));
         });
 
@@ -1454,9 +1737,10 @@
         if (presentes >= declare) return true;
 
         notifier({
-          titre: "Extraction refusée",
-          texte: presentes + " lignes sur " + declare + " sont chargées. "
-               + "L'export doit être produit par le service.",
+          titre: dire("extractionRefusee"),
+          texte: dire("extractionPartielle", {
+            presentes: nombre(presentes), total: nombre(declare)
+          }),
           ton: "danger",
           duree: 0
         });
@@ -1484,8 +1768,10 @@
         setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
 
         notifier({
-          titre: "Extraction téléchargée",
-          texte: fichier + " — " + lignesRetenues().length + " ligne(s).",
+          titre: dire("extractionFaite"),
+          texte: dire("extractionDetail", {
+            fichier: fichier, n: nombre(lignesRetenues().length)
+          }),
           ton: "succes"
         });
       }
@@ -1515,6 +1801,7 @@
      renvoyé en début de document.
      ----------------------------------------------------------- */
   function initEncarts() {
+    if (!NAVIGATEUR) return;
     document.addEventListener("click", function (ev) {
       var bouton = cibleDe(ev).closest("[data-ferme-encart]");
       if (!bouton) return;
@@ -1537,7 +1824,7 @@
                   (repli && $(FOCUSABLES, repli));
       if (cible) cible.focus();
 
-      notifier({ texte: "Message fermé.", duree: 2000 });
+      notifier({ texte: dire("messageFerme"), duree: 2000 });
     });
   }
 
@@ -1634,8 +1921,8 @@
       function majAffichage() {
         var restant = max - champ.value.length;
         sortie.textContent = restant >= 0
-          ? restant + " caractère" + (restant > 1 ? "s" : "") + " restant" + (restant > 1 ? "s" : "")
-          : "Limite dépassée";
+          ? dire("caracteresRestants", { n: restant, s: pluriel(restant) })
+          : dire("limiteDepassee");
         sortie.classList.toggle("fs-message--erreur", restant < 0);
       }
 
@@ -1703,6 +1990,7 @@
     initPanneaux();
     initMenus();
     initEncarts();
+    initFermetureCombos();
   }
 
   /* initialiser() sans argument parcourt le document entier ;
@@ -1799,6 +2087,10 @@
     telechargerCsv: telechargerCsv,
     version: "2.0.0",
 
+    /* Les libellés produits par le script. À compléter, et non à
+       remplacer : Object.assign(Faso.textes, { ... }). */
+    textes: TEXTES,
+
     /* Les comportements sont exposés pour que la documentation
        puisse afficher leur source réelle, lue par toString().
        Le code montré est donc celui qui s'exécute, et non une
@@ -1834,10 +2126,30 @@
   if (NAVIGATEUR) {
     window.Faso = Faso;
 
-    if (document.readyState === "loading") {
-      document.addEventListener("DOMContentLoaded", function () { initialiser(); });
-    } else {
-      initialiser();
+    /* Le démarrage automatique convient à une page servie telle
+       quelle : il n'y a rien à appeler, et c'est le mode d'origine du
+       système. Une application qui maîtrise son cycle de vie — rendu
+       côté serveur avec hydratation, surtout — veut au contraire
+       décider du moment. Elle le refuse, avant le chargement :
+
+           window.FASO_SANS_DEMARRAGE = true;
+
+       ou sur la balise elle-même :
+
+           <script src="faso.js" data-sans-demarrage defer></script>
+
+       et appelle ensuite Faso.initialiser() ou Faso.observer() quand
+       son propre rendu est terminé. */
+    var balise = document.currentScript;
+    var manuel = window.FASO_SANS_DEMARRAGE === true ||
+                 !!(balise && balise.hasAttribute("data-sans-demarrage"));
+
+    if (!manuel) {
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { initialiser(); });
+      } else {
+        initialiser();
+      }
     }
   }
 
