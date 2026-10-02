@@ -17,7 +17,7 @@
 # disponibles. Le script ne touche pas au pare-feu ni au DNS.
 set -euo pipefail
 
-DOMAINE="${DOMAINE:-chartegraphique.gov.bf}"
+DOMAINE="${DOMAINE:-chartegraphique-21.mtdpce-test.gov.bf}"
 DEPOT="${DEPOT:-depot.$DOMAINE}"
 COURRIEL="${COURRIEL:-}"
 RACINE="/var/www/charte"
