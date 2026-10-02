@@ -7,6 +7,102 @@
 # PHP, sans chaîne Node, sans droit d'administration. Tout ce qui suit
 # fonctionne dans ce cadre.
 
+# ------------------------------------------------------------ robots
+# >>> robots : engendre par outils/robots.js
+# Refus des collecteurs
+#
+# Engendre par outils/robots.js. Ne pas modifier a la main :
+# la liste des agents est tenue dans cet outil, et « node
+# outils/robots.js --verifier » fait partie de la recette.
+#
+# Cette couche arrete ce qui s'annonce. Un collecteur qui se
+# declare navigateur passe. Sur un hebergement mutualise, il n'y a
+# pas de limitation de debit possible : le refus par nom est tout
+# ce que ce fichier peut faire.
+
+<IfModule mod_setenvif.c>
+    # Collecte pour l'entraînement de modèles
+    SetEnvIfNoCase User-Agent "GPTBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "ClaudeBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "anthropic-ai" faso_collecteur
+    SetEnvIfNoCase User-Agent "Claude-Web" faso_collecteur
+    SetEnvIfNoCase User-Agent "CCBot" faso_collecteur
+    #   Google-Extended : jeton du robots.txt, aucune requete ne le porte
+    #   Applebot-Extended : jeton du robots.txt, aucune requete ne le porte
+    SetEnvIfNoCase User-Agent "Meta-ExternalAgent" faso_collecteur
+    SetEnvIfNoCase User-Agent "FacebookBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Bytespider" faso_collecteur
+    SetEnvIfNoCase User-Agent "Amazonbot" faso_collecteur
+    SetEnvIfNoCase User-Agent "PerplexityBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Diffbot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Omgilibot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Omgili" faso_collecteur
+    SetEnvIfNoCase User-Agent "cohere-ai" faso_collecteur
+    SetEnvIfNoCase User-Agent "AI2Bot" faso_collecteur
+    SetEnvIfNoCase User-Agent "ImagesiftBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Timpibot" faso_collecteur
+    SetEnvIfNoCase User-Agent "YouBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "PanguBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Kangaroo\s*Bot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Webzio-Extended" faso_collecteur
+    SetEnvIfNoCase User-Agent "SemrushBot-OCOB" faso_collecteur
+    SetEnvIfNoCase User-Agent "Scrapy" faso_collecteur
+
+    # Assistants, requête déclenchée par une personne
+    SetEnvIfNoCase User-Agent "ChatGPT-User" faso_collecteur
+    SetEnvIfNoCase User-Agent "OAI-SearchBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Claude-User" faso_collecteur
+    SetEnvIfNoCase User-Agent "Claude-SearchBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "Perplexity-User" faso_collecteur
+    SetEnvIfNoCase User-Agent "MistralAI-User" faso_collecteur
+    SetEnvIfNoCase User-Agent "DuckAssistBot" faso_collecteur
+
+    # Aspirateurs de site
+    SetEnvIfNoCase User-Agent "HTTrack" faso_collecteur
+    SetEnvIfNoCase User-Agent "WebCopier" faso_collecteur
+    SetEnvIfNoCase User-Agent "Teleport" faso_collecteur
+    SetEnvIfNoCase User-Agent "TeleportPro" faso_collecteur
+    SetEnvIfNoCase User-Agent "WebZIP" faso_collecteur
+    SetEnvIfNoCase User-Agent "Offline\s*Explorer" faso_collecteur
+    SetEnvIfNoCase User-Agent "SiteSnagger" faso_collecteur
+    SetEnvIfNoCase User-Agent "WebReaper" faso_collecteur
+    SetEnvIfNoCase User-Agent "Xenu" faso_collecteur
+    SetEnvIfNoCase User-Agent "larbin" faso_collecteur
+    SetEnvIfNoCase User-Agent "grub-client" faso_collecteur
+
+    # Scanners de vulnérabilité
+    SetEnvIfNoCase User-Agent "Nikto" faso_collecteur
+    SetEnvIfNoCase User-Agent "sqlmap" faso_collecteur
+    SetEnvIfNoCase User-Agent "Nmap\s*Scripting\s*Engine" faso_collecteur
+    SetEnvIfNoCase User-Agent "masscan" faso_collecteur
+    SetEnvIfNoCase User-Agent "zgrab" faso_collecteur
+    SetEnvIfNoCase User-Agent "WPScan" faso_collecteur
+    SetEnvIfNoCase User-Agent "Nessus" faso_collecteur
+    SetEnvIfNoCase User-Agent "acunetix" faso_collecteur
+    SetEnvIfNoCase User-Agent "dirbuster" faso_collecteur
+    SetEnvIfNoCase User-Agent "gobuster" faso_collecteur
+    SetEnvIfNoCase User-Agent "Wfuzz" faso_collecteur
+
+    # Aucun agent declare.
+    SetEnvIf User-Agent "^$" faso_collecteur
+
+    # Supervision : le « ! » retire le marquage pose plus haut.
+    #
+    # Une sonde n'envoie souvent aucun agent et se ferait refuser
+    # par la regle ci-dessus : le service serait declare en panne
+    # alors qu'il repond. Inscrire ici les adresses des sondes
+    # avant la mise en production.
+    #   SetEnvIf Remote_Addr "^10\.0\.0\.7$" !faso_collecteur
+</IfModule>
+
+<IfModule mod_authz_core.c>
+    <RequireAll>
+        Require all granted
+        Require not env faso_collecteur
+    </RequireAll>
+</IfModule>
+# <<< robots
+
 # ------------------------------------------------------------- types
 <IfModule mod_mime.c>
     AddType font/woff2 .woff2
@@ -39,6 +135,16 @@
     Header set X-Content-Type-Options "nosniff"
     Header set Referrer-Policy "strict-origin-when-cross-origin"
     Header set X-Frame-Options "DENY"
+
+    # Reservation des droits de fouille de textes et de donnees, au
+    # sens du protocole TDM du W3C. Sa portee est juridique, pas
+    # technique : elle ne bloque rien, elle etablit que la reprise
+    # n'a pas ete consentie.
+    #
+    # « noindex » n'y figure pas, et ne doit pas y figurer : le site
+    # doit rester trouvable par les moteurs de recherche.
+    Header set X-Robots-Tag "noai, noimageai"
+    Header set TDM-Reservation "1"
 
     # img-src data: est indispensable : les icônes de la charte sont des
     # masques CSS encodés en data:. Sans cette autorisation, elles

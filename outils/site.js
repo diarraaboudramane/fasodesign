@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Charte graphique de l'administration burkinabè
- * Construction du site à mettre en ligne sur fasodesign.gov.bf
+ * Construction du site à mettre en ligne sur chartegraphique.gov.bf
  *
  *   node outils/site.js
  *
@@ -16,7 +16,7 @@
  *   Il double les ressources sous un dossier au numéro de version.
  *   Un service peut ainsi écrire une adresse figée :
  *
- *     https://fasodesign.gov.bf/2.0.0/css/faso.css
+ *     https://chartegraphique.gov.bf/2.0.0/css/faso.css
  *
  *   Une correction sort sous un nouveau numéro et ne réécrit jamais
  *   l'ancien : un service ne change pas d'apparence du jour au
@@ -25,10 +25,17 @@
 "use strict";
 
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 
 const RACINE = path.join(__dirname, "..");
-const SORTIE = path.join(RACINE, "site");
+/* Le site ne se construit pas dans le projet : il en recopierait
+   l'intégralité, et chaque page existerait deux fois sous le même nom.
+   FASO_SITE permet à l'intégration continue de le placer dans son
+   espace de travail. */
+const SORTIE = process.env.FASO_SITE
+  ? path.resolve(process.env.FASO_SITE)
+  : path.join(os.tmpdir(), "fasodesign-site");
 const VERSION = JSON.parse(
   fs.readFileSync(path.join(RACINE, "package.json"), "utf8")).version;
 
@@ -73,9 +80,15 @@ for (const d of ["assets", "archives", "android"]) {
 }
 
 /* La configuration du serveur voyage avec le site : sans elle, ni
-   en-têtes de sécurité, ni cache, ni autorisation pour les polices. */
+   en-têtes de sécurité, ni cache, ni autorisation pour les polices,
+   ni refus des collecteurs. */
 copier(path.join(RACINE, "hebergement", "apache.htaccess"),
   path.join(SORTIE, ".htaccess"));
+
+/* Le robots.txt doit être à la racine du domaine, et nulle part
+   ailleurs : demandé sous un autre chemin, il n'est jamais lu. */
+copier(path.join(RACINE, "hebergement", "robots.txt"),
+  path.join(SORTIE, "robots.txt"));
 
 /* ------------------------------------------- la diffusion versionnée */
 
@@ -92,6 +105,42 @@ for (const inutile of ["docs.css", "docs.js"]) {
   if (fs.existsSync(p)) fs.rmSync(p);
 }
 
+/* ------------------------------------------------------ le plan */
+
+/*
+ * Le robots.txt annonce un plan du site : il doit exister, faute de
+ * quoi la ligne renvoie vers une page absente.
+ *
+ * Il ne sert pas qu'à la forme. Les moteurs restent autorisés parce
+ * qu'un système de conception que personne ne trouve ne sert
+ * personne ; leur donner la liste des pages est la contrepartie de
+ * ce choix.
+ */
+const DOMAINE = "https://chartegraphique.gov.bf";
+const jour = new Date().toISOString().slice(0, 10);
+
+const plan = pages
+  /* 404.html répond à une erreur : l'annoncer comme une page du site
+     la ferait indexer comme telle. */
+  .filter((p) => p !== "404.html")
+  .map((p) => {
+    const adresse = p === "index.html" ? "/" : "/" + p.replace(/\.html$/, "");
+    return [
+      "  <url>",
+      "    <loc>" + DOMAINE + adresse + "</loc>",
+      "    <lastmod>" + jour + "</lastmod>",
+      "  </url>",
+    ].join("\n");
+  });
+
+fs.writeFileSync(path.join(SORTIE, "sitemap.xml"), [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...plan,
+  "</urlset>",
+  "",
+].join("\n"), "utf8");
+
 fs.writeFileSync(path.join(SORTIE, "VERSION.txt"),
   "Charte graphique de l'administration burkinabè\n" +
   "Version " + VERSION + "\n" +
@@ -107,7 +156,8 @@ fs.writeFileSync(path.join(SORTIE, "VERSION.txt"),
 /* ----------------------------------------------------------- bilan */
 
 const total = compter(SORTIE);
-console.log("  site/ construit : " + total.n + " fichiers, " + total.ko + " Ko");
+console.log("  site construit : " + total.n + " fichiers, " + total.ko + " Ko");
+console.log("    " + SORTIE);
 console.log("    " + pages.length + " pages de documentation");
 console.log("    diffusion figee sous /" + VERSION + "/");
-console.log("    .htaccess depose a la racine");
+console.log("    .htaccess, robots.txt et sitemap.xml a la racine");

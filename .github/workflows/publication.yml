@@ -1,5 +1,8 @@
 # Charte graphique de l'administration burkinabè
-# Publication d'une version : le paquet sur npm, la documentation en ligne.
+# Publication d'une version : les deux paquets sur npm, la documentation
+# en ligne. Les deux paquets sont @govbf/fasodesign, la charte, et
+# @govbf/create-fasodesign, l'outil qui prépare un projet. Ils portent
+# la même version et partent ensemble.
 #
 # Se déclenche sur une étiquette « v2.0.0 », jamais sur une branche.
 # Rien n'est publié si la vérification échoue, et la version publiée est
@@ -7,7 +10,7 @@
 # le travail s'arrête avant d'avoir rien envoyé.
 #
 # Avant la première exécution, trois choses à faire une fois :
-#   1. enregistrer l'espace de noms @gouv-bf sur le registre choisi ;
+#   1. enregistrer l'espace de noms @govbf sur le registre choisi ;
 #   2. créer un jeton d'accès « Automation » et le ranger dans le secret
 #      NPM_TOKEN du dépôt ;
 #   3. activer Pages sur le dépôt, source « GitHub Actions ».
@@ -96,6 +99,53 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.REGISTRE_INTERNE_TOKEN }}
 
   # ------------------------------------------------------------------
+  # L'outil de préparation, @govbf/create-fasodesign, est ce que npm
+  # exécute derrière « npm create @govbf/fasodesign@latest ». Il porte
+  # la même version que la charte et part sur les mêmes dépôts, sans
+  # quoi la commande installerait une version et en annoncerait une
+  # autre.
+  outil:
+    needs: paquet
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    defaults:
+      run:
+        working-directory: amorce
+
+    env:
+      JETON_PUBLIC: ${{ secrets.NPM_TOKEN }}
+      DEPOT_INTERNE: ${{ vars.REGISTRE_INTERNE }}
+      JETON_INTERNE: ${{ secrets.REGISTRE_INTERNE_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Publier sur le registre public
+        if: env.JETON_PUBLIC != ''
+        run: npm publish --provenance --access public --registry https://registry.npmjs.org
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publier sur le dépôt de la forge
+        run: npm publish --registry https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Publier sur le dépôt de l'administration
+        if: env.DEPOT_INTERNE != '' && env.JETON_INTERNE != ''
+        run: npm publish --registry "$DEPOT_INTERNE"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.REGISTRE_INTERNE_TOKEN }}
+
+  # ------------------------------------------------------------------
   documentation:
     needs: verifier
     runs-on: ubuntu-latest
@@ -109,16 +159,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Le site est le dépôt lui-même : aucune construction, aucun
-      # générateur. On écarte seulement ce qui n'a rien à y faire.
-      - name: Préparer le site
-        run: |
-          mkdir -p site
-          cp -r *.html assets archives site/
-          cp -r android site/android
-          printf 'Version %s, publiée le %s\n' \
-            "$(node -p "require('./package.json').version")" "$(date -I)" \
-            > site/VERSION.txt
+      # Le même outil qu'en local. Le recopier ici à la main donnerait
+      # un site sans la diffusion figée ni le .htaccess, et la
+      # différence ne se verrait qu'une fois en ligne.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Construire le site
+        env:
+          FASO_SITE: site
+        run: node outils/site.js
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
 <link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/armoiries.svg">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body>
 
@@ -689,19 +691,107 @@
 
         <div class="doc-demo" data-libelle="Consentement">
           <div class="doc-demo-scene doc-demo-scene--pile">
-            <div class="fs-consentement" style="position: static; width: auto; max-width: 460px;">
-              <h4 style="font-size: var(--taille-lg); margin-bottom: var(--espace-3);">Mesure d'audience</h4>
+            <div class="fs-consentement" data-consentement
+                 style="position: static; width: auto; max-width: 480px;"
+                 role="dialog" aria-labelledby="consentement-titre">
+              <h4 id="consentement-titre" style="font-size: var(--taille-lg); margin-bottom: var(--espace-3);">Mesure d'audience</h4>
               <p class="fs-legende" style="margin-bottom: var(--espace-5);">
                 Ce service dépose des cookies de mesure d'audience afin d'améliorer la
                 qualité des démarches en ligne. Aucune donnée n'est transmise à un
-                tiers commercial. Votre choix est conservé six mois.
+                tiers commercial. Votre choix est conservé six mois, et vous pouvez y
+                revenir à tout moment depuis le pied de page.
               </p>
+
+              <div data-consentement-detail hidden style="margin-bottom: var(--espace-5);">
+                <div class="fs-choix">
+                  <input type="checkbox" id="finalite-mesure" data-finalite="mesure">
+                  <label for="finalite-mesure">
+                    Mesure d'audience
+                    <span class="fs-aide">Nombre de visites et parcours suivis, sans identification.</span>
+                  </label>
+                </div>
+                <div class="fs-choix">
+                  <input type="checkbox" id="finalite-video" data-finalite="video">
+                  <label for="finalite-video">
+                    Vidéos explicatives
+                    <span class="fs-aide">Lecture des tutoriels hébergés par un tiers.</span>
+                  </label>
+                </div>
+              </div>
+
               <div class="fs-actions">
-                <button type="button" class="fs-btn fs-btn--tertiaire">Personnaliser</button>
-                <button type="button" class="fs-btn fs-btn--tertiaire">Refuser</button>
-                <button type="button" class="fs-btn fs-btn--principal">Accepter</button>
+                <button type="button" class="fs-btn fs-btn--tertiaire"
+                        data-consentement-regler aria-expanded="false">Personnaliser</button>
+                <button type="button" class="fs-btn fs-btn--tertiaire"
+                        data-consentement-rien>Refuser</button>
+                <button type="button" class="fs-btn fs-btn--principal"
+                        data-consentement-tout>Accepter</button>
+              </div>
+
+              <div class="fs-actions fs-mt-4" data-consentement-detail hidden>
+                <button type="button" class="fs-btn fs-btn--secondaire"
+                        data-consentement-choix>Enregistrer mes choix</button>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          La décision est conservée dans un cookie, non dans le stockage local. Le
+          serveur doit pouvoir la lire avant d'écrire sa page, sans quoi il servirait
+          une mesure d'audience à un usager qui l'a refusée. Et un cookie porte une
+          échéance&nbsp;: la décision expire d'elle-même au bout de six mois et la
+          question est reposée, ce que le stockage local ne sait pas faire.
+        </div>
+
+        <h4 class="fs-mt-8">Ce que la charte prend en charge, et ce qu'elle laisse au service</h4>
+        <div class="doc-usages">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">La charte</p>
+            <ul>
+              <li>Affiche le bandeau tant qu'aucune réponse n'a été donnée.</li>
+              <li>Conserve la décision, finalité par finalité, six mois.</li>
+              <li>La restitue par <code>Faso.consentement.lire()</code>.</li>
+              <li>Annonce chaque changement par <code>fs:consentement</code>.</li>
+              <li>Permet de revenir sur le choix par
+                  <code>data-rouvre-consentement</code>.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">Le service</p>
+            <ul>
+              <li>Dépose ou retire les traceurs&nbsp;: la charte ne sait pas lesquels il
+                  emploie.</li>
+              <li>Déclare ses finalités par <code>data-finalite</code>.</li>
+              <li>N'exécute rien tant que <code>lire()</code> rend
+                  <code>null</code>&nbsp;: l'absence de réponse n'est pas un accord.</li>
+              <li>Écrit sa page de politique de confidentialité.</li>
+            </ul>
+          </div>
+        </div>
+
+        <pre><code>// Le service ecoute, et agit lui-meme sur ses traceurs.
+document.addEventListener('fs:consentement', (ev) =&gt; {
+  const decision = ev.detail;            // null si l'usager a tout oublie
+  if (decision &amp;&amp; decision.mesure) demarrerMesure();
+  else arreterMesure();
+});
+
+// Au chargement, avant tout depot.
+const decision = Faso.consentement.lire();
+if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
+
+        <div class="fs-encart fs-encart--alerte fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Trois cookies n'en sont pas moins des cookies</p>
+            <p>
+              Le cookie qui enregistre la décision, celui qui porte la session et celui
+              qui protège un formulaire contre la falsification sont nécessaires au
+              service&nbsp;: ils ne se demandent pas. Tout le reste se demande, et se
+              dépose seulement après une réponse. Le service reste tenu de les
+              énumérer dans sa politique de confidentialité.
+            </p>
           </div>
         </div>
       </div>

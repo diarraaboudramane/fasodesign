@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
 <link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/armoiries.svg">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body>
 
@@ -163,6 +165,82 @@
       </p>
 
       <div class="doc-bloc">
+        <h3>Préparer un projet en une commande</h3>
+        <p class="doc-bloc-note">
+          Pour un projet qui démarre, une commande suffit. Elle écrit les fichiers
+          de départ et installe la charte&nbsp;; il n'y a ensuite qu'à ouvrir la page
+          ou importer le fichier d'amorçage.
+        </p>
+        <pre><code>npm create @govbf/fasodesign@latest</code></pre>
+        <p class="doc-bloc-note">
+          Trois questions&nbsp;: le dossier, le type de projet — <code>statique</code>,
+          <code>react</code>, <code>angular</code> ou <code>laravel</code> — et le
+          dépôt npm interne si le service en emploie un. Tout peut aussi se donner
+          sur la ligne de commande&nbsp;:
+        </p>
+        <pre><code>npm create @govbf/fasodesign@latest mon-service -- \
+  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui</code></pre>
+
+        <table class="fs-tableau fs-mt-6">
+          <caption class="fs-legende">Ce qui est écrit, selon le type</caption>
+          <thead>
+            <tr><th scope="col">Type</th><th scope="col">Fichiers</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row"><code>statique</code></th>
+              <td>
+                <code>index.html</code>, une page complète avec le bandeau officiel,
+                le filet national et le pied de page&nbsp;; <code>LISEZMOI.md</code>.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><code>react</code>, <code>angular</code></th>
+              <td>
+                <code>src/charte.js</code>&nbsp;: les trois feuilles dans l'ordre et
+                l'appel d'observation&nbsp;; <code>LISEZMOI.md</code>.
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><code>laravel</code></th>
+              <td>
+                <code>resources/js/charte.js</code>, où Laravel range ses
+                sources&nbsp;; <code>LISEZMOI.md</code>.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fs-legende fs-mt-4">
+          Plus un <code>package.json</code> minimal s'il n'y en a pas, et un
+          <code>.npmrc</code> si un dépôt interne a été indiqué. La commande refuse
+          d'écrire dans un dossier qui existe déjà et n'est pas vide.
+        </p>
+
+        <div class="fs-encart fs-encart--info fs-mt-8">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Les conditions d'emploi se lisent avant l'installation</p>
+            <p>
+              La charte porte les armoiries, le drapeau et la devise de l'État. La
+              commande les rappelle et demande de les accepter avant d'installer quoi
+              que ce soit. Sur une chaîne d'intégration, où personne ne répond,
+              l'acceptation se donne par la variable
+              <code>FASODESIGN_ACCEPTE_LICENCE=oui</code> ou par l'option
+              <code>--oui</code>.
+            </p>
+          </div>
+        </div>
+
+        <p class="fs-legende fs-mt-6">
+          La commande s'appuie sur un second paquet,
+          <code>@govbf/create-fasodesign</code>, que npm télécharge, exécute une fois
+          puis oublie. Il porte la même version que la charte et part sur les mêmes
+          dépôts. Un projet déjà commencé n'en a pas besoin&nbsp;: il installe la
+          charte directement, comme ci-dessous.
+        </p>
+      </div>
+
+      <div class="doc-bloc">
         <h3>Par npm</h3>
 
         <div class="fs-encart fs-encart--alerte">
@@ -170,11 +248,13 @@
           <div class="fs-encart-corps">
             <p class="fs-encart-titre">Le paquet n'est pas encore sur le registre public</p>
             <p>
-              <code>npm install @gouv-bf/charte-graphique</code> répond aujourd'hui
-              <code>404 Not Found</code>. L'espace de noms <code>@gouv-bf</code> doit
+              <code>npm install @govbf/fasodesign</code> répond aujourd'hui
+              <code>404 Not Found</code>. L'espace de noms <code>@govbf</code> doit
               être enregistré par l'organisme désigné responsable du système, et cette
-              désignation n'est pas arrêtée. Les trois voies ci-dessous fonctionnent
-              dès maintenant et n'exigent rien de plus qu'un accès aux fichiers.
+              désignation n'est pas arrêtée. <code>npm create</code> passe par le même
+              espace de noms et répond la même chose. Les trois voies ci-dessous
+              fonctionnent dès maintenant et n'exigent rien de plus qu'un accès aux
+              fichiers.
             </p>
           </div>
         </div>
@@ -188,15 +268,15 @@
         </p>
         <pre><code># depuis le depot de la charte
 npm pack
-# produit gouv-bf-charte-graphique-2.0.0.tgz
+# produit govbf-fasodesign-2.0.0.tgz
 
 # depuis le projet qui la consomme
 mkdir -p vendor
-cp .../gouv-bf-charte-graphique-2.0.0.tgz vendor/
-npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
+cp .../govbf-fasodesign-2.0.0.tgz vendor/
+npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
         <pre><code>// le package.json du projet porte alors :
 "dependencies": {
-  "@gouv-bf/charte-graphique": "file:vendor/gouv-bf-charte-graphique-2.0.0.tgz"
+  "@govbf/fasodesign": "file:vendor/govbf-fasodesign-2.0.0.tgz"
 }</code></pre>
         <p class="fs-legende fs-mt-4">
           L'archive versionnée dans le dépôt du projet rend l'installation
@@ -219,10 +299,10 @@ npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
           et la traçabilité, sans dépendre d'un service hébergé hors du pays.
         </p>
         <pre><code># .npmrc du projet
-@gouv-bf:registry=https://depot.gov.bf/npm/</code></pre>
+@govbf:registry=https://depot.gov.bf/npm/</code></pre>
 
         <h4 class="fs-mt-8">Une fois l'espace de noms enregistré</h4>
-        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <pre><code>npm install @govbf/fasodesign</code></pre>
         <p class="fs-legende fs-mt-4">
           Rien d'autre ne change. Les chemins d'importation donnés dans cette page
           sont déjà les bons.
@@ -242,7 +322,7 @@ npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
               <tr><th>Import</th><th>Ce qu'il désigne</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>@gouv-bf/charte-graphique</code></td><td>Les comportements, avec leurs types</td></tr>
+              <tr><td><code>@govbf/fasodesign</code></td><td>Les comportements, avec leurs types</td></tr>
               <tr><td><code>…/css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td></tr>
               <tr><td><code>…/css/faso.css</code></td><td>Bibliothèque de composants</td></tr>
               <tr><td><code>…/css/icones.css</code></td><td>Les 35 icônes</td></tr>
@@ -255,7 +335,7 @@ npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
           </table>
         </div>
         <div class="doc-note fs-mt-6">
-          <code>@gouv-bf/charte-graphique/assets/css/faso.css</code> ne fonctionne
+          <code>@govbf/fasodesign/assets/css/faso.css</code> ne fonctionne
           pas, et c'est voulu&nbsp;: seuls les chemins ci-dessus sont publics. Les
           déclarations de polices, elles, désignent leurs fichiers par un chemin
           relatif interne au paquet&nbsp;; un empaqueteur les résout tout seul, sans que
@@ -294,7 +374,7 @@ npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz</code></pre>
           remplace ce dont il a besoin&nbsp;; ce qu'il ne remplace pas reste en
           français.
         </p>
-        <pre><code>import Faso from '@gouv-bf/charte-graphique';
+        <pre><code>import Faso from '@govbf/fasodesign';
 
 Object.assign(Faso.textes, {
   langue: 'fr-BF',
@@ -363,7 +443,7 @@ Object.assign(Faso.textes, {
             <tbody>
               <tr>
                 <td>L'organisme responsable du système</td>
-                <td>Il détient l'espace de noms <code>@gouv-bf</code>, le dépôt et le
+                <td>Il détient l'espace de noms <code>@govbf</code>, le dépôt et le
                     jeton de publication. Tant qu'il n'est pas désigné, personne ne
                     peut publier au nom de l'État.</td>
               </tr>
@@ -467,9 +547,9 @@ git push --follow-tags</code></pre>
         </div>
 
         <h4 class="fs-mt-8">La règle de version, qui commande tout le reste</h4>
-        <pre><code>https://fasodesign.gov.bf/2.0.0/css/faso.css     ← figé, cache d'un an
-https://fasodesign.gov.bf/2.1.0/css/faso.css     ← la version suivante
-https://fasodesign.gov.bf/latest/css/faso.css    ← à proscrire en production</code></pre>
+        <pre><code>https://chartegraphique.gov.bf/2.0.0/css/faso.css     ← figé, cache d'un an
+https://chartegraphique.gov.bf/2.1.0/css/faso.css     ← la version suivante
+https://chartegraphique.gov.bf/latest/css/faso.css    ← à proscrire en production</code></pre>
         <p class="fs-legende fs-mt-4">
           Une adresse versionnée ne se réécrit jamais. Une correction sort sous un
           nouveau numéro. C'est ce qui autorise le cache d'un an, et surtout ce qui
@@ -503,7 +583,111 @@ https://fasodesign.gov.bf/latest/css/faso.css    ← à proscrire en production<
       </div>
 
       <div class="doc-bloc">
-        <h3>4. Où héberger le paquet</h3>
+        <h3>4. Collecteurs, robots et fouille de données</h3>
+        <p class="doc-bloc-note">
+          Cinquante-quatre agents sont refusés en production&nbsp;: collecteurs
+          d'entraînement de modèles, assistants, aspirateurs de site et scanners de
+          vulnérabilité. La liste est tenue dans <code>outils/robots.js</code>, qui
+          engendre le <code>robots.txt</code>, le fragment nginx et le bloc du
+          <code>.htaccess</code>. Tenue à la main, elle diverge&nbsp;: on ajoute un
+          agent au <code>robots.txt</code>, on oublie le serveur, et le refus n'est
+          plus qu'une demande écrite.
+        </p>
+        <pre><code>npm run robots              # engendre les trois fichiers
+npm run verifier-robots     # refuse de les laisser diverger</code></pre>
+
+        <h4 class="fs-mt-8">Ce que chaque couche arrête réellement</h4>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th scope="col">Couche</th><th scope="col">Portée</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>robots.txt</code></th>
+                <td>
+                  Rien, techniquement. C'est une demande. Les collecteurs des grandes
+                  maisons la respectent parce qu'il leur en coûterait de se faire
+                  prendre&nbsp;; les autres la lisent pour savoir où regarder.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Refus par nom</th>
+                <td>
+                  Ce qui s'annonce. Un agent qui déclare <code>GPTBot</code> reçoit
+                  <code>403</code>. Un agent qui se déclare Firefox passe.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Débit limité</th>
+                <td>
+                  Ce qui insiste. Seule couche qui agisse sur un agent non déclaré.
+                  Elle protège le serveur plus qu'elle ne protège le contenu&nbsp;:
+                  neuf pages se copient en neuf requêtes, et aucun réglage tenable ne
+                  l'empêche. Disponible sous nginx, pas sous un hébergement mutualisé.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><code>TDM-Reservation</code></th>
+                <td>
+                  Rien, techniquement. L'en-tête réserve les droits de fouille de
+                  textes et de données au sens du protocole TDM du W3C. Sa portée est
+                  juridique&nbsp;: elle établit que la reprise n'a pas été consentie,
+                  ce qu'un <code>robots.txt</code> laisse toujours discuter.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="fs-encart fs-encart--info fs-mt-8">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Les moteurs de recherche restent autorisés</p>
+            <p>
+              Ce n'est pas un oubli. Un développeur d'un ministère cherche
+              «&nbsp;bouton charte burkina&nbsp;» avant de chercher
+              <code>chartegraphique.gov.bf</code>&nbsp;: un système de conception que
+              personne ne trouve ne sert personne. Les refuser retirerait la
+              documentation des résultats de recherche sans gêner un seul collecteur
+              d'entraînement, ceux-ci passant par d'autres agents. Un contrôle de la
+              recette refuse d'ailleurs un <code>X-Robots-Tag</code> qui porterait
+              <code>noindex</code>, et refuse que Googlebot, Bingbot, DuckDuckBot ou
+              Applebot se retrouvent dans la liste.
+            </p>
+          </div>
+        </div>
+
+        <h4 class="fs-mt-8">Deux réglages à faire avant la mise en production</h4>
+        <p class="doc-bloc-note">
+          <strong>Les adresses de supervision.</strong> Une sonde n'envoie souvent
+          aucun agent, et se ferait refuser comme un collecteur&nbsp;: le service
+          serait déclaré en panne alors qu'il répond. Les deux configurations portent
+          l'emplacement où inscrire ces adresses, en commentaire, avec la ligne
+          d'exemple.
+        </p>
+        <p class="doc-bloc-note">
+          <strong>Les assistants.</strong> <code>ChatGPT-User</code>,
+          <code>Claude-User</code> et leurs pareils ne collectent pas&nbsp;: ils vont
+          chercher une page parce qu'une personne vient de la demander. Les refuser
+          refuse à un agent de l'administration de faire lire la documentation par
+          l'outil qu'il emploie. Ils sont refusés, comme demandé&nbsp;; c'est le
+          groupe à rouvrir en premier si l'usage interne s'en plaint, en retirant le
+          bloc <code>assistants</code> de <code>outils/robots.js</code>.
+        </p>
+
+        <div class="doc-note fs-mt-6">
+          <strong>La diffusion versionnée n'est pas limitée en débit.</strong> Les
+          fichiers sous <code>/2.0.0/</code> sont consommés par les navigateurs des
+          agents d'autres administrations. Un ministère derrière une seule sortie
+          nattée compte pour une adresse&nbsp;: une limitation par adresse le
+          couperait en entier, pour protéger des fichiers statiques mis en cache un
+          an. Le débit ne s'applique qu'aux pages de documentation.
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>5. Où héberger le paquet</h3>
         <p class="doc-bloc-note">
           Un paquet npm ne vit pas nulle part&nbsp;: il faut un dépôt distant qui le
           serve. Le choix n'est pas seulement technique. Il engage la souveraineté sur
@@ -585,32 +769,32 @@ https://fasodesign.gov.bf/latest/css/faso.css    ← à proscrire en production<
       </div>
 
       <div class="doc-bloc">
-        <h3>5. Ce qu'écrit le projet qui installe</h3>
+        <h3>6. Ce qu'écrit le projet qui installe</h3>
         <p class="doc-bloc-note">
           Une chose est à comprendre avant tout le reste. La déclaration se
           fait <strong>par espace de noms</strong>. Seuls les paquets
-          <code>@gouv-bf/…</code> sont demandés au dépôt désigné&nbsp;; tout le reste
+          <code>@govbf/…</code> sont demandés au dépôt désigné&nbsp;; tout le reste
           continue d'aller là où il allait. On ne bascule pas un projet entier pour
           installer la charte.
         </p>
 
         <h4 class="fs-mt-6">Registre public</h4>
-        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <pre><code>npm install @govbf/fasodesign</code></pre>
         <p class="fs-legende fs-mt-4">Rien à déclarer&nbsp;: c'est la destination par défaut.</p>
 
         <h4 class="fs-mt-8">Dépôt souverain, ou toute autre installation de Verdaccio</h4>
         <pre><code># .npmrc, à la racine du projet, versionné avec lui
-@gouv-bf:registry=https://depot.fasodesign.gov.bf/</code></pre>
+@govbf:registry=https://depot.chartegraphique.gov.bf/</code></pre>
         <p class="fs-legende fs-mt-4">
           Si le dépôt exige un compte pour lire, on ajoute la ligne d'authentification
           — jamais dans le fichier versionné, mais par une variable d'environnement
           que <code>npm</code> substitue&nbsp;:
         </p>
-        <pre><code>//depot.fasodesign.gov.bf/:_authToken=${JETON_DEPOT}</code></pre>
+        <pre><code>//depot.chartegraphique.gov.bf/:_authToken=${JETON_DEPOT}</code></pre>
 
         <h4 class="fs-mt-8">Dépôt de la forge</h4>
         <pre><code># .npmrc
-@gouv-bf:registry=https://npm.pkg.github.com
+@govbf:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=${JETON_FORGE}</code></pre>
         <div class="fs-encart fs-encart--alerte fs-mt-4">
           <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
@@ -629,7 +813,7 @@ https://fasodesign.gov.bf/latest/css/faso.css    ← à proscrire en production<
 
         <h4 class="fs-mt-8">Sans dépôt du tout</h4>
         <pre><code># depuis une archive rangée dans le projet
-npm install ./vendor/gouv-bf-charte-graphique-2.0.0.tgz
+npm install ./vendor/govbf-fasodesign-2.0.0.tgz
 
 # ou directement depuis le dépôt de code, sur une étiquette
 npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</code></pre>
@@ -640,10 +824,10 @@ npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</co
       </div>
 
       <div class="doc-bloc">
-        <h3>6. Monter le dépôt souverain</h3>
+        <h3>7. Monter le dépôt souverain</h3>
         <p class="doc-bloc-note">
           <code>hebergement/verdaccio.yaml</code> est prêt à l'emploi. Il déclare deux
-          choses qui comptent&nbsp;: les paquets <code>@gouv-bf/*</code> n'ont
+          choses qui comptent&nbsp;: les paquets <code>@govbf/*</code> n'ont
           <strong>aucun accès amont</strong>, et le reste est relayé vers le registre
           public avec mise en cache.
         </p>
@@ -655,7 +839,7 @@ npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</co
             </thead>
             <tbody>
               <tr>
-                <td>Pas de <code>proxy</code> sur <code>@gouv-bf/*</code></td>
+                <td>Pas de <code>proxy</code> sur <code>@govbf/*</code></td>
                 <td>Une demande pour un paquet de l'État ne doit jamais partir vers le
                     registre public, où un homonyme pourrait répondre à sa place. Sans
                     cette précaution, un paquet déposé par un tiers sous le même nom
@@ -735,9 +919,9 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
           qu'on veut. Les classes doivent s'appliquer partout.
         </p>
         <pre><code>"styles": [
-  "node_modules/@gouv-bf/charte-graphique/assets/css/tokens.css",
-  "node_modules/@gouv-bf/charte-graphique/assets/css/faso.css",
-  "node_modules/@gouv-bf/charte-graphique/assets/css/icones.css",
+  "node_modules/@govbf/fasodesign/assets/css/tokens.css",
+  "node_modules/@govbf/fasodesign/assets/css/faso.css",
+  "node_modules/@govbf/fasodesign/assets/css/icones.css",
   "src/styles.css"
 ]</code></pre>
         <p class="fs-legende fs-mt-4">
@@ -755,7 +939,7 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
         </p>
         <pre><code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import Faso from '@gouv-bf/charte-graphique';
+import Faso from '@govbf/fasodesign';
 
 @Component({ selector: 'app-root', templateUrl: './app.html' })
 export class AppComponent implements OnInit {
@@ -961,7 +1145,7 @@ ngOnInit(): void {
           typé, et <code>window.Faso</code> est déclaré globalement pour les projets
           qui préfèrent y accéder directement.
         </p>
-        <pre><code>import Faso from '@gouv-bf/charte-graphique';
+        <pre><code>import Faso from '@govbf/fasodesign';
 
 Faso.initialiser(element);
 Faso.notifier({ titre: 'Dossier transmis', ton: 'succes' });
@@ -983,9 +1167,9 @@ Faso.appliquerTheme('dark');</code></pre>
       <div class="doc-bloc">
         <h3>1. Déclarer les feuilles</h3>
         <pre><code>// main.tsx, avant le rendu
-import '@gouv-bf/charte-graphique/css/tokens.css';
-import '@gouv-bf/charte-graphique/css/faso.css';
-import '@gouv-bf/charte-graphique/css/icones.css';</code></pre>
+import '@govbf/fasodesign/css/tokens.css';
+import '@govbf/fasodesign/css/faso.css';
+import '@govbf/fasodesign/css/icones.css';</code></pre>
         <p class="fs-legende fs-mt-4">
           L'ordre compte. Les jetons d'abord, la feuille du projet en dernier. Aucun
           module CSS, aucune portée&nbsp;— les classes de la charte sont globales par
@@ -1001,7 +1185,7 @@ import '@gouv-bf/charte-graphique/css/icones.css';</code></pre>
           tout ce que React rendra.
         </p>
         <pre><code>import { useEffect } from 'react';
-import Faso from '@gouv-bf/charte-graphique';
+import Faso from '@govbf/fasodesign';
 
 export default function App() {
   useEffect(() =&gt; {
@@ -1278,12 +1462,12 @@ export default function RootLayout({ children }) {
         <h3>1. Installer, avec ou sans Node</h3>
 
         <h4 class="fs-mt-6">Avec Vite, qui est le défaut</h4>
-        <pre><code>npm install @gouv-bf/charte-graphique</code></pre>
+        <pre><code>npm install @govbf/fasodesign</code></pre>
         <pre><code>// resources/js/app.js
-import '@gouv-bf/charte-graphique/css/tokens.css';
-import '@gouv-bf/charte-graphique/css/faso.css';
-import '@gouv-bf/charte-graphique/css/icones.css';
-import '@gouv-bf/charte-graphique';   // les comportements s'amorcent seuls</code></pre>
+import '@govbf/fasodesign/css/tokens.css';
+import '@govbf/fasodesign/css/faso.css';
+import '@govbf/fasodesign/css/icones.css';
+import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code></pre>
         <pre><code>{{-- resources/views/layouts/app.blade.php --}}
 &lt;!doctype html&gt;
 &lt;html lang="fr"&gt;
@@ -1304,8 +1488,8 @@ import '@gouv-bf/charte-graphique';   // les comportements s'amorcent seuls</cod
           reste pleinement pris en charge.
         </p>
         <pre><code># une fois, depuis un poste qui a Node
-npm pack @gouv-bf/charte-graphique
-tar -xzf gouv-bf-charte-graphique-2.0.0.tgz
+npm pack @govbf/fasodesign
+tar -xzf govbf-fasodesign-2.0.0.tgz
 cp -r package/assets public/charte</code></pre>
         <pre><code>&lt;script src="{{ asset('charte/js/faso-amorce.js') }}"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/tokens.css') }}"&gt;
@@ -1483,7 +1667,7 @@ cp -r package/assets public/charte</code></pre>
         </p>
 
         <pre><code>// resources/js/app.js — la voie simple, une fois pour toutes
-import Faso from '@gouv-bf/charte-graphique';
+import Faso from '@govbf/fasodesign';
 Faso.observer();</code></pre>
 
         <pre><code>// ou la voie explicite, si l'on préfère ne rien observer
@@ -1519,7 +1703,7 @@ document.addEventListener('livewire:init', () =&gt; {
           non dans un gabarit Blade rendu à chaque requête.
         </p>
         <pre><code>// resources/js/app.jsx
-import Faso from '@gouv-bf/charte-graphique';
+import Faso from '@govbf/fasodesign';
 
 createInertiaApp({
   setup({ el, App, props }) {

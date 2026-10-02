@@ -1,14 +1,14 @@
 {
-  "name": "@gouv-bf/charte-graphique",
+  "name": "@govbf/fasodesign",
   "version": "2.0.0",
   "description": "Charte graphique des services numériques de l'administration burkinabè : jetons, composants CSS, comportements sans dépendance.",
-  "homepage": "https://fasodesign.gov.bf/",
+  "homepage": "https://chartegraphique.gov.bf/",
   "repository": {
     "type": "git",
     "url": "git+https://A-RENSEIGNER/charte-graphique.git"
   },
   "bugs": {
-    "url": "https://fasodesign.gov.bf/issues"
+    "url": "https://chartegraphique.gov.bf/issues"
   },
   "author": "A-RENSEIGNER (autorite de tutelle du systeme)",
   "license": "SEE LICENSE IN LISEZMOI-PAQUET.txt",
@@ -18,10 +18,13 @@
     "verifier-jetons": "node outils/jetons.js --verifier",
     "android": "node outils/android.js",
     "verifier-android": "node outils/android.js --verifier",
+    "robots": "node outils/robots.js",
+    "verifier-robots": "node outils/robots.js --verifier",
     "verifier": "node outils/verifier.js",
     "test": "node outils/verifier.js",
     "site": "node outils/site.js",
-    "local": "node outils/site.js && httpd -f hebergement/apache-local.conf -DFOREGROUND"
+    "local": "node outils/site.js && httpd -f hebergement/apache-local.conf -DFOREGROUND",
+    "embleme": "node outils/embleme.js"
   },
   "main": "./assets/js/faso.js",
   "types": "./assets/js/faso.d.ts",
@@ -39,7 +42,10 @@
     "./img/icones.svg": "./assets/img/icones.svg",
     "./polices/*": "./assets/polices/*",
     "./package.json": "./package.json",
-    "./android/*": "./android/*"
+    "./android/*": "./android/*",
+    "./img/armoiries-gris.svg": "./assets/img/armoiries-gris.svg",
+    "./img/favicon.svg": "./assets/img/favicon.svg",
+    "./img/*": "./assets/img/*"
   },
   "sideEffects": [
     "*.css",

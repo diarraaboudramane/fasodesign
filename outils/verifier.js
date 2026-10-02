@@ -183,10 +183,32 @@ function xmlBienForme(chemin) {
 }
 
 controle("SVG de la charte", () => {
-  for (const f of ["assets/img/armoiries.svg", "assets/img/icones.svg"]) {
-    xmlBienForme(path.join(RACINE, f));
-  }
-  return "2 fichiers";
+  const liste = fichiers(path.join(RACINE, "assets", "img"), ".svg");
+  for (const f of liste) xmlBienForme(f);
+  return liste.length + " fichiers";
+});
+
+controle("declinaisons de l'embleme", () => {
+  /* Les PNG demandent Inkscape : on verifie qu'ils sont la, non
+     qu'on saurait les reproduire ici. */
+  const attendus = [
+    /* les quatre formats gradues */
+    "armoiries.svg", "armoiries-moyen.svg", "armoiries-ecu.svg", "favicon.svg",
+    /* la version une encre */
+    "armoiries-gris.svg",
+    /* le matriciel */
+    "armoiries-512.png", "armoiries-256.png", "armoiries-128.png",
+    "armoiries-64.png", "armoiries-ecu-64.png", "armoiries-ecu-32.png",
+    "favicon-32.png", "favicon-180.png"];
+  const manquants = attendus.filter(
+    (f) => !fs.existsSync(path.join(RACINE, "assets", "img", f)));
+  if (manquants.length) throw new Error("absents : " + manquants.join(", "));
+
+  /* Le favicon doit rester minuscule : c'est sa raison d'etre. */
+  const poids = fs.statSync(path.join(RACINE, "assets", "img", "favicon.svg")).size;
+  if (poids > 2048) throw new Error("favicon.svg pese " + poids + " octets");
+
+  return attendus.length + " fichiers, favicon " + poids + " octets";
 });
 
 controle("ressources Android bien formees", () => {
@@ -250,6 +272,51 @@ for (const [libelle, outil] of [
   });
 }
 
+/* ====================================================== hebergement */
+
+titre("Hebergement");
+
+controle("robots.txt et les configurations correspondent", () => {
+  execFileSync(process.execPath, [path.join(__dirname, "robots.js"), "--verifier"],
+    { stdio: "pipe" });
+});
+
+/*
+ * Le refus des collecteurs vit dans le .htaccess, que site.js depose a
+ * la racine du site. Un .htaccess sans ce bloc mettrait en ligne un
+ * site ouvert a tous les collecteurs, sans qu'aucune page ne change
+ * d'apparence : la panne serait invisible.
+ */
+controle("le .htaccess publie refuse les collecteurs", () => {
+  const texte = lire("hebergement/apache.htaccess");
+  for (const attendu of [
+    "SetEnvIfNoCase User-Agent \"GPTBot\"",
+    "Require not env faso_collecteur",
+  ]) {
+    if (texte.indexOf(attendu) < 0) throw new Error(attendu + " absent");
+  }
+  /* Une reserve de fouille qui porte noindex retirerait le site des
+     moteurs de recherche. La documentation doit rester trouvable. */
+  if (/X-Robots-Tag[^\n]*noindex/.test(texte)) {
+    throw new Error("X-Robots-Tag porte noindex : le site sortirait des " +
+      "resultats de recherche");
+  }
+});
+
+controle("les moteurs de recherche restent autorises", () => {
+  const texte = lire("hebergement/robots.txt");
+  for (const moteur of ["Googlebot", "Bingbot", "DuckDuckBot", "Applebot"]) {
+    /* Applebot-Extended est refuse, Applebot ne doit pas l'etre : on
+       cherche donc le nom suivi d'une fin de ligne, pas le nom seul. */
+    const refuse = new RegExp("^User-agent:\\s*" + moteur + "\\s*(#|$)", "mi");
+    if (refuse.test(texte)) {
+      throw new Error(moteur + " est refuse : la documentation sortirait " +
+        "des resultats de recherche");
+    }
+  }
+  return "4 moteurs verifies";
+});
+
 /* =========================================================== paquet */
 
 titre("Paquet");
@@ -298,15 +365,17 @@ controle("une page npm existe", () => {
 if (process.argv.includes("--publication")) {
   titre("Avant publication");
 
-  controle("aucun gabarit a renseigner dans package.json", () => {
-    const brut = lire("package.json");
-    if (brut.indexOf("A-RENSEIGNER") >= 0) {
-      const lignes = brut.split("\n")
-        .filter((l) => l.indexOf("A-RENSEIGNER") >= 0)
-        .map((l) => l.trim());
-      throw new Error(lignes.join(" | "));
-    }
-  });
+  for (const manifeste of ["package.json", "amorce/package.json"]) {
+    controle("aucun gabarit a renseigner dans " + manifeste, () => {
+      const brut = lire(manifeste);
+      if (brut.indexOf("A-RENSEIGNER") >= 0) {
+        const lignes = brut.split("\n")
+          .filter((l) => l.indexOf("A-RENSEIGNER") >= 0)
+          .map((l) => l.trim());
+        throw new Error(lignes.join(" | "));
+      }
+    });
+  }
 
   controle("conditions de reutilisation arretees", () => {
     const texte = lire("LISEZMOI-PAQUET.txt");

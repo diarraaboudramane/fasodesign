@@ -1829,6 +1829,171 @@
   }
 
   /* -----------------------------------------------------------
+     Consentement au dépôt de traceurs
+
+     Ce que la charte prend en charge : recueillir la décision, la
+     conserver, la restituer, et prévenir le service. Ce qu'elle ne
+     prend pas en charge : déposer ou retirer les traceurs eux-mêmes,
+     qui appartiennent au service et à lui seul.
+
+     La décision est conservée dans un cookie et non dans le stockage
+     local, pour deux raisons. Le serveur doit pouvoir la lire avant
+     d'écrire sa page, sans quoi il servirait une mesure d'audience à
+     un usager qui l'a refusée. Et un cookie porte une échéance, ce
+     que le stockage local ne sait pas faire : la décision expire
+     d'elle-même au bout de six mois, et la question est reposée.
+
+     Ce cookie-là ne demande pas de consentement : il est ce qui
+     permet d'honorer le refus. Le supprimer reviendrait à redemander
+     indéfiniment.
+     ----------------------------------------------------------- */
+
+  var CLE_CONSENTEMENT = "faso-consentement";
+  var DUREE_CONSENTEMENT = 15552000;            // six mois, en secondes
+
+  function lireCookie(nom) {
+    if (!NAVIGATEUR) return null;
+    var morceaux = document.cookie ? document.cookie.split(";") : [];
+    for (var i = 0; i < morceaux.length; i++) {
+      var paire = morceaux[i].trim();
+      if (paire.indexOf(nom + "=") === 0) {
+        return decodeURIComponent(paire.slice(nom.length + 1));
+      }
+    }
+    return null;
+  }
+
+  function ecrireCookie(nom, valeur, duree) {
+    if (!NAVIGATEUR) return;
+    /* SameSite=Lax suffit : la décision n'a pas à voyager avec une
+       requête venue d'un autre site. Secure dès que la page est
+       servie en https, ce qui est la règle pour un téléservice. */
+    var morceaux = [
+      nom + "=" + encodeURIComponent(valeur),
+      "Max-Age=" + duree,
+      "Path=/",
+      "SameSite=Lax"
+    ];
+    if (location.protocol === "https:") morceaux.push("Secure");
+    document.cookie = morceaux.join("; ");
+  }
+
+  /* La décision est un objet : une clé par finalité, plus la date.
+     Un service qui ajoute une finalité n'invalide pas les décisions
+     déjà prises, il constate seulement qu'elle est absente. */
+  function lireConsentement() {
+    var brut = lireCookie(CLE_CONSENTEMENT);
+    if (!brut) return null;
+    try {
+      var decision = JSON.parse(brut);
+      return decision && typeof decision === "object" ? decision : null;
+    } catch (e) {
+      return null;                              // cookie illisible
+    }
+  }
+
+  function definirConsentement(finalites) {
+    var decision = {};
+    for (var cle in finalites) {
+      if (Object.prototype.hasOwnProperty.call(finalites, cle)) {
+        decision[cle] = !!finalites[cle];
+      }
+    }
+    decision.date = new Date().toISOString().slice(0, 10);
+    ecrireCookie(CLE_CONSENTEMENT, JSON.stringify(decision), DUREE_CONSENTEMENT);
+
+    /* Le service écoute cette annonce pour déposer ou retirer ses
+       traceurs. La charte ne le fait pas à sa place : elle ne sait
+       pas ce qu'il emploie. */
+    if (NAVIGATEUR) diffuser(document.documentElement, "consentement", decision);
+    return decision;
+  }
+
+  function oublierConsentement() {
+    ecrireCookie(CLE_CONSENTEMENT, "", 0);
+    if (NAVIGATEUR) diffuser(document.documentElement, "consentement", null);
+  }
+
+  function initConsentement(racine) {
+    $$("[data-consentement]", racine).forEach(function (bandeau) {
+      if (!nouveau(bandeau, "consentement")) return;
+
+      var finalites = function () {
+        return $$("[data-finalite]", bandeau);
+      };
+
+      function fermer() {
+        bandeau.hidden = true;
+        /* Le focus revient au document plutôt que de rester sur un
+           élément masqué, où il disparaîtrait pour un lecteur
+           d'écran. */
+        var apres = $("[data-rouvre-consentement]") || document.body;
+        if (apres && apres.focus) apres.focus();
+      }
+
+      function enregistrer(valeur) {
+        var choix = {};
+        finalites().forEach(function (c) {
+          var nom = c.getAttribute("data-finalite");
+          choix[nom] = valeur === null ? !!c.checked : valeur;
+          c.checked = choix[nom];
+        });
+        /* Sans case déclarée, le bandeau ne porte qu'une finalité
+           implicite : la mesure d'audience. */
+        if (!finalites().length) choix.mesure = valeur === null ? false : valeur;
+        definirConsentement(choix);
+        fermer();
+      }
+
+      $$("[data-consentement-tout]", bandeau).forEach(function (b) {
+        b.addEventListener("click", function () { enregistrer(true); });
+      });
+      $$("[data-consentement-rien]", bandeau).forEach(function (b) {
+        b.addEventListener("click", function () { enregistrer(false); });
+      });
+      $$("[data-consentement-choix]", bandeau).forEach(function (b) {
+        b.addEventListener("click", function () { enregistrer(null); });
+      });
+
+      /* Le réglage détaillé n'est qu'un dépliage : pas de seconde
+         fenêtre à gérer, pas de focus à enfermer. */
+      $$("[data-consentement-regler]", bandeau).forEach(function (b) {
+        var detail = $("[data-consentement-detail]", bandeau);
+        if (!detail) return;
+        b.addEventListener("click", function () {
+          var ouvert = !detail.hidden;
+          detail.hidden = ouvert;
+          b.setAttribute("aria-expanded", String(!ouvert));
+        });
+      });
+
+      var decision = lireConsentement();
+      if (decision) {
+        finalites().forEach(function (c) {
+          c.checked = !!decision[c.getAttribute("data-finalite")];
+        });
+        bandeau.hidden = true;
+      } else {
+        bandeau.hidden = false;
+      }
+    });
+
+    /* Rouvrir la question, depuis un pied de page par exemple. La
+       loi impose que le choix puisse être repris à tout moment. */
+    $$("[data-rouvre-consentement]", racine).forEach(function (lien) {
+      if (!nouveau(lien, "rouvre-consentement")) return;
+      lien.addEventListener("click", function (ev) {
+        ev.preventDefault();
+        var bandeau = $("[data-consentement]");
+        if (!bandeau) return;
+        bandeau.hidden = false;
+        var premier = $(FOCUSABLES, bandeau);
+        if (premier) premier.focus();
+      });
+    });
+  }
+
+  /* -----------------------------------------------------------
      Centre de notifications
      ----------------------------------------------------------- */
   function initCentreNotifications(racine) {
@@ -2011,6 +2176,7 @@
     initPaginations(zone);
     initFiltres(zone);
     initExports(zone);
+    initConsentement(zone);
     initCentreNotifications(zone);
     initCalendriers(zone);
     initCompteurs(zone);
@@ -2081,6 +2247,15 @@
   var Faso = {
     notifier: notifier,
     appliquerTheme: appliquerTheme,
+
+    /* Consentement au dépôt de traceurs. lire() rend null tant que
+       l'usager n'a pas répondu, ce qui n'est pas la même chose qu'un
+       refus : tant que null, aucun traceur non essentiel. */
+    consentement: {
+      lire: lireConsentement,
+      definir: definirConsentement,
+      oublier: oublierConsentement
+    },
     initialiser: initialiser,
     observer: observer,
     versCsv: versCsv,
@@ -2112,6 +2287,7 @@
       filtres: initFiltres,
       exports: initExports,
       encarts: initEncarts,
+      consentement: initConsentement,
       centreNotifications: initCentreNotifications,
       calendriers: initCalendriers,
       compteurs: initCompteurs,

@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
 <link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/armoiries.svg">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body>
 
@@ -506,6 +508,80 @@
     </section>
 
     <!-- ===================================================== -->
+    <section class="doc-section" id="stockage">
+      <h2>Ce que la charte dépose sur l'appareil</h2>
+      <p class="doc-section-intro">
+        Un système qui impose le consentement aux services doit commencer par
+        déclarer ce qu'il dépose lui-même. La charte écrit deux choses, et rien
+        d'autre&nbsp;: aucun identifiant, aucune mesure, aucun appel vers un tiers.
+      </p>
+
+      <div class="fs-tableau-cadre">
+        <table class="fs-tableau">
+          <thead>
+            <tr>
+              <th>Ce qui est écrit</th><th>Où</th><th>Combien de temps</th>
+              <th>Consentement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>faso-theme</code><br><span class="fs-faible">« dark » ou « light »</span></td>
+              <td>Stockage local</td>
+              <td>Jusqu'à effacement par l'usager</td>
+              <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
+            </tr>
+            <tr>
+              <td><code>faso-consentement</code><br><span class="fs-faible">la décision, finalité par finalité</span></td>
+              <td>Cookie, <code>SameSite=Lax</code>, <code>Secure</code> en https</td>
+              <td>Six mois, puis la question est reposée</td>
+              <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="doc-note fs-mt-6">
+        Ces deux écritures ne demandent pas de consentement, et la raison est la
+        même dans les deux cas&nbsp;: elles ne servent qu'à exécuter ce que l'usager a
+        demandé. Le thème est un réglage qu'il a posé lui-même. La décision de
+        consentement est ce qui permet d'honorer son refus&nbsp;; ne pas la conserver
+        reviendrait à reposer la question indéfiniment.
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Ce que la charte ne fait jamais</h3>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Aucun identifiant d'appareil ni de session n'est créé par la charte.</li>
+          <li>Aucune mesure d'audience n'est incluse. Celle du service lui appartient,
+              et n'est déposée qu'après une réponse.</li>
+          <li>Aucun appel réseau vers un tiers&nbsp;: les polices, les icônes et
+              l'emblème sont servis par le domaine du service.</li>
+          <li>Le stockage est toujours protégé&nbsp;: en navigation privée ou sur un site
+              bloqué, la lecture échoue sans que la page en souffre.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Ce qui revient au service</h3>
+        <p class="doc-bloc-note">
+          Un téléservice dépose d'autres choses que la charte ne connaît pas&nbsp;:
+          cookie de session, jeton anti-falsification de formulaire, mesure
+          d'audience, lecteur vidéo. Les trois premiers lui sont nécessaires et ne se
+          demandent pas&nbsp;; ils doivent néanmoins figurer dans sa politique de
+          confidentialité. Le reste passe par le
+          <a href="composants-metier.html#confiance">bandeau de consentement</a>.
+        </p>
+        <p class="doc-bloc-note">
+          La protection des données à caractère personnel relève au Burkina Faso d'une
+          autorité de contrôle dédiée. Les obligations déclaratives d'un téléservice,
+          la durée de conservation et les mentions de sa politique de confidentialité
+          s'apprécient au regard du cadre national&nbsp;: la charte fournit le
+          composant et le comportement, pas la qualification juridique.
+        </p>
+      </div>
+    </section>
+
     <section class="doc-section" id="conformite">
       <h2>Déclaration de conformité</h2>
       <p class="doc-section-intro">
@@ -661,6 +737,23 @@
             lisait la nouvelle valeur à l'écran et le formulaire partait avec
             l'ancienne. La charte écrit désormais par l'accesseur du prototype, ce qui
             est sans effet pour les cadriciels qui n'ont rien installé.
+          </li>
+          <li>
+            <strong>Consentement réellement géré.</strong> Le bandeau existait mais
+            n'était qu'une image&nbsp;: trois boutons sans comportement, aucune décision
+            conservée, et un texte qui promettait &laquo;&nbsp;votre choix est conservé
+            six mois&nbsp;&raquo; alors que rien ne conservait. Un service qui recopiait
+            ce balisage obtenait un bandeau qui reparaissait à chaque page. La
+            décision est désormais recueillie finalité par finalité, conservée six
+            mois dans un cookie <code>SameSite=Lax</code>, restituée par
+            <code>Faso.consentement.lire()</code> et annoncée par
+            <code>fs:consentement</code>. Le dépôt des traceurs reste au service.
+          </li>
+          <li>
+            <strong>Ce que la charte dépose est déclaré.</strong> Elle écrivait le
+            thème dans le stockage local depuis le début sans qu'aucune page ne le
+            dise. Une section le déclare, avec la durée et le motif pour lequel ces
+            deux écritures ne demandent pas de consentement.
           </li>
           <li>
             <strong>Une seule composition pour toutes les marques.</strong> Le filet

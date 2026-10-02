@@ -10,8 +10,30 @@ ou s'installent comme une dépendance ordinaire.
 
 ## Installation
 
+Pour un projet qui démarre, une commande écrit les fichiers de départ et
+installe la charte :
+
 ```bash
-npm install @gouv-bf/charte-graphique
+npm create @govbf/fasodesign@latest
+```
+
+Elle demande le dossier, le type de projet — `statique`, `react`, `angular` ou
+`laravel` — et le dépôt npm interne si le service en emploie un. Tout peut se
+donner sur la ligne de commande :
+
+```bash
+npm create @govbf/fasodesign@latest mon-service -- \
+  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui
+```
+
+La charte porte les armoiries, le drapeau et la devise de l'État : la commande
+rappelle les conditions d'emploi et demande de les accepter avant d'installer
+quoi que ce soit. Sur une chaîne d'intégration, `FASODESIGN_ACCEPTE_LICENCE=oui`.
+
+Pour un projet déjà commencé :
+
+```bash
+npm install @govbf/fasodesign
 ```
 
 Selon le dépôt retenu par l'administration, le projet déclare l'espace de noms —
@@ -19,7 +41,7 @@ et lui seul, le reste des dépendances continuant d'aller là où il allait :
 
 ```ini
 # .npmrc, à la racine du projet
-@gouv-bf:registry=https://depot.fasodesign.gov.bf/
+@govbf:registry=https://depot.chartegraphique.gov.bf/
 ```
 
 Les cinq dépôts possibles et leurs implications sont comparés dans la page
@@ -28,10 +50,10 @@ Intégration, section « Publier et servir en ligne ».
 Puis, dans le projet :
 
 ```js
-import '@gouv-bf/charte-graphique/css/tokens.css';
-import '@gouv-bf/charte-graphique/css/faso.css';
-import '@gouv-bf/charte-graphique/css/icones.css';
-import Faso from '@gouv-bf/charte-graphique';
+import '@govbf/fasodesign/css/tokens.css';
+import '@govbf/fasodesign/css/faso.css';
+import '@govbf/fasodesign/css/icones.css';
+import Faso from '@govbf/fasodesign';
 
 Faso.observer();   // une fois, au démarrage de l'application
 ```
@@ -55,13 +77,18 @@ puisent leurs repères dans `icones.css`.
 
 | Chemin | Contenu |
 | --- | --- |
-| `@gouv-bf/charte-graphique` | Comportements, avec leurs déclarations TypeScript |
+| `@govbf/fasodesign` | Comportements, avec leurs déclarations TypeScript |
 | `…/css/tokens.css` | 193 jetons, thèmes clair et sombre, déclarations de polices |
 | `…/css/faso.css` | 65 composants |
 | `…/css/icones.css` | 35 icônes, appliquées en masque CSS |
 | `…/amorce` | Pose le thème retenu avant le premier rendu |
 | `…/jetons.json` | Les jetons, valeurs résolues, pour les outils de conception |
-| `…/img/armoiries.svg` | Emblème vectoriel |
+| `…/img/armoiries.svg` | Grand format, à partir de 64 px |
+| `…/img/armoiries-moyen.svg` | Moyen format, 32 à 64 px, un tiers plus léger |
+| `…/img/armoiries-ecu.svg` | Petit format, 16 à 32 px : l'écu seul |
+| `…/img/armoiries-gris.svg` | Impression en une seule encre, photocopie |
+| `…/img/armoiries-512.png` … `-64.png` | Bureautique, courriel, icône d'application |
+| `…/img/favicon.svg` | Mini format, 16 px et en dessous : le drapeau et son étoile |
 | `…/polices/*` | Archivo et Inter, variables, sous-ensemble latin, licences comprises |
 | `…/android/*` | Ressources Android produites depuis les mêmes jetons |
 
@@ -128,16 +155,41 @@ npm test
 
 Syntaxe, balisage des pages, classes orphelines, bonne formation des SVG et des
 ressources Android, correspondance des jetons, cohérence du paquet, contraste,
-et six suites de comportements. C'est ce qui doit passer avant chaque
-publication.
+refus des collecteurs, et neuf suites de comportements. C'est ce qui doit passer
+avant chaque publication.
 
 ```bash
 npm run jetons     # régénère assets/jetons.json depuis tokens.css
 npm run android    # régénère android/ depuis tokens.css
+npm run robots     # régénère robots.txt, le fragment nginx et le .htaccess
 ```
 
-`tokens.css` est la source faisant foi : les deux autres en sont des
-projections, jamais modifiées à la main.
+`tokens.css` est la source faisant foi pour les deux premiers, la liste
+d'agents de `outils/robots.js` pour le troisième : les fichiers produits ne se
+modifient jamais à la main, et `npm test` refuse de les laisser diverger.
+
+---
+
+## Robots et fouille de données
+
+Cinquante-quatre agents sont refusés en production : collecteurs
+d'entraînement de modèles, assistants, aspirateurs de site et scanners de
+vulnérabilité. Le refus tient en trois couches, et il vaut mieux savoir ce que
+chacune arrête :
+
+| Couche | Portée |
+|---|---|
+| `robots.txt` | Une demande. Respectée par les grandes maisons, lue par les autres pour savoir où regarder. |
+| Refus par nom | Ce qui s'annonce. `GPTBot` reçoit `403` ; un agent qui se déclare Firefox passe. |
+| Débit limité | Ce qui insiste. Protège le serveur, pas le contenu. nginx seulement. |
+| `TDM-Reservation` | Rien techniquement : la réserve de fouille au sens du protocole TDM du W3C a une portée juridique. |
+
+Les moteurs de recherche restent autorisés. Un système de conception que
+personne ne trouve ne sert personne, et les refuser retirerait la documentation
+des résultats sans gêner un seul collecteur d'entraînement. La page
+Intégration détaille les deux réglages à faire avant la mise en production :
+les adresses de supervision, et le sort des assistants déclenchés par une
+personne.
 
 ---
 

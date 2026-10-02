@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{nom}}</title>
+<meta name="description" content="Service de l'administration burkinabè.">
+
+<!-- Pose le thème retenu avant le premier rendu, pour éviter le
+     clignotement clair d'une page réglée en sombre. À retirer si le
+     service ne propose pas le thème sombre. -->
+<script src="node_modules/@govbf/fasodesign/assets/js/faso-amorce.js"></script>
+
+<!-- L'ordre compte : les jetons d'abord, la feuille du projet en
+     dernier. Les trois feuilles sont obligatoires et solidaires. -->
+<link rel="stylesheet" href="node_modules/@govbf/fasodesign/assets/css/tokens.css">
+<link rel="stylesheet" href="node_modules/@govbf/fasodesign/assets/css/faso.css">
+<link rel="stylesheet" href="node_modules/@govbf/fasodesign/assets/css/icones.css">
+
+<link rel="icon" href="node_modules/@govbf/fasodesign/assets/img/favicon.svg">
+</head>
+<body>
+
+<a class="fs-evitement" href="#contenu">Aller au contenu</a>
+
+<!-- Le bandeau d'identification officielle, puis le filet national.
+     Ils marquent l'appartenance à l'État et ne se retouchent pas. -->
+<div class="fs-bandeau">
+  <div class="fs-conteneur">Site officiel de l'administration burkinabè</div>
+</div>
+
+<header class="fs-conteneur" style="padding-block: var(--espace-6);">
+  <div class="fs-marque">
+    <img src="node_modules/@govbf/fasodesign/assets/img/armoiries.svg"
+         alt="Armoiries du Burkina Faso" style="height: 56px;">
+    <div>
+      <p class="fs-marque-nom">Burkina Faso</p>
+      <p class="fs-marque-devise">La Patrie ou la Mort, nous Vaincrons</p>
+    </div>
+  </div>
+</header>
+
+<div class="fs-filet"></div>
+
+<main id="contenu" class="fs-conteneur" style="padding-block: var(--espace-10);">
+
+  <h1>{{nom}}</h1>
+  <p class="fs-chapeau fs-mesure">
+    Remplacez ce texte par la présentation du service. La mesure de lecture
+    est tenue par <code>.fs-mesure</code>.
+  </p>
+
+  <div class="fs-actions fs-mt-6">
+    <a class="fs-btn fs-btn--principal" href="#">Commencer la démarche</a>
+    <a class="fs-btn fs-btn--secondaire" href="#">Pièces à fournir</a>
+  </div>
+
+  <div class="fs-encart fs-encart--info fs-mt-8">
+    <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+    <div class="fs-encart-corps">
+      <p class="fs-encart-titre">Par où continuer</p>
+      <p>
+        Les composants, les gabarits et les règles d'emploi sont documentés sur
+        chartegraphique.gov.bf. Aucun script n'est à appeler : la charte s'initialise
+        au chargement.
+      </p>
+    </div>
+  </div>
+
+</main>
+
+<footer class="fs-conteneur" style="padding-block: var(--espace-8);">
+  <p class="fs-legende">
+    {{nom}} — administration burkinabè.
+    <a href="#" data-rouvre-consentement>Gestion des cookies</a>
+  </p>
+</footer>
+
+<script src="node_modules/@govbf/fasodesign/assets/js/faso.js" defer></script>
+</body>
+</html>

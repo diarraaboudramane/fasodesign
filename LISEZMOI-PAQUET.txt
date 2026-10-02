@@ -11,7 +11,18 @@ CE QUE CONTIENT CE PAQUET
   assets/js/faso-amorce.js  Pose le theme avant le premier rendu
   assets/js/faso.d.ts       Declarations TypeScript
   assets/polices/           Archivo et Inter, variables, latin
-  assets/img/armoiries.svg  Emblème vectoriel
+  assets/img/armoiries.svg  Grand format, a partir de 64 px
+  assets/img/armoiries-moyen.svg
+                            Moyen format, 32 a 64 px
+  assets/img/armoiries-ecu.svg
+                            Petit format, 16 a 32 px : l'ecu seul
+  assets/img/armoiries-gris.svg
+                            Impression en une encre, photocopie
+  assets/img/armoiries-*.png
+                            512, 256, 128 et 64 px, pour la
+                            bureautique et le courriel
+  assets/img/favicon.svg    Icone d'onglet : le drapeau et son
+                            etoile, seule marque lisible a 16 px
   assets/img/icones.svg     Memes traces, pour les outils de conception
   assets/jetons.json        193 jetons, valeurs resolues, produits
                             depuis tokens.css par outils/jetons.js
@@ -26,23 +37,36 @@ composants puisent leurs reperes dans icones.css.
 
 INSTALLATION
 
+  Pour un projet qui demarre, une commande ecrit les fichiers de
+  depart et installe la charte :
+
+    npm create @govbf/fasodesign@latest
+
+  Elle demande le dossier, le type de projet (statique, react,
+  angular, laravel) et le depot npm interne s'il y en a un. Elle
+  rappelle les conditions d'emploi et demande de les accepter avant
+  d'installer quoi que ce soit ; sur une chaine d'integration,
+  FASODESIGN_ACCEPTE_LICENCE=oui.
+
+  Pour un projet deja commence, l'installation est ordinaire.
+
   Le paquet peut etre servi par cinq depots distants differents :
   le registre public, le depot d'une forge, un Verdaccio heberge au
   Burkina Faso, le depot d'une forge interne, ou aucun depot du tout
   (archive ou depot Git). La page Integration les compare.
 
   Quel que soit le depot, la declaration se fait par espace de noms :
-  seuls les paquets @gouv-bf y sont demandes.
+  seuls les paquets @govbf y sont demandes.
 
     # .npmrc du projet
-    @gouv-bf:registry=https://depot.fasodesign.gov.bf/
+    @govbf:registry=https://depot.chartegraphique.gov.bf/
 
   Voir la page « Integration » de la documentation. En resume :
 
-    import '@gouv-bf/charte-graphique/css/tokens.css';
-    import '@gouv-bf/charte-graphique/css/faso.css';
-    import '@gouv-bf/charte-graphique/css/icones.css';
-    import Faso from '@gouv-bf/charte-graphique';
+    import '@govbf/fasodesign/css/tokens.css';
+    import '@govbf/fasodesign/css/faso.css';
+    import '@govbf/fasodesign/css/icones.css';
+    import Faso from '@govbf/fasodesign';
 
     Faso.observer();   // une fois, au demarrage de l'application
 

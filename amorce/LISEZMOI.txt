@@ -1,0 +1,63 @@
+PREPARATION D'UN PROJET AVEC LA CHARTE GRAPHIQUE
+DE L'ADMINISTRATION BURKINABE
+Version 2.0 — septembre 2026
+
+
+CE QUE FAIT CET OUTIL
+
+  npm create @govbf/fasodesign@latest
+
+  Il pose trois questions, ecrit les fichiers de depart et installe
+  @govbf/fasodesign dans le dossier choisi. Il ne s'installe pas
+  lui-meme : npm le telecharge, l'execute une fois, puis l'oublie.
+
+  Sans question, pour une chaine d'integration :
+
+    FASODESIGN_ACCEPTE_LICENCE=oui \
+      npm create @govbf/fasodesign@latest mon-service -- \
+      --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui
+
+  Types disponibles : statique, react, angular, laravel.
+
+
+CE QUI EST ECRIT
+
+  statique   index.html, une page complete avec le bandeau officiel,
+             le filet national et le pied de page, plus LISEZMOI.md.
+
+  autres     src/charte.js, ou resources/js/charte.js pour Laravel :
+             les trois feuilles de styles dans l'ordre, et l'appel
+             d'observation. Plus LISEZMOI.md.
+
+  Dans tous les cas, un package.json minimal s'il n'y en a pas, et
+  un .npmrc si un depot interne a ete indique.
+
+  Rien n'est ecrit dans un dossier qui existe deja et n'est pas vide.
+
+
+CONDITIONS D'EMPLOI
+
+  La charte porte les armoiries du Burkina Faso, le drapeau national
+  et la devise de l'Etat. Ce sont des symboles de souverainete.
+
+  L'outil demande d'accepter les conditions avant d'installer quoi
+  que ce soit. Cette acceptation engage a n'employer la charte que
+  pour un service de l'administration burkinabe ou pour le compte
+  de celle-ci, a ne pas modifier les emblemes, leurs couleurs ni
+  leurs proportions, et a ne pas laisser croire a un caractere
+  officiel la ou il n'y en a pas.
+
+  Le detail des licences figure dans LISEZMOI-PAQUET.txt du paquet
+  @govbf/fasodesign et dans la page Gouvernance de la documentation.
+
+
+LICENCE DE CET OUTIL
+
+  Memes conditions que le paquet @govbf/fasodesign. Reutilisable par
+  les administrations publiques ; les conditions precises relevent
+  de l'autorite de tutelle du systeme, qui reste a designer.
+
+
+DOCUMENTATION
+
+  https://chartegraphique.gov.bf

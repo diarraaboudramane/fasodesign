@@ -1,0 +1,37 @@
+{
+  "name": "@govbf/create-fasodesign",
+  "version": "2.0.0",
+  "description": "Prépare un projet employant la charte graphique de l'administration burkinabè.",
+  "homepage": "https://chartegraphique.gov.bf/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://A-RENSEIGNER/charte-graphique.git",
+    "directory": "amorce"
+  },
+  "bugs": {
+    "url": "https://chartegraphique.gov.bf/issues"
+  },
+  "license": "SEE LICENSE IN LISEZMOI.txt",
+  "type": "commonjs",
+  "bin": {
+    "create-fasodesign": "./index.js"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "gabarits",
+    "LISEZMOI.txt"
+  ],
+  "keywords": [
+    "fasodesign",
+    "charte-graphique",
+    "burkina-faso",
+    "service-public"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

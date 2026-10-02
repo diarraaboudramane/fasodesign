@@ -82,6 +82,16 @@ export interface TextesFaso {
   [cle: string]: string | string[];
 }
 
+/**
+ * Décision de consentement : une clé par finalité déclarée dans le
+ * balisage par `data-finalite`, plus la date d'enregistrement.
+ */
+export interface DecisionConsentement {
+  /** Jour de l'enregistrement, au format AAAA-MM-JJ. */
+  date: string;
+  [finalite: string]: boolean | string;
+}
+
 export interface Faso {
   /** Version du système, alignée sur celle du paquet. */
   readonly version: string;
@@ -142,6 +152,26 @@ export interface Faso {
    * l'initialisation, jamais à remplacer.
    */
   readonly textes: TextesFaso;
+
+  /**
+   * Consentement au dépôt de traceurs.
+   *
+   * La charte recueille la décision, la conserve six mois dans un
+   * cookie et la restitue. Elle ne dépose ni ne retire aucun traceur :
+   * cela appartient au service, qui écoute `fs:consentement`.
+   */
+  readonly consentement: {
+    /**
+     * La décision, ou `null` tant que l'usager n'a pas répondu.
+     * `null` n'est pas un refus : c'est une absence de réponse, et
+     * aucun traceur non essentiel ne doit être déposé dans cet état.
+     */
+    lire(): DecisionConsentement | null;
+    /** Enregistre une décision et prévient le service. */
+    definir(finalites: Record<string, boolean>): DecisionConsentement;
+    /** Efface la décision : la question sera reposée. */
+    oublier(): void;
+  };
 
   /**
    * Comportements pris isolément. Exposés pour la documentation

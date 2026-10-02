@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
 <link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/armoiries.svg">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body>
 
@@ -102,11 +104,61 @@
       <div class="doc-bloc">
         <h3>Formats de l'emblème</h3>
         <p class="doc-bloc-note">
-          L'emblème est livré en vectoriel. C'est la seule forme qui reste nette du
-          favicon de 16&nbsp;px à l'affiche imprimée, et la seule compatible avec le
-          principe de contrainte réseau. Le fichier pèse 45&nbsp;Ko une fois compressé,
-          contre 916&nbsp;Ko pour le raster dont il est issu, soit vingt fois moins sur
-          une connexion facturée au volume.
+          L'emblème complet cesse d'être lisible bien avant le favicon. Ses onze
+          tracés, ses deux chevaux et sa devise demandent de la place. En dessous de
+          64&nbsp;px il perd ses détails, en dessous de 32&nbsp;px il n'est plus qu'une
+          tache. Le système livre donc <strong>quatre formats gradués</strong>, chacun
+          avec sa plage d'emploi, plus une version en niveaux de gris et des
+          exports matriciels.
+        </p>
+
+        <p class="doc-bloc-note">
+          Tous sont vectoriels. Le fichier de référence pèse 45&nbsp;Ko une fois
+          compressé, contre 916&nbsp;Ko pour le raster dont il est issu, soit vingt fois
+          moins sur une connexion facturée au volume.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Les quatre formats, du plus complet au plus réduit</caption>
+            <thead>
+              <tr><th>Format</th><th>Fichier</th><th>Plage d'emploi</th><th>Ce qu'il montre</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Grand</strong></td>
+                <td><code>armoiries.svg</code><br><span class="fs-faible">191&nbsp;Ko</span></td>
+                <td>À partir de 64&nbsp;px, impression, affiche</td>
+                <td>L'emblème complet : écu, chevaux, lances, banderoles et devise.</td>
+              </tr>
+              <tr>
+                <td><strong>Moyen</strong></td>
+                <td><code>armoiries-moyen.svg</code><br><span class="fs-faible">118&nbsp;Ko</span></td>
+                <td>32 à 64&nbsp;px, en-tête de page</td>
+                <td>Le même dessin, géométrie allégée d'une passe. Indiscernable de la
+                    référence à ces tailles, un tiers plus léger.</td>
+              </tr>
+              <tr>
+                <td><strong>Petit</strong></td>
+                <td><code>armoiries-ecu.svg</code><br><code>armoiries-ecu-32.png</code></td>
+                <td>16 à 32&nbsp;px, liste, pastille</td>
+                <td>L'écu seul, découpé suivant sa silhouette. Le drapeau et l'étoile
+                    restent lisibles là où les chevaux ne le sont plus.</td>
+              </tr>
+              <tr>
+                <td><strong>Mini</strong></td>
+                <td><code>favicon.svg</code><br><span class="fs-faible">504&nbsp;octets</span></td>
+                <td>16&nbsp;px et en dessous, onglet</td>
+                <td>Le drapeau et son étoile, sans écu. La seule marque qui tienne dans
+                    un carré de seize pixels.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="fs-mt-8">Tailles d'emploi</h4>
+        <p class="doc-bloc-note">
+          Où l'emblème se place dans une page, et avec quel format à chaque fois.
         </p>
 
         <div class="doc-demo" data-libelle="Tailles d'emploi">
@@ -130,10 +182,93 @@
           </div>
         </div>
 
+        <p class="fs-legende fs-mt-4">
+          Ces quatre emplois montrent le format de référence, comme à l'origine. À
+          partir de 56&nbsp;px le format moyen convient aussi bien pour un tiers de
+          poids en moins, et à 32&nbsp;px le petit format se lit mieux. Le choix
+          relève de l'autorité qui garde les armoiries.
+        </p>
+
+        <h4 class="fs-mt-8">Les quatre formats côte à côte</h4>
+
+        <div class="doc-demo fs-mt-6" data-libelle="Formats gradués">
+          <div class="doc-demo-scene" style="align-items: flex-end; gap: var(--espace-8);">
+            <div class="doc-variante">
+              <img src="assets/img/armoiries.svg" alt="" style="height: 96px;">
+              <span class="doc-variante-nom">Grand</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/armoiries-moyen.svg" alt="" style="height: 48px;">
+              <span class="doc-variante-nom">Moyen</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/armoiries-ecu.svg" alt="" style="height: 28px;">
+              <span class="doc-variante-nom">Petit</span>
+            </div>
+            <div class="doc-variante">
+              <img src="assets/img/favicon.svg" alt="" style="height: 16px;">
+              <span class="doc-variante-nom">Mini</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          Le petit format n'est pas un emblème redessiné. Le fichier de référence est
+          une vectorisation par nappes de tons, sans objet séparable : y retirer des
+          couches efface le dessin au lieu de le simplifier, et en redessiner un
+          reviendrait à modifier un symbole de l'État. La silhouette de l'écu a donc
+          été relevée sur le dessin lui-même, puis employée comme découpe. Un vrai
+          emblème simplifié, s'il en faut un, relève d'une décision graphique et de
+          l'autorité qui garde les armoiries.
+        </div>
+
+        <div class="fs-tableau-cadre fs-mt-6">
+          <table class="fs-tableau">
+            <caption>Les six fichiers livrés, et l'emploi de chacun</caption>
+            <thead>
+              <tr><th>Fichier</th><th>Emploi</th><th class="fs-num">Poids</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>armoiries.svg</code></td>
+                <td>Référence. Tout usage numérique et imprimé à partir de 32&nbsp;px.</td>
+                <td class="fs-num">191&nbsp;Ko</td>
+              </tr>
+              <tr>
+                <td><code>armoiries-gris.svg</code></td>
+                <td>Impression en une seule encre, photocopie, télécopie, gravure.</td>
+                <td class="fs-num">191&nbsp;Ko</td>
+              </tr>
+              <tr>
+                <td><code>armoiries-512.png</code><br><code>…-256</code>, <code>…-128</code>, <code>…-64</code></td>
+                <td>Bureautique et courriel, où le vectoriel n'est pas rendu de façon
+                    fiable. 512 pour une vignette de partage, 256 pour un en-tête de
+                    document, 128 pour une signature, 64 pour une liste.</td>
+                <td class="fs-num">180 à 8&nbsp;Ko</td>
+              </tr>
+              <tr>
+                <td><code>favicon.svg</code></td>
+                <td>Icone de l'onglet. Ce n'est pas l'emblème mais le drapeau et son
+                    étoile, seule marque lisible à 16&nbsp;px.</td>
+                <td class="fs-num">504&nbsp;o</td>
+              </tr>
+              <tr>
+                <td><code>favicon-32.png</code><br><code>favicon-180.png</code></td>
+                <td>Repli pour les navigateurs anciens, et carré tactile d'iOS.</td>
+                <td class="fs-num">0,5 et 2,4&nbsp;Ko</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <dl class="fs-definitions fs-mt-6">
           <div>
             <dt><code>armoiries.svg</code></dt>
             <dd>Emblème vectoriel. Format de référence pour tout usage numérique et imprimé. 191&nbsp;Ko, 45&nbsp;Ko compressé.</dd>
+          </div>
+          <div>
+            <dt>Taille minimale de l'emblème complet</dt>
+            <dd>32&nbsp;px de hauteur. En deçà, l'écu cesse d'être identifiable et la devise devient illisible&nbsp;: on passe au petit format.</dd>
           </div>
           <div>
             <dt>Dimensions</dt>
@@ -141,9 +276,21 @@
           </div>
           <div>
             <dt>Taille minimale</dt>
-            <dd>32&nbsp;px de hauteur. En deçà, l'écu cesse d'être identifiable et la devise devient illisible.</dd>
+            <dd>64&nbsp;px pour le grand format, 32 pour le moyen, 16 pour le petit. En deçà de chaque seuil, on passe au format suivant.</dd>
+          </div>
+          <div>
+            <dt>Production</dt>
+            <dd>Les cinq déclinaisons sont produites depuis la référence par <code>node outils/embleme.js</code>. Aucune n'est retouchée à la main.</dd>
           </div>
         </dl>
+
+        <div class="doc-note fs-mt-6">
+          Le passage en niveaux de gris ne se fait pas par conversion des luminances.
+          Le rouge du drapeau donnerait <code>#707070</code> et le vert
+          <code>#717171</code>, soit un seul gris pour deux couleurs, et l'écu
+          perdrait son drapeau. Les trois teintes nationales reçoivent donc trois
+          tons séparés, du plus sombre pour le rouge au plus clair pour l'or.
+        </div>
 
         <div class="doc-note fs-mt-6">
           <strong>Recalage chromatique.</strong> L'écu porte le drapeau national. La

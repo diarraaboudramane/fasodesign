@@ -1,0 +1,149 @@
+# Charte graphique de l'administration burkinabe
+# https://chartegraphique.gov.bf
+#
+# Engendre par outils/robots.js. Ne pas modifier a la main :
+# la liste des agents est tenue dans cet outil, et « node
+# outils/robots.js --verifier » fait partie de la recette.
+
+
+# Collecte pour l'entraînement de modèles
+#
+# Ces collecteurs ramassent les pages pour en nourrir des modèles.
+# La documentation de la charte est publique, mais sa reprise dans un
+# modèle n'est pas une publication : elle en détache le contenu de son
+# autorité et de sa version. Refusée.
+
+# OpenAI
+User-agent: GPTBot
+# Anthropic
+User-agent: ClaudeBot
+# Anthropic, ancien nom
+User-agent: anthropic-ai
+# Anthropic, ancien nom
+User-agent: Claude-Web
+# Common Crawl, source de nombreux corpus
+User-agent: CCBot
+# Gemini
+User-agent: Google-Extended
+# Apple Intelligence
+User-agent: Applebot-Extended
+# Meta
+User-agent: Meta-ExternalAgent
+# Meta
+User-agent: FacebookBot
+# ByteDance
+User-agent: Bytespider
+# Amazon
+User-agent: Amazonbot
+# Perplexity
+User-agent: PerplexityBot
+# revente de données extraites
+User-agent: Diffbot
+# revente de corpus
+User-agent: Omgilibot
+# revente de corpus
+User-agent: Omgili
+# Cohere
+User-agent: cohere-ai
+# Allen Institute
+User-agent: AI2Bot
+# collecte d'images
+User-agent: ImagesiftBot
+# Timpi
+User-agent: Timpibot
+# You.com
+User-agent: YouBot
+# Huawei
+User-agent: PanguBot
+# collecte de corpus
+User-agent: Kangaroo Bot
+# Webz.io
+User-agent: Webzio-Extended
+# Semrush, collecte pour modèles
+User-agent: SemrushBot-OCOB
+# bibliothèque d'extraction, souvent laissée telle quelle
+User-agent: Scrapy
+Disallow: /
+
+# Assistants, requête déclenchée par une personne
+#
+# Ceux-ci ne collectent pas : ils vont chercher une page parce qu'une
+# personne vient de la demander à un assistant. Les refuser refuse à
+# un agent de l'administration de faire lire la documentation par
+# l'outil qu'il emploie. Refusés ici parce que la commande était de
+# refuser l'IA ; c'est le groupe à rouvrir en premier si l'usage
+# interne le demande, en retirant ce bloc de la liste.
+
+# OpenAI, à la demande d'une personne
+User-agent: ChatGPT-User
+# OpenAI, index de recherche
+User-agent: OAI-SearchBot
+# Anthropic, à la demande d'une personne
+User-agent: Claude-User
+# Anthropic, index de recherche
+User-agent: Claude-SearchBot
+# Perplexity, à la demande d'une personne
+User-agent: Perplexity-User
+# Mistral, à la demande d'une personne
+User-agent: MistralAI-User
+# DuckDuckGo
+User-agent: DuckAssistBot
+Disallow: /
+
+# Aspirateurs de site
+#
+# Outils de recopie intégrale. Ils tirent le site entier en quelques
+# secondes et servent le plus souvent à en monter une copie ailleurs.
+# Une copie de la charte sous un autre domaine est un faux site de
+# l'administration.
+
+User-agent: HTTrack
+User-agent: WebCopier
+User-agent: Teleport
+User-agent: TeleportPro
+User-agent: WebZIP
+User-agent: Offline Explorer
+User-agent: SiteSnagger
+User-agent: WebReaper
+User-agent: Xenu
+User-agent: larbin
+User-agent: grub-client
+Disallow: /
+
+# Scanners de vulnérabilité
+#
+# Ils ne lisent pas le site, ils le sondent. Les refuser ne protège
+# de rien — un scanner sérieux ne s'annonce pas — mais vide le
+# journal du bruit de fond, ce qui rend visible ce qui compte.
+
+User-agent: Nikto
+User-agent: sqlmap
+User-agent: Nmap Scripting Engine
+User-agent: masscan
+User-agent: zgrab
+User-agent: WPScan
+User-agent: Nessus
+User-agent: acunetix
+User-agent: dirbuster
+User-agent: gobuster
+User-agent: Wfuzz
+Disallow: /
+
+# Tout le reste, moteurs de recherche compris.
+#
+# La documentation a vocation a etre trouvee : la refuser aux
+# moteurs la retirerait des resultats sans gener un seul
+# collecteur d'entrainement. Seuls quelques chemins sans interet
+# en recherche sont ecartes.
+#
+# Crawl-delay n'est pas lu par Google ; les autres le respectent,
+# et il suffit a etaler un parcours complet du site.
+
+User-agent: *
+# ressources Android, sans intérêt en recherche
+Disallow: /android/
+# dépôt de paquets, si Verdaccio est monté sous ce chemin
+Disallow: /npm/
+Crawl-delay: 5
+
+Sitemap: https://chartegraphique.gov.bf/sitemap.xml

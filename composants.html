@@ -12,7 +12,9 @@
 <link rel="stylesheet" href="assets/css/faso.css">
 <link rel="stylesheet" href="assets/css/icones.css">
 <link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/armoiries.svg">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
 </head>
 <body>
 
@@ -1662,15 +1664,32 @@
                 <span style="width:54%; background: var(--serie-1);">54&nbsp;%</span>
                 <span style="width:21%; background: var(--serie-2); color: var(--neutre-900);">21&nbsp;%</span>
                 <span style="width:18%; background: var(--serie-3);">18&nbsp;%</span>
-                <span style="width:7%;  background: var(--serie-4); color: var(--neutre-900);"></span>
+                <span style="width:7%;  background: var(--serie-4);"></span>
               </div>
 
               <div class="fs-repartition-legende">
-                <span style="--puce: var(--serie-1);">En instruction</span>
-                <span style="--puce: var(--serie-2);">Complément demandé</span>
-                <span style="--puce: var(--serie-3);">Validés</span>
-                <span style="--puce: var(--serie-4);">Rejetés</span>
+                <span style="--puce: var(--serie-1);">En instruction&nbsp;· 54&nbsp;%</span>
+                <span style="--puce: var(--serie-2);">Complément demandé&nbsp;· 21&nbsp;%</span>
+                <span style="--puce: var(--serie-3);">Validés&nbsp;· 18&nbsp;%</span>
+                <span style="--puce: var(--serie-4);">Rejetés&nbsp;· 7&nbsp;%</span>
               </div>
+
+              <details class="fs-graphe-donnees">
+                <summary>Consulter les données sous forme de tableau</summary>
+                <div class="fs-tableau-cadre">
+                  <table class="fs-tableau fs-tableau--compact">
+                    <thead>
+                      <tr><th>État</th><th class="fs-num">Dossiers</th><th class="fs-num">Part</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>En instruction</td><td class="fs-num">6&nbsp;739</td><td class="fs-num">54&nbsp;%</td></tr>
+                      <tr><td>Complément demandé</td><td class="fs-num">2&nbsp;621</td><td class="fs-num">21&nbsp;%</td></tr>
+                      <tr><td>Validés</td><td class="fs-num">2&nbsp;246</td><td class="fs-num">18&nbsp;%</td></tr>
+                      <tr><td>Rejetés</td><td class="fs-num">874</td><td class="fs-num">7&nbsp;%</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </details>
             </div>
           </div>
         </div>
@@ -1679,26 +1698,30 @@
           <div class="doc-demo-scene doc-demo-scene--pile">
             <div class="fs-graphe">
               <p class="fs-graphe-titre">Délai moyen de traitement</p>
-              <p class="fs-graphe-note">En jours ouvrés, de mars à septembre 2026.</p>
+              <p class="fs-graphe-note">En jours ouvrés, de mars à septembre 2026. Données d'exemple.</p>
 
-              <svg class="fs-courbe" viewBox="0 0 420 160" role="img"
-                   aria-label="Le délai moyen passe de 9 jours en mars à 3 jours en septembre, en baisse continue.">
+              <svg class="fs-courbe" viewBox="0 0 420 180" role="img"
+                   aria-label="Le délai moyen passe de 9 jours ouvrés en mars à 3 jours ouvrés en septembre 2026, en baisse chaque mois.">
                 <path class="fs-courbe-grille" d="M40 20h370M40 60h370M40 100h370"/>
                 <path class="fs-courbe-axe" d="M40 140h370"/>
-                <path class="fs-courbe-aire" d="M40 30 100 52 160 58 220 88 280 100 340 116 400 124V140H40Z"/>
-                <path class="fs-courbe-trace" d="M40 30 100 52 160 58 220 88 280 100 340 116 400 124"/>
+                <!-- Échelle linéaire : y = 140 - délai × (120 / 9), de 0 à 9 jours. -->
+                <path class="fs-courbe-aire" d="M40 20 100 41.333 160 48 220 76 280 86.667 340 94.667 400 100V140H40Z"/>
+                <path class="fs-courbe-trace" d="M40 20 100 41.333 160 48 220 76 280 86.667 340 94.667 400 100"/>
                 <g class="fs-courbe-point">
-                  <circle cx="40" cy="30" r="4"/><circle cx="100" cy="52" r="4"/>
-                  <circle cx="160" cy="58" r="4"/><circle cx="220" cy="88" r="4"/>
-                  <circle cx="280" cy="100" r="4"/><circle cx="340" cy="116" r="4"/>
-                  <circle cx="400" cy="124" r="4"/>
+                  <circle cx="40" cy="20" r="4"/><circle cx="100" cy="41.333" r="4"/>
+                  <circle cx="160" cy="48" r="4"/><circle cx="220" cy="76" r="4"/>
+                  <circle cx="280" cy="86.667" r="4"/><circle cx="340" cy="94.667" r="4"/>
+                  <circle cx="400" cy="100" r="4"/>
                 </g>
                 <g class="fs-courbe-etiquette" text-anchor="middle">
-                  <text x="40" y="155">Mars</text><text x="160" y="155">Mai</text>
-                  <text x="280" y="155">Juil.</text><text x="400" y="155">Sept.</text>
+                  <text x="40" y="168">Mars</text><text x="100" y="168">Avril</text>
+                  <text x="160" y="168">Mai</text><text x="220" y="168">Juin</text>
+                  <text x="280" y="168">Juil.</text><text x="340" y="168">Août</text>
+                  <text x="400" y="168">Sept.</text>
                 </g>
                 <g class="fs-courbe-etiquette" text-anchor="end">
                   <text x="32" y="24">9 j</text><text x="32" y="64">6 j</text><text x="32" y="104">3 j</text>
+                  <text x="32" y="144">0 j</text>
                 </g>
               </svg>
 
