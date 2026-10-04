@@ -82,7 +82,7 @@ fi
 
 # ------------------------------------------------------ prérequis locaux
 dire "Vérification des logiciels déjà installés"
-commandes="nginx git node npm systemctl runuser useradd"
+commandes="nginx git node npm curl systemctl runuser useradd"
 [ "$TLS" = local ] && commandes="$commandes certbot"
 for commande in $commandes; do
   command -v "$commande" >/dev/null 2>&1 || {
@@ -260,7 +260,8 @@ User=verdaccio
 # Adresse publique : les liens vers les archives restent en https même
 # si le TLS est terminé en amont de cette machine.
 Environment=VERDACCIO_PUBLIC_URL=https://$DOMAINE
-ExecStart=/var/lib/verdaccio/npm/bin/verdaccio --config /etc/verdaccio/verdaccio.yaml
+# Installation locale (--prefix) : l'exécutable est sous node_modules/.bin.
+ExecStart=/var/lib/verdaccio/npm/node_modules/.bin/verdaccio --config /etc/verdaccio/verdaccio.yaml
 Restart=on-failure
 RestartSec=5
 # Le depot n'a besoin d'ecrire que dans son propre stockage.
@@ -275,12 +276,33 @@ WantedBy=multi-user.target
 UNIT
 
 systemctl daemon-reload
-systemctl enable --now verdaccio
+systemctl enable verdaccio
+systemctl restart verdaccio
+# Un service qui ne démarre pas ne se voit qu'en 502 côté nginx :
+# on le constate ici, avec son journal, plutôt qu'en production.
+for _ in $(seq 1 30); do
+  curl -fsS -o /dev/null http://127.0.0.1:4873/-/ping && break
+  sleep 1
+done
+curl -fsS -o /dev/null http://127.0.0.1:4873/-/ping || {
+  echo "Verdaccio ne répond pas sur 127.0.0.1:4873." >&2
+  journalctl -u verdaccio -n 30 --no-pager >&2
+  exit 1
+}
 
 # Ancienne configuration sur sous-domaine, remplacée par /npm/.
 rm -f /etc/nginx/sites-enabled/depot /etc/nginx/sites-available/depot
 
-nginx -t
+# Une autre configuration qui revendique le même nom l'emporte sur
+# celle-ci, et le site resterait invisible sans aucune erreur.
+VERIF_NGINX="$(nginx -t 2>&1)" || { echo "$VERIF_NGINX" >&2; exit 1; }
+echo "$VERIF_NGINX"
+if grep -q 'conflicting server name' <<<"$VERIF_NGINX"; then
+  echo "Une autre configuration nginx déclare déjà $DOMAINE :" >&2
+  nginx -T 2>/dev/null | grep -nE '^# configuration file|server_name' >&2
+  echo "La désactiver, puis relancer ce script." >&2
+  exit 1
+fi
 systemctl reload nginx
 
 # ------------------------------------------------------------ certificats
