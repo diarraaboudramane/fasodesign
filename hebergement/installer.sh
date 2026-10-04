@@ -177,8 +177,10 @@ grep -q 'conf\.d/\*\.conf' /etc/nginx/nginx.conf ||
 
 install -d /etc/nginx/snippets
 # Les règles de cache, de compression et d'en-têtes sont celles du
-# dépôt : une seule source, pas deux.
-sed "s#^root .*#root $CURRENT;#" "$SOURCE/hebergement/nginx.conf" \
+# dépôt : une seule source, pas deux. La racine est posée par le bloc
+# server ci-dessus : la laisser aussi dans le fragment la déclarerait
+# deux fois, et nginx refuse de démarrer.
+sed '/^[[:space:]]*root[[:space:]]/d' "$SOURCE/hebergement/nginx.conf" \
   > /etc/nginx/snippets/charte.conf
 
 ln -sf /etc/nginx/sites-available/charte /etc/nginx/sites-enabled/charte
