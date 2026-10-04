@@ -8,9 +8,10 @@
 #
 # Met en place deux choses sur la même machine :
 #
-#   le site de la charte, servi en statique sur chartegraphique.gov.bf ;
-#   le dépôt npm de l'administration, sur depot.chartegraphique.gov.bf,
-#   qui sert aussi de miroir au registre public.
+#   le site de la charte, servi en statique sur $DOMAINE ;
+#   le dépôt npm de l'administration, sous $DOMAINE/npm/, qui sert
+#   aussi de miroir au registre public. Il partage le nom et le
+#   certificat du site : aucun sous-domaine à déclarer.
 #
 # Les nouvelles versions sont construites à part puis activées par un
 # basculement de lien symbolique. Les versions précédentes restent
@@ -18,7 +19,6 @@
 set -euo pipefail
 
 DOMAINE="${DOMAINE:-chartegraphique-21.mtdpce-test.gov.bf}"
-DEPOT="${DEPOT:-depot.$DOMAINE}"
 COURRIEL="${COURRIEL:-}"
 RACINE="/var/www/charte"
 SOURCE="${SOURCE:-/opt/charte-graphique}"
@@ -42,8 +42,6 @@ trap nettoyer EXIT
 
 [[ "$DOMAINE" =~ ^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]] ||
   { echo "DOMAINE doit être un nom DNS valide." >&2; exit 1; }
-[[ "$DEPOT" =~ ^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]] ||
-  { echo "DEPOT doit être un nom DNS valide." >&2; exit 1; }
 [[ "$COURRIEL" =~ ^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$ ]] ||
   { echo "Renseigner COURRIEL avec une adresse valide pour activer HTTPS." >&2; exit 1; }
 [ -n "$DEPOT_GIT" ] ||
@@ -140,6 +138,31 @@ server {
     server_name $DOMAINE www.$DOMAINE;
     root $CURRENT;
     include /etc/nginx/snippets/charte.conf;
+
+    # Le dépôt npm, sous le même nom. « ^~ » l'emporte sur les
+    # emplacements par expression du fragment, et la limitation de
+    # débit des pages ne s'y applique pas : un « npm install » envoie
+    # des dizaines de requêtes d'un coup. Le refus des collecteurs, posé
+    # au niveau du bloc server par le fragment, s'y applique.
+    location = /npm {
+        return 301 /npm/;
+    }
+    location ^~ /npm/ {
+        # Une archive npm dépasse la limite par défaut de nginx.
+        client_max_body_size 50m;
+        proxy_pass http://127.0.0.1:4873/;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+
+        # add_header remplace le jeu hérité : sans CSP ici, l'interface
+        # de Verdaccio, qui emploie du script en ligne, reste utilisable.
+        add_header X-Content-Type-Options "nosniff" always;
+        add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+        add_header X-Frame-Options "DENY" always;
+        add_header X-Robots-Tag "noindex, noai, noimageai" always;
+    }
 }
 NGINX
 
@@ -179,7 +202,7 @@ install -d /etc/verdaccio
 [ -f /etc/verdaccio/htpasswd ] || : > /etc/verdaccio/htpasswd
 chown -R verdaccio:verdaccio /etc/verdaccio /var/lib/verdaccio
 
-cat > /etc/systemd/system/verdaccio.service <<'UNIT'
+cat > /etc/systemd/system/verdaccio.service <<UNIT
 [Unit]
 Description=Depot npm de l'administration burkinabe
 After=network.target
@@ -187,6 +210,9 @@ After=network.target
 [Service]
 Type=simple
 User=verdaccio
+# Adresse publique : les liens vers les archives restent en https même
+# si le TLS est terminé en amont de cette machine.
+Environment=VERDACCIO_PUBLIC_URL=https://$DOMAINE
 ExecStart=/var/lib/verdaccio/npm/bin/verdaccio --config /etc/verdaccio/verdaccio.yaml
 Restart=on-failure
 RestartSec=5
@@ -204,31 +230,8 @@ UNIT
 systemctl daemon-reload
 systemctl enable --now verdaccio
 
-cat > /etc/nginx/sites-available/depot <<NGINX
-server {
-    listen 80;
-    listen [::]:80;
-    server_name $DEPOT;
-
-    # Une archive npm depasse la limite par defaut de nginx.
-    client_max_body_size 50m;
-
-    # Le même refus que le site. Pas de limitation de débit : un
-    # « npm install » envoie des dizaines de requêtes d'un coup.
-    if (\$faso_collecteur) {
-        return 403;
-    }
-
-    location / {
-        proxy_pass http://127.0.0.1:4873/;
-        proxy_set_header Host \$host;
-        proxy_set_header X-Real-IP \$remote_addr;
-        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto \$scheme;
-    }
-}
-NGINX
-ln -sf /etc/nginx/sites-available/depot /etc/nginx/sites-enabled/depot
+# Ancienne configuration sur sous-domaine, remplacée par /npm/.
+rm -f /etc/nginx/sites-enabled/depot /etc/nginx/sites-available/depot
 
 nginx -t
 systemctl reload nginx
@@ -236,14 +239,14 @@ systemctl reload nginx
 # ------------------------------------------------------------ certificats
 dire "Certificats"
 certbot --nginx --non-interactive --agree-tos --redirect \
-  -m "$COURRIEL" -d "$DOMAINE" -d "www.$DOMAINE" -d "$DEPOT"
+  -m "$COURRIEL" -d "$DOMAINE" -d "www.$DOMAINE"
 
 # ------------------------------------------------------------------ fin
 dire "En place"
 cat <<FIN
 
   Site      https://$DOMAINE
-  Dépôt     https://$DEPOT
+  Dépôt     https://$DOMAINE/npm/
 
   Il reste deux gestes à faire à la main :
 

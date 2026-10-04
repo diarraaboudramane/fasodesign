@@ -10,7 +10,7 @@
 #   npm install -g verdaccio
 #   verdaccio --config verdaccio.yaml
 #
-# Derrière un nginx qui termine le TLS, sur depot.chartegraphique.gov.bf.
+# Derrière le nginx du site, qui termine le TLS, sous le chemin /npm/.
 #
 # Deux raisons de faire cela plutôt que de dépendre du seul registre
 # public :
@@ -76,6 +76,10 @@ listen: 127.0.0.1:4873
 
 server:
   keepAliveTimeout: 60
+
+# Servi sous /npm/ du domaine du site. L'adresse complète est donnée
+# par VERDACCIO_PUBLIC_URL dans le service systemd.
+url_prefix: /npm/
 
 web:
   title: Dépôt npm de l'administration burkinabè

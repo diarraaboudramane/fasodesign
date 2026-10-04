@@ -65,9 +65,14 @@ function compter(dossier) {
 
 /* Le dossier est refait à neuf : un fichier retiré du projet ne doit
    pas survivre dans le site parce qu'il traînait d'une construction
-   précédente. */
-fs.rmSync(SORTIE, { recursive: true, force: true });
+   précédente.
+   On vide le dossier sans le supprimer : en production, il est créé
+   par root dans un parent où le compte de construction ne peut pas
+   écrire, et ce compte n'a donc pas le droit de le retirer. */
 fs.mkdirSync(SORTIE, { recursive: true });
+for (const e of fs.readdirSync(SORTIE)) {
+  fs.rmSync(path.join(SORTIE, e), { recursive: true, force: true });
+}
 
 /* ------------------------------------------------ la documentation */
 

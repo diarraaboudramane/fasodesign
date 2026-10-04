@@ -146,8 +146,12 @@ if (plan) {
     path.join(RACINE, "hebergement", "installer.sh"), "utf8");
   verifier("l'installation pose faso-robots.conf dans conf.d",
     /install\b[^\n]*hebergement\/faso-robots\.conf[^\n]*\/etc\/nginx\/conf\.d\//.test(installeur));
+  /* Le depot npm vit sous /npm/ du bloc server du site : il herite du
+     refus des collecteurs que le fragment pose au niveau du server. */
+  const site = /cat > \/etc\/nginx\/sites-available\/charte <<NGINX\n([\s\S]*?)\nNGINX/.exec(installeur);
   verifier("le depot npm refuse aussi les collecteurs",
-    /server_name \$DEPOT;[\s\S]*?if \(\\\$faso_collecteur\)/.test(installeur));
+    !!site && /include \/etc\/nginx\/snippets\/charte\.conf;/.test(site[1]) &&
+      /location \^~ \/npm\/ \{/.test(site[1]));
 }
 
 console.log();
