@@ -3,7 +3,12 @@
 # Charte graphique de l'administration burkinabè
 # Installation sur une machine Debian 12 ou Ubuntu 24.04
 #
+#   Derrière un proxy qui termine le TLS (cas par défaut) :
 #   sudo env DEPOT_GIT=https://hote/organisation/charte.git \
+#     PROXY_AMONT=10.0.0.1 bash hebergement/installer.sh
+#
+#   Machine exposée directement, certificat posé ici :
+#   sudo env DEPOT_GIT=https://hote/organisation/charte.git TLS=local \
 #     COURRIEL=administration@domaine.gov.bf bash hebergement/installer.sh
 #
 # Met en place deux choses sur la même machine :
@@ -20,6 +25,11 @@ set -euo pipefail
 
 DOMAINE="${DOMAINE:-chartegraphique-21.mtdpce-test.gov.bf}"
 COURRIEL="${COURRIEL:-}"
+# « amont » : un proxy termine le TLS et parle HTTP à cette machine.
+# « local » : cette machine reçoit Internet et obtient son certificat.
+TLS="${TLS:-amont}"
+# Adresses du proxy amont (IP ou CIDR, séparées par des espaces).
+PROXY_AMONT="${PROXY_AMONT:-}"
 RACINE="/var/www/charte"
 SOURCE="${SOURCE:-/opt/charte-graphique}"
 DEPOT_GIT="${DEPOT_GIT:-}"
@@ -42,8 +52,23 @@ trap nettoyer EXIT
 
 [[ "$DOMAINE" =~ ^([a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$ ]] ||
   { echo "DOMAINE doit être un nom DNS valide." >&2; exit 1; }
-[[ "$COURRIEL" =~ ^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$ ]] ||
-  { echo "Renseigner COURRIEL avec une adresse valide pour activer HTTPS." >&2; exit 1; }
+case "$TLS" in
+  local)
+    [[ "$COURRIEL" =~ ^[^@[:space:]]+@[^@[:space:]]+\.[^@[:space:]]+$ ]] ||
+      { echo "Renseigner COURRIEL avec une adresse valide pour activer HTTPS." >&2; exit 1; }
+    ;;
+  amont)
+    # Sans l'adresse du proxy, tous les visiteurs ont la sienne : la
+    # limitation de débit des pages les compterait comme un seul.
+    [ -n "$PROXY_AMONT" ] ||
+      { echo "Renseigner PROXY_AMONT avec l'adresse du proxy qui termine le TLS." >&2; exit 1; }
+    for adresse in $PROXY_AMONT; do
+      [[ "$adresse" =~ ^[0-9a-fA-F.:]+(/[0-9]{1,3})?$ ]] ||
+        { echo "PROXY_AMONT : adresse invalide : $adresse" >&2; exit 1; }
+    done
+    ;;
+  *) echo "TLS vaut « amont » ou « local »." >&2; exit 1 ;;
+esac
 [ -n "$DEPOT_GIT" ] ||
   { echo "Renseigner DEPOT_GIT avec l'URL du dépôt." >&2; exit 1; }
 [[ "$VERDACCIO_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]] ||
@@ -57,7 +82,9 @@ fi
 
 # ------------------------------------------------------ prérequis locaux
 dire "Vérification des logiciels déjà installés"
-for commande in nginx git node npm certbot systemctl runuser useradd; do
+commandes="nginx git node npm systemctl runuser useradd"
+[ "$TLS" = local ] && commandes="$commandes certbot"
+for commande in $commandes; do
   command -v "$commande" >/dev/null 2>&1 || {
     echo "Commande requise absente : $commande. Installez-la avant de continuer." >&2
     exit 1
@@ -133,8 +160,10 @@ install -d /etc/nginx/sites-available /etc/nginx/sites-enabled
 
 cat > /etc/nginx/sites-available/charte <<NGINX
 server {
-    listen 80;
-    listen [::]:80;
+    # Serveur par défaut : un proxy amont peut transmettre un autre nom
+    # d'hôte que le domaine, et la machine ne sert que la charte.
+    listen 80 default_server;
+    listen [::]:80 default_server;
     server_name $DOMAINE www.$DOMAINE;
     root $CURRENT;
     include /etc/nginx/snippets/charte.conf;
@@ -183,7 +212,23 @@ install -d /etc/nginx/snippets
 sed '/^[[:space:]]*root[[:space:]]/d' "$SOURCE/hebergement/nginx.conf" \
   > /etc/nginx/snippets/charte.conf
 
+# Le site d'accueil de la distribution revendique lui aussi le rôle de
+# serveur par défaut : deux à la fois, nginx refuse de démarrer.
+rm -f /etc/nginx/sites-enabled/default
 ln -sf /etc/nginx/sites-available/charte /etc/nginx/sites-enabled/charte
+
+# Derrière un proxy, l'adresse du visiteur est dans X-Forwarded-For.
+# Elle n'est crue que si la requête vient du proxy déclaré.
+if [ "$TLS" = amont ]; then
+  {
+    echo "# Engendré par hebergement/installer.sh : proxy amont qui termine le TLS."
+    for adresse in $PROXY_AMONT; do echo "set_real_ip_from $adresse;"; done
+    echo "real_ip_header X-Forwarded-For;"
+    echo "real_ip_recursive on;"
+  } > /etc/nginx/conf.d/faso-proxy.conf
+else
+  rm -f /etc/nginx/conf.d/faso-proxy.conf
+fi
 
 # --------------------------------------------------------------- dépôt npm
 dire "Dépôt npm"
@@ -240,8 +285,12 @@ systemctl reload nginx
 
 # ------------------------------------------------------------ certificats
 dire "Certificats"
-certbot --nginx --non-interactive --agree-tos --redirect \
-  -m "$COURRIEL" -d "$DOMAINE" -d "www.$DOMAINE"
+if [ "$TLS" = local ]; then
+  certbot --nginx --non-interactive --agree-tos --redirect \
+    -m "$COURRIEL" -d "$DOMAINE" -d "www.$DOMAINE"
+else
+  echo "TLS terminé par le proxy amont ($PROXY_AMONT) : rien à faire ici."
+fi
 
 # ------------------------------------------------------------------ fin
 dire "En place"
@@ -260,7 +309,7 @@ cat <<FIN
        miroir ne se remplira pas
          curl -sS -o /dev/null -w '%{http_code}\\n' https://registry.npmjs.org/
 
-  Pour mettre à jour le site après une nouvelle version :
-    sudo bash $SOURCE/hebergement/installer.sh
+  Pour mettre à jour le site après une nouvelle version, relancer
+  ce script avec les mêmes variables.
 
 FIN
