@@ -1,80 +1,6 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Charte graphique de l'administration burkinabè</title>
-<meta name="description" content="Système de conception des services numériques de l'État burkinabè : fondations, composants d'interface, composants métier et gabarits institutionnels.">
-<!-- Pose le theme retenu avant le premier rendu, pour eviter
-     le clignotement clair d'une page reglee en sombre. -->
-<script src="assets/js/faso-amorce.js"></script>
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/faso.css">
-<link rel="stylesheet" href="assets/css/icones.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
-</head>
-<body>
+@extends('layouts.accueil')
 
-<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
-
-<!-- Bandeau d'identification officielle : premier élément de la page,
-     avant même la marque. L'usager doit pouvoir vérifier qu'il est sur
-     un service authentique avant de lire quoi que ce soit d'autre. -->
-<div class="fs-officiel">
-  <div class="fs-conteneur">
-    <span class="fs-officiel-sceau">Site officiel de l'administration burkinabè</span>
-    <span class="fs-masque-mobile">Domaine vérifié <code>gov.bf</code></span>
-  </div>
-</div>
-
-<div class="fs-filet"></div>
-
-<header class="fs-entete">
-  <div class="fs-conteneur">
-    <div class="fs-entete-haut">
-      <a class="fs-marque" href="index.html">
-        <img src="assets/img/armoiries.svg" alt="Armoiries du Burkina Faso">
-        <span class="fs-marque-texte">
-          <span class="fs-marque-pays">Burkina Faso</span>
-          <span class="fs-marque-devise">La Patrie ou la Mort, nous Vaincrons</span>
-          <span class="fs-marque-entite">Charte graphique des services numériques</span>
-        </span>
-      </a>
-
-      <div class="fs-entete-outils">
-        <button type="button" class="fs-btn fs-btn--fantome fs-btn--sm" data-bascule-theme aria-pressed="false">
-          <span data-theme-libelle>Thème sombre</span>
-        </button>
-        <a class="fs-btn fs-btn--secondaire fs-btn--sm fs-masque-mobile" href="fondations.html">Consulter la charte</a>
-      </div>
-    </div>
-  </div>
-
-  <nav class="fs-nav" id="nav-principale" aria-label="Navigation principale">
-    <div class="fs-conteneur">
-      <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm fs-nav-bascule"
-              data-bascule="nav-principale" aria-expanded="false" aria-controls="nav-principale"
-              style="margin-block: var(--espace-3);">
-        Menu
-      </button>
-      <ul class="fs-nav-liste">
-        <li><a class="fs-nav-lien" href="index.html" aria-current="page">Présentation</a></li>
-        <li><a class="fs-nav-lien" href="fondations.html">Fondations</a></li>
-        <li><a class="fs-nav-lien" href="composants.html">Composants de base</a></li>
-        <li><a class="fs-nav-lien" href="composants-metier.html">Composants métier</a></li>
-        <li><a class="fs-nav-lien" href="gabarits.html">Gabarits</a></li>
-        <li><a class="fs-nav-lien" href="accessibilite.html">Accessibilité</a></li>
-        <li><a class="fs-nav-lien" href="integration.html">Intégration</a></li>
-        <li><a class="fs-nav-lien" href="gouvernance.html">Gouvernance</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<main id="contenu">
+@section('contenu')
 
   <section class="doc-heros">
     <div class="fs-conteneur">
@@ -89,11 +15,17 @@
         </p>
 
         <div class="fs-actions">
-          <a class="fs-btn fs-btn--principal fs-btn--lg" href="fondations.html">Ouvrir les fondations</a>
-          <a class="fs-btn fs-btn--secondaire fs-btn--lg" href="composants.html">Parcourir les composants</a>
+          <a class="fs-btn fs-btn--principal fs-btn--lg" href="{{ page('fondations') }}">Ouvrir les fondations</a>
+          <a class="fs-btn fs-btn--secondaire fs-btn--lg" href="{{ page('composants') }}">Parcourir les composants</a>
         </div>
       </div>
 
+@unless (config('charte.export'))
+{{-- La recherche demande un serveur : le site exporté, statique, ne la
+     propose pas, et garde le drapeau seul dans sa colonne. --}}
+      <div class="doc-heros-cote">
+        @include('partials.recherche', ['id' => 'recherche-accueil', 'libelleMasque' => true])
+@endunless
       <!-- Composition dérivée du drapeau : une toile tissée aux rayures du
            Faso Dan Fani, et par-dessus une carte rouge et verte portant
            l'étoile. Ce n'est pas le drapeau, c'est ce qu'il inspire. -->
@@ -126,6 +58,9 @@
                    points="260,190 275.9,238.2 326.6,238.4 285.7,268.3 301.1,316.6 260,287 218.9,316.6 234.3,268.3 193.4,238.4 244.1,238.2"/>
         </g>
       </svg>
+@unless (config('charte.export'))
+      </div>
+@endunless
     </div>
   </section>
 
@@ -165,7 +100,7 @@
       </div>
 
       <div class="doc-entrees">
-        <a class="doc-entree" href="fondations.html">
+        <a class="doc-entree" href="{{ page('fondations') }}">
           <span class="doc-entree-num">01&nbsp;— Fondations</span>
           <span class="doc-entree-titre">Emblème, couleurs, typographie</span>
           <span class="doc-entree-texte">
@@ -175,7 +110,7 @@
           <span class="doc-entree-compte">Palette · Typographie · Grille · Formes · Motif tissé</span>
         </a>
 
-        <a class="doc-entree doc-entree--or" href="composants.html">
+        <a class="doc-entree doc-entree--or" href="{{ page('composants') }}">
           <span class="doc-entree-num">02&nbsp;— Composants de base</span>
           <span class="doc-entree-titre">Sept familles, HTML et CSS natifs</span>
           <span class="doc-entree-texte">
@@ -185,7 +120,7 @@
           <span class="doc-entree-compte">Actions · Formulaires · Navigation · Information · Données · Retour · Superposition</span>
         </a>
 
-        <a class="doc-entree doc-entree--rouge" href="composants-metier.html">
+        <a class="doc-entree doc-entree--rouge" href="{{ page('composants-metier') }}">
           <span class="doc-entree-num">03&nbsp;— Composants métier</span>
           <span class="doc-entree-titre">Ce qui n'existe que dans le service public</span>
           <span class="doc-entree-texte">
@@ -195,7 +130,7 @@
           <span class="doc-entree-compte">Confiance numérique · Parcours administratif</span>
         </a>
 
-        <a class="doc-entree" href="gabarits.html">
+        <a class="doc-entree" href="{{ page('gabarits') }}">
           <span class="doc-entree-num">04&nbsp;— Gabarits</span>
           <span class="doc-entree-titre">Les assemblages de référence</span>
           <span class="doc-entree-texte">
@@ -205,7 +140,7 @@
           <span class="doc-entree-compte">Neuf gabarits validés</span>
         </a>
 
-        <a class="doc-entree doc-entree--or" href="accessibilite.html">
+        <a class="doc-entree doc-entree--or" href="{{ page('accessibilite') }}">
           <span class="doc-entree-num">05&nbsp;— Accessibilité</span>
           <span class="doc-entree-titre">Les exigences non négociables</span>
           <span class="doc-entree-texte">
@@ -215,7 +150,7 @@
           <span class="doc-entree-compte">WCAG 2.1 AA · Rédaction</span>
         </a>
 
-        <a class="doc-entree doc-entree--rouge" href="gouvernance.html">
+        <a class="doc-entree doc-entree--rouge" href="{{ page('gouvernance') }}">
           <span class="doc-entree-num">06&nbsp;— Gouvernance</span>
           <span class="doc-entree-titre">Qui décide, et comment ça évolue</span>
           <span class="doc-entree-texte">
@@ -379,21 +314,21 @@
               <h3 class="fs-carte-titre" style="font-size: var(--taille-md);">Ressources</h3>
               <ul class="fs-liste-nue" style="font-size: var(--taille-sm);">
                 <li style="margin-bottom: var(--espace-3);">
-                  <a class="fs-lien-fichier" href="assets/jetons.json" download>
+                  <a class="fs-lien-fichier" href="{{ ressource('assets/jetons.json') }}" download>
                     Jetons du système
                     <span class="fs-poids">JSON&nbsp;— 20&nbsp;Ko</span>
                   </a>
                   <br><span class="fs-faible">193 jetons, valeurs résolues et surcharges du thème sombre</span>
                 </li>
                 <li style="margin-bottom: var(--espace-3);">
-                  <a class="fs-lien-fichier" href="assets/img/icones.svg" download>
+                  <a class="fs-lien-fichier" href="{{ ressource('assets/img/icones.svg') }}" download>
                     Jeu d'icônes
                     <span class="fs-poids">SVG&nbsp;— 8&nbsp;Ko</span>
                   </a>
                   <br><span class="fs-faible">35 tracés, grille de 24&nbsp;px</span>
                 </li>
                 <li>
-                  <a class="fs-lien-fichier" href="assets/img/armoiries.svg" download>
+                  <a class="fs-lien-fichier" href="{{ ressource('assets/img/armoiries.svg') }}" download>
                     Emblème vectoriel
                     <span class="fs-poids">SVG&nbsp;— 191&nbsp;Ko</span>
                   </a>
@@ -447,7 +382,7 @@
                 développement. Il reste dérivé d'un rendu raster&nbsp;: pour une mise en
                 production, la version de référence doit être obtenue auprès du
                 Secrétariat général du Gouvernement.
-                <a href="fondations.html#marque">Voir les formats et les tailles</a>.
+                <a href="{{ page('fondations') }}#marque">Voir les formats et les tailles</a>.
               </p>
             </div>
           </div>
@@ -456,71 +391,4 @@
     </div>
   </section>
 
-</main>
-
-<footer class="fs-pied">
-  <div class="fs-tissage" style="--tissage-fond: var(--surface-enfoncee);"></div>
-  <div class="fs-conteneur">
-    <div class="fs-pied-corps">
-      <div>
-        <a class="fs-marque" href="index.html" style="padding: 0;">
-          <img src="assets/img/armoiries.svg" alt="">
-          <span class="fs-marque-texte">
-            <span class="fs-marque-pays">Burkina Faso</span>
-            <span class="fs-marque-devise">La Patrie ou la Mort, nous Vaincrons</span>
-          </span>
-        </a>
-        <p class="fs-legende fs-mt-4" style="max-width: 36ch;">
-          Charte graphique des services numériques de l'administration burkinabè.
-          Document de référence à destination des équipes de conception et de
-          développement des ministères et établissements publics.
-        </p>
-      </div>
-
-      <div>
-        <p class="fs-pied-titre">Le système</p>
-        <ul>
-          <li><a href="fondations.html">Fondations</a></li>
-          <li><a href="composants.html">Composants de base</a></li>
-          <li><a href="composants-metier.html">Composants métier</a></li>
-          <li><a href="gabarits.html">Gabarits</a></li>
-          <li><a href="accessibilite.html">Accessibilité</a></li>
-          <li><a href="integration.html">Intégration</a></li>
-          <li><a href="gouvernance.html">Gouvernance</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="fs-pied-titre">Ressources</p>
-        <ul>
-          <li><a href="#principes">Principes directeurs</a></li>
-          <li><a href="fondations.html#marque">Usage de l'emblème</a></li>
-          <li><a href="accessibilite.html#redaction">Ton administratif</a></li>
-          <li><a href="composants-metier.html#confiance">Confiance numérique</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <p class="fs-pied-titre">Obligations</p>
-        <ul>
-          <li><a href="#">Mentions légales</a></li>
-          <li><a href="#">Politique de confidentialité</a></li>
-          <li><a href="#">Déclaration d'accessibilité</a></li>
-          <li><a href="#">Plan du site</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="fs-pied-bas">
-      <p>Version 2.0&nbsp;— Septembre 2026</p>
-      <p>Sauf mention contraire, les contenus de cette charte sont réutilisables par les administrations publiques.</p>
-    </div>
-  </div>
-</footer>
-
-<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
-     avant que les comportements n'y ajoutent leurs attributs. -->
-<script src="assets/js/docs.js" defer></script>
-<script src="assets/js/faso.js" defer></script>
-</body>
-</html>
+@endsection

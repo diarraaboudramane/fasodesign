@@ -15,8 +15,10 @@
 "use strict";
 
 const fs = require("fs");
+const os = require("os");
 const path = require("path");
 const { execFileSync } = require("child_process");
+const { exporterPages } = require("./pages");
 
 const RACINE = path.join(__dirname, "..");
 let echecs = 0;
@@ -59,7 +61,8 @@ function lire(p) {
 titre("Syntaxe");
 
 for (const f of ["assets/js/faso.js", "assets/js/faso-amorce.js",
-  "assets/js/docs.js", "outils/jetons.js", "outils/android.js"]) {
+  "assets/js/docs.js", "outils/jetons.js", "outils/android.js",
+  "outils/pages.js", "outils/site.js"]) {
   controle(f, () => {
     execFileSync(process.execPath, ["--check", path.join(RACINE, f)]);
   });
@@ -115,10 +118,25 @@ function balises(source) {
   if (reste.length) throw new Error("non fermees : " + reste.map((b) => b.nom).join(", "));
 }
 
-const pages = fs.readdirSync(RACINE).filter((f) => f.endsWith(".html"));
+/* Les pages sont des vues Blade : on vérifie ce que l'application en
+   écrit, c'est-à-dire exactement ce que « npm run site » publie. */
+const EXPORT = fs.mkdtempSync(path.join(os.tmpdir(), "fasodesign-pages-"));
+process.on("exit", () => fs.rmSync(EXPORT, { recursive: true, force: true }));
+let pages = [];
+
+controle("les vues Blade s'ecrivent en HTML", () => {
+  exporterPages(EXPORT);
+  pages = fs.readdirSync(EXPORT).filter((f) => f.endsWith(".html"));
+  if (!pages.length) throw new Error("aucune page ecrite");
+  return pages.length + " pages";
+});
+
+function lirePage(p) {
+  return fs.readFileSync(path.join(EXPORT, p), "utf8");
+}
 
 controle("balisage bien forme", () => {
-  for (const p of pages) balises(lire(p));
+  for (const p of pages) balises(lirePage(p));
   return pages.length + " pages";
 });
 
@@ -129,7 +147,7 @@ controle("aucune classe orpheline", () => {
 
   const employees = new Set();
   for (const p of pages) {
-    const m = lire(p).match(/class="[^"]*"/g) || [];
+    const m = lirePage(p).match(/class="[^"]*"/g) || [];
     for (const a of m) {
       for (const c of a.slice(7, -1).split(/\s+/)) if (c) employees.add(c);
     }
@@ -145,7 +163,7 @@ controle("etiquettes des barres synchrones", () => {
   for (const p of pages) {
     const motif = /<div class="fs-barre[^"]*" data-valeur="([\d.]+)">([\s\S]*?)<\/div>/g;
     let m;
-    while ((m = motif.exec(lire(p))) !== null) {
+    while ((m = motif.exec(lirePage(p))) !== null) {
       const libelle = /fs-barre-valeur">([^<]*)</.exec(m[2]);
       if (!libelle) continue;
       const texte = libelle[1].replace(/[ \s]|&nbsp;/g, "");
@@ -422,6 +440,29 @@ for (const essai of fs.readdirSync(path.join(RACINE, "tests")).sort()) {
     execFileSync(process.execPath, [path.join(RACINE, "tests", essai)], { stdio: "pipe" });
   });
 }
+
+/* ================================================= application Laravel */
+
+titre("Application");
+
+controle("essais de l'application (phpunit)", () => {
+  const php = process.env.PHP || "php";
+  const phpunit = path.join(RACINE, "vendor", "phpunit", "phpunit", "phpunit");
+  if (!fs.existsSync(phpunit)) {
+    throw new Error("phpunit absent : lancer « composer install » a la racine du projet");
+  }
+  let sortie;
+  try {
+    sortie = execFileSync(php, [phpunit, "--colors=never"],
+      { cwd: RACINE, stdio: "pipe", encoding: "utf8" });
+  } catch (e) {
+    const lignes = String(e.stdout || e.message).split("\n")
+      .filter((l) => /^\d+\)|FAILURES|Tests:/.test(l));
+    throw new Error(lignes.join(" | ") || "echec");
+  }
+  const bilan = /OK \((\d+) tests?, (\d+) assertions?\)/.exec(sortie);
+  return bilan ? bilan[1] + " essais, " + bilan[2] + " assertions" : "";
+});
 
 /* ============================================================= bilan */
 

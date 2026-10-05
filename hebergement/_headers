@@ -17,7 +17,7 @@
   X-Frame-Options: DENY
   X-Robots-Tag: noai, noimageai
   TDM-Reservation: 1
-  Content-Security-Policy: default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate

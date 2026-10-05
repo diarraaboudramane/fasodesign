@@ -425,12 +425,20 @@ const SORTIES = [
     chemin: path.join(HEBERGEMENT, "apache.htaccess"),
     contenu: poser(path.join(HEBERGEMENT, "apache.htaccess"), apacheBloc()),
   },
+  /* Le même refus pour l'application Laravel servie par Apache : sa
+     racine est public/, où hebergement/apache.htaccess ne s'applique
+     pas. */
+  {
+    chemin: path.join(RACINE, "public", ".htaccess"),
+    contenu: poser(path.join(RACINE, "public", ".htaccess"), apacheBloc()),
+  },
 ];
 
 /* nginx.conf porte deux blocs : le refus, en tete du bloc server, et
-   la limitation, dans la location des pages. */
-{
-  const chemin = path.join(HEBERGEMENT, "nginx.conf");
+   la limitation, dans la location des pages. nginx-laravel.conf, qui
+   sert l'application au lieu du site exporte, porte les deux memes. */
+for (const fichier of ["nginx.conf", "nginx-laravel.conf"]) {
+  const chemin = path.join(HEBERGEMENT, fichier);
   let texte = fs.readFileSync(chemin, "utf8");
   for (const [marque, bloc] of [
     ["refus", nginxServer()],
@@ -439,7 +447,7 @@ const SORTIES = [
     const d = texte.indexOf(DEBUT + " " + marque);
     const f = texte.indexOf(FIN + " " + marque);
     if (d < 0 || f < 0 || f < d) {
-      throw new Error("nginx.conf n'a pas les reperes " + marque);
+      throw new Error(fichier + " n'a pas les reperes " + marque);
     }
     texte = texte.slice(0, d) + DEBUT + " " + marque + bloc +
       "    " + FIN + " " + marque + texte.slice(f + (FIN + " " + marque).length);

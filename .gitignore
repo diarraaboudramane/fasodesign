@@ -9,3 +9,11 @@
 *.tgz
 
 node_modules/
+
+# Application Laravel de la documentation.
+/vendor/
+.env
+.env.backup
+.phpunit.result.cache
+/.phpunit.cache
+/storage/*.key

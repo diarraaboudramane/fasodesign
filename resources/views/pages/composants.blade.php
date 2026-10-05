@@ -1,66 +1,10 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Composants de base&nbsp;— Charte graphique de l'administration burkinabè</title>
-<meta name="description" content="Catalogue des composants d'interface du système de conception de l'État burkinabè : actions, formulaires, navigation, information, données, retour système et superposition.">
-<!-- Pose le theme retenu avant le premier rendu, pour eviter
-     le clignotement clair d'une page reglee en sombre. -->
-<script src="assets/js/faso-amorce.js"></script>
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/faso.css">
-<link rel="stylesheet" href="assets/css/icones.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
-</head>
-<body>
+@extends('layouts.documentation')
 
-<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
-
-<div class="doc-barre">
-  <a class="doc-menu-marque" href="index.html">
-    <img src="assets/img/armoiries.svg" alt="">
-    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-  </a>
-  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
-</div>
-
-<div class="doc-page">
-
-  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
-    <a class="doc-menu-marque" href="index.html">
-      <img src="assets/img/armoiries.svg" alt="">
-      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-    </a>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Le système</p>
-      <ul>
-        <li><a href="index.html">Présentation</a></li>
-        <li><a href="fondations.html">Fondations</a></li>
-        <li><a href="composants.html" aria-current="page">Composants de base</a></li>
-        <li><a href="composants-metier.html">Composants métier</a></li>
-        <li><a href="gabarits.html">Gabarits</a></li>
-        <li><a href="accessibilite.html">Accessibilité</a></li>
-        <li><a href="integration.html">Intégration</a></li>
-        <li><a href="gouvernance.html">Gouvernance</a></li>
-      </ul>
-    </div>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Familles</p>
-      <div class="fs-sommaire" data-sommaire-auto></div>
-    </div>
-  </nav>
-
-  <main class="doc-corps" id="contenu" data-teinte="or">
+@section('contenu')
 
     <div class="doc-entete">
       <nav class="doc-fil" aria-label="Fil d'Ariane">
-        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Composants de base</span>
+        <a href="{{ page('index') }}">Charte</a> <span aria-hidden="true">/</span> <span>Composants de base</span>
       </nav>
       <h1>Composants de base</h1>
       <p class="fs-chapeau">
@@ -1260,7 +1204,7 @@
             <div class="fs-tableau-bloc" data-pagination="5" data-filtres data-export="demandes">
 
               <div class="fs-impression-entete">
-                <img src="assets/img/armoiries.svg" alt="">
+                <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="">
                 <div>
                   <p class="fs-impression-titre">Demandes déposées</p>
                   <p class="fs-impression-meta">Direction générale de la modernisation de l'état civil</p>
@@ -2147,12 +2091,4 @@
       </div>
     </section>
 
-  </main>
-</div>
-
-<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
-     avant que les comportements n'y ajoutent leurs attributs. -->
-<script src="assets/js/docs.js" defer></script>
-<script src="assets/js/faso.js" defer></script>
-</body>
-</html>
+@endsection

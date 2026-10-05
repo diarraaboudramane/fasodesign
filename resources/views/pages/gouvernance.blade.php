@@ -1,66 +1,10 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gouvernance&nbsp;— Charte graphique de l'administration burkinabè</title>
-<meta name="description" content="Rôles, versionnement, cycle de vie des composants, procédure de contribution, dérogations et journal des versions du système de conception de l'État burkinabè.">
-<!-- Pose le theme retenu avant le premier rendu, pour eviter
-     le clignotement clair d'une page reglee en sombre. -->
-<script src="assets/js/faso-amorce.js"></script>
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/faso.css">
-<link rel="stylesheet" href="assets/css/icones.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
-</head>
-<body>
+@extends('layouts.documentation')
 
-<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
-
-<div class="doc-barre">
-  <a class="doc-menu-marque" href="index.html">
-    <img src="assets/img/armoiries.svg" alt="">
-    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-  </a>
-  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
-</div>
-
-<div class="doc-page">
-
-  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
-    <a class="doc-menu-marque" href="index.html">
-      <img src="assets/img/armoiries.svg" alt="">
-      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-    </a>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Le système</p>
-      <ul>
-        <li><a href="index.html">Présentation</a></li>
-        <li><a href="fondations.html">Fondations</a></li>
-        <li><a href="composants.html">Composants de base</a></li>
-        <li><a href="composants-metier.html">Composants métier</a></li>
-        <li><a href="gabarits.html">Gabarits</a></li>
-        <li><a href="accessibilite.html">Accessibilité</a></li>
-        <li><a href="integration.html">Intégration</a></li>
-        <li><a href="gouvernance.html" aria-current="page">Gouvernance</a></li>
-      </ul>
-    </div>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Sur cette page</p>
-      <div class="fs-sommaire" data-sommaire-auto></div>
-    </div>
-  </nav>
-
-  <main class="doc-corps" id="contenu">
+@section('contenu')
 
     <div class="doc-entete">
       <nav class="doc-fil" aria-label="Fil d'Ariane">
-        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Gouvernance</span>
+        <a href="{{ page('index') }}">Charte</a> <span aria-hidden="true">/</span> <span>Gouvernance</span>
       </nav>
       <h1>Gouvernance</h1>
       <p class="fs-chapeau">
@@ -548,6 +492,56 @@
         consentement est ce qui permet d'honorer son refus&nbsp;; ne pas la conserver
         reviendrait à reposer la question indéfiniment.
       </div>
+@unless (config('charte.export'))
+{{-- Le site exporté, statique, ne dépose rien de plus que la charte : ce
+     bloc ne vaut que pour l'application, qui sert cette page. --}}
+
+      <div class="doc-bloc">
+        <h3>Ce que ce site de documentation dépose en plus</h3>
+        <p class="doc-bloc-note">
+          Le tableau ci-dessus vaut pour la charte, dans n'importe quel service. Le
+          site que vous lisez ajoute ce qui suit, pour se protéger des robots et
+          recevoir vos messages. La même règle s'applique à lui&nbsp;: il le déclare.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr>
+                <th>Ce qui est écrit</th><th>Où</th><th>Combien de temps</th>
+                <th>Consentement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>charte_humain</code><br><span class="fs-faible">l'heure à laquelle la case anti-robot a été cochée, chiffrée</span></td>
+                <td>Cookie, <code>HttpOnly</code>, <code>SameSite=Lax</code></td>
+                <td>{{ intdiv(config('charte.verification.duree'), 60) }}&nbsp;heures, puis la case est redemandée</td>
+                <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
+              </tr>
+              <tr>
+                <td><code>charte_session</code> et <code>XSRF-TOKEN</code><br><span class="fs-faible">session et jeton anti-falsification</span></td>
+                <td>Cookies, pages Vérification et Nous écrire seulement</td>
+                <td>{{ config('session.lifetime') }}&nbsp;minutes d'inactivité</td>
+                <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
+              </tr>
+              <tr>
+                <td>Google reCAPTCHA<br><span class="fs-faible">la case « Je ne suis pas un robot »</span></td>
+                <td>Script et cadre servis par Google, pages Vérification et Nous écrire</td>
+                <td>Selon les règles de Google</td>
+                <td><span class="fs-badge fs-badge--alerte">Tiers</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="doc-bloc-note fs-mt-4">
+          Deux écarts aux règles de cette page en découlent, et il vaut mieux les
+          écrire&nbsp;: la case est un appel vers un tiers, Google, et elle demande
+          JavaScript, si bien que le site ne se lit plus sans lui. Les fichiers de la
+          charte, eux, restent servis sans case ni appel extérieur, et le site
+          exporté en fichiers statiques n'a ni l'un ni l'autre.
+        </p>
+      </div>
+@endunless
 
       <div class="doc-bloc">
         <h3>Ce que la charte ne fait jamais</h3>
@@ -570,7 +564,7 @@
           d'audience, lecteur vidéo. Les trois premiers lui sont nécessaires et ne se
           demandent pas&nbsp;; ils doivent néanmoins figurer dans sa politique de
           confidentialité. Le reste passe par le
-          <a href="composants-metier.html#confiance">bandeau de consentement</a>.
+          <a href="{{ page('composants-metier') }}#confiance">bandeau de consentement</a>.
         </p>
         <p class="doc-bloc-note">
           La protection des données à caractère personnel relève au Burkina Faso d'une
@@ -981,12 +975,4 @@
       </div>
     </section>
 
-  </main>
-</div>
-
-<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
-     avant que les comportements n'y ajoutent leurs attributs. -->
-<script src="assets/js/docs.js" defer></script>
-<script src="assets/js/faso.js" defer></script>
-</body>
-</html>
+@endsection

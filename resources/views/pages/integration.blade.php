@@ -1,66 +1,10 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Intégration&nbsp;— Charte graphique de l'administration burkinabè</title>
-<meta name="description" content="Intégrer la charte comme dépendance : npm, Composer, téléchargement. Cas détaillé d'Angular, rendu côté serveur, politique de sécurité, encapsulation des styles.">
-<!-- Pose le theme retenu avant le premier rendu, pour eviter
-     le clignotement clair d'une page reglee en sombre. -->
-<script src="assets/js/faso-amorce.js"></script>
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/faso.css">
-<link rel="stylesheet" href="assets/css/icones.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
-</head>
-<body>
+@extends('layouts.documentation')
 
-<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
-
-<div class="doc-barre">
-  <a class="doc-menu-marque" href="index.html">
-    <img src="assets/img/armoiries.svg" alt="">
-    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-  </a>
-  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
-</div>
-
-<div class="doc-page">
-
-  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
-    <a class="doc-menu-marque" href="index.html">
-      <img src="assets/img/armoiries.svg" alt="">
-      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-    </a>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Le système</p>
-      <ul>
-        <li><a href="index.html">Présentation</a></li>
-        <li><a href="fondations.html">Fondations</a></li>
-        <li><a href="composants.html">Composants de base</a></li>
-        <li><a href="composants-metier.html">Composants métier</a></li>
-        <li><a href="gabarits.html">Gabarits</a></li>
-        <li><a href="accessibilite.html">Accessibilité</a></li>
-        <li><a href="integration.html" aria-current="page">Intégration</a></li>
-        <li><a href="gouvernance.html">Gouvernance</a></li>
-      </ul>
-    </div>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Sur cette page</p>
-      <div class="fs-sommaire" data-sommaire-auto></div>
-    </div>
-  </nav>
-
-  <main class="doc-corps" id="contenu" data-teinte="or">
+@section('contenu')
 
     <div class="doc-entete">
       <nav class="doc-fil" aria-label="Fil d'Ariane">
-        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Intégration</span>
+        <a href="{{ page('index') }}">Charte</a> <span aria-hidden="true">/</span> <span>Intégration</span>
       </nav>
       <h1>Intégration</h1>
       <p class="fs-chapeau">
@@ -171,15 +115,15 @@
           de départ et installe la charte&nbsp;; il n'y a ensuite qu'à ouvrir la page
           ou importer le fichier d'amorçage.
         </p>
-        <pre><code>npm create @govbf/fasodesign@latest</code></pre>
+        <pre>@verbatim<code>npm create @govbf/fasodesign@latest</code>@endverbatim</pre>
         <p class="doc-bloc-note">
           Trois questions&nbsp;: le dossier, le type de projet — <code>statique</code>,
           <code>react</code>, <code>angular</code> ou <code>laravel</code> — et le
           dépôt npm interne si le service en emploie un. Tout peut aussi se donner
           sur la ligne de commande&nbsp;:
         </p>
-        <pre><code>npm create @govbf/fasodesign@latest mon-service -- \
-  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui</code></pre>
+        <pre>@verbatim<code>npm create @govbf/fasodesign@latest mon-service -- \
+  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui</code>@endverbatim</pre>
 
         <table class="fs-tableau fs-mt-6">
           <caption class="fs-legende">Ce qui est écrit, selon le type</caption>
@@ -233,7 +177,7 @@
 
         <p class="fs-legende fs-mt-6">
           La commande s'appuie sur un second paquet,
-          <code>@govbf/create-fasodesign</code>, que npm télécharge, exécute une fois
+          <code>@verbatim@govbf/create-fasodesign@endverbatim</code>, que npm télécharge, exécute une fois
           puis oublie. Il porte la même version que la charte et part sur les mêmes
           dépôts. Un projet déjà commencé n'en a pas besoin&nbsp;: il installe la
           charte directement, comme ci-dessous.
@@ -248,8 +192,8 @@
           <div class="fs-encart-corps">
             <p class="fs-encart-titre">Le paquet n'est pas encore sur le registre public</p>
             <p>
-              <code>npm install @govbf/fasodesign</code> répond aujourd'hui
-              <code>404 Not Found</code>. L'espace de noms <code>@govbf</code> doit
+              <code>@verbatimnpm install @govbf/fasodesign@endverbatim</code> répond aujourd'hui
+              <code>404 Not Found</code>. L'espace de noms <code>@verbatim@govbf@endverbatim</code> doit
               être enregistré par l'organisme désigné responsable du système, et cette
               désignation n'est pas arrêtée. <code>npm create</code> passe par le même
               espace de noms et répond la même chose. Les trois voies ci-dessous
@@ -274,10 +218,10 @@ npm pack
 mkdir -p vendor
 cp .../govbf-fasodesign-2.0.0.tgz vendor/
 npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
-        <pre><code>// le package.json du projet porte alors :
+        <pre>@verbatim<code>// le package.json du projet porte alors :
 "dependencies": {
   "@govbf/fasodesign": "file:vendor/govbf-fasodesign-2.0.0.tgz"
-}</code></pre>
+}</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           L'archive versionnée dans le dépôt du projet rend l'installation
           reproductible, y compris sur une machine d'intégration sans accès au
@@ -298,11 +242,11 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
           mieux que des archives recopiées. Il donne les versions, les mises à jour
           et la traçabilité, sans dépendre d'un service hébergé hors du pays.
         </p>
-        <pre><code># .npmrc du projet
-@govbf:registry=https://depot.gov.bf/npm/</code></pre>
+        <pre>@verbatim<code># .npmrc du projet
+@govbf:registry=https://depot.gov.bf/npm/</code>@endverbatim</pre>
 
         <h4 class="fs-mt-8">Une fois l'espace de noms enregistré</h4>
-        <pre><code>npm install @govbf/fasodesign</code></pre>
+        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           Rien d'autre ne change. Les chemins d'importation donnés dans cette page
           sont déjà les bons.
@@ -322,7 +266,7 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
               <tr><th>Import</th><th>Ce qu'il désigne</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>@govbf/fasodesign</code></td><td>Les comportements, avec leurs types</td></tr>
+              <tr><td><code>@verbatim@govbf/fasodesign@endverbatim</code></td><td>Les comportements, avec leurs types</td></tr>
               <tr><td><code>…/css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td></tr>
               <tr><td><code>…/css/faso.css</code></td><td>Bibliothèque de composants</td></tr>
               <tr><td><code>…/css/icones.css</code></td><td>Les 35 icônes</td></tr>
@@ -335,7 +279,7 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
           </table>
         </div>
         <div class="doc-note fs-mt-6">
-          <code>@govbf/fasodesign/assets/css/faso.css</code> ne fonctionne
+          <code>@verbatim@govbf/fasodesign/assets/css/faso.css@endverbatim</code> ne fonctionne
           pas, et c'est voulu&nbsp;: seuls les chemins ci-dessus sont publics. Les
           déclarations de polices, elles, désignent leurs fichiers par un chemin
           relatif interne au paquet&nbsp;; un empaqueteur les résout tout seul, sans que
@@ -374,14 +318,14 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
           remplace ce dont il a besoin&nbsp;; ce qu'il ne remplace pas reste en
           français.
         </p>
-        <pre><code>import Faso from '@govbf/fasodesign';
+        <pre>@verbatim<code>import Faso from '@govbf/fasodesign';
 
 Object.assign(Faso.textes, {
   langue: 'fr-BF',
   pageSuivante: '…',
   aucunResultat: '…',
 });
-// puis seulement : Faso.observer();</code></pre>
+// puis seulement : Faso.observer();</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           À faire avant l'initialisation, ou avant le premier rendu du composant
           concerné&nbsp;: un libellé déjà écrit dans le document n'est pas réécrit.
@@ -443,7 +387,7 @@ Object.assign(Faso.textes, {
             <tbody>
               <tr>
                 <td>L'organisme responsable du système</td>
-                <td>Il détient l'espace de noms <code>@govbf</code>, le dépôt et le
+                <td>Il détient l'espace de noms <code>@verbatim@govbf@endverbatim</code>, le dépôt et le
                     jeton de publication. Tant qu'il n'est pas désigné, personne ne
                     peut publier au nom de l'État.</td>
               </tr>
@@ -773,18 +717,18 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
         <p class="doc-bloc-note">
           Une chose est à comprendre avant tout le reste. La déclaration se
           fait <strong>par espace de noms</strong>. Seuls les paquets
-          <code>@govbf/…</code> sont demandés au dépôt désigné&nbsp;; tout le reste
+          <code>@verbatim@govbf/…@endverbatim</code> sont demandés au dépôt désigné&nbsp;; tout le reste
           continue d'aller là où il allait. On ne bascule pas un projet entier pour
           installer la charte.
         </p>
 
         <h4 class="fs-mt-6">Registre public</h4>
-        <pre><code>npm install @govbf/fasodesign</code></pre>
+        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">Rien à déclarer&nbsp;: c'est la destination par défaut.</p>
 
         <h4 class="fs-mt-8">Dépôt souverain, ou toute autre installation de Verdaccio</h4>
-        <pre><code># .npmrc, à la racine du projet, versionné avec lui
-@govbf:registry=https://depot.chartegraphique.gov.bf/</code></pre>
+        <pre>@verbatim<code># .npmrc, à la racine du projet, versionné avec lui
+@govbf:registry=https://depot.chartegraphique.gov.bf/</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           Si le dépôt exige un compte pour lire, on ajoute la ligne d'authentification
           — jamais dans le fichier versionné, mais par une variable d'environnement
@@ -793,9 +737,9 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
         <pre><code>//depot.chartegraphique.gov.bf/:_authToken=${JETON_DEPOT}</code></pre>
 
         <h4 class="fs-mt-8">Dépôt de la forge</h4>
-        <pre><code># .npmrc
+        <pre>@verbatim<code># .npmrc
 @govbf:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${JETON_FORGE}</code></pre>
+//npm.pkg.github.com/:_authToken=${JETON_FORGE}</code>@endverbatim</pre>
         <div class="fs-encart fs-encart--alerte fs-mt-4">
           <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
           <div class="fs-encart-corps">
@@ -827,7 +771,7 @@ npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</co
         <h3>7. Monter le dépôt souverain</h3>
         <p class="doc-bloc-note">
           <code>hebergement/verdaccio.yaml</code> est prêt à l'emploi. Il déclare deux
-          choses qui comptent&nbsp;: les paquets <code>@govbf/*</code> n'ont
+          choses qui comptent&nbsp;: les paquets <code>@verbatim@govbf/*@endverbatim</code> n'ont
           <strong>aucun accès amont</strong>, et le reste est relayé vers le registre
           public avec mise en cache.
         </p>
@@ -839,7 +783,7 @@ npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</co
             </thead>
             <tbody>
               <tr>
-                <td>Pas de <code>proxy</code> sur <code>@govbf/*</code></td>
+                <td>Pas de <code>proxy</code> sur <code>@verbatim@govbf/*@endverbatim</code></td>
                 <td>Une demande pour un paquet de l'État ne doit jamais partir vers le
                     registre public, où un homonyme pourrait répondre à sa place. Sans
                     cette précaution, un paquet déposé par un tiers sous le même nom
@@ -889,7 +833,7 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
           <li><code>npm test</code> passe en local.</li>
           <li><code>node outils/verifier.js --publication</code> passe&nbsp;: plus aucun
               champ à renseigner, conditions de réutilisation arrêtées.</li>
-          <li>Le journal des versions de la page <a href="gouvernance.html">Gouvernance</a>
+          <li>Le journal des versions de la page <a href="{{ page('gouvernance') }}">Gouvernance</a>
               décrit ce qui change.</li>
           <li>L'étiquette correspond à la version du <code>package.json</code>.</li>
           <li>Le paquet ne contient ni les essais, ni l'outillage, ni la documentation.</li>
@@ -918,12 +862,12 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
           globaux échappent à l'encapsulation des composants, ce qui est exactement ce
           qu'on veut. Les classes doivent s'appliquer partout.
         </p>
-        <pre><code>"styles": [
+        <pre>@verbatim<code>"styles": [
   "node_modules/@govbf/fasodesign/assets/css/tokens.css",
   "node_modules/@govbf/fasodesign/assets/css/faso.css",
   "node_modules/@govbf/fasodesign/assets/css/icones.css",
   "src/styles.css"
-]</code></pre>
+]</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           L'ordre compte. Les jetons d'abord, la feuille du projet en dernier, pour
           qu'une surcharge locale l'emporte.
@@ -937,7 +881,7 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
           tout ce que l'application rendra par la suite. Il n'y a plus rien à appeler
           après chaque rendu, et rien à défaire au démontage.
         </p>
-        <pre><code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
+        <pre>@verbatim<code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import Faso from '@govbf/fasodesign';
 
@@ -950,7 +894,7 @@ export class AppComponent implements OnInit {
       Faso.observer();
     }
   }
-}</code></pre>
+}</code>@endverbatim</pre>
 
         <div class="doc-note fs-mt-6">
           Le test de plateforme n'est pas indispensable&nbsp;— <code>observer()</code> se
@@ -1145,11 +1089,11 @@ ngOnInit(): void {
           typé, et <code>window.Faso</code> est déclaré globalement pour les projets
           qui préfèrent y accéder directement.
         </p>
-        <pre><code>import Faso from '@govbf/fasodesign';
+        <pre>@verbatim<code>import Faso from '@govbf/fasodesign';
 
 Faso.initialiser(element);
 Faso.notifier({ titre: 'Dossier transmis', ton: 'succes' });
-Faso.appliquerTheme('dark');</code></pre>
+Faso.appliquerTheme('dark');</code>@endverbatim</pre>
       </div>
     </section>
 
@@ -1166,10 +1110,10 @@ Faso.appliquerTheme('dark');</code></pre>
 
       <div class="doc-bloc">
         <h3>1. Déclarer les feuilles</h3>
-        <pre><code>// main.tsx, avant le rendu
+        <pre>@verbatim<code>// main.tsx, avant le rendu
 import '@govbf/fasodesign/css/tokens.css';
 import '@govbf/fasodesign/css/faso.css';
-import '@govbf/fasodesign/css/icones.css';</code></pre>
+import '@govbf/fasodesign/css/icones.css';</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           L'ordre compte. Les jetons d'abord, la feuille du projet en dernier. Aucun
           module CSS, aucune portée&nbsp;— les classes de la charte sont globales par
@@ -1184,7 +1128,7 @@ import '@govbf/fasodesign/css/icones.css';</code></pre>
           Un effet unique, au composant racine. L'observation prend ensuite en charge
           tout ce que React rendra.
         </p>
-        <pre><code>import { useEffect } from 'react';
+        <pre>@verbatim<code>import { useEffect } from 'react';
 import Faso from '@govbf/fasodesign';
 
 export default function App() {
@@ -1194,7 +1138,7 @@ export default function App() {
   }, []);
 
   return &lt;Routes /&gt;;
-}</code></pre>
+}</code>@endverbatim</pre>
 
         <div class="doc-note fs-mt-6">
           Le mode strict ne demande rien de particulier. En développement,
@@ -1462,13 +1406,13 @@ export default function RootLayout({ children }) {
         <h3>1. Installer, avec ou sans Node</h3>
 
         <h4 class="fs-mt-6">Avec Vite, qui est le défaut</h4>
-        <pre><code>npm install @govbf/fasodesign</code></pre>
-        <pre><code>// resources/js/app.js
+        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
+        <pre>@verbatim<code>// resources/js/app.js
 import '@govbf/fasodesign/css/tokens.css';
 import '@govbf/fasodesign/css/faso.css';
 import '@govbf/fasodesign/css/icones.css';
-import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code></pre>
-        <pre><code>{{-- resources/views/layouts/app.blade.php --}}
+import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code>@endverbatim</pre>
+        <pre>@verbatim<code>{{-- resources/views/layouts/app.blade.php --}}
 &lt;!doctype html&gt;
 &lt;html lang="fr"&gt;
 &lt;head&gt;
@@ -1479,7 +1423,7 @@ import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code></pre>
 &lt;body&gt;
   @yield('contenu')
 &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+&lt;/html&gt;</code>@endverbatim</pre>
 
         <h4 class="fs-mt-8">Sans chaîne Node</h4>
         <p class="doc-bloc-note">
@@ -1487,15 +1431,15 @@ import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code></pre>
           copie les fichiers et on les sert. C'est le mode d'origine du système, et il
           reste pleinement pris en charge.
         </p>
-        <pre><code># une fois, depuis un poste qui a Node
+        <pre>@verbatim<code># une fois, depuis un poste qui a Node
 npm pack @govbf/fasodesign
 tar -xzf govbf-fasodesign-2.0.0.tgz
-cp -r package/assets public/charte</code></pre>
-        <pre><code>&lt;script src="{{ asset('charte/js/faso-amorce.js') }}"&gt;&lt;/script&gt;
+cp -r package/assets public/charte</code>@endverbatim</pre>
+        <pre>@verbatim<code>&lt;script src="{{ asset('charte/js/faso-amorce.js') }}"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/tokens.css') }}"&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/faso.css') }}"&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/icones.css') }}"&gt;
-&lt;script src="{{ asset('charte/js/faso.js') }}" defer&gt;&lt;/script&gt;</code></pre>
+&lt;script src="{{ asset('charte/js/faso.js') }}" defer&gt;&lt;/script&gt;</code>@endverbatim</pre>
         <div class="doc-note fs-mt-6">
           L'arborescence <code>css/</code> et <code>polices/</code> doit être conservée
           telle quelle&nbsp;: les déclarations de polices désignent les fichiers par un
@@ -1514,7 +1458,7 @@ cp -r package/assets public/charte</code></pre>
           l'identifiant désigné.
         </p>
 
-        <pre><code>{{-- resources/views/composants/champ.blade.php --}}
+        <pre>@verbatim<code>{{-- resources/views/composants/champ.blade.php --}}
 @props(['nom', 'libelle', 'type' =&gt; 'text', 'aide' =&gt; null])
 
 @php
@@ -1540,15 +1484,15 @@ cp -r package/assets public/charte</code></pre>
   @if($erreur)
     &lt;p class="fs-message fs-message--erreur" id="{{ $idErreur }}"&gt;{{ $erreur }}&lt;/p&gt;
   @endif
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;</code>@endverbatim</pre>
 
-        <pre><code>&lt;form method="post" action="{{ route('demande.store') }}" class="fs-pile fs-pile--large"&gt;
+        <pre>@verbatim<code>&lt;form method="post" action="{{ route('demande.store') }}" class="fs-pile fs-pile--large"&gt;
   @csrf
   &lt;x-champ nom="nom" libelle="Nom de famille" /&gt;
   &lt;x-champ nom="courriel" libelle="Adresse électronique" type="email"
            aide="Nous y enverrons le récépissé." /&gt;
   &lt;button class="fs-btn fs-btn--principal" type="submit"&gt;Déposer la demande&lt;/button&gt;
-&lt;/form&gt;</code></pre>
+&lt;/form&gt;</code>@endverbatim</pre>
 
         <div class="doc-note fs-mt-6">
           <strong>Ce composant appartient au projet, pas à la charte.</strong> La
@@ -1570,7 +1514,7 @@ cp -r package/assets public/charte</code></pre>
 
         <pre><code>php artisan vendor:publish --tag=laravel-pagination</code></pre>
 
-        <pre><code>{{-- resources/views/vendor/pagination/charte.blade.php --}}
+        <pre>@verbatim<code>{{-- resources/views/vendor/pagination/charte.blade.php --}}
 @if ($paginator-&gt;hasPages())
   &lt;nav class="fs-pagination" aria-label="Pagination des résultats"&gt;
     @if ($paginator-&gt;onFirstPage())
@@ -1600,15 +1544,15 @@ cp -r package/assets public/charte</code></pre>
       &lt;span aria-hidden="true"&gt;&rsaquo;&lt;/span&gt;
     @endif
   &lt;/nav&gt;
-@endif</code></pre>
+@endif</code>@endverbatim</pre>
 
-        <pre><code>{{ $demandes-&gt;links('vendor.pagination.charte') }}</code></pre>
+        <pre>@verbatim<code>{{ $demandes-&gt;links('vendor.pagination.charte') }}</code>@endverbatim</pre>
 
         <div class="doc-note fs-mt-6">
           L'extraction suit la même règle. Le bouton d'export de la
           charte lit le document&nbsp;: sur une page qui n'affiche que vingt lignes sur
           quatre mille, il produirait un fichier faux. Déclarer
-          <code>data-export-total="{{ $demandes-&gt;total() }}"</code> fait refuser
+          <code>@verbatimdata-export-total="{{ $demandes-&gt;total() }}"@endverbatim</code> fait refuser
           l'extraction et affiche un message explicite&nbsp;; l'export complet se fait
           alors par une route qui diffuse le jeu entier.
         </div>
@@ -1642,7 +1586,7 @@ cp -r package/assets public/charte</code></pre>
                     préservés, l'intérieur est mis à jour.</td>
               </tr>
               <tr>
-                <td>Une liste rendue par <code>@foreach</code></td>
+                <td>Une liste rendue par <code>@verbatim@foreach@endverbatim</code></td>
                 <td>Une <code>wire:key</code> stable sur chaque élément&nbsp;: Livewire
                     réutilise alors les nœuds au lieu de les recréer.</td>
               </tr>
@@ -1666,9 +1610,9 @@ cp -r package/assets public/charte</code></pre>
           sur les nouveaux nœuds. Deux voies, au choix.
         </p>
 
-        <pre><code>// resources/js/app.js — la voie simple, une fois pour toutes
+        <pre>@verbatim<code>// resources/js/app.js — la voie simple, une fois pour toutes
 import Faso from '@govbf/fasodesign';
-Faso.observer();</code></pre>
+Faso.observer();</code>@endverbatim</pre>
 
         <pre><code>// ou la voie explicite, si l'on préfère ne rien observer
 document.addEventListener('livewire:init', () =&gt; {
@@ -1686,11 +1630,11 @@ document.addEventListener('livewire:init', () =&gt; {
           on annule l'annonce de la charte&nbsp;— la forme à trait d'union se lie
           directement dans une directive Alpine.
         </p>
-        <pre><code>&lt;div role="tablist" x-data="{ actif: 'suivi' }"
+        <pre>@verbatim<code>&lt;div role="tablist" x-data="{ actif: 'suivi' }"
      @fs-onglet="$event.preventDefault(); actif = $event.detail.onglet.dataset.cle"&gt;
   &lt;button role="tab" data-cle="suivi"
           :aria-selected="actif === 'suivi'"&gt;Suivi&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;</code>@endverbatim</pre>
       </div>
 
       <div class="doc-bloc">
@@ -1702,7 +1646,7 @@ document.addEventListener('livewire:init', () =&gt; {
           si bien que l'amorçage doit avoir lieu une fois dans le point d'entrée, et
           non dans un gabarit Blade rendu à chaque requête.
         </p>
-        <pre><code>// resources/js/app.jsx
+        <pre>@verbatim<code>// resources/js/app.jsx
 import Faso from '@govbf/fasodesign';
 
 createInertiaApp({
@@ -1710,7 +1654,7 @@ createInertiaApp({
     Faso.observer();                  // une fois, pour toute la session
     createRoot(el).render(&lt;App {...props} /&gt;);
   },
-});</code></pre>
+});</code>@endverbatim</pre>
       </div>
 
       <div class="doc-bloc">
@@ -1872,13 +1816,13 @@ android/kotlin/*.kt                →  app/src/main/java/bf/gouv/charte/</code>
         </div>
 
         <h4 class="fs-mt-8">Les polices</h4>
-        <pre><code>// app/src/main/res/font/archivo.xml  — après avoir place les .ttf
+        <pre>@verbatim<code>// app/src/main/res/font/archivo.xml  — après avoir place les .ttf
 &lt;font-family xmlns:android="http://schemas.android.com/apk/res/android"&gt;
   &lt;font android:fontStyle="normal" android:fontWeight="400"
         android:font="@font/archivo_regular" /&gt;
   &lt;font android:fontStyle="normal" android:fontWeight="700"
         android:font="@font/archivo_bold" /&gt;
-&lt;/font-family&gt;</code></pre>
+&lt;/font-family&gt;</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           Les lignes <code>fontFamily</code> sont déjà présentes dans
           <code>themes.xml</code>, en commentaire. Il suffit de les rétablir. Sans
@@ -1904,7 +1848,7 @@ class MainActivity : ComponentActivity() {
     }
 }</code></pre>
 
-        <pre><code>@Composable
+        <pre>@verbatim<code>@Composable
 fun FicheDemarche() {
     Column(modifier = Modifier.padding(16.dp)) {
 
@@ -1929,7 +1873,7 @@ fun FicheDemarche() {
             Text("Déposer la demande")
         }
     }
-}</code></pre>
+}</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           <code>cibleMinimale</code> vaut 48&nbsp;dp, et non les 44&nbsp;px du web&nbsp;:
           Android impose un plancher plus haut, c'est le plus strict des deux qui
@@ -1943,10 +1887,10 @@ fun FicheDemarche() {
           Le thème se pose dans le manifeste, et les styles suivent. Rien ne distingue
           Kotlin de Java à ce niveau&nbsp;: tout est déclaratif.
         </p>
-        <pre><code>&lt;!-- AndroidManifest.xml --&gt;
-&lt;application android:theme="@style/Theme.Faso" …&gt;</code></pre>
+        <pre>@verbatim<code>&lt;!-- AndroidManifest.xml --&gt;
+&lt;application android:theme="@style/Theme.Faso" …&gt;</code>@endverbatim</pre>
 
-        <pre><code>&lt;!-- res/layout/fiche_demarche.xml --&gt;
+        <pre>@verbatim<code>&lt;!-- res/layout/fiche_demarche.xml --&gt;
 &lt;LinearLayout
     android:orientation="vertical"
     android:padding="@dimen/faso_espace_4"&gt;
@@ -1969,7 +1913,7 @@ fun FicheDemarche() {
       android:layout_marginTop="@dimen/faso_espace_6"
       app:icon="@drawable/ic_faso_coche"
       android:text="@string/deposer_la_demande" /&gt;
-&lt;/LinearLayout&gt;</code></pre>
+&lt;/LinearLayout&gt;</code>@endverbatim</pre>
 
         <div class="doc-usages fs-mt-6">
           <div class="doc-usage doc-usage--oui">
@@ -1987,7 +1931,7 @@ fun FicheDemarche() {
           </div>
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Java</p>
-            <pre><code>public class FicheActivity extends AppCompatActivity {
+            <pre>@verbatim<code>public class FicheActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle etat) {
         super.onCreate(etat);
@@ -1996,7 +1940,7 @@ fun FicheDemarche() {
         MaterialButton deposer = findViewById(R.id.deposer);
         deposer.setOnClickListener(v -&gt; deposer());
     }
-}</code></pre>
+}</code>@endverbatim</pre>
           </div>
         </div>
       </div>
@@ -2121,7 +2065,7 @@ vue.loadUrl("https://appassets.androidplatform.net/assets/demarche.html")</code>
 vue.evaluateJavascript(
     "Faso.notifier({ titre: 'Dossier enregistré', ton: 'succes' })", null)</code></pre>
         <p class="fs-legende fs-mt-4">
-          Dans l'autre sens, un pont <code>@JavascriptInterface</code> est possible,
+          Dans l'autre sens, un pont <code>@verbatim@JavascriptInterface@endverbatim</code> est possible,
           mais il expose des méthodes natives à la page&nbsp;: à réserver à un contenu
           servi par l'administration elle-même, jamais à une page distante.
         </p>
@@ -2623,7 +2567,7 @@ reprendre(ev: Event) {
               <td>Vue, Nuxt</td>
               <td><a href="#react">React</a></td>
               <td>La forme à trait d'union se lie directement&nbsp;:
-                  <code>@fs-onglet.prevent="…"</code>. La forme à deux-points, elle,
+                  <code>@verbatim@fs-onglet.prevent="…"@endverbatim</code>. La forme à deux-points, elle,
                   demande une référence de gabarit et un écouteur.</td>
             </tr>
             <tr>
@@ -2728,7 +2672,7 @@ reprendre(ev: Event) {
           composants. C'est même recommandé au-delà de quelques écrans. Ces
           enveloppes appartiennent au projet, pas à la charte, et n'engagent qu'elle.
         </p>
-        <pre><code>@Component({
+        <pre>@verbatim<code>@Component({
   selector: 'app-bouton',
   template: `&lt;button [class]="classes" [disabled]="desactive"&gt;
                &lt;ng-content /&gt;
@@ -2738,7 +2682,7 @@ export class Bouton {
   variante = input&lt;'principal' | 'secondaire' | 'tertiaire'&gt;('principal');
   desactive = input(false);
   get classes() { return `fs-btn fs-btn--${this.variante()}`; }
-}</code></pre>
+}</code>@endverbatim</pre>
       </div>
     </section>
 
@@ -2776,17 +2720,9 @@ export class Bouton {
               <code>@</code> arrivent précédées d'une apostrophe.</li>
           <li><code>node outils/jetons.js --verifier</code> passe, si le projet reprend
               les jetons en JSON.</li>
-          <li>Les cinq vérifications d'<a href="accessibilite.html">accessibilité</a> sont passées.</li>
+          <li>Les cinq vérifications d'<a href="{{ page('accessibilite') }}">accessibilité</a> sont passées.</li>
         </ul>
       </div>
     </section>
 
-  </main>
-</div>
-
-<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
-     avant que les comportements n'y ajoutent leurs attributs. -->
-<script src="assets/js/docs.js" defer></script>
-<script src="assets/js/faso.js" defer></script>
-</body>
-</html>
+@endsection

@@ -35,6 +35,15 @@ jobs:
         with:
           node-version: "20"
 
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer
+          coverage: none
+
+      - name: Dépendances de l'application
+        run: composer install --no-interaction --prefer-dist --no-progress
+
       - name: Vérification complète, contrôles de publication compris
         run: node outils/verifier.js --publication
 
@@ -165,6 +174,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
+
+      # Les pages sont écrites par l'application Laravel ; le site
+      # publié, lui, reste statique et n'a pas besoin de PHP.
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer
+          coverage: none
+
+      - name: Dépendances de l'application
+        run: composer install --no-interaction --prefer-dist --no-progress --no-dev
 
       - name: Construire le site
         env:

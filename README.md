@@ -147,21 +147,110 @@ mesure sur les points listés », et non « conforme ».
 
 ---
 
+## La documentation : une application Laravel
+
+Le paquet npm ne change pas : il ne contient ni PHP ni Laravel. C'est le site
+de documentation qui est une application Laravel 13 (PHP 8.3 ou plus), sans
+base de données. À la première visite, une case reCAPTCHA est demandée avant
+toute page ; les pages ne posent ensuite aucun autre cookie que celui qui retient
+cette vérification. Seules les pages `/contact` et `/verification` ouvrent une
+session.
+
+```bash
+composer install
+cp .env.example .env && php artisan key:generate
+php artisan serve          # http://localhost:8000
+```
+
+| Chemin | Rôle |
+| --- | --- |
+| `config/charte.php` | La liste des pages : routes, menus, plan du site et export en sont tirés |
+| `resources/views/pages/` | Le contenu de chaque page, en Blade |
+| `resources/views/layouts/` | En-tête, menus et pied, communs à toutes les pages |
+| `app/Http/Controllers/FichierController.php` | Sert `assets/`, `archives/`, `android/` et la diffusion figée `/2.0.0/…` depuis le dépôt, sans copie dans `public/` |
+| `app/Http/Middleware/EnTetesDeSecurite.php` | Politique de sécurité, réserve de fouille, cache |
+| `app/Support/Recherche.php` | La recherche de l'accueil (`/recherche?q=…`) : index des sections de toutes les pages, sans accents ni casse, recalculé dès qu'une vue change |
+
+Une page s'ajoute en deux temps : une entrée dans `config/charte.php`, une vue
+dans `resources/views/pages/`. Les extraits de code Blade cités dans la
+documentation sont entourés de `@verbatim` : sans cela, ils seraient exécutés au
+lieu d'être affichés.
+
+### Vérification anti-robot à l'entrée
+
+Toutes les pages HTML de l'application (documentation, recherche, contact)
+renvoient d'abord vers `/verification`, où l'usager coche la case reCAPTCHA v2,
+puis revient à la page demandée. La vérification est retenue 24 heures sur
+l'appareil par un cookie chiffré, `charte_humain`, que l'usager ne peut ni forger
+ni prolonger (`app/Http/Middleware/VerifierHumain.php`).
+
+Restent ouverts, sans case :
+
+- les fichiers de la charte (`/assets/…`, `/2.0.0/…`), que les services des
+  ministères chargent depuis leurs propres pages ;
+- `robots.txt`, `sitemap.xml` et `VERSION.txt` ;
+- Googlebot, Bingbot et Applebot authentiques : leur adresse doit se résoudre
+  dans le domaine du moteur, puis revenir à la même adresse. Un agent qui se
+  dit Googlebot depuis une autre adresse reçoit la case. Sans cette exception,
+  la documentation sortirait des résultats de recherche.
+
+Réglages : `CHARTE_VERIFICATION=false` coupe la vérification,
+`CHARTE_VERIFICATION_DUREE` fixe sa durée en minutes (1440 par défaut). Derrière
+un mandataire inverse, déclarer ses adresses comme mandataires de confiance, sans
+quoi tous les visiteurs auraient l'adresse du mandataire. Le site exporté,
+statique, n'a pas de vérification.
+
+### Formulaire de contact et reCAPTCHA
+
+La page `/contact` envoie un courriel à `CONTACT_DESTINATAIRE`. Elle est
+protégée par Google reCAPTCHA v2 (case « Je ne suis pas un robot ») et
+vérifiée côté serveur (`app/Rules/Recaptcha.php`). Elle n'est accessible que
+par l'application : le site exporté, statique, ne peut pas recevoir de
+formulaire.
+
+Avant la mise en production :
+
+1. créer des clés de type « Case à cocher » pour le domaine dans la console
+   reCAPTCHA, puis renseigner `RECAPTCHA_SITE_KEY` et `RECAPTCHA_SECRET_KEY` ;
+   les clés d'essai de `.env.example` sont refusées en production ;
+2. renseigner `CONTACT_DESTINATAIRE` et un vrai serveur de courrier
+   (`MAIL_MAILER=smtp`…) : en développement, les messages sont écrits dans
+   `storage/logs/laravel.log` ;
+3. mettre `SESSION_SECURE_COOKIE=true` derrière HTTPS.
+
+Les origines de Google ne sont ouvertes dans la politique de sécurité que sur
+cette page.
+
+Deux façons de mettre en ligne :
+
+- **l'application** : la racine du serveur est `public/`. Apache lit
+  `public/.htaccess` ; pour nginx, `hebergement/nginx-laravel.conf` ;
+- **le site statique**, sans PHP sur le serveur : `npm run site` fait écrire
+  les pages par l'application (`php artisan charte:exporter`), avec des liens
+  relatifs, puis assemble le site comme auparavant. C'est ce que publie
+  l'intégration continue sur GitHub Pages. Il faut PHP sur le poste qui
+  construit le site, pas sur celui qui le sert.
+
+---
+
 ## Vérification
 
 ```bash
+composer install   # une fois : les pages sont écrites par l'application
 npm test
 ```
 
 Syntaxe, balisage des pages, classes orphelines, bonne formation des SVG et des
 ressources Android, correspondance des jetons, cohérence du paquet, contraste,
-refus des collecteurs, et neuf suites de comportements. C'est ce qui doit passer
-avant chaque publication.
+refus des collecteurs, neuf suites de comportements et les essais de
+l'application Laravel (`php artisan test`). Le balisage est vérifié sur les pages
+telles que l'application les écrit. C'est ce qui doit passer avant chaque
+publication.
 
 ```bash
 npm run jetons     # régénère assets/jetons.json depuis tokens.css
 npm run android    # régénère android/ depuis tokens.css
-npm run robots     # régénère robots.txt, le fragment nginx et le .htaccess
+npm run robots     # régénère robots.txt, les fragments nginx et les .htaccess
 ```
 
 `tokens.css` est la source faisant foi pour les deux premiers, la liste

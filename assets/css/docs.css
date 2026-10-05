@@ -936,6 +936,23 @@ body { background: var(--surface); }
   filter: drop-shadow(0 24px 40px rgba(3, 46, 22, 0.18));
 }
 
+/* Colonne de droite de l'application : la recherche en tête, sur la
+   ligne du surtitre, le drapeau dessous. Les deux colonnes partent du
+   haut, sans quoi la plus courte serait centrée et le champ ne serait
+   plus aligné sur le surtitre. */
+.doc-heros .fs-conteneur:has(> .doc-heros-cote) { align-items: start; }
+.doc-heros-cote {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espace-8);
+}
+/* Le champ est plus haut que la ligne du surtitre : remonté de la
+   moitié de l'écart, il se centre sur elle au lieu de partir de son
+   sommet. */
+@media (min-width: 901px) {
+  .doc-heros-cote { margin-top: calc(var(--espace-2) * -1); }
+}
+
 @media (max-width: 900px) {
   .doc-heros { padding-top: var(--espace-10); }
   .doc-heros .fs-conteneur { grid-template-columns: minmax(0, 1fr); gap: var(--espace-8); }
@@ -1173,3 +1190,8 @@ body { background: var(--surface); }
   .doc-page { grid-template-columns: minmax(0, 1fr); }
   .doc-entete::after, .doc-trio-tuile::before { display: none; }
 }
+
+/* Pages d'une seule colonne de l'application : vérification, recherche,
+   contact. La marge est ici et non dans un attribut style : la
+   politique de sécurité (style-src 'self') ignore les styles en ligne. */
+.doc-page-simple { padding-block: var(--espace-12) var(--espace-16); }

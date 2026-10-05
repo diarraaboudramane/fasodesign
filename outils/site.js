@@ -5,8 +5,12 @@
  *
  *   node outils/site.js
  *
- * Il n'y a rien à compiler : le site, ce sont les pages telles
- * qu'elles sont écrites. Cet outil ne fait que deux choses, mais
+ * La documentation est une application Laravel (php artisan serve).
+ * Elle se publie aussi en site statique, sans PHP sur le serveur :
+ * c'est ce que produit cet outil. Les pages sont écrites par
+ * l'application elle-même (php artisan charte:exporter) ; il faut donc
+ * PHP et « composer install » sur le poste qui construit, pas sur celui
+ * qui sert. Pour le reste, cet outil ne fait que deux choses, mais
  * aucune des deux ne doit être faite à la main.
  *
  *   Il écarte ce qui n'a pas à être publié — les essais, l'outillage,
@@ -27,6 +31,7 @@
 const fs = require("fs");
 const os = require("os");
 const path = require("path");
+const { exporterPages } = require("./pages");
 
 const RACINE = path.join(__dirname, "..");
 /* Le site ne se construit pas dans le projet : il en recopierait
@@ -76,8 +81,11 @@ for (const e of fs.readdirSync(SORTIE)) {
 
 /* ------------------------------------------------ la documentation */
 
-const pages = fs.readdirSync(RACINE).filter((f) => f.endsWith(".html"));
-for (const p of pages) copier(path.join(RACINE, p), path.join(SORTIE, p));
+/* Les pages sont des vues Blade (resources/views) : l'application
+   Laravel les écrit en HTML, avec des liens relatifs, et le site
+   statique reste lisible depuis n'importe quel hébergement. */
+exporterPages(SORTIE);
+const pages = fs.readdirSync(SORTIE).filter((f) => f.endsWith(".html"));
 
 for (const d of ["assets", "archives", "android"]) {
   const source = path.join(RACINE, d);

@@ -1,11 +1,15 @@
 # Charte graphique de l'administration burkinabè
-# Configuration Apache, pour un hébergement mutualisé sans accès à la
-# configuration du serveur. À renommer « .htaccess » et à déposer à la
-# racine du site.
+# Configuration Apache de l'application Laravel : la racine du site est
+# ce dossier public/, et toute adresse passe par index.php.
 #
-# C'est le cas le plus fréquent dans l'administration : un hébergement
-# PHP, sans chaîne Node, sans droit d'administration. Tout ce qui suit
-# fonctionne dans ce cadre.
+# Les en-têtes de sécurité, le cache et l'autorisation des polices sont
+# posés par l'application elle-même (app/Http/Middleware) : ils valent
+# quel que soit le serveur. Ce fichier ne porte que ce que PHP ne peut
+# pas faire aussi tôt : refuser un collecteur avant de démarrer quoi que
+# ce soit.
+#
+# Pour le site exporté en fichiers statiques (npm run site), c'est
+# hebergement/apache.htaccess qui s'applique, et non celui-ci.
 
 # ------------------------------------------------------------ robots
 # >>> robots : engendre par outils/robots.js
@@ -103,86 +107,37 @@
 </IfModule>
 # <<< robots
 
-# ------------------------------------------------------------- types
-<IfModule mod_mime.c>
-    AddType font/woff2 .woff2
-    AddType image/svg+xml .svg
-    AddType application/json .json
-</IfModule>
-
 # ------------------------------------------------------- compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/css application/javascript
-    AddOutputFilterByType DEFLATE image/svg+xml application/json
-    # Les woff2 sont déjà compressés : ne pas les repasser au filtre.
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript
+    AddOutputFilterByType DEFLATE image/svg+xml application/json application/xml
 </IfModule>
 
-# ------------------------------------------------------------- cache
-<IfModule mod_expires.c>
-    ExpiresActive On
+# ------------------------------------------------ contrôleur frontal
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
-    # Les pages peuvent changer : elles se revalident.
-    ExpiresByType text/html "access plus 0 seconds"
+    RewriteEngine On
 
-    # Les fichiers servis sous un numéro de version ne changent jamais.
-    ExpiresByType text/css "access plus 1 year"
-    ExpiresByType application/javascript "access plus 1 year"
-    ExpiresByType font/woff2 "access plus 1 year"
-    ExpiresByType image/svg+xml "access plus 1 year"
-</IfModule>
+    # Les adresses terminées par une barre oblique sont ramenées à
+    # leur forme sans barre.
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
 
-<IfModule mod_headers.c>
-    Header set X-Content-Type-Options "nosniff"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
-    Header set X-Frame-Options "DENY"
-
-    # Reservation des droits de fouille de textes et de donnees, au
-    # sens du protocole TDM du W3C. Sa portee est juridique, pas
-    # technique : elle ne bloque rien, elle etablit que la reprise
-    # n'a pas ete consentie.
-    #
-    # « noindex » n'y figure pas, et ne doit pas y figurer : le site
-    # doit rester trouvable par les moteurs de recherche.
-    Header set X-Robots-Tag "noai, noimageai"
-    Header set TDM-Reservation "1"
-
-    # img-src data: est indispensable : les icônes de la charte sont des
-    # masques CSS encodés en data:. Sans cette autorisation, elles
-    # disparaissent sans autre symptôme.
-    #
-    # style-src-attr : les pages de la documentation placent leurs
-    # exemples par des attributs style. Sans cette autorisation, ces
-    # attributs sont ignorés et les démonstrations perdent leurs tailles.
-    # Elle ne vaut que pour les attributs : ni <style>, ni script en
-    # ligne. La charte elle-même n'en a pas besoin.
-    Header set Content-Security-Policy "default-src 'self'; img-src 'self' data:; font-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
-
-    Header set Cache-Control "public, max-age=0, must-revalidate" "expr=%{CONTENT_TYPE} =~ m#text/html#"
-
-    # Un service hébergé sur un autre domaine consomme les polices :
-    # sans cet en-tête, le navigateur les télécharge puis les rejette.
-    <FilesMatch "\.(woff2|svg)$">
-        Header set Access-Control-Allow-Origin "*"
-        Header set Cache-Control "public, max-age=31536000, immutable"
-    </FilesMatch>
-
-    # Les répertoires versionnés sont figés.
-    <If "%{REQUEST_URI} =~ m#^/\d+\.\d+\.\d+/#">
-        Header set Cache-Control "public, max-age=31536000, immutable"
-        Header set Access-Control-Allow-Origin "*"
-    </If>
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
 </IfModule>
 
 # ------------------------------------------------------------ divers
 
-# Ce fichier se protege lui-meme. Beaucoup de configurations Apache le
-# font deja dans la configuration principale, mais pas toutes : sur un
-# hebergement mutualise, rien ne le garantit. Sans cette regle, la
-# politique de securite du site est lisible par quiconque demande
-# l'adresse /.htaccess.
+# Sur un hébergement mutualisé, rien ne garantit que la configuration
+# principale protège déjà ce fichier.
 <FilesMatch "^\.ht">
     Require all denied
 </FilesMatch>
 
 Options -Indexes
-ErrorDocument 404 /404.html

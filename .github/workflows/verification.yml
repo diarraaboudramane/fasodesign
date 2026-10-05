@@ -25,8 +25,18 @@ jobs:
         with:
           node-version: "20"
 
-      # Aucune dépendance à installer : le système n'en a pas.
-      # « npm ci » échouerait faute de verrou, et n'aurait rien à faire.
+      # La charte n'a aucune dépendance npm : « npm ci » échouerait faute
+      # de verrou, et n'aurait rien à faire. La documentation, elle, est
+      # une application Laravel : ses pages sont écrites par PHP avant
+      # d'être vérifiées.
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          tools: composer
+          coverage: none
+
+      - name: Dépendances de l'application
+        run: composer install --no-interaction --prefer-dist --no-progress
 
       - name: Vérification complète
         run: npm test

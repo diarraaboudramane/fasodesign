@@ -1,66 +1,10 @@
-<!doctype html>
-<html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fondations&nbsp;— Charte graphique de l'administration burkinabè</title>
-<meta name="description" content="Emblème, couleurs nationales, typographie, grille, espacement, formes et mouvement du système de conception de l'État burkinabè.">
-<!-- Pose le theme retenu avant le premier rendu, pour eviter
-     le clignotement clair d'une page reglee en sombre. -->
-<script src="assets/js/faso-amorce.js"></script>
-<link rel="stylesheet" href="assets/css/tokens.css">
-<link rel="stylesheet" href="assets/css/faso.css">
-<link rel="stylesheet" href="assets/css/icones.css">
-<link rel="stylesheet" href="assets/css/docs.css">
-<link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate icon" href="assets/img/favicon-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png">
-</head>
-<body>
+@extends('layouts.documentation')
 
-<a class="fs-evitement" href="#contenu">Aller au contenu principal</a>
-
-<div class="doc-barre">
-  <a class="doc-menu-marque" href="index.html">
-    <img src="assets/img/armoiries.svg" alt="">
-    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-  </a>
-  <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
-</div>
-
-<div class="doc-page">
-
-  <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
-    <a class="doc-menu-marque" href="index.html">
-      <img src="assets/img/armoiries.svg" alt="">
-      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
-    </a>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Le système</p>
-      <ul>
-        <li><a href="index.html">Présentation</a></li>
-        <li><a href="fondations.html" aria-current="page">Fondations</a></li>
-        <li><a href="composants.html">Composants de base</a></li>
-        <li><a href="composants-metier.html">Composants métier</a></li>
-        <li><a href="gabarits.html">Gabarits</a></li>
-        <li><a href="accessibilite.html">Accessibilité</a></li>
-        <li><a href="integration.html">Intégration</a></li>
-        <li><a href="gouvernance.html">Gouvernance</a></li>
-      </ul>
-    </div>
-
-    <div class="doc-menu-groupe">
-      <p class="doc-menu-titre">Sur cette page</p>
-      <div class="fs-sommaire" data-sommaire-auto></div>
-    </div>
-  </nav>
-
-  <main class="doc-corps" id="contenu">
+@section('contenu')
 
     <div class="doc-entete">
       <nav class="doc-fil" aria-label="Fil d'Ariane">
-        <a href="index.html">Charte</a> <span aria-hidden="true">/</span> <span>Fondations</span>
+        <a href="{{ page('index') }}">Charte</a> <span aria-hidden="true">/</span> <span>Fondations</span>
       </nav>
       <h1>Fondations</h1>
       <p class="fs-chapeau">
@@ -90,7 +34,7 @@
         <div class="doc-demo" data-libelle="Bloc-marque complet">
           <div class="doc-demo-scene doc-demo-scene--pile">
             <a class="fs-marque" href="#">
-              <img src="assets/img/armoiries.svg" alt="Armoiries du Burkina Faso">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="Armoiries du Burkina Faso">
               <span class="fs-marque-texte">
                 <span class="fs-marque-pays">Burkina Faso</span>
                 <span class="fs-marque-devise">La Patrie ou la Mort, nous Vaincrons</span>
@@ -164,19 +108,19 @@
         <div class="doc-demo" data-libelle="Tailles d'emploi">
           <div class="doc-demo-scene" style="align-items: flex-end; gap: var(--espace-8);">
             <div class="doc-variante">
-              <img src="assets/img/armoiries.svg" alt="" style="height: 120px;">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 120px;">
               <span class="doc-variante-nom">120 px — page d'accueil</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/armoiries.svg" alt="" style="height: 56px;">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 56px;">
               <span class="doc-variante-nom">56 px — en-tête</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/armoiries.svg" alt="" style="height: 44px;">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 44px;">
               <span class="doc-variante-nom">44 px — écran étroit</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/armoiries.svg" alt="" style="height: 32px;">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 32px;">
               <span class="doc-variante-nom">32 px — pied de page</span>
             </div>
           </div>
@@ -194,19 +138,19 @@
         <div class="doc-demo fs-mt-6" data-libelle="Formats gradués">
           <div class="doc-demo-scene" style="align-items: flex-end; gap: var(--espace-8);">
             <div class="doc-variante">
-              <img src="assets/img/armoiries.svg" alt="" style="height: 96px;">
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 96px;">
               <span class="doc-variante-nom">Grand</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/armoiries-moyen.svg" alt="" style="height: 48px;">
+              <img src="{{ ressource('assets/img/armoiries-moyen.svg') }}" alt="" style="height: 48px;">
               <span class="doc-variante-nom">Moyen</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/armoiries-ecu.svg" alt="" style="height: 28px;">
+              <img src="{{ ressource('assets/img/armoiries-ecu.svg') }}" alt="" style="height: 28px;">
               <span class="doc-variante-nom">Petit</span>
             </div>
             <div class="doc-variante">
-              <img src="assets/img/favicon.svg" alt="" style="height: 16px;">
+              <img src="{{ ressource('assets/img/favicon.svg') }}" alt="" style="height: 16px;">
               <span class="doc-variante-nom">Mini</span>
             </div>
           </div>
@@ -488,7 +432,7 @@
           <div class="doc-demo-scene">
             <div class="fs-rangee" style="gap: var(--espace-5);">
               <a class="fs-marque" href="#" style="padding-right: var(--espace-5); border-right: var(--trait-fin) solid var(--bordure);">
-                <img src="assets/img/armoiries.svg" alt="Armoiries du Burkina Faso">
+                <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="Armoiries du Burkina Faso">
                 <span class="fs-marque-texte">
                   <span class="fs-marque-pays">Burkina Faso</span>
                   <span class="fs-marque-entite">Ministère de la Santé</span>
@@ -925,7 +869,7 @@
         </div>
 
         <p class="fs-legende fs-mt-4">
-          Plafond fixé par le <a href="accessibilite.html#budget">budget de
+          Plafond fixé par le <a href="{{ page('accessibilite') }}#budget">budget de
           performance</a>&nbsp;: 100&nbsp;Ko. Objectif&nbsp;: 60&nbsp;Ko. Le système est sous le
           plafond, au-dessus de l'objectif&nbsp;; la marge restante viendrait d'un
           sous-ensemble plus étroit que le latin complet.
@@ -1043,13 +987,13 @@
                 <td>Archivo</td>
                 <td>The Archivo Project Authors</td>
                 <td>SIL OFL 1.1</td>
-                <td><a href="assets/polices/archivo-OFL.txt">archivo-OFL.txt</a></td>
+                <td><a href="{{ ressource('assets/polices/archivo-OFL.txt') }}">archivo-OFL.txt</a></td>
               </tr>
               <tr>
                 <td>Inter</td>
                 <td>The Inter Project Authors</td>
                 <td>SIL OFL 1.1</td>
-                <td><a href="assets/polices/inter-OFL.txt">inter-OFL.txt</a></td>
+                <td><a href="{{ ressource('assets/polices/inter-OFL.txt') }}">inter-OFL.txt</a></td>
               </tr>
             </tbody>
           </table>
@@ -1214,7 +1158,7 @@
         <dl class="fs-definitions fs-mt-6">
           <div><dt>Rapports admis</dt><dd><code>16/9</code> pour une bannière, <code>4/3</code> pour une photographie de contenu, <code>1/1</code> pour un portrait ou une vignette.</dd></div>
           <div><dt>Traitement</dt><dd>Aucun filtre, aucune teinte de marque, aucun cadre arrondi au-delà du rayon du système. Recadrage seulement.</dd></div>
-          <div><dt>Poids</dt><dd>200&nbsp;Ko au maximum par image, dimensionnée à sa taille d'affichage. Voir le <a href="accessibilite.html#budget">budget de performance</a>.</dd></div>
+          <div><dt>Poids</dt><dd>200&nbsp;Ko au maximum par image, dimensionnée à sa taille d'affichage. Voir le <a href="{{ page('accessibilite') }}#budget">budget de performance</a>.</dd></div>
           <div><dt>Texte de remplacement</dt><dd>Descriptif si l'image porte une information, vide (<code>alt=""</code>) si elle est redondante avec le texte voisin.</dd></div>
         </dl>
       </div>
@@ -1796,14 +1740,14 @@
           <code>tokens.css</code> et n'a donc pas à être répétée composant par
           composant.
         </p>
-        <pre><code>@media (prefers-reduced-motion: reduce) {
+        <pre>@verbatim<code>@media (prefers-reduced-motion: reduce) {
   :root {
     --duree-instant: 1ms;
     --duree-courte:  1ms;
     --duree-moyenne: 1ms;
     --duree-longue:  1ms;
   }
-}</code></pre>
+}</code>@endverbatim</pre>
       </div>
     </section>
 
@@ -1849,12 +1793,4 @@
       </div>
     </section>
 
-  </main>
-</div>
-
-<!-- docs.js precede faso.js : les extraits de code sont lus dans le DOM
-     avant que les comportements n'y ajoutent leurs attributs. -->
-<script src="assets/js/docs.js" defer></script>
-<script src="assets/js/faso.js" defer></script>
-</body>
-</html>
+@endsection
