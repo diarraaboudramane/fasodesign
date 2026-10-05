@@ -57,7 +57,9 @@ class EnTetesDeSecurite
          * « noindex » n'y figure pas, et ne doit pas y figurer : le site
          * doit rester trouvable par les moteurs de recherche.
          */
-        $entetes->set('X-Robots-Tag', 'noai, noimageai');
+        $entetes->set('X-Robots-Tag', config('charte.indexable')
+            ? 'noai, noimageai'
+            : 'noindex, nofollow, noai, noimageai');
         $entetes->set('TDM-Reservation', '1');
 
         /* La page d'erreur détaillée du mode débogage est faite de styles

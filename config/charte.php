@@ -125,6 +125,22 @@ return [
     'export' => false,
 
     /*
+     * Faux sur un serveur de test : X-Robots-Tag porte alors noindex et
+     * robots.txt refuse tout, pour que le domaine de test ne concurrence
+     * pas le site officiel dans les moteurs. Vrai par défaut : le site
+     * officiel doit rester trouvable (voir la page Intégration).
+     */
+    'indexable' => (bool) env('CHARTE_INDEXABLE', true),
+
+    /*
+     * Adresses du proxy qui transmet les requêtes à l'application (IP ou
+     * CIDR, séparées par des virgules ou des espaces ; « * » pour tout
+     * proxy, seulement si l'application n'est joignable que par lui).
+     * Vide quand l'application reçoit directement les visiteurs.
+     */
+    'mandataires' => env('MANDATAIRES_DE_CONFIANCE', ''),
+
+    /*
      * Adresse qui reçoit les messages du formulaire de contact. Sans
      * elle, le formulaire refuse l'envoi au lieu de perdre le message.
      */

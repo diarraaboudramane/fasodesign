@@ -30,7 +30,9 @@ class Recaptcha implements ValidationRule
     {
         $secret = config('services.recaptcha.secret_key');
 
-        if (blank($secret)) {
+        /* Une valeur de modèle laissée telle quelle (« À-RENSEIGNER ») vaut
+           une clé absente. */
+        if (blank($secret) || str_contains(mb_strtoupper($secret), 'RENSEIGNER')) {
             Log::error('reCAPTCHA : RECAPTCHA_SECRET_KEY absente, formulaire refusé.');
             $fail(self::INDISPONIBLE);
 

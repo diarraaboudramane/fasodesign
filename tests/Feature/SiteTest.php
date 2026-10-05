@@ -14,7 +14,27 @@ class SiteTest extends TestCase
 
         $reponse->assertOk();
         $this->assertStringStartsWith('text/plain', $reponse->headers->get('Content-Type'));
-        $this->assertSame(file_get_contents(base_path('hebergement/robots.txt')), $reponse->getContent());
+
+        /* Le même fichier, à la ligne Sitemap près, qui désigne le domaine
+           qui répond et non le domaine officiel écrit dans le fichier. */
+        $attendu = preg_replace('/^Sitemap: .*$/m', 'Sitemap: http://localhost/sitemap.xml',
+            file_get_contents(base_path('hebergement/robots.txt')));
+        $this->assertSame($attendu, $reponse->getContent());
+    }
+
+    public function test_un_serveur_de_test_refuse_toute_indexation(): void
+    {
+        config(['charte.indexable' => false]);
+
+        $this->get('/robots.txt')->assertSee("User-agent: *\nDisallow: /", false);
+        $this->get('/')->assertHeader('X-Robots-Tag', 'noindex, nofollow, noai, noimageai');
+        $this->get('/assets/css/faso.css')->assertHeader('X-Robots-Tag', 'noindex, nofollow, noai, noimageai');
+    }
+
+    public function test_le_site_officiel_reste_indexable_par_defaut(): void
+    {
+        $this->assertTrue(config('charte.indexable'));
+        $this->get('/')->assertHeader('X-Robots-Tag', 'noai, noimageai');
     }
 
     public function test_le_plan_du_site_annonce_chaque_page_et_rien_d_autre(): void

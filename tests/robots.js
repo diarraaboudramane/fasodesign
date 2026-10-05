@@ -138,20 +138,14 @@ if (plan) {
 
 /* ------------------------------------------- la mise en production */
 
-/* Le fragment nginx nomme $faso_collecteur et les zones de debit : si
-   l'installation ne pose pas faso-robots.conf, nginx ne demarre pas,
-   ou la protection n'existe qu'au depot de code. */
-{
-  const installeur = fs.readFileSync(
-    path.join(RACINE, "hebergement", "installer.sh"), "utf8");
-  verifier("l'installation pose faso-robots.conf dans conf.d",
-    /install\b[^\n]*hebergement\/faso-robots\.conf[^\n]*\/etc\/nginx\/conf\.d\//.test(installeur));
-  /* Le depot npm vit sous /npm/ du bloc server du site : il herite du
-     refus des collecteurs que le fragment pose au niveau du server. */
-  const site = /cat > \/etc\/nginx\/sites-available\/charte <<NGINX\n([\s\S]*?)\nNGINX/.exec(installeur);
-  verifier("le depot npm refuse aussi les collecteurs",
-    !!site && /include \/etc\/nginx\/snippets\/charte\.conf;/.test(site[1]) &&
-      /location \^~ \/npm\/ \{/.test(site[1]));
+/* Les fragments nginx nomment $faso_collecteur et les zones de debit,
+   definis dans faso-robots.conf : sans lui dans le contexte « http »,
+   nginx ne demarre pas, ou la protection n'existe qu'au depot de code.
+   Chaque fragment doit donc le dire a qui l'installe. */
+for (const fragment of ["nginx.conf", "nginx-laravel.conf"]) {
+  const texte = fs.readFileSync(path.join(RACINE, "hebergement", fragment), "utf8");
+  verifier(fragment + " annonce qu'il requiert faso-robots.conf",
+    texte.indexOf("$faso_collecteur") >= 0 && texte.indexOf("faso-robots.conf") >= 0);
 }
 
 console.log();

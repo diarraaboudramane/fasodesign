@@ -129,7 +129,9 @@ for (const inutile of ["docs.css", "docs.js"]) {
  * personne ; leur donner la liste des pages est la contrepartie de
  * ce choix.
  */
-const DOMAINE = "https://chartegraphique.gov.bf";
+/* FASO_DOMAINE permet de construire pour un autre domaine que le domaine
+   officiel, un serveur de test par exemple. */
+const DOMAINE = (process.env.FASO_DOMAINE || "https://chartegraphique.gov.bf").replace(/\/+$/, "");
 const jour = new Date().toISOString().slice(0, 10);
 
 const plan = pages

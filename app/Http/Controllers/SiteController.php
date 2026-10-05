@@ -12,12 +12,29 @@ class SiteController extends Controller
 {
     /**
      * Le robots.txt est engendré par outils/robots.js, comme pour le site
-     * statique : il n'y en a qu'un, servi tel quel.
+     * statique : il n'y en a qu'un. Seule la ligne Sitemap suit le domaine
+     * qui répond, pour qu'un serveur de test n'envoie pas les moteurs vers
+     * le domaine officiel.
+     *
+     * Sur un domaine non indexable (CHARTE_INDEXABLE=false), tout est
+     * refusé : un serveur de test ne doit pas concurrencer le site
+     * officiel dans les résultats de recherche.
      */
     public function robots(): Response
     {
-        return response(file_get_contents(base_path('hebergement/robots.txt')))
-            ->header('Content-Type', 'text/plain; charset=utf-8');
+        if (! config('charte.indexable')) {
+            $texte = "# Serveur de test : rien n'est à indexer ici.\n"
+                ."# Le site officiel est servi sur un autre domaine.\n\n"
+                ."User-agent: *\nDisallow: /\n";
+        } else {
+            $texte = preg_replace(
+                '/^Sitemap: .*$/m',
+                'Sitemap: '.url('sitemap.xml'),
+                file_get_contents(base_path('hebergement/robots.txt'))
+            );
+        }
+
+        return response($texte)->header('Content-Type', 'text/plain; charset=utf-8');
     }
 
     /**

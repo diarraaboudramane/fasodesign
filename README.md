@@ -231,6 +231,41 @@ Deux façons de mettre en ligne :
   l'intégration continue sur GitHub Pages. Il faut PHP sur le poste qui
   construit le site, pas sur celui qui le sert.
 
+### Déployer l'application sur le serveur de test
+
+Le serveur de test est `https://chartegraphique-21.mtdpce-test.gov.bf`. Le
+domaine officiel reste `chartegraphique.gov.bf` pour la bascule.
+
+Sur le serveur (PHP 8.3 ou plus, extensions `ctype`, `curl`, `dom`,
+`fileinfo`, `mbstring`, `openssl`, `tokenizer`, `xml`) :
+
+```bash
+composer install --no-dev --optimize-autoloader
+cp hebergement/serveur-test.env .env      # puis compléter les « À-RENSEIGNER »
+php artisan key:generate --force
+php artisan charte:diagnostic             # doit finir par « Prêt à recevoir des visiteurs »
+php artisan optimize                      # met en cache configuration, routes et vues
+```
+
+- La racine web est `public/`, et rien d'autre : le reste du dossier contient
+  `.env`. Apache lit `public/.htaccess` ; pour nginx, partir de
+  `hebergement/nginx-laravel.conf`.
+- Le compte du serveur web doit pouvoir écrire dans `storage/` et
+  `bootstrap/cache/`.
+- Les clés reCAPTCHA se créent pour `chartegraphique-21.mtdpce-test.gov.bf`.
+  Une même clé peut porter plusieurs domaines : à la bascule, il suffit d'y
+  ajouter `chartegraphique.gov.bf`.
+- Derrière un proxy qui termine le TLS, déclarer son adresse dans
+  `MANDATAIRES_DE_CONFIANCE`. Les liens restent en https dans tous les cas,
+  dès que `APP_URL` commence par `https://`.
+- Après toute modification de `.env`, relancer `php artisan optimize` : la
+  configuration est lue depuis le cache, pas depuis le fichier.
+
+Le serveur de test n'est pas indexé (`CHARTE_INDEXABLE=false`) : `robots.txt`
+refuse tout et chaque réponse porte `noindex`. À la bascule, changer `APP_URL`
+et `MAIL_FROM_ADDRESS`, passer `CHARTE_INDEXABLE=true`, relancer
+`charte:diagnostic` puis `optimize`.
+
 ---
 
 ## Vérification
