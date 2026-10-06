@@ -19,8 +19,9 @@
   <h1>Une vérification avant d'entrer</h1>
   <p class="fs-chapeau">
     Cochez la case ci-dessous pour accéder à la charte. Elle protège le site
-    contre les robots qui en aspirent le contenu&nbsp;; elle n'est demandée
-    qu'une fois par jour sur cet appareil.
+    contre les robots qui en aspirent le contenu. Une fois cochée, elle ne vous
+    est redemandée qu'après {!! \App\Support\Duree::lisible(config('charte.verification.duree')) !!}
+    sans aucune page consultée sur cet appareil.
   </p>
 
   @if ($errors->any())

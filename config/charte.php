@@ -170,7 +170,9 @@ return [
      */
     'verification' => [
         'active' => (bool) env('CHARTE_VERIFICATION', true),
-        'duree' => (int) env('CHARTE_VERIFICATION_DUREE', 1440),
+        /* Une minute au moins : à zéro, la case serait expirée à peine
+           cochée, et le visiteur renvoyé vers elle sans fin. */
+        'duree' => max(1, (int) env('CHARTE_VERIFICATION_DUREE', 1440)),
         'moteurs' => [
             'Googlebot' => ['domaines' => ['.googlebot.com', '.google.com', '.googleusercontent.com']],
             'bingbot' => ['domaines' => ['.search.msn.com']],

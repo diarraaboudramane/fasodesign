@@ -513,9 +513,9 @@
             </thead>
             <tbody>
               <tr>
-                <td><code>charte_humain</code><br><span class="fs-faible">l'heure à laquelle la case anti-robot a été cochée, chiffrée</span></td>
-                <td>Cookie, <code>HttpOnly</code>, <code>SameSite=Lax</code></td>
-                <td>{{ intdiv(config('charte.verification.duree'), 60) }}&nbsp;heures, puis la case est redemandée</td>
+                <td><code>charte_humain</code><br><span class="fs-faible">l'heure de la dernière page vue après la case anti-robot, chiffrée</span></td>
+                <td>Cookie, <code>HttpOnly</code>, <code>SameSite=Lax</code>, réécrit à chaque page</td>
+                <td>{!! \App\Support\Duree::lisible(config('charte.verification.duree')) !!} sans page vue, puis la case est redemandée</td>
                 <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
               </tr>
               <tr>

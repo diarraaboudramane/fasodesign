@@ -71,9 +71,14 @@ class EnTetesDeSecurite
                     ? self::CSP_RECAPTCHA : self::CSP);
         }
 
-        /* Les pages peuvent changer : elles se revalident. */
+        /* Les pages peuvent changer : elles se revalident. Une réponse qui
+           pose un cookie est propre à un visiteur : un cache partagé ne
+           doit pas la garder, sans quoi il resservirait ce cookie, et la
+           vérification qu'il porte, au visiteur suivant. */
         if (str_starts_with((string) $entetes->get('Content-Type'), 'text/html')) {
-            $entetes->set('Cache-Control', 'public, max-age=0, must-revalidate');
+            $entetes->set('Cache-Control', $entetes->getCookies()
+                ? 'private, no-store'
+                : 'public, max-age=0, must-revalidate');
         }
 
         return $reponse;

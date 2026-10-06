@@ -101,8 +101,10 @@ class RechercheTest extends TestCase
         $this->get('/recherche?q=bouton')->assertSee('<meta name="robots" content="noindex, follow">', false);
     }
 
-    public function test_la_recherche_ne_pose_pas_de_cookie(): void
+    public function test_la_recherche_ne_pose_que_le_cookie_de_verification(): void
     {
-        $this->assertSame([], $this->get('/recherche?q=bouton')->headers->getCookies());
+        $noms = array_map(fn ($c) => $c->getName(), $this->get('/recherche?q=bouton')->headers->getCookies());
+
+        $this->assertSame([\App\Http\Middleware\VerifierHumain::COOKIE], $noms);
     }
 }

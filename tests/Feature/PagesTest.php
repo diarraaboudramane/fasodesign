@@ -52,12 +52,17 @@ class PagesTest extends TestCase
     }
 
     #[DataProvider('pages')]
-    public function test_aucune_page_ne_pose_de_cookie(string $nom, string $chemin): void
+    public function test_une_page_ne_pose_que_le_cookie_de_verification(string $nom, string $chemin): void
     {
         $reponse = $this->get($chemin);
 
-        $this->assertSame([], $reponse->headers->getCookies());
-        $this->assertNull($reponse->headers->get('Set-Cookie'));
+        /* Il est réécrit à chaque page pour prolonger la vérification ;
+           aucun autre cookie, ni session ni jeton, n'est posé. */
+        $noms = array_map(fn ($c) => $c->getName(), $reponse->headers->getCookies());
+        $this->assertSame([\App\Http\Middleware\VerifierHumain::COOKIE], $noms);
+
+        /* Propre à ce visiteur : aucun cache partagé ne doit la garder. */
+        $reponse->assertHeader('Cache-Control', 'no-store, private');
     }
 
     public function test_les_en_tetes_de_securite_sont_poses(): void
@@ -69,7 +74,6 @@ class PagesTest extends TestCase
         $reponse->assertHeader('X-Frame-Options', 'DENY');
         $reponse->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
         $reponse->assertHeader('TDM-Reservation', '1');
-        $this->assertStringContainsString('must-revalidate', $reponse->headers->get('Cache-Control'));
 
         /* Le site doit rester trouvable par les moteurs. */
         $this->assertStringNotContainsString('noindex', $reponse->headers->get('X-Robots-Tag'));
@@ -84,6 +88,11 @@ class PagesTest extends TestCase
         $reponse->assertSee(route('composants'), false);
         $reponse->assertHeader('Content-Security-Policy', EnTetesDeSecurite::CSP);
         $this->assertSame([], $reponse->headers->getCookies());
+
+        /* Sans cookie, une page reste partageable par les caches, à
+           condition de se revalider. */
+        $this->assertStringContainsString('public', $reponse->headers->get('Cache-Control'));
+        $this->assertStringContainsString('must-revalidate', $reponse->headers->get('Cache-Control'));
     }
 
     public function test_les_anciennes_adresses_en_html_menent_a_la_page(): void

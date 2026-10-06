@@ -180,9 +180,13 @@ lieu d'être affichés.
 
 Toutes les pages HTML de l'application (documentation, recherche, contact)
 renvoient d'abord vers `/verification`, où l'usager coche la case reCAPTCHA v2,
-puis revient à la page demandée. La vérification est retenue 24 heures sur
-l'appareil par un cookie chiffré, `charte_humain`, que l'usager ne peut ni forger
-ni prolonger (`app/Http/Middleware/VerifierHumain.php`).
+puis revient à la page demandée. La case n'est redemandée qu'après un temps
+réglable sans aucune page vue (24 heures par défaut, 10 minutes sur le serveur
+de test) : chaque page fait repartir le délai, si bien qu'un visiteur qui lit
+n'est jamais interrompu. La preuve est un cookie chiffré, `charte_humain`,
+réécrit à chaque page, que l'usager ne peut ni forger ni prolonger lui-même
+(`app/Http/Middleware/VerifierHumain.php`). Les pages qui le posent sont
+marquées `Cache-Control: private, no-store` : aucun cache partagé ne les garde.
 
 Restent ouverts, sans case :
 

@@ -32,14 +32,7 @@ class VerificationController extends Controller
             'g-recaptcha-response' => [new Recaptcha($request->ip())],
         ]);
 
-        Cookie::queue(Cookie::make(
-            VerifierHumain::COOKIE,
-            (string) time(),
-            config('charte.verification.duree'),
-            secure: config('session.secure'),
-            httpOnly: true,
-            sameSite: 'lax',
-        ));
+        Cookie::queue(VerifierHumain::cookie());
 
         return redirect(self::retour($request->input('retour')));
     }

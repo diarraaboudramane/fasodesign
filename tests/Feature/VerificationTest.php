@@ -205,6 +205,59 @@ class VerificationTest extends TestCase
             file_get_contents(resource_path('views/pages/integration.blade.php')));
     }
 
+    public function test_une_duree_de_dix_minutes_s_applique_et_s_affiche(): void
+    {
+        config(['charte.verification.duree' => 10]);
+
+        $this->get('/verification')->assertSee("qu'après 10&nbsp;minutes", false);
+
+        $this->withCookie(VerifierHumain::COOKIE, (string) (time() - 9 * 60));
+        $this->get('/')->assertOk();
+
+        $this->withCookie(VerifierHumain::COOKIE, (string) (time() - 11 * 60));
+        $this->get('/')->assertRedirect();
+    }
+
+    public function test_chaque_page_vue_fait_repartir_le_delai(): void
+    {
+        config(['charte.verification.duree' => 10]);
+
+        /* Coché il y a 9 minutes : la page s'affiche, et le cookie renvoyé
+           est daté de maintenant. */
+        $this->withCookie(VerifierHumain::COOKIE, (string) (time() - 9 * 60));
+        $reponse = $this->get('/fondations')->assertOk();
+
+        $cookie = collect($reponse->headers->getCookies())->firstWhere(fn ($c) => $c->getName() === VerifierHumain::COOKIE);
+        $this->assertNotNull($cookie);
+        $this->assertEqualsWithDelta(time() + 600, $cookie->getExpiresTime(), 5);
+
+        /* Le cookie chiffré porte l'heure de cette page, non celle de la
+           case cochée : les dix minutes repartent d'ici. */
+        $valeur = app('encrypter')->decrypt($cookie->getValue(), false);
+        $horodatage = (int) substr($valeur, strrpos($valeur, '|') + 1);
+        $this->assertEqualsWithDelta(time(), $horodatage, 5);
+    }
+
+    public function test_sans_page_vue_pendant_le_delai_la_case_est_redemandee(): void
+    {
+        config(['charte.verification.duree' => 10]);
+
+        $this->withCookie(VerifierHumain::COOKIE, (string) (time() - 10 * 60 - 1));
+        $reponse = $this->get('/fondations');
+
+        $reponse->assertRedirect();
+        $this->assertSame([], array_filter($reponse->headers->getCookies(), fn ($c) => $c->getName() === VerifierHumain::COOKIE));
+    }
+
+    public function test_les_durees_s_ecrivent_comme_on_les_dit(): void
+    {
+        $this->assertSame('5&nbsp;minutes', \App\Support\Duree::lisible(5));
+        $this->assertSame('1&nbsp;minute', \App\Support\Duree::lisible(1));
+        $this->assertSame('1&nbsp;heure', \App\Support\Duree::lisible(60));
+        $this->assertSame('1&nbsp;heure 30&nbsp;minutes', \App\Support\Duree::lisible(90));
+        $this->assertSame('24&nbsp;heures', \App\Support\Duree::lisible(1440));
+    }
+
     public function test_la_verification_peut_etre_coupee(): void
     {
         config(['charte.verification.active' => false]);
