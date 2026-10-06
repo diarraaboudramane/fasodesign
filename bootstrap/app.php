@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnTetesDeSecurite;
+use App\Http\Middleware\MesurerAudience;
 use App\Http\Middleware\VerifierHumain;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -41,6 +42,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->group('humain', [
             EncryptCookies::class,
             VerifierHumain::class,
+            MesurerAudience::class,
         ]);
 
         /* Global, et non dans le groupe web : une adresse qui ne

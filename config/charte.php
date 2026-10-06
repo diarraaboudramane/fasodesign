@@ -115,7 +115,7 @@ return [
      * mettra en production.
      */
     'diffusion' => ['css', 'js', 'img', 'polices'],
-    'hors_diffusion' => ['css/docs.css', 'js/docs.js'],
+    'hors_diffusion' => ['css/docs.css', 'js/docs.js', 'js/audience.js'],
 
     /*
      * Vrai pendant « php artisan charte:exporter » : les liens sont
@@ -168,6 +168,19 @@ return [
      *            Un agent qui se dit Googlebot depuis une autre adresse
      *            reçoit la case.
      */
+    /*
+     * Mesure d'audience anonyme, affichée au pied de l'accueil : personnes
+     * en ligne (actives depuis « fenetre » minutes) et visiteurs distincts
+     * du mois. Seuls les visiteurs passés par la vérification sont comptés.
+     * Aucune écriture sur l'appareil, aucune adresse IP conservée : une
+     * empreinte hachée avec la clé de l'application et le mois en cours,
+     * qui ne peut pas être reliée d'un mois à l'autre.
+     */
+    'audience' => [
+        'active' => (bool) env('CHARTE_AUDIENCE', true),
+        'fenetre' => 5,
+    ],
+
     'verification' => [
         'active' => (bool) env('CHARTE_VERIFICATION', true),
         /* Une minute au moins : à zéro, la case serait expirée à peine

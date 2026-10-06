@@ -112,10 +112,18 @@
 
     <div class="fs-pied-bas">
       <p>Version 2.0&nbsp;— Septembre 2026</p>
+@unless (config('charte.export') || ! config('charte.audience.active'))
+{{-- Mis à jour en direct par assets/js/audience.js ; le site exporté,
+     sans serveur, n'a rien à compter. --}}
+      @include('partials.audience', \App\Support\Audience::chiffres())
+@endunless
       <p>Sauf mention contraire, les contenus de cette charte sont réutilisables par les administrations publiques.</p>
     </div>
   </div>
 </footer>
 
 @include('partials.scripts')
+@unless (config('charte.export') || ! config('charte.audience.active'))
+<script src="{{ ressource('assets/js/audience.js') }}" defer></script>
+@endunless
 @endsection

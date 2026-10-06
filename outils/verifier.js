@@ -61,7 +61,7 @@ function lire(p) {
 titre("Syntaxe");
 
 for (const f of ["assets/js/faso.js", "assets/js/faso-amorce.js",
-  "assets/js/docs.js", "outils/jetons.js", "outils/android.js",
+  "assets/js/docs.js", "assets/js/audience.js", "outils/jetons.js", "outils/android.js",
   "outils/pages.js", "outils/site.js"]) {
   controle(f, () => {
     execFileSync(process.execPath, ["--check", path.join(RACINE, f)]);

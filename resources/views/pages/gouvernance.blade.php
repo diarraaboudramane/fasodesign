@@ -530,6 +530,14 @@
                 <td>Selon les règles de Google</td>
                 <td><span class="fs-badge fs-badge--alerte">Tiers</span></td>
               </tr>
+@if (config('charte.audience.active'))
+              <tr>
+                <td>Mesure d'audience<br><span class="fs-faible">personnes en ligne et visiteurs du mois, affichés au pied de l'accueil</span></td>
+                <td>Rien sur l'appareil. Sur le serveur, une empreinte anonyme&nbsp;: adresse et navigateur hachés avec une clé secrète et le mois en cours, l'adresse elle-même n'étant jamais gardée</td>
+                <td>Jusqu'à la fin du mois&nbsp;; rien ne relie un mois au suivant</td>
+                <td><span class="fs-badge fs-badge--succes">Non requis</span></td>
+              </tr>
+@endif
             </tbody>
           </table>
         </div>

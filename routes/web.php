@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AudienceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\FichierController;
@@ -49,6 +50,15 @@ Route::middleware('humain')->group(function () {
    vérification s'applique. */
 Route::get('{nom}.html', [DocumentationController::class, 'ancienneAdresse'])
     ->whereIn('nom', array_keys(config('charte.pages')));
+
+/* ------------------------------------------------------ l'audience */
+
+/* Hors du groupe « humain » : la mise à jour en direct ne doit pas
+   prolonger la case anti-robot. Le cookie est seulement lu, pour ne
+   compter que les visiteurs vérifiés. */
+Route::get('audience', [AudienceController::class, 'chiffres'])
+    ->middleware([\Illuminate\Cookie\Middleware\EncryptCookies::class, 'throttle:30,1'])
+    ->name('audience');
 
 /* ---------------------------------------------- la vérification */
 

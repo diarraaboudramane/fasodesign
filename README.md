@@ -169,6 +169,7 @@ php artisan serve          # http://localhost:8000
 | `resources/views/layouts/` | En-tête, menus et pied, communs à toutes les pages |
 | `app/Http/Controllers/FichierController.php` | Sert `assets/`, `archives/`, `android/` et la diffusion figée `/2.0.0/…` depuis le dépôt, sans copie dans `public/` |
 | `app/Http/Middleware/EnTetesDeSecurite.php` | Politique de sécurité, réserve de fouille, cache |
+| `app/Support/Audience.php` | Personnes en ligne (actives depuis 5 minutes) et visiteurs du mois, au pied de l'accueil. Seuls les visiteurs vérifiés comptent ; aucune écriture sur l'appareil, aucune adresse IP gardée, une empreinte hachée qui change chaque mois. `CHARTE_AUDIENCE=false` la coupe |
 | `app/Support/Recherche.php` | La recherche de l'accueil (`/recherche?q=…`) : index des sections de toutes les pages, sans accents ni casse, recalculé dès qu'une vue change |
 
 Une page s'ajoute en deux temps : une entrée dans `config/charte.php`, une vue
