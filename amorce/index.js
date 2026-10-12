@@ -3,8 +3,8 @@
  * Charte graphique de l'administration burkinabè
  * Préparation d'un projet
  *
- *   npm create @govbf/fasodesign@latest
- *   npm create @govbf/fasodesign@latest mon-service -- --type=statique --oui
+ *   npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
+ *   npx https://…/npm/govbf-create-charte-graphique-2.0.0.tgz mon-service --type=statique --oui
  *
  * Trois choses, et rien d'autre : faire accepter les conditions
  * d'emploi, écrire les fichiers de départ, installer la charte.
@@ -13,7 +13,12 @@
  * armoiries du Burkina Faso, qui sont un symbole de l'État. Personne
  * ne doit pouvoir les installer sans avoir lu à quelles conditions il
  * en dispose. L'acceptation se donne à la main, ou par la variable
- * FASODESIGN_ACCEPTE_LICENCE pour une chaîne d'intégration.
+ * CHARTE_ACCEPTE_LICENCE pour une chaîne d'intégration.
+ *
+ * La charte s'installe depuis le serveur qui sert la documentation,
+ * à la même version que cet outil : l'espace de noms @govbf n'est sur
+ * aucun registre public. Avec --depot, elle se demande au dépôt npm
+ * interne indiqué.
  *
  * Aucune dépendance : Node seul, et les questions passent par
  * readline.
@@ -25,7 +30,14 @@ const path = require("path");
 const readline = require("readline");
 const { execFileSync } = require("child_process");
 
-const PAQUET = "@govbf/fasodesign";
+const PAQUET = "@govbf/charte-graphique";
+const VERSION = require("./package.json").version;
+
+/* À la bascule : https://chartegraphique.gov.bf, ici et dans
+   config/charte.php (« serveur »). */
+const SERVEUR = "https://chartegraphique-21.mtdpce-test.gov.bf";
+const ARCHIVE = SERVEUR + "/npm/govbf-charte-graphique-" + VERSION + ".tgz";
+const OUTIL = SERVEUR + "/npm/govbf-create-charte-graphique-" + VERSION + ".tgz";
 const GABARITS = path.join(__dirname, "gabarits");
 
 const TYPES = {
@@ -69,13 +81,13 @@ function arguments_() {
 
 function aide() {
   dire("");
-  dire("  " + gras("npm create @govbf/fasodesign@latest") + " [dossier] [options]");
+  dire("  " + gras("npx " + OUTIL) + " [dossier] [options]");
   dire("");
   dire("  --type=<" + Object.keys(TYPES).join("|") + ">");
   dire("  --depot=<adresse>   dépôt npm interne, si le projet en emploie un");
   dire("  --oui               accepte les conditions sans les redemander");
   dire("");
-  dire("  " + faible("En intégration continue : FASODESIGN_ACCEPTE_LICENCE=oui"));
+  dire("  " + faible("En intégration continue : CHARTE_ACCEPTE_LICENCE=oui"));
   dire("");
 }
 
@@ -114,7 +126,7 @@ const CONDITIONS = [
 ];
 
 async function accepter(rl, opt) {
-  if (opt.oui || process.env.FASODESIGN_ACCEPTE_LICENCE === "oui") return true;
+  if (opt.oui || process.env.CHARTE_ACCEPTE_LICENCE === "oui") return true;
 
   CONDITIONS.forEach(dire);
   const r = await demander(rl, "Acceptez-vous ces conditions ? [oui/non]", "non");
@@ -237,11 +249,14 @@ async function principal() {
 
     dire("");
     dire("  " + gras("Installation de la charte"));
+    /* Un dépôt interne déclaré dans .npmrc sert le paquet par son nom ;
+       sinon, l'archive vient du serveur de la documentation. */
+    const source = process.env.CHARTE_SOURCE || (depot ? PAQUET : ARCHIVE);
     try {
-      installer(cible, process.env.FASODESIGN_SOURCE || PAQUET);
+      installer(cible, source);
     } catch (e) {
       erreur("L'installation a échoué. Les fichiers sont écrits ; relancez\n" +
-        "  « npm install " + PAQUET + " » depuis " + dossier + ".");
+        "  « npm install " + source + " » depuis " + dossier + ".");
       process.exitCode = 1;
       return;
     }
@@ -254,7 +269,7 @@ async function principal() {
       ? "    puis ouvrez index.html, ou servez le dossier"
       : "    puis importez " + SOURCES[type] + " depuis votre point d'entrée");
     dire("");
-    dire("  " + faible("Documentation : https://chartegraphique.gov.bf"));
+    dire("  " + faible("Documentation : " + SERVEUR));
     dire("");
   } finally {
     rl.close();

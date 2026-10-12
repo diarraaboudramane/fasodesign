@@ -7,6 +7,7 @@ use App\Http\Controllers\FichierController;
 use App\Http\Controllers\RechercheController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\VerificationController;
+use App\Support\PaquetNpm;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,6 +85,11 @@ Route::get('VERSION.txt', [SiteController::class, 'version']);
 Route::get('{dossier}/{chemin}', [FichierController::class, 'dossier'])
     ->whereIn('dossier', config('charte.dossiers'))
     ->where('chemin', '.+');
+
+/* Les archives npm : npm install https://<serveur>/npm/govbf-charte-graphique-2.0.0.tgz */
+Route::get('npm/{nom}-{version}.tgz', [FichierController::class, 'paquet'])
+    ->whereIn('nom', array_keys(PaquetNpm::PAQUETS))
+    ->where('version', '\d+\.\d+\.\d+');
 
 /* La diffusion à adresse figée : /2.0.0/css/faso.css. */
 Route::get('{version}/{type}/{chemin}', [FichierController::class, 'diffusion'])

@@ -36,11 +36,11 @@ verifier("index.js s'analyse", (() => {
 })());
 
 verifier("le script est declare comme commande",
-  PAQUET.bin && PAQUET.bin["create-fasodesign"] === "./index.js",
+  PAQUET.bin && PAQUET.bin["create-charte-graphique"] === "./index.js",
   JSON.stringify(PAQUET.bin));
 
-verifier("le nom permet « npm create @govbf/fasodesign »",
-  PAQUET.name === "@govbf/create-fasodesign", PAQUET.name);
+verifier("le nom permet « npm create @govbf/charte-graphique »",
+  PAQUET.name === "@govbf/create-charte-graphique", PAQUET.name);
 
 verifier("les deux paquets portent la meme version",
   PAQUET.version === CHARTE.version,
@@ -77,7 +77,7 @@ verifier("gabarit charte.js",
    carte des exports du paquet : sans quoi Node refuse l'import, et
    l'erreur ne se voit qu'a la construction du projet du developpeur. */
 const CHARTE_JS = lire(path.join(AMORCE, "gabarits", "charte.js"));
-for (const m of CHARTE_JS.matchAll(/import\s+(?:.+?\s+from\s+)?'(@govbf\/fasodesign[^']*)'/g)) {
+for (const m of CHARTE_JS.matchAll(/import\s+(?:.+?\s+from\s+)?'(@govbf\/charte-graphique[^']*)'/g)) {
   const sous = "." + m[1].slice(CHARTE.name.length);
   verifier("export " + m[1],
     Object.prototype.hasOwnProperty.call(CHARTE.exports, sous),

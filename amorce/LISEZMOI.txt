@@ -5,17 +5,18 @@ Version 2.0 — septembre 2026
 
 CE QUE FAIT CET OUTIL
 
-  npm create @govbf/fasodesign@latest
+  npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
 
   Il pose trois questions, ecrit les fichiers de depart et installe
-  @govbf/fasodesign dans le dossier choisi. Il ne s'installe pas
-  lui-meme : npm le telecharge, l'execute une fois, puis l'oublie.
+  @govbf/charte-graphique dans le dossier choisi, depuis le meme serveur
+  et a la meme version. Il ne s'installe pas lui-meme : npx le
+  telecharge, l'execute une fois, puis l'oublie.
 
   Sans question, pour une chaine d'integration :
 
-    FASODESIGN_ACCEPTE_LICENCE=oui \
-      npm create @govbf/fasodesign@latest mon-service -- \
-      --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui
+    CHARTE_ACCEPTE_LICENCE=oui npx --yes \
+      https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz \
+      mon-service --type=react --oui
 
   Types disponibles : statique, react, angular, laravel.
 
@@ -48,16 +49,16 @@ CONDITIONS D'EMPLOI
   officiel la ou il n'y en a pas.
 
   Le detail des licences figure dans LISEZMOI-PAQUET.txt du paquet
-  @govbf/fasodesign et dans la page Gouvernance de la documentation.
+  @govbf/charte-graphique et dans la page Gouvernance de la documentation.
 
 
 LICENCE DE CET OUTIL
 
-  Memes conditions que le paquet @govbf/fasodesign. Reutilisable par
+  Memes conditions que le paquet @govbf/charte-graphique. Reutilisable par
   les administrations publiques ; les conditions precises relevent
   de l'autorite de tutelle du systeme, qui reste a designer.
 
 
 DOCUMENTATION
 
-  https://chartegraphique.gov.bf
+  https://chartegraphique-21.mtdpce-test.gov.bf

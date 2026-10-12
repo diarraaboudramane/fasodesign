@@ -14,7 +14,7 @@ Pour un projet qui démarre, une commande écrit les fichiers de départ et
 installe la charte :
 
 ```bash
-npm create @govbf/fasodesign@latest
+npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
 ```
 
 Elle demande le dossier, le type de projet — `statique`, `react`, `angular` ou
@@ -22,38 +22,33 @@ Elle demande le dossier, le type de projet — `statique`, `react`, `angular` ou
 donner sur la ligne de commande :
 
 ```bash
-npm create @govbf/fasodesign@latest mon-service -- \
-  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui
+npx --yes https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz \
+  mon-service --type=react --oui
 ```
 
 La charte porte les armoiries, le drapeau et la devise de l'État : la commande
 rappelle les conditions d'emploi et demande de les accepter avant d'installer
-quoi que ce soit. Sur une chaîne d'intégration, `FASODESIGN_ACCEPTE_LICENCE=oui`.
+quoi que ce soit. Sur une chaîne d'intégration, `CHARTE_ACCEPTE_LICENCE=oui`.
 
 Pour un projet déjà commencé :
 
 ```bash
-npm install @govbf/fasodesign
+npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-2.0.0.tgz
 ```
 
-Selon le dépôt retenu par l'administration, le projet déclare l'espace de noms —
-et lui seul, le reste des dépendances continuant d'aller là où il allait :
-
-```ini
-# .npmrc, à la racine du projet
-@govbf:registry=https://depot.chartegraphique.gov.bf/
-```
-
-Les cinq dépôts possibles et leurs implications sont comparés dans la page
+L'espace de noms `@govbf` n'est encore sur aucun registre : les deux archives
+sont servies par l'application elle-même (`/npm/…`, construites depuis le dépôt).
+Le paquet installé s'appelle `@govbf/charte-graphique`, et c'est sous ce nom qu'il
+s'importe. Les dépôts possibles pour la suite sont comparés dans la page
 Intégration, section « Publier et servir en ligne ».
 
 Puis, dans le projet :
 
 ```js
-import '@govbf/fasodesign/css/tokens.css';
-import '@govbf/fasodesign/css/faso.css';
-import '@govbf/fasodesign/css/icones.css';
-import Faso from '@govbf/fasodesign';
+import '@govbf/charte-graphique/css/tokens.css';
+import '@govbf/charte-graphique/css/faso.css';
+import '@govbf/charte-graphique/css/icones.css';
+import Faso from '@govbf/charte-graphique';
 
 Faso.observer();   // une fois, au démarrage de l'application
 ```
@@ -77,7 +72,7 @@ puisent leurs repères dans `icones.css`.
 
 | Chemin | Contenu |
 | --- | --- |
-| `@govbf/fasodesign` | Comportements, avec leurs déclarations TypeScript |
+| `@govbf/charte-graphique` | Comportements, avec leurs déclarations TypeScript |
 | `…/css/tokens.css` | 193 jetons, thèmes clair et sombre, déclarations de polices |
 | `…/css/faso.css` | 65 composants |
 | `…/css/icones.css` | 35 icônes, appliquées en masque CSS |
@@ -270,6 +265,12 @@ Le serveur de test n'est pas indexé (`CHARTE_INDEXABLE=false`) : `robots.txt`
 refuse tout et chaque réponse porte `noindex`. À la bascule, changer `APP_URL`
 et `MAIL_FROM_ADDRESS`, passer `CHARTE_INDEXABLE=true`, relancer
 `charte:diagnostic` puis `optimize`.
+
+Les commandes d'installation de la page Intégration (`npm install …/npm/…tgz`,
+`npx …`, adresses figées `/2.0.0/…`) désignent toutes le serveur de test, quel que
+soit le domaine qui sert la page. À la bascule, définir
+`CHARTE_SERVEUR=https://chartegraphique.gov.bf` et changer la constante `SERVEUR`
+d'`amorce/index.js`.
 
 ---
 

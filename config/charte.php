@@ -115,6 +115,15 @@ return [
      * mettra en production.
      */
     'diffusion' => ['css', 'js', 'img', 'polices'],
+
+    /*
+     * Adresse publique d'où les projets installent la charte : archives
+     * npm (/npm/…) et diffusion figée (/<version>/…). Toutes les commandes
+     * de la page Intégration l'emploient, quel que soit le domaine qui
+     * sert la page. À la bascule : https://chartegraphique.gov.bf, ici et
+     * dans amorce/index.js.
+     */
+    'serveur' => rtrim(env('CHARTE_SERVEUR', 'https://chartegraphique-21.mtdpce-test.gov.bf'), '/'),
     'hors_diffusion' => ['css/docs.css', 'js/docs.js', 'js/audience.js'],
 
     /*

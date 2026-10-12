@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Support\Documentation;
+use App\Support\PaquetNpm;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\Mime\MimeTypes;
 
@@ -45,6 +46,26 @@ class FichierController extends Controller
 
         return $this->servir($this->resoudre("assets/{$type}", $chemin), [
             'Cache-Control' => self::FIGE,
+            'Access-Control-Allow-Origin' => '*',
+        ]);
+    }
+
+    /**
+     * /npm/govbf-charte-graphique-2.0.0.tgz : l'archive que « npm install »
+     * reçoit. Seule la version courante est servie, comme pour la
+     * diffusion figée.
+     */
+    public function paquet(string $nom, string $version): BinaryFileResponse
+    {
+        abort_unless($version === Documentation::version(), 404);
+        $archive = PaquetNpm::archive($nom);
+        abort_if($archive === null, 404);
+
+        /* Une heure, pas un an : une archive reconstruite sous le même
+           numéro doit atteindre les projets sans attendre. */
+        return response()->file($archive, [
+            'Content-Type' => 'application/octet-stream',
+            'Cache-Control' => 'public, max-age=3600',
             'Access-Control-Allow-Origin' => '*',
         ]);
     }

@@ -58,7 +58,7 @@ class SiteTest extends TestCase
 
     public function test_l_export_ecrit_des_pages_aux_liens_relatifs(): void
     {
-        $sortie = sys_get_temp_dir().'/fasodesign-export-'.getmypid();
+        $sortie = sys_get_temp_dir().'/charte-graphique-export-'.getmypid();
         File::deleteDirectory($sortie);
 
         $this->artisan('charte:exporter', ['sortie' => $sortie])->assertSuccessful();

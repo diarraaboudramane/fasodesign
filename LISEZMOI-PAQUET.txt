@@ -40,33 +40,28 @@ INSTALLATION
   Pour un projet qui demarre, une commande ecrit les fichiers de
   depart et installe la charte :
 
-    npm create @govbf/fasodesign@latest
+    npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
 
   Elle demande le dossier, le type de projet (statique, react,
   angular, laravel) et le depot npm interne s'il y en a un. Elle
   rappelle les conditions d'emploi et demande de les accepter avant
   d'installer quoi que ce soit ; sur une chaine d'integration,
-  FASODESIGN_ACCEPTE_LICENCE=oui.
+  CHARTE_ACCEPTE_LICENCE=oui.
 
-  Pour un projet deja commence, l'installation est ordinaire.
+  Pour un projet deja commence :
 
-  Le paquet peut etre servi par cinq depots distants differents :
-  le registre public, le depot d'une forge, un Verdaccio heberge au
-  Burkina Faso, le depot d'une forge interne, ou aucun depot du tout
-  (archive ou depot Git). La page Integration les compare.
+    npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-2.0.0.tgz
 
-  Quel que soit le depot, la declaration se fait par espace de noms :
-  seuls les paquets @govbf y sont demandes.
-
-    # .npmrc du projet
-    @govbf:registry=https://depot.chartegraphique.gov.bf/
+  L'archive est servie par le site de la documentation : l'espace
+  de noms @govbf n'est encore sur aucun registre. Le paquet installe
+  s'appelle @govbf/charte-graphique, et s'importe sous ce nom.
 
   Voir la page « Integration » de la documentation. En resume :
 
-    import '@govbf/fasodesign/css/tokens.css';
-    import '@govbf/fasodesign/css/faso.css';
-    import '@govbf/fasodesign/css/icones.css';
-    import Faso from '@govbf/fasodesign';
+    import '@govbf/charte-graphique/css/tokens.css';
+    import '@govbf/charte-graphique/css/faso.css';
+    import '@govbf/charte-graphique/css/icones.css';
+    import Faso from '@govbf/charte-graphique';
 
     Faso.observer();   // une fois, au demarrage de l'application
 

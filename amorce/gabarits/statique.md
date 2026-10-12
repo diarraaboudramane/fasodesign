@@ -2,7 +2,7 @@
 
 Projet préparé avec la charte graphique de l'administration burkinabè.
 
-    https://chartegraphique.gov.bf
+    https://chartegraphique-21.mtdpce-test.gov.bf
 
 ## Conditions d'emploi
 
@@ -22,7 +22,7 @@ page.
 
 ## Mise en ligne
 
-Les fichiers de `node_modules/@govbf/fasodesign/assets` se recopient tels
+Les fichiers de `node_modules/@govbf/charte-graphique/assets` se recopient tels
 quels dans le dossier public du serveur. Conservez l'arborescence `css/` et
 `polices/` : les déclarations de polices désignent leurs fichiers par un
 chemin relatif.

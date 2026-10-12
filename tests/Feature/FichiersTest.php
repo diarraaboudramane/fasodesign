@@ -75,4 +75,46 @@ class FichiersTest extends TestCase
         $this->get("/{$version}/js/docs.js")->assertNotFound();
         $this->get('/assets/css/docs.css')->assertOk();
     }
+
+    public function test_les_archives_npm_sont_servies_sans_verification(): void
+    {
+        /* npm ne coche pas de case : l'archive doit répondre même quand
+           la vérification anti-robot est active. */
+        config(['charte.verification.active' => true]);
+        $version = Documentation::version();
+
+        foreach (['govbf-charte-graphique' => '', 'govbf-create-charte-graphique' => 'amorce'] as $nom => $dossier) {
+            $reponse = $this->get("/npm/{$nom}-{$version}.tgz");
+
+            $reponse->assertOk();
+            $tar = gzdecode($reponse->streamedContent());
+            $this->assertNotFalse($tar, "{$nom} n'est pas une archive gzip");
+
+            /* Le manifeste emporté est celui du dépôt, sous package/. */
+            $this->assertSame('package/package.json', rtrim(substr($tar, 0, 100), "\0"));
+            $taille = octdec(rtrim(substr($tar, 124, 12), "\0"));
+            $this->assertSame(
+                file_get_contents(base_path(ltrim("{$dossier}/package.json", '/'))),
+                substr($tar, 512, $taille)
+            );
+        }
+    }
+
+    public function test_l_archive_npm_est_stable(): void
+    {
+        /* La même source donne les mêmes octets : sans quoi l'empreinte
+           du package-lock.json des projets ne correspondrait plus. */
+        $adresse = '/npm/govbf-charte-graphique-'.Documentation::version().'.tgz';
+
+        $this->assertSame(
+            $this->get($adresse)->streamedContent(),
+            $this->get($adresse)->streamedContent()
+        );
+    }
+
+    public function test_seuls_les_paquets_de_la_version_courante_sont_servis(): void
+    {
+        $this->get('/npm/govbf-charte-graphique-0.0.1.tgz')->assertNotFound();
+        $this->get('/npm/autre-paquet-'.Documentation::version().'.tgz')->assertNotFound();
+    }
 }

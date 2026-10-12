@@ -2,7 +2,7 @@
 
 Projet préparé avec la charte graphique de l'administration burkinabè.
 
-    https://chartegraphique.gov.bf
+    https://chartegraphique-21.mtdpce-test.gov.bf
 
 ## Conditions d'emploi
 

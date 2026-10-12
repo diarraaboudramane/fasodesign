@@ -120,7 +120,7 @@ function balises(source) {
 
 /* Les pages sont des vues Blade : on vérifie ce que l'application en
    écrit, c'est-à-dire exactement ce que « npm run site » publie. */
-const EXPORT = fs.mkdtempSync(path.join(os.tmpdir(), "fasodesign-pages-"));
+const EXPORT = fs.mkdtempSync(path.join(os.tmpdir(), "charte-graphique-pages-"));
 process.on("exit", () => fs.rmSync(EXPORT, { recursive: true, force: true }));
 let pages = [];
 

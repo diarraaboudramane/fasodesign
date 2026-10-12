@@ -1,6 +1,14 @@
 @extends('layouts.documentation')
 
 @section('contenu')
+@php
+    /* Toutes les commandes désignent le serveur qui sert la charte
+       (config/charte.php, « serveur »), à la version en cours. */
+    $serveur = config('charte.serveur');
+    $version = \App\Support\Documentation::version();
+    $archive = \App\Support\PaquetNpm::adresse('govbf-charte-graphique');
+    $outil = \App\Support\PaquetNpm::adresse('govbf-create-charte-graphique');
+@endphp
 
     <div class="doc-entete">
       <nav class="doc-fil" aria-label="Fil d'Ariane">
@@ -115,15 +123,16 @@
           de départ et installe la charte&nbsp;; il n'y a ensuite qu'à ouvrir la page
           ou importer le fichier d'amorçage.
         </p>
-        <pre>@verbatim<code>npm create @govbf/fasodesign@latest</code>@endverbatim</pre>
+        <pre><code>npx {{ $outil }}</code></pre>
         <p class="doc-bloc-note">
           Trois questions&nbsp;: le dossier, le type de projet — <code>statique</code>,
           <code>react</code>, <code>angular</code> ou <code>laravel</code> — et le
-          dépôt npm interne si le service en emploie un. Tout peut aussi se donner
+          dépôt npm interne si le service en emploie un&nbsp;; sans réponse, la charte
+          vient de <code>{{ preg_replace('#^https://#', '', $serveur) }}</code>. Tout peut aussi se donner
           sur la ligne de commande&nbsp;:
         </p>
-        <pre>@verbatim<code>npm create @govbf/fasodesign@latest mon-service -- \
-  --type=react --depot=https://depot.chartegraphique.gov.bf/ --oui</code>@endverbatim</pre>
+        <pre><code>npx --yes {{ $outil }} \
+  mon-service --type=react --oui</code></pre>
 
         <table class="fs-tableau fs-mt-6">
           <caption class="fs-legende">Ce qui est écrit, selon le type</caption>
@@ -169,7 +178,7 @@
               commande les rappelle et demande de les accepter avant d'installer quoi
               que ce soit. Sur une chaîne d'intégration, où personne ne répond,
               l'acceptation se donne par la variable
-              <code>FASODESIGN_ACCEPTE_LICENCE=oui</code> ou par l'option
+              <code>CHARTE_ACCEPTE_LICENCE=oui</code> ou par l'option
               <code>--oui</code>.
             </p>
           </div>
@@ -177,80 +186,55 @@
 
         <p class="fs-legende fs-mt-6">
           La commande s'appuie sur un second paquet,
-          <code>@verbatim@govbf/create-fasodesign@endverbatim</code>, que npm télécharge, exécute une fois
-          puis oublie. Il porte la même version que la charte et part sur les mêmes
-          dépôts. Un projet déjà commencé n'en a pas besoin&nbsp;: il installe la
+          <code>@verbatim@govbf/create-charte-graphique@endverbatim</code>, que npx télécharge depuis le
+          même serveur, exécute une fois puis oublie. Il porte la même version que
+          la charte. Un projet déjà commencé n'en a pas besoin&nbsp;: il installe la
           charte directement, comme ci-dessous.
         </p>
       </div>
 
       <div class="doc-bloc">
         <h3>Par npm</h3>
+        <p class="doc-bloc-note">
+          Le serveur de la charte sert l'archive npm de chaque version. Elle
+          s'installe comme n'importe quelle dépendance, quel que soit le
+          cadriciel&nbsp;: Angular, React, Vue, Laravel avec Vite.
+        </p>
+        <pre><code>npm install {{ $archive }}</code></pre>
+        <pre><code>// le package.json du projet porte alors :
+"dependencies": {
+  "@verbatim@govbf/charte-graphique@endverbatim": "{{ $archive }}"
+}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Le paquet installé s'appelle <code>@verbatim@govbf/charte-graphique@endverbatim</code>&nbsp;: c'est
+          sous ce nom qu'il s'importe, comme dans tous les exemples de cette page.
+          L'adresse porte le numéro de version&nbsp;; passer à la suivante, c'est
+          changer ce numéro. Le <code>package-lock.json</code> garde l'empreinte
+          de l'archive, ce qui rend l'installation reproductible.
+        </p>
 
-        <div class="fs-encart fs-encart--alerte">
-          <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
+        <div class="fs-encart fs-encart--info fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
           <div class="fs-encart-corps">
-            <p class="fs-encart-titre">Le paquet n'est pas encore sur le registre public</p>
+            <p class="fs-encart-titre">Pas encore sur un registre</p>
             <p>
-              <code>@verbatimnpm install @govbf/fasodesign@endverbatim</code> répond aujourd'hui
-              <code>404 Not Found</code>. L'espace de noms <code>@verbatim@govbf@endverbatim</code> doit
-              être enregistré par l'organisme désigné responsable du système, et cette
-              désignation n'est pas arrêtée. <code>npm create</code> passe par le même
-              espace de noms et répond la même chose. Les trois voies ci-dessous
-              fonctionnent dès maintenant et n'exigent rien de plus qu'un accès aux
-              fichiers.
+              <code>@verbatimnpm install @govbf/charte-graphique@endverbatim</code>, sans adresse,
+              répond aujourd'hui <code>404 Not Found</code>&nbsp;: l'espace de noms
+              <code>@verbatim@govbf@endverbatim</code> n'est enregistré sur aucun registre. Le jour
+              où il le sera, seule la ligne d'installation change&nbsp;; les chemins
+              d'importation sont déjà les bons.
             </p>
           </div>
         </div>
 
-        <h4 class="fs-mt-8">Aujourd'hui&nbsp;: par une archive</h4>
+        <h4 class="fs-mt-8">Machine sans accès au serveur</h4>
         <p class="doc-bloc-note">
-          La plus simple, et celle qui se contrôle le mieux. On produit l'archive
-          depuis le dépôt, on la range dans le projet, on l'installe comme n'importe
-          quelle dépendance. Le nom du paquet, ses sous-chemins et ses types sont
-          exactement ceux qu'ils seront après publication.
+          Pour une chaîne d'intégration fermée, on télécharge l'archive une fois,
+          on la range dans le dépôt du projet et on l'installe depuis là.
         </p>
-        <pre><code># depuis le depot de la charte
-npm pack
-# produit govbf-fasodesign-2.0.0.tgz
-
-# depuis le projet qui la consomme
-mkdir -p vendor
-cp .../govbf-fasodesign-2.0.0.tgz vendor/
-npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
-        <pre>@verbatim<code>// le package.json du projet porte alors :
-"dependencies": {
-  "@govbf/fasodesign": "file:vendor/govbf-fasodesign-2.0.0.tgz"
-}</code>@endverbatim</pre>
-        <p class="fs-legende fs-mt-4">
-          L'archive versionnée dans le dépôt du projet rend l'installation
-          reproductible, y compris sur une machine d'intégration sans accès au
-          registre.
-        </p>
-
-        <h4 class="fs-mt-8">Aujourd'hui&nbsp;: depuis le dépôt</h4>
-        <pre><code>npm install git+https://&lt;hôte&gt;/&lt;organisation&gt;/charte-graphique.git#v2.0.0</code></pre>
-        <p class="fs-legende fs-mt-4">
-          npm clone, lit le <code>package.json</code> et n'installe que les fichiers
-          déclarés. Épingler une étiquette de version, jamais une branche. Une
-          branche changerait sous les pieds du projet.
-        </p>
-
-        <h4 class="fs-mt-8">À l'échelle de l'administration&nbsp;: un registre interne</h4>
-        <p class="doc-bloc-note">
-          Dès que plusieurs services reprennent la charte, un registre privé vaut
-          mieux que des archives recopiées. Il donne les versions, les mises à jour
-          et la traçabilité, sans dépendre d'un service hébergé hors du pays.
-        </p>
-        <pre>@verbatim<code># .npmrc du projet
-@govbf:registry=https://depot.gov.bf/npm/</code>@endverbatim</pre>
-
-        <h4 class="fs-mt-8">Une fois l'espace de noms enregistré</h4>
-        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
-        <p class="fs-legende fs-mt-4">
-          Rien d'autre ne change. Les chemins d'importation donnés dans cette page
-          sont déjà les bons.
-        </p>
+        <pre><code>mkdir -p vendor
+curl -o vendor/govbf-charte-graphique-{{ $version }}.tgz {{ $archive }}
+npm install ./vendor/govbf-charte-graphique-{{ $version }}.tgz</code></pre>
       </div>
 
       <div class="doc-bloc">
@@ -266,7 +250,7 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
               <tr><th>Import</th><th>Ce qu'il désigne</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>@verbatim@govbf/fasodesign@endverbatim</code></td><td>Les comportements, avec leurs types</td></tr>
+              <tr><td><code>@verbatim@govbf/charte-graphique@endverbatim</code></td><td>Les comportements, avec leurs types</td></tr>
               <tr><td><code>…/css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td></tr>
               <tr><td><code>…/css/faso.css</code></td><td>Bibliothèque de composants</td></tr>
               <tr><td><code>…/css/icones.css</code></td><td>Les 35 icônes</td></tr>
@@ -279,7 +263,7 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
           </table>
         </div>
         <div class="doc-note fs-mt-6">
-          <code>@verbatim@govbf/fasodesign/assets/css/faso.css@endverbatim</code> ne fonctionne
+          <code>@verbatim@govbf/charte-graphique/assets/css/faso.css@endverbatim</code> ne fonctionne
           pas, et c'est voulu&nbsp;: seuls les chemins ci-dessus sont publics. Les
           déclarations de polices, elles, désignent leurs fichiers par un chemin
           relatif interne au paquet&nbsp;; un empaqueteur les résout tout seul, sans que
@@ -290,15 +274,16 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
       <div class="doc-bloc">
         <h3>Sans chaîne Node</h3>
         <p class="doc-bloc-note">
-          Projet PHP sans outillage, site statique, page isolée&nbsp;: on télécharge les
-          fichiers et on les sert. C'est le mode de fonctionnement d'origine du
+          Projet PHP sans outillage, site statique, page isolée&nbsp;: la page charge
+          les fichiers directement depuis le serveur de la charte, à une adresse
+          figée sur la version. C'est le mode de fonctionnement d'origine du
           système, et il reste pleinement pris en charge.
         </p>
-        <pre><code>&lt;script src="/assets/js/faso-amorce.js"&gt;&lt;/script&gt;
-&lt;link rel="stylesheet" href="/assets/css/tokens.css"&gt;
-&lt;link rel="stylesheet" href="/assets/css/faso.css"&gt;
-&lt;link rel="stylesheet" href="/assets/css/icones.css"&gt;
-&lt;script src="/assets/js/faso.js" defer&gt;&lt;/script&gt;</code></pre>
+        <pre><code>&lt;script src="{{ $serveur }}/{{ $version }}/js/faso-amorce.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="{{ $serveur }}/{{ $version }}/css/tokens.css"&gt;
+&lt;link rel="stylesheet" href="{{ $serveur }}/{{ $version }}/css/faso.css"&gt;
+&lt;link rel="stylesheet" href="{{ $serveur }}/{{ $version }}/css/icones.css"&gt;
+&lt;script src="{{ $serveur }}/{{ $version }}/js/faso.js" defer&gt;&lt;/script&gt;</code></pre>
         <p class="fs-legende fs-mt-4">
           Dans ce mode, l'initialisation est automatique au chargement&nbsp;: il n'y a rien
           à appeler. La première ligne, bloquante et minuscule, pose le thème retenu
@@ -318,7 +303,7 @@ npm install ./vendor/govbf-fasodesign-2.0.0.tgz</code></pre>
           remplace ce dont il a besoin&nbsp;; ce qu'il ne remplace pas reste en
           français.
         </p>
-        <pre>@verbatim<code>import Faso from '@govbf/fasodesign';
+        <pre>@verbatim<code>import Faso from '@govbf/charte-graphique';
 
 Object.assign(Faso.textes, {
   langue: 'fr-BF',
@@ -491,9 +476,9 @@ git push --follow-tags</code></pre>
         </div>
 
         <h4 class="fs-mt-8">La règle de version, qui commande tout le reste</h4>
-        <pre><code>https://chartegraphique.gov.bf/2.0.0/css/faso.css     ← figé, cache d'un an
-https://chartegraphique.gov.bf/2.1.0/css/faso.css     ← la version suivante
-https://chartegraphique.gov.bf/latest/css/faso.css    ← à proscrire en production</code></pre>
+        <pre><code>{{ $serveur }}/{{ $version }}/css/faso.css     ← figé, cache d'un an
+{{ $serveur }}/2.1.0/css/faso.css     ← la version suivante
+{{ $serveur }}/latest/css/faso.css    ← à proscrire en production</code></pre>
         <p class="fs-legende fs-mt-4">
           Une adresse versionnée ne se réécrit jamais. Une correction sort sous un
           nouveau numéro. C'est ce qui autorise le cache d'un an, et surtout ce qui
@@ -722,19 +707,26 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
           installer la charte.
         </p>
 
-        <h4 class="fs-mt-6">Registre public</h4>
-        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
+        <h4 class="fs-mt-6">Aujourd'hui&nbsp;: le serveur de la charte</h4>
+        <pre><code>npm install {{ $archive }}</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Rien à déclarer&nbsp;: l'adresse complète de l'archive figure dans le
+          <code>package.json</code> du projet.
+        </p>
+
+        <h4 class="fs-mt-8">Registre public</h4>
+        <pre>@verbatim<code>npm install @govbf/charte-graphique</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">Rien à déclarer&nbsp;: c'est la destination par défaut.</p>
 
         <h4 class="fs-mt-8">Dépôt souverain, ou toute autre installation de Verdaccio</h4>
         <pre>@verbatim<code># .npmrc, à la racine du projet, versionné avec lui
-@govbf:registry=https://depot.chartegraphique.gov.bf/</code>@endverbatim</pre>
+@govbf:registry=https://&lt;adresse du dépôt retenu&gt;/</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           Si le dépôt exige un compte pour lire, on ajoute la ligne d'authentification
           — jamais dans le fichier versionné, mais par une variable d'environnement
           que <code>npm</code> substitue&nbsp;:
         </p>
-        <pre><code>//depot.chartegraphique.gov.bf/:_authToken=${JETON_DEPOT}</code></pre>
+        <pre><code>//&lt;adresse du dépôt retenu&gt;/:_authToken=${JETON_DEPOT}</code></pre>
 
         <h4 class="fs-mt-8">Dépôt de la forge</h4>
         <pre>@verbatim<code># .npmrc
@@ -755,15 +747,12 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
           </div>
         </div>
 
-        <h4 class="fs-mt-8">Sans dépôt du tout</h4>
-        <pre><code># depuis une archive rangée dans le projet
-npm install ./vendor/govbf-fasodesign-2.0.0.tgz
-
-# ou directement depuis le dépôt de code, sur une étiquette
-npm install git+https://forge.example.bf/gouv-bf/charte-graphique.git#v2.0.0</code></pre>
+        <h4 class="fs-mt-8">Sans accès au serveur</h4>
+        <pre><code># depuis une archive téléchargée une fois et rangée dans le projet
+npm install ./vendor/govbf-charte-graphique-{{ $version }}.tgz</code></pre>
         <p class="fs-legende fs-mt-4">
-          Toujours une étiquette, jamais une branche&nbsp;: une branche changerait sous
-          les pieds du projet, sans que rien ne le signale.
+          Toujours une version figée&nbsp;: une archive qui changerait sous les pieds
+          du projet le ferait sans que rien ne le signale.
         </p>
       </div>
 
@@ -863,9 +852,9 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
           qu'on veut. Les classes doivent s'appliquer partout.
         </p>
         <pre>@verbatim<code>"styles": [
-  "node_modules/@govbf/fasodesign/assets/css/tokens.css",
-  "node_modules/@govbf/fasodesign/assets/css/faso.css",
-  "node_modules/@govbf/fasodesign/assets/css/icones.css",
+  "node_modules/@govbf/charte-graphique/assets/css/tokens.css",
+  "node_modules/@govbf/charte-graphique/assets/css/faso.css",
+  "node_modules/@govbf/charte-graphique/assets/css/icones.css",
   "src/styles.css"
 ]</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
@@ -883,7 +872,7 @@ verdaccio --config /etc/verdaccio/verdaccio.yaml
         </p>
         <pre>@verbatim<code>import { Component, OnInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import Faso from '@govbf/fasodesign';
+import Faso from '@govbf/charte-graphique';
 
 @Component({ selector: 'app-root', templateUrl: './app.html' })
 export class AppComponent implements OnInit {
@@ -1089,7 +1078,7 @@ ngOnInit(): void {
           typé, et <code>window.Faso</code> est déclaré globalement pour les projets
           qui préfèrent y accéder directement.
         </p>
-        <pre>@verbatim<code>import Faso from '@govbf/fasodesign';
+        <pre>@verbatim<code>import Faso from '@govbf/charte-graphique';
 
 Faso.initialiser(element);
 Faso.notifier({ titre: 'Dossier transmis', ton: 'succes' });
@@ -1111,9 +1100,9 @@ Faso.appliquerTheme('dark');</code>@endverbatim</pre>
       <div class="doc-bloc">
         <h3>1. Déclarer les feuilles</h3>
         <pre>@verbatim<code>// main.tsx, avant le rendu
-import '@govbf/fasodesign/css/tokens.css';
-import '@govbf/fasodesign/css/faso.css';
-import '@govbf/fasodesign/css/icones.css';</code>@endverbatim</pre>
+import '@govbf/charte-graphique/css/tokens.css';
+import '@govbf/charte-graphique/css/faso.css';
+import '@govbf/charte-graphique/css/icones.css';</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
           L'ordre compte. Les jetons d'abord, la feuille du projet en dernier. Aucun
           module CSS, aucune portée&nbsp;— les classes de la charte sont globales par
@@ -1129,7 +1118,7 @@ import '@govbf/fasodesign/css/icones.css';</code>@endverbatim</pre>
           tout ce que React rendra.
         </p>
         <pre>@verbatim<code>import { useEffect } from 'react';
-import Faso from '@govbf/fasodesign';
+import Faso from '@govbf/charte-graphique';
 
 export default function App() {
   useEffect(() =&gt; {
@@ -1406,12 +1395,12 @@ export default function RootLayout({ children }) {
         <h3>1. Installer, avec ou sans Node</h3>
 
         <h4 class="fs-mt-6">Avec Vite, qui est le défaut</h4>
-        <pre>@verbatim<code>npm install @govbf/fasodesign</code>@endverbatim</pre>
+        <pre><code>npm install {{ $archive }}</code></pre>
         <pre>@verbatim<code>// resources/js/app.js
-import '@govbf/fasodesign/css/tokens.css';
-import '@govbf/fasodesign/css/faso.css';
-import '@govbf/fasodesign/css/icones.css';
-import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code>@endverbatim</pre>
+import '@govbf/charte-graphique/css/tokens.css';
+import '@govbf/charte-graphique/css/faso.css';
+import '@govbf/charte-graphique/css/icones.css';
+import '@govbf/charte-graphique';   // les comportements s'amorcent seuls</code>@endverbatim</pre>
         <pre>@verbatim<code>{{-- resources/views/layouts/app.blade.php --}}
 &lt;!doctype html&gt;
 &lt;html lang="fr"&gt;
@@ -1431,10 +1420,10 @@ import '@govbf/fasodesign';   // les comportements s'amorcent seuls</code>@endve
           copie les fichiers et on les sert. C'est le mode d'origine du système, et il
           reste pleinement pris en charge.
         </p>
-        <pre>@verbatim<code># une fois, depuis un poste qui a Node
-npm pack @govbf/fasodesign
-tar -xzf govbf-fasodesign-2.0.0.tgz
-cp -r package/assets public/charte</code>@endverbatim</pre>
+        <pre><code># une fois, sans Node
+curl -O {{ $archive }}
+tar -xzf govbf-charte-graphique-{{ $version }}.tgz
+cp -r package/assets public/charte</code></pre>
         <pre>@verbatim<code>&lt;script src="{{ asset('charte/js/faso-amorce.js') }}"&gt;&lt;/script&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/tokens.css') }}"&gt;
 &lt;link rel="stylesheet" href="{{ asset('charte/css/faso.css') }}"&gt;
@@ -1611,7 +1600,7 @@ cp -r package/assets public/charte</code>@endverbatim</pre>
         </p>
 
         <pre>@verbatim<code>// resources/js/app.js — la voie simple, une fois pour toutes
-import Faso from '@govbf/fasodesign';
+import Faso from '@govbf/charte-graphique';
 Faso.observer();</code>@endverbatim</pre>
 
         <pre><code>// ou la voie explicite, si l'on préfère ne rien observer
@@ -1647,7 +1636,7 @@ document.addEventListener('livewire:init', () =&gt; {
           non dans un gabarit Blade rendu à chaque requête.
         </p>
         <pre>@verbatim<code>// resources/js/app.jsx
-import Faso from '@govbf/fasodesign';
+import Faso from '@govbf/charte-graphique';
 
 createInertiaApp({
   setup({ el, App, props }) {

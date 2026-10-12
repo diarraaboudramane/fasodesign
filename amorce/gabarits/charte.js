@@ -6,11 +6,11 @@
  * projet en dernier. Les trois sont obligatoires et solidaires,
  * plusieurs composants puisant leurs repères dans icones.css.
  */
-import '@govbf/fasodesign/css/tokens.css';
-import '@govbf/fasodesign/css/faso.css';
-import '@govbf/fasodesign/css/icones.css';
+import '@govbf/charte-graphique/css/tokens.css';
+import '@govbf/charte-graphique/css/faso.css';
+import '@govbf/charte-graphique/css/icones.css';
 
-import Faso from '@govbf/fasodesign';
+import Faso from '@govbf/charte-graphique';
 
 /* Une seule ligne, au démarrage. L'observation prend en charge tout
    ce que le cadriciel rendra ensuite : il n'y a plus rien à appeler

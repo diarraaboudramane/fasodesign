@@ -1,7 +1,7 @@
 # Charte graphique de l'administration burkinabè
 # Publication d'une version : les deux paquets sur npm, la documentation
-# en ligne. Les deux paquets sont @govbf/fasodesign, la charte, et
-# @govbf/create-fasodesign, l'outil qui prépare un projet. Ils portent
+# en ligne. Les deux paquets sont @govbf/charte-graphique, la charte, et
+# @govbf/create-charte-graphique, l'outil qui prépare un projet. Ils portent
 # la même version et partent ensemble.
 #
 # Se déclenche sur une étiquette « v2.0.0 », jamais sur une branche.
@@ -108,8 +108,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.REGISTRE_INTERNE_TOKEN }}
 
   # ------------------------------------------------------------------
-  # L'outil de préparation, @govbf/create-fasodesign, est ce que npm
-  # exécute derrière « npm create @govbf/fasodesign@latest ». Il porte
+  # L'outil de préparation, @govbf/create-charte-graphique, est ce que npm
+  # exécute derrière « npm create @govbf/charte-graphique@latest ». Il porte
   # la même version que la charte et part sur les mêmes dépôts, sans
   # quoi la commande installerait une version et en annoncerait une
   # autre.

@@ -112,4 +112,20 @@ class PagesTest extends TestCase
         $this->assertStringContainsString("{{ asset('charte/css/faso.css') }}", $html);
         $this->assertStringContainsString('@csrf', $html);
     }
+
+    public function test_l_integration_installe_depuis_le_serveur_de_la_charte(): void
+    {
+        $html = $this->get('/integration')->getContent();
+        $serveur = config('charte.serveur');
+
+        $this->assertSame('https://chartegraphique-21.mtdpce-test.gov.bf', $serveur);
+        $this->assertStringContainsString("npm install {$serveur}/npm/govbf-charte-graphique-", $html);
+        $this->assertStringContainsString("npx {$serveur}/npm/govbf-create-charte-graphique-", $html);
+
+        /* Ni commande qui répond 404, ni domaine qui n'existe pas. */
+        $this->assertStringNotContainsString('npm create @govbf', $html);
+        foreach (['depot.chartegraphique.gov.bf', 'depot.gov.bf', 'forge.example.bf', 'https://chartegraphique.gov.bf/'] as $hote) {
+            $this->assertStringNotContainsString($hote, $html);
+        }
+    }
 }

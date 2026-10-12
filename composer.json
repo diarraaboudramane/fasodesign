@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "govbf/fasodesign-documentation",
+    "name": "govbf/charte-graphique-documentation",
     "type": "project",
     "description": "Site de documentation de la charte graphique des services numériques de l'administration burkinabè.",
     "keywords": ["charte-graphique", "design-system", "burkina-faso", "laravel"],

@@ -40,7 +40,7 @@ const RACINE = path.join(__dirname, "..");
    espace de travail. */
 const SORTIE = process.env.FASO_SITE
   ? path.resolve(process.env.FASO_SITE)
-  : path.join(os.tmpdir(), "fasodesign-site");
+  : path.join(os.tmpdir(), "charte-graphique-site");
 const VERSION = JSON.parse(
   fs.readFileSync(path.join(RACINE, "package.json"), "utf8")).version;
 
