@@ -26,6 +26,7 @@
         <env name="APP_KEY" value="base64:jrNuhCXo4DdbtpAyPgghn9nEYKTFlYVBKtPuRvvZ5kE="/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="CONTACT_DESTINATAIRE" value="equipe@exemple.bf"/>
+        <env name="CHARTE_VERIFICATION" value="true"/>
         <env name="RECAPTCHA_SITE_KEY" value="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"/>
         <env name="RECAPTCHA_SECRET_KEY" value="6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"/>
     </php>
