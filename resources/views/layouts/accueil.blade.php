@@ -92,6 +92,7 @@
           <li><a href="{{ page('fondations') }}#marque">Usage de l'emblème</a></li>
           <li><a href="{{ page('accessibilite') }}#redaction">Ton administratif</a></li>
           <li><a href="{{ page('composants-metier') }}#confiance">Confiance numérique</a></li>
+          <li><a href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">Toute la charte en Markdown</a></li>
         </ul>
       </div>
 

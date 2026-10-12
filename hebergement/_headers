@@ -22,6 +22,11 @@
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
+# Toute la charte en Markdown, régénérée à chaque publication.
+/charte.md
+  Content-Type: text/markdown; charset=utf-8
+  Cache-Control: public, max-age=0, must-revalidate
+
 # ------------------------------------------------- diffusion versionnée
 # https://chartegraphique.gov.bf/2.0.0/css/faso.css
 # Le contenu de ces adresses est figé : une correction sort sous un

@@ -73,13 +73,13 @@ Disallow: /
 # l'outil qu'il emploie. Refusés ici parce que la commande était de
 # refuser l'IA ; c'est le groupe à rouvrir en premier si l'usage
 # interne le demande, en retirant ce bloc de la liste.
+#
+# Une exception : /charte.md, toute la charte en Markdown, écrite
+# pour être lue par ces assistants et ouverte par ses consignes
+# aux agents. Elle leur reste ouverte, et à eux seuls.
 
-# OpenAI, à la demande d'une personne
-User-agent: ChatGPT-User
 # OpenAI, index de recherche
 User-agent: OAI-SearchBot
-# Anthropic, à la demande d'une personne
-User-agent: Claude-User
 # Anthropic, index de recherche
 User-agent: Claude-SearchBot
 # Perplexity, à la demande d'une personne
@@ -88,6 +88,7 @@ User-agent: Perplexity-User
 User-agent: MistralAI-User
 # DuckDuckGo
 User-agent: DuckAssistBot
+Allow: /charte.md
 Disallow: /
 
 # Aspirateurs de site
@@ -128,6 +129,19 @@ User-agent: dirbuster
 User-agent: gobuster
 User-agent: Wfuzz
 Disallow: /
+
+# Assistants autorises sur tout le site
+#
+# Requetes faites a la demande d'une personne, pas collecte pour
+# l'entrainement. Leur propre groupe, et non « * », pour rester
+# lisibles la ou « * » refuse tout.
+
+# OpenAI, à la demande d'une personne
+User-agent: ChatGPT-User
+# Anthropic, à la demande d'une personne
+User-agent: Claude-User
+Disallow: /android/
+Disallow: /npm/
 
 # Tout le reste, moteurs de recherche compris.
 #

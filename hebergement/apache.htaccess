@@ -49,13 +49,11 @@
     SetEnvIfNoCase User-Agent "Scrapy" faso_collecteur
 
     # Assistants, requête déclenchée par une personne
-    SetEnvIfNoCase User-Agent "ChatGPT-User" faso_collecteur
-    SetEnvIfNoCase User-Agent "OAI-SearchBot" faso_collecteur
-    SetEnvIfNoCase User-Agent "Claude-User" faso_collecteur
-    SetEnvIfNoCase User-Agent "Claude-SearchBot" faso_collecteur
-    SetEnvIfNoCase User-Agent "Perplexity-User" faso_collecteur
-    SetEnvIfNoCase User-Agent "MistralAI-User" faso_collecteur
-    SetEnvIfNoCase User-Agent "DuckAssistBot" faso_collecteur
+    SetEnvIfNoCase User-Agent "OAI-SearchBot" faso_collecteur faso_assistant
+    SetEnvIfNoCase User-Agent "Claude-SearchBot" faso_collecteur faso_assistant
+    SetEnvIfNoCase User-Agent "Perplexity-User" faso_collecteur faso_assistant
+    SetEnvIfNoCase User-Agent "MistralAI-User" faso_collecteur faso_assistant
+    SetEnvIfNoCase User-Agent "DuckAssistBot" faso_collecteur faso_assistant
 
     # Aspirateurs de site
     SetEnvIfNoCase User-Agent "HTTrack" faso_collecteur
@@ -96,10 +94,20 @@
 </IfModule>
 
 <IfModule mod_authz_core.c>
-    <RequireAll>
-        Require all granted
-        Require not env faso_collecteur
-    </RequireAll>
+    <RequireAny>
+        <RequireAll>
+            Require all granted
+            Require not env faso_collecteur
+        </RequireAll>
+        # Chemins ouverts aux assistants : /charte.md.
+        # THE_REQUEST est la ligne de requete d'origine. Le chemin de la
+        # requete, lui, devient /index.php des que l'application reecrit
+        # l'adresse, et Apache reverifie l'acces apres la reecriture.
+        <RequireAll>
+            Require env faso_assistant
+            Require expr "%{THE_REQUEST} =~ m#^(GET|HEAD) (/charte\.md)[? ]#"
+        </RequireAll>
+    </RequireAny>
 </IfModule>
 # <<< robots
 
@@ -108,6 +116,8 @@
     AddType font/woff2 .woff2
     AddType image/svg+xml .svg
     AddType application/json .json
+    # charte.md : toute la charte en Markdown.
+    AddType "text/markdown; charset=utf-8" .md
 </IfModule>
 
 # ------------------------------------------------------- compression

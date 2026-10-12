@@ -19,6 +19,14 @@ if (! function_exists('page')) {
     }
 }
 
+if (! function_exists('markdown')) {
+    /** Adresse de toute la charte en Markdown (/charte.md). */
+    function markdown(): string
+    {
+        return config('charte.export') ? 'charte.md' : route('markdown');
+    }
+}
+
 if (! function_exists('ressource')) {
     /** Adresse d'un fichier servi tel quel : assets/…, archives/…, android/… */
     function ressource(string $chemin): string

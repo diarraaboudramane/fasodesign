@@ -237,6 +237,60 @@ curl -o vendor/govbf-charte-graphique-{{ $version }}.tgz {{ $archive }}
 npm install ./vendor/govbf-charte-graphique-{{ $version }}.tgz</code></pre>
       </div>
 
+      <div class="doc-bloc" id="markdown">
+        <h3>Toute la charte en Markdown</h3>
+        <p class="doc-bloc-note">
+          Un seul fichier reprend l'intégralité de la charte&nbsp;: principes,
+          fondations, composants avec leur balisage, composants métier, gabarits,
+          accessibilité, intégration et gouvernance, suivis des jetons, de la liste
+          des classes et de l'API JavaScript. Il est tiré des pages de ce site et ne
+          peut pas s'en écarter. Il se lit tel quel, se cherche facilement, et sert
+          surtout de référence aux agents de code&nbsp;: assistants, modèles de
+          langage, outils de génération ou de revue.
+        </p>
+        <p>
+          <a class="fs-btn fs-btn--secondaire" href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">Télécharger {{ \App\Support\CharteMarkdown::nomFichier() }}</a>
+        </p>
+        <pre><code>curl -o docs/charte-graphique.md {{ $serveur }}/charte.md</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Depuis le dépôt de la charte, <code>php artisan charte:markdown</code>
+          écrit le même fichier. Un assistant peut aussi le lire directement à son
+          adresse, <code>{{ $serveur }}/charte.md</code>&nbsp;: ChatGPT et Claude
+          lisent tout le site, les autres assistants cette seule adresse. Les
+          collecteurs d'entraînement de modèles en restent écartés.
+        </p>
+
+        <div class="fs-encart fs-encart--info fs-mt-6">
+          <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
+          <div class="fs-encart-corps">
+            <p class="fs-encart-titre">Le fichier commence par des consignes aux agents</p>
+            <p>
+              Avant tout le reste, il demande à tout agent qui le lit de suivre
+              toujours les principes et les règles de la charte&nbsp;: aucune classe ni
+              valeur inventée, balisage des exemples repris tel quel, emblèmes
+              intouchables, accessibilité non négociable, et signalement de tout
+              conflit entre une demande et la charte au lieu de l'appliquer en
+              silence.
+            </p>
+          </div>
+        </div>
+
+        <p class="doc-bloc-note fs-mt-6">
+          Pour que l'agent s'y tienne à chaque tâche, on range le fichier dans le
+          dépôt du projet et on le désigne depuis son fichier de consignes&nbsp;:
+          <code>AGENTS.md</code>, <code>CLAUDE.md</code> ou
+          <code>.github/copilot-instructions.md</code>, selon l'outil.
+        </p>
+        <pre><code># AGENTS.md
+Toute interface de ce projet suit la charte graphique de l'administration
+burkinabè : lire docs/charte-graphique.md et appliquer ses consignes aux
+agents avant toute modification d'interface.</code></pre>
+        <p class="fs-legende fs-mt-4">
+          Le fichier porte le numéro de version de la charte. À chaque montée de
+          version du paquet, on le télécharge à nouveau.
+        </p>
+      </div>
+
       <div class="doc-bloc">
         <h3>Chemins d'importation</h3>
         <p class="doc-bloc-note">
@@ -600,9 +654,15 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
           <code>Claude-User</code> et leurs pareils ne collectent pas&nbsp;: ils vont
           chercher une page parce qu'une personne vient de la demander. Les refuser
           refuse à un agent de l'administration de faire lire la documentation par
-          l'outil qu'il emploie. Ils sont refusés, comme demandé&nbsp;; c'est le
-          groupe à rouvrir en premier si l'usage interne s'en plaint, en retirant le
-          bloc <code>assistants</code> de <code>outils/robots.js</code>.
+          l'outil qu'il emploie. <code>ChatGPT-User</code> et <code>Claude-User</code>
+          sont donc autorisés sur tout le site (liste
+          <code>ASSISTANTS_AUTORISES</code> de <code>outils/robots.js</code>), avec
+          leur propre groupe dans le <code>robots.txt</code>. Les autres assistants
+          restent refusés, sauf sur <a href="#markdown"><code>/charte.md</code></a>,
+          écrite pour eux&nbsp;: l'exception est déclarée par le champ
+          <code>ouverts</code> du groupe et reportée dans les trois sorties. Dans
+          tous les cas, <code>GPTBot</code> et <code>ClaudeBot</code>, qui collectent
+          pour l'entraînement, restent refusés.
         </p>
 
         <div class="doc-note fs-mt-6">

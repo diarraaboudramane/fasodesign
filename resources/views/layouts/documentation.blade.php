@@ -29,6 +29,13 @@
     </div>
 
     <div class="doc-menu-groupe">
+      <p class="doc-menu-titre">Pour les développeurs</p>
+      <ul>
+        <li><a href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">Toute la charte en Markdown</a></li>
+      </ul>
+    </div>
+
+    <div class="doc-menu-groupe">
       <p class="doc-menu-titre">{{ $page['sommaire'] }}</p>
       <div class="fs-sommaire" data-sommaire-auto></div>
     </div>

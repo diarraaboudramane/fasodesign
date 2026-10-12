@@ -76,6 +76,10 @@ Route::get('robots.txt', [SiteController::class, 'robots']);
 Route::get('sitemap.xml', [SiteController::class, 'plan']);
 Route::get('VERSION.txt', [SiteController::class, 'version']);
 
+/* Toute la charte en Markdown. Hors vérification : un développeur la
+   télécharge avec curl, un agent la lit par son adresse. */
+Route::get('charte.md', [SiteController::class, 'markdown'])->name('markdown');
+
 /* ----------------------------------------------- les fichiers servis */
 
 /* Hors vérification : les services des ministères chargent ces fichiers

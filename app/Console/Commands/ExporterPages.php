@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Support\CharteMarkdown;
 use App\Support\Documentation;
 use Illuminate\Console\Command;
 
@@ -38,7 +39,10 @@ class ExporterPages extends Command
            convention de GitHub Pages. */
         file_put_contents("{$sortie}/404.html", view('errors.404')->render());
 
-        $this->line('  '.(count(Documentation::pages()) + 1).' pages écrites dans '.$sortie);
+        /* Toute la charte en Markdown, à la même adresse que sur l'application. */
+        file_put_contents("{$sortie}/charte.md", CharteMarkdown::document());
+
+        $this->line('  '.(count(Documentation::pages()) + 1).' pages et charte.md écrits dans '.$sortie);
 
         return self::SUCCESS;
     }

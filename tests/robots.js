@@ -84,13 +84,68 @@ const REFUSES = [
   "GPTBot", "ClaudeBot", "anthropic-ai", "Claude-Web", "CCBot",
   "Google-Extended", "Applebot-Extended", "Meta-ExternalAgent",
   "Bytespider", "Amazonbot", "PerplexityBot", "CCBot", "Scrapy",
-  "ChatGPT-User", "Claude-User", "Perplexity-User",
+  "Perplexity-User", "MistralAI-User",
   "HTTrack", "Offline Explorer", "sqlmap", "Nikto",
 ];
 let manques = [];
 for (const nom of REFUSES) if (!refuseTout(nom)) manques.push(nom);
 verifier(REFUSES.length + " agents refuses par le fichier", manques.length === 0,
   manques.join(", "));
+
+/* --------------------------- l'exception faite aux assistants */
+
+/* /charte.md est ecrit pour les assistants : ils doivent pouvoir le
+   lire, et eux seuls. Un collecteur d'entrainement qui heriterait de
+   l'exception emporterait toute la charte d'une requete. */
+function ouvre(nom, chemin) {
+  const g = GROUPES.find((x) => x.agents.includes(nom.toLowerCase()));
+  return !!g && g.regles.some((r) => r.champ === "allow" && r.chemin === chemin);
+}
+
+const ASSISTANTS = ["Perplexity-User", "MistralAI-User", "OAI-SearchBot", "Claude-SearchBot"];
+const fermes = ASSISTANTS.filter((n) => !ouvre(n, "/charte.md"));
+verifier("les assistants peuvent lire /charte.md", fermes.length === 0, fermes.join(", "));
+
+const COLLECTEURS = ["GPTBot", "ClaudeBot", "CCBot", "Google-Extended", "Bytespider", "HTTrack", "Scrapy"];
+const ouverts = COLLECTEURS.filter((n) => GROUPES
+  .filter((x) => x.agents.includes(n.toLowerCase()))
+  .some((g) => g.regles.some((r) => r.champ === "allow")));
+verifier("aucun collecteur n'herite de l'exception", ouverts.length === 0, ouverts.join(", "));
+
+/* Le refus serveur doit porter la meme exception, et pour les memes
+   agents : sinon le robots.txt promet ce que le serveur refuse. */
+const HTACCESS = fs.readFileSync(path.join(RACINE, "public", ".htaccess"), "utf8");
+const NGINX = fs.readFileSync(path.join(RACINE, "hebergement", "faso-robots.conf"), "utf8");
+verifier("Apache ouvre /charte.md aux seuls assistants",
+  HTACCESS.indexOf("Require env faso_assistant") >= 0 &&
+  HTACCESS.indexOf("THE_REQUEST") >= 0 && HTACCESS.indexOf("/charte\\.md") >= 0 &&
+  ASSISTANTS.every((n) => HTACCESS.indexOf('"' + n + '" faso_collecteur faso_assistant') >= 0) &&
+  COLLECTEURS.every((n) => HTACCESS.indexOf('"' + n + '" faso_collecteur faso_assistant') < 0));
+verifier("nginx ouvre /charte.md aux seuls assistants",
+  /map "\$faso_assistant\$request_uri" \$faso_ouvert/.test(NGINX) &&
+  ASSISTANTS.every((n) => NGINX.indexOf(n) >= 0) &&
+  !/\$faso_assistant \{[^}]*GPTBot/.test(NGINX));
+
+/* ------------------------- les assistants autorises partout */
+
+/* ChatGPT et Claude, a la demande d'une personne, lisent tout le site.
+   Ils ont leur groupe dans le robots.txt, sans refus de la racine, et
+   aucun motif du serveur ne doit les reconnaitre : les motifs sont des
+   sous-chaines sans casse, et « Claude » ou « ChatGPT » suffirait a
+   les refuser de nouveau sans que rien ne le signale. Les agents
+   ci-dessous sont ceux qu'envoient reellement OpenAI et Anthropic. */
+const AUTORISES = {
+  "ChatGPT-User": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot",
+  "Claude-User": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Claude-User/1.0; +Claude-User@anthropic.com)",
+};
+const MOTIFS = [...HTACCESS.matchAll(/SetEnvIfNoCase User-Agent "([^"]+)"/g)].map((m) => new RegExp(m[1], "i"));
+for (const [nom, agent] of Object.entries(AUTORISES)) {
+  const g = GROUPES.find((x) => x.agents.includes(nom.toLowerCase()));
+  verifier(nom + " a son groupe, sans refus de la racine",
+    !!g && !g.agents.includes("*") && !refuseTout(nom));
+  const pris = MOTIFS.filter((m) => m.test(agent)).map(String);
+  verifier(nom + " n'est reconnu par aucun motif de refus", pris.length === 0, pris.join(", "));
+}
 
 /* ------------------------------------ ce qui doit rester permis */
 
@@ -138,14 +193,14 @@ if (plan) {
 
 /* ------------------------------------------- la mise en production */
 
-/* Les fragments nginx nomment $faso_collecteur et les zones de debit,
+/* Les fragments nginx nomment $faso_refuse et les zones de debit,
    definis dans faso-robots.conf : sans lui dans le contexte « http »,
    nginx ne demarre pas, ou la protection n'existe qu'au depot de code.
    Chaque fragment doit donc le dire a qui l'installe. */
 for (const fragment of ["nginx.conf", "nginx-laravel.conf"]) {
   const texte = fs.readFileSync(path.join(RACINE, "hebergement", fragment), "utf8");
   verifier(fragment + " annonce qu'il requiert faso-robots.conf",
-    texte.indexOf("$faso_collecteur") >= 0 && texte.indexOf("faso-robots.conf") >= 0);
+    texte.indexOf("$faso_refuse") >= 0 && texte.indexOf("faso-robots.conf") >= 0);
 }
 
 console.log();

@@ -294,6 +294,14 @@
             </li>
           </ul>
 
+          <p class="fs-mesure fs-mt-6">
+            Toute la charte existe aussi en un seul fichier Markdown, pour les
+            développeurs et les agents de code qui les assistent&nbsp;:
+            <a href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">{{ \App\Support\CharteMarkdown::nomFichier() }}</a>.
+            Il s'ouvre sur les consignes que tout agent doit suivre&nbsp;; son emploi est
+            décrit dans la page <a href="{{ page('integration') }}#markdown">Intégration</a>.
+          </p>
+
           <div class="fs-encart fs-encart--info fs-mt-8">
             <span class="fs-encart-marque fs-icone fs-icone--information" aria-hidden="true"></span>
             <div class="fs-encart-corps">

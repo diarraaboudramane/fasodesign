@@ -103,11 +103,15 @@ const GROUPES = [
       "un agent de l'administration de faire lire la documentation par\n" +
       "l'outil qu'il emploie. Refusés ici parce que la commande était de\n" +
       "refuser l'IA ; c'est le groupe à rouvrir en premier si l'usage\n" +
-      "interne le demande, en retirant ce bloc de la liste.",
+      "interne le demande, en retirant ce bloc de la liste.\n\n" +
+      "Une exception : /charte.md, toute la charte en Markdown, écrite\n" +
+      "pour être lue par ces assistants et ouverte par ses consignes\n" +
+      "aux agents. Elle leur reste ouverte, et à eux seuls.",
+    ouverts: ["/charte.md"],
+    /* ChatGPT-User et Claude-User n'y sont plus : ils sont autorisés,
+       voir ASSISTANTS_AUTORISES. */
     agents: [
-      { nom: "ChatGPT-User", note: "OpenAI, à la demande d'une personne" },
       { nom: "OAI-SearchBot", note: "OpenAI, index de recherche" },
-      { nom: "Claude-User", note: "Anthropic, à la demande d'une personne" },
       { nom: "Claude-SearchBot", note: "Anthropic, index de recherche" },
       { nom: "Perplexity-User", note: "Perplexity, à la demande d'une personne" },
       { nom: "MistralAI-User", note: "Mistral, à la demande d'une personne" },
@@ -181,6 +185,22 @@ const MOTEURS = [
   { nom: "Slurp", note: "Yahoo" },
 ];
 
+/*
+ * Les deux assistants autorisés sur tout le site, à la demande de
+ * l'équipe : un agent de l'administration doit pouvoir faire lire la
+ * documentation par ChatGPT ou par Claude. Ce sont les requêtes faites
+ * à la demande d'une personne, pas la collecte : GPTBot et ClaudeBot,
+ * qui ramassent pour l'entraînement, restent refusés plus haut.
+ *
+ * Ils ont leur propre groupe dans le robots.txt plutôt que de tomber
+ * dans « * » : sur un serveur de test, « * » refuse tout, et un
+ * assistant qui respecte le robots.txt n'y lirait plus rien.
+ */
+const ASSISTANTS_AUTORISES = [
+  { nom: "ChatGPT-User", note: "OpenAI, à la demande d'une personne" },
+  { nom: "Claude-User", note: "Anthropic, à la demande d'une personne" },
+];
+
 /* Chemins qu'aucun collecteur n'a de raison de parcourir. Les pages de
    documentation, elles, ont vocation à être trouvées. */
 const CHEMINS_REFUSES = [
@@ -190,6 +210,22 @@ const CHEMINS_REFUSES = [
 
 const REFUSES = GROUPES.flatMap((g) => g.agents);
 const NOMMABLES = REFUSES.filter((a) => !a.robotsSeulement);
+
+/* Les agents refusés partout sauf sur quelques chemins, et ces chemins.
+   Un seul jeu d'exceptions : les trois sorties n'en savent pas exprimer
+   un par groupe sans devenir illisibles. */
+const OUVERTS = GROUPES.filter((g) => g.ouverts);
+const AGENTS_OUVERTS = OUVERTS.flatMap((g) => g.agents).filter((a) => !a.robotsSeulement);
+const CHEMINS_OUVERTS = [...new Set(OUVERTS.flatMap((g) => g.ouverts))];
+if (new Set(OUVERTS.map((g) => g.ouverts.join("|"))).size > 1) {
+  throw new Error("Les groupes ouverts doivent partager les memes chemins.");
+}
+
+/* Le chemin, en expression rationnelle sur la ligne de requête :
+   « /charte.md » seul ou suivi d'une chaîne de requête. */
+function cheminsMotif() {
+  return CHEMINS_OUVERTS.map((c) => c.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+}
 
 /* ================================================== fabrication */
 
@@ -223,8 +259,25 @@ function robotsTxt() {
       if (a.note) out.push("# " + a.note);
       out.push("User-agent: " + a.nom);
     }
+    /* Allow avant Disallow : la RFC 9309 retient la règle la plus
+       longue, d'anciens analyseurs la première qui correspond. Les
+       deux lectures aboutissent ainsi au même résultat. */
+    for (const c of g.ouverts || []) out.push("Allow: " + c);
     out.push("Disallow: /");
   }
+
+  out.push("");
+  out.push(commentaire(
+    "Assistants autorises sur tout le site\n\n" +
+    "Requetes faites a la demande d'une personne, pas collecte pour\n" +
+    "l'entrainement. Leur propre groupe, et non « * », pour rester\n" +
+    "lisibles la ou « * » refuse tout.", "#"));
+  out.push("");
+  for (const a of ASSISTANTS_AUTORISES) {
+    out.push("# " + a.note);
+    out.push("User-agent: " + a.nom);
+  }
+  for (const c of CHEMINS_REFUSES) out.push("Disallow: " + c.chemin);
 
   out.push("");
   out.push(commentaire(
@@ -300,6 +353,28 @@ map "$faso_supervision$faso_agent_refuse" $faso_collecteur {
     "01"      1;
 }
 
+# ------------------------------------------------- chemins ouverts
+# Les assistants, refuses partout ailleurs, peuvent lire
+# ${CHEMINS_OUVERTS.join(", ")}. $request_uri est l'adresse demandee, avant toute
+# reecriture : elle designe le meme fichier sur le site exporte et
+# sur l'application.
+map $http_user_agent $faso_assistant {
+    default                0;
+    "~*(${AGENTS_OUVERTS.map((a) => echapper(a.nom)).join("|")})"   1;
+}
+
+map "$faso_assistant$request_uri" $faso_ouvert {
+    default                0;
+    "~^1(${cheminsMotif()})(\\?|$)"   1;
+}
+
+# Le refus applique : un collecteur, sauf un assistant sur un chemin
+# ouvert.
+map "$faso_ouvert$faso_collecteur" $faso_refuse {
+    default   0;
+    "01"      1;
+}
+
 # ------------------------------------------------- debit limite
 # La seule couche qui agisse sur un collecteur non declare.
 #
@@ -329,7 +404,7 @@ function nginxServer() {
   return `
     # Refus des collecteurs declares. Le 403 est rendu sans lire le
     # disque, et le journal garde la trace de la tentative.
-    if ($faso_collecteur) {
+    if ($faso_refuse) {
         return 403;
     }
 `;
@@ -377,7 +452,7 @@ function apacheBloc() {
         continue;
       }
       lignes.push('    SetEnvIfNoCase User-Agent "' + echapper(a.nom) +
-        '" faso_collecteur');
+        '" faso_collecteur' + (g.ouverts ? " faso_assistant" : ""));
     }
     lignes.push("");
   }
@@ -394,10 +469,22 @@ function apacheBloc() {
   lignes.push("</IfModule>");
   lignes.push("");
   lignes.push("<IfModule mod_authz_core.c>");
-  lignes.push("    <RequireAll>");
-  lignes.push("        Require all granted");
-  lignes.push("        Require not env faso_collecteur");
-  lignes.push("    </RequireAll>");
+  lignes.push("    <RequireAny>");
+  lignes.push("        <RequireAll>");
+  lignes.push("            Require all granted");
+  lignes.push("            Require not env faso_collecteur");
+  lignes.push("        </RequireAll>");
+  lignes.push(commentaire(
+    "Chemins ouverts aux assistants : " + CHEMINS_OUVERTS.join(", ") + ".\n" +
+    "THE_REQUEST est la ligne de requete d'origine. Le chemin de la\n" +
+    "requete, lui, devient /index.php des que l'application reecrit\n" +
+    "l'adresse, et Apache reverifie l'acces apres la reecriture.", "        #"));
+  lignes.push("        <RequireAll>");
+  lignes.push("            Require env faso_assistant");
+  lignes.push('            Require expr "%{THE_REQUEST} =~ m#^(GET|HEAD) (' +
+    cheminsMotif() + ')[? ]#"');
+  lignes.push("        </RequireAll>");
+  lignes.push("    </RequireAny>");
   lignes.push("</IfModule>");
   return lignes.join("\n");
 }
@@ -481,4 +568,5 @@ console.log("");
 for (const g of GROUPES) {
   console.log("  " + String(g.agents.length).padStart(3) + "  " + g.titre);
 }
+console.log("  " + String(ASSISTANTS_AUTORISES.length).padStart(3) + "  assistants autorises sur tout le site");
 console.log("  " + String(MOTEURS.length).padStart(3) + "  moteurs de recherche, laisses passer");

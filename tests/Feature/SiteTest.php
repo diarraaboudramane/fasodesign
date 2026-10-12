@@ -26,7 +26,15 @@ class SiteTest extends TestCase
     {
         config(['charte.indexable' => false]);
 
-        $this->get('/robots.txt')->assertSee("User-agent: *\nDisallow: /", false);
+        $robots = $this->get('/robots.txt')->getContent();
+        $this->assertStringEndsWith("User-agent: *\nDisallow: /\n", $robots);
+        $this->assertStringNotContainsString('Sitemap:', $robots);
+        $this->assertSame(1, substr_count($robots, 'User-agent: *'));
+        /* Les refus nommés restent, et l'exception des assistants avec eux. */
+        $this->assertStringContainsString("User-agent: GPTBot", $robots);
+        $this->assertStringContainsString("User-agent: DuckAssistBot\nAllow: /charte.md\nDisallow: /", $robots);
+        /* ChatGPT et Claude gardent leur groupe : « * » ne les atteint pas. */
+        $this->assertMatchesRegularExpression("/User-agent: ChatGPT-User\n(?:#.*\n)?User-agent: Claude-User\n(?!Disallow: \/\n)/", $robots);
         $this->get('/')->assertHeader('X-Robots-Tag', 'noindex, nofollow, noai, noimageai');
         $this->get('/assets/css/faso.css')->assertHeader('X-Robots-Tag', 'noindex, nofollow, noai, noimageai');
     }
@@ -80,6 +88,13 @@ class SiteTest extends TestCase
             '<li><a href="fondations.html" aria-current="page">Fondations</a></li>',
             file_get_contents("{$sortie}/fondations.html")
         );
+
+        /* Le Markdown part avec le site, ses liens restent absolus. */
+        $this->assertStringContainsString('href="charte.md"', file_get_contents("{$sortie}/fondations.html"));
+        $markdown = file_get_contents("{$sortie}/charte.md");
+        $this->assertStringContainsString('## Consignes aux agents', $markdown);
+        $this->assertStringContainsString('('.config('charte.serveur').'/fondations)', $markdown);
+        $this->assertStringNotContainsString('](fondations.html', $markdown);
 
         File::deleteDirectory($sortie);
     }
