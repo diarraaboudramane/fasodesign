@@ -153,11 +153,13 @@ mesure sur les points listés », et non « conforme ».
 ## La documentation : une application Laravel
 
 Le paquet npm ne change pas : il ne contient ni PHP ni Laravel. C'est le site
-de documentation qui est une application Laravel 13 (PHP 8.3 ou plus), sans
-base de données. Une case reCAPTCHA peut être demandée avant toute page (voir
-plus bas ; elle est coupée pour l'instant sur le serveur de test). Les pages ne
-posent aucun autre cookie que celui qui retient cette vérification, et seules
-`/contact` et `/verification` ouvrent une session.
+de documentation qui est une application Laravel 13 (PHP 8.3 ou plus). La
+documentation se lit sans base de données. Seul l'outil de contrôle de
+conformité en a une, une base SQLite pour ses comptes et ses bilans. Une case
+reCAPTCHA peut être demandée avant toute page (voir plus bas ; elle est coupée
+pour l'instant sur le serveur de test). Les pages de documentation ne posent
+aucun autre cookie que celui qui retient cette vérification. Seules `/contact`,
+`/verification` et `/conformite/…` ouvrent une session.
 
 ```bash
 composer install
@@ -228,6 +230,77 @@ Avant la mise en production :
 
 Les origines de Google ne sont ouvertes dans la politique de sécurité que sur
 cette page.
+
+### Contrôle de conformité
+
+`/conformite` vérifie qu'un site ou un projet respecte la charte et en rend un
+bilan. On soumet l'adresse d'un site en ligne, ou l'archive ZIP de son code. Il
+faut un compte : une adresse en `.gov.bf` est ouverte dès qu'elle est confirmée,
+les autres attendent qu'un administrateur les valide.
+
+| Chemin | Rôle |
+| --- | --- |
+| `app/Conformite/Regles/` | Les 17 règles, une classe chacune, avec sa gravité et la section de la charte qui l'explique |
+| `app/Conformite/Moteur.php` | Applique les règles et calcule le niveau : conforme, conforme avec réserves, non conforme |
+| `app/Conformite/Collecte/` | Le parcours d'un site (`CollecteAdresse`), la lecture d'une archive (`CollecteArchive`), la garde réseau |
+| `app/Conformite/LecteurZip.php` | Lecture des archives en mémoire, sans l'extension zip ni rien écrire sur le disque |
+| `app/Conformite/Reference.php` | Classes, empreintes et version de la charte, lues dans le dépôt lui-même |
+| `app/Jobs/AnalyserProjet.php` | Une analyse en arrière-plan ; l'archive est supprimée à la fin |
+
+Ce qui protège le serveur :
+
+- **Adresses** : seuls `http` et `https` sur les ports 80 et 443 sont admis. Les
+  adresses du réseau interne sont refusées, y compris derrière une redirection,
+  et l'appel se fait sur l'adresse IP vérifiée. On ne suit que trois
+  redirections, on lit au plus 2 Mo par réponse et 20 pages, en 90 secondes.
+- **Archives** : 50 Mo au plus. L'archive est refusée si elle contient un chemin
+  qui sort du dossier, un lien symbolique, une entrée chiffrée ou ZIP64, plus de
+  5 000 fichiers, plus de 200 Mo une fois décompressée, ou un taux de
+  compression de bombe. Rien n'est exécuté ni installé.
+- **Comptes** : 20 analyses par jour et par compte. Les tentatives de connexion
+  sont limitées, et les bilans sont supprimés au bout d'un an.
+
+Mise en service :
+
+```bash
+touch database/database.sqlite
+php artisan migrate --force
+php artisan charte:administrateur prenom.nom@mtdpce.gov.bf   # après avoir créé ce compte sur /conformite/inscription
+php artisan queue:work --tries=1 --timeout=300               # à garder lancé (systemd, supervisor)
+# cron, chaque minute : php artisan schedule:run   (purge des bilans de plus d'un an)
+```
+
+Sur un poste de développement, `CONFORMITE_RESEAU_LOCAL=true` permet d'analyser
+`localhost`. Le réglage est sans effet en production.
+
+**Rendu JavaScript.** C'est une option de l'analyse par adresse, pour les
+applications React, Angular ou Vue rendues dans le navigateur. Un Chrome sans
+interface ouvre chaque page et exécute son code. L'analyse porte alors sur la
+page affichée, et mesure en plus les contrastes réels et le poids réel, images
+et polices comprises. Le travail est fait par `outils/rendu/rendu.js`.
+
+Le code exécuté est celui d'un tiers. Tout ce que Chrome demande au réseau
+passe donc par un mandataire ouvert par le script, qui applique la même garde
+que l'analyse simple : pas de réseau interne, `http` et `https` seulement, sur
+les ports 80 et 443. Les WebSocket passent aussi par ce mandataire, et WebRTC
+est coupé. `node tests/rendu.js` le vérifie avec un vrai Chrome : une page qui
+tente de joindre un serveur interne ne l'atteint pas.
+
+```bash
+cd outils/rendu && npm install --omit=dev          # puppeteer-core, hors du paquet de la charte
+apt install chromium                               # ou Google Chrome
+# .env : CONFORMITE_CHROME=/usr/bin/chromium   (et CONFORMITE_NODE si node n'est pas dans le PATH)
+```
+
+Lancer la file d'attente sous un compte ordinaire, pas root : sous root, Chrome
+tourne sans son bac à sable. Pour une isolation complète, faire tourner ce compte
+dans un conteneur sans accès au réseau interne. Sans `CONFORMITE_CHROME`,
+l'option reste grisée dans le formulaire.
+
+Ce que l'outil ne vérifie pas est écrit dans chaque bilan. Il ne juge ni la
+clarté des textes ni l'usage réel au clavier, et il ne voit pas le contenu
+ajouté par JavaScript. Le bilan ne vaut ni audit d'accessibilité ni
+homologation.
 
 Deux façons de mettre en ligne :
 

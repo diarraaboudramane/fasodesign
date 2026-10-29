@@ -45,6 +45,12 @@ return Application::configure(basePath: dirname(__DIR__))
             MesurerAudience::class,
         ]);
 
+        /* L'outil de contrôle de conformité : un visiteur sans compte va à
+           la connexion, un compte connecté qui revient sur la connexion va
+           à ses analyses. */
+        $middleware->redirectGuestsTo(fn () => route('connexion'));
+        $middleware->redirectUsersTo(fn () => route('conformite.espace'));
+
         /* Global, et non dans le groupe web : une adresse qui ne
            correspond à aucune route reçoit aussi les en-têtes. */
         $middleware->append(EnTetesDeSecurite::class);

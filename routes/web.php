@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdministrationController;
 use App\Http\Controllers\AudienceController;
+use App\Http\Controllers\CompteController;
+use App\Http\Controllers\ConformiteController;
+use App\Http\Middleware\CompteActif;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\FichierController;
@@ -43,6 +47,57 @@ Route::middleware('humain')->group(function () {
         Route::post('contact', [ContactController::class, 'envoyer'])
             ->middleware('throttle:5,1')
             ->name('contact.envoyer');
+    });
+
+    /* ---------------------------------- le contrôle de conformité */
+
+    /* Réservé aux comptes : la session est ouverte ici, et nulle part
+       ailleurs dans la documentation. */
+    Route::middleware('formulaire')->prefix('conformite')->group(function () {
+        Route::get('/', [ConformiteController::class, 'presentation'])->name('conformite');
+
+        Route::middleware('guest')->group(function () {
+            Route::get('inscription', [CompteController::class, 'inscription'])->name('inscription');
+            Route::post('inscription', [CompteController::class, 'inscrire'])
+                ->middleware('throttle:5,1')->name('inscription.enregistrer');
+            Route::get('connexion', [CompteController::class, 'connexion'])->name('connexion');
+            Route::post('connexion', [CompteController::class, 'connecter'])
+                ->middleware('throttle:10,1')->name('connexion.ouvrir');
+            Route::get('mot-de-passe-oublie', [CompteController::class, 'oubli'])->name('oubli');
+            Route::post('mot-de-passe-oublie', [CompteController::class, 'envoyerLien'])
+                ->middleware('throttle:3,1')->name('oubli.envoyer');
+            Route::get('reinitialisation/{jeton}', [CompteController::class, 'reinitialisation'])->name('password.reset');
+            Route::post('reinitialisation', [CompteController::class, 'reinitialiser'])
+                ->middleware('throttle:5,1')->name('reinitialisation.enregistrer');
+        });
+
+        Route::middleware('auth')->group(function () {
+            Route::post('deconnexion', [CompteController::class, 'deconnecter'])->name('deconnexion');
+            Route::get('confirmation', [CompteController::class, 'courriel'])->name('conformite.courriel');
+            Route::post('confirmation', [CompteController::class, 'renvoyer'])
+                ->middleware('throttle:3,1')->name('conformite.courriel.renvoyer');
+            Route::get('confirmation/{id}/{empreinte}', [CompteController::class, 'confirmer'])
+                ->middleware('signed')->whereNumber('id')->name('conformite.courriel.confirmer');
+
+            Route::middleware(CompteActif::class)->group(function () {
+                Route::get('analyses', [ConformiteController::class, 'espace'])->name('conformite.espace');
+                Route::post('analyses', [ConformiteController::class, 'lancer'])
+                    ->middleware('throttle:6,1')->name('conformite.lancer');
+                Route::get('analyses/{analyse}', [ConformiteController::class, 'bilan'])
+                    ->whereNumber('analyse')->name('conformite.bilan');
+                Route::get('analyses/{analyse}/bilan.md', [ConformiteController::class, 'markdown'])
+                    ->whereNumber('analyse')->name('conformite.markdown');
+                Route::post('analyses/{analyse}/signalements', [ConformiteController::class, 'signaler'])
+                    ->middleware('throttle:20,1')->whereNumber('analyse')->name('conformite.signaler');
+
+                Route::get('comptes', [AdministrationController::class, 'comptes'])->name('conformite.comptes');
+                Route::post('comptes/{compte}', [AdministrationController::class, 'modifier'])
+                    ->whereNumber('compte')->name('conformite.comptes.modifier');
+                Route::get('signalements', [AdministrationController::class, 'signalements'])->name('conformite.signalements');
+                Route::post('signalements/{signalement}', [AdministrationController::class, 'traiter'])
+                    ->whereNumber('signalement')->name('conformite.signalements.traiter');
+            });
+        });
     });
 });
 

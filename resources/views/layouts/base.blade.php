@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="{{ ressource('assets/img/favicon-180.png') }}">
 @stack('tete')
 </head>
-<body class="fs-espace-public">
+<body class="{{ $espace ?? 'fs-espace-public' }}">
 
 @yield('corps')
 </body>

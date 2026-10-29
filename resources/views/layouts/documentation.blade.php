@@ -32,6 +32,10 @@
       <p class="doc-menu-titre">Pour les développeurs</p>
       <ul>
         <li><a href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">Toute la charte en Markdown</a></li>
+@unless (config('charte.export'))
+{{-- L'outil demande un serveur et des comptes : le site exporté ne l'a pas. --}}
+        <li><a href="{{ route('conformite') }}">Contrôle de conformité</a></li>
+@endunless
       </ul>
     </div>
 

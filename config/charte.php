@@ -124,7 +124,7 @@ return [
      * dans amorce/index.js.
      */
     'serveur' => rtrim(env('CHARTE_SERVEUR', 'https://chartegraphique-21.mtdpce-test.gov.bf'), '/'),
-    'hors_diffusion' => ['css/docs.css', 'js/docs.js', 'js/audience.js'],
+    'hors_diffusion' => ['css/docs.css', 'js/docs.js', 'js/audience.js', 'js/conformite.js'],
 
     /*
      * Vrai pendant « php artisan charte:exporter » : les liens sont
@@ -189,6 +189,29 @@ return [
     'audience' => [
         'active' => (bool) env('CHARTE_AUDIENCE', true),
         'fenetre' => 5,
+    ],
+
+    /*
+     * Outil de contrôle de conformité, réservé aux comptes validés.
+     * reseau_local autorise l'analyse d'une adresse locale sur un poste de
+     * développement ; il est sans effet en production.
+     */
+    'conformite' => [
+        'pages_max' => (int) env('CONFORMITE_PAGES_MAX', 20),
+        'ressources_max' => 40,
+        'duree_max' => 90,
+        'archive_max_ko' => 50 * 1024,
+        'analyses_par_jour' => (int) env('CONFORMITE_ANALYSES_PAR_JOUR', 20),
+        'conservation_jours' => 365,
+        'reseau_local' => (bool) env('CONFORMITE_RESEAU_LOCAL', false),
+        /* Rendu JavaScript par un navigateur sans interface : il faut Node,
+           Chrome ou Chromium, et « npm install » dans outils/rendu. */
+        'rendu' => [
+            'chrome' => env('CONFORMITE_CHROME'),
+            'node' => env('CONFORMITE_NODE', 'node'),
+            'delai_page' => 30,
+            'duree_max' => 180,
+        ],
     ],
 
     'verification' => [

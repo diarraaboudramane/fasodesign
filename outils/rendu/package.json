@@ -1,0 +1,9 @@
+{
+  "name": "charte-graphique-rendu",
+  "private": true,
+  "description": "Rendu des pages par un navigateur sans interface, pour l'outil de contrôle de conformité. Ne fait pas partie du paquet de la charte.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "puppeteer-core": "24.10.0"
+  }
+}

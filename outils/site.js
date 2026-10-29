@@ -124,7 +124,7 @@ for (const [numero, assets] of versions) {
 
   /* L'outillage de la documentation n'a rien à faire dans une adresse
      qu'un service mettra en production. */
-  for (const inutile of ["docs.css", "docs.js", "audience.js"]) {
+  for (const inutile of ["docs.css", "docs.js", "audience.js", "conformite.js"]) {
     const p = path.join(versionne, inutile.endsWith(".css") ? "css" : "js", inutile);
     if (fs.existsSync(p)) fs.rmSync(p);
   }
