@@ -285,7 +285,7 @@
         <h3>Choix en carte</h3>
         <p class="doc-bloc-note">
           Lorsque le choix engage la suite du parcours, la cible cliquable est
-          étendue à toute la carte. La cible tactile devient bien plus généreuse
+          étendue à toute la carte&nbsp;: sous le pouce, elle devient bien plus large
           que la case elle-même.
         </p>
         <div class="doc-demo" data-libelle="Choix en carte">
@@ -425,9 +425,9 @@
         </div>
 
         <div class="doc-note fs-mt-6">
-          Un PDF n'est pas rendu. Le coût de calcul est sans rapport avec le service
-          rendu. Une icône de document suffit, le nom et le nombre de pages portant
-          l'information utile.
+          Un PDF n'a pas de vignette&nbsp;: le calculer coûterait bien plus qu'il ne
+          rapporte. Une icône de document suffit, puisque le nom et le nombre de
+          pages portent déjà l'information utile.
         </div>
       </div>
 
@@ -516,7 +516,7 @@
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
               <li>Un calendrier pour saisir une date de naissance.</li>
-              <li>Trois listes déroulantes. Une liste de 1&nbsp;900 à 2&nbsp;026 est inutilisable au pouce.</li>
+              <li>Trois listes déroulantes&nbsp;: une liste d'années de 1900 à 2026 est inutilisable au pouce.</li>
               <li>Refuser la saisie d'un chiffre au motif que la date serait invalide. On valide à la sortie du champ, pas à la frappe.</li>
               <li>Imposer les zéros de tête&nbsp;: « 7 » vaut « 07 ».</li>
             </ul>
@@ -571,22 +571,22 @@
                     <td><button type="button" class="fs-jour" disabled aria-label="6 septembre, passé">6</button></td>
                   </tr>
                   <tr>
-                    <td><button type="button" class="fs-jour" disabled>7</button></td>
-                    <td><button type="button" class="fs-jour" disabled>8</button></td>
-                    <td><button type="button" class="fs-jour" disabled>9</button></td>
-                    <td><button type="button" class="fs-jour" disabled>10</button></td>
-                    <td><button type="button" class="fs-jour" disabled>11</button></td>
-                    <td><button type="button" class="fs-jour" disabled>12</button></td>
-                    <td><button type="button" class="fs-jour" disabled>13</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="7 septembre, passé">7</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="8 septembre, passé">8</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="9 septembre, passé">9</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="10 septembre, passé">10</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="11 septembre, passé">11</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="12 septembre, passé">12</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="13 septembre, passé">13</button></td>
                   </tr>
                   <tr>
-                    <td><button type="button" class="fs-jour" disabled>14</button></td>
-                    <td><button type="button" class="fs-jour" disabled>15</button></td>
-                    <td><button type="button" class="fs-jour" disabled>16</button></td>
-                    <td><button type="button" class="fs-jour" disabled>17</button></td>
-                    <td><button type="button" class="fs-jour" disabled>18</button></td>
-                    <td><button type="button" class="fs-jour" disabled>19</button></td>
-                    <td><button type="button" class="fs-jour" disabled>20</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="14 septembre, passé">14</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="15 septembre, passé">15</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="16 septembre, passé">16</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="17 septembre, passé">17</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="18 septembre, passé">18</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="19 septembre, passé">19</button></td>
+                    <td><button type="button" class="fs-jour" disabled aria-label="20 septembre, passé">20</button></td>
                   </tr>
                   <tr>
                     <td>
@@ -646,7 +646,7 @@
             <p class="doc-usage-titre">À faire</p>
             <ul>
               <li>Produire le mois côté serveur&nbsp;: sans JavaScript, le calendrier reste consultable et les jours ouverts restent atteignables.</li>
-              <li>Donner à chaque jour un <code>aria-label</code> complet, la seule lecture du chiffre étant insuffisante.</li>
+              <li>Donner à chaque jour un <code>aria-label</code> complet&nbsp;: le chiffre seul ne dit ni le mois ni la disponibilité.</li>
               <li>Distinguer le jour courant du jour choisi&nbsp;: ce sont deux repères différents, qui peuvent tomber sur la même case.</li>
               <li>Doubler la disponibilité d'un repère non chromatique&nbsp;: point pour ouvert, barré pour complet.</li>
             </ul>
@@ -667,8 +667,8 @@
         <h3>Autocomplétion <code>.fs-combo</code></h3>
         <p class="doc-bloc-note">
           Pour choisir dans une liste trop longue pour une liste déroulante&nbsp;: communes,
-          administrations, démarches. La règle est simple&nbsp;: <strong>en dessous de
-          quinze entrées, une liste déroulante&nbsp;; au-delà, une autocomplétion</strong>.
+          administrations, démarches. <strong>En dessous de quinze entrées, une
+          liste déroulante&nbsp;; au-delà, une autocomplétion</strong>.
           Sans JavaScript, le champ reste une saisie libre que le serveur valide&nbsp;— la
           liste n'est qu'une aide.
         </p>
@@ -713,7 +713,7 @@
               <li>Annoncer le nombre de résultats dans une région live&nbsp;: sans cela, un usager au lecteur d'écran ignore que la liste a changé.</li>
               <li>Mettre en évidence la portion saisie dans chaque suggestion.</li>
               <li>Proposer une issue explicite quand rien ne correspond.</li>
-              <li>Laisser le focus dans le champ. La suggestion courante est désignée par <code>aria-activedescendant</code>.</li>
+              <li>Laisser le focus dans le champ et désigner la suggestion courante par <code>aria-activedescendant</code>.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
@@ -779,9 +779,9 @@
       <div class="doc-bloc">
         <h3>Onglets <code>[role="tablist"]</code></h3>
         <p class="doc-bloc-note">
-          Navigation au clavier conforme&nbsp;: flèches pour changer d'onglet, Début et
-          Fin pour atteindre les extrémités. Un seul onglet est atteignable par
-          tabulation, le panneau actif étant la destination suivante.
+          Au clavier, les flèches changent d'onglet, Début et Fin atteignent les
+          extrémités. La tabulation ne s'arrête que sur l'onglet actif, puis passe
+          directement au panneau affiché.
         </p>
         <div class="doc-demo" data-libelle="Onglets">
           <div class="doc-demo-scene doc-demo-scene--pile">
@@ -892,9 +892,9 @@
     <section class="doc-section" id="information">
       <h2>Information</h2>
       <p class="doc-section-intro">
-        Présenter un contenu sans hiérarchiser l'urgence revient à ne rien
-        hiérarchiser. Les encarts distinguent quatre registres, du simple repère
-        documentaire à l'alerte critique.
+        Quand tout est présenté avec la même urgence, plus rien ne ressort. Les
+        encarts distinguent quatre registres, du simple repère documentaire à
+        l'alerte critique.
       </p>
 
       <div class="doc-bloc">
@@ -978,8 +978,8 @@
       <div class="doc-bloc">
         <h3>Bandeau d'urgence <code>.fs-bandeau</code></h3>
         <p class="doc-bloc-note">
-          Réservé aux communications de portée nationale. Son emploi pour une
-          information de service courante épuiserait sa valeur d'alerte.
+          Réservé aux communications de portée nationale. Employé pour une
+          information de service courante, il perdrait sa valeur d'alerte.
         </p>
         <div class="doc-demo" data-libelle="Bandeau">
           <div class="doc-demo-scene doc-demo-scene--pile" style="padding:0;">
@@ -999,7 +999,7 @@
         <div class="doc-demo" data-libelle="Étiquettes">
           <div class="doc-demo-scene">
             <span class="fs-badge fs-badge--neutre">Brouillon</span>
-            <span class="fs-badge fs-badge--info">En instruction</span>
+            <span class="fs-badge fs-badge--info">En cours d'instruction</span>
             <span class="fs-badge fs-badge--succes">Validé</span>
             <span class="fs-badge fs-badge--alerte">Complément demandé</span>
             <span class="fs-badge fs-badge--danger">Rejeté</span>
@@ -1166,7 +1166,7 @@
                     <td data-colonne="Démarche">Certificat de résidence</td>
                     <td data-colonne="Dépôt" data-valeur="2026-09-15">15/09/2026</td>
                     <td data-colonne="Montant" class="fs-num" data-valeur="1000">1&nbsp;000&nbsp;F</td>
-                    <td data-colonne="État"><span class="fs-statut fs-statut--cours">En instruction</span></td>
+                    <td data-colonne="État"><span class="fs-statut fs-statut--cours">En cours d'instruction</span></td>
                   </tr>
                   <tr>
                     <td data-colonne="Référence"><code>BF-2026-004915</code></td>
@@ -1223,10 +1223,10 @@
                   <select class="fs-select" id="f-etat" data-filtre="egal" data-filtre-colonne="État">
                     <option value="">Tous</option>
                     <option>Validé</option>
-                    <option>En instruction</option>
+                    <option>En cours d'instruction</option>
                     <option>Complément demandé</option>
                     <option>Rejeté</option>
-                    <option>Disponible</option>
+                    <option>Disponible au retrait</option>
                   </select>
                 </div>
                 <div class="fs-champ">
@@ -1283,16 +1283,16 @@
                   </thead>
                   <tbody>
                     <tr><td data-colonne="Référence"><code>BF-2026-004871</code></td><td data-colonne="Démarche">Acte de naissance</td><td data-colonne="Dépôt" data-valeur="2026-09-18">18/09/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="500">500 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Validé</span></td></tr>
-                    <tr><td data-colonne="Référence"><code>BF-2026-004902</code></td><td data-colonne="Démarche">Certificat de résidence</td><td data-colonne="Dépôt" data-valeur="2026-09-15">15/09/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="1000">1 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--cours">En instruction</span></td></tr>
+                    <tr><td data-colonne="Référence"><code>BF-2026-004902</code></td><td data-colonne="Démarche">Certificat de résidence</td><td data-colonne="Dépôt" data-valeur="2026-09-15">15/09/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="1000">1 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--cours">En cours d'instruction</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004915</code></td><td data-colonne="Démarche">Casier judiciaire</td><td data-colonne="Dépôt" data-valeur="2026-09-12">12/09/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="2000">2 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--alerte">Complément demandé</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004930</code></td><td data-colonne="Démarche">Passeport ordinaire</td><td data-colonne="Dépôt" data-valeur="2026-09-02">02/09/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="50000">50 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--rejet">Rejeté</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004944</code></td><td data-colonne="Démarche">Acte de mariage</td><td data-colonne="Dépôt" data-valeur="2026-08-28">28/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="500">500 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Validé</span></td></tr>
-                    <tr><td data-colonne="Référence"><code>BF-2026-004951</code></td><td data-colonne="Démarche">Certificat de vie</td><td data-colonne="Dépôt" data-valeur="2026-08-24">24/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="0">Gratuit</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Disponible</span></td></tr>
-                    <tr><td data-colonne="Référence"><code>BF-2026-004968</code></td><td data-colonne="Démarche">Carte grise</td><td data-colonne="Dépôt" data-valeur="2026-08-19">19/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="15000">15 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--cours">En instruction</span></td></tr>
+                    <tr><td data-colonne="Référence"><code>BF-2026-004951</code></td><td data-colonne="Démarche">Certificat de vie</td><td data-colonne="Dépôt" data-valeur="2026-08-24">24/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="0">Gratuit</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Disponible au retrait</span></td></tr>
+                    <tr><td data-colonne="Référence"><code>BF-2026-004968</code></td><td data-colonne="Démarche">Carte grise</td><td data-colonne="Dépôt" data-valeur="2026-08-19">19/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="15000">15 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--cours">En cours d'instruction</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004977</code></td><td data-colonne="Démarche">Légalisation de signature</td><td data-colonne="Dépôt" data-valeur="2026-08-14">14/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="200">200 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Validé</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004983</code></td><td data-colonne="Démarche">Attestation de résidence</td><td data-colonne="Dépôt" data-valeur="2026-08-08">08/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="1000">1 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--alerte">Complément demandé</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-004990</code></td><td data-colonne="Démarche">Acte de décès</td><td data-colonne="Dépôt" data-valeur="2026-08-03">03/08/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="500">500 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Validé</span></td></tr>
-                    <tr><td data-colonne="Référence"><code>BF-2026-005002</code></td><td data-colonne="Démarche">Extrait de casier</td><td data-colonne="Dépôt" data-valeur="2026-07-30">30/07/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="2000">2 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Disponible</span></td></tr>
+                    <tr><td data-colonne="Référence"><code>BF-2026-005002</code></td><td data-colonne="Démarche">Extrait de casier</td><td data-colonne="Dépôt" data-valeur="2026-07-30">30/07/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="2000">2 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--succes">Disponible au retrait</span></td></tr>
                     <tr><td data-colonne="Référence"><code>BF-2026-005014</code></td><td data-colonne="Démarche">Permis de conduire</td><td data-colonne="Dépôt" data-valeur="2026-07-22">22/07/2026</td><td data-colonne="Montant" class="fs-num" data-valeur="25000">25 000 F</td><td data-colonne="État"><span class="fs-statut fs-statut--rejet">Rejeté</span></td></tr>
                   </tbody>
                 </table>
@@ -1369,7 +1369,7 @@
 
         <h4 class="fs-mt-8">Filtre et pagination</h4>
         <p class="doc-bloc-note">
-          Ce sont deux couches distinctes qu'il ne faut pas confondre&nbsp;: le filtre
+          Deux couches distinctes&nbsp;: le filtre
           <strong>écarte</strong> une ligne du jeu de données, la pagination
           <strong>masque</strong> celles qui ne sont pas sur la page courante. Une
           ligne écartée ne compte dans aucun total et n'occupe aucune place sur une
@@ -1378,8 +1378,8 @@
 
         <h4 class="fs-mt-8">Extraction</h4>
         <p class="doc-bloc-note">
-          Deux sorties, pour deux usages. Le <strong>CSV</strong> sert à exploiter les
-          données dans un tableur. L'<strong>impression</strong> produit un document
+          Le <strong>CSV</strong> sert à exploiter les données dans un tableur&nbsp;;
+          l'<strong>impression</strong> produit un document
           paginé, destiné à être archivé ou transmis, que tout système d'exploitation
           sait enregistrer en PDF.
         </p>
@@ -1389,8 +1389,8 @@
           bibliothèques qui le permettent pèsent plusieurs centaines de kilo-octets,
           soit davantage que l'ensemble de ce système, pour un résultat inférieur à ce
           que le navigateur sait déjà faire&nbsp;: pagination, en-tête de colonnes répété,
-          polices intégrées. Lorsqu'un PDF doit être <em>joint</em> à un envoi&nbsp;—
-          récépissé, quittance, décision : il est produit par le serveur, qui seul
+          polices intégrées. Lorsqu'un PDF doit être <em>joint</em> à un envoi
+          (récépissé, quittance, décision), il est produit par le serveur, qui seul
           peut le signer et lui donner valeur probante.
         </div>
 
@@ -1455,9 +1455,9 @@
 
         <h4 class="fs-mt-8">Où se fait la pagination</h4>
         <p class="doc-bloc-note">
-          Le composant ci-dessus pagine dans le navigateur. Toutes les lignes sont
-          déjà dans la page. C'est acceptable jusqu'à quelques centaines de lignes.
-          Au-delà, la pagination revient au serveur.
+          Le composant ci-dessus pagine dans le navigateur&nbsp;: toutes les lignes
+          sont déjà dans la page. Cela tient jusqu'à quelques centaines de lignes&nbsp;;
+          au-delà, la pagination revient au serveur.
         </p>
 
         <div class="fs-tableau-cadre">
@@ -1604,7 +1604,7 @@
               <p class="fs-graphe-note">12&nbsp;480 dossiers au 21 septembre 2026.</p>
 
               <div class="fs-repartition" role="img"
-                   aria-label="En instruction 54 %, complément demandé 21 %, validés 18 %, rejetés 7 %">
+                   aria-label="En cours d'instruction 54 %, complément demandé 21 %, validés 18 %, rejetés 7 %">
                 <span style="width:54%; background: var(--serie-1);">54&nbsp;%</span>
                 <span style="width:21%; background: var(--serie-2); color: var(--neutre-900);">21&nbsp;%</span>
                 <span style="width:18%; background: var(--serie-3);">18&nbsp;%</span>
@@ -1612,7 +1612,7 @@
               </div>
 
               <div class="fs-repartition-legende">
-                <span style="--puce: var(--serie-1);">En instruction&nbsp;· 54&nbsp;%</span>
+                <span style="--puce: var(--serie-1);">En cours d'instruction&nbsp;· 54&nbsp;%</span>
                 <span style="--puce: var(--serie-2);">Complément demandé&nbsp;· 21&nbsp;%</span>
                 <span style="--puce: var(--serie-3);">Validés&nbsp;· 18&nbsp;%</span>
                 <span style="--puce: var(--serie-4);">Rejetés&nbsp;· 7&nbsp;%</span>
@@ -1626,7 +1626,7 @@
                       <tr><th>État</th><th class="fs-num">Dossiers</th><th class="fs-num">Part</th></tr>
                     </thead>
                     <tbody>
-                      <tr><td>En instruction</td><td class="fs-num">6&nbsp;739</td><td class="fs-num">54&nbsp;%</td></tr>
+                      <tr><td>En cours d'instruction</td><td class="fs-num">6&nbsp;739</td><td class="fs-num">54&nbsp;%</td></tr>
                       <tr><td>Complément demandé</td><td class="fs-num">2&nbsp;621</td><td class="fs-num">21&nbsp;%</td></tr>
                       <tr><td>Validés</td><td class="fs-num">2&nbsp;246</td><td class="fs-num">18&nbsp;%</td></tr>
                       <tr><td>Rejetés</td><td class="fs-num">874</td><td class="fs-num">7&nbsp;%</td></tr>
@@ -1731,7 +1731,7 @@
             <ul>
               <li>Joindre systématiquement le tableau des données, replié sous le graphique.</li>
               <li>Donner au graphique un <code>role="img"</code> et un <code>aria-label</code> qui énonce la tendance, pas la liste des valeurs.</li>
-              <li>Étiqueter directement chaque barre. Une légende oblige l'œil à faire des allers-retours.</li>
+              <li>Étiqueter directement chaque barre&nbsp;: une légende oblige l'œil à faire des allers-retours.</li>
               <li>Indiquer la source et la date d'arrêté des données.</li>
               <li>Faire partir l'axe des valeurs de zéro.</li>
             </ul>
@@ -1792,9 +1792,8 @@
         <h3>Notification passagère <code>.fs-toast</code></h3>
         <p class="doc-bloc-note">
           Appelée par <code>Faso.notifier()</code>. Le conteneur est une région live
-          polie. Le message est annoncé sans interrompre la tâche en cours. Une
-          notification ne porte jamais une information que l'usager doit retrouver
-          plus tard.
+          polie&nbsp;: le message est annoncé sans interrompre la tâche en cours. Ce qui
+          doit être retrouvé plus tard n'a pas sa place dans une notification.
         </p>
         <div class="doc-demo" data-libelle="Notifications">
           <div class="doc-demo-scene">
@@ -1815,9 +1814,9 @@
         <p class="doc-bloc-note">
           Historique consultable, distinct de la notification passagère qui, elle,
           disparaît. Il ne porte <strong>jamais seul</strong> une information exigeant
-          une action. Un usager qui ne revient pas sur le service ne la verrait pas.
-          Le SMS reste le canal qui l'atteint hors du service, le centre n'en est que
-          la trace.
+          une action&nbsp;: un usager qui ne revient pas sur le service ne la verrait pas.
+          Le SMS reste le canal qui l'atteint hors du service&nbsp;; le centre n'en garde
+          que la trace.
         </p>
 
         <div class="doc-demo" data-libelle="Centre de notifications">
@@ -1874,7 +1873,7 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Rendre la liste au serveur. Elle doit être lisible sans JavaScript.</li>
+              <li>Produire la liste côté serveur, pour qu'elle reste lisible sans JavaScript.</li>
               <li>Signaler le non-lu par trois repères (fond, graisse et pastille), dont aucun n'est la couleur seule.</li>
               <li>Dater chaque entrée avec un <code>&lt;time&gt;</code> exploitable.</li>
               <li>Rappeler la référence du dossier dans tout message de suivi.</li>
@@ -1883,7 +1882,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>N'exister que dans le centre pour une action attendue avec échéance.</li>
+              <li>Signaler une action à échéance uniquement dans le centre.</li>
               <li>Marquer comme lu au simple défilement&nbsp;: l'usager n'a rien confirmé.</li>
               <li>Accumuler sans limite&nbsp;: au-delà de trois mois, les entrées sont archivées.</li>
               <li>Notifier une étape purement technique sans effet pour l'usager.</li>
@@ -1964,17 +1963,17 @@
     <section class="doc-section" id="superposition">
       <h2>Superposition</h2>
       <p class="doc-section-intro">
-        Toute superposition interrompt la tâche en cours. Elle doit donc être
-        justifiée par une décision à prendre, jamais employée pour afficher un
-        contenu qui aurait sa place dans la page.
+        Une superposition interrompt la tâche en cours&nbsp;: elle se justifie par une
+        décision à prendre, jamais par un contenu qui aurait sa place dans la page.
       </p>
 
       <div class="doc-bloc">
         <h3>Accordéon <code>.fs-accordeon</code></h3>
         <p class="doc-bloc-note">
-          Bâti sur <code>&lt;details&gt;</code> et <code>&lt;summary&gt;</code> : il
-          fonctionne sans JavaScript, reste ouvrable par la recherche du navigateur
-          et s'imprime correctement.
+          Bâti sur <code>&lt;details&gt;</code> et <code>&lt;summary&gt;</code>&nbsp;: il
+          fonctionne sans JavaScript et reste ouvrable par la recherche du
+          navigateur. À l'impression, un panneau fermé ne sort pas&nbsp;: ce qui
+          doit figurer sur papier ne se range pas dans un accordéon.
         </p>
         <div class="doc-demo" data-libelle="Accordéon">
           <div class="doc-demo-scene doc-demo-scene--pile">
@@ -2006,8 +2005,8 @@
         <h3>Modale <code>.fs-modale</code></h3>
         <p class="doc-bloc-note">
           Fondée sur <code>&lt;dialog&gt;</code>, qui enferme nativement le focus et
-          gère la touche Échap. Le retour du focus sur l'élément déclencheur est
-          rétabli à la fermeture. Sur écran étroit, la modale occupe tout l'écran.
+          gère la touche Échap. À la fermeture, le script rend le focus à l'élément
+          déclencheur. Sur écran étroit, la modale occupe tout l'écran.
         </p>
         <div class="doc-demo" data-libelle="Modale">
           <div class="doc-demo-scene">
@@ -2056,7 +2055,7 @@
               <div class="fs-modale-corps">
                 <fieldset class="fs-fieldset" style="border:0; padding:0;">
                   <legend class="fs-label">État du dossier</legend>
-                  <label class="fs-choix"><input type="checkbox" checked><span class="fs-choix-texte"><span>En instruction</span></span></label>
+                  <label class="fs-choix"><input type="checkbox" checked><span class="fs-choix-texte"><span>En cours d'instruction</span></span></label>
                   <label class="fs-choix"><input type="checkbox"><span class="fs-choix-texte"><span>Validé</span></span></label>
                   <label class="fs-choix"><input type="checkbox"><span class="fs-choix-texte"><span>Rejeté</span></span></label>
                 </fieldset>

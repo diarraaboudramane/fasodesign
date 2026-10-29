@@ -83,7 +83,7 @@
         </div>
         <div>
           <span class="doc-chiffre-valeur">AA</span>
-          <span class="doc-chiffre-libelle">niveau de contraste garanti</span>
+          <span class="doc-chiffre-libelle">niveau de contraste vérifié</span>
         </div>
       </div>
     </div>
@@ -134,8 +134,9 @@
           <span class="doc-entree-num">04&nbsp;— Gabarits</span>
           <span class="doc-entree-titre">Les assemblages de référence</span>
           <span class="doc-entree-texte">
-            Portail de services, fiche de démarche, formulaire long, tableau de bord
-            usager, authentification et pages d'erreur.
+            Portail de services, résultats de recherche, contenu institutionnel,
+            fiche de démarche, formulaire long, tableaux de bord usager et agent,
+            authentification et pages d'erreur.
           </span>
           <span class="doc-entree-compte">Neuf gabarits validés</span>
         </a>
@@ -198,8 +199,8 @@
           <span class="doc-principe-num" aria-hidden="true">2</span>
           <h3>La reconnaissance avant l'esthétique</h3>
           <p>
-            Un usager doit distinguer un service authentique d'une contrefaçon en moins
-            de cinq secondes. Le bandeau officiel, le domaine visible et l'autorité
+            Un usager doit distinguer un service authentique d'une contrefaçon avant
+            de saisir quoi que ce soit. Le bandeau officiel, le domaine visible et l'autorité
             responsable priment sur toute recherche graphique.
           </p>
         </article>
@@ -239,7 +240,7 @@
           <h3>Une seule source pour chaque valeur</h3>
           <p>
             Aucune couleur, aucune taille, aucun rayon n'est écrit en dur dans un
-            composant. Tout transite par un jeton. Changer une décision se fait à un
+            composant&nbsp;: tout passe par un jeton, et une décision se change à un
             seul endroit.
           </p>
         </article>
@@ -271,7 +272,7 @@
             L'ordre des deux premières feuilles est imposé. <code>icones.css</code>
             peut être placé avant ou après <code>faso.css</code>&nbsp;: les variables
             CSS se résolvent à l'affichage, pas à la lecture du fichier. Il reste
-            néanmoins obligatoire, plusieurs composants y puisant leurs repères.
+            obligatoire&nbsp;: plusieurs composants y puisent leurs icônes.
           </p>
 
           <h3 class="fs-mt-8">Règles d'intégration</h3>
@@ -324,7 +325,7 @@
                 <li style="margin-bottom: var(--espace-3);">
                   <a class="fs-lien-fichier" href="{{ ressource('assets/jetons.json') }}" download>
                     Jetons du système
-                    <span class="fs-poids">JSON&nbsp;— 20&nbsp;Ko</span>
+                    <span class="fs-poids">JSON&nbsp;— 14&nbsp;Ko</span>
                   </a>
                   <br><span class="fs-faible">193 jetons, valeurs résolues et surcharges du thème sombre</span>
                 </li>
@@ -366,11 +367,17 @@
               <p class="fs-encart-titre">Périmètre de la charte</p>
               <p>
                 Elle couvre les <strong>services numériques accessibles par
-                navigateur</strong>. Elle ne traite ni l'identité imprimée&nbsp;—
-                papeterie, signalétique, gabarits bureautique&nbsp;— ni les applications
-                natives, qui relèvent de documents distincts restant à établir. Les
-                jetons livrés en JSON permettent néanmoins d'y reprendre les mêmes
-                valeurs.
+                navigateur</strong>. Elle ne traite pas l'identité imprimée&nbsp;:
+                papeterie, signalétique, gabarits bureautiques.
+              </p>
+              <p>
+                Les composants ne s'exécutent pas dans une application native&nbsp;;
+                ce qui s'y transporte, ce sont les jetons, l'emblème et les marques
+                nationales. La charte fournit des ressources Android générées depuis
+                <code>tokens.css</code>, pour Jetpack Compose et les vues XML, et
+                <code>jetons.json</code> sert de source pour les autres plateformes.
+                Voir la page
+                <a href="{{ page('integration') }}#android">Intégration</a>.
               </p>
               <p>
                 Le <strong>français</strong> est la seule langue servie par cette

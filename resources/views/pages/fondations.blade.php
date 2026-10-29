@@ -10,7 +10,7 @@
       <p class="fs-chapeau">
         Les fondations sont les décisions dont tout le reste découle. Un composant
         ne définit pas une couleur, une taille ou un rayon. Il consomme un jeton
-        déclaré ici. La charte évolue ainsi sans qu'on ait à le réécrire.
+        déclaré ici. On fait donc évoluer la charte sans réécrire les composants.
       </p>
     </div>
 
@@ -18,7 +18,7 @@
     <section class="doc-section" id="marque">
       <h2>Emblème et bloc-marque</h2>
       <p class="doc-section-intro">
-        Les armoiries du Burkina Faso sont un symbole de souveraineté de l'État.
+        Les armoiries du Burkina Faso sont un symbole de souveraineté.
         Leur emploi identifie l'État et engage la responsabilité de l'administration
         qui les affiche. Les règles qui suivent sont impératives.
       </p>
@@ -73,7 +73,7 @@
                 <td><strong>Grand</strong></td>
                 <td><code>armoiries.svg</code><br><span class="fs-faible">191&nbsp;Ko</span></td>
                 <td>À partir de 64&nbsp;px, impression, affiche</td>
-                <td>L'emblème complet : écu, chevaux, lances, banderoles et devise.</td>
+                <td>L'emblème complet&nbsp;: écu, chevaux, lances, banderoles et devise.</td>
               </tr>
               <tr>
                 <td><strong>Moyen</strong></td>
@@ -127,10 +127,10 @@
         </div>
 
         <p class="fs-legende fs-mt-4">
-          Ces quatre emplois montrent le format de référence, comme à l'origine. À
-          partir de 56&nbsp;px le format moyen convient aussi bien pour un tiers de
-          poids en moins, et à 32&nbsp;px le petit format se lit mieux. Le choix
-          relève de l'autorité qui garde les armoiries.
+          Ces quatre emplois sont montrés avec le format de référence. À partir de
+          56&nbsp;px, le format moyen convient aussi bien, pour un tiers de poids en
+          moins&nbsp;; à 32&nbsp;px, le petit format se lit mieux. Le choix relève de
+          l'autorité qui garde les armoiries.
         </p>
 
         <h4 class="fs-mt-8">Les quatre formats côte à côte</h4>
@@ -158,8 +158,8 @@
 
         <div class="doc-note fs-mt-6">
           Le petit format n'est pas un emblème redessiné. Le fichier de référence est
-          une vectorisation par nappes de tons, sans objet séparable : y retirer des
-          couches efface le dessin au lieu de le simplifier, et en redessiner un
+          une vectorisation par nappes de tons, sans objet séparable&nbsp;: y retirer des
+          couches efface le dessin au lieu de le simplifier, et le redessiner
           reviendrait à modifier un symbole de l'État. La silhouette de l'écu a donc
           été relevée sur le dessin lui-même, puis employée comme découpe. Un vrai
           emblème simplifié, s'il en faut un, relève d'une décision graphique et de
@@ -168,7 +168,7 @@
 
         <div class="fs-tableau-cadre fs-mt-6">
           <table class="fs-tableau">
-            <caption>Les six fichiers livrés, et l'emploi de chacun</caption>
+            <caption>Les fichiers livrés en dehors des quatre formats, et l'emploi de chacun</caption>
             <thead>
               <tr><th>Fichier</th><th>Emploi</th><th class="fs-num">Poids</th></tr>
             </thead>
@@ -192,7 +192,7 @@
               </tr>
               <tr>
                 <td><code>favicon.svg</code></td>
-                <td>Icone de l'onglet. Ce n'est pas l'emblème mais le drapeau et son
+                <td>Icône de l'onglet. Ce n'est pas l'emblème mais le drapeau et son
                     étoile, seule marque lisible à 16&nbsp;px.</td>
                 <td class="fs-num">504&nbsp;o</td>
               </tr>
@@ -220,7 +220,7 @@
           </div>
           <div>
             <dt>Taille minimale</dt>
-            <dd>64&nbsp;px pour le grand format, 32 pour le moyen, 16 pour le petit. En deçà de chaque seuil, on passe au format suivant.</dd>
+            <dd>Format recommandé selon la hauteur&nbsp;: grand à partir de 64&nbsp;px, moyen de 32 à 64, petit de 16 à 32, mini en dessous. Le grand et le moyen restent admis jusqu'à 32&nbsp;px, comme dans les exemples ci-dessus.</dd>
           </div>
           <div>
             <dt>Production</dt>
@@ -307,11 +307,10 @@
           Vignette courte portant la <strong>composition du drapeau</strong>&nbsp;:
           rouge au-dessus, vert au-dessous, étoile centrée à cheval sur les deux, dans
           des proportions proches de celles du drapeau lui-même. Il ponctue un titre
-          de section ou une
-          ouverture de page, là où le filet pleine largeur serait trop appuyé. Le
-          drapeau entier tient dans deux couches de fond, sans rien à superposer&nbsp;:
-          il se compose donc dans un pseudo-élément, là où aucune
-          classe ne peut être posée.
+          de section ou une ouverture de page, là où le filet pleine largeur serait
+          trop appuyé. Le drapeau entier tient en deux couches de fond, sans élément
+          superposé&nbsp;: le repère peut donc se composer dans un pseudo-élément, là
+          où l'on ne peut pas poser de classe.
         </p>
 
         <div class="doc-note">
@@ -423,7 +422,7 @@
         <h3>Co-marquage</h3>
         <p class="doc-bloc-note">
           Un service porté conjointement par l'État et un partenaire (agence,
-          établissement public, organisation internationale), fait coexister deux
+          établissement public, organisation internationale) fait coexister deux
           marques. L'ordre n'est pas négociable&nbsp;: l'emblème de l'État vient en
           premier, car c'est lui qui engage la responsabilité du service.
         </p>
@@ -451,7 +450,7 @@
             <ul>
               <li>Placer l'emblème de l'État en premier dans le sens de lecture, séparé de la marque partenaire par un filet vertical.</li>
               <li>Limiter la marque partenaire à la hauteur de l'emblème, pas au-delà.</li>
-              <li>Conserver la zone de protection de l'emblème, que le partenaire n'empiète pas.</li>
+              <li>Conserver la zone de protection de l'emblème&nbsp;: la marque partenaire n'empiète pas dessus.</li>
               <li>N'admettre qu'un seul partenaire dans le bloc-marque&nbsp;; les autres figurent en pied de page.</li>
             </ul>
           </div>
@@ -688,8 +687,8 @@
         <h3>Répartition chromatique</h3>
         <p class="doc-bloc-note">
           Une interface conforme n'est pas une interface tricolore. Les trois couleurs
-          nationales sont des signaux. Leur force tient à leur rareté. La proportion
-          de référence est la suivante.
+          nationales sont des signaux, et leur force tient à leur rareté. Proportion
+          de référence&nbsp;:
         </p>
 
         <div class="doc-demo" data-libelle="Proportions indicatives">
@@ -719,9 +718,9 @@
       <div class="doc-bloc">
         <h3>Les deux familles</h3>
         <p class="doc-bloc-note">
-          Deux familles suffisent, et deux seulement. Chaque famille
-          supplémentaire est un fichier de plus sur le chemin critique, pour un
-          service dont le premier principe est la contrainte réseau.
+          Pas une de plus&nbsp;: chaque famille supplémentaire est un fichier de plus
+          sur le chemin critique, pour des services conçus d'abord pour un réseau
+          instable.
         </p>
 
         <div class="doc-demo" data-libelle="Spécimen">
@@ -818,9 +817,9 @@
         <p class="doc-bloc-note">
           Références de dossier, montants dans un tableau, valeurs techniques&nbsp;: tout
           ce qui doit s'aligner en colonne ou se lire caractère par caractère.
-          <strong>Aucune police n'est téléchargée pour cela</strong>&nbsp;— une chasse fixe
-          ne porte aucune identité, celle du système d'exploitation convient, et son
-          absence économise un fichier entier sur le chemin critique.
+          <strong>Aucune police n'est téléchargée pour cela</strong>&nbsp;: une chasse fixe
+          ne porte aucune identité, celle du système d'exploitation convient, et
+          c'est un fichier de moins sur le chemin critique.
         </p>
 
         <div class="doc-demo" data-libelle="Chasse fixe">
@@ -880,9 +879,8 @@
           Les deux fichiers sont réduits au sous-ensemble latin&nbsp;: c'est ce qui les
           fait tenir en 81&nbsp;Ko. Ce sous-ensemble couvre le français, langue
           officielle, mais <strong>pas les caractères propres aux orthographes des
-          langues nationales</strong>. Le fait est écrit ici parce qu'il engage
-          directement tout service qui voudrait s'adresser aux usagers dans leur
-          langue.
+          langues nationales</strong>. Tout service qui voudrait s'adresser aux
+          usagers dans leur langue est directement concerné.
         </p>
 
         <div class="fs-tableau-cadre">
@@ -1050,7 +1048,7 @@
               <div class="doc-specimen-rendu"><span class="fs-surtitre" style="margin:0;">Service en ligne</span></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Monospace</b>JetBrains Mono<br>Références, montants, codes</div>
+              <div class="doc-specimen-fiche"><b>Monospace</b>Pile système<br>Références, montants, codes</div>
               <div class="doc-specimen-rendu"><code>BF-2026-004871-OUA</code></div>
             </div>
           </div>
@@ -1072,7 +1070,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Composer un paragraphe entier en capitales. La lecture chute d'environ un tiers.</li>
+              <li>Composer un paragraphe entier en capitales. Il se lit nettement plus lentement.</li>
               <li>Justifier le texte&nbsp;: sans césure, la justification crée des lézardes ingérables.</li>
               <li>Descendre sous 15&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
               <li>Introduire une troisième famille typographique pour un besoin ponctuel.</li>
@@ -1087,8 +1085,8 @@
       <h2>Photographie et illustration</h2>
       <p class="doc-section-intro">
         Une image de service public informe&nbsp;; elle n'habille pas. La question à se
-        poser avant d'en placer une n'est pas « qu'est-ce qui irait bien ici&nbsp;? » mais
-        « qu'est-ce que l'usager comprendra mieux grâce à elle&nbsp;? ». Si la réponse
+        poser avant d'en placer une n'est pas «&nbsp;qu'est-ce qui irait bien ici&nbsp;?&nbsp;» mais
+        «&nbsp;qu'est-ce que l'usager comprendra mieux grâce à elle&nbsp;?&nbsp;». Si la réponse
         n'est pas évidente, la place reste vide.
       </p>
 
@@ -1107,7 +1105,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Photographie d'ambiance pour « aérer » une page de démarche.</li>
+              <li>Photographie d'ambiance pour «&nbsp;aérer&nbsp;» une page de démarche.</li>
               <li>Banque d'images internationale sans lien avec le Burkina Faso.</li>
               <li>Image de fond derrière du texte. Le contraste devient incontrôlable.</li>
               <li>Illustration décorative dans un parcours de démarche. Elle allonge la page et distrait de l'action.</li>
@@ -1201,7 +1199,7 @@
       <p class="doc-section-intro">
         Une grille de douze colonnes, une gouttière fluide et quatre largeurs de
         conteneur couvrent l'ensemble des gabarits. La conception part du format le
-        plus étroit. C'est l'usage dominant.
+        plus étroit, celui de l'usage dominant.
       </p>
 
       <div class="doc-bloc">
@@ -1220,8 +1218,8 @@
         <h3>Répartitions courantes</h3>
         <p class="doc-bloc-note">
           Les classes <code>.fs-col-*</code> portent le nombre de colonnes occupées.
-          Sous 768&nbsp;px, toutes les colonnes passent en pleine largeur sans qu'il soit
-          nécessaire de le déclarer.
+          Sous 768&nbsp;px, toutes les colonnes passent en pleine largeur, sans rien
+          déclarer de plus.
         </p>
 
         <div class="doc-demo" data-libelle="Répartitions">
@@ -1304,9 +1302,8 @@
     <section class="doc-section" id="espacement">
       <h2>Espacement</h2>
       <p class="doc-section-intro">
-        Une échelle unique de base 4&nbsp;px. Toute valeur intermédiaire introduite hors
-        de cette échelle produit des désalignements qui se propagent à l'ensemble
-        d'une interface.
+        Une échelle unique de base 4&nbsp;px. Une valeur prise hors de cette échelle
+        crée des désalignements qui se propagent dans toute l'interface.
       </p>
 
       <div class="doc-bloc">
@@ -1419,7 +1416,7 @@
         Une icône ne remplace jamais un mot&nbsp;: elle accélère la reconnaissance d'un
         libellé déjà présent. Le jeu est volontairement restreint&nbsp;— 35 tracés
         couvrant les besoins réels des parcours documentés dans cette charte. Un
-        service qui a besoin d'une icône absente la soumet plutôt que d'en importer
+        service à qui il manque une icône en propose l'ajout plutôt que d'en importer
         une d'un jeu tiers, dont le dessin jurerait avec l'ensemble.
       </p>
 
@@ -1499,7 +1496,7 @@
             </span>
             <span class="fs-statut fs-statut--cours">
               <span class="fs-icone fs-icone--horloge fs-icone--sm" aria-hidden="true"></span>
-              En instruction
+              En cours d'instruction
             </span>
           </div>
         </div>
@@ -1520,7 +1517,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Employer une icône seule pour signaler un état&nbsp;: elle tombe sous le principe « la couleur ne porte jamais seule ».</li>
+              <li>Employer une icône seule pour signaler un état&nbsp;: elle tombe sous le principe «&nbsp;la couleur ne porte jamais seule&nbsp;».</li>
               <li>Redessiner ou étirer un tracé&nbsp;: l'épaisseur du trait ne se met jamais à l'échelle.</li>
               <li>Mélanger ce jeu avec des icônes d'une autre provenance.</li>
               <li>Employer une icône comme puce décorative répétée dans un texte courant.</li>
@@ -1532,8 +1529,8 @@
       <div class="doc-bloc">
         <h3>Le jeu complet</h3>
         <p class="doc-bloc-note">
-          Les icônes sont classées par usage et non par forme. On cherche « ce que
-          je veux dire », pas « ce que ça représente ». Le fichier
+          Les icônes sont classées par usage et non par forme. On cherche «&nbsp;ce que
+          je veux dire&nbsp;», pas «&nbsp;ce que ça représente&nbsp;». Le fichier
           <code>assets/img/icones.svg</code> rassemble les mêmes tracés pour les
           outils de conception.
         </p>
@@ -1756,7 +1753,7 @@
       <h2>Thèmes</h2>
       <p class="doc-section-intro">
         Le thème sombre n'est pas un ornement. Il réduit la consommation sur écran
-        OLED et soulage la lecture nocturne, deux situations courantes pour un usager
+        OLED et soulage la lecture de nuit, deux besoins courants pour un usager
         qui consulte un service depuis son téléphone. Il est obtenu en réaffectant
         les rôles sémantiques, sans toucher à un seul composant.
       </p>
@@ -1774,8 +1771,8 @@
             cohérent avec la souche chaude des neutres, qui réduit l'éblouissement.
           </li>
           <li>
-            Les ombres deviennent plus denses et plus contrastées, l'effet de
-            profondeur étant naturellement moins lisible sur fond sombre.
+            Les ombres deviennent plus denses et plus contrastées, car la
+            profondeur se lit moins bien sur fond sombre.
           </li>
           <li>
             Le thème clair est le thème par défaut de l'administration, quelle que

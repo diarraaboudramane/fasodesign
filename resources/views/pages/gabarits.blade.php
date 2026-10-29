@@ -11,7 +11,7 @@
         Les gabarits sont des assemblages validés. Ils fixent
         l'ordre des blocs et la hiérarchie de l'information pour les situations qui
         couvrent la quasi-totalité des services publics numériques. Un projet qui
-        s'en écarte doit justifier son écart.
+        s'en écarte doit le justifier.
       </p>
     </div>
 
@@ -46,8 +46,8 @@
     <section class="doc-section" id="portail">
       <h2>Portail de services</h2>
       <p class="doc-section-intro">
-        Page d'accueil d'une plateforme de téléservices. Sa fonction unique est
-        d'orienter. La recherche et les entrées par événement de vie précèdent tout
+        Page d'accueil d'une plateforme de téléservices. Elle sert à orienter, rien
+        d'autre&nbsp;: la recherche et les entrées par événement de vie précèdent tout
         contenu institutionnel.
       </p>
 
@@ -128,9 +128,10 @@
     <section class="doc-section" id="resultats">
       <h2>Résultats de recherche</h2>
       <p class="doc-section-intro">
-        La recherche est le premier geste de l'usager sur un portail. Documenter le
-        champ sans documenter ce qu'il produit laisse le gabarit le plus fréquent à
-        l'appréciation de chaque projet. Sa règle centrale&nbsp;: <strong>ne jamais
+        La recherche est le premier geste de l'usager sur un portail, ce qui fait
+        de la page de résultats le gabarit le plus fréquent. Le champ seul ne
+        suffit pas&nbsp;: ce qu'il produit doit suivre les mêmes règles d'un service à
+        l'autre. Règle centrale&nbsp;: <strong>ne jamais
         renvoyer une page vide</strong>.
       </p>
 
@@ -210,9 +211,9 @@
       <div class="doc-bloc">
         <h3>Recherche sans résultat</h3>
         <p class="doc-bloc-note">
-          C'est l'écran le plus important du gabarit, et le plus souvent bâclé. Il ne
-          se contente pas de constater. Il explique, propose une reformulation, et
-          ouvre une autre voie.
+          L'écran le plus important du gabarit, et le plus souvent bâclé. Il ne
+          s'arrête pas au constat&nbsp;: il dit quoi vérifier, propose la requête
+          reformulée et ouvre une autre entrée, comme le parcours par événement de vie.
         </p>
 
         <div class="doc-demo" data-libelle="Aucun résultat">
@@ -252,7 +253,7 @@
               <li>Renvoyer une page vide. Il y a toujours une suggestion, une reformulation ou un canal humain à proposer.</li>
               <li>Exiger l'orthographe exacte d'un terme administratif.</li>
               <li>Mêler démarches, actualités et pages institutionnelles sans les distinguer.</li>
-              <li>Paginer avant d'avoir proposé un filtre&nbsp;: l'usager préfère affiner que feuilleter.</li>
+              <li>Paginer avant d'avoir proposé un filtre&nbsp;: l'usager préfère affiner plutôt que feuilleter.</li>
               <li>Perdre les filtres actifs au changement de requête sans le signaler.</li>
             </ul>
           </div>
@@ -396,9 +397,9 @@
     <section class="doc-section" id="fiche">
       <h2>Fiche de démarche</h2>
       <p class="doc-section-intro">
-        Le gabarit le plus important du système. Il présente une démarche dans un
-        ordre invariable et place l'action principale en fin de parcours de lecture,
-        une fois l'usager informé.
+        C'est sur cette page que l'usager décide de s'engager ou non. Elle présente
+        la démarche dans un ordre invariable et place l'action principale en fin de
+        lecture, une fois l'usager informé.
       </p>
 
       <div class="doc-bloc">
@@ -444,6 +445,15 @@
                         <p class="fs-pieces-detail">Non exigé si vous êtes le titulaire de l'acte</p>
                       </div>
                     </li>
+                  </ol>
+                </div>
+
+                <div>
+                  <h4>Procédure</h4>
+                  <ol class="fs-liste-puces">
+                    <li>Déposez la demande en ligne avec vos pièces et réglez le droit de timbre.</li>
+                    <li>La mairie de votre lieu de naissance instruit le dossier&nbsp;; vous êtes prévenu par SMS.</li>
+                    <li>Retirez l'acte au guichet de la mairie, muni de votre CNIB.</li>
                   </ol>
                 </div>
 
@@ -540,7 +550,7 @@
                 <div class="fs-actions fs-actions--fin">
                   <button type="button" class="fs-btn fs-btn--fantome">Enregistrer et quitter</button>
                   <button type="button" class="fs-btn fs-btn--tertiaire">Étape précédente</button>
-                  <button type="button" class="fs-btn fs-btn--principal">Continuer</button>
+                  <button type="button" class="fs-btn fs-btn--principal">Passer au paiement</button>
                 </div>
 
               </div>
@@ -625,7 +635,7 @@
                         <td data-colonne="Référence"><code>BF-2026-004871</code></td>
                         <td data-colonne="Démarche">Acte de naissance</td>
                         <td data-colonne="Dépôt">18/09/2026</td>
-                        <td data-colonne="État"><span class="fs-statut fs-statut--cours">En instruction</span></td>
+                        <td data-colonne="État"><span class="fs-statut fs-statut--cours">En cours d'instruction</span></td>
                       </tr>
                       <tr>
                         <td data-colonne="Référence"><code>BF-2026-004915</code></td>
@@ -655,9 +665,9 @@
       <h2>Tableau de bord agent</h2>
       <p class="doc-section-intro">
         L'agent qui instruit les dossiers est lui aussi un usager du système. Son
-        écran répond à une question différente de celle du citoyen&nbsp;: non pas « où en
-        est mon dossier&nbsp;? » mais « lequel dois-je traiter maintenant&nbsp;? ». La densité
-        y est assumée, l'écran étant consulté toute la journée sur un poste fixe.
+        écran répond à une question différente de celle du citoyen&nbsp;: non pas «&nbsp;où en
+        est mon dossier&nbsp;?&nbsp;» mais «&nbsp;lequel dois-je traiter maintenant&nbsp;?&nbsp;». Consulté
+        toute la journée sur un poste fixe, il peut être dense.
       </p>
 
       <div class="doc-bloc">
@@ -788,9 +798,8 @@
     <section class="doc-section" id="authentification">
       <h2>Authentification</h2>
       <p class="doc-section-intro">
-        Page d'entrée dans l'espace personnel. Conteneur étroit, aucune navigation
-        secondaire, aucune distraction. La seule issue est de s'identifier ou de
-        revenir à l'accueil.
+        Page d'entrée dans l'espace personnel. Conteneur étroit, sans navigation
+        secondaire&nbsp;: l'usager ne peut que s'identifier ou revenir à l'accueil.
       </p>
 
       <div class="doc-bloc">

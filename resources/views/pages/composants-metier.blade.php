@@ -19,9 +19,9 @@
     <section class="doc-section" id="confiance">
       <h2>Confiance numérique</h2>
       <p class="doc-section-intro">
-        La multiplication des faux sites administratifs et des faux formulaires de
-        paiement constitue le principal risque pour l'usager. Les blocs de cette
-        famille répondent à un objectif unique&nbsp;: permettre de reconnaître un service
+        Les faux sites administratifs et les faux formulaires de paiement sont le
+        principal risque pour l'usager. Les blocs de cette famille n'ont qu'un
+        but&nbsp;: permettre de reconnaître un service
         authentique de l'État en quelques secondes, sans compétence technique.
       </p>
 
@@ -92,8 +92,8 @@
         <h3>Canaux de paiement autorisés</h3>
         <p class="doc-bloc-note">
           Tout parcours comportant un paiement liste explicitement les canaux
-          autorisés. Un canal absent de cette liste est un canal frauduleux. La
-          formulation doit le dire sans ambiguïté.
+          autorisés, et dit sans ambiguïté qu'un canal absent de cette liste est
+          frauduleux.
         </p>
 
         <div class="doc-demo" data-libelle="Canaux autorisés">
@@ -181,9 +181,9 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Porter le montant dans le libellé du bouton&nbsp;: « Payer 2&nbsp;400&nbsp;F&nbsp;CFA », jamais « Valider ».</li>
+              <li>Porter le montant dans le libellé du bouton&nbsp;: «&nbsp;Payer 2&nbsp;400&nbsp;F&nbsp;CFA&nbsp;», jamais «&nbsp;Valider&nbsp;».</li>
               <li>Détailler chaque ligne, y compris les frais annexes, avant le total.</li>
-              <li>Nommer le bénéficiaire et rappeler qu'aucun versement personnel n'est autorisé.</li>
+              <li>Nommer le bénéficiaire et rappeler qu'aucun versement sur un compte personnel n'est autorisé.</li>
               <li>Indiquer ce qui se passe après le paiement et sous quel délai.</li>
               <li>Délivrer une quittance téléchargeable dès l'encaissement.</li>
             </ul>
@@ -231,16 +231,16 @@
     <section class="doc-section" id="demarches">
       <h2>Démarches</h2>
       <p class="doc-section-intro">
-        Une démarche se présente toujours dans le même ordre. Ce qu'elle permet
+        Une démarche se présente toujours dans le même ordre&nbsp;: ce qu'elle permet
         d'obtenir, qui peut la demander, ce qu'elle coûte, combien de temps elle
-        prend, et ce qu'il faut fournir. Cet ordre n'est pas négociable. Il permet
-        à l'usager de décider avant de s'engager.
+        prend, ce qu'il faut fournir. Cet ordre n'est pas négociable&nbsp;: c'est lui
+        qui permet à l'usager de décider avant de s'engager.
       </p>
 
       <div class="doc-bloc">
         <h3>Carte de démarche <code>.fs-demarche</code></h3>
         <p class="doc-bloc-note">
-          Format de listing. Le coût et le délai sont affichés dès la liste&nbsp;: un
+          Format des listes de résultats. Le coût et le délai y sont affichés&nbsp;: un
           usager ne doit pas ouvrir cinq fiches pour comparer deux démarches.
         </p>
 
@@ -331,8 +331,8 @@
         <h3>Photographie d'identité <code>.fs-photo-guide</code></h3>
         <p class="doc-bloc-note">
           Le cadrage est le premier motif de rejet d'un dossier d'enrôlement. Montrer
-          le cadre attendu avant la prise de vue coûte moins cher qu'un aller-retour,
-          et évite à l'usager un second déplacement.
+          le cadre attendu avant la prise de vue évite le rejet, et à l'usager un
+          second déplacement.
         </p>
 
         <div class="doc-demo" data-libelle="Guide de cadrage">
@@ -365,7 +365,7 @@
             <ul>
               <li>Afficher le guide <strong>avant</strong> le dépôt, pas en message d'erreur après.</li>
               <li>Vérifier la résolution et prévenir immédiatement si elle est insuffisante.</li>
-              <li>Indiquer que la photographie peut être prise par un photographe agréé, tous les usagers n'ayant pas d'appareil.</li>
+              <li>Indiquer que la photographie peut être prise par un photographe agréé&nbsp;: tous les usagers ne disposent pas d'un appareil.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
@@ -384,7 +384,7 @@
         <p class="doc-bloc-note">
           Point d'entrée alternatif à la recherche. Un usager cherche rarement «&nbsp;acte
           de naissance&nbsp;»&nbsp;: il cherche «&nbsp;je viens d'avoir un enfant&nbsp;». L'entrée par
-          événement réduit la charge de vocabulaire administratif.
+          événement lui épargne une partie du vocabulaire administratif.
         </p>
 
         <div class="doc-demo" data-libelle="Événements de vie">
@@ -409,7 +409,7 @@
       <h2>Suivi de dossier</h2>
       <p class="doc-section-intro">
         Le suivi est le premier motif de contact avec les guichets. Un suivi lisible
-        en ligne réduit mécaniquement la charge d'accueil physique et téléphonique.
+        en ligne réduit d'autant les appels et les passages au guichet.
       </p>
 
       <div class="doc-bloc">
@@ -479,7 +479,7 @@
         <h3>Liste de dossiers <code>.fs-liste-dossiers</code></h3>
         <p class="doc-bloc-note">
           Format complémentaire du tableau. Il tient sur un écran étroit sans
-          reconfiguration et supporte des intitulés longs, là où un tableau impose des
+          reconfiguration et accepte des intitulés longs, là où un tableau impose des
           colonnes de largeur fixe. À privilégier quand l'usager consulte ses propres
           dossiers&nbsp;— peu nombreux, chacun important&nbsp;; le tableau reste préférable dès
           qu'il s'agit de comparer ou de trier.
@@ -515,7 +515,7 @@
                   </p>
                 </div>
                 <div class="fs-dossier-cote">
-                  <span class="fs-statut fs-statut--cours">En instruction</span>
+                  <span class="fs-statut fs-statut--cours">En cours d'instruction</span>
                   <a class="fs-btn fs-btn--tertiaire fs-btn--sm" href="#">Suivre</a>
                 </div>
               </li>
@@ -557,7 +557,7 @@
                 <td>La demande est enregistrée mais n'a pas encore été prise en charge.</td>
               </tr>
               <tr>
-                <td><span class="fs-badge fs-badge--info">En instruction</span></td>
+                <td><span class="fs-badge fs-badge--info">En cours d'instruction</span></td>
                 <td><code>--info</code></td>
                 <td>Un agent examine le dossier. Aucune action n'est attendue.</td>
               </tr>
@@ -577,7 +577,7 @@
                 <td>La demande est refusée. Le motif et la voie de recours sont indiqués.</td>
               </tr>
               <tr>
-                <td><span class="fs-badge fs-badge--succes">Disponible</span></td>
+                <td><span class="fs-badge fs-badge--succes">Disponible au retrait</span></td>
                 <td><code>--succes</code></td>
                 <td>Le document peut être téléchargé ou retiré au guichet indiqué.</td>
               </tr>
@@ -591,8 +591,8 @@
     <section class="doc-section" id="usager">
       <h2>Relation à l'usager</h2>
       <p class="doc-section-intro">
-        Recherche, consentement et contact. Ces blocs conditionnent l'accessibilité
-        réelle du service à l'ensemble de la population.
+        Recherche, consentement, SMS, courriel et contact. De ces blocs dépend que
+        le service soit réellement accessible à l'ensemble de la population.
       </p>
 
       <div class="doc-bloc">
@@ -728,13 +728,13 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
         <div class="fs-encart fs-encart--alerte fs-mt-6">
           <span class="fs-encart-marque fs-icone fs-icone--alerte" aria-hidden="true"></span>
           <div class="fs-encart-corps">
-            <p class="fs-encart-titre">Trois cookies n'en sont pas moins des cookies</p>
+            <p class="fs-encart-titre">Trois cookies dispensés de consentement, mais déclarés</p>
             <p>
               Le cookie qui enregistre la décision, celui qui porte la session et celui
               qui protège un formulaire contre la falsification sont nécessaires au
               service&nbsp;: ils ne se demandent pas. Tout le reste se demande, et se
-              dépose seulement après une réponse. Le service reste tenu de les
-              énumérer dans sa politique de confidentialité.
+              dépose seulement après une réponse. Le service reste tenu d'énumérer ces
+              trois cookies, eux aussi, dans sa politique de confidentialité.
             </p>
           </div>
         </div>
@@ -743,7 +743,7 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
       <div class="doc-bloc">
         <h3>Modèles de SMS</h3>
         <p class="doc-bloc-note">
-          Le SMS est le canal le plus sûr pour joindre un usager&nbsp;: il ne dépend
+          Le SMS est le canal le plus fiable pour joindre un usager&nbsp;: il ne dépend
           d'aucune connexion de données et atteint tous les appareils. C'est aussi
           celui qu'exploitent les fraudeurs. Chaque message suit donc la même
           structure&nbsp;: <strong>émetteur, objet, référence, action attendue</strong>&nbsp;—
@@ -763,21 +763,21 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
             <div class="doc-sms">
               <span class="doc-sms-expediteur">Dépôt enregistré</span>
               eBurkina : votre demande d'acte de naissance est enregistrée sous la
-              reference BF-2026-004871. Suivi sur eservices.gov.bf, rubrique Mon espace.
+              référence BF-2026-004871. Suivi sur eservices.gov.bf, rubrique Mon espace.
               <span class="doc-sms-compte">143 caractères — 1 SMS</span>
             </div>
 
             <div class="doc-sms">
               <span class="doc-sms-expediteur">Action attendue</span>
               eBurkina : dossier BF-2026-004915, un justificatif de domicile est attendu
-              avant le 30/09/2026. Connectez-vous a votre espace pour le transmettre.
+              avant le 30/09/2026. Connectez-vous à votre espace pour le transmettre.
               <span class="doc-sms-compte">146 caractères — 1 SMS</span>
             </div>
 
             <div class="doc-sms">
               <span class="doc-sms-expediteur">Document disponible</span>
-              eBurkina : votre acte est disponible. Retrait a la mairie de votre lieu de
-              naissance, muni de votre CNIB. Reference BF-2026-004871.
+              eBurkina : votre acte est disponible. Retrait à la mairie de votre lieu de
+              naissance, muni de votre CNIB. Référence BF-2026-004871.
               <span class="doc-sms-compte">131 caractères — 1 SMS</span>
             </div>
 
@@ -791,7 +791,7 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
               <li>Nommer le service en tête de message, toujours de la même façon.</li>
               <li>Tenir dans 160 caractères&nbsp;: au-delà, l'opérateur facture et découpe le message, et l'ordre d'arrivée n'est pas garanti.</li>
               <li>Rappeler la référence du dossier dans tout message de suivi.</li>
-              <li>Écrire sans accents&nbsp;: certains combinés anciens les remplacent par des caractères illisibles et font basculer le message en encodage long.</li>
+              <li>S'en tenir à l'alphabet GSM&nbsp;: é, è, à et ù y figurent, mais un seul â, ê, î, ô, û, ç, ë ou ï fait basculer le message en Unicode, limité à 70 caractères au lieu de 160. Un mot qui en porte se remplace plutôt qu'il ne s'écrit sans accent.</li>
               <li>Rappeler, dans tout message contenant un code, qu'aucun agent ne le demandera.</li>
             </ul>
           </div>
@@ -823,7 +823,7 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
                   <dt>De</dt>
                   <dd>Téléservices de l'État <span class="fs-faible">&lt;ne-pas-repondre@eservices.gov.bf&gt;</span></dd>
                   <dt>Objet</dt>
-                  <dd><strong>Acte de naissance, demande enregistrée, BF-2026-004871</strong></dd>
+                  <dd><strong>Acte de naissance — demande enregistrée — BF-2026-004871</strong></dd>
                   <dt>Pièce</dt>
                   <dd>recepisse-BF-2026-004871.pdf <span class="fs-faible">(84&nbsp;Ko)</span></dd>
                 </dl>
@@ -848,7 +848,9 @@ if (decision &amp;&amp; decision.mesure) demarrerMesure();</code></pre>
         <h4 class="fs-mt-8">Règle de l'objet</h4>
         <p class="doc-bloc-note">
           L'objet est souvent la seule partie lue. Il suit un ordre fixe, du général au
-          particulier, pour que la référence reste visible même tronquée sur mobile.
+          particulier&nbsp;: tronqué sur mobile, il garde la démarche et l'état, qui
+          disent à l'usager s'il doit agir. La référence, en fin d'objet, est reprise
+          dans le corps du message.
         </p>
         <pre><code>&lt;Démarche&gt; — &lt;état&gt; — &lt;référence&gt;
 

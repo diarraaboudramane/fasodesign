@@ -22,7 +22,7 @@
         <p>
           Les rôles et les procédures décrits ici sont des propositions de conception.
           Les organismes qui les exercent (autorité de tutelle, équipe du système,
-          comité d'arbitrage), doivent être désignés par acte administratif avant
+          comité d'arbitrage) doivent être désignés par acte administratif avant
           l'entrée en vigueur de la charte. Les mentions <code>[à désigner]</code>
           marquent les points qui relèvent de cette décision et non de la conception.
         </p>
@@ -33,7 +33,7 @@
     <section class="doc-section" id="roles">
       <h2>Rôles et responsabilités</h2>
       <p class="doc-section-intro">
-        Trois niveaux, et un principe. La décision revient au plus proche du
+        Trois niveaux, et un principe&nbsp;: la décision revient au plus proche du
         terrain qui peut la prendre sans compromettre l'unité du système.
       </p>
 
@@ -416,7 +416,7 @@
             <p class="doc-usage-titre">Recevable</p>
             <ul>
               <li>Composant absent du système et nécessaire à une obligation réglementaire.</li>
-              <li>Adaptation d'un gabarit imposée par un texte ou par un système tiers imposé.</li>
+              <li>Adaptation d'un gabarit exigée par un texte ou par un système tiers imposé.</li>
               <li>Contrainte technique documentée d'une plateforme existante.</li>
               <li>Densité d'information supérieure dans un outil réservé aux agents.</li>
             </ul>
@@ -554,9 +554,9 @@
       <div class="doc-bloc">
         <h3>Ce que la charte ne fait jamais</h3>
         <ul class="fs-liste-puces fs-mesure">
-          <li>Aucun identifiant d'appareil ni de session n'est créé par la charte.</li>
+          <li>La charte ne crée aucun identifiant d'appareil ni de session.</li>
           <li>Aucune mesure d'audience n'est incluse. Celle du service lui appartient,
-              et n'est déposée qu'après une réponse.</li>
+              et ne se dépose qu'après la réponse de l'usager au bandeau de consentement.</li>
           <li>Aucun appel réseau vers un tiers&nbsp;: les polices, les icônes et
               l'emblème sont servis par le domaine du service.</li>
           <li>Le stockage est toujours protégé&nbsp;: en navigation privée ou sur un site
@@ -569,7 +569,7 @@
         <p class="doc-bloc-note">
           Un téléservice dépose d'autres choses que la charte ne connaît pas&nbsp;:
           cookie de session, jeton anti-falsification de formulaire, mesure
-          d'audience, lecteur vidéo. Les trois premiers lui sont nécessaires et ne se
+          d'audience, lecteur vidéo. Les deux premiers lui sont nécessaires et ne se
           demandent pas&nbsp;; ils doivent néanmoins figurer dans sa politique de
           confidentialité. Le reste passe par le
           <a href="{{ page('composants-metier') }}#confiance">bandeau de consentement</a>.
@@ -668,7 +668,7 @@
               <tr>
                 <td>Police à chasse fixe</td>
                 <td>JetBrains Mono, téléchargée</td>
-                <td>Supprimée. La chasse fixe du système suffit. Elle ne porte aucune identité</td>
+                <td>Supprimée&nbsp;: la chasse fixe du système suffit, elle ne porte aucune identité</td>
               </tr>
               <tr>
                 <td>Neutres</td>
@@ -722,12 +722,12 @@
             de la seconde agissait sur la première. Quand l'identifiant ne désigne
             qu'un élément, le résultat reste celui de <code>getElementById</code>&nbsp;;
             ce n'est qu'en cas de doublon que la recherche remonte depuis le
-            déclencheur. La frontière d'une racine fantôme est franchie.
+            déclencheur, en franchissant au besoin la frontière d'une racine fantôme.
           </li>
           <li>
             <strong>Écritures de valeur signalées.</strong> Cinq endroits où le script
             écrit dans un champ (code collé, date collée, suggestion retenue, filtre
-            vidé), émettent <code>input</code> et <code>change</code>. Sans eux, une
+            vidé, fichier déposé) émettent <code>input</code> et <code>change</code>. Sans eux, une
             liaison bidirectionnelle conservait l'ancienne valeur et le formulaire
             partait incomplet.
           </li>
@@ -738,7 +738,7 @@
             filtre vidé) ne déclenchait donc jamais <code>onChange</code>&nbsp;: l'usager
             lisait la nouvelle valeur à l'écran et le formulaire partait avec
             l'ancienne. La charte écrit désormais par l'accesseur du prototype, ce qui
-            est sans effet pour les cadriciels qui n'ont rien installé.
+            est sans effet pour les cadriciels qui n'installent pas d'accesseur.
           </li>
           <li>
             <strong>Consentement réellement géré.</strong> Le bandeau existait mais
@@ -771,7 +771,7 @@
           </li>
           <li>
             <strong>Recette exécutable et chaîne de publication.</strong> La
-            vérification n'était affirmée nulle part qu'en prose.
+            vérification n'existait qu'en prose.
             <code>npm test</code> exécute désormais vingt contrôles&nbsp;: syntaxe,
             balisage des neuf pages, classes orphelines, bonne formation des SVG et
             des 43 ressources Android, correspondance des projections, cohérence du
@@ -977,7 +977,7 @@
         <ul class="fs-liste-puces fs-mesure">
           <li>Les fichiers sont déplacés dans <code>archives/&lt;version&gt;-&lt;mois&gt;/</code>, hors du chemin de production.</li>
           <li>Une note placée dans le dossier énonce, dès sa première ligne, que ces fichiers ne font plus foi et où se trouve la version en vigueur.</li>
-          <li>Les sources nécessaires à la reconstitution d'un livrable (fichier d'origine d'un emblème, par exemple), sont conservées avec elle.</li>
+          <li>Les sources nécessaires à la reconstitution d'un livrable (fichier d'origine d'un emblème, par exemple) sont conservées avec elle.</li>
           <li>Aucun fichier obsolète ne demeure à la racine. Deux sources contradictoires au même endroit valent absence de source.</li>
         </ul>
       </div>

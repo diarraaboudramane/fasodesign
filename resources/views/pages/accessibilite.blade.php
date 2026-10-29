@@ -10,7 +10,7 @@
       <p class="fs-chapeau">
         Un service public s'adresse à toute la population, sans condition d'équipement,
         de débit, de vue ou de maîtrise du vocabulaire administratif. Les exigences de
-        cette page ne sont pas des recommandations. Un service qui ne les respecte pas
+        cette page ne sont pas des recommandations&nbsp;: un service qui ne les respecte pas
         exclut une partie de ses usagers.
       </p>
     </div>
@@ -105,9 +105,10 @@
         <h3>Les deux exceptions à la cible de 44&nbsp;px</h3>
         <p class="doc-bloc-note">
           La règle des 44&nbsp;px est celle de la charte, plus exigeante que le
-          référentiel&nbsp;: WCAG&nbsp;2.2 fixe le plancher de conformité&nbsp;AA à
-          24&nbsp;×&nbsp;24&nbsp;px. Les deux cas ci-dessous restent très au-dessus de ce
-          plancher, et sont écrits ici plutôt que passés sous silence.
+          niveau visé&nbsp;: elle reprend le critère 2.5.5 de WCAG&nbsp;2.1, de
+          niveau&nbsp;AAA. Pour mémoire, WCAG&nbsp;2.2, que la charte ne revendique pas
+          encore, fixe le plancher&nbsp;AA à 24&nbsp;×&nbsp;24&nbsp;px (critère 2.5.8). Les deux cas ci-dessous restent très au-dessus de ce
+          plancher, et sont documentés ici plutôt que passés sous silence.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -124,8 +125,8 @@
               </tr>
               <tr>
                 <td>Jour de calendrier sous 400&nbsp;px de large</td>
-                <td class="fs-tabulaire">40&nbsp;px de haut</td>
-                <td class="fs-tabulaire">38&nbsp;px au minimum</td>
+                <td class="fs-tabulaire">38 à 44 × 40&nbsp;px</td>
+                <td class="fs-tabulaire">38 à 44 × 40&nbsp;px</td>
                 <td>Sept cases de 44&nbsp;px débordent d'un téléphone étroit. Au-delà de
                     400&nbsp;px, la case fait bien 44 × 44&nbsp;px.</td>
               </tr>
@@ -137,9 +138,8 @@
       <div class="doc-bloc">
         <h3>Portée de la vérification</h3>
         <p class="doc-bloc-note">
-          Une charte qui annonce un niveau doit dire comment elle le vérifie, et
-          jusqu'où sa vérification porte. Le tableau ci-dessus ne vaut que dans ces
-          limites.
+          Ce qui a été mesuré, comment, et ce qui ne l'a pas encore été. Le tableau
+          de conformité ne vaut que dans ces limites.
         </p>
 
         <div class="doc-usages">
@@ -149,7 +149,9 @@
               <li><strong>118 couples de couleurs</strong> effectivement employés par
                   <code>faso.css</code> (texte sur fond, variante de bouton, état
                   sémantique, contour de contrôle), calculés dans les deux thèmes,
-                  transparences composées sur leur fond réel. Aucun sous le seuil.</li>
+                  transparences composées sur leur fond réel. Aucun sous le seuil.
+                  Le décompte vient de <code>tests/contraste.js</code>, rejoué à
+                  chaque <code>npm test</code>.</li>
               <li><strong>Les dimensions des cibles tactiles</strong>, relevées dans la
                   feuille de styles et reportées ci-dessus sans arrondi favorable.</li>
               <li><strong>Le balisage des huit pages</strong>&nbsp;: bonne formation,
@@ -170,7 +172,7 @@
                   essais s'appuient sur un document simulé, qui ne remplace pas le
                   rendu réel.</li>
               <li><strong>Aucun test avec des personnes en situation de handicap</strong>,
-                  qui reste la seule vérification qui compte vraiment.</li>
+                  la seule vérification réellement décisive.</li>
             </ul>
           </div>
         </div>
@@ -217,8 +219,8 @@
 
         <div class="doc-note fs-mt-6">
           L'association du blanc sur l'or du drapeau est explicitement interdite&nbsp;:
-          son rapport est très inférieur au seuil. C'est la raison pour laquelle le
-          rôle <code>--relief-texte</code> impose un texte sombre.
+          son rapport est très inférieur au seuil. C'est pour cela que le rôle
+          <code>--relief-texte</code> impose un texte sombre.
         </div>
       </div>
     </section>
@@ -244,7 +246,7 @@
               <tr><td><kbd>Espace</kbd></td><td>Coche, décoche, ou active un bouton</td><td>Cases, interrupteurs, boutons</td></tr>
               <tr><td><kbd>Échap</kbd></td><td>Ferme et rend le focus au déclencheur</td><td>Modale, panneau latéral, menu</td></tr>
               <tr><td><kbd>&larr;</kbd> <kbd>&rarr;</kbd></td><td>Change d'onglet ou de bouton radio</td><td>Onglets, groupes radio</td></tr>
-              <tr><td><kbd>Début</kbd> <kbd>Fin</kbd></td><td>Atteint la première ou la dernière option</td><td>Onglets</td></tr>
+              <tr><td><kbd>Début</kbd> <kbd>Fin</kbd></td><td>Atteint le premier ou le dernier onglet</td><td>Onglets</td></tr>
             </tbody>
           </table>
         </div>
@@ -290,8 +292,8 @@
       <h2>Contrainte de réseau et d'équipement</h2>
       <p class="doc-section-intro">
         L'usager type consulte un service public depuis un téléphone d'entrée de
-        gamme, sur un réseau instable, avec un forfait facturé au volume. Cette
-        situation n'est pas un cas limite. C'est le cas nominal.
+        gamme, sur un réseau instable, avec un forfait facturé au volume. Ce n'est
+        pas un cas limite, c'est le cas nominal.
       </p>
 
       <div class="doc-bloc">
@@ -396,8 +398,8 @@
       <div class="doc-bloc">
         <h3>Où se situe le système lui-même</h3>
         <p class="doc-bloc-note">
-          Une charte qui impose un budget doit s'y tenir. Voici le poids réel des
-          fichiers livrés, mesuré sur cette version.
+          Le budget s'applique d'abord à la charte elle-même. Poids réel des
+          fichiers livrés, mesuré sur cette version&nbsp;:
         </p>
 
         <div class="fs-graphe">
@@ -461,9 +463,9 @@
             Socle complet&nbsp;: <strong>95,5&nbsp;Ko</strong> transférés, auxquels s'ajoutent
             <strong>81&nbsp;Ko</strong> de polices, servies depuis le domaine du service.
             Avec le HTML d'une page, le total s'établit autour de
-            <strong>183&nbsp;Ko</strong>&nbsp;: sous le plafond de 500&nbsp;Ko, au-dessus de
-            l'objectif de 250&nbsp;Ko seulement à la première visite, les polices et le
-            socle étant ensuite mis en cache.
+            <strong>183&nbsp;Ko</strong> à la première visite, sous l'objectif de 250&nbsp;Ko
+            pour une page complète. Aux visites suivantes, les polices et le socle
+            viennent du cache.
           </p>
         </div>
 
@@ -506,7 +508,7 @@
       <h2>Ton administratif et rédaction</h2>
       <p class="doc-section-intro">
         La formulation fait partie de l'interface. Un intitulé ambigu produit
-        exactement les mêmes abandons qu'un bouton mal placé.
+        les mêmes abandons qu'un bouton mal placé.
       </p>
 
       <div class="doc-bloc">
@@ -604,8 +606,8 @@
     <section class="doc-section" id="declaration">
       <h2>Déclaration d'accessibilité</h2>
       <p class="doc-section-intro">
-        Chaque service publie une déclaration d'accessibilité accessible depuis le
-        pied de page de toutes ses pages.
+        Chaque service publie une déclaration d'accessibilité, liée depuis le pied
+        de page de toutes ses pages.
       </p>
 
       <div class="doc-bloc">

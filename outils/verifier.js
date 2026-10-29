@@ -179,6 +179,20 @@ controle("etiquettes des barres synchrones", () => {
   return n + " etiquettes";
 });
 
+/* L'accueil annonce un nombre de composants : c'est celui des blocs
+   documentés dans les deux pages de composants, recompté ici pour que
+   l'ajout d'un composant ne laisse pas le chiffre en arrière. */
+controle("nombre de composants annonce", () => {
+  const blocs = ["composants.html", "composants-metier.html"]
+    .map((p) => (lirePage(p).match(/<div class="doc-bloc">/g) || []).length)
+    .reduce((a, b) => a + b, 0);
+  const annonce = /doc-chiffre-valeur">(\d+)<\/span>\s*<span class="doc-chiffre-libelle">composants/
+    .exec(lirePage("index.html"));
+  if (!annonce) throw new Error("index.html : chiffre des composants introuvable");
+  if (+annonce[1] !== blocs) throw new Error("annonce " + annonce[1] + ", documentes " + blocs);
+  return blocs + " composants";
+});
+
 /* ============================================================ emblemes */
 
 titre("Emblemes et identite");
