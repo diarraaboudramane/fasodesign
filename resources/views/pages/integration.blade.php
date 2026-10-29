@@ -309,9 +309,9 @@ agents avant toute modification d'interface.</code></pre>
               <tr><td><code>…/css/faso.css</code></td><td>Bibliothèque de composants</td></tr>
               <tr><td><code>…/css/icones.css</code></td><td>Les 35 icônes</td></tr>
               <tr><td><code>…/amorce</code></td><td>Pose le thème avant le premier rendu</td></tr>
-              <tr><td><code>…/jetons.json</code></td><td>Les 193 jetons, valeurs résolues</td></tr>
+              <tr><td><code>…/jetons.json</code></td><td>Les 202 jetons, valeurs résolues</td></tr>
               <tr><td><code>…/img/armoiries.svg</code></td><td>Emblème vectoriel</td></tr>
-              <tr><td><code>…/polices/archivo.woff2</code></td><td>Les fichiers de police, si le projet les sert lui-même</td></tr>
+              <tr><td><code>…/polices/montserrat.woff2</code>, <code>…/polices/roboto.woff2</code></td><td>Les fichiers de police, si le projet les sert lui-même</td></tr>
               <tr><td><code>…/android/…</code></td><td>Les ressources Android</td></tr>
             </tbody>
           </table>
@@ -382,10 +382,10 @@ Object.assign(Faso.textes, {
               <tr><td><code>css/tokens.css</code></td><td>Jetons, thèmes, déclarations de polices</td><td>Oui</td></tr>
               <tr><td><code>css/faso.css</code></td><td>Bibliothèque de composants</td><td>Oui</td></tr>
               <tr><td><code>css/icones.css</code></td><td>35 icônes&nbsp;; plusieurs composants y puisent leurs repères</td><td>Oui</td></tr>
-              <tr><td><code>polices/</code></td><td>Archivo et Inter, variables, sous-ensemble latin, avec leurs licences</td><td>Oui</td></tr>
+              <tr><td><code>polices/</code></td><td>Montserrat et Roboto, variables, sous-ensemble latin, avec leurs licences</td><td>Oui</td></tr>
               <tr><td>racine du paquet</td><td>Comportements, avec leurs déclarations de types</td><td>Non</td></tr>
               <tr><td><code>amorce</code></td><td>Pose le thème retenu avant le premier rendu</td><td>Si thème sombre</td></tr>
-              <tr><td><code>jetons.json</code></td><td>193 jetons, valeurs résolues, produits par <code>outils/jetons.js</code></td><td>Non</td></tr>
+              <tr><td><code>jetons.json</code></td><td>202 jetons, valeurs résolues, produits par <code>outils/jetons.js</code></td><td>Non</td></tr>
               <tr><td><code>img/armoiries.svg</code></td><td>Emblème vectoriel</td><td>Selon l'usage</td></tr>
             </tbody>
           </table>
@@ -667,7 +667,7 @@ npm run verifier-robots     # refuse de les laisser diverger</code></pre>
 
         <div class="doc-note fs-mt-6">
           <strong>La diffusion versionnée n'est pas limitée en débit.</strong> Les
-          fichiers sous <code>/2.0.0/</code> sont consommés par les navigateurs des
+          fichiers sous <code>/{{ $version }}/</code> sont consommés par les navigateurs des
           agents d'autres administrations. Un ministère derrière une seule sortie
           nattée compte pour une adresse&nbsp;: une limitation par adresse le
           couperait en entier, pour protéger des fichiers statiques mis en cache un
@@ -1814,11 +1814,12 @@ public function handle(Request $requete, Closure $suivant): Response
                     <code>faso_repere.xml</code></td>
               </tr>
               <tr>
-                <td>Polices Archivo et Inter</td>
-                <td><span class="fs-badge fs-badge--alerte">À télécharger</span>
-                    Le paquet ne contient que des <code>woff2</code>, illisibles hors
-                    navigateur. Les <code>ttf</code> viennent de la même source, sous
-                    la même licence SIL OFL.</td>
+                <td>Polices Montserrat et Roboto</td>
+                <td><span class="fs-badge fs-badge--alerte">Montserrat à télécharger</span>
+                    Roboto, police du texte courant, est celle du système Android&nbsp;:
+                    rien à ajouter. Pour Montserrat, le paquet ne contient qu'un
+                    <code>woff2</code>, illisible hors navigateur&nbsp;; les <code>ttf</code>
+                    viennent de la même source, sous la même licence SIL OFL.</td>
               </tr>
               <tr>
                 <td>Composants et comportements</td>
@@ -1862,18 +1863,19 @@ android/kotlin/*.kt                →  app/src/main/java/bf/gouv/charte/</code>
         </div>
 
         <h4 class="fs-mt-8">Les polices</h4>
-        <pre>@verbatim<code>// app/src/main/res/font/archivo.xml  — après avoir placé les .ttf
+        <pre>@verbatim<code>// app/src/main/res/font/montserrat.xml  — après avoir placé les .ttf
 &lt;font-family xmlns:android="http://schemas.android.com/apk/res/android"&gt;
   &lt;font android:fontStyle="normal" android:fontWeight="400"
-        android:font="@font/archivo_regular" /&gt;
+        android:font="@font/montserrat_regular" /&gt;
   &lt;font android:fontStyle="normal" android:fontWeight="700"
-        android:font="@font/archivo_bold" /&gt;
+        android:font="@font/montserrat_bold" /&gt;
 &lt;/font-family&gt;</code>@endverbatim</pre>
         <p class="fs-legende fs-mt-4">
-          Les lignes <code>fontFamily</code> sont déjà présentes dans
-          <code>themes.xml</code>, en commentaire. Il suffit de les rétablir. Sans
-          ces polices, Android emploie sa pile par défaut&nbsp;: le texte reste lisible,
-          mais l'identité typographique est perdue.
+          Les lignes <code>fontFamily</code> des titres sont déjà présentes dans
+          <code>themes.xml</code>, en commentaire. Il suffit de les rétablir. Le texte
+          courant n'en a pas besoin&nbsp;: Roboto est la police du système. Sans
+          Montserrat, les titres prennent la police par défaut&nbsp;: ils restent
+          lisibles, mais l'identité typographique est perdue.
         </p>
       </div>
 

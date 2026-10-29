@@ -28,7 +28,9 @@
         <p class="doc-bloc-note">
           Le bloc-marque associe l'emblème, la dénomination de l'État, la devise
           nationale et, le cas échéant, l'entité responsable du service. Il est le
-          premier élément de contenu de toute page et renvoie toujours à l'accueil.
+          premier élément de contenu de toute page, en haut à gauche, et c'est un
+          lien&nbsp;: il renvoie à la page d'accueil du site, ou à celle de l'espace
+          privé lorsque l'usager s'y trouve (guide, §&nbsp;2.1.1).
         </p>
 
         <div class="doc-demo" data-libelle="Bloc-marque complet">
@@ -42,6 +44,49 @@
               </span>
             </a>
           </div>
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Place et dimensions du logo</h3>
+        <p class="doc-bloc-note">
+          Pour les ministères et les institutions, le logo par défaut des plateformes
+          est l'emblème du Burkina Faso. Le guide en fixe la place et l'encombrement
+          (guide, §&nbsp;2.1.1, figure&nbsp;1)&nbsp;; <code>.fs-marque</code> et
+          <code>.fs-entete-haut</code> les appliquent sans réglage.
+        </p>
+
+        <dl class="fs-definitions">
+          <div>
+            <dt>Position</dt>
+            <dd>En haut à gauche, sur toutes les pages et dans tous les espaces de la plateforme.</dd>
+          </div>
+          <div>
+            <dt>Lien</dt>
+            <dd>Toujours cliquable&nbsp;: retour à l'accueil du site, ou à l'accueil de l'espace privé depuis cet espace.</dd>
+          </div>
+          <div>
+            <dt>Cadre</dt>
+            <dd>76&nbsp;×&nbsp;80&nbsp;px, à 9&nbsp;px du haut de la page. L'emblème, plus haut que large (468&nbsp;×&nbsp;550), y occupe toute la hauteur&nbsp;: 80&nbsp;px, soit environ 68&nbsp;px de large. Sous 640&nbsp;px de largeur de fenêtre, la charte le ramène à 44&nbsp;px, adaptation propre à l'écran étroit que le guide ne traite pas.</dd>
+          </div>
+          <div>
+            <dt>Version</dt>
+            <dd>Les armoiries dans leur version officielle, avec l'encadré, et en bonne qualité&nbsp;: le fichier vectoriel, jamais une capture agrandie.</dd>
+          </div>
+          <div>
+            <dt>Drapeau</dt>
+            <dd>S'il accompagne les armoiries, le drapeau est placé avant elles, à la place du logo.</dd>
+          </div>
+        </dl>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Logo propre à une structure.</strong> Une structure, ou un service
+          d'une structure, peut employer un logo qui lui est propre. Le guide
+          l'autorise, mais à une condition&nbsp;: toute la charte visuelle doit alors
+          être repensée pour être en harmonie avec ce logo (guide, §&nbsp;2.1.2).
+          Substituer un logo dans le bloc-marque en gardant le reste de cette charte
+          ne remplit pas cette condition. Les couleurs par défaut du logo sont celles
+          du drapeau.
         </div>
       </div>
 
@@ -72,13 +117,13 @@
               <tr>
                 <td><strong>Grand</strong></td>
                 <td><code>armoiries.svg</code><br><span class="fs-faible">191&nbsp;Ko</span></td>
-                <td>À partir de 64&nbsp;px, impression, affiche</td>
+                <td>À partir de 64&nbsp;px&nbsp;: en-tête (80&nbsp;px), page d'accueil, impression, affiche</td>
                 <td>L'emblème complet&nbsp;: écu, chevaux, lances, banderoles et devise.</td>
               </tr>
               <tr>
                 <td><strong>Moyen</strong></td>
                 <td><code>armoiries-moyen.svg</code><br><span class="fs-faible">118&nbsp;Ko</span></td>
-                <td>32 à 64&nbsp;px, en-tête de page</td>
+                <td>32 à 64&nbsp;px&nbsp;: en-tête sur écran étroit (44&nbsp;px), pied de page</td>
                 <td>Le même dessin, géométrie allégée d'une passe. Indiscernable de la
                     référence à ces tailles, un tiers plus léger.</td>
               </tr>
@@ -112,8 +157,8 @@
               <span class="doc-variante-nom">120 px — page d'accueil</span>
             </div>
             <div class="doc-variante">
-              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 56px;">
-              <span class="doc-variante-nom">56 px — en-tête</span>
+              <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 80px;">
+              <span class="doc-variante-nom">80 px — en-tête</span>
             </div>
             <div class="doc-variante">
               <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="" style="height: 44px;">
@@ -127,10 +172,12 @@
         </div>
 
         <p class="fs-legende fs-mt-4">
-          Ces quatre emplois sont montrés avec le format de référence. À partir de
-          56&nbsp;px, le format moyen convient aussi bien, pour un tiers de poids en
-          moins&nbsp;; à 32&nbsp;px, le petit format se lit mieux. Le choix relève de
-          l'autorité qui garde les armoiries.
+          Ces quatre emplois sont montrés avec le format de référence. Les 80&nbsp;px
+          de l'en-tête sont ceux du cadre fixé par le guide (§&nbsp;2.1.1)&nbsp;; les
+          autres hauteurs sont propres à la charte. À 44&nbsp;px, le format moyen
+          convient aussi bien, pour un tiers de poids en moins&nbsp;; à 32&nbsp;px, le
+          petit format se lit mieux. Le choix relève de l'autorité qui garde les
+          armoiries.
         </p>
 
         <h4 class="fs-mt-8">Les quatre formats côte à côte</h4>
@@ -239,8 +286,8 @@
         <div class="doc-note fs-mt-6">
           <strong>Recalage chromatique.</strong> L'écu porte le drapeau national. La
           vectorisation ayant fait dériver ses teintes, celles-ci ont été ramenées aux
-          valeurs officielles fixées par cette charte&nbsp;— <code>#e30613</code>,
-          <code>#00843b</code> et <code>#ffed00</code>. Sans cette correction,
+          valeurs officielles fixées par cette charte&nbsp;— <code>#ef2b2d</code>,
+          <code>#009e49</code> et <code>#fcd116</code>. Sans cette correction,
           l'emblème aurait juré avec les mêmes couleurs employées ailleurs sur la
           page. Les gris et les bruns de l'illustration sont conservés tels quels.
         </div>
@@ -398,7 +445,9 @@
             <p class="doc-usage-titre">À faire</p>
             <ul>
               <li>Conserver une zone de protection au moins égale à la moitié de la hauteur de l'emblème, libre de tout texte ou image.</li>
-              <li>Afficher l'emblème à 56&nbsp;px de hauteur minimum en en-tête, 44&nbsp;px sur écran étroit, 32&nbsp;px en pied de page.</li>
+              <li>Afficher l'emblème à 80&nbsp;px de hauteur en en-tête, dans le cadre de 76&nbsp;×&nbsp;80&nbsp;px placé à 9&nbsp;px du haut de page (guide, §&nbsp;2.1.1)&nbsp;; 44&nbsp;px sur écran étroit, 32&nbsp;px en pied de page.</li>
+              <li>Employer la version officielle des armoiries, avec l'encadré, depuis le fichier vectoriel (guide, §&nbsp;2.1.1).</li>
+              <li>Placer le drapeau avant les armoiries lorsqu'il les accompagne.</li>
               <li>Placer l'emblème sur un fond uni, clair ou très sombre, offrant un contraste suffisant.</li>
               <li>Associer systématiquement l'emblème au nom de l'administration responsable du service.</li>
               <li>Renseigner un texte de remplacement explicite lorsque l'emblème porte une information, et un texte vide lorsqu'il est redondant.</li>
@@ -469,8 +518,8 @@
       <div class="doc-bloc">
         <h3>Devise nationale</h3>
         <p class="doc-bloc-note">
-          La devise figure dans le bloc-marque en capitale initiale et en italique,
-          au palier typographique le plus discret. Elle n'est ni un slogan
+          La devise figure dans le bloc-marque en romain, sans italique (guide,
+          §&nbsp;2.4, point&nbsp;2), au palier typographique le plus discret. Elle n'est ni un slogan
           promotionnel, ni un titre&nbsp;: elle ne doit pas être mise en avant au
           détriment de l'intitulé du service. Sur écran étroit, elle est masquée pour
           préserver la lisibilité de la dénomination.
@@ -479,7 +528,11 @@
           La devise portée par l'emblème en vigueur est
           <strong>«&nbsp;La Patrie ou la Mort, nous Vaincrons&nbsp;»</strong>. Toute reprise
           doit être conforme au fichier officiel de référence, y compris dans la
-          ponctuation et les capitales.
+          ponctuation et les capitales. C'est une citation du texte constitutionnel
+          et non un libellé&nbsp;: la règle de la seule majuscule initiale (guide,
+          §&nbsp;2.4, point&nbsp;4) ne s'y applique pas. Le guide, rédigé en 2024, porte
+          encore l'ancienne devise «&nbsp;Unité-Progrès-Justice&nbsp;», remplacée par la
+          loi constitutionnelle n°&nbsp;033-2024/ALT du 29&nbsp;octobre 2024.
         </div>
       </div>
     </section>
@@ -489,27 +542,30 @@
       <h2>Couleurs</h2>
       <p class="doc-section-intro">
         Les trois couleurs du drapeau adopté le 4 août 1984 constituent la souche
-        chromatique du système. Elles sont trop saturées pour habiller une interface
-        entière&nbsp;: chacune est donc déclinée en dix paliers, la teinte officielle
-        restant fixée au palier indiqué. Les neutres sont dérivés d'une base chaude,
-        et non d'un gris bleuté, pour rester cohérents avec cette souche.
+        chromatique du système, aux valeurs fixées par le guide de la charte graphique
+        des plateformes numériques de l'administration publique (MTDPCE, 2024)&nbsp;:
+        rouge <code>#EF2B2D</code> (RVB 239/43/45), jaune <code>#FCD116</code> (RVB
+        252/209/22), vert <code>#009E49</code> (RVB 0/158/73). Elles sont trop saturées
+        pour habiller une interface entière&nbsp;: chacune est déclinée en dix paliers, la
+        teinte officielle restant fixée au palier indiqué. Les neutres sont des gris
+        pâles légèrement réchauffés, que le guide recommande pour les fonds.
       </p>
 
       <div class="doc-trio">
-        <div class="doc-trio-tuile doc-trio-tuile--rouge" data-copier="#e30613" title="Copier la valeur">
+        <div class="doc-trio-tuile doc-trio-tuile--rouge" data-copier="#ef2b2d" title="Copier la valeur">
           <span class="doc-trio-nom">Rouge</span>
           <span class="doc-trio-sens">Révolution, courage, sang versé pour la patrie</span>
-          <span class="doc-trio-hex">#e30613 · Pantone 032 C</span>
+          <span class="doc-trio-hex">#ef2b2d · Pantone 032 C</span>
         </div>
-        <div class="doc-trio-tuile doc-trio-tuile--or" data-copier="#ffed00" title="Copier la valeur">
+        <div class="doc-trio-tuile doc-trio-tuile--or" data-copier="#fcd116" title="Copier la valeur">
           <span class="doc-trio-nom">Or</span>
           <span class="doc-trio-sens">Lumière de l'étoile, richesse du sous-sol</span>
-          <span class="doc-trio-hex">#ffed00 · Pantone 116 C</span>
+          <span class="doc-trio-hex">#fcd116 · Pantone 116 C</span>
         </div>
-        <div class="doc-trio-tuile doc-trio-tuile--vert" data-copier="#00843b" title="Copier la valeur">
+        <div class="doc-trio-tuile doc-trio-tuile--vert" data-copier="#009e49" title="Copier la valeur">
           <span class="doc-trio-nom">Vert</span>
           <span class="doc-trio-sens">Espérance, abondance des richesses agricoles</span>
-          <span class="doc-trio-hex">#00843b · Pantone 355 C</span>
+          <span class="doc-trio-hex">#009e49 · Pantone 355 C</span>
         </div>
       </div>
 
@@ -517,49 +573,59 @@
         <h3>Rouge&nbsp;— révolution et courage</h3>
         <p class="doc-bloc-note">
           Employé pour le registre grave&nbsp;: erreurs, suppressions, alertes critiques,
-          signalement de fraude. Sa charge symbolique interdit de l'utiliser comme
+          signalement de fraude, conformément à la convention «&nbsp;rouge&nbsp;: alerte,
+          danger, interruption&nbsp;» (guide, §&nbsp;2.2, point&nbsp;5). Comme pour le vert,
+          les boutons et les messages emploient le palier 600. Sa charge symbolique interdit de l'utiliser comme
           couleur d'accentuation ordinaire ou de mise en avant commerciale.
         </p>
         <div class="doc-echelle">
-          <div class="doc-ton doc-ton--clair"  style="background:#fff1f2" data-copier="#fff1f2"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fff1f2</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#ffe0e2" data-copier="#ffe0e2"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#ffe0e2</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#ffc5c9" data-copier="#ffc5c9"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#ffc5c9</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#f99aa1" data-copier="#f99aa1"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#f99aa1</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#f0636e" data-copier="#f0636e"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#f0636e</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#e30613" data-copier="#e30613"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#e30613</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#c40511" data-copier="#c40511"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#c40511</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#a2040e" data-copier="#a2040e"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#a2040e</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#7d0610" data-copier="#7d0610"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#7d0610</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#5a0810" data-copier="#5a0810"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#5a0810</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fff1f1" data-copier="#fff1f1"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fff1f1</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffdfdf" data-copier="#ffdfdf"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#ffdfdf</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffc4c4" data-copier="#ffc4c4"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#ffc4c4</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fd9a9a" data-copier="#fd9a9a"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#fd9a9a</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#f76565" data-copier="#f76565"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#f76565</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#ef2b2d" data-copier="#ef2b2d"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#ef2b2d</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#d41f1f" data-copier="#d41f1f"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#d41f1f</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#b01616" data-copier="#b01616"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#b01616</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#8a1114" data-copier="#8a1114"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#8a1114</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#600d10" data-copier="#600d10"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#600d10</span></div>
         </div>
         <p class="fs-legende">
-          Référence d'impression&nbsp;: Pantone 032 C · CMJN 0 / 90 / 76 / 0 · RAL 3024.
-          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#e30613/#ffffff"></span>
+          Équivalence d'impression usuelle&nbsp;: Pantone 032 C.
+          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#ef2b2d/#ffffff"></span>, insuffisant pour
+          du texte courant&nbsp;; sur le palier 600, employé par les boutons et les messages&nbsp;:
+          <span data-contraste="#d41f1f/#ffffff"></span>
         </p>
       </div>
 
       <div class="doc-bloc">
         <h3>Vert&nbsp;— espérance et richesses agricoles</h3>
         <p class="doc-bloc-note">
-          Couleur de l'action. Elle porte les boutons principaux, les liens, les
-          états de validation et les repères de navigation active. C'est la couleur
-          la plus présente dans une interface conforme.
+          Couleur de l'action, et la plus présente dans une interface conforme.
+          C'est le <strong>palier 600</strong> (<code>#007d3c</code>) qui porte les
+          boutons principaux, les liens, les états de validation et les repères de
+          navigation active&nbsp;: la teinte officielle du palier 500 n'offre pas un
+          contraste suffisant avec du texte blanc. Elle reste celle des marques
+          nationales (filet, repère, emblème) et des aplats qui ne portent pas de
+          texte.
         </p>
         <div class="doc-echelle">
-          <div class="doc-ton doc-ton--clair"  style="background:#ecf7f0" data-copier="#ecf7f0"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#ecf7f0</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#d3eddd" data-copier="#d3eddd"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#d3eddd</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#a8dbbc" data-copier="#a8dbbc"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#a8dbbc</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#74c296" data-copier="#74c296"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#74c296</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#3ea46d" data-copier="#3ea46d"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#3ea46d</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#00843b" data-copier="#00843b"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#00843b</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#026c31" data-copier="#026c31"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#026c31</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#e9f8ef" data-copier="#e9f8ef"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#e9f8ef</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#cdeed9" data-copier="#cdeed9"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#cdeed9</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#9fdcb7" data-copier="#9fdcb7"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#9fdcb7</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#66c38e" data-copier="#66c38e"><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#66c38e</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#2fae68" data-copier="#2fae68"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#2fae68</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#009e49" data-copier="#009e49"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#009e49</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#007d3c" data-copier="#007d3c"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#007d3c</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#045527" data-copier="#045527"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#045527</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#04411f" data-copier="#04411f"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#04411f</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#032e16" data-copier="#032e16"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#032e16</span></div>
         </div>
         <p class="fs-legende">
-          Référence d'impression&nbsp;: Pantone 355 C · CMJN 93 / 0 / 100 / 0 · RAL 6037.
-          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#00843b/#ffffff"></span>
+          Équivalence d'impression usuelle&nbsp;: Pantone 355 C.
+          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#009e49/#ffffff"></span>, insuffisant pour
+          du texte courant&nbsp;; sur le palier 600, employé par les boutons et les liens&nbsp;:
+          <span data-contraste="#007d3c/#ffffff"></span>
         </p>
       </div>
 
@@ -571,22 +637,29 @@
           toujours d'un texte sombre. Les paliers 600 et au-delà tirent vers l'ocre
           et servent à écrire sur fond clair.
         </p>
+        <p class="doc-bloc-note">
+          Le guide déconseille d'associer le jaune et le vert (§&nbsp;2.2, point&nbsp;2).
+          La règle vaut pour l'interface&nbsp;: un aplat d'or ne se pose pas contre un
+          bouton vert, une série jaune ne côtoie pas une série verte. Elle ne vaut pas
+          pour les marques nationales&nbsp;— emblème, filet, repère, favicon&nbsp;— où le
+          drapeau associe par nature le jaune et le vert.
+        </p>
         <div class="doc-echelle">
-          <div class="doc-ton doc-ton--clair"  style="background:#fffce5" data-copier="#fffce5"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fffce5</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#fff8bf" data-copier="#fff8bf"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#fff8bf</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#fff287" data-copier="#fff287"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#fff287</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#ffed00" data-copier="#ffed00"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#ffed00</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#e8d400" data-copier="#e8d400"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#e8d400</span></div>
-          <div class="doc-ton doc-ton--clair"  style="background:#c9b600" data-copier="#c9b600"><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#c9b600</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#a39300" data-copier="#a39300"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#a39300</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#7d7100" data-copier="#7d7100"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#7d7100</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#5c5300" data-copier="#5c5300"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#5c5300</span></div>
-          <div class="doc-ton doc-ton--sombre" style="background:#3d3800" data-copier="#3d3800"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#3d3800</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fffbe6" data-copier="#fffbe6"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fffbe6</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fff5c2" data-copier="#fff5c2"><span class="doc-ton-palier">100</span><span class="doc-ton-hex">#fff5c2</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#ffe98a" data-copier="#ffe98a"><span class="doc-ton-palier">200</span><span class="doc-ton-hex">#ffe98a</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#fcd116" data-copier="#fcd116"><span class="doc-ton-drapeau">Drapeau</span><span class="doc-ton-palier">300</span><span class="doc-ton-hex">#fcd116</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#e6bb00" data-copier="#e6bb00"><span class="doc-ton-palier">400</span><span class="doc-ton-hex">#e6bb00</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#c9a200" data-copier="#c9a200"><span class="doc-ton-palier">500</span><span class="doc-ton-hex">#c9a200</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#a38300" data-copier="#a38300"><span class="doc-ton-palier">600</span><span class="doc-ton-hex">#a38300</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#7d6400" data-copier="#7d6400"><span class="doc-ton-palier">700</span><span class="doc-ton-hex">#7d6400</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#5c4900" data-copier="#5c4900"><span class="doc-ton-palier">800</span><span class="doc-ton-hex">#5c4900</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#3d3100" data-copier="#3d3100"><span class="doc-ton-palier">900</span><span class="doc-ton-hex">#3d3100</span></div>
         </div>
         <p class="fs-legende">
-          Référence d'impression&nbsp;: Pantone 116 C · CMJN 0 / 10 / 98 / 0 · RAL 2007.
-          Texte noir sur le palier 300&nbsp;: <span data-contraste="#ffed00/#211d1a"></span> ·
-          Texte blanc sur le palier 300&nbsp;: <span data-contraste="#ffed00/#ffffff"></span>
+          Équivalence d'impression usuelle&nbsp;: Pantone 116 C.
+          Texte noir sur le palier 300&nbsp;: <span data-contraste="#fcd116/#211d1a"></span> ·
+          Texte blanc sur le palier 300&nbsp;: <span data-contraste="#fcd116/#ffffff"></span>
         </p>
       </div>
 
@@ -623,10 +696,13 @@
       <div class="doc-bloc">
         <h3>Couleurs de support</h3>
         <p class="doc-bloc-note">
-          Deux familles complètent la souche nationale, strictement cantonnées à un
-          registre fonctionnel. Le bleu administratif ne structure pas un en-tête,
-          une navigation ou une action. Il n'appartient pas au drapeau et son emploi
-          au-delà du registre informatif affaiblirait l'identité de l'État.
+          Deux familles complètent la souche nationale, cantonnées à un registre
+          fonctionnel&nbsp;: le bleu administratif pour l'information neutre
+          (<code>--info</code>), l'ocre pour l'avertissement (<code>--alerte</code>).
+          Le bleu administratif ne structure ni un en-tête, ni une navigation, ni une
+          action. Il ne se confond pas avec le bleu nuit des palettes d'espace,
+          présenté plus bas, qui vient du guide et porte, lui, le bandeau officiel et
+          la navigation de l'espace public.
         </p>
         <div class="doc-echelle doc-echelle--libre">
           <div class="doc-ton doc-ton--clair"  style="background:#eef4f9" data-copier="#eef4f9"><span class="doc-ton-palier">Bleu 50</span><span class="doc-ton-hex">#eef4f9</span></div>
@@ -637,6 +713,140 @@
           <div class="doc-ton doc-ton--sombre" style="background:#b07800" data-copier="#b07800"><span class="doc-ton-palier">Ocre 500</span><span class="doc-ton-hex">#b07800</span></div>
           <div class="doc-ton doc-ton--sombre" style="background:#7d5500" data-copier="#7d5500"><span class="doc-ton-palier">Ocre 700</span><span class="doc-ton-hex">#7d5500</span></div>
         </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Palettes d'espace <code>.fs-espace-public</code> <code>.fs-espace-prive</code></h3>
+        <p class="doc-bloc-note">
+          Le guide demande de réserver à chaque espace d'une plateforme sa couleur
+          (§&nbsp;2.2, point&nbsp;8)&nbsp;: l'usager sait d'un coup d'œil s'il consulte
+          l'espace public ou son espace personnel. Les deux palettes que le guide
+          donne en exemple sont reprises telles quelles, en jetons
+          <code>--public-*</code> et <code>--prive-*</code>. La classe d'espace se pose
+          sur <code>&lt;body&gt;</code>.
+        </p>
+
+        <h4 class="fs-mt-6">Espace public</h4>
+        <div class="doc-echelle doc-echelle--libre">
+          <div class="doc-ton doc-ton--sombre" style="background:#00213b" data-copier="#00213b"><span class="doc-ton-palier">Public 900</span><span class="doc-ton-hex">#00213b</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#1b384f" data-copier="#1b384f"><span class="doc-ton-palier">Public 700</span><span class="doc-ton-hex">#1b384f</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#2c224e" data-copier="#2c224e"><span class="doc-ton-palier">Violet</span><span class="doc-ton-hex">#2c224e</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#eaecef" data-copier="#eaecef"><span class="doc-ton-palier">Fond</span><span class="doc-ton-hex">#eaecef</span></div>
+        </div>
+        <p class="fs-legende">
+          Jetons <code>--public-900</code>, <code>--public-700</code>,
+          <code>--public-violet</code>, <code>--public-fond</code>&nbsp;; RVB 0/33/59,
+          27/56/79, 44/34/78, 234/236/239. Avec
+          <code>.fs-espace-public</code>, la barre de navigation passe en bleu nuit
+          (<code>--public-900</code>), texte blanc, page active sur
+          <code>--public-700</code>. Texte blanc sur <code>--public-900</code>&nbsp;:
+          <span data-contraste="#00213b/#ffffff"></span>
+        </p>
+
+        <h4 class="fs-mt-6">Espace privé</h4>
+        <div class="doc-echelle doc-echelle--libre">
+          <div class="doc-ton doc-ton--clair"  style="background:#78cc99" data-copier="#78cc99"><span class="doc-ton-palier">Vert</span><span class="doc-ton-hex">#78cc99</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#f2aa3e" data-copier="#f2aa3e"><span class="doc-ton-palier">Orange</span><span class="doc-ton-hex">#f2aa3e</span></div>
+          <div class="doc-ton doc-ton--sombre" style="background:#535fdd" data-copier="#535fdd"><span class="doc-ton-palier">Bleu</span><span class="doc-ton-hex">#535fdd</span></div>
+          <div class="doc-ton doc-ton--clair"  style="background:#f0f0f7" data-copier="#f0f0f7"><span class="doc-ton-palier">Fond</span><span class="doc-ton-hex">#f0f0f7</span></div>
+        </div>
+        <p class="fs-legende">
+          Jetons <code>--prive-vert</code>, <code>--prive-orange</code>,
+          <code>--prive-bleu</code>, <code>--prive-fond</code>&nbsp;; RVB 120/204/153,
+          242/170/62, 83/95/221, 240/240/247. Avec
+          <code>.fs-espace-prive</code>, la barre de navigation prend le fond
+          gris-lavande (<code>--prive-fond</code>), texte sombre, page active
+          soulignée de <code>--prive-bleu</code>. Texte courant sur
+          <code>--prive-fond</code>&nbsp;: <span data-contraste="#f0f0f7/#211d1a"></span>
+        </p>
+
+        <div class="doc-note fs-mt-4">
+          Les autres teintes de chaque palette sont livrées comme jetons, pour les
+          éléments propres à l'espace. Elles ne remplacent pas les rôles
+          sémantiques&nbsp;: un bouton reste vert, une erreur reste rouge, dans un
+          espace comme dans l'autre (guide, §&nbsp;2.2, point&nbsp;4). Le vert et
+          l'orange de l'espace privé sont des teintes claires&nbsp;: ils ne servent pas
+          à écrire et ne portent pas de texte blanc (§&nbsp;2.2, point&nbsp;2, qui
+          écarte les couleurs pâles pour l'information à lire).
+        </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Règles d'emploi de la couleur</h3>
+        <p class="doc-bloc-note">
+          La couleur code l'information&nbsp;: elle différencie et identifie ce qui est
+          affiché. Les règles suivantes reprennent le guide (§&nbsp;2.2), avec la
+          manière dont la charte les applique.
+        </p>
+
+        <ol class="fs-liste-puces fs-mesure">
+          <li>
+            <strong>Jamais seule.</strong> La couleur n'est pas le seul moyen de
+            communiquer une information ni de distinguer deux objets&nbsp;: un libellé,
+            une forme ou une position la double toujours, pour les usagers
+            daltoniens ou achromates (point&nbsp;1). Dans la charte, un état n'est
+            jamais signalé par sa seule couleur&nbsp;: il porte un libellé.
+          </li>
+          <li>
+            <strong>Associations à éviter.</strong> Rouge avec bleu, jaune avec
+            violet, jaune avec vert (point&nbsp;2). Les séries de graphiques
+            (<code>--serie-1</code> à <code>--serie-6</code>) n'emploient donc ni
+            jaune ni bleu&nbsp;: des verts, des rouges et des neutres seulement.
+            Exception&nbsp;: les marques nationales, où le drapeau associe par nature
+            le jaune et le vert.
+          </li>
+          <li>
+            <strong>Fonds.</strong> Pas de fond de fenêtre rouge, jaune ou dérivé
+            (vert, orange)&nbsp;: gris pâle de préférence, sinon bleu foncé
+            (point&nbsp;2). C'est pourquoi les surfaces sont des neutres et le bandeau
+            officiel <code>.fs-officiel</code> est en bleu nuit
+            (<code>--public-900</code>). Pas de bleu pâle, ni de couleur pâle en
+            général, pour un texte que l'usager doit lire.
+          </li>
+          <li>
+            <strong>Affichage et saisie.</strong> Les zones d'affichage ont un fond
+            différent de celui des zones de saisie, de préférence gris (point&nbsp;3)&nbsp;:
+            un champ en lecture seule prend le fond <code>--surface-enfoncee</code>.
+          </li>
+          <li>
+            <strong>Mêmes codages partout.</strong> Une couleur garde le même sens
+            dans une application et dans toutes celles qui servent les mêmes usagers
+            (point&nbsp;4). C'est l'objet des rôles sémantiques présentés plus bas.
+          </li>
+          <li>
+            <strong>Conventions.</strong> Vert&nbsp;: tout se passe correctement.
+            Jaune ou orange&nbsp;: attention, vigilance. Rouge&nbsp;: alerte, danger,
+            interruption (point&nbsp;5). Les rôles <code>--succes</code> (vert),
+            <code>--alerte</code> (ocre) et <code>--danger</code> (rouge) suivent cette
+            répartition.
+          </li>
+          <li>
+            <strong>Cinq couleurs au plus</strong> dans un même écran, et dans une
+            même application&nbsp;; au-delà, l'usager ne saisit plus le rôle de chacune
+            (point&nbsp;6). Un graphique n'affiche donc pas plus de cinq séries à la
+            fois.
+          </li>
+          <li>
+            <strong>Impression en noir et blanc.</strong> Chaque couleur doit rester
+            distincte en niveaux de gris sur une imprimante monochrome&nbsp;; si les
+            niveaux de gris ne suffisent pas, prévoir des hachures (point&nbsp;7).
+            L'emblème a sa propre version en gris, <code>armoiries-gris.svg</code>.
+          </li>
+          <li>
+            <strong>Une couleur par espace</strong>, selon les palettes d'espace
+            ci-dessus (point&nbsp;8).
+          </li>
+        </ol>
+
+        <h4 class="fs-mt-8">Couleur des textes</h4>
+        <p class="doc-bloc-note">
+          Le texte est noir par défaut, nuancé vers le gris pour les textes généraux
+          (guide, §&nbsp;2.3). Le guide obtient cette nuance par une opacité&nbsp;; la
+          charte emploie des gris pleins de l'échelle des neutres&nbsp;—
+          <code>--texte</code> (<code>#211d1a</code>) pour le texte courant,
+          <code>--texte-attenue</code> (<code>#635c55</code>) pour le texte
+          secondaire&nbsp;— dont le contraste se calcule sans dépendre du fond.
+        </p>
       </div>
 
       <div class="doc-bloc">
@@ -708,11 +918,12 @@
     <section class="doc-section" id="typographie">
       <h2>Typographie</h2>
       <p class="doc-section-intro">
-        Deux familles suffisent. Archivo, grotesque de facture institutionnelle,
-        porte les titres et les éléments d'interface&nbsp;; son dessin ferme tient bien
-        en petit corps et en capitales. Inter porte le texte courant. Sa hauteur
-        d'x généreuse reste lisible sur les écrans de faible densité, qui
-        constituent le parc dominant.
+        Deux familles, celles que propose le guide (§&nbsp;2.4, point&nbsp;5), chacune
+        avec un rôle assigné. Montserrat porte les titres principaux et les
+        boutons d'action (§&nbsp;2.4.1.1). Roboto porte tout le reste&nbsp;: texte
+        courant, libellés de champ, liens de navigation et menus, onglets, en-têtes
+        de tableau (§&nbsp;2.4.1.2). Les niveaux de lecture se font ressortir par le
+        corps et la graisse, pas par une troisième police.
       </p>
 
       <div class="doc-bloc">
@@ -726,7 +937,7 @@
         <div class="doc-demo" data-libelle="Spécimen">
           <div class="doc-demo-scene doc-demo-scene--pile">
             <div>
-              <p class="fs-legende">Archivo&nbsp;— titres, boutons, navigation</p>
+              <p class="fs-legende">Montserrat&nbsp;— titres principaux, boutons d'action</p>
               <p style="font-family: var(--police-titre); font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: var(--espace-2) 0;">
                 Burkina Faso
               </p>
@@ -740,7 +951,7 @@
             <hr>
 
             <div>
-              <p class="fs-legende">Inter&nbsp;— texte courant, formulaires, tableaux</p>
+              <p class="fs-legende">Roboto&nbsp;— texte courant, libellés, navigation, onglets, tableaux</p>
               <p style="font-family: var(--police-texte); font-size: 1.0625rem; line-height: 1.7; margin: var(--espace-2) 0 0; max-width: 54ch;">
                 Le récépissé de dépôt est délivré immédiatement après validation du
                 formulaire. Il ne vaut pas acte et ne peut être produit comme pièce
@@ -774,31 +985,31 @@
       <div class="doc-bloc">
         <h3>Graisses</h3>
         <p class="doc-bloc-note">
-          Cinq graisses sont disponibles, mais chacune a un emploi assigné. Une
-          graisse employée hors de son rôle affaiblit la hiérarchie au lieu de la
-          renforcer.
+          Les fichiers couvrent toutes les graisses de 100 à 900, mais la charte
+          n'en emploie que cinq, chacune avec un emploi assigné. Une graisse employée
+          hors de son rôle affaiblit la hiérarchie au lieu de la renforcer.
         </p>
 
         <div class="doc-demo" data-libelle="Graisses">
           <div class="doc-demo-scene doc-demo-scene--pile" style="display:block;">
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>400 — normale</b>Texte courant</div>
+              <div class="doc-specimen-fiche"><b>400 — normale</b>Roboto, texte courant</div>
               <div class="doc-specimen-rendu" style="font-weight: 400; font-size: 1.125rem;">Demander un acte de naissance</div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>500 — moyenne</b>Étiquette, libellé de champ</div>
+              <div class="doc-specimen-fiche"><b>500 — moyenne</b>Roboto, libellé de champ, lien de menu</div>
               <div class="doc-specimen-rendu" style="font-weight: 500; font-size: 1.125rem;">Demander un acte de naissance</div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>600 — demi-grasse</b>Boutons, titres de rang 4 à 6</div>
+              <div class="doc-specimen-fiche"><b>600 — demi-grasse</b>Montserrat, boutons, titres de rang 4 à 6</div>
               <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 600; font-size: 1.125rem;">Demander un acte de naissance</div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>700 — grasse</b>Titres de rang 2 et 3</div>
+              <div class="doc-specimen-fiche"><b>700 — grasse</b>Montserrat, titres de rang 2 et 3</div>
               <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 700; font-size: 1.125rem;">Demander un acte de naissance</div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>800 — noire</b>Titre de rang 1, chiffres clés</div>
+              <div class="doc-specimen-fiche"><b>800 — noire</b>Montserrat, titre de rang 1, chiffres clés</div>
               <div class="doc-specimen-rendu" style="font-family: var(--police-titre); font-weight: 800; font-size: 1.125rem;">Demander un acte de naissance</div>
             </div>
           </div>
@@ -806,9 +1017,10 @@
 
         <div class="doc-note fs-mt-6">
           Les fichiers sont des <strong>polices variables</strong>&nbsp;: un seul fichier
-          par famille couvre toutes les graisses. Cinq fichiers statiques auraient
-          pesé le triple. Aucune graisse intermédiaire n'est pour autant autorisée&nbsp;—
-          l'échelle reste celle des cinq paliers ci-dessus.
+          par famille couvre toutes les graisses, de 100 à 900. Cinq fichiers
+          statiques auraient pesé bien davantage. Aucune graisse intermédiaire n'est
+          pour autant autorisée&nbsp;— l'échelle reste celle des cinq paliers
+          ci-dessus.
         </div>
       </div>
 
@@ -820,6 +1032,13 @@
           <strong>Aucune police n'est téléchargée pour cela</strong>&nbsp;: une chasse fixe
           ne porte aucune identité, celle du système d'exploitation convient, et
           c'est un fichier de moins sur le chemin critique.
+        </p>
+        <p class="doc-bloc-note">
+          Ce n'est pas une troisième famille au sens du guide&nbsp;: celui-ci admet un
+          codage particulier, dont une police différente, pour distinguer certains
+          textes (§&nbsp;2.4, point&nbsp;3). La chasse fixe est réservée à ce codage,
+          un champ ou une cellule entière à la fois, jamais au milieu d'un texte
+          courant.
         </p>
 
         <div class="doc-demo" data-libelle="Chasse fixe">
@@ -859,10 +1078,10 @@
               <tr><th>Fichier</th><th>Format</th><th>Graisses</th><th class="fs-num">Poids</th></tr>
             </thead>
             <tbody>
-              <tr><td><code>archivo.woff2</code></td><td>Variable</td><td>400 à 800</td><td class="fs-num">34&nbsp;Ko</td></tr>
-              <tr><td><code>inter.woff2</code></td><td>Variable</td><td>400 à 700</td><td class="fs-num">47&nbsp;Ko</td></tr>
+              <tr><td><code>montserrat.woff2</code></td><td>Variable</td><td>100 à 900</td><td class="fs-num">37&nbsp;Ko</td></tr>
+              <tr><td><code>roboto.woff2</code></td><td>Variable</td><td>100 à 900</td><td class="fs-num">42&nbsp;Ko</td></tr>
               <tr><td>Chasse fixe</td><td>Système</td><td>—</td><td class="fs-num">0&nbsp;Ko</td></tr>
-              <tr><td><strong>Total</strong></td><td></td><td></td><td class="fs-num"><strong>81&nbsp;Ko</strong></td></tr>
+              <tr><td><strong>Total</strong></td><td></td><td></td><td class="fs-num"><strong>79&nbsp;Ko</strong></td></tr>
             </tbody>
           </table>
         </div>
@@ -877,7 +1096,7 @@
         <h4 class="fs-mt-8">Langues nationales et couverture des glyphes</h4>
         <p class="doc-bloc-note">
           Les deux fichiers sont réduits au sous-ensemble latin&nbsp;: c'est ce qui les
-          fait tenir en 81&nbsp;Ko. Ce sous-ensemble couvre le français, langue
+          fait tenir en 79&nbsp;Ko. Ce sous-ensemble couvre le français, langue
           officielle, mais <strong>pas les caractères propres aux orthographes des
           langues nationales</strong>. Tout service qui voudrait s'adresser aux
           usagers dans leur langue est directement concerné.
@@ -927,8 +1146,8 @@
 
         <div class="doc-note fs-mt-4">
           <strong>Ce qu'il faut faire pour y remédier.</strong> Reproduire le
-          sous-ensemble depuis les fichiers d'origine d'Archivo et d'Inter, tous deux
-          sous licence SIL OFL, en y ajoutant les plages
+          sous-ensemble depuis les fichiers d'origine de Montserrat et de Roboto, tous
+          deux sous licence SIL OFL, en y ajoutant les plages
           <code>U+014A-014B</code>, <code>U+0186</code>, <code>U+0190</code>,
           <code>U+0254</code>, <code>U+025B</code>, <code>U+0269</code>,
           <code>U+028B</code>, puis étendre <code>unicode-range</code> en conséquence.
@@ -982,16 +1201,16 @@
             </thead>
             <tbody>
               <tr>
-                <td>Archivo</td>
-                <td>The Archivo Project Authors</td>
+                <td>Montserrat</td>
+                <td>The Montserrat Project Authors</td>
                 <td>SIL OFL 1.1</td>
-                <td><a href="{{ ressource('assets/polices/archivo-OFL.txt') }}">archivo-OFL.txt</a></td>
+                <td><a href="{{ ressource('assets/polices/montserrat-OFL.txt') }}">montserrat-OFL.txt</a></td>
               </tr>
               <tr>
-                <td>Inter</td>
-                <td>The Inter Project Authors</td>
+                <td>Roboto</td>
+                <td>The Roboto Project Authors</td>
                 <td>SIL OFL 1.1</td>
-                <td><a href="{{ ressource('assets/polices/inter-OFL.txt') }}">inter-OFL.txt</a></td>
+                <td><a href="{{ ressource('assets/polices/roboto-OFL.txt') }}">roboto-OFL.txt</a></td>
               </tr>
             </tbody>
           </table>
@@ -1007,44 +1226,52 @@
       <div class="doc-bloc">
         <h3>Échelle typographique</h3>
         <p class="doc-bloc-note">
-          Les tailles de titre sont fluides. Elles s'interpolent entre 360&nbsp;px et
-          1280&nbsp;px de largeur de fenêtre, ce qui évite les paliers brutaux sur les
-          formats intermédiaires. Le corps de texte reste fixe à 15&nbsp;px, plancher
-          au-dessous duquel la lecture prolongée devient pénible.
+          Le guide fixe trois tailles par défaut (§&nbsp;2.4.1.3)&nbsp;: 14&nbsp;px pour
+          le texte courant (<code>--taille-md</code>), 12&nbsp;px pour les liens de
+          navigation et les menus (<code>--taille-menu</code>), 2,5&nbsp;rem pour les
+          grands titres. Les tailles de titre sont fluides&nbsp;: elles s'interpolent
+          entre 360&nbsp;px et 1280&nbsp;px de largeur de fenêtre, ce qui évite les
+          paliers brutaux sur les formats intermédiaires, et le titre de rang&nbsp;1
+          atteint les 2,5&nbsp;rem (40&nbsp;px) sur un écran de bureau. Le corps de
+          texte reste fixe.
         </p>
 
         <div class="doc-demo" data-libelle="Spécimen">
           <div class="doc-demo-scene doc-demo-scene--pile" style="display:block;">
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Titre 1</b>Archivo 800<br>32 → 53&nbsp;px<br>interligne 1.15</div>
+              <div class="doc-specimen-fiche"><b>Titre 1</b>Montserrat 800<br>32 → 40&nbsp;px<br>interligne 1,15</div>
               <div class="doc-specimen-rendu"><h1 style="margin:0;">Demander un acte de naissance</h1></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Titre 2</b>Archivo 700<br>26 → 38&nbsp;px<br>interligne 1.25</div>
+              <div class="doc-specimen-fiche"><b>Titre 2</b>Montserrat 700<br>26 → 38&nbsp;px<br>interligne 1,25</div>
               <div class="doc-specimen-rendu"><h2 style="margin:0; border:0; padding:0;">Pièces à fournir</h2></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Titre 3</b>Archivo 700<br>22 → 29&nbsp;px</div>
+              <div class="doc-specimen-fiche"><b>Titre 3</b>Montserrat 700<br>22 → 29&nbsp;px</div>
               <div class="doc-specimen-rendu"><h3 style="margin:0;">Délai de traitement</h3></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Titre 4</b>Archivo 600<br>19 → 23&nbsp;px</div>
+              <div class="doc-specimen-fiche"><b>Titre 4</b>Montserrat 600<br>19 → 23&nbsp;px</div>
               <div class="doc-specimen-rendu"><h4 style="margin:0;">Administration responsable</h4></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Chapeau</b>Inter 400<br>17&nbsp;px<br>interligne 1.75</div>
+              <div class="doc-specimen-fiche"><b>Chapeau</b>Roboto 400<br>17&nbsp;px<br>interligne 1,75</div>
               <div class="doc-specimen-rendu"><p class="fs-chapeau" style="margin:0;">La demande peut être déposée en ligne ou au guichet de la mairie de résidence.</p></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Corps</b>Inter 400<br>15&nbsp;px<br>interligne 1.6</div>
+              <div class="doc-specimen-fiche"><b>Corps</b>Roboto 400<br>14&nbsp;px<br>interligne 1,6</div>
               <div class="doc-specimen-rendu"><p style="margin:0;">Le récépissé de dépôt est délivré immédiatement après validation du formulaire. Il ne vaut pas acte et ne peut être produit comme pièce justificative.</p></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Petit texte</b>Inter 400<br>13&nbsp;px</div>
+              <div class="doc-specimen-fiche"><b>Menu</b>Roboto 500<br>12&nbsp;px<br>liens de navigation, menus</div>
+              <div class="doc-specimen-rendu"><p style="margin:0; font-size: var(--taille-menu); font-weight: var(--graisse-moyenne);">Démarches en ligne</p></div>
+            </div>
+            <div class="doc-specimen">
+              <div class="doc-specimen-fiche"><b>Petit texte</b>Roboto 400<br>13&nbsp;px</div>
               <div class="doc-specimen-rendu"><p class="fs-legende" style="margin:0;">Mention légale, légende de tableau, précision secondaire.</p></div>
             </div>
             <div class="doc-specimen">
-              <div class="doc-specimen-fiche"><b>Surtitre</b>Archivo 700<br>12&nbsp;px<br>capitales, approche 0.08em</div>
+              <div class="doc-specimen-fiche"><b>Surtitre</b>Montserrat 700<br>12&nbsp;px<br>majuscule initiale seule</div>
               <div class="doc-specimen-rendu"><span class="fs-surtitre" style="margin:0;">Service en ligne</span></div>
             </div>
             <div class="doc-specimen">
@@ -1053,6 +1280,45 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Bornes de taille et masques de saisie</h3>
+        <p class="doc-bloc-note">
+          Le guide conseille, pour le texte, une taille comprise entre 8 et
+          16&nbsp;points (§&nbsp;2.4, point&nbsp;1)&nbsp;: en dessous, les caractères sont
+          quasiment illisibles&nbsp;; au-dessus, ils gênent la lecture. Les titres
+          relèvent de leur propre échelle, plafonnée à 2,5&nbsp;rem
+          (§&nbsp;2.4.1.3).
+        </p>
+
+        <dl class="fs-definitions">
+          <div>
+            <dt>Minimum</dt>
+            <dd>8&nbsp;points, soit environ 11&nbsp;px à l'écran. C'est le plancher de l'échelle (<code>--taille-2xs</code>)&nbsp;: aucun texte de la charte ne descend en dessous, et ce palier est réservé aux mentions secondaires.</dd>
+          </div>
+          <div>
+            <dt>Maximum</dt>
+            <dd>16&nbsp;points, soit environ 21&nbsp;px. Le plus grand texte courant de la charte, le chapeau, fait 17&nbsp;px.</dd>
+          </div>
+          <div>
+            <dt>Par défaut</dt>
+            <dd>14&nbsp;px pour le texte, 12&nbsp;px pour les liens de navigation et les menus, 2,5&nbsp;rem au plus pour les grands titres.</dd>
+          </div>
+        </dl>
+
+        <h4 class="fs-mt-8">Masques de saisie</h4>
+        <p class="doc-bloc-note">
+          Pour une date, un montant ou un numéro de téléphone, le format attendu doit
+          être explicite (guide, §&nbsp;2.4.1.4). Dans la charte, il l'est par le
+          composant lui-même plutôt que par un gabarit de caractères tapés dans le
+          champ&nbsp;: la date se saisit en trois champs jour, mois, année, avec un
+          exemple concret dans l'aide&nbsp;; le montant porte son unité
+          (<code>F&nbsp;CFA</code>) dans le libellé et en affixe&nbsp;; le numéro de
+          téléphone affiche l'indicatif <code>+226</code> en affixe et se lit par
+          paires de chiffres. Voir les
+          <a href="{{ page('composants') }}#formulaires">composants de formulaire</a>.
+        </p>
       </div>
 
       <div class="doc-bloc">
@@ -1065,14 +1331,17 @@
               <li>Respecter la hiérarchie des niveaux de titre sans en sauter&nbsp;: un <code>h3</code> suit un <code>h2</code>.</li>
               <li>Aligner les chiffres en colonne avec <code>font-variant-numeric: tabular-nums</code> dans les tableaux et les montants.</li>
               <li>Écrire les montants en francs CFA avec séparateur de milliers et unité explicite.</li>
+              <li>Ne mettre une majuscule qu'à l'initiale du premier mot d'un libellé, d'une option de menu, d'un bouton ou d'un titre&nbsp;: «&nbsp;Pièces à fournir&nbsp;», pas «&nbsp;Pièces À Fournir&nbsp;» (guide, §&nbsp;2.4, point&nbsp;4). Les noms propres et les sigles gardent leurs capitales.</li>
+              <li>Une seule police par champ. Un codage particulier (graisse, couleur, soulignement, chasse fixe) reste admis pour distinguer un mot clé, un lien ou le libellé d'un champ obligatoire (guide, §&nbsp;2.4, point&nbsp;3).</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Composer un paragraphe entier en capitales. Il se lit nettement plus lentement.</li>
+              <li>Composer en capitales un libellé, un titre ou un paragraphe. Seul le nom «&nbsp;BURKINA FASO&nbsp;» du bloc-marque, qui est un logotype, reste en capitales.</li>
+              <li>Employer l'italique, y compris pour une citation ou une mise en valeur&nbsp;: il nuit à la lisibilité à l'écran (guide, §&nbsp;2.4, point&nbsp;2).</li>
               <li>Justifier le texte&nbsp;: sans césure, la justification crée des lézardes ingérables.</li>
-              <li>Descendre sous 15&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
+              <li>Descendre sous 14&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
               <li>Introduire une troisième famille typographique pour un besoin ponctuel.</li>
             </ul>
           </div>
@@ -1082,12 +1351,14 @@
 
     <!-- ===================================================== -->
     <section class="doc-section" id="images">
-      <h2>Photographie et illustration</h2>
+      <h2>Images</h2>
       <p class="doc-section-intro">
         Une image de service public informe&nbsp;; elle n'habille pas. La question à se
         poser avant d'en placer une n'est pas «&nbsp;qu'est-ce qui irait bien ici&nbsp;?&nbsp;» mais
         «&nbsp;qu'est-ce que l'usager comprendra mieux grâce à elle&nbsp;?&nbsp;». Si la réponse
-        n'est pas évidente, la place reste vide.
+        n'est pas évidente, la place reste vide. Le guide le dit à sa
+        manière&nbsp;: chaque prise de vue doit traduire la volonté de
+        <strong>communiquer par la preuve</strong> (guide, §&nbsp;4.2.1.1).
       </p>
 
       <div class="doc-bloc">
@@ -1132,6 +1403,49 @@
       </div>
 
       <div class="doc-bloc">
+        <h3>Prises de vue et cadrages</h3>
+        <p class="doc-bloc-note">
+          La simplicité et l'efficacité des clichés se recherchent systématiquement,
+          dans le cadrage comme dans la mise en scène (guide, §&nbsp;4.2.1).
+        </p>
+
+        <dl class="fs-definitions">
+          <div>
+            <dt>Cadrages</dt>
+            <dd>Gros plan, plan rapproché ou plan large, rien d'autre. Une mise en scène épurée&nbsp;: de grandes lignes, le moins d'éléments possible, pour la lisibilité (§&nbsp;4.2.1.2).</dd>
+          </div>
+          <div>
+            <dt>Sujet</dt>
+            <dd>Des visuels humains et factuels&nbsp;: des personnes, des lieux, des documents réels. Pas de représentation conceptuelle ou symbolique (§&nbsp;4.2.1.2).</dd>
+          </div>
+          <div>
+            <dt>Couleurs</dt>
+            <dd>Des images sans saturation excessive, accordées aux couleurs du logo et au gris de la palette, pour conserver l'unité visuelle (§&nbsp;4.2.2).</dd>
+          </div>
+        </dl>
+
+        <div class="doc-usages fs-mt-6">
+          <div class="doc-usage doc-usage--oui">
+            <p class="doc-usage-titre">À privilégier</p>
+            <ul>
+              <li>Un traitement épuré, de l'espace libre, des compositions simples.</li>
+              <li>Des prises de vue de face.</li>
+            </ul>
+          </div>
+          <div class="doc-usage doc-usage--non">
+            <p class="doc-usage-titre">À éviter</p>
+            <ul>
+              <li>Les effets de mouvement flou.</li>
+              <li>La juxtaposition de plusieurs visuels et les compositions en fondu.</li>
+              <li>Les angles de vue en plongée et en contre-plongée.</li>
+              <li>Les cadrages aléatoires.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="fs-legende fs-mt-4">Principes de composition du guide (§&nbsp;4.2.3, tableau&nbsp;1).</p>
+      </div>
+
+      <div class="doc-bloc">
         <h3>Traitement et format <code>.fs-figure</code></h3>
         <p class="doc-bloc-note">
           Le rapport d'affichage est déclaré pour qu'aucun décalage de mise en page ne
@@ -1155,10 +1469,57 @@
 
         <dl class="fs-definitions fs-mt-6">
           <div><dt>Rapports admis</dt><dd><code>16/9</code> pour une bannière, <code>4/3</code> pour une photographie de contenu, <code>1/1</code> pour un portrait ou une vignette.</dd></div>
-          <div><dt>Traitement</dt><dd>Aucun filtre, aucune teinte de marque, aucun cadre arrondi au-delà du rayon du système. Recadrage seulement.</dd></div>
+          <div><dt>Traitement</dt><dd>Aucun filtre, aucune teinte de marque, aucun cadre arrondi au-delà du rayon du système. Recadrage seulement&nbsp;: l'accord avec les couleurs du logo et le gris se cherche au choix de l'image, pas par retouche.</dd></div>
           <div><dt>Poids</dt><dd>200&nbsp;Ko au maximum par image, dimensionnée à sa taille d'affichage. Voir le <a href="{{ page('accessibilite') }}#budget">budget de performance</a>.</dd></div>
           <div><dt>Texte de remplacement</dt><dd>Descriptif si l'image porte une information, vide (<code>alt=""</code>) si elle est redondante avec le texte voisin.</dd></div>
         </dl>
+      </div>
+
+      <div class="doc-bloc">
+        <h3>Formats et optimisation</h3>
+        <p class="doc-bloc-note">
+          Un bon rapport qualité/poids améliore l'accessibilité d'une page (guide,
+          §&nbsp;4.3). Le guide date de 2024 mais reprend des recommandations plus
+          anciennes&nbsp;; la charte en garde l'intention et adapte deux points au web
+          actuel.
+        </p>
+
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Format à employer selon la nature de l'image</caption>
+            <thead>
+              <tr><th>Nature</th><th>Format</th><th>Réglage</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Photographie</td>
+                <td>JPEG, ou WebP</td>
+                <td>Qualité autour de 75&nbsp;%, le compromis que retient le guide. Le WebP est admis comme alternative, à qualité comparable pour un poids moindre.</td>
+              </tr>
+              <tr>
+                <td>Logo, pictogramme, schéma</td>
+                <td>SVG</td>
+                <td>Vectoriel, net à toutes les tailles et à toutes les densités d'écran. C'est le format de l'emblème et des icônes de la charte.</td>
+              </tr>
+              <tr>
+                <td>Vignette, capture, graphique matriciel</td>
+                <td>PNG</td>
+                <td>Compression sans perte et transparence. C'est le repli quand le vectoriel n'est pas rendu, en bureautique ou dans un courriel.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>Ce que la charte adapte.</strong> Le guide recommande le GIF pour les
+          logotypes et les pictogrammes&nbsp;: ses 256 couleurs le rendent léger, mais
+          il pixellise à l'agrandissement et gère mal la transparence. Le SVG, que le
+          guide préconise lui-même pour les icônes (§&nbsp;4.1), et le PNG le
+          remplacent. Le guide fixe aussi une résolution de 72&nbsp;dpi&nbsp;: cette
+          valeur n'a aucun effet sur l'affichage web. On raisonne en pixels&nbsp;: une
+          image est servie aux dimensions où elle s'affiche, au double au plus pour
+          les écrans haute densité.
+        </div>
       </div>
 
       <div class="doc-bloc">
@@ -1419,6 +1780,25 @@
         service à qui il manque une icône en propose l'ajout plutôt que d'en importer
         une d'un jeu tiers, dont le dessin jurerait avec l'ensemble.
       </p>
+
+      <div class="doc-bloc">
+        <h3>Principes du guide</h3>
+        <p class="doc-bloc-note">
+          Une icône a deux fonctions&nbsp;: aider à identifier la nature d'une
+          information, ou représenter l'action d'un bouton de commande (guide,
+          §&nbsp;4.1). Elle doit être explicite, c'est-à-dire représentative de l'action
+          ou du concept qu'elle désigne, et constante&nbsp;: une même action ou un même
+          concept garde la même icône dans toute l'application, jamais deux icônes
+          pour une seule chose.
+        </p>
+        <div class="doc-note">
+          Le guide préconise des images vectorielles et suggère les jeux de Font
+          Awesome et d'Icones8. La charte fournit son propre jeu vectoriel, servi
+          depuis le domaine du service&nbsp;: pas de dépendance à un tiers, et un dessin
+          homogène avec l'emblème et les composants. Les principes du guide s'y
+          appliquent tels quels.
+        </div>
+      </div>
 
       <div class="doc-bloc">
         <h3>Construction</h3>

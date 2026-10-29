@@ -1,5 +1,5 @@
 CHARTE GRAPHIQUE DE L'ADMINISTRATION BURKINABE
-Version 2.0 — septembre 2026
+Version 3.0 — octobre 2026
 
 
 CE QUE CONTIENT CE PAQUET
@@ -10,7 +10,7 @@ CE QUE CONTIENT CE PAQUET
   assets/js/faso.js         Comportements, sans dependance
   assets/js/faso-amorce.js  Pose le theme avant le premier rendu
   assets/js/faso.d.ts       Declarations TypeScript
-  assets/polices/           Archivo et Inter, variables, latin
+  assets/polices/           Montserrat et Roboto, variables, latin
   assets/img/armoiries.svg  Grand format, a partir de 64 px
   assets/img/armoiries-moyen.svg
                             Moyen format, 32 a 64 px
@@ -24,7 +24,7 @@ CE QUE CONTIENT CE PAQUET
   assets/img/favicon.svg    Icone d'onglet : le drapeau et son
                             etoile, seule marque lisible a 16 px
   assets/img/icones.svg     Memes traces, pour les outils de conception
-  assets/jetons.json        193 jetons, valeurs resolues, produits
+  assets/jetons.json        202 jetons, valeurs resolues, produits
                             depuis tokens.css par outils/jetons.js
   android/                  Ressources Android produites depuis les
                             memes jetons : couleurs, dimensions,
@@ -40,7 +40,7 @@ INSTALLATION
   Pour un projet qui demarre, une commande ecrit les fichiers de
   depart et installe la charte :
 
-    npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
+    npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz
 
   Elle demande le dossier, le type de projet (statique, react,
   angular, laravel) et le depot npm interne s'il y en a un. Elle
@@ -50,7 +50,7 @@ INSTALLATION
 
   Pour un projet deja commence :
 
-    npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-2.0.0.tgz
+    npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-3.0.0.tgz
 
   L'archive est servie par le site de la documentation : l'espace
   de noms @govbf n'est encore sur aucun registre. Le paquet installe
@@ -124,6 +124,20 @@ particulierement : refuser l'assombrissement automatique d'Android,
 qui deplacerait le rouge, le vert et l'or officiels.
 
 
+REFERENCE NORMATIVE
+
+La charte applique le "Guide pour la definition de la charte
+graphique des plateformes numeriques de l'administration publique",
+version V1.0 du 10/08/2024, etabli par le Comite de suivi de la
+dematerialisation des procedures administratives (MTDPCE/SG/DGTD) :
+couleurs officielles du drapeau (rouge #EF2B2D, jaune #FCD116,
+vert #009E49), Montserrat pour les titres et les boutons d'action,
+Roboto pour le texte, palettes reservees aux espaces public et
+prive, structure des pages. Les points du guide qui ne sont pas
+appliques tels quels sont listes et motives dans la page
+Gouvernance de la documentation ("Ecarts assumes avec le guide").
+
+
 LICENCES
 
 Code et documentation
@@ -132,8 +146,8 @@ Code et documentation
   a designer.
 
 Polices de caracteres
-  Archivo — Copyright The Archivo Project Authors
-  Inter   — Copyright The Inter Project Authors
+  Montserrat — Copyright The Montserrat Project Authors
+  Roboto     — Copyright The Roboto Project Authors
 
   Toutes deux sous SIL Open Font License 1.1, qui autorise l'usage,
   la modification et la redistribution, y compris commerciale, a
@@ -141,12 +155,12 @@ Polices de caracteres
   de la licence.
 
   Ce texte accompagne les fichiers :
-    assets/polices/archivo-OFL.txt
-    assets/polices/inter-OFL.txt
+    assets/polices/montserrat-OFL.txt
+    assets/polices/roboto-OFL.txt
 
   Il doit etre conserve lors de toute reprise du paquet.
 
-Emblème
+Embleme
   Les armoiries du Burkina Faso sont un symbole de souverainete.
   Le fichier fourni est derive par vectorisation d'un rendu raster
   et convient a la conception comme au developpement. Pour une mise
@@ -157,6 +171,8 @@ Emblème
 ACCESSIBILITE
 
 Le systeme vise WCAG 2.1 AA. Les criteres relevant des composants
-sont satisfaits ; ceux relevant du projet — langue du document,
+sont tenus par construction et verifies par la mesure la ou elle
+est possible ; aucun audit externe n'a encore eu lieu. Ceux relevant
+du projet — langue du document,
 textes de remplacement, hierarchie des titres, libelles de liens —
 restent a sa charge. La liste figure dans la documentation.

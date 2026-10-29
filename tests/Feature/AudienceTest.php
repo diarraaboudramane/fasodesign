@@ -70,6 +70,31 @@ class AudienceTest extends TestCase
         $this->assertSame(0, Audience::mois());
     }
 
+    public function test_sans_la_case_chaque_navigateur_est_compte(): void
+    {
+        config(['charte.verification.active' => false]);
+        $this->defaultCookies = [];
+
+        $this->visiter('203.0.113.1')->assertOk();
+        $this->visiter('203.0.113.2', adresse: '/audience')->assertOk();
+
+        $this->assertSame(2, Audience::mois());
+        $this->assertSame(2, Audience::enLigne());
+    }
+
+    public function test_sans_la_case_un_automate_declare_n_est_pas_compte(): void
+    {
+        config(['charte.verification.active' => false]);
+        $this->defaultCookies = [];
+
+        $this->visiter('66.249.66.1', 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)');
+        $this->visiter('203.0.113.5', 'curl/8.4.0');
+        $this->visiter('203.0.113.6', 'Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Claude-User/1.0; +Claude-User@anthropic.com)');
+        $this->visiter('203.0.113.7', '');
+
+        $this->assertSame(0, Audience::mois());
+    }
+
     public function test_aucune_adresse_ip_n_est_gardee(): void
     {
         $this->visiter('203.0.113.77');

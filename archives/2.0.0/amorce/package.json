@@ -1,0 +1,36 @@
+{
+  "name": "@govbf/create-charte-graphique",
+  "version": "2.0.0",
+  "description": "Prépare un projet employant la charte graphique de l'administration burkinabè.",
+  "homepage": "https://chartegraphique.gov.bf/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://A-RENSEIGNER/charte-graphique.git",
+    "directory": "amorce"
+  },
+  "bugs": {
+    "url": "https://chartegraphique.gov.bf/issues"
+  },
+  "license": "SEE LICENSE IN LISEZMOI.txt",
+  "type": "commonjs",
+  "bin": {
+    "create-charte-graphique": "./index.js"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "gabarits",
+    "LISEZMOI.txt"
+  ],
+  "keywords": [
+    "charte-graphique",
+    "burkina-faso",
+    "service-public"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

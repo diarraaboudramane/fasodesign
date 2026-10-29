@@ -28,7 +28,7 @@ class FichiersTest extends TestCase
 
     public function test_polices_et_emblemes_sont_consommables_depuis_un_autre_domaine(): void
     {
-        foreach (['/assets/polices/inter.woff2', '/assets/img/armoiries.svg'] as $adresse) {
+        foreach (['/assets/polices/roboto.woff2', '/assets/img/armoiries.svg'] as $adresse) {
             $reponse = $this->get($adresse);
 
             $reponse->assertOk();
@@ -62,9 +62,36 @@ class FichiersTest extends TestCase
         $reponse->assertHeader('Access-Control-Allow-Origin', '*');
     }
 
-    public function test_la_diffusion_versionnee_ne_sert_que_la_version_courante(): void
+    public function test_la_diffusion_versionnee_ne_sert_que_les_versions_publiees(): void
     {
         $this->get('/0.0.1/css/faso.css')->assertNotFound();
+    }
+
+    public function test_une_version_anterieure_reste_servie_telle_quelle(): void
+    {
+        /* Les services restés sur la 2.0.0 ne doivent rien voir changer :
+           ses fichiers viennent de sa copie gelée, pas de assets/. */
+        $reponse = $this->get('/2.0.0/css/tokens.css');
+
+        $reponse->assertOk();
+        $reponse->assertHeader('Cache-Control', 'immutable, max-age=31536000, public');
+        $this->assertSame(file_get_contents(base_path('archives/2.0.0/assets/css/tokens.css')), $reponse->streamedContent());
+        $this->assertStringContainsString('#e30613', $reponse->streamedContent());
+        $this->get('/2.0.0/polices/inter.woff2')->assertOk();
+        $this->get('/2.0.0/css/docs.css')->assertNotFound();
+    }
+
+    public function test_l_archive_npm_d_une_version_anterieure_est_servie(): void
+    {
+        foreach (['govbf-charte-graphique' => '', 'govbf-create-charte-graphique' => 'amorce'] as $nom => $dossier) {
+            $tar = gzdecode($this->get("/npm/{$nom}-2.0.0.tgz")->assertOk()->streamedContent());
+            $taille = octdec(rtrim(substr($tar, 124, 12), "\0"));
+            $this->assertSame(
+                file_get_contents(base_path(ltrim("archives/2.0.0/{$dossier}/package.json", '/'))),
+                substr($tar, 512, $taille)
+            );
+            $this->assertStringContainsString('"version": "2.0.0"', substr($tar, 512, $taille));
+        }
     }
 
     public function test_l_outillage_de_la_documentation_n_est_pas_diffuse(): void

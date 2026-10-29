@@ -2,6 +2,7 @@
 
 namespace App\Support;
 
+use App\Http\Middleware\VerifierHumain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
@@ -23,6 +24,30 @@ use Throwable;
 final class Audience
 {
     private const PRESENCE = 'audience.presence';
+
+    /* Agents qui se déclarent pour ce qu'ils sont : moteurs, aperçus de
+       lien, outils en ligne de commande, sondes, et assistants qui lisent
+       pour le compte d'une personne sans être cette personne. */
+    private const AUTOMATES = '/bot|crawl|spider|slurp|preview|fetch|curl|wget|python|java\/|go-http|okhttp|axios|scrapy|headless|lighthouse|monitor|uptime|-user\b/i';
+
+    /**
+     * Le visiteur est-il une personne à compter ?
+     *
+     * Avec la case anti-robot, seul compte celui qui l'a cochée. Sans
+     * elle, personne n'a le cookie : on compte alors tout navigateur qui
+     * ne se déclare pas automate. Un robot qui se fait passer pour un
+     * navigateur sera compté, c'est le prix de la case désactivée.
+     */
+    public static function compte(Request $request): bool
+    {
+        if (config('charte.verification.active')) {
+            return VerifierHumain::estVerifie($request);
+        }
+
+        $agent = (string) $request->userAgent();
+
+        return $agent !== '' && ! preg_match(self::AUTOMATES, $agent);
+    }
 
     public static function enregistrer(Request $request): void
     {

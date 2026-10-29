@@ -3,8 +3,8 @@
  * Charte graphique de l'administration burkinabè
  * Préparation d'un projet
  *
- *   npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
- *   npx https://…/npm/govbf-create-charte-graphique-2.0.0.tgz mon-service --type=statique --oui
+ *   npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz
+ *   npx https://…/npm/govbf-create-charte-graphique-3.0.0.tgz mon-service --type=statique --oui
  *
  * Trois choses, et rien d'autre : faire accepter les conditions
  * d'emploi, écrire les fichiers de départ, installer la charte.

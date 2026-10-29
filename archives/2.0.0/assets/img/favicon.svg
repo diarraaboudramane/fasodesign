@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Icone de l'administration burkinabe.
+       Le drapeau, rouge au-dessus, vert au-dessous, etoile centree.
+       Produit par outils/embleme.js. -->
+  <rect width="32" height="16" fill="#e30613"/>
+  <rect y="16" width="32" height="16" fill="#00843b"/>
+  <g transform="translate(9.28,9.616) scale(0.134)">
+    <path fill="#ffed00" d="M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z"/>
+  </g>
+</svg>

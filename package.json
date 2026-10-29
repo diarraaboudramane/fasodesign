@@ -1,6 +1,6 @@
 {
   "name": "@govbf/charte-graphique",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Charte graphique des services numériques de l'administration burkinabè : jetons, composants CSS, comportements sans dépendance.",
   "homepage": "https://chartegraphique.gov.bf/",
   "repository": {

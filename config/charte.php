@@ -180,7 +180,8 @@ return [
     /*
      * Mesure d'audience anonyme, affichée au pied de l'accueil : personnes
      * en ligne (actives depuis « fenetre » minutes) et visiteurs distincts
-     * du mois. Seuls les visiteurs passés par la vérification sont comptés.
+     * du mois. Seuls les visiteurs passés par la vérification sont comptés ;
+     * sans vérification, tout navigateur qui ne se déclare pas automate.
      * Aucune écriture sur l'appareil, aucune adresse IP conservée : une
      * empreinte hachée avec la clé de l'application et le mois en cours,
      * qui ne peut pas être reliée d'un mois à l'autre.

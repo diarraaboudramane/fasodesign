@@ -57,7 +57,6 @@
 </main>
 
 <footer class="fs-pied">
-  <div class="fs-tissage" style="--tissage-fond: var(--surface-enfoncee);"></div>
   <div class="fs-conteneur">
     <div class="fs-pied-corps">
       <div>
@@ -112,7 +111,7 @@
     </div>
 
     <div class="fs-pied-bas">
-      <p>Version 2.0&nbsp;— Septembre 2026</p>
+      <p>Version 3.0&nbsp;— Octobre 2026</p>
 @unless (config('charte.export') || ! config('charte.audience.active'))
 {{-- Mis à jour en direct par assets/js/audience.js ; le site exporté,
      sans serveur, n'a rien à compter. --}}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Charte graphique de l'administration burkinabè
+  Fichier produit par outils/android.js depuis assets/css/tokens.css.
+  Ne pas modifier directement : toute retouche serait perdue à la
+  prochaine génération. La source faisant foi est la feuille de jetons.
+-->
+<resources>
+  <color name="faso_surface">#14110F</color>
+  <color name="faso_surface_basse">#191512</color>
+  <color name="faso_surface_enfoncee">#1F1A17</color>
+  <color name="faso_surface_haute">#211D1A</color>
+  <color name="faso_surface_inverse">#F7F5F2</color>
+  <color name="faso_surface_voile">#B3000000</color>
+  <color name="faso_texte">#F2EFEC</color>
+  <color name="faso_texte_attenue">#B3ACA4</color>
+  <color name="faso_texte_faible">#8D857D</color>
+  <color name="faso_texte_inverse">#14110F</color>
+  <color name="faso_bordure">#332E2A</color>
+  <color name="faso_bordure_forte">#756D66</color>
+  <color name="faso_bordure_inverse">#CFC8BF</color>
+  <color name="faso_action">#3EA46D</color>
+  <color name="faso_action_survol">#74C296</color>
+  <color name="faso_action_active">#A8DBBC</color>
+  <color name="faso_action_tenue">#243EA46D</color>
+  <color name="faso_action_texte">#04211A</color>
+  <color name="faso_action_sur_clair">#74C296</color>
+  <color name="faso_accent">#F0636E</color>
+  <color name="faso_accent_texte">#14110F</color>
+  <color name="faso_accent_survol">#F99AA1</color>
+  <color name="faso_accent_actif">#FFC5C9</color>
+  <color name="faso_accent_tenue">#24F0636E</color>
+  <color name="faso_accent_sur_clair">#F99AA1</color>
+  <color name="faso_relief_survol">#FFF287</color>
+  <color name="faso_relief_texte">#14110F</color>
+  <color name="faso_relief_sur_clair">#FFF287</color>
+  <color name="faso_succes">#3EA46D</color>
+  <color name="faso_succes_fond">#1F3EA46D</color>
+  <color name="faso_succes_bord">#523EA46D</color>
+  <color name="faso_succes_texte">#A8DBBC</color>
+  <color name="faso_alerte">#D9A441</color>
+  <color name="faso_alerte_fond">#1FD9A441</color>
+  <color name="faso_alerte_bord">#52D9A441</color>
+  <color name="faso_alerte_texte">#EDC57D</color>
+  <color name="faso_danger">#F0636E</color>
+  <color name="faso_danger_fond">#1FF0636E</color>
+  <color name="faso_danger_bord">#52F0636E</color>
+  <color name="faso_danger_texte">#FFC5C9</color>
+  <color name="faso_info">#7BA5C4</color>
+  <color name="faso_info_fond">#1F7BA5C4</color>
+  <color name="faso_info_bord">#4D7BA5C4</color>
+  <color name="faso_info_texte">#B7D2E4</color>
+  <color name="faso_focus_couleur">#74C296</color>
+  <color name="faso_lien">#74C296</color>
+  <color name="faso_lien_survol">#A8DBBC</color>
+  <color name="faso_lien_visite">#9FD4B6</color>
+</resources>

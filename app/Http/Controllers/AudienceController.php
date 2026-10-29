@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\VerifierHumain;
 use App\Support\Audience;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,11 +14,11 @@ class AudienceController extends Controller
      * Hors du groupe « humain » : ces appels réguliers ne doivent pas
      * prolonger la case anti-robot, sans quoi un onglet ouvert la
      * garderait valable indéfiniment. Ils maintiennent en revanche la
-     * présence d'un visiteur vérifié dont l'onglet est visible.
+     * présence d'un visiteur compté dont l'onglet est visible.
      */
     public function chiffres(Request $request): JsonResponse
     {
-        if (VerifierHumain::estVerifie($request)) {
+        if (Audience::compte($request)) {
             Audience::enregistrer($request);
         }
 

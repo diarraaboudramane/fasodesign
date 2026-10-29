@@ -38,27 +38,34 @@ class FichierController extends Controller
         return $this->servir($fichier, $entetes);
     }
 
-    /** /<version>/css/faso.css : une adresse qui ne change jamais de contenu. */
+    /**
+     * /<version>/css/faso.css : une adresse qui ne change jamais de contenu.
+     * La version courante est lue dans assets/ ; une version antérieure,
+     * dans sa copie gelée sous archives/<version>/, pour que les services
+     * qui l'emploient encore ne voient rien changer.
+     */
     public function diffusion(string $version, string $type, string $chemin): BinaryFileResponse
     {
-        abort_unless($version === Documentation::version(), 404);
+        $racine = self::racine($version);
+        abort_if($racine === null, 404);
         abort_if(in_array("{$type}/{$chemin}", config('charte.hors_diffusion'), true), 404);
 
-        return $this->servir($this->resoudre("assets/{$type}", $chemin), [
+        return $this->servir($this->resoudre("{$racine}assets/{$type}", $chemin), [
             'Cache-Control' => self::FIGE,
             'Access-Control-Allow-Origin' => '*',
         ]);
     }
 
     /**
-     * /npm/govbf-charte-graphique-2.0.0.tgz : l'archive que « npm install »
-     * reçoit. Seule la version courante est servie, comme pour la
-     * diffusion figée.
+     * /npm/govbf-charte-graphique-3.0.0.tgz : l'archive que « npm install »
+     * reçoit. Les versions antérieures restent installables depuis leur
+     * copie gelée, comme pour la diffusion figée.
      */
     public function paquet(string $nom, string $version): BinaryFileResponse
     {
-        abort_unless($version === Documentation::version(), 404);
-        $archive = PaquetNpm::archive($nom);
+        $racine = self::racine($version);
+        abort_if($racine === null, 404);
+        $archive = PaquetNpm::archive($nom, base_path($racine));
         abort_if($archive === null, 404);
 
         /* Une heure, pas un an : une archive reconstruite sous le même
@@ -68,6 +75,24 @@ class FichierController extends Controller
             'Cache-Control' => 'public, max-age=3600',
             'Access-Control-Allow-Origin' => '*',
         ]);
+    }
+
+    /**
+     * Dossier, relatif à la racine du dépôt, qui contient la version
+     * demandée : vide pour la version courante, archives/<version>/ pour
+     * une version gelée, null si elle n'existe pas.
+     */
+    public static function racine(string $version): ?string
+    {
+        if ($version === Documentation::version()) {
+            return '';
+        }
+
+        $gelee = "archives/{$version}/";
+
+        return preg_match('/^\d+\.\d+\.\d+$/', $version) && is_file(base_path($gelee.'package.json'))
+            ? $gelee
+            : null;
     }
 
     /**

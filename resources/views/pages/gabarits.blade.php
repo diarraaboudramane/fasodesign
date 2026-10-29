@@ -28,8 +28,8 @@
         <div class="doc-demo" data-libelle="Ossature">
           <div class="doc-demo-scene doc-demo-scene--pile" style="padding:0;">
             <div style="font-family: var(--police-mono); font-size: var(--taille-xs);">
-              <div style="padding: var(--espace-3) var(--espace-4); background: var(--vert-900); color:#fff;">1 · Lien d'évitement (invisible, premier élément focusable)</div>
-              <div style="padding: var(--espace-3) var(--espace-4); background: var(--vert-800); color:#fff;">2 · Bandeau d'identification officielle</div>
+              <div style="padding: var(--espace-3) var(--espace-4); background: var(--public-900); color:#fff;">1 · Lien d'évitement (invisible, premier élément focusable)</div>
+              <div style="padding: var(--espace-3) var(--espace-4); background: var(--public-700); color:#fff;">2 · Bandeau d'identification officielle</div>
               <div class="fs-filet fs-filet--fin"></div>
               <div style="padding: var(--espace-4); background: var(--surface-enfoncee);">3 · Bloc-marque et outils</div>
               <div style="padding: var(--espace-3) var(--espace-4); background: var(--surface-basse); border-block: 1px solid var(--bordure);">4 · Navigation principale</div>
@@ -39,6 +39,89 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="doc-bloc" id="couleur-espace">
+        <h3>Couleur d'espace</h3>
+        <p class="doc-bloc-note">
+          Le guide réserve une couleur à chaque espace d'une plateforme (guide, § 2.2,
+          point 8). La barre de navigation la porte&nbsp;: l'usager sait d'un coup d'œil
+          s'il consulte l'espace public ou s'il est dans son espace personnel. La classe
+          se pose une fois, sur <code>&lt;body&gt;</code>, et ne concerne que la navigation
+          principale (bloc&nbsp;4 ci-dessus).
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Classes d'espace et rendu de la navigation</caption>
+            <thead>
+              <tr><th>Classe sur <code>&lt;body&gt;</code></th><th>Gabarits concernés</th><th>Navigation</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>.fs-espace-public</code></td>
+                <td>Portail, résultats de recherche, contenu institutionnel, fiche de démarche</td>
+                <td>Fond bleu nuit (<code>--public-900</code>), liens en blanc, page courante sur <code>--public-700</code></td>
+              </tr>
+              <tr>
+                <td><code>.fs-espace-prive</code></td>
+                <td>Formulaire de démarche, tableaux de bord usager et agent</td>
+                <td>Fond gris-lavande (<code>--prive-fond</code>), page courante soulignée en bleu (<code>--prive-bleu</code>)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fs-legende fs-mt-4">
+          Sans classe d'espace, la navigation garde son rendu neutre. Les autres teintes
+          des deux palettes (violet et gris pâle du public, vert et orange du privé) sont
+          livrées comme jetons sans être posées sur un composant&nbsp;: qui les emploie
+          reste tenu par la limite de cinq couleurs par écran (guide, § 2.2, point 6).
+        </p>
+      </div>
+
+      <div class="doc-bloc" id="enchainement">
+        <h3>Enchaînement des écrans</h3>
+        <p class="doc-bloc-note">
+          Le guide distingue deux manières de faire cheminer l'usager (guide, § 5.2.1).
+          Le choix ne relève pas du goût&nbsp;: il dépend de la tâche.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Conversation guidée ou libre selon le gabarit</caption>
+            <thead>
+              <tr><th>Conversation</th><th>Quand la choisir</th><th>Gabarits</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Guidée</td>
+                <td>Procédure imposée par la réglementation, saisie en grand nombre où le rendement prime. L'application fixe l'ordre des écrans.</td>
+                <td>Formulaire long en étapes, authentification</td>
+              </tr>
+              <tr>
+                <td>Libre</td>
+                <td>Consultation, sans procédure imposée&nbsp;; l'usager garde une vue d'ensemble de ce que propose la plateforme.</td>
+                <td>Portail, résultats de recherche, contenu institutionnel, fiche de démarche, tableaux de bord</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="fs-liste-puces fs-mesure fs-mt-6">
+          <li>La profondeur d'une plateforme se limite à trois niveaux, par exemple accueil, rubrique, démarche (guide, § 5.2.2). Au-delà, l'usager se perd&nbsp;; le fil d'Ariane ne compense pas une arborescence trop profonde.</li>
+          <li>Chaque écran est un compromis entre densité et nombre d'écrans (guide, § 4.4.1)&nbsp;: un écran trop chargé multiplie les erreurs et allonge la recherche d'une information, une information trop diluée fait perdre la vue d'ensemble. Le tableau de bord agent, consulté toute la journée, peut être dense&nbsp;; un parcours citoyen sur téléphone ne le peut pas.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc" id="disposition">
+        <h3>Disposition des éléments</h3>
+        <p class="doc-bloc-note">
+          Règles communes à la zone de contenu de tous les gabarits (guide, § 4.4.2).
+        </p>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Regrouper les données en rubriques selon les habitudes de l'usager&nbsp;: fréquence d'usage, ordre dans la tâche, importance (saisies obligatoires avant les facultatives). Le groupe le plus important selon ce critère vient en haut.</li>
+          <li>Aligner verticalement les champs et leurs libellés. La charte place le libellé au-dessus du champ, cadré à gauche, ce qui est le troisième cas prévu par le guide et le seul qui résiste à un écran étroit.</li>
+          <li>Donner un libellé à chaque donnée et un en-tête à chaque groupe de données.</li>
+          <li>Séparer les catégories d'informations par des espaces. Les encadrements s'emploient avec parcimonie&nbsp;: un groupe qui a déjà un en-tête n'a pas besoin d'un cadre en plus.</li>
+          <li>Ne jamais encadrer un groupe de boutons de commande.</li>
+        </ul>
       </div>
     </section>
 
@@ -61,7 +144,7 @@
           <div class="doc-maquette-contenu">
             <div class="fs-pile fs-pile--large">
 
-              <div style="padding: var(--espace-8) var(--espace-6); background: var(--vert-900); color:#fff; border-radius: var(--rayon-lg);">
+              <div style="padding: var(--espace-8) var(--espace-6); background: var(--public-900); color:#fff; border-radius: var(--rayon-lg);">
                 <h3 style="color:#fff; max-width: 20ch;">Effectuez vos démarches administratives en ligne</h3>
                 <div class="fs-recherche" style="max-width: 520px; margin-top: var(--espace-5);">
                   <input class="fs-saisie" type="search" aria-label="Rechercher une démarche" placeholder="Acte de naissance, passeport, casier judiciaire…">
@@ -99,6 +182,15 @@
                 </div>
               </div>
 
+              <div>
+                <h4>Contacts</h4>
+                <dl class="fs-definitions">
+                  <div><dt>Téléphone</dt><dd>Numéro vert, du lundi au vendredi</dd></div>
+                  <div><dt>Courriel</dt><dd>contact@eservices.gov.bf</dd></div>
+                  <div><dt>Accueil physique</dt><dd>Adresse et horaires du guichet</dd></div>
+                </dl>
+              </div>
+
             </div>
           </div>
         </div>
@@ -107,6 +199,8 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Règles</p>
             <ul>
+              <li>Les blocs suivent l'architecture du guide de la charte graphique des plateformes numériques (§ 3.1.1)&nbsp;: navigation principale, services, contacts, pied de page.</li>
+              <li>Le bouton de connexion à l'espace privé figure dans l'en-tête, à côté de la navigation horizontale vers les services (guide, § 1.2).</li>
               <li>La recherche occupe la zone haute et reste atteignable sans défilement sur mobile.</li>
               <li>Les démarches affichées en page d'accueil indiquent coût et délai.</li>
               <li>L'accès au compte usager et au suivi de dossier est visible dès l'accueil.</li>
@@ -562,6 +656,7 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Règles</p>
             <ul>
+              <li>Conversation guidée (guide, § 5.2.1)&nbsp;: la démarche impose un ordre et l'application le fixe. L'usager ne choisit pas l'ordre des étapes, mais il peut revenir sur une étape déjà faite.</li>
               <li>Une seule intention par étape, cinq étapes au maximum.</li>
               <li>Sauvegarde automatique à chaque changement d'étape.</li>
               <li>Récapitulatif modifiable avant validation définitive.</li>
@@ -598,14 +693,37 @@
             <span class="doc-maquette-url">https://eservices.gov.bf/mon-espace</span>
           </div>
           <div class="doc-maquette-contenu">
-            <div class="fs-pile fs-pile--large">
+            <div class="fs-espace-grille">
 
-              <div class="fs-rangee fs-rangee--entre">
-                <div>
-                  <h3 style="margin-bottom: var(--espace-1);">Bonjour</h3>
-                  <p class="fs-attenue" style="margin:0;">Dernière connexion le 19 septembre 2026</p>
+              <div class="fs-espace-ariane">
+                <nav class="fs-ariane" aria-label="Fil d'Ariane">
+                  <ol>
+                    <li><a href="#">Accueil</a></li>
+                    <li><span aria-current="page">Mon espace</span></li>
+                  </ol>
+                </nav>
+                <div class="fs-actions">
+                  <a class="fs-btn fs-btn--secondaire fs-btn--sm" href="#">Mes documents</a>
+                  <a class="fs-btn fs-btn--principal fs-btn--sm" href="#">Nouvelle démarche</a>
                 </div>
-                <a class="fs-btn fs-btn--principal" href="#">Nouvelle démarche</a>
+              </div>
+
+              <nav class="fs-espace-menu fs-sommaire" aria-label="Menu principal de l'espace">
+                <p class="fs-sommaire-titre">Mon espace</p>
+                <ul>
+                  <li><a href="#" aria-current="true">Tableau de bord</a></li>
+                  <li><a href="#">Mes demandes</a></li>
+                  <li><a href="#">Mes documents</a></li>
+                  <li><a href="#">Mes paiements</a></li>
+                  <li><a href="#">Mon profil</a></li>
+                </ul>
+              </nav>
+
+              <div class="fs-espace-contenu fs-pile fs-pile--large">
+
+              <div>
+                <h3 style="margin-bottom: var(--espace-1);">Bonjour</h3>
+                <p class="fs-attenue" style="margin:0;">Dernière connexion le 19 septembre 2026</p>
               </div>
 
               <div class="fs-encart fs-encart--alerte">
@@ -654,8 +772,32 @@
                 </div>
               </div>
 
+              </div>
+
+              <aside class="fs-espace-actions fs-pile" aria-label="Actions">
+                <div class="fs-carte">
+                  <div class="fs-carte-corps">
+                    <h4 class="fs-carte-titre">Actions</h4>
+                    <div class="fs-pile">
+                      <a class="fs-btn fs-btn--secondaire fs-btn--bloc" href="#">Transmettre une pièce</a>
+                      <a class="fs-btn fs-btn--secondaire fs-btn--bloc" href="#">Télécharger un récépissé</a>
+                      <a class="fs-btn fs-btn--tertiaire fs-btn--bloc" href="#">Signaler un problème</a>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+
             </div>
           </div>
+        </div>
+
+        <div class="doc-note fs-mt-6">
+          La disposition suit le guide de la charte graphique des plateformes numériques
+          (§ 3.1.2)&nbsp;: fil d'Ariane et commandes en haut, menu principal de l'espace à
+          gauche, contenus au centre, actions et traitements à droite. Elle s'obtient avec
+          <code>.fs-espace-grille</code> et ses quatre zones&nbsp;; sur écran étroit, les zones
+          s'empilent. La classe <code>.fs-espace-prive</code>, posée sur <code>&lt;body&gt;</code>,
+          donne à la navigation la couleur réservée à l'espace privé.
         </div>
       </div>
     </section>

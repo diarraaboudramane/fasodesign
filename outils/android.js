@@ -239,40 +239,41 @@ function themes() {
   </style>
 
   <!--
-    Les polices ne sont pas fournies ici : le paquet ne contient que
-    des woff2, que seul un navigateur sait lire. Archivo et Inter sont
-    sous licence SIL OFL ; on télécharge les fichiers .ttf depuis la
-    même source, on les place dans res/font, et on décosmmente les deux
-    lignes fontFamily ci-dessous.
+    Roboto, la police du texte courant, est celle du système Android :
+    il n'y a rien à ajouter. Montserrat, celle des titres, n'est pas
+    fournie ici : le paquet ne contient que des woff2, que seul un
+    navigateur sait lire. Elle est sous licence SIL OFL ; on télécharge
+    les fichiers .ttf depuis la même source, on les place dans res/font,
+    et on décommente les lignes fontFamily des titres ci-dessous.
   -->
   <style name="TextAppearance.Faso.H1" parent="TextAppearance.Material3.HeadlineLarge">
-    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <!-- <item name="fontFamily">@font/montserrat</item> -->
     <item name="android:textSize">@dimen/faso_taille_h1</item>
     <item name="android:textColor">@color/faso_texte</item>
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
   <style name="TextAppearance.Faso.H2" parent="TextAppearance.Material3.HeadlineMedium">
-    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <!-- <item name="fontFamily">@font/montserrat</item> -->
     <item name="android:textSize">@dimen/faso_taille_h2</item>
     <item name="android:textColor">@color/faso_texte</item>
     <item name="android:letterSpacing">-0.02</item>
   </style>
 
   <style name="TextAppearance.Faso.H3" parent="TextAppearance.Material3.TitleLarge">
-    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <!-- <item name="fontFamily">@font/montserrat</item> -->
     <item name="android:textSize">@dimen/faso_taille_h3</item>
     <item name="android:textColor">@color/faso_texte</item>
   </style>
 
   <style name="TextAppearance.Faso.Texte" parent="TextAppearance.Material3.BodyLarge">
-    <!-- <item name="fontFamily">@font/inter</item> -->
+    <item name="fontFamily">sans-serif</item>
     <item name="android:textSize">@dimen/faso_taille_md</item>
     <item name="android:textColor">@color/faso_texte</item>
   </style>
 
   <style name="TextAppearance.Faso.Legende" parent="TextAppearance.Material3.BodySmall">
-    <!-- <item name="fontFamily">@font/inter</item> -->
+    <item name="fontFamily">sans-serif</item>
     <item name="android:textSize">@dimen/faso_taille_sm</item>
     <item name="android:textColor">@color/faso_texte_faible</item>
   </style>
@@ -543,14 +544,14 @@ function marque(options) {
     '    android:height="' + hauteur + 'dp"\n' +
     '    android:viewportWidth="' + largeur + '"\n' +
     '    android:viewportHeight="' + hauteur + '">\n' +
-    '  <path android:fillColor="#E30613" android:pathData="' + moitie[0] + '" />\n' +
-    '  <path android:fillColor="#00843B" android:pathData="' + moitie[1] + '" />\n' +
+    '  <path android:fillColor="#EF2B2D" android:pathData="' + moitie[0] + '" />\n' +
+    '  <path android:fillColor="#009E49" android:pathData="' + moitie[1] + '" />\n' +
     '  <group\n' +
     '      android:translateX="' + n(x) + '"\n' +
     '      android:translateY="' + n(y) + '"\n' +
     '      android:scaleX="' + n(echelle) + '"\n' +
     '      android:scaleY="' + n(echelle) + '">\n' +
-    '    <path android:fillColor="#FFED00" android:pathData="' + etoile + '" />\n' +
+    '    <path android:fillColor="#FCD116" android:pathData="' + etoile + '" />\n' +
     '  </group>\n' +
     '</vector>\n';
 }

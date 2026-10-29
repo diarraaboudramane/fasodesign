@@ -9,14 +9,15 @@
   <dimen name="faso_taille_2xs">11sp</dimen>
   <dimen name="faso_taille_xs">12sp</dimen>
   <dimen name="faso_taille_sm">13sp</dimen>
-  <dimen name="faso_taille_md">15sp</dimen>
+  <dimen name="faso_taille_md">14sp</dimen>
+  <dimen name="faso_taille_menu">12sp</dimen>
   <dimen name="faso_taille_lg">17sp</dimen>
   <dimen name="faso_taille_h6">16sp</dimen>
   <dimen name="faso_taille_h5">19sp</dimen>
   <dimen name="faso_taille_h4">23sp</dimen>
   <dimen name="faso_taille_h3">29sp</dimen>
   <dimen name="faso_taille_h2">38sp</dimen>
-  <dimen name="faso_taille_h1">53sp</dimen>
+  <dimen name="faso_taille_h1">40sp</dimen>
   <dimen name="faso_espace_0">0dp</dimen>
   <dimen name="faso_espace_1">4dp</dimen>
   <dimen name="faso_espace_2">8dp</dimen>

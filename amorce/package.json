@@ -1,6 +1,6 @@
 {
   "name": "@govbf/create-charte-graphique",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Prépare un projet employant la charte graphique de l'administration burkinabè.",
   "homepage": "https://chartegraphique.gov.bf/",
   "repository": {

@@ -53,7 +53,7 @@
               </tr>
               <tr>
                 <td>Taille du corps de texte</td>
-                <td class="fs-tabulaire">15&nbsp;px minimum</td>
+                <td class="fs-tabulaire">14&nbsp;px, 12&nbsp;px pour la navigation (guide, §&nbsp;2.4.1.3)</td>
                 <td><span class="fs-badge fs-badge--succes">Système</span></td>
               </tr>
               <tr>
@@ -146,7 +146,7 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Mesuré</p>
             <ul>
-              <li><strong>118 couples de couleurs</strong> effectivement employés par
+              <li><strong>130 couples de couleurs</strong> effectivement employés par
                   <code>faso.css</code> (texte sur fond, variante de bouton, état
                   sémantique, contour de contrôle), calculés dans les deux thèmes,
                   transparences composées sur leur fond réel. Aucun sous le seuil.
@@ -206,12 +206,14 @@
               <tr><td>Texte 550 sur surface enfoncée</td><td>Légende dans un encadré</td><td><span data-contraste="#756d66/#f7f5f2"></span></td></tr>
               <tr><td>Bordure 450 sur blanc</td><td>Contour d'un champ, seuil de 3:1</td><td><span data-contraste="#8e867f/#ffffff"></span></td></tr>
               <tr><td>Bordure 450 sur surface enfoncée</td><td>Contour d'un champ désactivé</td><td><span data-contraste="#8e867f/#f7f5f2"></span></td></tr>
-              <tr><td>Blanc sur vert 500</td><td>Bouton principal</td><td><span data-contraste="#ffffff/#00843b"></span></td></tr>
-              <tr><td>Blanc sur rouge 500</td><td>Bouton de suppression</td><td><span data-contraste="#ffffff/#e30613"></span></td></tr>
-              <tr><td>Noir sur or 300</td><td>Bouton de mise en avant</td><td><span data-contraste="#211d1a/#ffed00"></span></td></tr>
-              <tr><td>Blanc sur or 300</td><td>Association interdite</td><td><span data-contraste="#ffffff/#ffed00"></span></td></tr>
+              <tr><td>Blanc sur vert 600</td><td>Bouton principal</td><td><span data-contraste="#ffffff/#007d3c"></span></td></tr>
+              <tr><td>Blanc sur rouge 600</td><td>Bouton de suppression</td><td><span data-contraste="#ffffff/#d41f1f"></span></td></tr>
+              <tr><td>Blanc sur vert 500</td><td>Réservé aux marques nationales, jamais sous un texte</td><td><span data-contraste="#ffffff/#009e49"></span></td></tr>
+              <tr><td>Blanc sur rouge 500</td><td>Réservé aux marques nationales, jamais sous un texte</td><td><span data-contraste="#ffffff/#ef2b2d"></span></td></tr>
+              <tr><td>Noir sur or 300</td><td>Bouton de mise en avant</td><td><span data-contraste="#211d1a/#fcd116"></span></td></tr>
+              <tr><td>Blanc sur or 300</td><td>Association interdite</td><td><span data-contraste="#ffffff/#fcd116"></span></td></tr>
               <tr><td>Vert 700 sur blanc</td><td>Lien dans le texte</td><td><span data-contraste="#045527/#ffffff"></span></td></tr>
-              <tr><td>Rouge 700 sur rouge 50</td><td>Message d'erreur</td><td><span data-contraste="#a2040e/#fff1f2"></span></td></tr>
+              <tr><td>Rouge 700 sur rouge 50</td><td>Message d'erreur</td><td><span data-contraste="#b01616/#fff1f1"></span></td></tr>
               <tr><td>Ocre 700 sur ocre 50</td><td>Message d'avertissement</td><td><span data-contraste="#7d5500/#fdf4e3"></span></td></tr>
             </tbody>
           </table>
@@ -220,7 +222,10 @@
         <div class="doc-note fs-mt-6">
           L'association du blanc sur l'or du drapeau est explicitement interdite&nbsp;:
           son rapport est très inférieur au seuil. C'est pour cela que le rôle
-          <code>--relief-texte</code> impose un texte sombre.
+          <code>--relief-texte</code> impose un texte sombre. Le rouge et le vert
+          officiels du drapeau (palier 500) n'atteignent pas non plus 4,5&nbsp;: 1 sous
+          un texte blanc. Ils restent aux marques nationales (drapeau, filet, repère,
+          emblème)&nbsp;; boutons, liens et messages emploient le palier 600.
         </div>
       </div>
     </section>
@@ -279,7 +284,7 @@
               </div>
               <div class="fs-modale-pied">
                 <button type="button" class="fs-btn fs-btn--tertiaire" data-ferme-modale>Fermer</button>
-                <button type="button" class="fs-btn fs-btn--principal" data-ferme-modale>J'ai compris</button>
+                <button type="button" class="fs-btn fs-btn--principal" data-ferme-modale>OK</button>
               </div>
             </dialog>
           </div>
@@ -376,7 +381,7 @@
                 <td>Polices</td>
                 <td class="fs-tabulaire">60 Ko</td>
                 <td class="fs-tabulaire">100 Ko</td>
-                <td>Deux familles au plus, hébergées localement, <code>font-display: swap</code> obligatoire. Le système s'établit à 81 Ko.</td>
+                <td>Deux familles au plus, hébergées localement, <code>font-display: swap</code> obligatoire. Le système s'établit à 79 Ko (Montserrat 37 Ko, Roboto 42 Ko).</td>
               </tr>
               <tr>
                 <td>Image, à l'unité</td>
@@ -407,24 +412,24 @@
           <p class="fs-graphe-note">Ces fichiers sont mis en cache&nbsp;: ils ne sont téléchargés qu'à la première visite.</p>
 
           <div class="fs-barres" data-max="100">
-            <div class="fs-barre" data-valeur="44.8">
+            <div class="fs-barre" data-valeur="44.7">
               <span class="fs-barre-libelle">Emblème <code>armoiries.svg</code></span>
-              <span class="fs-barre-valeur">44,8 Ko</span>
+              <span class="fs-barre-valeur">44,7 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s2" data-valeur="19.1">
+            <div class="fs-barre fs-barre--s2" data-valeur="20.6">
               <span class="fs-barre-libelle">Composants <code>faso.css</code></span>
-              <span class="fs-barre-valeur">19,1 Ko</span>
+              <span class="fs-barre-valeur">20,6 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s3" data-valeur="22.1">
+            <div class="fs-barre fs-barre--s3" data-valeur="24">
               <span class="fs-barre-libelle">Comportements <code>faso.js</code></span>
-              <span class="fs-barre-valeur">22,1 Ko</span>
+              <span class="fs-barre-valeur">24,0 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
-            <div class="fs-barre fs-barre--s4" data-valeur="6">
+            <div class="fs-barre fs-barre--s4" data-valeur="6.8">
               <span class="fs-barre-libelle">Jetons <code>tokens.css</code></span>
-              <span class="fs-barre-valeur">6,0 Ko</span>
+              <span class="fs-barre-valeur">6,8 Ko</span>
               <span class="fs-barre-piste"><span class="fs-barre-remplissage"></span></span>
             </div>
             <div class="fs-barre fs-barre--s5" data-valeur="2.9">
@@ -447,30 +452,30 @@
                   <tr><th>Fichier</th><th class="fs-num">Poids transféré</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>Emblème <code>armoiries.svg</code></td><td class="fs-num">44,8 Ko</td></tr>
-                  <tr><td>Composants <code>faso.css</code></td><td class="fs-num">19,1 Ko</td></tr>
-                  <tr><td>Comportements <code>faso.js</code></td><td class="fs-num">22,1 Ko</td></tr>
-                  <tr><td>Jetons <code>tokens.css</code></td><td class="fs-num">6,0 Ko</td></tr>
+                  <tr><td>Emblème <code>armoiries.svg</code></td><td class="fs-num">44,7 Ko</td></tr>
+                  <tr><td>Composants <code>faso.css</code></td><td class="fs-num">20,6 Ko</td></tr>
+                  <tr><td>Comportements <code>faso.js</code></td><td class="fs-num">24,0 Ko</td></tr>
+                  <tr><td>Jetons <code>tokens.css</code></td><td class="fs-num">6,8 Ko</td></tr>
                   <tr><td>Icônes <code>icones.css</code></td><td class="fs-num">2,9 Ko</td></tr>
                   <tr><td>Amorce <code>faso-amorce.js</code></td><td class="fs-num">0,6 Ko</td></tr>
-                  <tr><td><strong>Total</strong></td><td class="fs-num"><strong>95,5 Ko</strong></td></tr>
+                  <tr><td><strong>Total</strong></td><td class="fs-num"><strong>99,6 Ko</strong></td></tr>
                 </tbody>
               </table>
             </div>
           </details>
 
           <p class="fs-legende fs-mt-6">
-            Socle complet&nbsp;: <strong>95,5&nbsp;Ko</strong> transférés, auxquels s'ajoutent
-            <strong>81&nbsp;Ko</strong> de polices, servies depuis le domaine du service.
+            Socle complet&nbsp;: <strong>99,6&nbsp;Ko</strong> transférés, auxquels s'ajoutent
+            <strong>79&nbsp;Ko</strong> de polices, servies depuis le domaine du service.
             Avec le HTML d'une page, le total s'établit autour de
-            <strong>183&nbsp;Ko</strong> à la première visite, sous l'objectif de 250&nbsp;Ko
+            <strong>185&nbsp;Ko</strong> à la première visite, sous l'objectif de 250&nbsp;Ko
             pour une page complète. Aux visites suivantes, les polices et le socle
             viennent du cache.
           </p>
         </div>
 
         <div class="doc-note fs-mt-6">
-          L'emblème représente à lui seul la moitié du socle. C'est le prix d'un tracé
+          L'emblème représente à lui seul près de la moitié du socle. C'est le prix d'un tracé
           vectoriel fidèle. Il reste vingt fois plus léger que le raster dont il est
           issu, et il n'est téléchargé qu'une fois pour l'ensemble du service.
         </div>
@@ -523,11 +528,29 @@
         </ul>
       </div>
 
+      <div class="doc-bloc" id="vocabulaire">
+        <h3>Vocabulaire et libellés</h3>
+        <p class="doc-bloc-note">
+          Règles du guide pour tous les textes d'écran&nbsp;: libellés, titres de
+          colonne, en-têtes de groupe, messages (guide, §&nbsp;4.4.4).
+        </p>
+        <ul class="fs-liste-puces fs-mesure">
+          <li>Employer le vocabulaire du domaine de l'usager, pas celui de l'administration qui instruit&nbsp;: «&nbsp;acte de naissance&nbsp;» plutôt que l'intitulé du registre.</li>
+          <li>Choisir des termes explicites et sans ambiguïté, en phrases simples, à la forme affirmative&nbsp;: «&nbsp;Le fichier dépasse 5&nbsp;Mo&nbsp;» plutôt que «&nbsp;Le fichier n'est pas en dessous de la taille permise&nbsp;».</li>
+          <li>Indiquer l'unité de mesure, en abrégé si elle est connue de tous&nbsp;: <code>Montant (F CFA)</code>, <code>Surface (m²)</code>, <code>Poids maximal&nbsp;: 5&nbsp;Mo</code>.</li>
+          <li>Éviter les abréviations. Si la place manque, ne retenir que les plus répandues&nbsp;; pour un mot court, préférer la contraction (<code>Nbre</code> pour nombre), pour un mot long, la troncature (<code>Administr.</code> pour administration).</li>
+          <li>Ne pas employer de synonymes&nbsp;: un même objet ou une même action porte partout le même libellé. Si l'écran dit «&nbsp;demande&nbsp;», le courriel ne dit pas «&nbsp;dossier&nbsp;» et le bouton ne dit pas «&nbsp;requête&nbsp;».</li>
+          <li>Dans une liste, un libellé trop long pour sa ligne se tronque au milieu, avec des points de suspension, pour garder le début et la fin&nbsp;: <code>Certificat de … du casier judiciaire</code>. Quand seul le début discrimine les éléments, couper à la fin. La propriété CSS <code>text-overflow: ellipsis</code> ne coupe qu'à la fin&nbsp;: la troncature au milieu se prépare côté serveur, et le libellé complet reste disponible pour les lecteurs d'écran.</li>
+        </ul>
+      </div>
+
       <div class="doc-bloc">
         <h3>Messages d'erreur</h3>
         <p class="doc-bloc-note">
-          Un message d'erreur indique la correction attendue. Constater la faute sans
-          dire quoi faire laisse l'usager bloqué.
+          Un message d'erreur indique la correction attendue. Constater l'erreur sans
+          dire quoi faire laisse l'usager bloqué. Le ton reste concis et jamais
+          vexatoire&nbsp;: aucun message ne contient «&nbsp;faute&nbsp;», «&nbsp;mauvaise
+          manipulation&nbsp;» ni «&nbsp;illégal&nbsp;» (guide, §&nbsp;7.1.1, point&nbsp;7).
         </p>
 
         <div class="fs-tableau-cadre">
@@ -561,11 +584,114 @@
         </div>
       </div>
 
+      <div class="doc-bloc" id="messages-standard">
+        <h3>Messages standardisés</h3>
+        <p class="doc-bloc-note">
+          Le guide fixe la formulation des situations les plus courantes (guide,
+          §&nbsp;8.1.2). Les textes ci-dessous la reprennent, mise en typographie
+          française&nbsp;; les mentions entre crochets se remplacent par la valeur réelle.
+          Partout où le message accompagne un champ, il s'affiche sous ce champ, sans
+          bouton à acquitter&nbsp;: le bouton du guide ne sert que dans une boîte de
+          message.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Situations et messages standardisés</caption>
+            <thead>
+              <tr><th>Situation</th><th>Message</th><th>Boutons</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Recherche multicritère&nbsp;: trop de réponses pour les afficher</td>
+                <td>Trop de [éléments] ([nombre]) correspondent à votre sélection. Veuillez modifier vos critères de sélection.</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Recherche multicritère&nbsp;: aucune réponse</td>
+                <td>Aucun [élément] ne correspond à votre sélection. Veuillez modifier vos critères de sélection.</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Champ de longueur fixe mal rempli</td>
+                <td>Le [nom du champ] doit comporter au moins (ou au plus) [nombre] caractères [alphabétiques ou numériques]. Le format attendu est donné si nécessaire.</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Code inconnu</td>
+                <td>La valeur «&nbsp;[valeur saisie]&nbsp;» n'est pas une valeur de [catégorie].</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Champ obligatoire laissé vide</td>
+                <td>La saisie du [nom du champ] est obligatoire.</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Date au mauvais format</td>
+                <td>La date doit être saisie sous le format «&nbsp;jj/mm/aaaa&nbsp;».</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Nombre ou date hors des bornes</td>
+                <td>Le [nom du champ] doit être compris entre [minimum] et [maximum].</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Nombre ou date au-delà ou en deçà d'un seuil</td>
+                <td>Le [nom du champ] doit être inférieur (ou supérieur) à [seuil]. La date doit être antérieure (ou postérieure) au [date].</td>
+                <td>OK</td>
+              </tr>
+              <tr>
+                <td>Action à risque à confirmer</td>
+                <td>Souhaitez-vous vraiment [action]&nbsp;?</td>
+                <td>Continuer, Arrêter</td>
+              </tr>
+              <tr>
+                <td>Traitement en tâche de fond terminé</td>
+                <td>Le [nom de l'opération] est terminé.</td>
+                <td>OK</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fs-legende fs-mt-4">
+          Ces textes sont repris mot pour mot du guide, «&nbsp;Veuillez&nbsp;» compris&nbsp;: ils
+          sont faits pour être identiques d'une application à l'autre, et c'est la seule
+          exception à la règle de l'impératif direct énoncée plus haut. Pour une erreur de saisie, le texte du tableau «&nbsp;Messages d'erreur&nbsp;» va
+          plus loin que le message standard&nbsp;: il donne aussi la correction.
+        </p>
+      </div>
+
+      <div class="doc-bloc" id="boites-message">
+        <h3>Boutons des boîtes de message</h3>
+        <p class="doc-bloc-note">
+          Chaque type de message a ses boutons (guide, §&nbsp;7.1.2 à 7.1.5). Une boîte
+          de message porte un titre qui indique son origine, une icône à gauche du
+          texte et, s'il y en a un, l'identifiant du message en bas à droite
+          (guide, §&nbsp;7.1.1).
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Type</th><th>Emploi</th><th>Boutons, action par défaut en premier</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Information</td><td>Résultat d'une action sans risque</td><td>OK</td></tr>
+              <tr><td>Avertissement</td><td>Action qui peut s'avérer dangereuse&nbsp;; fenêtre modale si les conséquences sont graves</td><td>Annuler, Continuer, Aide</td></tr>
+              <tr><td>Confirmation</td><td>Obligatoire avant toute opération irréversible&nbsp;; toujours une question, toujours modale</td><td>Continuer, Arrêter (ou Annuler)</td></tr>
+              <tr><td>Blocage</td><td>Action irréalisable dans le contexte</td><td>OK</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       <div class="doc-bloc">
         <h3>Intitulés d'action</h3>
         <p class="doc-bloc-note">
           Un bouton décrit ce qu'il déclenche. Un usager qui ne lit que les boutons
-          doit comprendre la conséquence de son geste.
+          doit comprendre la conséquence de son geste. Le guide déconseille les
+          questions auxquelles on ne répond que par «&nbsp;Oui&nbsp;» ou «&nbsp;Non&nbsp;»
+          et préfère des verbes d'action (guide, §&nbsp;7.1.1, point&nbsp;3).
         </p>
 
         <div class="doc-usages">
@@ -583,11 +709,56 @@
             <ul>
               <li>Valider</li>
               <li>Oui</li>
-              <li>Continuer</li>
+              <li>Continuer, sur un bouton de formulaire ou d'étape</li>
               <li>Cliquez ici</li>
             </ul>
           </div>
         </div>
+
+        <div class="doc-note fs-mt-6">
+          <strong>«&nbsp;Continuer&nbsp;» et «&nbsp;Arrêter&nbsp;» ont leur place dans les
+          boîtes de confirmation et d'avertissement</strong>, où le guide les prévoit
+          (guide, §&nbsp;7.1.3 et 7.1.4)&nbsp;: la question posée par la boîte nomme
+          l'action, le bouton y répond. Partout ailleurs, sur un formulaire ou entre
+          deux étapes, le bouton nomme ce qu'il déclenche&nbsp;: «&nbsp;Passer au
+          paiement&nbsp;», pas «&nbsp;Continuer&nbsp;».
+        </div>
+      </div>
+
+      <div class="doc-bloc" id="temps-reponse">
+        <h3>Temps de réponse</h3>
+        <p class="doc-bloc-note">
+          Ce que l'usager perçoit selon la durée d'attente, et ce que l'interface lui
+          doit (guide, §&nbsp;7.2). Sur un réseau lent, les seuils sont franchis plus
+          souvent qu'on ne le croit.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Seuil</th><th>Au-delà, l'usager…</th><th>Réponse de l'interface</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="fs-tabulaire">0,1&nbsp;s</td><td>ne perçoit plus la réaction comme instantanée</td><td>Retour visuel immédiat sur l'élément actionné (état du bouton)</td></tr>
+              <tr><td class="fs-tabulaire">1&nbsp;s</td><td>a l'impression de ne plus contrôler le système</td><td>Pointeur d'attente&nbsp;: <code>aria-busy="true"</code> sur la zone en cours de traitement, ou sur <code>&lt;body&gt;</code> si plus rien n'est utilisable (guide, §&nbsp;7.1.6)</td></tr>
+              <tr><td class="fs-tabulaire">6&nbsp;s</td><td>a besoin de savoir où en est le traitement</td><td>Indicateur de progression <code>.fs-jauge</code>, avec le pourcentage ou le temps écoulé en texte</td></tr>
+              <tr><td class="fs-tabulaire">10&nbsp;s</td><td>n'est plus attentif à l'échange en cours</td><td>Indicateur de progression obligatoire, raison de l'attente affichée, message à la fin du traitement</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="fs-liste-puces fs-mesure fs-mt-6">
+          <li>Dire pourquoi l'usager attend&nbsp;: «&nbsp;Vérification de vos pièces auprès du registre&nbsp;» se supporte mieux qu'une roue qui tourne.</li>
+          <li>Si l'usager peut continuer à travailler, l'indicateur reste dans la page&nbsp;; s'il ne le peut pas, il s'affiche dans une fenêtre modale.</li>
+          <li>Un bouton «&nbsp;Annuler&nbsp;» ou «&nbsp;Arrêter&nbsp;» interrompt réellement le traitement et rend la main. Un bouton qui ne fait que masquer l'indicateur est proscrit.</li>
+        </ul>
+      </div>
+
+      <div class="doc-bloc" id="confidentialite">
+        <h3>Champs confidentiels</h3>
+        <p class="doc-bloc-note">
+          Les caractères saisis dans un champ confidentiel sont masqués (guide,
+          §&nbsp;7.3)&nbsp;: mot de passe, code secret de paiement. Le masquage s'obtient par <code>type="password"</code>&nbsp;; il
+          ne dispense ni du libellé ni de l'indication du format attendu.
+        </p>
       </div>
 
       <div class="doc-bloc">

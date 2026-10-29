@@ -1,0 +1,145 @@
+/* =============================================================
+   Charte graphique de l'administration burkinabè
+   icones.css — jeu d'icônes du système
+   Version 2.0
+
+   FICHIER GÉNÉRÉ. Chaque icône est un tracé SVG de 24 x 24 porté
+   par un data URI et appliqué en masque : la couleur vient de
+   currentColor, donc une icône hérite toujours de la couleur du
+   texte qui l'accompagne et suit le thème sans réglage.
+
+   Grille       : 24 x 24, zone utile 20 x 20
+   Trait        : 1,5 — extrémités et jonctions arrondies
+   Taille       : proportionnelle au texte (em), 4 paliers
+
+   Une icône est décorative : elle double toujours un libellé. Sur
+   un bouton réduit à une icône, le nom accessible est porté par
+   aria-label, jamais par l'icône elle-même.
+
+   Chaque tracé est d'abord déclaré comme variable --i-<nom>, puis
+   consommé par la classe correspondante. Un composant qui a besoin
+   d'une icône dans un pseudo-élément — où l'on ne peut pas ajouter
+   de classe — référence directement la variable.
+   ============================================================= */
+
+.fs-icone {
+  --icone-taille: 1.25em;
+  display: inline-block;
+  width: var(--icone-taille);
+  height: var(--icone-taille);
+  flex: none;
+  vertical-align: -0.22em;
+  background-color: currentColor;
+  -webkit-mask-image: var(--icone-forme);
+          mask-image: var(--icone-forme);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+          mask-position: center;
+  -webkit-mask-size: contain;
+          mask-size: contain;
+}
+
+/* Paliers de taille. L'unité em fait suivre l'icône au corps du
+   texte ; rem sert lorsqu'elle doit rester stable, par exemple
+   dans un état vide. */
+.fs-icone--sm { --icone-taille: 1em; }
+.fs-icone--lg { --icone-taille: 1.5em; }
+.fs-icone--xl { --icone-taille: 2rem; }
+.fs-icone--xxl { --icone-taille: 3rem; }
+
+/* Icône alignée sur la première ligne d'un bloc de texte */
+.fs-icone--tete { vertical-align: baseline; margin-top: 0.15em; }
+
+
+/* Tracés. Réutilisables par tout composant, y compris dans
+   un pseudo-élément où aucune classe ne peut être posée. */
+:root {
+  /* Navigation */
+  --i-recherche: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='M15.9 15.9 20.5 20.5'/%3E%3C/svg%3E");
+  --i-fermer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 6 18 18M18 6 6 18'/%3E%3C/svg%3E");
+  --i-menu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 7h16M4 12h16M4 17h16'/%3E%3C/svg%3E");
+  --i-chevron-bas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9.5 6 6 6-6'/%3E%3C/svg%3E");
+  --i-chevron-haut: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 14.5 6-6 6 6'/%3E%3C/svg%3E");
+  --i-chevron-droite: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9.5 6 6 6-6 6'/%3E%3C/svg%3E");
+  --i-chevron-gauche: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m14.5 6-6 6 6 6'/%3E%3C/svg%3E");
+  --i-fleche-droite: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16'/%3E%3Cpath d='m13.5 5.5 6.5 6.5-6.5 6.5'/%3E%3C/svg%3E");
+  --i-lien-externe: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 4h6v6'/%3E%3Cpath d='M20 4 11 13'/%3E%3Cpath d='M18 14.5V19a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 19V7.5A1.5 1.5 0 0 1 5 6h4.5'/%3E%3C/svg%3E");
+  --i-filtre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 5.5h17l-6.5 7.6v5.7l-4 2.2v-7.9z'/%3E%3C/svg%3E");
+  --i-trier: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4.5v15'/%3E%3Cpath d='m4 16.5 3 3 3-3'/%3E%3Cpath d='M17 19.5v-15'/%3E%3Cpath d='m14 7.5 3-3 3 3'/%3E%3C/svg%3E");
+  /* Démarches */
+  --i-document: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 3.5H6.5A1.5 1.5 0 0 0 5 5v14a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V8.5z'/%3E%3Cpath d='M14 3.5V8.5H19'/%3E%3Cpath d='M8.5 13.5h7M8.5 16.5h4.5'/%3E%3C/svg%3E");
+  --i-dossier: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 7A1.5 1.5 0 0 1 5 5.5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9.5v9A1.5 1.5 0 0 1 19 20H5a1.5 1.5 0 0 1-1.5-1.5z'/%3E%3C/svg%3E");
+  --i-telecharger: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.5v11'/%3E%3Cpath d='m7.5 10 4.5 4.5 4.5-4.5'/%3E%3Cpath d='M4 16.5V19a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-2.5'/%3E%3C/svg%3E");
+  --i-televerser: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 15.5v-11'/%3E%3Cpath d='m7.5 9 4.5-4.5 4.5 4.5'/%3E%3Cpath d='M4 16.5V19a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19v-2.5'/%3E%3C/svg%3E");
+  --i-imprimer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 9V3.5h10V9'/%3E%3Cpath d='M7 17.5H5.5A1.5 1.5 0 0 1 4 16v-5a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 20 11v5a1.5 1.5 0 0 1-1.5 1.5H17'/%3E%3Cpath d='M7 14h10v6.5H7z'/%3E%3C/svg%3E");
+  --i-calendrier: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3.5' y='5.5' width='17' height='15' rx='1.5'/%3E%3Cpath d='M3.5 10.5h17M8 3.5v4M16 3.5v4'/%3E%3C/svg%3E");
+  --i-horloge: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 7v5.3l3.5 2.2'/%3E%3C/svg%3E");
+  --i-paiement: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='6.5' width='19' height='11' rx='1.5'/%3E%3Ccircle cx='12' cy='12' r='2.5'/%3E%3Cpath d='M6 12h.01M18 12h.01'/%3E%3C/svg%3E");
+  /* Identité */
+  --i-carte-identite: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2.5' y='5' width='19' height='14' rx='1.5'/%3E%3Ccircle cx='8.5' cy='10.8' r='2'/%3E%3Cpath d='M5.2 15.8c.6-1.5 1.9-2.4 3.3-2.4s2.7.9 3.3 2.4'/%3E%3Cpath d='M15 10h4M15 13.5h4'/%3E%3C/svg%3E");
+  --i-utilisateur: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='8.5' r='3.75'/%3E%3Cpath d='M4.5 20c.8-3.8 3.9-6 7.5-6s6.7 2.2 7.5 6'/%3E%3C/svg%3E");
+  --i-institution: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 9.5 12 4l8.5 5.5'/%3E%3Cpath d='M6 9.5V18M10 9.5V18M14 9.5V18M18 9.5V18'/%3E%3Cpath d='M3.5 20.5h17'/%3E%3C/svg%3E");
+  --i-lieu: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z'/%3E%3Ccircle cx='12' cy='10' r='2.5'/%3E%3C/svg%3E");
+  --i-telephone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.4 4.5H5.6A1.6 1.6 0 0 0 4 6.2c0 7.9 6.4 14.3 14.3 14.3a1.6 1.6 0 0 0 1.6-1.6v-2.8l-4-1.4-2 2a13.2 13.2 0 0 1-5.4-5.4l2-2z'/%3E%3C/svg%3E");
+  --i-courriel: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5.5' width='18' height='13' rx='1.5'/%3E%3Cpath d='m3.5 7 8.5 6 8.5-6'/%3E%3C/svg%3E");
+  /* États */
+  --i-information: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M12 11.2v5.3M12 7.8h.01'/%3E%3C/svg%3E");
+  --i-succes: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='m8.3 12.2 2.6 2.6 5-5.3'/%3E%3C/svg%3E");
+  --i-alerte: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.7 4.2 2.9 17.4A1.5 1.5 0 0 0 4.2 19.7h15.6a1.5 1.5 0 0 0 1.3-2.3L13.3 4.2a1.5 1.5 0 0 0-2.6 0z'/%3E%3Cpath d='M12 9.5v4M12 16.6h.01'/%3E%3C/svg%3E");
+  --i-erreur: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='m9 9 6 6m0-6-6 6'/%3E%3C/svg%3E");
+  --i-coche: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4.5 12.8 5 5 10-11'/%3E%3C/svg%3E");
+  --i-aide: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='8.5'/%3E%3Cpath d='M9.6 9.6a2.5 2.5 0 0 1 4.9.4c0 1.7-2.5 2.2-2.5 3.6'/%3E%3Cpath d='M12 16.4h.01'/%3E%3C/svg%3E");
+  /* Confiance */
+  --i-cadenas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4.5' y='10' width='15' height='10.5' rx='1.5'/%3E%3Cpath d='M8 10V7.5a4 4 0 0 1 8 0V10'/%3E%3C/svg%3E");
+  --i-bouclier: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3.2 5 5.9v5.6c0 4.3 2.9 8.3 7 9.3 4.1-1 7-5 7-9.3V5.9z'/%3E%3Cpath d='m9.2 12.2 2 2 3.6-3.8'/%3E%3C/svg%3E");
+  --i-signalement: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.5 21V4'/%3E%3Cpath d='M5.5 4.8h12.2l-2 3.6 2 3.6H5.5z'/%3E%3C/svg%3E");
+  --i-oeil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+}
+
+/* Classes utilitaires */
+
+/* --- Navigation -------------------------------------------- */
+.fs-icone--recherche { --icone-forme: var(--i-recherche); }
+.fs-icone--fermer { --icone-forme: var(--i-fermer); }
+.fs-icone--menu { --icone-forme: var(--i-menu); }
+.fs-icone--chevron-bas { --icone-forme: var(--i-chevron-bas); }
+.fs-icone--chevron-haut { --icone-forme: var(--i-chevron-haut); }
+.fs-icone--chevron-droite { --icone-forme: var(--i-chevron-droite); }
+.fs-icone--chevron-gauche { --icone-forme: var(--i-chevron-gauche); }
+.fs-icone--fleche-droite { --icone-forme: var(--i-fleche-droite); }
+.fs-icone--lien-externe { --icone-forme: var(--i-lien-externe); }
+.fs-icone--filtre { --icone-forme: var(--i-filtre); }
+.fs-icone--trier { --icone-forme: var(--i-trier); }
+
+/* --- Démarches --------------------------------------------- */
+.fs-icone--document { --icone-forme: var(--i-document); }
+.fs-icone--dossier { --icone-forme: var(--i-dossier); }
+.fs-icone--telecharger { --icone-forme: var(--i-telecharger); }
+.fs-icone--televerser { --icone-forme: var(--i-televerser); }
+.fs-icone--imprimer { --icone-forme: var(--i-imprimer); }
+.fs-icone--calendrier { --icone-forme: var(--i-calendrier); }
+.fs-icone--horloge { --icone-forme: var(--i-horloge); }
+.fs-icone--paiement { --icone-forme: var(--i-paiement); }
+
+/* --- Identité ---------------------------------------------- */
+.fs-icone--carte-identite { --icone-forme: var(--i-carte-identite); }
+.fs-icone--utilisateur { --icone-forme: var(--i-utilisateur); }
+.fs-icone--institution { --icone-forme: var(--i-institution); }
+.fs-icone--lieu { --icone-forme: var(--i-lieu); }
+.fs-icone--telephone { --icone-forme: var(--i-telephone); }
+.fs-icone--courriel { --icone-forme: var(--i-courriel); }
+
+/* --- États ------------------------------------------------- */
+.fs-icone--information { --icone-forme: var(--i-information); }
+.fs-icone--succes { --icone-forme: var(--i-succes); }
+.fs-icone--alerte { --icone-forme: var(--i-alerte); }
+.fs-icone--erreur { --icone-forme: var(--i-erreur); }
+.fs-icone--coche { --icone-forme: var(--i-coche); }
+.fs-icone--aide { --icone-forme: var(--i-aide); }
+
+/* --- Confiance --------------------------------------------- */
+.fs-icone--cadenas { --icone-forme: var(--i-cadenas); }
+.fs-icone--bouclier { --icone-forme: var(--i-bouclier); }
+.fs-icone--signalement { --icone-forme: var(--i-signalement); }
+.fs-icone--oeil { --icone-forme: var(--i-oeil); }

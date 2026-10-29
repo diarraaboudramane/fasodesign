@@ -1,7 +1,7 @@
 /* =============================================================
    Charte graphique de l'administration burkinabè
    faso.js — comportements des composants
-   Version 2.0
+   Version 3.0
 
    Principes retenus :
    - aucune dépendance externe ;
@@ -2260,7 +2260,7 @@
     observer: observer,
     versCsv: versCsv,
     telechargerCsv: telechargerCsv,
-    version: "2.0.0",
+    version: "3.0.0",
 
     /* Les libellés produits par le script. À compléter, et non à
        remplacer : Object.assign(Faso.textes, { ... }). */

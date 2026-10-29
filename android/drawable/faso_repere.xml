@@ -10,13 +10,13 @@
     android:height="12dp"
     android:viewportWidth="52"
     android:viewportHeight="12">
-  <path android:fillColor="#E30613" android:pathData="M0,0h52v6h-52z" />
-  <path android:fillColor="#00843B" android:pathData="M0,6h52v6h-52z" />
+  <path android:fillColor="#EF2B2D" android:pathData="M0,0h52v6h-52z" />
+  <path android:fillColor="#009E49" android:pathData="M0,6h52v6h-52z" />
   <group
       android:translateX="23.48"
       android:translateY="3.606"
       android:scaleX="0.0504"
       android:scaleY="0.0504">
-    <path android:fillColor="#FFED00" android:pathData="M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z" />
+    <path android:fillColor="#FCD116" android:pathData="M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z" />
   </group>
 </vector>

@@ -5,7 +5,7 @@
   <section class="doc-heros">
     <div class="fs-conteneur">
       <div>
-        <span class="fs-surtitre">Version 2.0&nbsp;— Septembre 2026</span>
+        <span class="fs-surtitre">Version 3.0&nbsp;— Octobre 2026</span>
         <h1>Une identité commune pour tous les <span class="doc-accent">services numériques</span> de l'État</h1>
         <p class="fs-chapeau">
           Cette charte fixe les fondations visuelles, la bibliothèque de composants et
@@ -33,9 +33,9 @@
         <defs>
           <pattern id="tissage" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
             <rect width="26" height="26" fill="#fcfbf9"/>
-            <rect x="0" width="8" height="26" fill="#e30613"/>
-            <rect x="10" width="4" height="26" fill="#ffed00"/>
-            <rect x="16" width="8" height="26" fill="#00843b"/>
+            <rect x="0" width="8" height="26" fill="#ef2b2d"/>
+            <rect x="10" width="4" height="26" fill="#fcd116"/>
+            <rect x="16" width="8" height="26" fill="#009e49"/>
           </pattern>
           <clipPath id="carte">
             <rect x="96" y="60" width="328" height="400" rx="34"/>
@@ -50,11 +50,11 @@
 
         <g transform="rotate(5 260 260)" filter="url(#ombre)">
           <g clip-path="url(#carte)">
-            <rect x="96" y="60" width="328" height="200" fill="#e30613"/>
-            <rect x="96" y="260" width="328" height="200" fill="#00843b"/>
+            <rect x="96" y="60" width="328" height="200" fill="#ef2b2d"/>
+            <rect x="96" y="260" width="328" height="200" fill="#009e49"/>
           </g>
           <rect x="96" y="60" width="328" height="400" rx="34" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="2"/>
-          <polygon fill="#ffed00"
+          <polygon fill="#fcd116"
                    points="260,190 275.9,238.2 326.6,238.4 285.7,268.3 301.1,316.6 260,287 218.9,316.6 234.3,268.3 193.4,238.4 244.1,238.2"/>
         </g>
       </svg>
@@ -64,13 +64,11 @@
     </div>
   </section>
 
-  <div class="fs-tissage"></div>
-
   <section class="fs-fond-basse">
     <div class="fs-conteneur">
       <div class="doc-chiffres">
         <div>
-          <span class="doc-chiffre-valeur">65</span>
+          <span class="doc-chiffre-valeur">66</span>
           <span class="doc-chiffre-libelle">composants documentés</span>
         </div>
         <div>
@@ -296,6 +294,15 @@
           </ul>
 
           <p class="fs-mesure fs-mt-6">
+            La charte applique le «&nbsp;Guide pour la définition de la charte graphique
+            des plateformes numériques de l'administration publique&nbsp;» (MTDPCE,
+            version V1.0 du 10/08/2024)&nbsp;: couleurs officielles, Montserrat et
+            Roboto, palettes d'espace, structure des pages. Les points qu'elle
+            n'applique pas tels quels sont
+            <a href="{{ page('gouvernance') }}#ecarts-guide">listés et motivés dans la page Gouvernance</a>.
+          </p>
+
+          <p class="fs-mesure fs-mt-6">
             Toute la charte existe aussi en un seul fichier Markdown, pour les
             développeurs et les agents de code qui les assistent&nbsp;:
             <a href="{{ markdown() }}" download="{{ \App\Support\CharteMarkdown::nomFichier() }}">{{ \App\Support\CharteMarkdown::nomFichier() }}</a>.
@@ -327,7 +334,7 @@
                     Jetons du système
                     <span class="fs-poids">JSON&nbsp;— 14&nbsp;Ko</span>
                   </a>
-                  <br><span class="fs-faible">193 jetons, valeurs résolues et surcharges du thème sombre</span>
+                  <br><span class="fs-faible">202 jetons, valeurs résolues et surcharges du thème sombre</span>
                 </li>
                 <li style="margin-bottom: var(--espace-3);">
                   <a class="fs-lien-fichier" href="{{ ressource('assets/img/icones.svg') }}" download>

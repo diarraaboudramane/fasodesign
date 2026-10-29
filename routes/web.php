@@ -90,12 +90,12 @@ Route::get('{dossier}/{chemin}', [FichierController::class, 'dossier'])
     ->whereIn('dossier', config('charte.dossiers'))
     ->where('chemin', '.+');
 
-/* Les archives npm : npm install https://<serveur>/npm/govbf-charte-graphique-2.0.0.tgz */
+/* Les archives npm : npm install https://<serveur>/npm/govbf-charte-graphique-3.0.0.tgz */
 Route::get('npm/{nom}-{version}.tgz', [FichierController::class, 'paquet'])
     ->whereIn('nom', array_keys(PaquetNpm::PAQUETS))
     ->where('version', '\d+\.\d+\.\d+');
 
-/* La diffusion à adresse figée : /2.0.0/css/faso.css. */
+/* La diffusion à adresse figée : /3.0.0/css/faso.css. */
 Route::get('{version}/{type}/{chemin}', [FichierController::class, 'diffusion'])
     ->where('version', '\d+\.\d+\.\d+')
     ->whereIn('type', config('charte.diffusion'))

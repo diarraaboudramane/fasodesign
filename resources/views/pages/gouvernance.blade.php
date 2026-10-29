@@ -30,6 +30,106 @@
     </div>
 
     <!-- ===================================================== -->
+    <section class="doc-section" id="reference">
+      <h2>Référence normative</h2>
+      <p class="doc-section-intro">
+        La charte transpose au web et aux applications le guide officiel de
+        l'administration. En cas de désaccord entre cette documentation et le guide,
+        le guide fait foi, sauf sur les écarts listés plus bas, qui sont motivés.
+      </p>
+
+      <div class="doc-bloc">
+        <h3>Le texte de référence</h3>
+        <dl class="fs-definitions">
+          <div><dt>Titre</dt><dd>Guide pour la définition de la charte graphique des plateformes numériques de l'administration publique</dd></div>
+          <div><dt>Version</dt><dd>V1.0 du 10/08/2024</dd></div>
+          <div><dt>Auteur</dt><dd>Comité de suivi de la dématérialisation des procédures administratives</dd></div>
+          <div><dt>Émetteur</dt><dd>Ministère de la Transition digitale, des Postes et des Communications électroniques (MTDPCE), Secrétariat général, Direction générale de la transformation digitale (MTDPCE/SG/DGTD)</dd></div>
+        </dl>
+        <p class="fs-legende fs-mt-4">
+          La documentation le cite sous la forme «&nbsp;(guide, §&nbsp;x.y)&nbsp;», avec le
+          numéro de paragraphe du guide.
+        </p>
+      </div>
+
+      <div class="doc-bloc" id="ecarts-guide">
+        <h3>Écarts assumés avec le guide</h3>
+        <p class="doc-bloc-note">
+          Les points ci-dessous ne sont pas appliqués tels que le guide les écrit,
+          soit parce qu'un texte plus récent les a remplacés, soit parce qu'ils
+          décrivent une application de bureau et ne se transposent pas au web sans
+          dégrader l'usage. Chaque écart est motivé&nbsp;; aucun autre n'est admis
+          sans passer par la <a href="#derogations">procédure de dérogation</a>.
+        </p>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <caption>Points du guide dépassés ou non transposables</caption>
+            <thead>
+              <tr><th>Point du guide</th><th>Ce que fait la charte</th><th>Raison</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Devise «&nbsp;Unité-Progrès-Justice&nbsp;» (en-tête du guide)</td>
+                <td>La charte et l'emblème portent «&nbsp;La Patrie ou la Mort, nous Vaincrons&nbsp;».</td>
+                <td>Devise remplacée par la loi constitutionnelle n°&nbsp;033-2024/ALT du 29&nbsp;octobre 2024, postérieure au guide&nbsp;; la loi sur les armoiries a été révisée ensuite.</td>
+              </tr>
+              <tr>
+                <td>Site «&nbsp;www.mdenp.gov.bf&nbsp;» (pied du guide)</td>
+                <td>Non repris.</td>
+                <td>Ancienne dénomination du ministère, aujourd'hui MTDPCE.</td>
+              </tr>
+              <tr>
+                <td>Format GIF pour les logos et pictogrammes (§&nbsp;4.3)</td>
+                <td>SVG pour les logos et pictogrammes, PNG en repli&nbsp;; JPEG de qualité voisine de 75&nbsp;% pour les photographies, WebP admis à sa place.</td>
+                <td>Le SVG est vectoriel, net à toute taille et plus léger, ce que le guide préconise lui-même pour les icônes (§&nbsp;4.1). Le GIF est limité à 256 couleurs et n'apporte rien que le PNG ne fasse mieux.</td>
+              </tr>
+              <tr>
+                <td>Résolution de 72&nbsp;dpi (§&nbsp;4.3)</td>
+                <td>Dimensions en pixels&nbsp;: l'image servie a la taille à laquelle elle s'affiche, double densité au plus.</td>
+                <td>La résolution déclarée dans un fichier est sans effet sur un écran&nbsp;; seules les dimensions en pixels comptent.</td>
+              </tr>
+              <tr>
+                <td>«&nbsp;Continuer&nbsp;» comme bouton par défaut de toute confirmation (§&nbsp;7.1.4)</td>
+                <td>Appliqué, sauf pour une suppression ou une autre action destructrice&nbsp;: le focus s'ouvre alors sur la fermeture, et l'action se déclenche seulement si l'usager la choisit.</td>
+                <td>Une touche Entrée pressée par réflexe ne doit pas détruire de données&nbsp;; c'est aussi la recommandation des pratiques d'accessibilité des fenêtres modales.</td>
+              </tr>
+              <tr>
+                <td>Touche Entrée équivalente à la tabulation (§&nbsp;5.1.2, point&nbsp;3)</td>
+                <td>Non appliqué&nbsp;: Entrée garde son rôle natif, qui est de soumettre un formulaire ou d'activer un bouton.</td>
+                <td>Détourner Entrée rompt la convention des navigateurs et désoriente les usagers du clavier et des lecteurs d'écran.</td>
+              </tr>
+              <tr>
+                <td>Tabulation en boucle sur toute la fenêtre (§&nbsp;5.1.2)</td>
+                <td>Boucle appliquée dans les fenêtres modales et le panneau latéral&nbsp;; sur la page, le navigateur gère la sortie vers sa propre interface.</td>
+                <td>Enfermer le focus dans une page empêche d'atteindre la barre d'adresse et les outils du navigateur.</td>
+              </tr>
+              <tr>
+                <td>Signal sonore (§&nbsp;7.2.3)</td>
+                <td>Non employé.</td>
+                <td>Le guide en déconseille déjà l'usage intensif. Sur le web, un son non sollicité gêne les lecteurs d'écran et les usagers en lieu public&nbsp;; l'information passe par le texte et les zones d'annonce.</td>
+              </tr>
+              <tr>
+                <td>Icônes Font Awesome ou Icones8 (§&nbsp;4.1)</td>
+                <td>Jeu propre de 35 icônes vectorielles, servi depuis le domaine du service.</td>
+                <td>Le guide les cite comme suggestion. Une bibliothèque tierce ajoute une dépendance et du poids&nbsp;; les principes du guide (icônes explicites, une icône pour un seul concept) s'appliquent au jeu de la charte.</td>
+              </tr>
+              <tr>
+                <td>Barre d'état, curseur en sablier, menus système (§&nbsp;7.1.6, §&nbsp;7.2.2, §&nbsp;8.2.2)</td>
+                <td>Transposés&nbsp;: indicateur de progression et message dans la page, pointeur d'attente sur <code>[aria-busy="true"]</code>, aide contextuelle au focus et au survol.</td>
+                <td>Vocabulaire d'application de bureau&nbsp;: une page web n'a ni barre d'état ni menu système à elle.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="fs-legende fs-mt-4">
+          Les tailles de 12&nbsp;px pour les liens de navigation et les menus
+          (§&nbsp;2.4.1.3) sont, elles, appliquées comme le guide le demande&nbsp;; la
+          cible tactile de 44&nbsp;px est conservée autour de ces liens.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================================== -->
     <section class="doc-section" id="roles">
       <h2>Rôles et responsabilités</h2>
       <p class="doc-section-intro">
@@ -640,6 +740,107 @@
         Chaque version publiée est consignée ici. Les ruptures sont listées en premier,
         parce que ce sont les seules qui demandent du travail aux projets.
       </p>
+
+      <div class="doc-bloc" id="journal-3-0">
+        <h3>3.0&nbsp;— octobre 2026&nbsp;: mise en conformité avec le guide</h3>
+        <p class="doc-bloc-note">
+          Alignement sur le <a href="#reference">guide officiel du 10/08/2024</a>.
+          Version majeure&nbsp;: le remplacement des fichiers de police, le corps de
+          texte à 14&nbsp;px et le registre d'information passé au gris changent
+          l'apparence des services sans qu'ils aient rien modifié. Les écarts
+          maintenus avec le guide sont <a href="#ecarts-guide">listés et motivés</a>.
+        </p>
+        <p class="doc-bloc-note">
+          Elle arrive un mois après la 2.0, contre la règle d'une version majeure par
+          an annoncée six mois à l'avance&nbsp;: le guide est le texte de référence de
+          l'administration, et une charte qui s'en écarte n'a pas à attendre pour
+          s'y conformer. La contrepartie est que la 2.0.0 reste servie, gelée,
+          aussi longtemps que des services l'emploient&nbsp;: <code>/2.0.0/…</code> et
+          l'archive npm 2.0.0 répondent comme avant.
+        </p>
+
+        <h4 class="fs-mt-6">Ruptures</h4>
+        <div class="fs-tableau-cadre">
+          <table class="fs-tableau">
+            <thead>
+              <tr><th>Objet</th><th>Avant</th><th>Après</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Couleurs du drapeau (guide, §&nbsp;2.1.2)</td>
+                <td>Rouge <code>#e30613</code>, or <code>#ffed00</code>, vert <code>#00843b</code></td>
+                <td>Rouge <code>#ef2b2d</code>, jaune <code>#fcd116</code>, vert <code>#009e49</code>, valeurs du guide. Échelles de dix paliers recalculées autour d'elles. Le guide écrit <code>#EF2B2B</code> pour le rouge mais RVB&nbsp;239/43/45&nbsp;: c'est le triplet RVB qui est retenu</td>
+              </tr>
+              <tr>
+                <td><code>--action</code>, <code>--accent</code>, <code>--danger</code></td>
+                <td>Palier 500, celui du drapeau</td>
+                <td>Palier 600 (<code>#007d3c</code>, <code>#d41f1f</code>)&nbsp;: le rouge et le vert officiels n'atteignent pas 4,5:1 sous un texte blanc. Le palier 500 reste aux marques nationales</td>
+              </tr>
+              <tr>
+                <td>Polices (guide, §&nbsp;2.4)</td>
+                <td>Archivo pour les titres, Inter pour le texte</td>
+                <td>Montserrat pour les grands titres et les boutons d'action, Roboto pour le texte courant, les libellés, la navigation, les onglets et les en-têtes de tableau</td>
+              </tr>
+              <tr>
+                <td>Fichiers de police</td>
+                <td><code>archivo.woff2</code>, <code>inter.woff2</code> et leurs licences</td>
+                <td><code>montserrat.woff2</code>, <code>roboto.woff2</code>, <code>montserrat-OFL.txt</code>, <code>roboto-OFL.txt</code>. Un projet qui référençait les anciens fichiers doit mettre à jour ses chemins</td>
+              </tr>
+              <tr>
+                <td>Tailles (guide, §&nbsp;2.4.1.3)</td>
+                <td>Corps de texte à 15&nbsp;px, grand titre jusqu'à 53&nbsp;px</td>
+                <td>Corps à 14&nbsp;px (<code>--taille-md</code>), liens de navigation et menus à 12&nbsp;px (nouveau jeton <code>--taille-menu</code>), grand titre plafonné à 2,5&nbsp;rem</td>
+              </tr>
+              <tr>
+                <td>Capitales et italique (guide, §&nbsp;2.4)</td>
+                <td>Surtitres, en-têtes de tableau, étiquettes, titres de pied de page et étapes en capitales automatiques&nbsp;; devise en italique</td>
+                <td>Majuscule à l'initiale seulement, plus d'italique. Seul «&nbsp;BURKINA FASO&nbsp;» du bloc-marque reste en capitales, comme sur l'emblème</td>
+              </tr>
+              <tr>
+                <td>Logo du bloc-marque (guide, §&nbsp;2.1.1)</td>
+                <td>56&nbsp;px de haut</td>
+                <td>Cadre de 76&nbsp;×&nbsp;80&nbsp;px, à 9&nbsp;px du haut de page&nbsp;; 44&nbsp;px de haut sous 640&nbsp;px de large</td>
+              </tr>
+              <tr>
+                <td>Bandeau officiel <code>.fs-officiel</code></td>
+                <td>Fond vert foncé</td>
+                <td>Fond bleu nuit (<code>--public-900</code>)&nbsp;: le guide écarte le rouge, le jaune et le vert des fonds (§&nbsp;2.2)</td>
+              </tr>
+              <tr>
+                <td>Séries de graphiques</td>
+                <td>Or en deuxième série, bleu en sixième</td>
+                <td>Ni jaune ni bleu, dont les associations avec le vert et le rouge sont proscrites (§&nbsp;2.2, point&nbsp;2)&nbsp;: vert, gris, rouge foncé, gris foncé, vert clair, rouge clair</td>
+              </tr>
+              <tr>
+                <td>Registre d'information <code>--info-*</code></td>
+                <td>Bleu</td>
+                <td>Gris&nbsp;: il voisine avec le rouge des erreurs dans les listes d'états (§&nbsp;2.2, point&nbsp;2)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="fs-mt-8">Ajouts</h4>
+        <ul class="fs-liste-puces fs-mesure">
+          <li><strong>Palettes d'espace</strong> (guide, §&nbsp;2.2, point&nbsp;8)&nbsp;: jetons <code>--public-*</code> et <code>--prive-*</code>, classes <code>.fs-espace-public</code> et <code>.fs-espace-prive</code> qui donnent à la navigation la couleur de l'espace.</li>
+          <li><strong>Tableaux défilants</strong> (guide, §&nbsp;4.4.3)&nbsp;: <code>.fs-tableau-cadre--defilant</code>, en-têtes de colonnes figés en défilement vertical, en-têtes de lignes figés en défilement horizontal.</li>
+          <li><strong>Onglets</strong> (guide, §&nbsp;4.4.5)&nbsp;: une seule rangée, languettes accolées et alignées à gauche, libellés centrés sur une ligne.</li>
+          <li><strong>Pointeur d'attente</strong> (guide, §&nbsp;7.1.6)&nbsp;: <code>[aria-busy="true"]</code> affiche le pointeur «&nbsp;en cours&nbsp;», <code>body[aria-busy="true"]</code> le pointeur d'attente.</li>
+          <li><strong>Gabarits</strong>&nbsp;: bloc Contacts du portail dans l'ordre du guide (§&nbsp;3.1.1)&nbsp;; disposition de l'espace privé par <code>.fs-espace-grille</code> (§&nbsp;3.1.2)&nbsp;; règles d'enchaînement, de profondeur, de densité et de disposition.</li>
+          <li><strong>Rédaction</strong>&nbsp;: messages standardisés du guide (§&nbsp;8.1.2), boutons propres à chaque type de message, temps de réponse et indicateur de progression (§&nbsp;7.2).</li>
+          <li><strong>Champs en lecture seule</strong> sur fond gris (§&nbsp;2.2, point&nbsp;3, et §&nbsp;6.1.1).</li>
+          <li><strong>Versions gelées</strong>&nbsp;: une version antérieure reste servie depuis <code>archives/&lt;version&gt;/</code>, à son adresse figée comme en archive npm.</li>
+        </ul>
+
+        <h4 class="fs-mt-8">Passer de la 2.0 à la 3.0</h4>
+        <ol class="fs-liste-puces fs-mesure">
+          <li>Remplacer <code>2.0.0</code> par <code>3.0.0</code> dans les adresses des feuilles et du script, ou mettre à jour la dépendance <code>@govbf/charte-graphique</code>.</li>
+          <li>Si le projet sert lui-même les polices, remplacer <code>archivo.woff2</code> et <code>inter.woff2</code> par <code>montserrat.woff2</code> et <code>roboto.woff2</code>, avec leurs licences. Un projet qui charge <code>tokens.css</code> tel quel n'a rien à faire.</li>
+          <li>Rechercher dans les feuilles du projet les couleurs du drapeau écrites en dur (<code>#e30613</code>, <code>#00843b</code>, <code>#ffed00</code>) et les remplacer par les jetons.</li>
+          <li>Relire les écrans denses&nbsp;: le corps passe de 15 à 14&nbsp;px et les menus à 12&nbsp;px. Les cibles tactiles restent de 44&nbsp;px.</li>
+          <li>Poser <code>class="fs-espace-public"</code> ou <code>class="fs-espace-prive"</code> sur <code>&lt;body&gt;</code> selon l'espace.</li>
+        </ol>
+      </div>
 
       <div class="doc-bloc">
         <h3>2.0&nbsp;— septembre 2026</h3>

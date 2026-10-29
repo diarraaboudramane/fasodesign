@@ -46,9 +46,9 @@ const SOURCE = path.join(IMG, "armoiries.svg");
    gris pour deux couleurs, et l'écu perdrait son drapeau. On les
    sépare franchement, du plus sombre au plus clair. */
 const TONS_NATIONAUX = {
-  "#e30613": "#4f4f4f",   // rouge
-  "#00843b": "#8c8c8c",   // vert
-  "#ffed00": "#e9e9e9",   // or
+  "#ef2b2d": "#4f4f4f",   // rouge
+  "#009e49": "#8c8c8c",   // vert
+  "#fcd116": "#e9e9e9",   // or
 };
 
 function luminance(hex) {
@@ -111,10 +111,10 @@ function favicon() {
     "  <!-- Icone de l'administration burkinabe.\n" +
     "       Le drapeau, rouge au-dessus, vert au-dessous, etoile centree.\n" +
     "       Produit par outils/embleme.js. -->\n" +
-    '  <rect width="32" height="16" fill="#e30613"/>\n' +
-    '  <rect y="16" width="32" height="16" fill="#00843b"/>\n' +
+    '  <rect width="32" height="16" fill="#ef2b2d"/>\n' +
+    '  <rect y="16" width="32" height="16" fill="#009e49"/>\n' +
     '  <g transform="translate(' + n(x) + "," + n(y) + ") scale(" + n(e) + ')">\n' +
-    '    <path fill="#ffed00" d="' + etoile + '"/>\n' +
+    '    <path fill="#fcd116" d="' + etoile + '"/>\n' +
     "  </g>\n" +
     "</svg>\n";
 }

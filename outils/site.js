@@ -20,7 +20,7 @@
  *   Il double les ressources sous un dossier au numéro de version.
  *   Un service peut ainsi écrire une adresse figée :
  *
- *     https://chartegraphique.gov.bf/2.0.0/css/faso.css
+ *     https://chartegraphique.gov.bf/3.0.0/css/faso.css
  *
  *   Une correction sort sous un nouveau numéro et ne réécrit jamais
  *   l'ancien : un service ne change pas d'apparence du jour au
@@ -105,17 +105,29 @@ copier(path.join(RACINE, "hebergement", "robots.txt"),
 
 /* ------------------------------------------- la diffusion versionnée */
 
-const versionne = path.join(SORTIE, VERSION);
-for (const d of ["css", "js", "img", "polices"]) {
-  const source = path.join(RACINE, "assets", d);
-  if (fs.existsSync(source)) copier(source, path.join(versionne, d));
+/* La version courante vient de assets/, chaque version antérieure de sa
+   copie gelée dans archives/<version>/ : un service resté sur une
+   ancienne version garde ses adresses. */
+const versions = [[VERSION, path.join(RACINE, "assets")]];
+for (const d of fs.readdirSync(path.join(RACINE, "archives"))) {
+  if (/^\d+\.\d+\.\d+$/.test(d) && d !== VERSION) {
+    versions.push([d, path.join(RACINE, "archives", d, "assets")]);
+  }
 }
 
-/* L'outillage de la documentation n'a rien à faire dans une adresse
-   qu'un service mettra en production. */
-for (const inutile of ["docs.css", "docs.js", "audience.js"]) {
-  const p = path.join(versionne, inutile.endsWith(".css") ? "css" : "js", inutile);
-  if (fs.existsSync(p)) fs.rmSync(p);
+for (const [numero, assets] of versions) {
+  const versionne = path.join(SORTIE, numero);
+  for (const d of ["css", "js", "img", "polices"]) {
+    const source = path.join(assets, d);
+    if (fs.existsSync(source)) copier(source, path.join(versionne, d));
+  }
+
+  /* L'outillage de la documentation n'a rien à faire dans une adresse
+     qu'un service mettra en production. */
+  for (const inutile of ["docs.css", "docs.js", "audience.js"]) {
+    const p = path.join(versionne, inutile.endsWith(".css") ? "css" : "js", inutile);
+    if (fs.existsSync(p)) fs.rmSync(p);
+  }
 }
 
 /* ------------------------------------------------------ le plan */
@@ -174,5 +186,5 @@ const total = compter(SORTIE);
 console.log("  site construit : " + total.n + " fichiers, " + total.ko + " Ko");
 console.log("    " + SORTIE);
 console.log("    " + pages.length + " pages de documentation");
-console.log("    diffusion figee sous /" + VERSION + "/");
+console.log("    diffusion figee sous " + versions.map((v) => "/" + v[0] + "/").join(", "));
 console.log("    .htaccess, robots.txt et sitemap.xml a la racine");

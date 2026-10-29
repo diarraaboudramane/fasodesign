@@ -6,7 +6,7 @@
 <div class="doc-barre">
   <a class="doc-menu-marque" href="{{ page('index') }}">
     <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="">
-    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+    <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v3.0</span></span>
   </a>
   <button type="button" class="fs-btn fs-btn--tertiaire fs-btn--sm" data-bascule="doc-menu" aria-expanded="false" aria-controls="doc-menu">Sommaire</button>
 </div>
@@ -16,7 +16,7 @@
   <nav class="doc-menu" id="doc-menu" aria-label="Navigation de la documentation">
     <a class="doc-menu-marque" href="{{ page('index') }}">
       <img src="{{ ressource('assets/img/armoiries.svg') }}" alt="">
-      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v2.0</span></span>
+      <span><span class="doc-nom">Charte graphique</span><span class="doc-version">Burkina Faso&nbsp;— v3.0</span></span>
     </a>
 
     <div class="doc-menu-groupe">

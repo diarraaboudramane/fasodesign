@@ -1,10 +1,18 @@
 # Charte graphique de l'administration burkinabè
 
 Système de conception des services numériques de l'État burkinabè : jetons,
-composants CSS, comportements sans dépendance, gabarits institutionnels.
+composants CSS, comportements JavaScript, gabarits institutionnels.
 
-Sans dépendance, sans étape de compilation. Les fichiers se servent tels quels
-ou s'installent comme une dépendance ordinaire.
+Aucune dépendance, aucune étape de compilation. Les fichiers se servent tels
+quels ou s'installent comme n'importe quel paquet npm.
+
+La charte applique le « Guide pour la définition de la charte graphique des
+plateformes numériques de l'administration publique » (MTDPCE/SG/DGTD,
+version V1.0 du 10/08/2024) : couleurs officielles du drapeau, Montserrat pour
+les titres et les boutons d'action, Roboto pour le texte, palettes réservées
+aux espaces public et privé, structure des pages. Les points du guide qu'elle
+n'applique pas tels quels sont listés et motivés dans la page Gouvernance de
+la documentation, section « Écarts assumés avec le guide ».
 
 ---
 
@@ -14,7 +22,7 @@ Pour un projet qui démarre, une commande écrit les fichiers de départ et
 installe la charte :
 
 ```bash
-npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
+npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz
 ```
 
 Elle demande le dossier, le type de projet — `statique`, `react`, `angular` ou
@@ -22,7 +30,7 @@ Elle demande le dossier, le type de projet — `statique`, `react`, `angular` ou
 donner sur la ligne de commande :
 
 ```bash
-npx --yes https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz \
+npx --yes https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz \
   mon-service --type=react --oui
 ```
 
@@ -33,7 +41,7 @@ quoi que ce soit. Sur une chaîne d'intégration, `CHARTE_ACCEPTE_LICENCE=oui`.
 Pour un projet déjà commencé :
 
 ```bash
-npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-2.0.0.tgz
+npm install https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-charte-graphique-3.0.0.tgz
 ```
 
 L'espace de noms `@govbf` n'est encore sur aucun registre : les deux archives
@@ -73,8 +81,8 @@ puisent leurs repères dans `icones.css`.
 | Chemin | Contenu |
 | --- | --- |
 | `@govbf/charte-graphique` | Comportements, avec leurs déclarations TypeScript |
-| `…/css/tokens.css` | 193 jetons, thèmes clair et sombre, déclarations de polices |
-| `…/css/faso.css` | 65 composants |
+| `…/css/tokens.css` | 202 jetons, thèmes clair et sombre, déclarations de polices |
+| `…/css/faso.css` | 66 composants |
 | `…/css/icones.css` | 35 icônes, appliquées en masque CSS |
 | `…/amorce` | Pose le thème retenu avant le premier rendu |
 | `…/jetons.json` | Les jetons, valeurs résolues, pour les outils de conception |
@@ -84,7 +92,7 @@ puisent leurs repères dans `icones.css`.
 | `…/img/armoiries-gris.svg` | Impression en une seule encre, photocopie |
 | `…/img/armoiries-512.png` … `-64.png` | Bureautique, courriel, icône d'application |
 | `…/img/favicon.svg` | Mini format, 16 px et en dessous : le drapeau et son étoile |
-| `…/polices/*` | Archivo et Inter, variables, sous-ensemble latin, licences comprises |
+| `…/polices/*` | Montserrat et Roboto, variables, sous-ensemble latin, licences comprises (`montserrat.woff2`, `roboto.woff2`, `montserrat-OFL.txt`, `roboto-OFL.txt`) |
 | `…/android/*` | Ressources Android produites depuis les mêmes jetons |
 
 ---
@@ -131,7 +139,7 @@ Trois points sont propres à un environnement :
 
 ## Accessibilité
 
-Le niveau visé est WCAG 2.1 AA. Les 118 couples de couleurs effectivement
+Le niveau visé est WCAG 2.1 AA. Les 130 couples de couleurs effectivement
 employés par la feuille de styles passent leur seuil dans les deux thèmes, et
 c'est vérifié par `npm test`.
 
@@ -146,10 +154,10 @@ mesure sur les points listés », et non « conforme ».
 
 Le paquet npm ne change pas : il ne contient ni PHP ni Laravel. C'est le site
 de documentation qui est une application Laravel 13 (PHP 8.3 ou plus), sans
-base de données. À la première visite, une case reCAPTCHA est demandée avant
-toute page ; les pages ne posent ensuite aucun autre cookie que celui qui retient
-cette vérification. Seules les pages `/contact` et `/verification` ouvrent une
-session.
+base de données. Une case reCAPTCHA peut être demandée avant toute page (voir
+plus bas ; elle est coupée pour l'instant sur le serveur de test). Les pages ne
+posent aucun autre cookie que celui qui retient cette vérification, et seules
+`/contact` et `/verification` ouvrent une session.
 
 ```bash
 composer install
@@ -162,9 +170,9 @@ php artisan serve          # http://localhost:8000
 | `config/charte.php` | La liste des pages : routes, menus, plan du site et export en sont tirés |
 | `resources/views/pages/` | Le contenu de chaque page, en Blade |
 | `resources/views/layouts/` | En-tête, menus et pied, communs à toutes les pages |
-| `app/Http/Controllers/FichierController.php` | Sert `assets/`, `archives/`, `android/` et la diffusion figée `/2.0.0/…` depuis le dépôt, sans copie dans `public/` |
+| `app/Http/Controllers/FichierController.php` | Sert `assets/`, `archives/`, `android/` et la diffusion figée `/3.0.0/…` depuis le dépôt, sans copie dans `public/` |
 | `app/Http/Middleware/EnTetesDeSecurite.php` | Politique de sécurité, réserve de fouille, cache |
-| `app/Support/Audience.php` | Personnes en ligne (actives depuis 5 minutes) et visiteurs du mois, au pied de l'accueil. Seuls les visiteurs vérifiés comptent ; aucune écriture sur l'appareil, aucune adresse IP gardée, une empreinte hachée qui change chaque mois. `CHARTE_AUDIENCE=false` la coupe |
+| `app/Support/Audience.php` | Personnes en ligne (actives depuis 5 minutes) et visiteurs du mois, au pied de l'accueil. Seuls les visiteurs vérifiés comptent, ou, case coupée, les navigateurs qui ne se déclarent pas automates ; aucune écriture sur l'appareil, aucune adresse IP gardée, une empreinte hachée qui change chaque mois. `CHARTE_AUDIENCE=false` la coupe |
 | `app/Support/Recherche.php` | La recherche de l'accueil (`/recherche?q=…`) : index des sections de toutes les pages, sans accents ni casse, recalculé dès qu'une vue change |
 
 Une page s'ajoute en deux temps : une entrée dans `config/charte.php`, une vue
@@ -186,7 +194,7 @@ marquées `Cache-Control: private, no-store` : aucun cache partagé ne les garde
 
 Restent ouverts, sans case :
 
-- les fichiers de la charte (`/assets/…`, `/2.0.0/…`), que les services des
+- les fichiers de la charte (`/assets/…`, `/3.0.0/…`), que les services des
   ministères chargent depuis leurs propres pages ;
 - `robots.txt`, `sitemap.xml` et `VERSION.txt` ;
 - Googlebot, Bingbot et Applebot authentiques : leur adresse doit se résoudre
@@ -267,7 +275,7 @@ et `MAIL_FROM_ADDRESS`, passer `CHARTE_INDEXABLE=true`, relancer
 `charte:diagnostic` puis `optimize`.
 
 Les commandes d'installation de la page Intégration (`npm install …/npm/…tgz`,
-`npx …`, adresses figées `/2.0.0/…`) désignent toutes le serveur de test, quel que
+`npx …`, adresses figées `/3.0.0/…`) désignent toutes le serveur de test, quel que
 soit le domaine qui sert la page. À la bascule, définir
 `CHARTE_SERVEUR=https://chartegraphique.gov.bf` et changer la constante `SERVEUR`
 d'`amorce/index.js`.
@@ -302,10 +310,13 @@ modifient jamais à la main, et `npm test` refuse de les laisser diverger.
 
 ## Robots et fouille de données
 
-Cinquante-quatre agents sont refusés en production : collecteurs
-d'entraînement de modèles, assistants, aspirateurs de site et scanners de
-vulnérabilité. Le refus tient en trois couches, et il vaut mieux savoir ce que
-chacune arrête :
+Cinquante-deux agents sont refusés en production : collecteurs
+d'entraînement de modèles, aspirateurs de site, scanners de vulnérabilité, et
+les assistants autres que ChatGPT et Claude, qui n'ont accès qu'à `/charte.md`.
+ChatGPT-User et Claude-User, qui lisent à la demande d'une personne, ont accès
+à tout le site ; GPTBot et ClaudeBot, qui collectent pour l'entraînement,
+restent refusés. Le refus tient en plusieurs couches, et il vaut mieux savoir
+ce que chacune arrête :
 
 | Couche | Portée |
 |---|---|
@@ -316,10 +327,9 @@ chacune arrête :
 
 Les moteurs de recherche restent autorisés. Un système de conception que
 personne ne trouve ne sert personne, et les refuser retirerait la documentation
-des résultats sans gêner un seul collecteur d'entraînement. La page
-Intégration détaille les deux réglages à faire avant la mise en production :
-les adresses de supervision, et le sort des assistants déclenchés par une
-personne.
+des résultats sans gêner un seul collecteur d'entraînement. Reste un réglage
+à faire avant la mise en production, détaillé dans la page Intégration : les
+adresses de supervision.
 
 ---
 
@@ -354,5 +364,7 @@ Voir `LISEZMOI-PAQUET.txt`. Les conditions précises de réutilisation relèvent
 l'autorité de tutelle du système, qui reste à désigner : **ce point doit être
 arrêté avant toute publication sur un registre public**.
 
-Les polices Archivo et Inter sont distribuées sous licence SIL Open Font
-License 1.1, dont le texte accompagne les fichiers.
+Les polices Montserrat (© The Montserrat Project Authors) et Roboto
+(© The Roboto Project Authors) sont distribuées sous licence SIL Open Font
+License 1.1, dont le texte accompagne les fichiers (`montserrat-OFL.txt`,
+`roboto-OFL.txt`).

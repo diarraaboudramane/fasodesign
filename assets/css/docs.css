@@ -164,8 +164,6 @@ body { background: var(--surface); }
   font-family: var(--police-titre);
   font-size: var(--taille-2xs);
   font-weight: var(--graisse-grasse);
-  letter-spacing: var(--approche-capitale);
-  text-transform: uppercase;
   color: var(--texte-faible);
 }
 .doc-menu ul { list-style: none; margin: 0; padding: 0; }
@@ -279,7 +277,7 @@ body { background: var(--surface); }
 }
 .doc-entete h1 {
   margin-bottom: var(--espace-5);
-  font-size: clamp(2.25rem, 1.7rem + 2.4vw, 3.75rem);
+  font-size: var(--taille-h1);   /* 2,5 rem au plus (guide, § 2.4.1.3) */
 }
 .doc-entete .fs-chapeau {
   margin-bottom: 0;
@@ -295,7 +293,6 @@ body { background: var(--surface); }
   font-size: var(--taille-xs);
   font-weight: var(--graisse-demi);
   letter-spacing: 0.04em;
-  text-transform: uppercase;
   color: var(--texte-faible);
 }
 .doc-fil a { color: inherit; text-decoration: none; }
@@ -379,9 +376,6 @@ body { background: var(--surface); }
   gap: var(--espace-4);
   padding: var(--espace-6);
   background-color: var(--surface);
-  background-image: radial-gradient(var(--neutre-200) 1px, transparent 1.2px);
-  background-size: 18px 18px;
-  background-position: 9px 9px;
 }
 .doc-demo-scene--pile {
   flex-direction: column;
@@ -389,8 +383,7 @@ body { background: var(--surface); }
   gap: var(--espace-5);
 }
 .doc-demo-scene--sombre {
-  background-color: var(--vert-900);
-  background-image: radial-gradient(rgba(255, 255, 255, 0.10) 1px, transparent 1.2px);
+  background-color: var(--public-900);
   color: var(--neutre-50);
 }
 
@@ -468,8 +461,6 @@ body { background: var(--surface); }
 .doc-variante-nom {
   font-size: var(--taille-2xs);
   font-weight: var(--graisse-grasse);
-  letter-spacing: var(--approche-capitale);
-  text-transform: uppercase;
   color: var(--texte-faible);
 }
 
@@ -540,7 +531,6 @@ body { background: var(--surface); }
   font-family: var(--police-mono);
   font-size: var(--taille-xs);
   letter-spacing: 0.06em;
-  text-transform: uppercase;
   opacity: 0.9;
 }
 .doc-trio-tuile--or .doc-trio-sens,
@@ -583,7 +573,6 @@ body { background: var(--surface); }
   font-family: var(--police-mono);
   font-size: 10px;
   opacity: 0.8;
-  text-transform: uppercase;
   letter-spacing: 0.02em;
 }
 .doc-ton-drapeau {
@@ -598,7 +587,6 @@ body { background: var(--surface); }
   font-size: 9px;
   font-weight: var(--graisse-noire);
   letter-spacing: 0.06em;
-  text-transform: uppercase;
 }
 .doc-ton--clair { color: var(--neutre-900); }
 .doc-ton--sombre { color: #fff; }
@@ -799,8 +787,6 @@ body { background: var(--surface); }
   font-family: var(--police-titre);
   font-size: var(--taille-2xs);
   font-weight: var(--graisse-grasse);
-  letter-spacing: var(--approche-capitale);
-  text-transform: uppercase;
   color: var(--texte-faible);
 }
 .doc-sms-compte {
@@ -867,8 +853,6 @@ body { background: var(--surface); }
   font-family: var(--police-titre);
   font-size: var(--taille-sm);
   font-weight: var(--graisse-grasse);
-  letter-spacing: var(--approche-capitale);
-  text-transform: uppercase;
 }
 .doc-usage--oui .doc-usage-titre { color: var(--succes-texte); }
 .doc-usage--non .doc-usage-titre { color: var(--danger-texte); }
@@ -899,7 +883,7 @@ body { background: var(--surface); }
 .doc-heros h1 {
   max-width: 16ch;
   margin-bottom: var(--espace-6);
-  font-size: clamp(2.5rem, 1.7rem + 3.4vw, 4.5rem);
+  font-size: var(--taille-h1);
   line-height: 1.05;
   letter-spacing: -0.03em;
 }
@@ -977,7 +961,7 @@ body { background: var(--surface); }
 .doc-chiffre-valeur {
   display: block;
   font-family: var(--police-titre);
-  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.75rem);
+  font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
   font-weight: var(--graisse-noire);
   line-height: 1;
   letter-spacing: var(--approche-titre);
@@ -1046,7 +1030,6 @@ body { background: var(--surface); }
   font-family: var(--police-titre);
   font-size: var(--taille-xs);
   font-weight: var(--graisse-grasse);
-  letter-spacing: var(--approche-capitale);
   color: var(--entree-texte);
 }
 .doc-entree-titre {
@@ -1099,7 +1082,7 @@ body { background: var(--surface); }
   right: var(--espace-4);
   top: var(--espace-2);
   font-family: var(--police-titre);
-  font-size: 5rem;
+  font-size: 2.5rem;
   font-weight: var(--graisse-noire);
   line-height: 1;
   letter-spacing: -0.05em;

@@ -4,7 +4,7 @@
 # @govbf/create-charte-graphique, l'outil qui prépare un projet. Ils portent
 # la même version et partent ensemble.
 #
-# Se déclenche sur une étiquette « v2.0.0 », jamais sur une branche.
+# Se déclenche sur une étiquette « v3.0.0 », jamais sur une branche.
 # Rien n'est publié si la vérification échoue, et la version publiée est
 # celle du package.json : l'étiquette doit correspondre, faute de quoi
 # le travail s'arrête avant d'avoir rien envoyé.

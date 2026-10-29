@@ -5,7 +5,7 @@ namespace App\Support;
 /**
  * Les archives npm de la charte, servies par l'application elle-même :
  *
- *   npm install https://<serveur>/npm/govbf-charte-graphique-2.0.0.tgz
+ *   npm install https://<serveur>/npm/govbf-charte-graphique-3.0.0.tgz
  *
  * Tant que l'espace de noms @govbf n'est sur aucun registre, c'est ainsi
  * que les projets installent la charte. L'archive est construite depuis
@@ -38,13 +38,15 @@ final class PaquetNpm
      * Elle est gardée dans storage/ sous l'empreinte de son contenu : une
      * source modifiée donne un autre fichier, jamais une archive périmée.
      */
-    public static function archive(string $nom): ?string
+    public static function archive(string $nom, ?string $depot = null): ?string
     {
         if (! array_key_exists($nom, self::PAQUETS)) {
             return null;
         }
 
-        $racine = base_path(self::PAQUETS[$nom]);
+        /* $depot : la racine d'une version gelée (archives/<version>/),
+           ou le dépôt lui-même pour la version courante. */
+        $racine = rtrim($depot ?? base_path(), '/\\').'/'.self::PAQUETS[$nom];
         $manifeste = json_decode(file_get_contents($racine.'/package.json'), true, flags: JSON_THROW_ON_ERROR);
         $tar = self::tar($racine, self::fichiers($racine, $manifeste), $manifeste['bin'] ?? []);
 

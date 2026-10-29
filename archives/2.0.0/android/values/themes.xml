@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Charte graphique de l'administration burkinabè
+  Fichier produit par outils/android.js depuis assets/css/tokens.css.
+  Ne pas modifier directement : toute retouche serait perdue à la
+  prochaine génération. La source faisant foi est la feuille de jetons.
+-->
+<resources>
+
+  <!--
+    Thème de base. Les correspondances Material 3 ci-dessous sont le
+    seul endroit où une décision de traduction a été prise :
+
+      primary   → action, le vert du drapeau, couleur des commandes
+      secondary → relief, l'or, réservé à la mise en avant
+      error     → danger, le rouge du drapeau
+      outline   → bordure forte, celle qui atteint 3:1
+
+    Le rouge sert d'accent et non de couleur primaire : sur le web
+    comme ici, la commande principale est verte.
+  -->
+  <style name="Theme.Faso" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <item name="colorPrimary">@color/faso_action</item>
+    <item name="colorOnPrimary">@color/faso_action_texte</item>
+    <item name="colorPrimaryContainer">@color/faso_action_tenue</item>
+    <item name="colorOnPrimaryContainer">@color/faso_action_sur_clair</item>
+
+    <item name="colorSecondary">@color/faso_relief</item>
+    <item name="colorOnSecondary">@color/faso_relief_texte</item>
+
+    <item name="colorError">@color/faso_danger</item>
+    <item name="colorOnError">@color/faso_texte_sur_couleur</item>
+    <item name="colorErrorContainer">@color/faso_danger_fond</item>
+    <item name="colorOnErrorContainer">@color/faso_danger_texte</item>
+
+    <item name="android:colorBackground">@color/faso_surface</item>
+    <item name="colorSurface">@color/faso_surface</item>
+    <item name="colorOnSurface">@color/faso_texte</item>
+    <item name="colorSurfaceVariant">@color/faso_surface_enfoncee</item>
+    <item name="colorOnSurfaceVariant">@color/faso_texte_attenue</item>
+    <item name="colorOutline">@color/faso_bordure_forte</item>
+    <item name="colorOutlineVariant">@color/faso_bordure</item>
+
+    <item name="android:statusBarColor">@color/faso_surface</item>
+    <item name="android:navigationBarColor">@color/faso_surface</item>
+
+    <item name="textAppearanceHeadlineLarge">@style/TextAppearance.Faso.H1</item>
+    <item name="textAppearanceHeadlineMedium">@style/TextAppearance.Faso.H2</item>
+    <item name="textAppearanceTitleLarge">@style/TextAppearance.Faso.H3</item>
+    <item name="textAppearanceBodyLarge">@style/TextAppearance.Faso.Texte</item>
+    <item name="textAppearanceBodySmall">@style/TextAppearance.Faso.Legende</item>
+
+    <item name="shapeAppearanceSmallComponent">@style/Forme.Faso.Petite</item>
+    <item name="shapeAppearanceMediumComponent">@style/Forme.Faso.Moyenne</item>
+    <item name="shapeAppearanceLargeComponent">@style/Forme.Faso.Grande</item>
+  </style>
+
+  <!--
+    Les polices ne sont pas fournies ici : le paquet ne contient que
+    des woff2, que seul un navigateur sait lire. Archivo et Inter sont
+    sous licence SIL OFL ; on télécharge les fichiers .ttf depuis la
+    même source, on les place dans res/font, et on décosmmente les deux
+    lignes fontFamily ci-dessous.
+  -->
+  <style name="TextAppearance.Faso.H1" parent="TextAppearance.Material3.HeadlineLarge">
+    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <item name="android:textSize">@dimen/faso_taille_h1</item>
+    <item name="android:textColor">@color/faso_texte</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="TextAppearance.Faso.H2" parent="TextAppearance.Material3.HeadlineMedium">
+    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <item name="android:textSize">@dimen/faso_taille_h2</item>
+    <item name="android:textColor">@color/faso_texte</item>
+    <item name="android:letterSpacing">-0.02</item>
+  </style>
+
+  <style name="TextAppearance.Faso.H3" parent="TextAppearance.Material3.TitleLarge">
+    <!-- <item name="fontFamily">@font/archivo</item> -->
+    <item name="android:textSize">@dimen/faso_taille_h3</item>
+    <item name="android:textColor">@color/faso_texte</item>
+  </style>
+
+  <style name="TextAppearance.Faso.Texte" parent="TextAppearance.Material3.BodyLarge">
+    <!-- <item name="fontFamily">@font/inter</item> -->
+    <item name="android:textSize">@dimen/faso_taille_md</item>
+    <item name="android:textColor">@color/faso_texte</item>
+  </style>
+
+  <style name="TextAppearance.Faso.Legende" parent="TextAppearance.Material3.BodySmall">
+    <!-- <item name="fontFamily">@font/inter</item> -->
+    <item name="android:textSize">@dimen/faso_taille_sm</item>
+    <item name="android:textColor">@color/faso_texte_faible</item>
+  </style>
+
+  <style name="Forme.Faso.Petite" parent="ShapeAppearance.Material3.SmallComponent">
+    <item name="cornerSize">@dimen/faso_rayon_sm</item>
+  </style>
+
+  <style name="Forme.Faso.Moyenne" parent="ShapeAppearance.Material3.MediumComponent">
+    <item name="cornerSize">@dimen/faso_rayon_md</item>
+  </style>
+
+  <style name="Forme.Faso.Grande" parent="ShapeAppearance.Material3.LargeComponent">
+    <item name="cornerSize">@dimen/faso_rayon_lg</item>
+  </style>
+
+  <!--
+    Bouton principal. La hauteur minimale reprend la cible tactile :
+    48 dp, plancher d'Android, plus strict que les 44 px du web.
+  -->
+  <style name="Widget.Faso.Bouton" parent="Widget.Material3.Button">
+    <item name="android:minHeight">@dimen/faso_cible_min</item>
+    <item name="android:minWidth">@dimen/faso_cible_min</item>
+    <item name="android:textAppearance">@style/TextAppearance.Faso.Texte</item>
+    <item name="cornerRadius">@dimen/faso_rayon_md</item>
+    <item name="backgroundTint">@color/faso_action</item>
+    <item name="android:textColor">@color/faso_action_texte</item>
+  </style>
+
+  <style name="Widget.Faso.Bouton.Secondaire" parent="Widget.Material3.Button.OutlinedButton">
+    <item name="android:minHeight">@dimen/faso_cible_min</item>
+    <item name="cornerRadius">@dimen/faso_rayon_md</item>
+    <item name="strokeColor">@color/faso_action</item>
+    <item name="android:textColor">@color/faso_action_sur_clair</item>
+  </style>
+
+</resources>

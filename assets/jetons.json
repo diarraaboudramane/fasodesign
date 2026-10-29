@@ -1,10 +1,10 @@
 {
   "nom": "Charte graphique de l'administration burkinabè",
-  "version": "2.0.0",
-  "date": "2026-09-23",
+  "version": "3.0.0",
+  "date": "2026-10-29",
   "source": "assets/css/tokens.css",
   "avertissement": "Projection de la feuille de jetons CSS, qui reste la source faisant foi. Fichier produit par outils/jetons.js ; ne jamais le modifier directement. La verification « node outils/jetons.js --verifier » fait partie de la recette.",
-  "total": 193,
+  "total": 202,
   "familles": {
     "palette": "Valeurs chromatiques absolues. Jamais consommees directement par un composant.",
     "role": "Ce que les composants consomment. Changer de theme revient a reaffecter ces jetons.",
@@ -24,55 +24,55 @@
   "jetons": {
     "palette": {
       "rouge-50": {
-        "valeur": "#fff1f2"
+        "valeur": "#fff1f1"
       },
       "rouge-100": {
-        "valeur": "#ffe0e2"
+        "valeur": "#ffdfdf"
       },
       "rouge-200": {
-        "valeur": "#ffc5c9"
+        "valeur": "#ffc4c4"
       },
       "rouge-300": {
-        "valeur": "#f99aa1"
+        "valeur": "#fd9a9a"
       },
       "rouge-400": {
-        "valeur": "#f0636e"
+        "valeur": "#f76565"
       },
       "rouge-500": {
-        "valeur": "#e30613"
+        "valeur": "#ef2b2d"
       },
       "rouge-600": {
-        "valeur": "#c40511"
+        "valeur": "#d41f1f"
       },
       "rouge-700": {
-        "valeur": "#a2040e"
+        "valeur": "#b01616"
       },
       "rouge-800": {
-        "valeur": "#7d0610"
+        "valeur": "#8a1114"
       },
       "rouge-900": {
-        "valeur": "#5a0810"
+        "valeur": "#600d10"
       },
       "vert-50": {
-        "valeur": "#ecf7f0"
+        "valeur": "#e9f8ef"
       },
       "vert-100": {
-        "valeur": "#d3eddd"
+        "valeur": "#cdeed9"
       },
       "vert-200": {
-        "valeur": "#a8dbbc"
+        "valeur": "#9fdcb7"
       },
       "vert-300": {
-        "valeur": "#74c296"
+        "valeur": "#66c38e"
       },
       "vert-400": {
-        "valeur": "#3ea46d"
+        "valeur": "#2fae68"
       },
       "vert-500": {
-        "valeur": "#00843b"
+        "valeur": "#009e49"
       },
       "vert-600": {
-        "valeur": "#026c31"
+        "valeur": "#007d3c"
       },
       "vert-700": {
         "valeur": "#045527"
@@ -84,34 +84,34 @@
         "valeur": "#032e16"
       },
       "or-50": {
-        "valeur": "#fffce5"
+        "valeur": "#fffbe6"
       },
       "or-100": {
-        "valeur": "#fff8bf"
+        "valeur": "#fff5c2"
       },
       "or-200": {
-        "valeur": "#fff287"
+        "valeur": "#ffe98a"
       },
       "or-300": {
-        "valeur": "#ffed00"
+        "valeur": "#fcd116"
       },
       "or-400": {
-        "valeur": "#e8d400"
+        "valeur": "#e6bb00"
       },
       "or-500": {
-        "valeur": "#c9b600"
+        "valeur": "#c9a200"
       },
       "or-600": {
-        "valeur": "#a39300"
+        "valeur": "#a38300"
       },
       "or-700": {
-        "valeur": "#7d7100"
+        "valeur": "#7d6400"
       },
       "or-800": {
-        "valeur": "#5c5300"
+        "valeur": "#5c4900"
       },
       "or-900": {
-        "valeur": "#3d3800"
+        "valeur": "#3d3100"
       },
       "neutre-0": {
         "valeur": "#ffffff"
@@ -192,15 +192,15 @@
         "valeur": "#4a3200"
       },
       "etoile-or": {
-        "valeur": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 95'%3E%3Cpath fill='%23ffed00' d='M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z'/%3E%3C/svg%3E\")"
+        "valeur": "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 95'%3E%3Cpath fill='%23fcd116' d='M50 0 61.8 36.3 100 36.3 69.1 58.7 80.9 95 50 72.6 19.1 95 30.9 58.7 0 36.3 38.2 36.3Z'/%3E%3C/svg%3E\")"
       }
     },
     "typographie": {
       "police-titre": {
-        "valeur": "\"Archivo\", \"Segoe UI\", system-ui, -apple-system, sans-serif"
+        "valeur": "\"Montserrat\", \"Segoe UI\", system-ui, -apple-system, sans-serif"
       },
       "police-texte": {
-        "valeur": "\"Inter\", \"Segoe UI\", system-ui, -apple-system, sans-serif"
+        "valeur": "\"Roboto\", \"Segoe UI\", system-ui, -apple-system, sans-serif"
       },
       "police-mono": {
         "valeur": "ui-monospace, \"Cascadia Mono\", \"Segoe UI Mono\", Consolas, \"Liberation Mono\", Menlo, monospace"
@@ -215,7 +215,10 @@
         "valeur": "0.8125rem"
       },
       "taille-md": {
-        "valeur": "0.9375rem"
+        "valeur": "0.875rem"
+      },
+      "taille-menu": {
+        "valeur": "0.75rem"
       },
       "taille-lg": {
         "valeur": "1.0625rem"
@@ -236,7 +239,7 @@
         "valeur": "clamp(1.625rem, 1.36rem + 1.17vw, 2.375rem)"
       },
       "taille-h1": {
-        "valeur": "clamp(2rem, 1.54rem + 2.04vw, 3.3125rem)"
+        "valeur": "clamp(2rem, 1.75rem + 1.1vw, 2.5rem)"
       },
       "graisse-normale": {
         "valeur": "400"
@@ -442,6 +445,30 @@
       }
     },
     "role": {
+      "public-900": {
+        "valeur": "#00213b"
+      },
+      "public-700": {
+        "valeur": "#1b384f"
+      },
+      "public-violet": {
+        "valeur": "#2c224e"
+      },
+      "public-fond": {
+        "valeur": "#eaecef"
+      },
+      "prive-vert": {
+        "valeur": "#78cc99"
+      },
+      "prive-orange": {
+        "valeur": "#f2aa3e"
+      },
+      "prive-bleu": {
+        "valeur": "#535fdd"
+      },
+      "prive-fond": {
+        "valeur": "#f0f0f7"
+      },
       "surface": {
         "valeur": "var(--neutre-0)"
       },
@@ -485,13 +512,13 @@
         "valeur": "var(--neutre-700)"
       },
       "action": {
-        "valeur": "var(--vert-500)"
-      },
-      "action-survol": {
         "valeur": "var(--vert-600)"
       },
-      "action-active": {
+      "action-survol": {
         "valeur": "var(--vert-700)"
+      },
+      "action-active": {
+        "valeur": "var(--vert-800)"
       },
       "action-tenue": {
         "valeur": "var(--vert-50)"
@@ -503,16 +530,16 @@
         "valeur": "var(--vert-700)"
       },
       "accent": {
-        "valeur": "var(--rouge-500)"
+        "valeur": "var(--rouge-600)"
       },
       "accent-texte": {
         "valeur": "var(--neutre-0)"
       },
       "accent-survol": {
-        "valeur": "var(--rouge-600)"
+        "valeur": "var(--rouge-700)"
       },
       "accent-actif": {
-        "valeur": "var(--rouge-700)"
+        "valeur": "var(--rouge-800)"
       },
       "accent-tenue": {
         "valeur": "var(--rouge-50)"
@@ -533,7 +560,7 @@
         "valeur": "var(--or-700)"
       },
       "succes": {
-        "valeur": "var(--vert-500)"
+        "valeur": "var(--vert-600)"
       },
       "succes-fond": {
         "valeur": "var(--vert-50)"
@@ -557,7 +584,7 @@
         "valeur": "var(--ocre-700)"
       },
       "danger": {
-        "valeur": "var(--rouge-500)"
+        "valeur": "var(--rouge-600)"
       },
       "danger-fond": {
         "valeur": "var(--rouge-50)"
@@ -569,16 +596,16 @@
         "valeur": "var(--rouge-700)"
       },
       "info": {
-        "valeur": "var(--bleu-500)"
+        "valeur": "var(--neutre-600)"
       },
       "info-fond": {
-        "valeur": "var(--bleu-50)"
+        "valeur": "var(--neutre-50)"
       },
       "info-bord": {
-        "valeur": "var(--bleu-100)"
+        "valeur": "var(--neutre-200)"
       },
       "info-texte": {
-        "valeur": "var(--bleu-700)"
+        "valeur": "var(--neutre-800)"
       },
       "focus-couleur": {
         "valeur": "var(--vert-600)"
@@ -604,19 +631,19 @@
         "valeur": "var(--vert-600)"
       },
       "serie-2": {
-        "valeur": "var(--or-400)"
+        "valeur": "var(--neutre-400)"
       },
       "serie-3": {
         "valeur": "var(--rouge-700)"
       },
       "serie-4": {
-        "valeur": "var(--neutre-400)"
+        "valeur": "var(--neutre-700)"
       },
       "serie-5": {
         "valeur": "var(--vert-300)"
       },
       "serie-6": {
-        "valeur": "var(--bleu-700)"
+        "valeur": "var(--rouge-300)"
       }
     }
   }

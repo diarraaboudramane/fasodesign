@@ -181,7 +181,9 @@ controle("etiquettes des barres synchrones", () => {
 
 /* L'accueil annonce un nombre de composants : c'est celui des blocs
    documentés dans les deux pages de composants, recompté ici pour que
-   l'ajout d'un composant ne laisse pas le chiffre en arrière. */
+   l'ajout d'un composant ne laisse pas le chiffre en arrière. Un bloc
+   de règles transversales, qui ne documente aucun composant, porte
+   data-regles et n'entre pas dans le compte. */
 controle("nombre de composants annonce", () => {
   const blocs = ["composants.html", "composants-metier.html"]
     .map((p) => (lirePage(p).match(/<div class="doc-bloc">/g) || []).length)
@@ -253,7 +255,7 @@ controle("ressources Android bien formees", () => {
 
 controle("couleurs du drapeau intactes", () => {
   const t = lire("assets/css/tokens.css");
-  for (const c of ["#e30613", "#00843b", "#ffed00"]) {
+  for (const c of ["#ef2b2d", "#009e49", "#fcd116"]) {
     if (t.indexOf(c) < 0) throw new Error("teinte " + c + " absente de tokens.css");
   }
   if (t.indexOf("--etoile-or") < 0) throw new Error("jeton --etoile-or absent");

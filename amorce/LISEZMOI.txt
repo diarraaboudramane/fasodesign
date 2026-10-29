@@ -1,11 +1,11 @@
 PREPARATION D'UN PROJET AVEC LA CHARTE GRAPHIQUE
 DE L'ADMINISTRATION BURKINABE
-Version 2.0 — septembre 2026
+Version 3.0 — octobre 2026
 
 
 CE QUE FAIT CET OUTIL
 
-  npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz
+  npx https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz
 
   Il pose trois questions, ecrit les fichiers de depart et installe
   @govbf/charte-graphique dans le dossier choisi, depuis le meme serveur
@@ -15,7 +15,7 @@ CE QUE FAIT CET OUTIL
   Sans question, pour une chaine d'integration :
 
     CHARTE_ACCEPTE_LICENCE=oui npx --yes \
-      https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-2.0.0.tgz \
+      https://chartegraphique-21.mtdpce-test.gov.bf/npm/govbf-create-charte-graphique-3.0.0.tgz \
       mon-service --type=react --oui
 
   Types disponibles : statique, react, angular, laravel.
