@@ -53,9 +53,22 @@ class HebergementTest extends TestCase
             'services.recaptcha.site_key' => '6LcVraieCleDuSiteDeTest00000000000000000',
             'services.recaptcha.secret_key' => '6LcVraieCleSecreteDeTest000000000000000',
             'charte.contact.destinataire' => 'equipe@exemple.bf',
+            'mail.default' => 'smtp',
+            'mail.mailers.smtp.host' => 'smtp.mtdpce.gov.bf',
         ]);
 
         $this->artisan('charte:diagnostic')->assertSuccessful();
+    }
+
+    public function test_le_diagnostic_refuse_un_serveur_qui_n_envoie_pas_de_courriel(): void
+    {
+        /* Sans envoi, les comptes de l'outil de conformité ne se confirment pas. */
+        foreach ([['log', null], ['smtp', 'À-RENSEIGNER']] as [$transport, $hote]) {
+            config(['app.url' => 'https://chartegraphique-21.mtdpce-test.gov.bf', 'app.debug' => false, 'session.secure' => true,
+                'charte.contact.destinataire' => 'equipe@exemple.bf', 'mail.default' => $transport, 'mail.mailers.smtp.host' => $hote]);
+
+            $this->artisan('charte:diagnostic')->assertFailed();
+        }
     }
 
     public function test_le_diagnostic_refuse_un_modele_non_complete(): void

@@ -265,7 +265,9 @@ Mise en service :
 ```bash
 touch database/database.sqlite
 php artisan migrate --force
+php artisan charte:courriel-essai prenom.nom@mtdpce.gov.bf   # l'envoi des courriels doit marcher : sans lui, aucun compte ne se confirme
 php artisan charte:administrateur prenom.nom@mtdpce.gov.bf   # après avoir créé ce compte sur /conformite/inscription
+php artisan charte:confirmer-compte prenom.nom@tic.gov.bf    # dépannage : confirme une adresse dont le lien n'est pas arrivé
 php artisan queue:work --tries=1 --timeout=300               # à garder lancé (systemd, supervisor)
 # cron, chaque minute : php artisan schedule:run   (purge des bilans de plus d'un an)
 ```

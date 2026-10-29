@@ -62,9 +62,16 @@ class Diagnostic extends Command
         $this->controle(filter_var($destinataire, FILTER_VALIDATE_EMAIL) !== false,
             "les messages de contact vont à {$destinataire}",
             'CONTACT_DESTINATAIRE vide ou invalide : le formulaire refuserait tout envoi');
-        if (config('mail.default') === 'log') {
-            $this->warn('  !      MAIL_MAILER=log : les messages restent dans storage/logs');
-        }
+        /* Sans envoi réel, les comptes de l'outil de conformité ne peuvent pas
+           être confirmés : personne ne reçoit le lien. */
+        $transport = (string) config('mail.default');
+        $hote = (string) config("mail.mailers.{$transport}.host");
+        $this->controle(! in_array($transport, ['log', 'array'], true)
+            && ($transport !== 'smtp' || ($hote !== '' && ! str_contains($hote, 'RENSEIGNER'))),
+            "les courriels partent par {$transport}".($hote ? " ({$hote})" : '').', à vérifier avec charte:courriel-essai',
+            in_array($transport, ['log', 'array'], true)
+                ? "MAIL_MAILER={$transport} : aucun courriel ne part, les comptes ne peuvent pas être confirmés"
+                : 'MAIL_HOST non renseigné : aucun courriel ne part');
 
         foreach (['framework/cache', 'framework/sessions', 'framework/views', 'logs'] as $dossier) {
             $chemin = storage_path($dossier);
