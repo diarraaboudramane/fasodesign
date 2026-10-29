@@ -26,16 +26,31 @@
       <div class="doc-heros-cote">
         @include('partials.recherche', ['id' => 'recherche-accueil', 'libelleMasque' => true])
 @endunless
-      <!-- Composition dérivée du drapeau : une toile tissée aux rayures du
-           Faso Dan Fani, et par-dessus une carte rouge et verte portant
-           l'étoile. Ce n'est pas le drapeau, c'est ce qu'il inspire. -->
+      <!-- Une pièce de Faso Dan Fani, l'étoffe tissée en bandes étroites
+           cousues bord à bord, rayée indigo, écru et or ; par-dessus, une
+           carte rouge et verte portant l'étoile. Ce n'est pas le drapeau,
+           c'est ce qu'il inspire. -->
       <svg class="doc-heros-art" viewBox="0 0 520 520" aria-hidden="true" focusable="false">
         <defs>
-          <pattern id="tissage" width="26" height="26" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
-            <rect width="26" height="26" fill="#fcfbf9"/>
-            <rect x="0" width="8" height="26" fill="#ef2b2d"/>
-            <rect x="10" width="4" height="26" fill="#fcd116"/>
-            <rect x="16" width="8" height="26" fill="#009e49"/>
+          <!-- Une bande de 96 unités : rayures de chaîne, couture à gauche,
+               une ligne de trame claire toutes les deux unités. -->
+          <pattern id="tissage" width="96" height="4" patternUnits="userSpaceOnUse">
+            <rect x="0" width="14" height="4" fill="#22305a"/>
+            <rect x="14" width="3" height="4" fill="#efe6d2"/>
+            <rect x="17" width="3" height="4" fill="#22305a"/>
+            <rect x="20" width="2" height="4" fill="#fcd116"/>
+            <rect x="22" width="3" height="4" fill="#22305a"/>
+            <rect x="25" width="12" height="4" fill="#efe6d2"/>
+            <rect x="37" width="22" height="4" fill="#22305a"/>
+            <rect x="59" width="12" height="4" fill="#efe6d2"/>
+            <rect x="71" width="3" height="4" fill="#22305a"/>
+            <rect x="74" width="2" height="4" fill="#fcd116"/>
+            <rect x="76" width="3" height="4" fill="#22305a"/>
+            <rect x="79" width="3" height="4" fill="#efe6d2"/>
+            <rect x="82" width="14" height="4" fill="#22305a"/>
+            <rect width="96" height="1" fill="#fff" fill-opacity="0.14"/>
+            <rect y="2" width="96" height="1" fill="#fff" fill-opacity="0.14"/>
+            <rect width="1" height="4" fill="#000" fill-opacity="0.35"/>
           </pattern>
           <clipPath id="carte">
             <rect x="96" y="60" width="328" height="400" rx="34"/>

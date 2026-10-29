@@ -60,9 +60,9 @@ legend { padding: 0; }
    lignes que la pagination vient de masquer. */
 [hidden] { display: none !important; }
 
-/* Attente (guide, § 7.1.6) : le pointeur change dès qu'un traitement
-   dépasse la seconde. Une zone marquée aria-busy reste utilisable
-   ailleurs, d'où le pointeur « en cours » ; posé sur <body>, il
+/* Attente : le pointeur change dès qu'un traitement dépasse la
+   seconde. Une zone marquée aria-busy laisse le reste de la page
+   utilisable, d'où le pointeur « en cours » ; posé sur <body>, il
    signale que rien d'autre ne peut être lancé. */
 [aria-busy="true"] { cursor: progress; }
 body[aria-busy="true"] { cursor: wait; }
@@ -353,10 +353,10 @@ a:hover {
   .fs-avec-aside--gauche { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* Disposition de l'espace privé, telle que le guide la décrit
-   (§ 3.1.2) : fil d'Ariane et commandes en haut, menu principal à
-   gauche, contenus au centre, actions et traitements à droite. Sur
-   écran étroit, les zones s'empilent dans l'ordre de lecture. */
+/* Disposition de l'espace privé : fil d'Ariane et commandes en
+   haut, menu principal à gauche, contenus au centre, actions et
+   traitements à droite. Sur écran étroit, les zones s'empilent
+   dans l'ordre de lecture. */
 .fs-espace-grille {
   display: grid;
   gap: var(--espace-6);
@@ -628,8 +628,8 @@ a:hover {
 
 .fs-champ { display: flex; flex-direction: column; gap: var(--espace-2); }
 
-/* Montserrat est réservée aux titres et aux boutons d'action (guide,
-   § 2.4.1.1) : les libellés sont en Roboto, comme le texte courant. */
+/* Montserrat est réservée aux titres et aux boutons d'action : les
+   libellés sont en Roboto, comme le texte courant. */
 .fs-label {
   font-size: var(--taille-sm);
   font-weight: var(--graisse-demi);
@@ -1691,9 +1691,9 @@ a:hover {
   white-space: nowrap;
 }
 
-/* Tableau qui défile dans son cadre (guide, § 4.4.3) : en défilement
-   vertical, les en-têtes de colonnes restent visibles ; en défilement
-   horizontal, ce sont les en-têtes de lignes. */
+/* Tableau qui défile dans son cadre : en défilement vertical, les
+   en-têtes de colonnes restent visibles ; en défilement horizontal,
+   ce sont les en-têtes de lignes. */
 .fs-tableau-cadre--defilant {
   max-height: min(70vh, 40rem);
   overflow: auto;
@@ -1838,8 +1838,8 @@ a:hover {
   color: inherit;
 }
 /* Le guide fixe le logo des plateformes dans un cadre de 76 × 80 px,
-   à 9 px du bord supérieur de la page (§ 2.1.1, figure 1). L'emblème,
-   plus étroit que haut (468 × 550), y tient sur toute la hauteur. */
+   à 9 px du bord supérieur de la page. L'emblème, plus étroit que
+   haut (468 × 550), y tient sur toute la hauteur. */
 .fs-marque img {
   width: auto;
   max-width: 76px;
@@ -1926,38 +1926,109 @@ a:hover {
 }
 .fs-repere--centre { margin-inline: auto; }
 
-/* Motif tissé — inspiré des rayures du Faso Dan Fani, le tissu
-   traditionnel. Bandes de largeur inégale séparées d'un fil clair,
-   comme sur le métier à tisser. Réservé aux bordures décoratives
-   de faible hauteur ; jamais en fond de texte. */
+/* Motif tissé, d'après le Faso Dan Fani : une étoffe de coton tissée
+   en bandes étroites sur un métier de petite largeur, puis cousues bord
+   à bord. Chaque bande porte des rayures de chaîne, fines et larges,
+   indigo et écru, avec un fil jaune or ; une couture plus sombre sépare
+   les bandes, et la trame se devine en fines lignes claires. Le motif
+   est décoratif : il borde, il ne porte jamais de texte. */
 .fs-tissage {
-  --tissage-fond: var(--surface);
-  height: 8px;
-  background:
-    repeating-linear-gradient(to right,
-      var(--rouge-500) 0 18px,
-      var(--tissage-fond) 18px 21px,
-      var(--or-300) 21px 31px,
-      var(--tissage-fond) 31px 34px,
-      var(--vert-500) 34px 52px,
-      var(--tissage-fond) 52px 55px,
-      var(--or-300) 55px 61px,
-      var(--tissage-fond) 61px 64px);
-}
-.fs-tissage--fin { height: 4px; }
-.fs-tissage--vertical {
-  width: 8px;
-  height: auto;
+  --tissage-chaine: var(--indigo-800);
+  --tissage-clair:  var(--ecru);
+  --tissage-fil:    var(--or-300);
+  height: 10px;
   background:
     repeating-linear-gradient(to bottom,
-      var(--rouge-500) 0 18px,
-      var(--tissage-fond) 18px 21px,
-      var(--or-300) 21px 31px,
-      var(--tissage-fond) 31px 34px,
-      var(--vert-500) 34px 52px,
-      var(--tissage-fond) 52px 55px,
-      var(--or-300) 55px 61px,
-      var(--tissage-fond) 61px 64px);
+      rgba(255, 255, 255, 0.14) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(to right,
+      rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(to right,
+      var(--tissage-chaine) 0 14px,
+      var(--tissage-clair) 14px 17px,
+      var(--tissage-chaine) 17px 20px,
+      var(--tissage-fil) 20px 22px,
+      var(--tissage-chaine) 22px 25px,
+      var(--tissage-clair) 25px 37px,
+      var(--tissage-chaine) 37px 59px,
+      var(--tissage-clair) 59px 71px,
+      var(--tissage-chaine) 71px 74px,
+      var(--tissage-fil) 74px 76px,
+      var(--tissage-chaine) 76px 79px,
+      var(--tissage-clair) 79px 82px,
+      var(--tissage-chaine) 82px 96px);
+}
+.fs-tissage--fin { height: 6px; }
+.fs-tissage--vertical {
+  width: 10px;
+  height: auto;
+  background:
+    repeating-linear-gradient(to right,
+      rgba(255, 255, 255, 0.14) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.35) 0 1px, transparent 1px 96px),
+    repeating-linear-gradient(to bottom,
+      var(--tissage-chaine) 0 14px,
+      var(--tissage-clair) 14px 17px,
+      var(--tissage-chaine) 17px 20px,
+      var(--tissage-fil) 20px 22px,
+      var(--tissage-chaine) 22px 25px,
+      var(--tissage-clair) 25px 37px,
+      var(--tissage-chaine) 37px 59px,
+      var(--tissage-clair) 59px 71px,
+      var(--tissage-chaine) 71px 74px,
+      var(--tissage-fil) 74px 76px,
+      var(--tissage-chaine) 76px 79px,
+      var(--tissage-clair) 79px 82px,
+      var(--tissage-chaine) 82px 96px);
+}
+
+/* Autres armures du Faso Dan Fani. Les rayures sont la signature de
+   l'étoffe, mais les tisserands font aussi des carreaux, en croisant
+   des rayures de chaîne et de trame, et du pied-de-poule. Les mêmes
+   variables règlent les teintes. Ces deux armures demandent un peu de
+   hauteur pour se lire : 24 px au moins. */
+.fs-tissage--carreaux {
+  height: 24px;
+  background:
+    repeating-linear-gradient(to right,
+      color-mix(in srgb, var(--tissage-chaine) 80%, transparent) 0 10px,
+      transparent 10px 14px,
+      var(--tissage-fil) 14px 16px,
+      transparent 16px 24px),
+    repeating-linear-gradient(to bottom,
+      color-mix(in srgb, var(--tissage-chaine) 80%, transparent) 0 10px,
+      transparent 10px 14px,
+      var(--tissage-fil) 14px 16px,
+      transparent 16px 24px),
+    var(--tissage-clair);
+}
+
+/* Aux couleurs du drapeau : le vert en chaîne, le rouge à la place de
+   l'écru, l'or en fil. Se combine avec chacune des trois armures. Le
+   motif prend alors le statut des marques nationales, qui seules peuvent
+   associer le jaune et le vert. */
+.fs-tissage--drapeau {
+  --tissage-chaine: var(--vert-500);
+  --tissage-clair:  var(--rouge-500);
+  --tissage-fil:    var(--or-300);
+}
+
+/* Le pied-de-poule n'est pas dessiné : il est calculé. C'est un sergé
+   2/2 dont la chaîne et la trame alternent quatre fils sombres et
+   quatre fils clairs ; le gabarit ci-dessous est la case de 8 × 8 fils
+   que donne cet entrecroisement, posée en masque sur la teinte. */
+.fs-tissage--pied-de-poule {
+  position: relative;
+  height: 24px;
+  background: var(--tissage-clair);
+}
+.fs-tissage--pied-de-poule::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--tissage-chaine);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M0 0h4v1h-4zM6 0h2v1h-2zM0 1h5v1h-5zM7 1h1v1h-1zM0 2h6v1h-6zM0 3h4v1h-4zM5 3h2v1h-2zM0 4h2v1h-2zM1 5h2v1h-2zM2 6h2v1h-2zM0 7h1v1h-1zM3 7h1v1h-1z'/%3E%3C/svg%3E") 0 0 / 12px 12px repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3E%3Cpath d='M0 0h4v1h-4zM6 0h2v1h-2zM0 1h5v1h-5zM7 1h1v1h-1zM0 2h6v1h-6zM0 3h4v1h-4zM5 3h2v1h-2zM0 4h2v1h-2zM1 5h2v1h-2zM2 6h2v1h-2zM0 7h1v1h-1zM3 7h1v1h-1z'/%3E%3C/svg%3E") 0 0 / 12px 12px repeat;
 }
 
 .fs-entete {
@@ -1972,7 +2043,7 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: var(--espace-6);
-  /* 9 px au-dessus du logo, comme le prévoit le guide (§ 2.1.1). */
+  /* 9 px au-dessus du logo. */
   padding-block: 9px var(--espace-4);
 }
 .fs-entete-outils { display: flex; align-items: center; gap: var(--espace-2); }
@@ -2027,10 +2098,10 @@ a:hover {
   border-bottom-color: var(--action);
 }
 
-/* Couleur d'espace. Le guide réserve une couleur à chaque espace d'une
-   plateforme (§ 2.2, point 8) : la barre de navigation la porte, et
-   l'usager sait d'un coup d'œil s'il est dans l'espace public ou dans
-   son espace personnel. La classe se pose sur <body>. */
+/* Couleur d'espace. Chaque espace d'une plateforme a sa couleur et
+   la barre de navigation la porte : l'usager sait d'un coup d'œil
+   s'il est dans l'espace public ou dans son espace personnel. La
+   classe se pose sur <body>. */
 .fs-espace-public .fs-nav {
   border-top: 0;
   background: var(--public-900);
@@ -2110,7 +2181,7 @@ a:hover {
 
 /* Onglets */
 /* Une seule rangée d'onglets, alignés à gauche et accolés, libellés
-   centrés sur une seule ligne (guide, § 4.4.5). */
+   centrés sur une seule ligne. */
 .fs-onglets {
   display: flex;
   flex-wrap: nowrap;
@@ -2622,8 +2693,8 @@ a:hover {
 /* Bandeau d'identification officielle. Obligatoire en tête de
    tout service en ligne de l'État : il permet à l'usager de
    distinguer un site authentique d'une contrefaçon. Fond bleu nuit
-   et non vert : le guide écarte le vert, le rouge et le jaune des fonds
-   et retient le bleu foncé à défaut du gris (§ 2.2, point 2). */
+   et non vert : le vert, le rouge et le jaune sont écartés des
+   fonds, et le bleu foncé est retenu à défaut du gris. */
 .fs-officiel {
   display: flex;
   align-items: center;

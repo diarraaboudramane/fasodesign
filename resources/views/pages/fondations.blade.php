@@ -28,9 +28,7 @@
         <p class="doc-bloc-note">
           Le bloc-marque associe l'emblème, la dénomination de l'État, la devise
           nationale et, le cas échéant, l'entité responsable du service. Il est le
-          premier élément de contenu de toute page, en haut à gauche, et c'est un
-          lien&nbsp;: il renvoie à la page d'accueil du site, ou à celle de l'espace
-          privé lorsque l'usager s'y trouve (guide, §&nbsp;2.1.1).
+          premier élément de contenu de toute page.
         </p>
 
         <div class="doc-demo" data-libelle="Bloc-marque complet">
@@ -51,9 +49,9 @@
         <h3>Place et dimensions du logo</h3>
         <p class="doc-bloc-note">
           Pour les ministères et les institutions, le logo par défaut des plateformes
-          est l'emblème du Burkina Faso. Le guide en fixe la place et l'encombrement
-          (guide, §&nbsp;2.1.1, figure&nbsp;1)&nbsp;; <code>.fs-marque</code> et
-          <code>.fs-entete-haut</code> les appliquent sans réglage.
+          est l'emblème du Burkina Faso. Sa place et son encombrement sont fixes&nbsp;;
+          <code>.fs-marque</code> et <code>.fs-entete-haut</code> les appliquent sans
+          réglage.
         </p>
 
         <dl class="fs-definitions">
@@ -67,7 +65,7 @@
           </div>
           <div>
             <dt>Cadre</dt>
-            <dd>76&nbsp;×&nbsp;80&nbsp;px, à 9&nbsp;px du haut de la page. L'emblème, plus haut que large (468&nbsp;×&nbsp;550), y occupe toute la hauteur&nbsp;: 80&nbsp;px, soit environ 68&nbsp;px de large. Sous 640&nbsp;px de largeur de fenêtre, la charte le ramène à 44&nbsp;px, adaptation propre à l'écran étroit que le guide ne traite pas.</dd>
+            <dd>76&nbsp;×&nbsp;80&nbsp;px, à 9&nbsp;px du haut de la page. L'emblème, plus haut que large (468&nbsp;×&nbsp;550), y occupe toute la hauteur&nbsp;: 80&nbsp;px, soit environ 68&nbsp;px de large. Sous 640&nbsp;px de largeur de fenêtre, il passe à 44&nbsp;px.</dd>
           </div>
           <div>
             <dt>Version</dt>
@@ -80,13 +78,11 @@
         </dl>
 
         <div class="doc-note fs-mt-6">
-          <strong>Logo propre à une structure.</strong> Une structure, ou un service
-          d'une structure, peut employer un logo qui lui est propre. Le guide
-          l'autorise, mais à une condition&nbsp;: toute la charte visuelle doit alors
-          être repensée pour être en harmonie avec ce logo (guide, §&nbsp;2.1.2).
-          Substituer un logo dans le bloc-marque en gardant le reste de cette charte
-          ne remplit pas cette condition. Les couleurs par défaut du logo sont celles
-          du drapeau.
+          Une structure, ou un service d'une structure, peut employer un logo qui lui
+          est propre, à condition de repenser toute la charte visuelle en harmonie
+          avec ce logo. Substituer un logo dans le bloc-marque en gardant le reste de
+          cette charte ne remplit pas cette condition. Les couleurs par défaut du
+          logo sont celles du drapeau.
         </div>
       </div>
 
@@ -172,12 +168,10 @@
         </div>
 
         <p class="fs-legende fs-mt-4">
-          Ces quatre emplois sont montrés avec le format de référence. Les 80&nbsp;px
-          de l'en-tête sont ceux du cadre fixé par le guide (§&nbsp;2.1.1)&nbsp;; les
-          autres hauteurs sont propres à la charte. À 44&nbsp;px, le format moyen
-          convient aussi bien, pour un tiers de poids en moins&nbsp;; à 32&nbsp;px, le
-          petit format se lit mieux. Le choix relève de l'autorité qui garde les
-          armoiries.
+          Ces quatre emplois sont montrés avec le format de référence. À 44&nbsp;px, le
+          format moyen convient aussi bien, pour un tiers de poids en moins&nbsp;; à
+          32&nbsp;px, le petit format se lit mieux. Le choix relève de l'autorité qui
+          garde les armoiries.
         </p>
 
         <h4 class="fs-mt-8">Les quatre formats côte à côte</h4>
@@ -399,17 +393,36 @@
       <div class="doc-bloc">
         <h3>Motif tissé <code>.fs-tissage</code></h3>
         <p class="doc-bloc-note">
-          Inspiré des rayures du Faso Dan Fani, le tissu traditionnel. Les bandes
-          sont de largeur inégale et séparées d'un fil clair, comme sur le métier à
-          tisser. Le motif se distingue ainsi du filet officiel, qu'il ne remplace
-          pas. Il habille les lisières (bas d'un bandeau, tête d'un pied de page,
-          ouverture d'une section), et reste de faible hauteur.
+          D'après le Faso Dan Fani, l'étoffe de coton tissée en bandes étroites sur
+          un métier de petite largeur, puis cousues bord à bord. Chaque bande porte
+          des rayures de chaîne, fines et larges, en indigo et en écru, avec un fil
+          jaune or&nbsp;; une couture plus sombre sépare les bandes, et la trame se
+          devine en fines lignes claires. Ce n'est pas une marque nationale&nbsp;: le
+          motif ne remplace jamais le filet officiel. Trois armures sont livrées&nbsp;:
+          les rayures (<code>.fs-tissage</code>), les plus répandues, les carreaux
+          (<code>.fs-tissage--carreaux</code>), où les rayures de chaîne et de trame
+          se croisent, et le pied-de-poule (<code>.fs-tissage--pied-de-poule</code>),
+          calculé à partir d'un sergé 2/2. Chacune existe aussi aux couleurs du
+          drapeau, en ajoutant <code>.fs-tissage--drapeau</code>&nbsp;: le vert en chaîne,
+          le rouge à la place de l'écru, l'or en fil. Le motif compte alors parmi
+          les marques nationales et en suit les règles. Il habille les lisières (bas
+          d'un bandeau, tête d'un pied de page, ouverture d'une section) et reste de
+          faible hauteur.
         </p>
 
         <div class="doc-demo" data-libelle="Motif tissé">
           <div class="doc-demo-scene doc-demo-scene--pile">
+            <p class="fs-legende" style="margin:0;">Rayures, l'armure la plus courante</p>
             <div class="fs-tissage"></div>
             <div class="fs-tissage fs-tissage--fin"></div>
+            <p class="fs-legende" style="margin:0;">Carreaux</p>
+            <div class="fs-tissage fs-tissage--carreaux"></div>
+            <p class="fs-legende" style="margin:0;">Pied-de-poule</p>
+            <div class="fs-tissage fs-tissage--pied-de-poule"></div>
+            <p class="fs-legende" style="margin:0;">Aux couleurs du drapeau&nbsp;: rayures, carreaux, pied-de-poule</p>
+            <div class="fs-tissage fs-tissage--drapeau"></div>
+            <div class="fs-tissage fs-tissage--carreaux fs-tissage--drapeau"></div>
+            <div class="fs-tissage fs-tissage--pied-de-poule fs-tissage--drapeau"></div>
             <div style="display:flex; gap: var(--espace-4); height: 96px;">
               <div class="fs-tissage fs-tissage--vertical"></div>
               <p class="fs-legende" style="align-self:center; margin:0;">Variante verticale, pour border une colonne ou une citation.</p>
@@ -421,8 +434,9 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Hauteur de 4 à 8&nbsp;px, en pleine largeur ou sur une courte longueur en repère.</li>
-              <li>Sur un fond coloré, adapter le fil clair via <code>--tissage-fond</code>.</li>
+              <li>Rayures&nbsp;: 6 à 10&nbsp;px de haut, en pleine largeur ou sur une courte longueur en repère. Carreaux et pied-de-poule&nbsp;: 24&nbsp;px au moins, sans quoi l'armure ne se lit pas.</li>
+              <li>Une seule armure par service, pour que le motif reste reconnaissable d'une page à l'autre.</li>
+              <li>Garder les teintes de l'étoffe&nbsp;: <code>--tissage-chaine</code> (indigo), <code>--tissage-clair</code> (écru) et <code>--tissage-fil</code> (or) se règlent sur l'élément si un service a sa propre étoffe de référence.</li>
               <li>Un seul motif tissé par écran. Il accentue, il ne meuble pas.</li>
             </ul>
           </div>
@@ -431,7 +445,7 @@
             <ul>
               <li>Le poser en fond derrière du texte ou des composants.</li>
               <li>L'employer à la place du filet officiel sous le bandeau d'identification.</li>
-              <li>L'agrandir au-delà de 12&nbsp;px&nbsp;: il devient un drapeau déformé.</li>
+              <li>Agrandir les rayures au-delà de 12&nbsp;px, ou les autres armures au-delà de 32&nbsp;px&nbsp;: le motif cesse d'être une lisière et devient un aplat qui concurrence le contenu.</li>
             </ul>
           </div>
         </div>
@@ -445,9 +459,7 @@
             <p class="doc-usage-titre">À faire</p>
             <ul>
               <li>Conserver une zone de protection au moins égale à la moitié de la hauteur de l'emblème, libre de tout texte ou image.</li>
-              <li>Afficher l'emblème à 80&nbsp;px de hauteur en en-tête, dans le cadre de 76&nbsp;×&nbsp;80&nbsp;px placé à 9&nbsp;px du haut de page (guide, §&nbsp;2.1.1)&nbsp;; 44&nbsp;px sur écran étroit, 32&nbsp;px en pied de page.</li>
-              <li>Employer la version officielle des armoiries, avec l'encadré, depuis le fichier vectoriel (guide, §&nbsp;2.1.1).</li>
-              <li>Placer le drapeau avant les armoiries lorsqu'il les accompagne.</li>
+              <li>Afficher l'emblème à 80&nbsp;px de hauteur en en-tête, 44&nbsp;px sur écran étroit, 32&nbsp;px en pied de page.</li>
               <li>Placer l'emblème sur un fond uni, clair ou très sombre, offrant un contraste suffisant.</li>
               <li>Associer systématiquement l'emblème au nom de l'administration responsable du service.</li>
               <li>Renseigner un texte de remplacement explicite lorsque l'emblème porte une information, et un texte vide lorsqu'il est redondant.</li>
@@ -518,9 +530,9 @@
       <div class="doc-bloc">
         <h3>Devise nationale</h3>
         <p class="doc-bloc-note">
-          La devise figure dans le bloc-marque en romain, sans italique (guide,
-          §&nbsp;2.4, point&nbsp;2), au palier typographique le plus discret. Elle n'est ni un slogan
-          promotionnel, ni un titre&nbsp;: elle ne doit pas être mise en avant au
+          La devise figure dans le bloc-marque en romain, au palier typographique le
+          plus discret. Elle n'est ni un slogan promotionnel, ni un titre&nbsp;: elle
+          ne doit pas être mise en avant au
           détriment de l'intitulé du service. Sur écran étroit, elle est masquée pour
           préserver la lisibilité de la dénomination.
         </p>
@@ -528,11 +540,11 @@
           La devise portée par l'emblème en vigueur est
           <strong>«&nbsp;La Patrie ou la Mort, nous Vaincrons&nbsp;»</strong>. Toute reprise
           doit être conforme au fichier officiel de référence, y compris dans la
-          ponctuation et les capitales. C'est une citation du texte constitutionnel
-          et non un libellé&nbsp;: la règle de la seule majuscule initiale (guide,
-          §&nbsp;2.4, point&nbsp;4) ne s'y applique pas. Le guide, rédigé en 2024, porte
-          encore l'ancienne devise «&nbsp;Unité-Progrès-Justice&nbsp;», remplacée par la
-          loi constitutionnelle n°&nbsp;033-2024/ALT du 29&nbsp;octobre 2024.
+          ponctuation et les capitales&nbsp;: c'est une citation du texte
+          constitutionnel, pas un libellé, et la majuscule initiale seule ne s'y
+          applique pas. Le guide officiel, rédigé en 2024, porte encore l'ancienne
+          devise «&nbsp;Unité-Progrès-Justice&nbsp;», remplacée par la loi
+          constitutionnelle n°&nbsp;033-2024/ALT du 29&nbsp;octobre 2024.
         </div>
       </div>
     </section>
@@ -542,13 +554,14 @@
       <h2>Couleurs</h2>
       <p class="doc-section-intro">
         Les trois couleurs du drapeau adopté le 4 août 1984 constituent la souche
-        chromatique du système, aux valeurs fixées par le guide de la charte graphique
-        des plateformes numériques de l'administration publique (MTDPCE, 2024)&nbsp;:
-        rouge <code>#EF2B2D</code> (RVB 239/43/45), jaune <code>#FCD116</code> (RVB
-        252/209/22), vert <code>#009E49</code> (RVB 0/158/73). Elles sont trop saturées
-        pour habiller une interface entière&nbsp;: chacune est déclinée en dix paliers, la
-        teinte officielle restant fixée au palier indiqué. Les neutres sont des gris
-        pâles légèrement réchauffés, que le guide recommande pour les fonds.
+        chromatique du système, aux valeurs officielles du guide de la charte
+        graphique des plateformes numériques de l'administration publique (MTDPCE,
+        2024)&nbsp;: rouge <code>#EF2B2D</code> (RVB 239/43/45), jaune
+        <code>#FCD116</code> (RVB 252/209/22), vert <code>#009E49</code> (RVB
+        0/158/73). Elles sont trop saturées pour habiller une interface
+        entière&nbsp;: chacune est déclinée en dix paliers, la teinte officielle
+        restant fixée au palier indiqué. Les neutres, qui servent aux fonds, sont
+        des gris pâles légèrement réchauffés.
       </p>
 
       <div class="doc-trio">
@@ -573,10 +586,9 @@
         <h3>Rouge&nbsp;— révolution et courage</h3>
         <p class="doc-bloc-note">
           Employé pour le registre grave&nbsp;: erreurs, suppressions, alertes critiques,
-          signalement de fraude, conformément à la convention «&nbsp;rouge&nbsp;: alerte,
-          danger, interruption&nbsp;» (guide, §&nbsp;2.2, point&nbsp;5). Comme pour le vert,
-          les boutons et les messages emploient le palier 600. Sa charge symbolique interdit de l'utiliser comme
-          couleur d'accentuation ordinaire ou de mise en avant commerciale.
+          signalement de fraude. Les boutons et les messages emploient le
+          palier 600. Sa charge symbolique interdit de l'utiliser comme couleur
+          d'accentuation ordinaire ou de mise en avant commerciale.
         </p>
         <div class="doc-echelle">
           <div class="doc-ton doc-ton--clair"  style="background:#fff1f1" data-copier="#fff1f1"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fff1f1</span></div>
@@ -592,9 +604,10 @@
         </div>
         <p class="fs-legende">
           Équivalence d'impression usuelle&nbsp;: Pantone 032 C.
-          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#ef2b2d/#ffffff"></span>, insuffisant pour
-          du texte courant&nbsp;; sur le palier 600, employé par les boutons et les messages&nbsp;:
-          <span data-contraste="#d41f1f/#ffffff"></span>
+          Texte blanc sur le palier 500&nbsp;:
+          <span data-contraste="#ef2b2d/#ffffff"></span>, insuffisant pour du texte
+          courant&nbsp;; sur le palier 600, employé par les boutons et les
+          messages&nbsp;: <span data-contraste="#d41f1f/#ffffff"></span>
         </p>
       </div>
 
@@ -602,7 +615,7 @@
         <h3>Vert&nbsp;— espérance et richesses agricoles</h3>
         <p class="doc-bloc-note">
           Couleur de l'action, et la plus présente dans une interface conforme.
-          C'est le <strong>palier 600</strong> (<code>#007d3c</code>) qui porte les
+          C'est le palier 600 (<code>#007d3c</code>) qui porte les
           boutons principaux, les liens, les états de validation et les repères de
           navigation active&nbsp;: la teinte officielle du palier 500 n'offre pas un
           contraste suffisant avec du texte blanc. Elle reste celle des marques
@@ -623,9 +636,10 @@
         </div>
         <p class="fs-legende">
           Équivalence d'impression usuelle&nbsp;: Pantone 355 C.
-          Texte blanc sur le palier 500&nbsp;: <span data-contraste="#009e49/#ffffff"></span>, insuffisant pour
-          du texte courant&nbsp;; sur le palier 600, employé par les boutons et les liens&nbsp;:
-          <span data-contraste="#007d3c/#ffffff"></span>
+          Texte blanc sur le palier 500&nbsp;:
+          <span data-contraste="#009e49/#ffffff"></span>, insuffisant pour du texte
+          courant&nbsp;; sur le palier 600, employé par les boutons et les
+          liens&nbsp;: <span data-contraste="#007d3c/#ffffff"></span>
         </p>
       </div>
 
@@ -638,11 +652,10 @@
           et servent à écrire sur fond clair.
         </p>
         <p class="doc-bloc-note">
-          Le guide déconseille d'associer le jaune et le vert (§&nbsp;2.2, point&nbsp;2).
-          La règle vaut pour l'interface&nbsp;: un aplat d'or ne se pose pas contre un
-          bouton vert, une série jaune ne côtoie pas une série verte. Elle ne vaut pas
-          pour les marques nationales&nbsp;— emblème, filet, repère, favicon&nbsp;— où le
-          drapeau associe par nature le jaune et le vert.
+          Le jaune et le vert ne s'associent pas dans l'interface&nbsp;: un aplat d'or
+          ne se pose pas contre un bouton vert, une série jaune ne côtoie pas une
+          série verte. Les marques nationales (emblème, filet, repère, favicon) font
+          exception, puisque le drapeau associe par nature le jaune et le vert.
         </p>
         <div class="doc-echelle">
           <div class="doc-ton doc-ton--clair"  style="background:#fffbe6" data-copier="#fffbe6"><span class="doc-ton-palier">50</span><span class="doc-ton-hex">#fffbe6</span></div>
@@ -700,9 +713,9 @@
           fonctionnel&nbsp;: le bleu administratif pour l'information neutre
           (<code>--info</code>), l'ocre pour l'avertissement (<code>--alerte</code>).
           Le bleu administratif ne structure ni un en-tête, ni une navigation, ni une
-          action. Il ne se confond pas avec le bleu nuit des palettes d'espace,
-          présenté plus bas, qui vient du guide et porte, lui, le bandeau officiel et
-          la navigation de l'espace public.
+          action. Il ne se confond pas avec le bleu nuit de la palette de l'espace
+          public, qui porte, lui, le bandeau officiel et la navigation de cet
+          espace.
         </p>
         <div class="doc-echelle doc-echelle--libre">
           <div class="doc-ton doc-ton--clair"  style="background:#eef4f9" data-copier="#eef4f9"><span class="doc-ton-palier">Bleu 50</span><span class="doc-ton-hex">#eef4f9</span></div>
@@ -718,12 +731,11 @@
       <div class="doc-bloc">
         <h3>Palettes d'espace <code>.fs-espace-public</code> <code>.fs-espace-prive</code></h3>
         <p class="doc-bloc-note">
-          Le guide demande de réserver à chaque espace d'une plateforme sa couleur
-          (§&nbsp;2.2, point&nbsp;8)&nbsp;: l'usager sait d'un coup d'œil s'il consulte
-          l'espace public ou son espace personnel. Les deux palettes que le guide
-          donne en exemple sont reprises telles quelles, en jetons
-          <code>--public-*</code> et <code>--prive-*</code>. La classe d'espace se pose
-          sur <code>&lt;body&gt;</code>.
+          Chaque espace d'une plateforme a sa couleur&nbsp;: l'usager sait d'un coup
+          d'œil s'il consulte l'espace public ou son espace personnel. Les deux
+          palettes sont livrées en jetons <code>--public-*</code> et
+          <code>--prive-*</code>&nbsp;; la classe d'espace se pose sur
+          <code>&lt;body&gt;</code>.
         </p>
 
         <h4 class="fs-mt-6">Espace public</h4>
@@ -764,10 +776,9 @@
           Les autres teintes de chaque palette sont livrées comme jetons, pour les
           éléments propres à l'espace. Elles ne remplacent pas les rôles
           sémantiques&nbsp;: un bouton reste vert, une erreur reste rouge, dans un
-          espace comme dans l'autre (guide, §&nbsp;2.2, point&nbsp;4). Le vert et
-          l'orange de l'espace privé sont des teintes claires&nbsp;: ils ne servent pas
-          à écrire et ne portent pas de texte blanc (§&nbsp;2.2, point&nbsp;2, qui
-          écarte les couleurs pâles pour l'information à lire).
+          espace comme dans l'autre. Le vert et l'orange de l'espace privé sont des
+          teintes claires&nbsp;: ils ne servent pas à écrire et ne portent pas de
+          texte blanc.
         </div>
       </div>
 
@@ -775,77 +786,66 @@
         <h3>Règles d'emploi de la couleur</h3>
         <p class="doc-bloc-note">
           La couleur code l'information&nbsp;: elle différencie et identifie ce qui est
-          affiché. Les règles suivantes reprennent le guide (§&nbsp;2.2), avec la
-          manière dont la charte les applique.
+          affiché.
         </p>
 
         <ol class="fs-liste-puces fs-mesure">
           <li>
-            <strong>Jamais seule.</strong> La couleur n'est pas le seul moyen de
-            communiquer une information ni de distinguer deux objets&nbsp;: un libellé,
-            une forme ou une position la double toujours, pour les usagers
-            daltoniens ou achromates (point&nbsp;1). Dans la charte, un état n'est
-            jamais signalé par sa seule couleur&nbsp;: il porte un libellé.
+            La couleur n'est jamais le seul moyen de communiquer une information ni
+            de distinguer deux objets&nbsp;: un libellé, une forme ou une position la
+            double toujours, pour les usagers daltoniens ou achromates. Un état, en
+            particulier, porte toujours un libellé.
           </li>
           <li>
-            <strong>Associations à éviter.</strong> Rouge avec bleu, jaune avec
-            violet, jaune avec vert (point&nbsp;2). Les séries de graphiques
-            (<code>--serie-1</code> à <code>--serie-6</code>) n'emploient donc ni
-            jaune ni bleu&nbsp;: des verts, des rouges et des neutres seulement.
-            Exception&nbsp;: les marques nationales, où le drapeau associe par nature
-            le jaune et le vert.
+            Rouge et bleu, jaune et violet, jaune et vert ne s'associent pas. Les
+            séries de graphiques (<code>--serie-1</code> à <code>--serie-6</code>)
+            n'emploient donc ni jaune ni bleu&nbsp;: des verts, des rouges et des
+            neutres seulement.
           </li>
           <li>
-            <strong>Fonds.</strong> Pas de fond de fenêtre rouge, jaune ou dérivé
-            (vert, orange)&nbsp;: gris pâle de préférence, sinon bleu foncé
-            (point&nbsp;2). C'est pourquoi les surfaces sont des neutres et le bandeau
-            officiel <code>.fs-officiel</code> est en bleu nuit
-            (<code>--public-900</code>). Pas de bleu pâle, ni de couleur pâle en
-            général, pour un texte que l'usager doit lire.
+            Un fond de fenêtre n'est jamais rouge, jaune ou d'une teinte dérivée
+            (vert, orange)&nbsp;: gris pâle de préférence, sinon bleu foncé. Les
+            surfaces sont donc des neutres, et le bandeau officiel
+            <code>.fs-officiel</code> est en bleu nuit (<code>--public-900</code>).
+            Un texte que l'usager doit lire n'est ni en bleu pâle, ni dans une autre
+            couleur pâle.
           </li>
           <li>
-            <strong>Affichage et saisie.</strong> Les zones d'affichage ont un fond
-            différent de celui des zones de saisie, de préférence gris (point&nbsp;3)&nbsp;:
-            un champ en lecture seule prend le fond <code>--surface-enfoncee</code>.
+            Les zones d'affichage ont un fond différent de celui des zones de
+            saisie, de préférence gris&nbsp;: un champ en lecture seule prend le fond
+            <code>--surface-enfoncee</code>.
           </li>
           <li>
-            <strong>Mêmes codages partout.</strong> Une couleur garde le même sens
-            dans une application et dans toutes celles qui servent les mêmes usagers
-            (point&nbsp;4). C'est l'objet des rôles sémantiques présentés plus bas.
+            Une couleur garde le même sens dans une application et dans toutes celles
+            qui servent les mêmes usagers&nbsp;; les rôles sémantiques le garantissent.
           </li>
           <li>
-            <strong>Conventions.</strong> Vert&nbsp;: tout se passe correctement.
-            Jaune ou orange&nbsp;: attention, vigilance. Rouge&nbsp;: alerte, danger,
-            interruption (point&nbsp;5). Les rôles <code>--succes</code> (vert),
-            <code>--alerte</code> (ocre) et <code>--danger</code> (rouge) suivent cette
-            répartition.
+            Le vert signale que tout se passe correctement, le jaune ou l'orange
+            appelle à la vigilance, le rouge marque une alerte, un danger, une
+            interruption. Les rôles <code>--succes</code> (vert),
+            <code>--alerte</code> (ocre) et <code>--danger</code> (rouge) suivent
+            cette répartition.
           </li>
           <li>
-            <strong>Cinq couleurs au plus</strong> dans un même écran, et dans une
-            même application&nbsp;; au-delà, l'usager ne saisit plus le rôle de chacune
-            (point&nbsp;6). Un graphique n'affiche donc pas plus de cinq séries à la
-            fois.
+            Pas plus de cinq couleurs dans un même écran, ni dans une même
+            application&nbsp;: au-delà, l'usager ne saisit plus le rôle de chacune. Un
+            graphique n'affiche pas plus de cinq séries à la fois.
           </li>
           <li>
-            <strong>Impression en noir et blanc.</strong> Chaque couleur doit rester
-            distincte en niveaux de gris sur une imprimante monochrome&nbsp;; si les
-            niveaux de gris ne suffisent pas, prévoir des hachures (point&nbsp;7).
-            L'emblème a sa propre version en gris, <code>armoiries-gris.svg</code>.
-          </li>
-          <li>
-            <strong>Une couleur par espace</strong>, selon les palettes d'espace
-            ci-dessus (point&nbsp;8).
+            Chaque couleur reste distincte en niveaux de gris sur une imprimante
+            monochrome&nbsp;; quand les niveaux de gris ne suffisent pas, on ajoute des
+            hachures. L'emblème a sa propre version en gris,
+            <code>armoiries-gris.svg</code>.
           </li>
         </ol>
 
         <h4 class="fs-mt-8">Couleur des textes</h4>
         <p class="doc-bloc-note">
-          Le texte est noir par défaut, nuancé vers le gris pour les textes généraux
-          (guide, §&nbsp;2.3). Le guide obtient cette nuance par une opacité&nbsp;; la
-          charte emploie des gris pleins de l'échelle des neutres&nbsp;—
-          <code>--texte</code> (<code>#211d1a</code>) pour le texte courant,
-          <code>--texte-attenue</code> (<code>#635c55</code>) pour le texte
-          secondaire&nbsp;— dont le contraste se calcule sans dépendre du fond.
+          Le texte est noir par défaut, nuancé vers le gris pour les textes
+          généraux. La nuance vient de gris pleins de l'échelle des neutres, pas
+          d'une opacité&nbsp;: <code>--texte</code> (<code>#211d1a</code>) pour le
+          texte courant, <code>--texte-attenue</code> (<code>#635c55</code>) pour le
+          texte secondaire. Leur contraste se calcule ainsi sans dépendre du fond.
         </p>
       </div>
 
@@ -918,12 +918,11 @@
     <section class="doc-section" id="typographie">
       <h2>Typographie</h2>
       <p class="doc-section-intro">
-        Deux familles, celles que propose le guide (§&nbsp;2.4, point&nbsp;5), chacune
-        avec un rôle assigné. Montserrat porte les titres principaux et les
-        boutons d'action (§&nbsp;2.4.1.1). Roboto porte tout le reste&nbsp;: texte
+        Deux familles, chacune avec un rôle assigné. Montserrat porte les titres
+        principaux et les boutons d'action. Roboto porte tout le reste&nbsp;: texte
         courant, libellés de champ, liens de navigation et menus, onglets, en-têtes
-        de tableau (§&nbsp;2.4.1.2). Les niveaux de lecture se font ressortir par le
-        corps et la graisse, pas par une troisième police.
+        de tableau. Les niveaux de lecture ressortent par le corps et la graisse,
+        pas par une troisième police.
       </p>
 
       <div class="doc-bloc">
@@ -1019,8 +1018,7 @@
           Les fichiers sont des <strong>polices variables</strong>&nbsp;: un seul fichier
           par famille couvre toutes les graisses, de 100 à 900. Cinq fichiers
           statiques auraient pesé bien davantage. Aucune graisse intermédiaire n'est
-          pour autant autorisée&nbsp;— l'échelle reste celle des cinq paliers
-          ci-dessus.
+          pour autant autorisée&nbsp;: l'échelle s'en tient aux cinq paliers.
         </div>
       </div>
 
@@ -1034,11 +1032,9 @@
           c'est un fichier de moins sur le chemin critique.
         </p>
         <p class="doc-bloc-note">
-          Ce n'est pas une troisième famille au sens du guide&nbsp;: celui-ci admet un
-          codage particulier, dont une police différente, pour distinguer certains
-          textes (§&nbsp;2.4, point&nbsp;3). La chasse fixe est réservée à ce codage,
-          un champ ou une cellule entière à la fois, jamais au milieu d'un texte
-          courant.
+          La chasse fixe ne compte pas comme une troisième famille&nbsp;: c'est un
+          codage particulier, admis pour distinguer certains textes. Elle s'applique
+          à un champ ou à une cellule entière, jamais au milieu d'un texte courant.
         </p>
 
         <div class="doc-demo" data-libelle="Chasse fixe">
@@ -1226,9 +1222,9 @@
       <div class="doc-bloc">
         <h3>Échelle typographique</h3>
         <p class="doc-bloc-note">
-          Le guide fixe trois tailles par défaut (§&nbsp;2.4.1.3)&nbsp;: 14&nbsp;px pour
-          le texte courant (<code>--taille-md</code>), 12&nbsp;px pour les liens de
-          navigation et les menus (<code>--taille-menu</code>), 2,5&nbsp;rem pour les
+          Trois tailles servent par défaut&nbsp;: 14&nbsp;px pour le texte courant
+          (<code>--taille-md</code>), 12&nbsp;px pour les liens de navigation et les
+          menus (<code>--taille-menu</code>), 2,5&nbsp;rem pour les
           grands titres. Les tailles de titre sont fluides&nbsp;: elles s'interpolent
           entre 360&nbsp;px et 1280&nbsp;px de largeur de fenêtre, ce qui évite les
           paliers brutaux sur les formats intermédiaires, et le titre de rang&nbsp;1
@@ -1285,11 +1281,10 @@
       <div class="doc-bloc">
         <h3>Bornes de taille et masques de saisie</h3>
         <p class="doc-bloc-note">
-          Le guide conseille, pour le texte, une taille comprise entre 8 et
-          16&nbsp;points (§&nbsp;2.4, point&nbsp;1)&nbsp;: en dessous, les caractères sont
-          quasiment illisibles&nbsp;; au-dessus, ils gênent la lecture. Les titres
-          relèvent de leur propre échelle, plafonnée à 2,5&nbsp;rem
-          (§&nbsp;2.4.1.3).
+          Le guide officiel borne la taille du texte entre 8 et 16&nbsp;points&nbsp;: en
+          dessous, les caractères sont quasiment illisibles&nbsp;; au-dessus, ils
+          gênent la lecture. Les titres relèvent de leur propre échelle, plafonnée à
+          2,5&nbsp;rem.
         </p>
 
         <dl class="fs-definitions">
@@ -1301,20 +1296,15 @@
             <dt>Maximum</dt>
             <dd>16&nbsp;points, soit environ 21&nbsp;px. Le plus grand texte courant de la charte, le chapeau, fait 17&nbsp;px.</dd>
           </div>
-          <div>
-            <dt>Par défaut</dt>
-            <dd>14&nbsp;px pour le texte, 12&nbsp;px pour les liens de navigation et les menus, 2,5&nbsp;rem au plus pour les grands titres.</dd>
-          </div>
         </dl>
 
         <h4 class="fs-mt-8">Masques de saisie</h4>
         <p class="doc-bloc-note">
           Pour une date, un montant ou un numéro de téléphone, le format attendu doit
-          être explicite (guide, §&nbsp;2.4.1.4). Dans la charte, il l'est par le
-          composant lui-même plutôt que par un gabarit de caractères tapés dans le
-          champ&nbsp;: la date se saisit en trois champs jour, mois, année, avec un
-          exemple concret dans l'aide&nbsp;; le montant porte son unité
-          (<code>F&nbsp;CFA</code>) dans le libellé et en affixe&nbsp;; le numéro de
+          être explicite. C'est le composant lui-même qui l'indique, plutôt qu'un
+          gabarit de caractères tapés dans le champ&nbsp;: la date se saisit en trois
+          champs jour, mois, année, avec un exemple concret dans l'aide&nbsp;; le
+          montant porte son unité (<code>F&nbsp;CFA</code>) dans le libellé et en affixe&nbsp;; le numéro de
           téléphone affiche l'indicatif <code>+226</code> en affixe et se lit par
           paires de chiffres. Voir les
           <a href="{{ page('composants') }}#formulaires">composants de formulaire</a>.
@@ -1331,15 +1321,15 @@
               <li>Respecter la hiérarchie des niveaux de titre sans en sauter&nbsp;: un <code>h3</code> suit un <code>h2</code>.</li>
               <li>Aligner les chiffres en colonne avec <code>font-variant-numeric: tabular-nums</code> dans les tableaux et les montants.</li>
               <li>Écrire les montants en francs CFA avec séparateur de milliers et unité explicite.</li>
-              <li>Ne mettre une majuscule qu'à l'initiale du premier mot d'un libellé, d'une option de menu, d'un bouton ou d'un titre&nbsp;: «&nbsp;Pièces à fournir&nbsp;», pas «&nbsp;Pièces À Fournir&nbsp;» (guide, §&nbsp;2.4, point&nbsp;4). Les noms propres et les sigles gardent leurs capitales.</li>
-              <li>Une seule police par champ. Un codage particulier (graisse, couleur, soulignement, chasse fixe) reste admis pour distinguer un mot clé, un lien ou le libellé d'un champ obligatoire (guide, §&nbsp;2.4, point&nbsp;3).</li>
+              <li>Ne mettre une majuscule qu'à l'initiale du premier mot d'un libellé, d'une option de menu, d'un bouton ou d'un titre&nbsp;: «&nbsp;Pièces à fournir&nbsp;», pas «&nbsp;Pièces À Fournir&nbsp;». Les noms propres et les sigles gardent leurs capitales.</li>
+              <li>Une seule police par champ. Un codage particulier (graisse, couleur, soulignement, chasse fixe) reste admis pour distinguer un mot clé, un lien ou le libellé d'un champ obligatoire.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
               <li>Composer en capitales un libellé, un titre ou un paragraphe. Seul le nom «&nbsp;BURKINA FASO&nbsp;» du bloc-marque, qui est un logotype, reste en capitales.</li>
-              <li>Employer l'italique, y compris pour une citation ou une mise en valeur&nbsp;: il nuit à la lisibilité à l'écran (guide, §&nbsp;2.4, point&nbsp;2).</li>
+              <li>Employer l'italique, y compris pour une citation ou une mise en valeur&nbsp;: il nuit à la lisibilité à l'écran.</li>
               <li>Justifier le texte&nbsp;: sans césure, la justification crée des lézardes ingérables.</li>
               <li>Descendre sous 14&nbsp;px pour un contenu que l'usager doit lire pour agir.</li>
               <li>Introduire une troisième famille typographique pour un besoin ponctuel.</li>
@@ -1356,9 +1346,8 @@
         Une image de service public informe&nbsp;; elle n'habille pas. La question à se
         poser avant d'en placer une n'est pas «&nbsp;qu'est-ce qui irait bien ici&nbsp;?&nbsp;» mais
         «&nbsp;qu'est-ce que l'usager comprendra mieux grâce à elle&nbsp;?&nbsp;». Si la réponse
-        n'est pas évidente, la place reste vide. Le guide le dit à sa
-        manière&nbsp;: chaque prise de vue doit traduire la volonté de
-        <strong>communiquer par la preuve</strong> (guide, §&nbsp;4.2.1.1).
+        n'est pas évidente, la place reste vide. Chaque prise de vue traduit la
+        volonté de <strong>communiquer par la preuve</strong>.
       </p>
 
       <div class="doc-bloc">
@@ -1406,21 +1395,21 @@
         <h3>Prises de vue et cadrages</h3>
         <p class="doc-bloc-note">
           La simplicité et l'efficacité des clichés se recherchent systématiquement,
-          dans le cadrage comme dans la mise en scène (guide, §&nbsp;4.2.1).
+          dans le cadrage comme dans la mise en scène.
         </p>
 
         <dl class="fs-definitions">
           <div>
             <dt>Cadrages</dt>
-            <dd>Gros plan, plan rapproché ou plan large, rien d'autre. Une mise en scène épurée&nbsp;: de grandes lignes, le moins d'éléments possible, pour la lisibilité (§&nbsp;4.2.1.2).</dd>
+            <dd>Gros plan, plan rapproché ou plan large, rien d'autre. Une mise en scène épurée&nbsp;: de grandes lignes, le moins d'éléments possible, pour la lisibilité.</dd>
           </div>
           <div>
             <dt>Sujet</dt>
-            <dd>Des visuels humains et factuels&nbsp;: des personnes, des lieux, des documents réels. Pas de représentation conceptuelle ou symbolique (§&nbsp;4.2.1.2).</dd>
+            <dd>Des visuels humains et factuels&nbsp;: des personnes, des lieux, des documents réels. Pas de représentation conceptuelle ou symbolique.</dd>
           </div>
           <div>
             <dt>Couleurs</dt>
-            <dd>Des images sans saturation excessive, accordées aux couleurs du logo et au gris de la palette, pour conserver l'unité visuelle (§&nbsp;4.2.2).</dd>
+            <dd>Des images sans saturation excessive, accordées aux couleurs du logo et au gris de la palette, pour conserver l'unité visuelle.</dd>
           </div>
         </dl>
 
@@ -1442,7 +1431,6 @@
             </ul>
           </div>
         </div>
-        <p class="fs-legende fs-mt-4">Principes de composition du guide (§&nbsp;4.2.3, tableau&nbsp;1).</p>
       </div>
 
       <div class="doc-bloc">
@@ -1478,10 +1466,7 @@
       <div class="doc-bloc">
         <h3>Formats et optimisation</h3>
         <p class="doc-bloc-note">
-          Un bon rapport qualité/poids améliore l'accessibilité d'une page (guide,
-          §&nbsp;4.3). Le guide date de 2024 mais reprend des recommandations plus
-          anciennes&nbsp;; la charte en garde l'intention et adapte deux points au web
-          actuel.
+          Un bon rapport qualité/poids améliore l'accessibilité d'une page.
         </p>
 
         <div class="fs-tableau-cadre">
@@ -1494,7 +1479,7 @@
               <tr>
                 <td>Photographie</td>
                 <td>JPEG, ou WebP</td>
-                <td>Qualité autour de 75&nbsp;%, le compromis que retient le guide. Le WebP est admis comme alternative, à qualité comparable pour un poids moindre.</td>
+                <td>Qualité autour de 75&nbsp;%. Le WebP est admis en alternative&nbsp;: qualité comparable, poids moindre.</td>
               </tr>
               <tr>
                 <td>Logo, pictogramme, schéma</td>
@@ -1511,14 +1496,14 @@
         </div>
 
         <div class="doc-note fs-mt-6">
-          <strong>Ce que la charte adapte.</strong> Le guide recommande le GIF pour les
-          logotypes et les pictogrammes&nbsp;: ses 256 couleurs le rendent léger, mais
-          il pixellise à l'agrandissement et gère mal la transparence. Le SVG, que le
-          guide préconise lui-même pour les icônes (§&nbsp;4.1), et le PNG le
-          remplacent. Le guide fixe aussi une résolution de 72&nbsp;dpi&nbsp;: cette
-          valeur n'a aucun effet sur l'affichage web. On raisonne en pixels&nbsp;: une
-          image est servie aux dimensions où elle s'affiche, au double au plus pour
-          les écrans haute densité.
+          <strong>Écarts assumés.</strong> Le guide officiel, qui reprend des
+          recommandations antérieures au web actuel, conseille le GIF pour les
+          logotypes et les pictogrammes, et une résolution de 72&nbsp;dpi. Le GIF est
+          léger grâce à ses 256 couleurs, mais il pixellise à l'agrandissement et
+          gère mal la transparence&nbsp;: le SVG, déjà de règle pour les icônes, et le
+          PNG le remplacent. Les 72&nbsp;dpi, eux, n'ont aucun effet à l'écran. On
+          raisonne en pixels&nbsp;: une image est servie aux dimensions où elle
+          s'affiche, au double au plus pour les écrans haute densité.
         </div>
       </div>
 
@@ -1782,21 +1767,20 @@
       </p>
 
       <div class="doc-bloc">
-        <h3>Principes du guide</h3>
+        <h3>Fonction et constance</h3>
         <p class="doc-bloc-note">
           Une icône a deux fonctions&nbsp;: aider à identifier la nature d'une
-          information, ou représenter l'action d'un bouton de commande (guide,
-          §&nbsp;4.1). Elle doit être explicite, c'est-à-dire représentative de l'action
-          ou du concept qu'elle désigne, et constante&nbsp;: une même action ou un même
-          concept garde la même icône dans toute l'application, jamais deux icônes
-          pour une seule chose.
+          information, ou représenter l'action d'un bouton de commande. Elle est
+          explicite, c'est-à-dire représentative de l'action ou du concept qu'elle
+          désigne, et constante&nbsp;: une même action ou un même concept garde la
+          même icône dans toute l'application, jamais deux icônes pour une seule
+          chose.
         </p>
         <div class="doc-note">
-          Le guide préconise des images vectorielles et suggère les jeux de Font
-          Awesome et d'Icones8. La charte fournit son propre jeu vectoriel, servi
-          depuis le domaine du service&nbsp;: pas de dépendance à un tiers, et un dessin
-          homogène avec l'emblème et les composants. Les principes du guide s'y
-          appliquent tels quels.
+          Le guide officiel suggère les jeux Font Awesome et Icones8. La charte
+          fournit son propre jeu vectoriel, servi depuis le domaine du
+          service&nbsp;: pas de dépendance à un tiers, et un dessin homogène avec
+          l'emblème et les composants.
         </div>
       </div>
 

@@ -53,7 +53,7 @@
               </tr>
               <tr>
                 <td>Taille du corps de texte</td>
-                <td class="fs-tabulaire">14&nbsp;px, 12&nbsp;px pour la navigation (guide, §&nbsp;2.4.1.3)</td>
+                <td class="fs-tabulaire">14&nbsp;px, 12&nbsp;px pour la navigation</td>
                 <td><span class="fs-badge fs-badge--succes">Système</span></td>
               </tr>
               <tr>
@@ -106,9 +106,10 @@
         <p class="doc-bloc-note">
           La règle des 44&nbsp;px est celle de la charte, plus exigeante que le
           niveau visé&nbsp;: elle reprend le critère 2.5.5 de WCAG&nbsp;2.1, de
-          niveau&nbsp;AAA. Pour mémoire, WCAG&nbsp;2.2, que la charte ne revendique pas
-          encore, fixe le plancher&nbsp;AA à 24&nbsp;×&nbsp;24&nbsp;px (critère 2.5.8). Les deux cas ci-dessous restent très au-dessus de ce
-          plancher, et sont documentés ici plutôt que passés sous silence.
+          niveau&nbsp;AAA. WCAG&nbsp;2.2, que la charte ne revendique pas encore, fixe le
+          plancher&nbsp;AA à 24&nbsp;×&nbsp;24&nbsp;px (critère 2.5.8). Les deux exceptions
+          restent très au-dessus de ce plancher, et sont documentées ici plutôt que
+          passées sous silence.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -531,8 +532,8 @@
       <div class="doc-bloc" id="vocabulaire">
         <h3>Vocabulaire et libellés</h3>
         <p class="doc-bloc-note">
-          Règles du guide pour tous les textes d'écran&nbsp;: libellés, titres de
-          colonne, en-têtes de groupe, messages (guide, §&nbsp;4.4.4).
+          Ces règles valent pour tous les textes d'écran&nbsp;: libellés, titres de
+          colonne, en-têtes de groupe, messages.
         </p>
         <ul class="fs-liste-puces fs-mesure">
           <li>Employer le vocabulaire du domaine de l'usager, pas celui de l'administration qui instruit&nbsp;: «&nbsp;acte de naissance&nbsp;» plutôt que l'intitulé du registre.</li>
@@ -550,7 +551,7 @@
           Un message d'erreur indique la correction attendue. Constater l'erreur sans
           dire quoi faire laisse l'usager bloqué. Le ton reste concis et jamais
           vexatoire&nbsp;: aucun message ne contient «&nbsp;faute&nbsp;», «&nbsp;mauvaise
-          manipulation&nbsp;» ni «&nbsp;illégal&nbsp;» (guide, §&nbsp;7.1.1, point&nbsp;7).
+          manipulation&nbsp;» ni «&nbsp;illégal&nbsp;».
         </p>
 
         <div class="fs-tableau-cadre">
@@ -587,12 +588,11 @@
       <div class="doc-bloc" id="messages-standard">
         <h3>Messages standardisés</h3>
         <p class="doc-bloc-note">
-          Le guide fixe la formulation des situations les plus courantes (guide,
-          §&nbsp;8.1.2). Les textes ci-dessous la reprennent, mise en typographie
-          française&nbsp;; les mentions entre crochets se remplacent par la valeur réelle.
-          Partout où le message accompagne un champ, il s'affiche sous ce champ, sans
-          bouton à acquitter&nbsp;: le bouton du guide ne sert que dans une boîte de
-          message.
+          Les situations les plus courantes ont une formulation fixée par le guide,
+          reprise ici en typographie française. Les mentions entre crochets se
+          remplacent par la valeur réelle. Quand le message accompagne un champ, il
+          s'affiche sous ce champ, sans bouton à acquitter&nbsp;: la colonne
+          «&nbsp;Boutons&nbsp;» ne vaut que pour une boîte de message.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -655,20 +655,20 @@
           </table>
         </div>
         <p class="fs-legende fs-mt-4">
-          Ces textes sont repris mot pour mot du guide, «&nbsp;Veuillez&nbsp;» compris&nbsp;: ils
-          sont faits pour être identiques d'une application à l'autre, et c'est la seule
-          exception à la règle de l'impératif direct énoncée plus haut. Pour une erreur de saisie, le texte du tableau «&nbsp;Messages d'erreur&nbsp;» va
-          plus loin que le message standard&nbsp;: il donne aussi la correction.
+          Ces textes se reprennent mot pour mot, «&nbsp;Veuillez&nbsp;» compris&nbsp;: ils
+          sont faits pour être identiques d'une application à l'autre, et c'est la
+          seule exception à la règle de l'impératif direct. Pour une erreur de saisie,
+          le tableau «&nbsp;Messages d'erreur&nbsp;» va plus loin que le message
+          standard&nbsp;: il donne aussi la correction.
         </p>
       </div>
 
       <div class="doc-bloc" id="boites-message">
         <h3>Boutons des boîtes de message</h3>
         <p class="doc-bloc-note">
-          Chaque type de message a ses boutons (guide, §&nbsp;7.1.2 à 7.1.5). Une boîte
-          de message porte un titre qui indique son origine, une icône à gauche du
-          texte et, s'il y en a un, l'identifiant du message en bas à droite
-          (guide, §&nbsp;7.1.1).
+          Chaque type de message a ses boutons. La construction de la boîte, titre,
+          icône et identifiant, est décrite avec la modale dans
+          <a href="{{ page('composants') }}#superposition">Composants</a>.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -689,9 +689,8 @@
         <h3>Intitulés d'action</h3>
         <p class="doc-bloc-note">
           Un bouton décrit ce qu'il déclenche. Un usager qui ne lit que les boutons
-          doit comprendre la conséquence de son geste. Le guide déconseille les
-          questions auxquelles on ne répond que par «&nbsp;Oui&nbsp;» ou «&nbsp;Non&nbsp;»
-          et préfère des verbes d'action (guide, §&nbsp;7.1.1, point&nbsp;3).
+          doit comprendre la conséquence de son geste. Pas de question à laquelle
+          on ne répond que par «&nbsp;Oui&nbsp;» ou «&nbsp;Non&nbsp;»&nbsp;: un verbe d'action.
         </p>
 
         <div class="doc-usages">
@@ -716,12 +715,10 @@
         </div>
 
         <div class="doc-note fs-mt-6">
-          <strong>«&nbsp;Continuer&nbsp;» et «&nbsp;Arrêter&nbsp;» ont leur place dans les
-          boîtes de confirmation et d'avertissement</strong>, où le guide les prévoit
-          (guide, §&nbsp;7.1.3 et 7.1.4)&nbsp;: la question posée par la boîte nomme
-          l'action, le bouton y répond. Partout ailleurs, sur un formulaire ou entre
-          deux étapes, le bouton nomme ce qu'il déclenche&nbsp;: «&nbsp;Passer au
-          paiement&nbsp;», pas «&nbsp;Continuer&nbsp;».
+          «&nbsp;Continuer&nbsp;» et «&nbsp;Arrêter&nbsp;» restent admis dans les boîtes de
+          confirmation et d'avertissement&nbsp;: la question posée par la boîte nomme
+          l'action, le bouton y répond. Ailleurs, le bouton nomme ce qu'il
+          déclenche&nbsp;: «&nbsp;Passer au paiement&nbsp;».
         </div>
       </div>
 
@@ -729,8 +726,8 @@
         <h3>Temps de réponse</h3>
         <p class="doc-bloc-note">
           Ce que l'usager perçoit selon la durée d'attente, et ce que l'interface lui
-          doit (guide, §&nbsp;7.2). Sur un réseau lent, les seuils sont franchis plus
-          souvent qu'on ne le croit.
+          doit. Sur un réseau lent, les seuils sont franchis plus souvent qu'on ne
+          le croit.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -739,25 +736,26 @@
             </thead>
             <tbody>
               <tr><td class="fs-tabulaire">0,1&nbsp;s</td><td>ne perçoit plus la réaction comme instantanée</td><td>Retour visuel immédiat sur l'élément actionné (état du bouton)</td></tr>
-              <tr><td class="fs-tabulaire">1&nbsp;s</td><td>a l'impression de ne plus contrôler le système</td><td>Pointeur d'attente&nbsp;: <code>aria-busy="true"</code> sur la zone en cours de traitement, ou sur <code>&lt;body&gt;</code> si plus rien n'est utilisable (guide, §&nbsp;7.1.6)</td></tr>
+              <tr><td class="fs-tabulaire">1&nbsp;s</td><td>a l'impression de ne plus contrôler le système</td><td>Pointeur d'attente&nbsp;: <code>aria-busy="true"</code> sur la zone en cours de traitement, ou sur <code>&lt;body&gt;</code> si plus rien n'est utilisable</td></tr>
               <tr><td class="fs-tabulaire">6&nbsp;s</td><td>a besoin de savoir où en est le traitement</td><td>Indicateur de progression <code>.fs-jauge</code>, avec le pourcentage ou le temps écoulé en texte</td></tr>
               <tr><td class="fs-tabulaire">10&nbsp;s</td><td>n'est plus attentif à l'échange en cours</td><td>Indicateur de progression obligatoire, raison de l'attente affichée, message à la fin du traitement</td></tr>
             </tbody>
           </table>
         </div>
-        <ul class="fs-liste-puces fs-mesure fs-mt-6">
-          <li>Dire pourquoi l'usager attend&nbsp;: «&nbsp;Vérification de vos pièces auprès du registre&nbsp;» se supporte mieux qu'une roue qui tourne.</li>
-          <li>Si l'usager peut continuer à travailler, l'indicateur reste dans la page&nbsp;; s'il ne le peut pas, il s'affiche dans une fenêtre modale.</li>
-          <li>Un bouton «&nbsp;Annuler&nbsp;» ou «&nbsp;Arrêter&nbsp;» interrompt réellement le traitement et rend la main. Un bouton qui ne fait que masquer l'indicateur est proscrit.</li>
-        </ul>
+        <p class="fs-legende fs-mt-4">
+          Le libellé de l'attente, la place de l'indicateur et le bouton
+          d'interruption sont décrits avec la jauge, dans
+          <a href="{{ page('composants') }}#retour-systeme">Composants</a>.
+        </p>
       </div>
 
       <div class="doc-bloc" id="confidentialite">
         <h3>Champs confidentiels</h3>
         <p class="doc-bloc-note">
-          Les caractères saisis dans un champ confidentiel sont masqués (guide,
-          §&nbsp;7.3)&nbsp;: mot de passe, code secret de paiement. Le masquage s'obtient par <code>type="password"</code>&nbsp;; il
-          ne dispense ni du libellé ni de l'indication du format attendu.
+          Les caractères saisis dans un champ confidentiel sont masqués&nbsp;: mot de
+          passe, code secret de paiement. Le masquage s'obtient par
+          <code>type="password"</code>&nbsp;; il ne dispense ni du libellé ni de
+          l'indication du format attendu.
         </p>
       </div>
 

@@ -4,7 +4,7 @@
   "date": "2026-10-29",
   "source": "assets/css/tokens.css",
   "avertissement": "Projection de la feuille de jetons CSS, qui reste la source faisant foi. Fichier produit par outils/jetons.js ; ne jamais le modifier directement. La verification « node outils/jetons.js --verifier » fait partie de la recette.",
-  "total": 202,
+  "total": 204,
   "familles": {
     "palette": "Valeurs chromatiques absolues. Jamais consommees directement par un composant.",
     "role": "Ce que les composants consomment. Changer de theme revient a reaffecter ces jetons.",
@@ -468,6 +468,12 @@
       },
       "prive-fond": {
         "valeur": "#f0f0f7"
+      },
+      "indigo-800": {
+        "valeur": "#22305a"
+      },
+      "ecru": {
+        "valeur": "#efe6d2"
       },
       "surface": {
         "valeur": "var(--neutre-0)"

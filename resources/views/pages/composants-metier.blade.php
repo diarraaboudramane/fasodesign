@@ -186,7 +186,7 @@
               <li>Nommer le bénéficiaire et rappeler qu'aucun versement sur un compte personnel n'est autorisé.</li>
               <li>Indiquer ce qui se passe après le paiement et sous quel délai.</li>
               <li>Délivrer une quittance téléchargeable dès l'encaissement.</li>
-              <li>Présélectionner un canal&nbsp;: un groupe de boutons radio a toujours une valeur par défaut (guide, § 6.1.3). On retient le canal le plus employé, ou celui que l'usager a choisi la dernière fois.</li>
+              <li>Présélectionner un canal&nbsp;: un groupe de boutons radio a toujours une valeur par défaut. On retient le canal le plus employé, ou celui que l'usager a choisi la dernière fois.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
@@ -196,7 +196,7 @@
               <li>Ajouter un frais après le récapitulatif.</li>
               <li>Présélectionner une option payante.</li>
               <li>Demander un code de confirmation ailleurs que sur le service lui-même.</li>
-              <li>Déclencher le paiement au choix du canal&nbsp;: seul le bouton de paiement engage le débit, après une validation explicite (guide, § 6.1.1 et § 6.2).</li>
+              <li>Déclencher le paiement au choix du canal&nbsp;: seul le bouton de paiement engage le débit, après une validation explicite.</li>
             </ul>
           </div>
         </div>
@@ -547,10 +547,10 @@
       <div class="doc-bloc">
         <h3>États normalisés</h3>
         <p class="doc-bloc-note">
-          Le traitement visuel suit les conventions du guide (§ 2.2)&nbsp;: le vert dit
-          que tout se passe bien, l'ocre, proche de l'orange, appelle à la vigilance,
-          le rouge signale un refus. Chaque état garde le même codage dans tous les services, et son
-          libellé l'accompagne toujours&nbsp;: la couleur n'est jamais le seul repère.
+          Le vert dit que tout se passe bien, l'ocre, proche de l'orange, appelle à
+          la vigilance, le rouge signale un refus. Chaque état garde le même codage
+          dans tous les services, et son libellé l'accompagne toujours&nbsp;: la
+          couleur n'est jamais le seul repère.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">

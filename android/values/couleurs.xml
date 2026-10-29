@@ -65,6 +65,8 @@
   <color name="faso_prive_orange">#F2AA3E</color>
   <color name="faso_prive_bleu">#535FDD</color>
   <color name="faso_prive_fond">#F0F0F7</color>
+  <color name="faso_indigo_800">#22305A</color>
+  <color name="faso_ecru">#EFE6D2</color>
   <color name="faso_ocre_50">#FDF4E3</color>
   <color name="faso_ocre_100">#F9E6C2</color>
   <color name="faso_ocre_500">#B07800</color>

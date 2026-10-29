@@ -44,11 +44,11 @@
       <div class="doc-bloc" id="couleur-espace">
         <h3>Couleur d'espace</h3>
         <p class="doc-bloc-note">
-          Le guide réserve une couleur à chaque espace d'une plateforme (guide, § 2.2,
-          point 8). La barre de navigation la porte&nbsp;: l'usager sait d'un coup d'œil
-          s'il consulte l'espace public ou s'il est dans son espace personnel. La classe
-          se pose une fois, sur <code>&lt;body&gt;</code>, et ne concerne que la navigation
-          principale (bloc&nbsp;4 ci-dessus).
+          Chaque espace d'une plateforme a sa couleur, et la barre de navigation la
+          porte&nbsp;: l'usager sait d'un coup d'œil s'il consulte l'espace public ou
+          s'il est dans son espace personnel. La classe se pose une fois, sur
+          <code>&lt;body&gt;</code>, et ne concerne que la navigation principale
+          (bloc&nbsp;4 de l'ossature).
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -74,15 +74,15 @@
           Sans classe d'espace, la navigation garde son rendu neutre. Les autres teintes
           des deux palettes (violet et gris pâle du public, vert et orange du privé) sont
           livrées comme jetons sans être posées sur un composant&nbsp;: qui les emploie
-          reste tenu par la limite de cinq couleurs par écran (guide, § 2.2, point 6).
+          reste tenu par la limite de cinq couleurs par écran.
         </p>
       </div>
 
       <div class="doc-bloc" id="enchainement">
         <h3>Enchaînement des écrans</h3>
         <p class="doc-bloc-note">
-          Le guide distingue deux manières de faire cheminer l'usager (guide, § 5.2.1).
-          Le choix ne relève pas du goût&nbsp;: il dépend de la tâche.
+          Il y a deux manières de faire cheminer l'usager. Le choix ne relève pas du
+          goût&nbsp;: il dépend de la tâche.
         </p>
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
@@ -105,19 +105,19 @@
           </table>
         </div>
         <ul class="fs-liste-puces fs-mesure fs-mt-6">
-          <li>La profondeur d'une plateforme se limite à trois niveaux, par exemple accueil, rubrique, démarche (guide, § 5.2.2). Au-delà, l'usager se perd&nbsp;; le fil d'Ariane ne compense pas une arborescence trop profonde.</li>
-          <li>Chaque écran est un compromis entre densité et nombre d'écrans (guide, § 4.4.1)&nbsp;: un écran trop chargé multiplie les erreurs et allonge la recherche d'une information, une information trop diluée fait perdre la vue d'ensemble. Le tableau de bord agent, consulté toute la journée, peut être dense&nbsp;; un parcours citoyen sur téléphone ne le peut pas.</li>
+          <li>La profondeur d'une plateforme se limite à trois niveaux, par exemple accueil, rubrique, démarche. Au-delà, l'usager se perd&nbsp;; le fil d'Ariane ne compense pas une arborescence trop profonde.</li>
+          <li>Chaque écran est un compromis entre densité et nombre d'écrans&nbsp;: un écran trop chargé multiplie les erreurs et allonge la recherche d'une information, une information trop diluée fait perdre la vue d'ensemble. Le tableau de bord agent, consulté toute la journée, peut être dense&nbsp;; un parcours citoyen sur téléphone ne le peut pas.</li>
         </ul>
       </div>
 
       <div class="doc-bloc" id="disposition">
         <h3>Disposition des éléments</h3>
         <p class="doc-bloc-note">
-          Règles communes à la zone de contenu de tous les gabarits (guide, § 4.4.2).
+          Règles communes à la zone de contenu de tous les gabarits.
         </p>
         <ul class="fs-liste-puces fs-mesure">
           <li>Regrouper les données en rubriques selon les habitudes de l'usager&nbsp;: fréquence d'usage, ordre dans la tâche, importance (saisies obligatoires avant les facultatives). Le groupe le plus important selon ce critère vient en haut.</li>
-          <li>Aligner verticalement les champs et leurs libellés. La charte place le libellé au-dessus du champ, cadré à gauche, ce qui est le troisième cas prévu par le guide et le seul qui résiste à un écran étroit.</li>
+          <li>Aligner verticalement les champs et leurs libellés. La charte place le libellé au-dessus du champ, cadré à gauche&nbsp;: c'est la seule disposition qui résiste à un écran étroit.</li>
           <li>Donner un libellé à chaque donnée et un en-tête à chaque groupe de données.</li>
           <li>Séparer les catégories d'informations par des espaces. Les encadrements s'emploient avec parcimonie&nbsp;: un groupe qui a déjà un en-tête n'a pas besoin d'un cadre en plus.</li>
           <li>Ne jamais encadrer un groupe de boutons de commande.</li>
@@ -199,8 +199,8 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Règles</p>
             <ul>
-              <li>Les blocs suivent l'architecture du guide de la charte graphique des plateformes numériques (§ 3.1.1)&nbsp;: navigation principale, services, contacts, pied de page.</li>
-              <li>Le bouton de connexion à l'espace privé figure dans l'en-tête, à côté de la navigation horizontale vers les services (guide, § 1.2).</li>
+              <li>Les blocs se suivent dans cet ordre&nbsp;: navigation principale, services, contacts, pied de page.</li>
+              <li>Le bouton de connexion à l'espace privé figure dans l'en-tête, à côté de la navigation horizontale vers les services.</li>
               <li>La recherche occupe la zone haute et reste atteignable sans défilement sur mobile.</li>
               <li>Les démarches affichées en page d'accueil indiquent coût et délai.</li>
               <li>L'accès au compte usager et au suivi de dossier est visible dès l'accueil.</li>
@@ -656,7 +656,7 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">Règles</p>
             <ul>
-              <li>Conversation guidée (guide, § 5.2.1)&nbsp;: la démarche impose un ordre et l'application le fixe. L'usager ne choisit pas l'ordre des étapes, mais il peut revenir sur une étape déjà faite.</li>
+              <li>Conversation guidée&nbsp;: la démarche impose un ordre et l'application le fixe. L'usager ne choisit pas l'ordre des étapes, mais il peut revenir sur une étape déjà faite.</li>
               <li>Une seule intention par étape, cinq étapes au maximum.</li>
               <li>Sauvegarde automatique à chaque changement d'étape.</li>
               <li>Récapitulatif modifiable avant validation définitive.</li>
@@ -792,12 +792,12 @@
         </div>
 
         <div class="doc-note fs-mt-6">
-          La disposition suit le guide de la charte graphique des plateformes numériques
-          (§ 3.1.2)&nbsp;: fil d'Ariane et commandes en haut, menu principal de l'espace à
-          gauche, contenus au centre, actions et traitements à droite. Elle s'obtient avec
-          <code>.fs-espace-grille</code> et ses quatre zones&nbsp;; sur écran étroit, les zones
-          s'empilent. La classe <code>.fs-espace-prive</code>, posée sur <code>&lt;body&gt;</code>,
-          donne à la navigation la couleur réservée à l'espace privé.
+          Fil d'Ariane et commandes en haut, menu principal de l'espace à gauche,
+          contenus au centre, actions et traitements à droite&nbsp;: la disposition
+          s'obtient avec <code>.fs-espace-grille</code> et ses quatre zones&nbsp;; sur
+          écran étroit, les zones s'empilent. La classe <code>.fs-espace-prive</code>,
+          posée sur <code>&lt;body&gt;</code>, donne à la navigation la couleur réservée
+          à l'espace privé.
         </div>
       </div>
     </section>

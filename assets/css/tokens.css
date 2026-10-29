@@ -61,15 +61,14 @@
      1. PALETTES
 
      Les trois couleurs du drapeau servent de souche, aux valeurs
-     fixées par le Guide pour la définition de la charte graphique
-     des plateformes numériques de l'administration publique
-     (MTDPCE, 10/08/2024, § 2.1.2) :
-       rouge  RVB 239/43/45   #EF2B2D (voir ci-dessous)
+     officielles du guide de la charte graphique des plateformes
+     numériques (MTDPCE, 10/08/2024) :
+       rouge  RVB 239/43/45   #EF2B2D
        jaune  RVB 252/209/22  #FCD116
        vert   RVB 0/158/73    #009E49
-     Pour le rouge, le guide écrit RVB 239/43/45 mais #EF2B2B : les
-     deux diffèrent sur le bleu. La valeur retenue est #EF2B2D, qui
-     correspond au triplet RVB et à la teinte usuelle du drapeau.
+     Pour le rouge, la notation #EF2B2B donnée à côté du triplet
+     diffère de lui sur le bleu. C'est le triplet qui fait foi :
+     #EF2B2D, qui est aussi la teinte usuelle du drapeau.
 
      Chaque souche est déclinée en dix valeurs pour couvrir les
      besoins d'une interface (fonds, bordures, textes, états) sans
@@ -119,9 +118,9 @@
   --or-800: #5c4900;
   --or-900: #3d3100;
 
-  /* Neutres — les gris pâles que le guide préconise pour le fond
-     des fenêtres et des zones d'affichage (§ 2.2, points 2 et 3),
-     légèrement réchauffés pour s'accorder aux teintes du drapeau. */
+  /* Neutres — gris pâles pour le fond des fenêtres et des zones
+     d'affichage, légèrement réchauffés pour s'accorder aux teintes
+     du drapeau. */
   --neutre-0:   #ffffff;
   --neutre-25:  #fcfbf9;
   --neutre-50:  #f7f5f2;
@@ -145,9 +144,9 @@
   --neutre-950: #14110f;
 
   /* Bleu administratif — palette conservée pour les repères
-     documentaires. Le registre d'information est passé au gris (voir
-     les rôles sémantiques) ; le bleu nuit des espaces vient des
-     palettes d'espace ci-dessous. */
+     documentaires. Le registre d'information est passé au gris
+     (rôles --info-*) ; le bleu nuit des espaces vient des palettes
+     --public-*. */
   --bleu-50:  #eef4f9;
   --bleu-100: #d6e5f0;
   --bleu-300: #7ba5c4;
@@ -155,10 +154,10 @@
   --bleu-700: #173f5f;
   --bleu-900: #0d2639;
 
-  /* Palettes d'espace. Le guide demande de réserver à chaque espace
-     d'une plateforme sa couleur (§ 2.2, point 8) et en donne ces deux
-     exemples, repris tels quels. Elles s'appliquent par les classes
-     .fs-espace-public et .fs-espace-prive, posées sur <body>. */
+  /* Palettes d'espace. Chaque espace d'une plateforme a sa couleur ;
+     ces deux palettes reprennent telles quelles les exemples du
+     guide. Elles s'appliquent par les classes .fs-espace-public et
+     .fs-espace-prive, posées sur <body>. */
   --public-900: #00213b;
   --public-700: #1b384f;
   --public-violet: #2c224e;
@@ -167,6 +166,11 @@
   --prive-orange: #f2aa3e;
   --prive-bleu: #535fdd;
   --prive-fond: #f0f0f7;
+
+  /* Indigo et écru — les teintes traditionnelles du Faso Dan Fani,
+     réservées au motif tissé. */
+  --indigo-800: #22305a;
+  --ecru:       #efe6d2;
 
   /* Ocre — registre d'avertissement. Dérivé de l'or, assombri
      jusqu'à obtenir un contraste AA sur fond clair. */
@@ -179,10 +183,9 @@
   /* ---------------------------------------------------------
      2. TYPOGRAPHIE
 
-     Les deux familles proposées par le guide de la charte graphique
-     des plateformes numériques (§ 2.4) : Montserrat pour les titres
-     principaux et les boutons d'action, Roboto pour le texte
-     courant. Aucune autre famille n'est servie.
+     Montserrat pour les titres principaux et les boutons d'action,
+     Roboto pour le texte courant : les deux familles retenues par
+     le guide. Aucune autre famille n'est servie.
 
      Aucune police à chasse fixe n'est téléchargée. Une chasse
      fixe ne porte aucune identité : celle du système suffit, et
@@ -194,12 +197,11 @@
   --police-mono:  ui-monospace, "Cascadia Mono", "Segoe UI Mono", Consolas,
                   "Liberation Mono", Menlo, monospace;
 
-  /* Tailles par défaut du guide (§ 2.4.1.3) : texte courant 14 px,
-     liens de navigation et menus 12 px, grands titres 2,5 rem. Les
-     titres restent fluides entre 360 px et 1280 px de largeur de
-     fenêtre et atteignent ces valeurs sur un écran de bureau.
-     Aucun texte ne descend sous 11 px, soit les 8 points que le
-     guide fixe en minimum. */
+  /* Tailles par défaut : texte courant 14 px, liens de navigation
+     et menus 12 px, grands titres 2,5 rem. Les titres restent
+     fluides entre 360 px et 1280 px de largeur de fenêtre et
+     atteignent ces valeurs sur un écran de bureau. Aucun texte ne
+     descend sous 11 px, soit le minimum de 8 points. */
   --taille-2xs: 0.6875rem;                              /* 11px */
   --taille-xs:  0.75rem;                                /* 12px */
   --taille-sm:  0.8125rem;                              /* 13px */
@@ -401,7 +403,7 @@
 
   /* Registre d'information en gris et non en bleu : il voisine avec
      le rouge des erreurs dans les listes d'états, et le guide proscrit
-     d'associer le rouge et le bleu (§ 2.2, point 2). */
+     d'associer le rouge et le bleu. */
   --info:          var(--neutre-600);
   --info-fond:     var(--neutre-50);
   --info-bord:     var(--neutre-200);
@@ -413,9 +415,9 @@
      graphique doit rester lisible en niveaux de gris et pour un
      daltonien. La couleur ne distingue jamais seule une série,
      elle accompagne toujours une étiquette posée sur la donnée. */
-  /* Le guide proscrit d'associer le jaune au vert et le rouge au bleu
-     (§ 2.2, point 2) : les séries s'en tiennent au vert, au rouge et
-     aux gris, et un graphique n'en montre pas plus de cinq à la fois. */
+  /* Le jaune ne s'associe pas au vert, ni le bleu au rouge : les
+     séries s'en tiennent au vert, au rouge et aux gris, et un
+     graphique n'en montre pas plus de cinq à la fois. */
   --serie-1: var(--vert-600);
   --serie-2: var(--neutre-400);
   --serie-3: var(--rouge-700);

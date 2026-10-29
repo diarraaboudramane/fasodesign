@@ -159,7 +159,7 @@
               </label>
               <p class="fs-aide" id="cnib-aide">
                 Le numéro figure au recto de votre carte, sous la photographie.
-                Format. Une lettre suivie de sept chiffres.
+                Format&nbsp;: une lettre suivie de sept chiffres.
               </p>
               <input class="fs-saisie" type="text" id="cnib" name="cnib"
                      placeholder="B1234567" aria-describedby="cnib-aide" required>
@@ -171,20 +171,20 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Signaler un champ obligatoire par un astérisque rouge placé après le libellé, et ne rien ajouter devant les champs facultatifs (guide, § 6.1.1). L'astérisque est masqué au lecteur d'écran&nbsp;: c'est l'attribut <code>required</code> qui l'annonce.</li>
-              <li>Cadrer la saisie à gauche, chiffres compris (guide, § 6.1.1).</li>
+              <li>Signaler un champ obligatoire par un astérisque rouge placé après le libellé, et ne rien ajouter devant les champs facultatifs. L'astérisque est masqué au lecteur d'écran&nbsp;: c'est l'attribut <code>required</code> qui l'annonce.</li>
+              <li>Cadrer la saisie à gauche, chiffres compris.</li>
               <li>Donner au champ une largeur proportionnelle au nombre de caractères attendus&nbsp;: les trois champs de la saisie de date en sont l'exemple.</li>
-              <li>Préremplir le champ chaque fois que c'est possible, avec la valeur la plus probable ou celle que l'usager a déjà donnée dans le même contexte (guide, § 6.1.1). Un texte indicatif (<code>placeholder</code>) n'est pas une valeur par défaut&nbsp;: il disparaît à la frappe et n'est pas transmis.</li>
-              <li>Faire figurer l'unité dans le libellé («&nbsp;Montant à régler (F&nbsp;CFA)&nbsp;»)&nbsp;: l'usager ne la saisit jamais (guide, § 6.1.1 et § 4.4.4).</li>
-              <li>Montrer le format attendu des dates, montants et numéros de téléphone par un exemple réel, puis accepter la saisie avec ou sans séparateurs et la remettre en forme après coup (guide, § 2.4.1.4 et § 6.1.1).</li>
-              <li>Masquer la saisie d'un champ confidentiel (<code>type="password"</code>) lorsque sa nature l'exige (guide, § 7.3).</li>
+              <li>Préremplir le champ chaque fois que c'est possible, avec la valeur la plus probable ou celle que l'usager a déjà donnée dans le même contexte. Un texte indicatif (<code>placeholder</code>) n'est pas une valeur par défaut&nbsp;: il disparaît à la frappe et n'est pas transmis.</li>
+              <li>Faire figurer l'unité dans le libellé («&nbsp;Montant à régler (F&nbsp;CFA)&nbsp;»)&nbsp;: l'usager ne la saisit jamais.</li>
+              <li>Montrer le format attendu des dates, montants et numéros de téléphone par un exemple réel, puis accepter la saisie avec ou sans séparateurs et la remettre en forme après coup.</li>
+              <li>Masquer la saisie d'un champ confidentiel (<code>type="password"</code>) lorsque sa nature l'exige.</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Forcer la casse&nbsp;: ni conversion en majuscules à la frappe, ni refus des minuscules (guide, § 6.1.1). Le service normalise la valeur à l'enregistrement s'il en a besoin.</li>
-              <li>Écrire un libellé en capitales. Seule l'initiale du premier mot prend la majuscule (guide, § 2.4).</li>
+              <li>Forcer la casse&nbsp;: ni conversion en majuscules à la frappe, ni refus des minuscules. Le service normalise la valeur à l'enregistrement s'il en a besoin.</li>
+              <li>Écrire un libellé en capitales. Seule l'initiale du premier mot prend la majuscule.</li>
               <li>Faire saisir l'unité, ou la placer seulement dans l'aide.</li>
               <li>Un champ de 600&nbsp;px de large pour un code de six caractères.</li>
             </ul>
@@ -227,20 +227,17 @@
           </div>
         </div>
         <p class="fs-legende fs-mt-4">
-          Un champ en lecture seule (<code>readonly</code>) prend un fond gris&nbsp;: la
-          zone d'affichage ne doit pas ressembler à une zone de saisie (guide, § 2.2
-          et § 6.1.1). Il reste atteignable à la tabulation, ce qui laisse le lecteur
-          d'écran en lire la valeur, et celle-ci est transmise avec le formulaire. Une
-          donnée qui n'est que consultée, hors formulaire, s'affiche en texte (liste de
-          définitions), pas dans un champ&nbsp;: le focus ne doit pas s'arrêter sur un
-          champ d'affichage (guide, § 5.1.1).
+          Un champ en lecture seule (<code>readonly</code>) prend un fond gris, pour ne
+          pas ressembler à une zone de saisie. Il reste atteignable à la tabulation,
+          ce qui permet au lecteur d'écran d'en lire la valeur, et celle-ci est
+          transmise avec le formulaire. Une donnée seulement consultée, hors
+          formulaire, s'affiche en texte (liste de définitions), pas dans un champ.
         </p>
 
         <h4 class="fs-mt-8">Quand et comment signaler une erreur</h4>
         <p class="doc-bloc-note">
-          Le script de la charte ne valide aucun champ&nbsp;: les contrôles sont écrits par
-          le service, et vérifiés de nouveau par le serveur. Ils suivent les règles du
-          guide (§ 6.1.1).
+          Le script de la charte ne valide aucun champ&nbsp;: les contrôles sont écrits
+          par le service, puis vérifiés de nouveau par le serveur.
         </p>
         <div class="doc-usages">
           <div class="doc-usage doc-usage--oui">
@@ -258,7 +255,7 @@
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
               <li>Vider un champ en erreur, ou tout le formulaire.</li>
-              <li>Un message qui juge l'usager&nbsp;: «&nbsp;faute&nbsp;», «&nbsp;mauvaise manipulation&nbsp;», «&nbsp;illégal&nbsp;» (guide, § 7.1.1). Le message dit ce qu'il faut corriger.</li>
+              <li>Un message qui juge l'usager&nbsp;: «&nbsp;faute&nbsp;», «&nbsp;mauvaise manipulation&nbsp;», «&nbsp;illégal&nbsp;». Le message dit ce qu'il faut corriger.</li>
               <li>Enregistrer une donnée à la frappe ou au changement d'un choix, avant toute action de l'usager.</li>
             </ul>
           </div>
@@ -336,19 +333,18 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Pour une liste facultative, placer «&nbsp;Aucun&nbsp;» (ou «&nbsp;Aucune&nbsp;») en première ligne, sélectionné par défaut (guide, § 6.2).</li>
+              <li>Pour une liste facultative, placer «&nbsp;Aucun&nbsp;» (ou «&nbsp;Aucune&nbsp;») en première ligne, sélectionné par défaut&nbsp;: sans cette option, l'usager qui a fait un choix ne peut plus revenir à «&nbsp;rien&nbsp;».</li>
               <li>Pour une liste obligatoire, présélectionner la valeur la plus probable quand elle existe&nbsp;; sinon, une première ligne vide qui invite à choisir.</li>
-              <li>Ranger les options dans l'ordre qui a du sens pour l'usager, à défaut dans l'ordre alphabétique (guide, § 6.2 et § 4.4.3).</li>
-              <li>Permettre de défaire un choix aussi simplement qu'on l'a fait&nbsp;: dans une liste à sélection multiple, un second appui désélectionne (guide, § 6.2).</li>
+              <li>Ranger les options dans l'ordre qui a du sens pour l'usager, à défaut dans l'ordre alphabétique.</li>
+              <li>Permettre de défaire un choix aussi simplement qu'on l'a fait&nbsp;: dans une liste à sélection multiple, un second appui désélectionne.</li>
               <li>Afficher le nombre d'éléments sélectionnés dans une liste à sélection multiple, par exemple «&nbsp;3 états retenus&nbsp;».</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Déclencher une action au choix d'une option&nbsp;: ni envoi, ni enregistrement, ni changement de page (guide, § 6.2). L'action reste portée par un bouton.</li>
+              <li>Déclencher une action au choix d'une option&nbsp;: ni envoi, ni enregistrement, ni changement de page. L'action reste portée par un bouton.</li>
               <li>Ramener l'usager au début de la tâche quand il désélectionne un élément.</li>
-              <li>Une liste facultative sans option «&nbsp;Aucun&nbsp;»&nbsp;: une fois un choix fait, l'usager ne peut plus revenir à «&nbsp;rien&nbsp;».</li>
             </ul>
           </div>
         </div>
@@ -390,9 +386,9 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Boutons radio pour un choix exclusif, entre deux options au moins (guide, § 6.1.3).</li>
+              <li>Boutons radio pour un choix exclusif, entre deux options au moins.</li>
               <li>Toujours une option cochée par défaut. Si l'usager peut ne rien choisir, ajouter une option «&nbsp;Aucun&nbsp;» ou son équivalent, plutôt que de laisser le groupe vide.</li>
-              <li>Regrouper les options d'une même question dans un <code>&lt;fieldset&gt;</code> titré par sa <code>&lt;legend&gt;</code>&nbsp;: c'est la boîte de groupe du guide.</li>
+              <li>Regrouper les options d'une même question dans un <code>&lt;fieldset&gt;</code> titré par sa <code>&lt;legend&gt;</code>.</li>
               <li>Libellé à droite de la case ou du bouton, cliquable sur toute sa longueur.</li>
               <li>N'afficher que les cases pertinentes dans le contexte&nbsp;; une case affichée mais inutilisable est grisée (<code>disabled</code>), libellé compris.</li>
             </ul>
@@ -400,7 +396,7 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Une case à cocher pour un choix fonctionnel important, comme enregistrer ou transmettre (guide, § 6.1.3)&nbsp;: c'est le rôle d'un bouton. Une attestation sur l'honneur reste une case, puisqu'elle ne déclenche rien.</li>
+              <li>Une case à cocher pour un choix fonctionnel important, comme enregistrer ou transmettre&nbsp;: c'est le rôle d'un bouton. Une attestation sur l'honneur reste une case, puisqu'elle ne déclenche rien.</li>
               <li>Un bouton radio isolé, qu'on ne peut plus décocher une fois coché.</li>
               <li>Le libellé à gauche de la case.</li>
             </ul>
@@ -461,8 +457,8 @@
           Un interrupteur applique son effet immédiatement&nbsp;: il est réservé aux
           préférences réversibles, sans conséquence sur un dossier. Une autorisation
           de transmission, un consentement, ou tout changement qui crée, modifie ou
-          supprime une donnée d'un dossier exige une validation explicite (guide,
-          § 6.1.1)&nbsp;: une case à cocher suivie d'un bouton.
+          supprime une donnée d'un dossier exige une validation explicite&nbsp;: une
+          case à cocher suivie d'un bouton.
         </div>
       </div>
 
@@ -588,11 +584,10 @@
           </div>
         </div>
         <p class="fs-legende fs-mt-4">
-          Un champ de longueur fixe passe la main au suivant dès qu'il est complet
-          (guide, § 5.1.3). Dans <code>.fs-code</code>, le script ne garde que les
-          chiffres, avance d'une case à chaque chiffre, revient à la case précédente
-          sur un retour arrière dans une case vide, et répartit sur toutes les cases
-          un code collé d'un bloc.
+          Un champ de longueur fixe passe la main au suivant dès qu'il est complet.
+          Dans <code>.fs-code</code>, le script ne garde que les chiffres, avance d'une
+          case à chaque chiffre, revient à la case précédente sur un retour arrière
+          dans une case vide, et répartit sur toutes les cases un code collé d'un bloc.
         </p>
       </div>
 
@@ -606,14 +601,13 @@
           déjà connu de l'usager.
         </p>
         <p class="doc-bloc-note">
-          Les trois champs sont le masque de saisie que demande le guide pour les
-          dates (§ 2.4.1.4 et § 6.1.1)&nbsp;: le séparateur n'est jamais tapé. Dans
-          <code>.fs-date</code>, le script écarte ce qui n'est pas un chiffre, passe au
-          champ suivant quand le champ atteint sa longueur (<code>maxlength</code>) en
-          sélectionnant son contenu, revient au champ précédent sur un retour arrière
-          dans un champ vide, et répartit une date collée sur les trois champs. Un
-          jour tapé «&nbsp;7&nbsp;» ne fait donc pas avancer&nbsp;: l'usager passe au mois par
-          la tabulation.
+          Les trois champs font office de masque de saisie&nbsp;: le séparateur n'est
+          jamais tapé. Dans <code>.fs-date</code>, le script écarte ce qui n'est pas un
+          chiffre, passe au champ suivant quand le champ atteint sa longueur
+          (<code>maxlength</code>) en sélectionnant son contenu, revient au champ
+          précédent sur un retour arrière dans un champ vide, et répartit une date
+          collée sur les trois champs. Un jour tapé «&nbsp;7&nbsp;» ne fait donc pas
+          avancer&nbsp;: l'usager passe au mois par la tabulation.
         </p>
 
         <div class="doc-demo" data-libelle="Date connue de l'usager">
@@ -881,9 +875,7 @@
           Placé en tête de formulaire après une soumission invalide, il reçoit le
           focus et liste chaque erreur sous forme de lien vers le champ concerné.
           Sur un long formulaire, c'est la seule façon de ne pas laisser l'usager
-          chercher. Chaque lien place le curseur dans le champ en erreur, comme le
-          demande le guide (§ 6.1.1), et les valeurs saisies restent en place pour
-          une correction partielle.
+          chercher. Chaque lien place le curseur dans le champ en erreur.
         </p>
         <div class="doc-demo" data-libelle="Récapitulatif d'erreurs">
           <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 560px;">
@@ -892,7 +884,7 @@
               <ul>
                 <li><a href="#cnib">Numéro CNIB&nbsp;: le format attendu est une lettre suivie de sept chiffres</a></li>
                 <li><a href="#courriel-ko">Adresse électronique&nbsp;: ajoutez le symbole arobase</a></li>
-                <li><a href="#piece">Pièce d'identité. Aucun fichier n'a été transmis</a></li>
+                <li><a href="#piece">Pièce d'identité&nbsp;: aucun fichier n'a été transmis</a></li>
               </ul>
             </div>
           </div>
@@ -912,10 +904,10 @@
       <div class="doc-bloc">
         <h3>Fil d'Ariane <code>.fs-ariane</code></h3>
         <p class="doc-bloc-note">
-          Le fil d'Ariane rend visible la profondeur du service, que le guide limite
-          à trois niveaux sous l'accueil (§ 5.2.2)&nbsp;: au-delà, l'usager se perd. Un
-          fil qui dépasse quatre éléments signale une arborescence à resserrer, pas un
-          fil à raccourcir.
+          Le fil d'Ariane rend visible la profondeur du service, limitée à trois
+          niveaux sous l'accueil&nbsp;: au-delà, l'usager se perd. Un fil qui dépasse
+          quatre éléments signale une arborescence à resserrer, pas un fil à
+          raccourcir.
         </p>
         <div class="doc-demo" data-libelle="Fil d'Ariane">
           <div class="doc-demo-scene doc-demo-scene--pile">
@@ -954,7 +946,7 @@
                 <p>Copie de la pièce d'identité du demandeur, justificatif de filiation, et procuration le cas échéant.</p>
               </div>
               <div class="fs-panneau" role="tabpanel" id="p3" aria-labelledby="o3" tabindex="0" hidden>
-                <p>Droit de timbre de 500&nbsp;F&nbsp;CFA. Délai indicatif de traitement. Trois jours ouvrés à compter de la validation du dossier.</p>
+                <p>Droit de timbre de 500&nbsp;F&nbsp;CFA. Délai indicatif de traitement&nbsp;: trois jours ouvrés à compter de la validation du dossier.</p>
               </div>
               <div class="fs-panneau" role="tabpanel" id="p4" aria-labelledby="o4" tabindex="0" hidden>
                 <p>Direction générale de la modernisation de l'état civil&nbsp;— Ouagadougou. Permanence téléphonique du lundi au vendredi.</p>
@@ -967,7 +959,7 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Employer les onglets pour éviter une succession de boîtes de dialogue ou une rangée de boutons trop longue (guide, § 4.4.5).</li>
+              <li>Employer les onglets pour éviter une succession de boîtes de dialogue ou une rangée de boutons trop longue.</li>
               <li>Une seule rangée, languettes alignées à gauche et accolées, libellés centrés sur une ligne&nbsp;: c'est le rendu par défaut de <code>.fs-onglets</code>. Sur écran étroit, la rangée défile horizontalement au lieu de passer à la ligne.</li>
               <li>Onglets liés, qui forment ensemble une seule saisie&nbsp;: les boutons «&nbsp;Valider&nbsp;» et «&nbsp;Annuler&nbsp;» sont placés une seule fois, sous les panneaux, en dehors des onglets.</li>
               <li>Onglets indépendants, chacun enregistré à part&nbsp;: chaque panneau porte ses propres boutons, «&nbsp;Annuler&nbsp;» devient «&nbsp;Fermer&nbsp;» et le bouton de validation devient facultatif.</li>
@@ -976,7 +968,6 @@
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Deux rangées d'onglets ou plus.</li>
               <li>Un libellé d'onglet sur deux lignes, ou tronqué&nbsp;: on le raccourcit en choisissant un autre mot.</li>
               <li>Des boutons de validation répétés dans chaque panneau d'onglets liés&nbsp;: l'usager ne sait plus ce qu'il valide.</li>
             </ul>
@@ -1065,16 +1056,13 @@
       <div class="doc-bloc" data-regles>
         <h3>Déplacement du focus dans une page</h3>
         <p class="doc-bloc-note">
-          Les règles du guide sur la navigation au clavier (§ 5.1), transposées au
-          web. Aucune n'exige de script&nbsp;: elles tiennent à l'ordre du balisage.
+          La navigation au clavier tient à l'ordre du balisage, sans script.
         </p>
         <ul class="fs-liste-puces">
           <li>La tabulation suit l'ordre de lecture, de gauche à droite et de haut en bas&nbsp;: l'ordre du code source est l'ordre visuel, sans <code>tabindex</code> positif.</li>
-          <li>Le focus s'arrête sur les champs de saisie, les listes et les commandes, jamais sur une donnée seulement affichée (§ 5.1.1).</li>
-          <li>À l'ouverture d'un formulaire, le focus peut être placé sur le champ que l'usager a le plus de chances de remplir en premier (§ 5.1.3).</li>
-          <li>Un champ de longueur fixe passe au suivant quand il est complet (§ 5.1.3)&nbsp;: c'est le cas des cases de <code>.fs-code</code> et des trois champs de <code>.fs-date</code>.</li>
-          <li>La touche Entrée n'imite pas la tabulation, contrairement à ce que prévoit le § 5.1.2&nbsp;: sur le web, elle soumet le formulaire, et lui donner un autre sens désoriente les usagers du clavier et des lecteurs d'écran.</li>
-          <li>Le déplacement en boucle de la tabulation n'est appliqué que dans une fenêtre modale, où le focus reste enfermé&nbsp;; ailleurs, le navigateur laisse sortir de la page.</li>
+          <li>Le focus s'arrête sur les champs de saisie, les listes et les commandes, jamais sur une donnée seulement affichée.</li>
+          <li>À l'ouverture d'un formulaire, le focus peut être placé sur le champ que l'usager a le plus de chances de remplir en premier.</li>
+          <li>Entrée garde son rôle natif, qui est de soumettre le formulaire. La tabulation ne boucle que dans une fenêtre modale&nbsp;; ailleurs, le navigateur laisse sortir de la page. Ces deux écarts au guide sont motivés dans la page Gouvernance.</li>
         </ul>
       </div>
     </section>
@@ -1283,12 +1271,12 @@
       <div class="doc-bloc">
         <h3>Infobulle <code>.fs-infobulle</code></h3>
         <p class="doc-bloc-note">
-          C'est l'aide contextuelle rapide du guide (§ 8.2.2)&nbsp;: elle apparaît
-          quand le pointeur survole l'élément ou quand celui-ci reçoit le focus, et
-          disparaît d'elle-même dès qu'il les quitte, sans commande de fermeture. Elle
-          décrit brièvement le champ ou le bouton&nbsp;: définition, contenu, format
-          attendu. Elle ne porte jamais une information indispensable&nbsp;: sur écran
-          tactile, elle peut rester inaccessible.
+          L'infobulle est une aide contextuelle rapide. Elle apparaît quand le
+          pointeur survole l'élément ou quand celui-ci reçoit le focus, et disparaît
+          d'elle-même dès qu'il les quitte, sans commande de fermeture. Elle décrit
+          brièvement le champ ou le bouton&nbsp;: définition, contenu, format attendu.
+          Elle ne porte jamais une information indispensable&nbsp;: sur écran tactile,
+          elle peut rester inaccessible.
         </p>
         <div class="doc-demo" data-libelle="Infobulle">
           <div class="doc-demo-scene">
@@ -1334,13 +1322,12 @@
           <code>.fs-tableau--empile</code> transforme chaque ligne en fiche.
         </p>
         <p class="doc-bloc-note">
-          Tout tableau porte un titre, dans son <code>&lt;caption&gt;</code> (guide,
-          § 4.4.3)&nbsp;: c'est lui qui permet de se repérer d'un coup d'œil, et que le
-          lecteur d'écran annonce en entrant dans le tableau. Les libellés sont
-          alignés à gauche, les nombres et montants à droite avec
-          <code>.fs-num</code>&nbsp;; aucune colonne n'est centrée, ce qui dessinerait des
-          vagues verticales. Les lignes suivent l'ordre de travail de l'usager, à
-          défaut l'ordre alphabétique ou numérique.
+          Tout tableau porte un titre, dans son <code>&lt;caption&gt;</code>&nbsp;: il
+          permet de se repérer d'un coup d'œil, et le lecteur d'écran l'annonce en
+          entrant dans le tableau. Les libellés sont alignés à gauche, les nombres et
+          montants à droite avec <code>.fs-num</code>&nbsp;; aucune colonne n'est
+          centrée, ce qui dessinerait des vagues verticales. Les lignes suivent
+          l'ordre de travail de l'usager, à défaut l'ordre alphabétique ou numérique.
         </p>
         <div class="doc-demo" data-libelle="Tableau triable">
           <div class="doc-demo-scene doc-demo-scene--pile">
@@ -1396,12 +1383,12 @@
         <h3>Tableau défilant <code>.fs-tableau-cadre--defilant</code></h3>
         <p class="doc-bloc-note">
           Pour un tableau trop grand pour être vu en entier. Le cadre limite sa
-          hauteur et fait défiler le tableau dans les deux sens&nbsp;; pendant le
-          défilement vertical, les en-têtes de colonnes restent visibles, et pendant
-          le défilement horizontal, ce sont les en-têtes de lignes, à condition
-          qu'ils soient balisés <code>&lt;th scope="row"&gt;</code> (guide, § 4.4.3).
-          La hauteur par défaut est de <code>min(70vh, 40rem)</code>&nbsp;; la démonstration
-          la réduit pour faire apparaître le défilement.
+          hauteur et fait défiler le tableau dans les deux sens. Les en-têtes de
+          colonnes restent visibles pendant le défilement vertical, les en-têtes de
+          lignes pendant le défilement horizontal, à condition d'être balisés
+          <code>&lt;th scope="row"&gt;</code>. La hauteur par défaut est de
+          <code>min(70vh, 40rem)</code>&nbsp;; la démonstration la réduit pour faire
+          apparaître le défilement.
         </p>
         <div class="doc-demo" data-libelle="Tableau défilant">
           <div class="doc-demo-scene doc-demo-scene--pile">
@@ -1947,19 +1934,19 @@
         <p class="doc-bloc-note">
           Les séries sont ordonnées par <strong>écart de luminosité</strong> et non par
           teinte&nbsp;: un graphique doit rester lisible en niveaux de gris, à
-          l'impression en noir et blanc comme pour un usager daltonien (guide, § 2.2).
-          La palette ne compte ni jaune ni bleu&nbsp;: le guide proscrit d'associer le
-          jaune au vert et le rouge au bleu. Elle alterne des verts, des rouges et des
-          gris. Quand les séries portent un état, le vert et le rouge gardent leur
-          sens conventionnel&nbsp;: le vert pour ce qui se passe bien, le rouge pour
-          l'alerte ou le refus, un gris pour ce qui n'est ni l'un ni l'autre. La
-          répartition ci-dessus applique cette règle.
+          l'impression en noir et blanc comme pour un usager daltonien.
+          La palette ne compte ni jaune ni bleu, pour éviter les associations
+          jaune-vert et rouge-bleu, que le guide proscrit. Elle alterne des verts,
+          des rouges et des gris. Quand les séries portent un état, le vert et le
+          rouge gardent leur sens conventionnel&nbsp;: le vert pour ce qui se passe
+          bien, le rouge pour l'alerte ou le refus, un gris pour ce qui n'est ni l'un
+          ni l'autre. La répartition des dossiers par état suit cette règle.
         </p>
         <p class="doc-bloc-note">
-          <strong>Cinq séries visibles au plus</strong>, ce qui respecte la limite de
-          cinq couleurs par écran du guide (§ 2.2)&nbsp;; au-delà, un tableau vaut mieux
-          qu'un graphique. La sixième teinte n'est qu'une couleur de remplacement,
-          jamais une sixième série affichée en même temps que les cinq autres.
+          Un graphique affiche cinq séries au plus, comme un écran compte cinq
+          couleurs au plus&nbsp;; au-delà, un tableau vaut mieux qu'un graphique. La
+          sixième teinte n'est qu'une couleur de remplacement, jamais une sixième
+          série affichée en même temps que les cinq autres.
         </p>
 
         <div class="doc-roles">
@@ -2007,9 +1994,8 @@
               <li>Distinguer des séries par la seule couleur.</li>
               <li>Tronquer l'axe pour accentuer une variation.</li>
               <li>Les effets de profondeur, les dégradés et les animations d'apparition.</li>
-              <li>Donner au vert ou au rouge un sens contraire à la convention&nbsp;: une série «&nbsp;rejetés&nbsp;» en vert, une série «&nbsp;validés&nbsp;» en rouge (guide, § 2.2).</li>
-              <li>Ajouter du jaune ou du bleu à la palette&nbsp;: jaune et vert, rouge et bleu sont des associations que le guide écarte.</li>
-              <li>Plus de cinq séries dans un même graphique.</li>
+              <li>Donner au vert ou au rouge un sens contraire à la convention&nbsp;: une série «&nbsp;rejetés&nbsp;» en vert, une série «&nbsp;validés&nbsp;» en rouge.</li>
+              <li>Ajouter du jaune ou du bleu à la palette.</li>
             </ul>
           </div>
         </div>
@@ -2160,11 +2146,11 @@
       <div class="doc-bloc">
         <h3>Progression <code>.fs-jauge</code></h3>
         <p class="doc-bloc-note">
-          Le guide fixe trois seuils (§ 7.2.1)&nbsp;: au-delà de 0,1&nbsp;s, la réponse ne
-          paraît plus instantanée&nbsp;; au-delà de 1&nbsp;s, l'usager a le sentiment de
-          perdre le contrôle&nbsp;; au-delà de 10&nbsp;s, il décroche. D'où trois réponses&nbsp;:
-          rien sous la seconde, un indicateur d'attente au-delà, et une jauge
-          d'avancement pour toute attente qui dépasse 6&nbsp;s (§ 7.2.2).
+          Trois seuils guident le retour d'attente. Au-delà de 0,1&nbsp;s, la réponse
+          ne paraît plus instantanée&nbsp;; au-delà de 1&nbsp;s, l'usager a le sentiment
+          de perdre le contrôle&nbsp;; au-delà de 10&nbsp;s, il décroche. D'où trois
+          réponses&nbsp;: rien sous la seconde, un indicateur d'attente au-delà, et
+          une jauge d'avancement pour toute attente qui dépasse 6&nbsp;s.
         </p>
         <div class="doc-demo" data-libelle="Progression">
           <div class="doc-demo-scene doc-demo-scene--pile" style="max-width: 460px;">
@@ -2217,11 +2203,11 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Dire pourquoi l'on attend&nbsp;: «&nbsp;Envoi des pièces au service instructeur&nbsp;», pas «&nbsp;Veuillez patienter&nbsp;» (guide, § 7.2.2).</li>
+              <li>Dire pourquoi l'on attend&nbsp;: «&nbsp;Envoi des pièces au service instructeur&nbsp;», pas «&nbsp;Veuillez patienter&nbsp;».</li>
               <li>Au-delà de 6&nbsp;s, afficher en texte le pourcentage atteint ou le temps écoulé, et faire avancer la jauge avec le traitement réel.</li>
               <li>Annoncer la fin par un message&nbsp;: une notification passagère, ou un encart de succès si le résultat doit rester visible.</li>
               <li>Faire interrompre réellement le traitement par «&nbsp;Annuler&nbsp;» ou «&nbsp;Arrêter&nbsp;», et rendre la main à l'usager.</li>
-              <li>Poser <code>aria-busy="true"</code> sur la zone qui travaille&nbsp;: le pointeur prend la forme «&nbsp;en cours&nbsp;» et le reste de la page reste utilisable. Sur <code>&lt;body&gt;</code>, il prend la forme d'attente et signale que rien d'autre ne peut être lancé (guide, § 7.1.6).</li>
+              <li>Poser <code>aria-busy="true"</code> sur la zone qui travaille&nbsp;: le pointeur prend la forme «&nbsp;en cours&nbsp;» et le reste de la page reste utilisable. Sur <code>&lt;body&gt;</code>, il prend la forme d'attente et signale que rien d'autre ne peut être lancé.</li>
               <li>Placer la jauge dans la page quand l'usager peut continuer à travailler, dans une fenêtre modale quand il ne le peut pas.</li>
             </ul>
           </div>
@@ -2229,7 +2215,6 @@
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
               <li>Une jauge qui avance selon une minuterie, sans rapport avec le traitement réel.</li>
-              <li>Un simple indicateur d'attente pour un traitement qui dure plus de 6&nbsp;s.</li>
               <li>Un bouton «&nbsp;Annuler&nbsp;» qui masque la jauge en laissant le traitement se poursuivre.</li>
               <li>Laisser <code>aria-busy</code> en place une fois le traitement terminé.</li>
             </ul>
@@ -2347,25 +2332,24 @@
         <div class="doc-note fs-mt-4">
           Le libellé du bouton de confirmation décrit l'action («&nbsp;Supprimer
           définitivement&nbsp;»), et non «&nbsp;Oui&nbsp;». Un usager qui ne lit que les boutons
-          doit comprendre ce qu'il déclenche. Le guide admet aussi «&nbsp;Continuer&nbsp;»
-          et «&nbsp;Arrêter&nbsp;» dans une boîte de confirmation (ci-dessous)&nbsp;; pour une
-          suppression, nommer l'action dit mieux ce qui sera perdu.
+          doit comprendre ce qu'il déclenche. Pour une suppression, ce libellé dit
+          mieux que «&nbsp;Continuer&nbsp;» ce qui sera perdu.
         </div>
 
         <h4 class="fs-mt-8">Boîtes de message</h4>
         <p class="doc-bloc-note">
           Quand le système doit informer, avertir, faire confirmer ou bloquer, il le
-          fait dans une boîte de message construite sur la modale, toujours de la même
-          façon (guide, § 7.1.1)&nbsp;: un titre qui dit d'où vient le message, une icône
-          à gauche du texte qui en donne le type, un texte bref qui explique la cause
-          et propose une suite, et les boutons propres à ce type. Si le message porte
-          un identifiant, il se place en bas à droite, en petit&nbsp;: il sert au support,
-          pas à l'usager.
+          fait dans une boîte de message construite sur la modale, toujours de la
+          même façon&nbsp;: un titre qui dit d'où vient le message, une icône à gauche
+          du texte qui en donne le type, un texte bref qui explique la cause et
+          propose une suite, et les boutons propres à ce type. Si le message porte un
+          identifiant, il se place en bas à droite, en petit&nbsp;: il sert au
+          support, pas à l'usager.
         </p>
 
         <div class="fs-tableau-cadre">
           <table class="fs-tableau">
-            <caption>Les quatre types de message (guide, § 7.1.2 à § 7.1.5)</caption>
+            <caption>Les quatre types de message</caption>
             <thead>
               <tr><th scope="col">Type</th><th scope="col">Quand</th><th scope="col">Icône</th><th scope="col">Boutons</th><th scope="col">Bouton par défaut</th></tr>
             </thead>
@@ -2443,17 +2427,16 @@
           <div class="doc-usage doc-usage--oui">
             <p class="doc-usage-titre">À faire</p>
             <ul>
-              <li>Employer le vocabulaire de l'usager, dans un style concis et neutre (guide, § 7.1.1).</li>
+              <li>Employer le vocabulaire de l'usager, dans un style concis et neutre.</li>
               <li>Expliquer la cause, puis proposer ce que l'usager peut faire.</li>
-              <li>Formuler une confirmation comme une vraie question&nbsp;: «&nbsp;Souhaitez-vous vraiment…&nbsp;» (guide, § 8.1.2).</li>
-              <li>Réserver «&nbsp;Continuer&nbsp;» et «&nbsp;Arrêter&nbsp;» aux boîtes d'avertissement et de confirmation, où le guide les prévoit. Partout ailleurs, et notamment sur les boutons de formulaire et d'étape, le bouton nomme l'action&nbsp;: «&nbsp;Passer au paiement&nbsp;».</li>
+              <li>Formuler une confirmation comme une vraie question&nbsp;: «&nbsp;Souhaitez-vous vraiment…&nbsp;».</li>
+              <li>Réserver «&nbsp;Continuer&nbsp;» et «&nbsp;Arrêter&nbsp;» aux boîtes d'avertissement et de confirmation. Partout ailleurs, et notamment sur les boutons de formulaire et d'étape, le bouton nomme l'action&nbsp;: «&nbsp;Passer au paiement&nbsp;».</li>
             </ul>
           </div>
           <div class="doc-usage doc-usage--non">
             <p class="doc-usage-titre">À proscrire</p>
             <ul>
-              <li>Les réponses «&nbsp;Oui&nbsp;» et «&nbsp;Non&nbsp;»&nbsp;: elles obligent à relire la question pour savoir ce que l'on déclenche (guide, § 7.1.1 et § 7.1.4).</li>
-              <li>Les mots qui mettent l'usager en cause&nbsp;: «&nbsp;faute&nbsp;», «&nbsp;mauvaise manipulation&nbsp;», «&nbsp;illégal&nbsp;».</li>
+              <li>Les réponses «&nbsp;Oui&nbsp;» et «&nbsp;Non&nbsp;»&nbsp;: elles obligent à relire la question pour savoir ce que l'on déclenche.</li>
               <li>Un code d'erreur à la place du texte, ou en tête du message.</li>
               <li>Une boîte de message pour une information que la page peut porter elle-même&nbsp;: un encart suffit.</li>
             </ul>

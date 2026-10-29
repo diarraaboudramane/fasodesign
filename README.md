@@ -8,11 +8,11 @@ quels ou s'installent comme n'importe quel paquet npm.
 
 La charte applique le « Guide pour la définition de la charte graphique des
 plateformes numériques de l'administration publique » (MTDPCE/SG/DGTD,
-version V1.0 du 10/08/2024) : couleurs officielles du drapeau, Montserrat pour
-les titres et les boutons d'action, Roboto pour le texte, palettes réservées
-aux espaces public et privé, structure des pages. Les points du guide qu'elle
-n'applique pas tels quels sont listés et motivés dans la page Gouvernance de
-la documentation, section « Écarts assumés avec le guide ».
+10/08/2024) : couleurs officielles du drapeau, Montserrat pour les titres et
+les boutons d'action, Roboto pour le texte, palettes réservées aux espaces
+public et privé, structure des pages. Ce qu'elle n'en applique pas tel quel
+est motivé dans la page Gouvernance de la documentation, section « Écarts
+assumés avec le guide ».
 
 ---
 

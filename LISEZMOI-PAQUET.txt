@@ -128,14 +128,14 @@ REFERENCE NORMATIVE
 
 La charte applique le "Guide pour la definition de la charte
 graphique des plateformes numeriques de l'administration publique",
-version V1.0 du 10/08/2024, etabli par le Comite de suivi de la
-dematerialisation des procedures administratives (MTDPCE/SG/DGTD) :
-couleurs officielles du drapeau (rouge #EF2B2D, jaune #FCD116,
-vert #009E49), Montserrat pour les titres et les boutons d'action,
-Roboto pour le texte, palettes reservees aux espaces public et
-prive, structure des pages. Les points du guide qui ne sont pas
-appliques tels quels sont listes et motives dans la page
-Gouvernance de la documentation ("Ecarts assumes avec le guide").
+du 10/08/2024, etabli par le Comite de suivi de la dematerialisation
+des procedures administratives (MTDPCE/SG/DGTD) : couleurs
+officielles du drapeau (rouge #EF2B2D, jaune #FCD116, vert #009E49),
+Montserrat pour les titres et les boutons d'action, Roboto pour le
+texte, palettes reservees aux espaces public et prive, structure
+des pages. Ce qui n'en est pas applique tel quel est motive dans la
+page Gouvernance de la documentation ("Ecarts assumes avec le
+guide").
 
 
 LICENCES
@@ -173,6 +173,5 @@ ACCESSIBILITE
 Le systeme vise WCAG 2.1 AA. Les criteres relevant des composants
 sont tenus par construction et verifies par la mesure la ou elle
 est possible ; aucun audit externe n'a encore eu lieu. Ceux relevant
-du projet — langue du document,
-textes de remplacement, hierarchie des titres, libelles de liens —
-restent a sa charge. La liste figure dans la documentation.
+du projet — langue du document, textes de remplacement, hierarchie
+des titres, libelles de liens — restent a sa charge. La liste figure dans la documentation.
